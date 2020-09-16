@@ -38,7 +38,7 @@ class Block extends Model
      */
     public function delegate(): BelongsTo
     {
-        return $this->belongsTo(Account::class, 'generator_public_key', 'public_key');
+        return $this->belongsTo(Wallet::class, 'generator_public_key', 'public_key');
     }
 
     /**
