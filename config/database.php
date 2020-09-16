@@ -91,6 +91,21 @@ return [
             'prefix_indexes' => true,
         ],
 
+        'explorer' => [
+            'driver'         => 'pgsql',
+            'url'            => env('EXPLORER_DATABASE_URL'),
+            'host'           => env('EXPLORER_DB_HOST', '127.0.0.1'),
+            'port'           => env('EXPLORER_DB_PORT', '5432'),
+            'database'       => env('EXPLORER_DB_DATABASE', 'forge'),
+            'username'       => env('EXPLORER_DB_USERNAME', 'forge'),
+            'password'       => env('EXPLORER_DB_PASSWORD', ''),
+            'charset'        => 'utf8',
+            'prefix'         => '',
+            'prefix_indexes' => true,
+            'schema'         => 'public',
+            'sslmode'        => 'prefer',
+        ],
+
     ],
 
     /*
