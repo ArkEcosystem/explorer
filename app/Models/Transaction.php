@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use ArkEcosystem\Crypto\Configuration\Network;
-use ArkEcosystem\Crypto\Transactions\Deserializer;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -19,6 +18,13 @@ class Transaction extends Model
      * @var bool
      */
     public $incrementing = false;
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = ['asset' => 'array'];
 
     /**
      * A transaction belongs to a block.
@@ -83,18 +89,7 @@ class Transaction extends Model
      */
     public function getTimestampCarbonAttribute(): Carbon
     {
-        return Carbon::parse(Network::get()->epoch())
-            ->addSeconds($this->attributes['timestamp']);
-    }
-
-    /**
-     * Get the human readable representation of the vendor field.
-     *
-     * @return string
-     */
-    public function getSerializedAttribute(): string
-    {
-        return bin2hex(stream_get_contents($this->attributes['serialized']));
+        return Carbon::parse(Network::get()->epoch())->addSeconds($this->attributes['timestamp']);
     }
 
     /**
@@ -104,13 +99,13 @@ class Transaction extends Model
      */
     public function getVendorFieldAttribute(): ?string
     {
-        $vendorFieldHex = $this->attributes['vendor_field_hex'];
+        $vendorFieldHex = $this->attributes['vendor_field'];
 
         if (empty($vendorFieldHex)) {
             return null;
         }
 
-        return hex2bin(stream_get_contents($vendorFieldHex));
+        return hex2bin(bin2hex(stream_get_contents($vendorFieldHex)));
     }
 
     /**
@@ -143,16 +138,6 @@ class Transaction extends Model
     public static function findById(string $value): self
     {
         return static::whereId($value)->firstOrFail();
-    }
-
-    /**
-     * Perform AIP11 compliant deserialisation.
-     *
-     * @return object
-     */
-    public function deserialise(): object
-    {
-        return Deserializer::new($this->serialized)->deserialize();
     }
 
     /**
