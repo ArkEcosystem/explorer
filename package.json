@@ -10,7 +10,7 @@
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
     },
     "devDependencies": {
-        "@tailwindcss/ui": "^0.5.0",
+        "@tailwindcss/ui": "^0.6.0",
         "alpinejs": "^2.7.0",
         "cross-env": "^7.0.2",
         "glob-all": "^3.2.1",
