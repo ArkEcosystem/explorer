@@ -6,7 +6,6 @@ on:
             - "**.css"
             - "**.js"
             - "**.php"
-            - "**.vue"
 
 jobs:
     php-cs-fixer:

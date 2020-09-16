@@ -15,21 +15,10 @@ jobs:
       - name: Merge Conflict finder
         uses: olivernybroe/action-conflict-finder@v1.1
 
-  build:
+  pest:
     needs: [merge_conflict_finder]
 
     runs-on: ubuntu-latest
-
-    services:
-      postgres:
-        image: postgres:12
-        env:
-          POSTGRES_DB: homestead
-          POSTGRES_USER: homestead
-          POSTGRES_PASSWORD: password
-        ports:
-          - 5432:5432
-        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
 
     steps:
       - name: Checkout code
@@ -66,7 +55,4 @@ jobs:
         run: php artisan config:clear && php artisan route:clear
 
       - name: Run Tests
-        run: ./vendor/bin/pest --coverage --min=100 --coverage-html=.coverage --coverage-clover=coverage.xml --configuration=phpunit.gh.xml
-
-      - name: Codecov
-        run: bash <(curl -s https://codecov.io/bash) -t ${{ secrets.CODECOV_TOKEN }}
+        run: ./vendor/bin/pest --coverage --min=100 --coverage-html=.coverage --coverage-clover=coverage.xml
