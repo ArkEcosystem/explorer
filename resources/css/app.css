@@ -1,3 +1,23 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+/** Tailwind */
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+/** Custom Styles */
+@import "_general.css";
+
+/** 3rd party **/
+
+/** Frontend Repo Styles **/
+@import "vendor/ark/_alerts.css";
+@import "vendor/ark/_animations.css";
+@import "vendor/ark/_buttons.css";
+@import "vendor/ark/_components.css";
+@import "vendor/ark/_document.css";
+@import "vendor/ark/_fonts.css";
+@import "vendor/ark/_forms.css";
+@import "vendor/ark/_general.css";
+@import "vendor/ark/_slider.css";
+@import "vendor/ark/_tables.css";
+@import "vendor/ark/_toasts.css";
+@import "vendor/ark/_variables.css";

@@ -1,19 +1,5 @@
-const defaultTheme = require('tailwindcss/defaultTheme');
+const defaultConfig = require('./vendor/arkecosystem/frontend/resources/tailwind.config.js');
 
 module.exports = {
-    purge: ['./storage/framework/views/*.php', './resources/views/**/*.blade.php'],
-
-    theme: {
-        extend: {
-            fontFamily: {
-                sans: ['Nunito', ...defaultTheme.fontFamily.sans],
-            },
-        },
-    },
-
-    variants: {
-        opacity: ['responsive', 'hover', 'focus', 'disabled'],
-    },
-
-    plugins: [require('@tailwindcss/ui')],
-};
+    ...defaultConfig,
+}

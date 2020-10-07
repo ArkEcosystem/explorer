@@ -11,8 +11,16 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
+mix
+    .ts('resources/js/app.ts', 'public/js')
     .postCss('resources/css/app.css', 'public/css', [
         require('postcss-import'),
         require('tailwindcss'),
-    ]);
+    ])
+    .copyDirectory('resources/images', 'public/images')
+    .copyDirectory('resources/fonts', 'public/fonts')
+    .extract();
+
+if (mix.inProduction()) {
+    mix.version();
+}
