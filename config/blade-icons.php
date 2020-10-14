@@ -60,7 +60,7 @@ return [
         'app' => [
             'path'   => 'resources/icons',
             'prefix' => 'app',
-            'class'  => 'fill-current'
+            'class'  => 'fill-current',
         ],
 
     ],
