@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Dashboard for /Users/brian/Work/explorer/app</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="_css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link href="_css/nv.d3.min.css" rel="stylesheet" type="text/css">
+  <link href="_css/style.css" rel="stylesheet" type="text/css">
+  <link href="_css/custom.css" rel="stylesheet" type="text/css">
+ </head>
+ <body>
+  <header>
+   <div class="container-fluid">
+    <div class="row">
+     <div class="col-md-12">
+      <nav aria-label="breadcrumb">
+       <ol class="breadcrumb">
+         <li class="breadcrumb-item"><a href="index.html">/Users/brian/Work/explorer/app</a></li>
+         <li class="breadcrumb-item active">(Dashboard)</li>
+
+       </ol>
+      </nav>
+     </div>
+    </div>
+   </div>
+  </header>
+  <div class="container-fluid">
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Classes</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="classCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="classComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Http/Controllers/HomeController.php.html#7">App\Http\Controllers\HomeController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Http/Controllers/ListBlocksByWalletController.php.html#8">App\Http\Controllers\ListBlocksByWalletController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Http/Controllers/ListBlocksController.php.html#8">App\Http\Controllers\ListBlocksController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Http/Controllers/ListTransactionsByBlockController.php.html#8">App\Http\Controllers\ListTransactionsByBlockController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Http/Controllers/ListTransactionsByWalletController.php.html#8">App\Http\Controllers\ListTransactionsByWalletController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Http/Controllers/ListTransactionsController.php.html#8">App\Http\Controllers\ListTransactionsController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Http/Controllers/ListVotersByWalletController.php.html#8">App\Http\Controllers\ListVotersByWalletController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Http/Controllers/ShowBlockController.php.html#8">App\Http\Controllers\ShowBlockController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Http/Controllers/ShowDelegateMonitorController.php.html#7">App\Http\Controllers\ShowDelegateMonitorController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Http/Controllers/ShowTopWalletsController.php.html#8">App\Http\Controllers\ShowTopWalletsController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Http/Controllers/ShowTransactionController.php.html#8">App\Http\Controllers\ShowTransactionController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Http/Controllers/ShowWalletController.php.html#8">App\Http\Controllers\ShowWalletController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/Block.php.html#13">App\Models\Block</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/Round.php.html#9">App\Models\Round</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/Transaction.php.html#11">App\Models\Transaction</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/Wallet.php.html#9">App\Models\Wallet</a></td><td class="text-right">0%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Models/Transaction.php.html#11">App\Models\Transaction</a></td><td class="text-right">156</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Methods</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="methodCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="methodComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Http/Controllers/HomeController.php.html#9"><abbr title="App\Http\Controllers\HomeController::__invoke">__invoke</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/Transaction.php.html#145"><abbr title="App\Models\Transaction::findById">findById</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/Transaction.php.html#51"><abbr title="App\Models\Transaction::sender">sender</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/Transaction.php.html#61"><abbr title="App\Models\Transaction::recipient">recipient</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/Transaction.php.html#74"><abbr title="App\Models\Transaction::scopeSendBy">scopeSendBy</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/Transaction.php.html#87"><abbr title="App\Models\Transaction::scopeReceivedBy">scopeReceivedBy</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/Transaction.php.html#97"><abbr title="App\Models\Transaction::getTimestampCarbonAttribute">getTimestampCarbonAttribute</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/Transaction.php.html#107"><abbr title="App\Models\Transaction::getVendorFieldAttribute">getVendorFieldAttribute</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/Transaction.php.html#123"><abbr title="App\Models\Transaction::getFormattedFeeAttribute">getFormattedFeeAttribute</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/Transaction.php.html#133"><abbr title="App\Models\Transaction::getFormattedAmountAttribute">getFormattedAmountAttribute</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/Transaction.php.html#155"><abbr title="App\Models\Transaction::getConnectionName">getConnectionName</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/Round.php.html#45"><abbr title="App\Models\Round::getConnectionName">getConnectionName</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/Wallet.php.html#25"><abbr title="App\Models\Wallet::sentTransactions">sentTransactions</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/Wallet.php.html#35"><abbr title="App\Models\Wallet::receivedTransactions">receivedTransactions</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/Wallet.php.html#45"><abbr title="App\Models\Wallet::blocks">blocks</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/Wallet.php.html#58"><abbr title="App\Models\Wallet::scopeVote">scopeVote</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/Wallet.php.html#68"><abbr title="App\Models\Wallet::getFormattedBalanceAttribute">getFormattedBalanceAttribute</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/Wallet.php.html#78"><abbr title="App\Models\Wallet::getFormattedVoteBalanceAttribute">getFormattedVoteBalanceAttribute</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/Wallet.php.html#90"><abbr title="App\Models\Wallet::findByAddress">findByAddress</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/Wallet.php.html#102"><abbr title="App\Models\Wallet::findByPublicKey">findByPublicKey</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/Wallet.php.html#114"><abbr title="App\Models\Wallet::findByUsername">findByUsername</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/Transaction.php.html#41"><abbr title="App\Models\Transaction::block">block</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/Round.php.html#35"><abbr title="App\Models\Round::getFormattedBalanceAttribute">getFormattedBalanceAttribute</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Http/Controllers/ListBlocksByWalletController.php.html#10"><abbr title="App\Http\Controllers\ListBlocksByWalletController::__invoke">__invoke</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Http/Controllers/ShowTransactionController.php.html#10"><abbr title="App\Http\Controllers\ShowTransactionController::__invoke">__invoke</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Http/Controllers/ListBlocksController.php.html#10"><abbr title="App\Http\Controllers\ListBlocksController::__invoke">__invoke</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Http/Controllers/ListTransactionsByBlockController.php.html#10"><abbr title="App\Http\Controllers\ListTransactionsByBlockController::__invoke">__invoke</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Http/Controllers/ListTransactionsByWalletController.php.html#10"><abbr title="App\Http\Controllers\ListTransactionsByWalletController::__invoke">__invoke</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Http/Controllers/ListTransactionsController.php.html#10"><abbr title="App\Http\Controllers\ListTransactionsController::__invoke">__invoke</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Http/Controllers/ListVotersByWalletController.php.html#10"><abbr title="App\Http\Controllers\ListVotersByWalletController::__invoke">__invoke</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Http/Controllers/ShowBlockController.php.html#10"><abbr title="App\Http\Controllers\ShowBlockController::__invoke">__invoke</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Http/Controllers/ShowDelegateMonitorController.php.html#9"><abbr title="App\Http\Controllers\ShowDelegateMonitorController::__invoke">__invoke</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Http/Controllers/ShowTopWalletsController.php.html#10"><abbr title="App\Http\Controllers\ShowTopWalletsController::__invoke">__invoke</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Http/Controllers/ShowWalletController.php.html#10"><abbr title="App\Http\Controllers\ShowWalletController::__invoke">__invoke</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/Round.php.html#25"><abbr title="App\Models\Round::delegate">delegate</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/Block.php.html#29"><abbr title="App\Models\Block::transactions">transactions</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/Block.php.html#39"><abbr title="App\Models\Block::delegate">delegate</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/Block.php.html#49"><abbr title="App\Models\Block::previous">previous</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/Block.php.html#62"><abbr title="App\Models\Block::scopeGenerator">scopeGenerator</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/Block.php.html#72"><abbr title="App\Models\Block::getTimestampCarbonAttribute">getTimestampCarbonAttribute</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/Block.php.html#83"><abbr title="App\Models\Block::getFormattedTotalAttribute">getFormattedTotalAttribute</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/Block.php.html#93"><abbr title="App\Models\Block::getFormattedFeeAttribute">getFormattedFeeAttribute</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/Block.php.html#103"><abbr title="App\Models\Block::getFormattedRewardAttribute">getFormattedRewardAttribute</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/Block.php.html#113"><abbr title="App\Models\Block::getConnectionName">getConnectionName</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/Wallet.php.html#124"><abbr title="App\Models\Wallet::getConnectionName">getConnectionName</abbr></a></td><td class="text-right">0%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Models/Transaction.php.html#107"><abbr title="App\Models\Transaction::getVendorFieldAttribute">getVendorFieldAttribute</abbr></a></td><td class="text-right">6</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <footer>
+    <hr/>
+    <p>
+     <small>Generated by <a href="https://github.com/sebastianbergmann/php-code-coverage" target="_top">php-code-coverage 9.1.8</a> using <a href="https://secure.php.net/" target="_top">PHP 7.4.11</a> with <a href="https://github.com/krakjoe/pcov">PCOV 1.0.6</a> and <a href="https://phpunit.de/">PHPUnit 9.3.10</a> at Wed Oct 14 5:23:58 UTC 2020.</small>
+    </p>
+   </footer>
+  </div>
+  <script src="_js/jquery.min.js" type="text/javascript"></script>
+  <script src="_js/d3.min.js" type="text/javascript"></script>
+  <script src="_js/nv.d3.min.js" type="text/javascript"></script>
+  <script type="text/javascript">
+$(document).ready(function() {
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#classCoverageDistribution svg')
+      .datum(getCoverageDistributionData([16,0,0,0,0,0,0,0,0,0,0,2], "Class Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#methodCoverageDistribution svg')
+      .datum(getCoverageDistributionData([45,0,0,0,0,0,0,0,0,0,0,0], "Method Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getCoverageDistributionData(data, label) {
+    var labels = [
+      '0%',
+      '0-10%',
+      '10-20%',
+      '20-30%',
+      '30-40%',
+      '40-50%',
+      '50-60%',
+      '60-70%',
+      '70-80%',
+      '80-90%',
+      '90-100%',
+      '100%'
+    ];
+    var values = [];
+    $.each(labels, function(key) {
+      values.push({x: labels[key], y: data[key]});
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Cyclomatic Complexity');
+
+    d3.select('#classComplexity svg')
+      .datum(getComplexityData([[100,0,"<a href=\"Http\/Controllers\/Controller.php.html#10\">App\\Http\\Controllers\\Controller<\/a>"],[0,1,"<a href=\"Http\/Controllers\/HomeController.php.html#7\">App\\Http\\Controllers\\HomeController<\/a>"],[0,1,"<a href=\"Http\/Controllers\/ListBlocksByWalletController.php.html#8\">App\\Http\\Controllers\\ListBlocksByWalletController<\/a>"],[0,1,"<a href=\"Http\/Controllers\/ListBlocksController.php.html#8\">App\\Http\\Controllers\\ListBlocksController<\/a>"],[0,1,"<a href=\"Http\/Controllers\/ListTransactionsByBlockController.php.html#8\">App\\Http\\Controllers\\ListTransactionsByBlockController<\/a>"],[0,1,"<a href=\"Http\/Controllers\/ListTransactionsByWalletController.php.html#8\">App\\Http\\Controllers\\ListTransactionsByWalletController<\/a>"],[0,1,"<a href=\"Http\/Controllers\/ListTransactionsController.php.html#8\">App\\Http\\Controllers\\ListTransactionsController<\/a>"],[0,1,"<a href=\"Http\/Controllers\/ListVotersByWalletController.php.html#8\">App\\Http\\Controllers\\ListVotersByWalletController<\/a>"],[0,1,"<a href=\"Http\/Controllers\/ShowBlockController.php.html#8\">App\\Http\\Controllers\\ShowBlockController<\/a>"],[0,1,"<a href=\"Http\/Controllers\/ShowDelegateMonitorController.php.html#7\">App\\Http\\Controllers\\ShowDelegateMonitorController<\/a>"],[0,1,"<a href=\"Http\/Controllers\/ShowTopWalletsController.php.html#8\">App\\Http\\Controllers\\ShowTopWalletsController<\/a>"],[0,1,"<a href=\"Http\/Controllers\/ShowTransactionController.php.html#8\">App\\Http\\Controllers\\ShowTransactionController<\/a>"],[0,1,"<a href=\"Http\/Controllers\/ShowWalletController.php.html#8\">App\\Http\\Controllers\\ShowWalletController<\/a>"],[0,9,"<a href=\"Models\/Block.php.html#13\">App\\Models\\Block<\/a>"],[0,3,"<a href=\"Models\/Round.php.html#9\">App\\Models\\Round<\/a>"],[0,12,"<a href=\"Models\/Transaction.php.html#11\">App\\Models\\Transaction<\/a>"],[100,0,"<a href=\"Models\/User.php.html#13\">App\\Models\\User<\/a>"],[0,10,"<a href=\"Models\/Wallet.php.html#9\">App\\Models\\Wallet<\/a>"]], 'Class Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Method Complexity');
+
+    d3.select('#methodComplexity svg')
+      .datum(getComplexityData([[0,1,"<a href=\"Http\/Controllers\/HomeController.php.html#9\">App\\Http\\Controllers\\HomeController::__invoke<\/a>"],[0,1,"<a href=\"Http\/Controllers\/ListBlocksByWalletController.php.html#10\">App\\Http\\Controllers\\ListBlocksByWalletController::__invoke<\/a>"],[0,1,"<a href=\"Http\/Controllers\/ListBlocksController.php.html#10\">App\\Http\\Controllers\\ListBlocksController::__invoke<\/a>"],[0,1,"<a href=\"Http\/Controllers\/ListTransactionsByBlockController.php.html#10\">App\\Http\\Controllers\\ListTransactionsByBlockController::__invoke<\/a>"],[0,1,"<a href=\"Http\/Controllers\/ListTransactionsByWalletController.php.html#10\">App\\Http\\Controllers\\ListTransactionsByWalletController::__invoke<\/a>"],[0,1,"<a href=\"Http\/Controllers\/ListTransactionsController.php.html#10\">App\\Http\\Controllers\\ListTransactionsController::__invoke<\/a>"],[0,1,"<a href=\"Http\/Controllers\/ListVotersByWalletController.php.html#10\">App\\Http\\Controllers\\ListVotersByWalletController::__invoke<\/a>"],[0,1,"<a href=\"Http\/Controllers\/ShowBlockController.php.html#10\">App\\Http\\Controllers\\ShowBlockController::__invoke<\/a>"],[0,1,"<a href=\"Http\/Controllers\/ShowDelegateMonitorController.php.html#9\">App\\Http\\Controllers\\ShowDelegateMonitorController::__invoke<\/a>"],[0,1,"<a href=\"Http\/Controllers\/ShowTopWalletsController.php.html#10\">App\\Http\\Controllers\\ShowTopWalletsController::__invoke<\/a>"],[0,1,"<a href=\"Http\/Controllers\/ShowTransactionController.php.html#10\">App\\Http\\Controllers\\ShowTransactionController::__invoke<\/a>"],[0,1,"<a href=\"Http\/Controllers\/ShowWalletController.php.html#10\">App\\Http\\Controllers\\ShowWalletController::__invoke<\/a>"],[0,1,"<a href=\"Models\/Block.php.html#29\">App\\Models\\Block::transactions<\/a>"],[0,1,"<a href=\"Models\/Block.php.html#39\">App\\Models\\Block::delegate<\/a>"],[0,1,"<a href=\"Models\/Block.php.html#49\">App\\Models\\Block::previous<\/a>"],[0,1,"<a href=\"Models\/Block.php.html#62\">App\\Models\\Block::scopeGenerator<\/a>"],[0,1,"<a href=\"Models\/Block.php.html#72\">App\\Models\\Block::getTimestampCarbonAttribute<\/a>"],[0,1,"<a href=\"Models\/Block.php.html#83\">App\\Models\\Block::getFormattedTotalAttribute<\/a>"],[0,1,"<a href=\"Models\/Block.php.html#93\">App\\Models\\Block::getFormattedFeeAttribute<\/a>"],[0,1,"<a href=\"Models\/Block.php.html#103\">App\\Models\\Block::getFormattedRewardAttribute<\/a>"],[0,1,"<a href=\"Models\/Block.php.html#113\">App\\Models\\Block::getConnectionName<\/a>"],[0,1,"<a href=\"Models\/Round.php.html#25\">App\\Models\\Round::delegate<\/a>"],[0,1,"<a href=\"Models\/Round.php.html#35\">App\\Models\\Round::getFormattedBalanceAttribute<\/a>"],[0,1,"<a href=\"Models\/Round.php.html#45\">App\\Models\\Round::getConnectionName<\/a>"],[0,1,"<a href=\"Models\/Transaction.php.html#41\">App\\Models\\Transaction::block<\/a>"],[0,1,"<a href=\"Models\/Transaction.php.html#51\">App\\Models\\Transaction::sender<\/a>"],[0,1,"<a href=\"Models\/Transaction.php.html#61\">App\\Models\\Transaction::recipient<\/a>"],[0,1,"<a href=\"Models\/Transaction.php.html#74\">App\\Models\\Transaction::scopeSendBy<\/a>"],[0,1,"<a href=\"Models\/Transaction.php.html#87\">App\\Models\\Transaction::scopeReceivedBy<\/a>"],[0,1,"<a href=\"Models\/Transaction.php.html#97\">App\\Models\\Transaction::getTimestampCarbonAttribute<\/a>"],[0,2,"<a href=\"Models\/Transaction.php.html#107\">App\\Models\\Transaction::getVendorFieldAttribute<\/a>"],[0,1,"<a href=\"Models\/Transaction.php.html#123\">App\\Models\\Transaction::getFormattedFeeAttribute<\/a>"],[0,1,"<a href=\"Models\/Transaction.php.html#133\">App\\Models\\Transaction::getFormattedAmountAttribute<\/a>"],[0,1,"<a href=\"Models\/Transaction.php.html#145\">App\\Models\\Transaction::findById<\/a>"],[0,1,"<a href=\"Models\/Transaction.php.html#155\">App\\Models\\Transaction::getConnectionName<\/a>"],[0,1,"<a href=\"Models\/Wallet.php.html#25\">App\\Models\\Wallet::sentTransactions<\/a>"],[0,1,"<a href=\"Models\/Wallet.php.html#35\">App\\Models\\Wallet::receivedTransactions<\/a>"],[0,1,"<a href=\"Models\/Wallet.php.html#45\">App\\Models\\Wallet::blocks<\/a>"],[0,1,"<a href=\"Models\/Wallet.php.html#58\">App\\Models\\Wallet::scopeVote<\/a>"],[0,1,"<a href=\"Models\/Wallet.php.html#68\">App\\Models\\Wallet::getFormattedBalanceAttribute<\/a>"],[0,1,"<a href=\"Models\/Wallet.php.html#78\">App\\Models\\Wallet::getFormattedVoteBalanceAttribute<\/a>"],[0,1,"<a href=\"Models\/Wallet.php.html#90\">App\\Models\\Wallet::findByAddress<\/a>"],[0,1,"<a href=\"Models\/Wallet.php.html#102\">App\\Models\\Wallet::findByPublicKey<\/a>"],[0,1,"<a href=\"Models\/Wallet.php.html#114\">App\\Models\\Wallet::findByUsername<\/a>"],[0,1,"<a href=\"Models\/Wallet.php.html#124\">App\\Models\\Wallet::getConnectionName<\/a>"]], 'Method Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getComplexityData(data, label) {
+    var values = [];
+    $.each(data, function(key) {
+      var value = Math.round(data[key][0]*100) / 100;
+      values.push({
+        x: value,
+        y: data[key][1],
+        class: data[key][2],
+        size: 0.05,
+        shape: 'diamond'
+      });
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+});
+  </script>
+ </body>
+</html>
