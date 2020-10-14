@@ -163,10 +163,6 @@ return [
         Illuminate\View\ViewServiceProvider::class,
 
         /*
-         * Package Service Providers...
-         */
-
-        /*
          * Application Service Providers...
          */
         App\Providers\AppServiceProvider::class,
@@ -176,6 +172,12 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\FortifyServiceProvider::class,
         App\Providers\JetstreamServiceProvider::class,
+
+        /*
+         * Package Service Providers...
+         */
+        Laravel\Fortify\FortifyServiceProvider::class,
+        ARKEcosystem\Fortify\FortifyServiceProvider::class,
 
     ],
 
