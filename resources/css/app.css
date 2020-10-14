@@ -9,15 +9,15 @@
 /** 3rd party **/
 
 /** Frontend Repo Styles **/
-@import "vendor/ark/_alerts.css";
-@import "vendor/ark/_animations.css";
-@import "vendor/ark/_buttons.css";
-@import "vendor/ark/_components.css";
-@import "vendor/ark/_document.css";
-@import "vendor/ark/_fonts.css";
-@import "vendor/ark/_forms.css";
-@import "vendor/ark/_general.css";
-@import "vendor/ark/_slider.css";
-@import "vendor/ark/_tables.css";
-@import "vendor/ark/_toasts.css";
-@import "vendor/ark/_variables.css";
+@import "../../vendor/arkecosystem/frontend/resources/assets/css/_alerts.css";
+@import "../../vendor/arkecosystem/frontend/resources/assets/css/_animations.css";
+@import "../../vendor/arkecosystem/frontend/resources/assets/css/_buttons.css";
+@import "../../vendor/arkecosystem/frontend/resources/assets/css/_components.css";
+@import "../../vendor/arkecosystem/frontend/resources/assets/css/_document.css";
+@import "../../vendor/arkecosystem/frontend/resources/assets/css/_fonts.css";
+@import "../../vendor/arkecosystem/frontend/resources/assets/css/_forms.css";
+@import "../../vendor/arkecosystem/frontend/resources/assets/css/_general.css";
+@import "../../vendor/arkecosystem/frontend/resources/assets/css/_slider.css";
+@import "../../vendor/arkecosystem/frontend/resources/assets/css/_tables.css";
+@import "../../vendor/arkecosystem/frontend/resources/assets/css/_toasts.css";
+@import "../../vendor/arkecosystem/frontend/resources/assets/css/_variables.css";

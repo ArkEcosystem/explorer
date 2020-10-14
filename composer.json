@@ -88,7 +88,7 @@
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi",
-            "@php artisan vendor:publish --provider=\"ARKEcosystem\\Frontend\\FrontendServiceProvider\" --tag=\"css\" --tag=\"fonts\" --tag=\"pagination\" --tag=\"js\" --force"
+            "@php artisan vendor:publish --provider=\"ARKEcosystem\\Frontend\\FrontendServiceProvider\" --tag=\"fonts\" --tag=\"pagination\" --tag=\"js\" --force"
         ],
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
