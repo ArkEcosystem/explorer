@@ -12,3 +12,7 @@ npm-debug.log
 yarn-error.log
 .coverage
 coverage.xml
+.php_cs.cache
+.env.bak.vessel
+.DS_Store
+auth.json
