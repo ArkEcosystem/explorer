@@ -32,7 +32,7 @@
         @stack('scripts')
     </head>
     <body>
-        <div id="app" class="flex flex-col antialiased bg-white theme-light">
+        <div id="app" class="flex flex-col antialiased bg-white">
             <x-ark-navbar
                 :navigation="[
                     ['route' => 'home', 'label' => trans('menus.delegate')],
@@ -59,6 +59,8 @@
                 </div>
             </main>
         </div>
+        {{-- TODO: Find a better way of preventing purges without this - webpack mix doesn't pick it up --}}
+        {{-- <div class="theme-dark"></div> --}}
 
         <x-footer />
 
