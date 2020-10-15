@@ -61,3 +61,10 @@ jobs:
 
       - name: Run Tests
         run: ./vendor/bin/pest --coverage --min=100 --coverage-html=.coverage --coverage-clover=coverage.xml
+        env:
+          DB_CONNECTION: pgsql
+          DB_HOST: 127.0.0.1
+          DB_PORT: 5432
+          DB_DATABASE: explorer
+          DB_USERNAME: explorer
+          DB_PASSWORD: password
