@@ -66,7 +66,7 @@
 
                     <div class="flex items-center ml-8">
                         <div class="pl-8 border-l border-theme-primary-100">
-                            <livewire:navbar-ark-price />
+                            <livewire:navbar-price />
                         </div>
                     </div>
 
