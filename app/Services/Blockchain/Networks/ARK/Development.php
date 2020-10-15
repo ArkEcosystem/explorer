@@ -12,7 +12,7 @@ class Development implements Network
     {
         return Cache::rememberForever(
             'ark.development.wallets.known',
-            fn () => Http::get('https://raw.githubusercontent.com/ArkEcosystem/common/blob/master/devnet/known-wallets.json')->json()
+            fn () => Http::get('https://raw.githubusercontent.com/ArkEcosystem/common/master/devnet/known-wallets.json')->json()
         );
     }
 }

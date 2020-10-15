@@ -12,7 +12,7 @@ class Production implements Network
     {
         return Cache::rememberForever(
             'ark.production.wallets.known',
-            fn () => Http::get('https://raw.githubusercontent.com/ArkEcosystem/common/blob/master/mainnet/known-wallets.json')->json()
+            fn () => Http::get('https://raw.githubusercontent.com/ArkEcosystem/common/master/mainnet/known-wallets.json')->json()
         );
     }
 }
