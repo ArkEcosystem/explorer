@@ -1,7 +1,8 @@
 <?php
 
 return [
-    'delegate' => 'Delegate',
+    'delegate'     => 'Delegate',
+    'home'         => 'Home',
+    'registered'   => 'Registered',
     'top_accounts' => 'Top Accounts',
-    'registered' => 'Registered',
 ];
