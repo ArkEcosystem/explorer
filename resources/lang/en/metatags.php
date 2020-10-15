@@ -2,8 +2,8 @@
 
 return [
     'home' => [
-        'title' => 'Explorer',
+        'title'       => 'Explorer',
         'description' => '',
-        'image' => '',
+        'image'       => '',
     ],
 ];
