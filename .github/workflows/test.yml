@@ -20,6 +20,17 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    services:
+      postgres:
+        image: postgres:12
+        env:
+          POSTGRES_DB: homestead
+          POSTGRES_USER: homestead
+          POSTGRES_PASSWORD: password
+        ports:
+          - 5432:5432
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -38,12 +49,6 @@ jobs:
         with:
           path: ~/.composer/cache/files
           key: dependencies-composer-${{ hashFiles('composer.json') }}
-
-      - name: Authenticate Nova
-        run: composer config http-basic.nova.laravel.com ${{ secrets.NOVA_USERNAME }} ${{ secrets.NOVA_PASSWORD }}
-
-      - name: Authenticate Packagist
-        run: composer config http-basic.repo.packagist.com arkecosystem ${{ secrets.PACKAGIST_TOKEN }}
 
       - name: Install Composer dependencies
         run: composer install --no-ansi --no-interaction --no-suggest --no-progress --prefer-dist --optimize-autoloader
