@@ -10,7 +10,9 @@ module.exports = {
     variants: {
         ...defaultConfig.variants,
         textColor: ['dark', 'dark-hover', 'responsive', 'hover', 'focus'],
-        backgroundColor: ['dark', 'dark-hover', 'responsive', 'hover', 'focus']
+        backgroundColor: ['dark', 'dark-hover', 'responsive', 'hover', 'focus'],
+        borderColor: ['dark', 'dark-hover', 'responsive', 'hover', 'focus'],
+        boxShadow: ['dark', 'dark-hover', 'responsive', 'hover', 'focus'],
     },
     plugins: [
         ...defaultConfig.plugins,
