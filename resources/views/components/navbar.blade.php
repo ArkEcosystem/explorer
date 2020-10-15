@@ -2,7 +2,7 @@
 <div x-data="{ open: false, openDropdown: null, selectedChild: null }" class="fixed z-20 w-full">
     <div x-show="openDropdown !== null || open" class="fixed inset-0 z-30 overflow-y-auto opacity-75 bg-theme-secondary-900" x-cloak @click="openDropdown = null; open = false;"></div>
 
-    <nav class="relative z-30 bg-white shadow-header-smooth">
+    <nav class="relative z-30 bg-white shadow-header-smooth dark:bg-theme-secondary-900">
         <div class="px-8">
             <div class="relative flex justify-between h-20 lg:h-24">
 

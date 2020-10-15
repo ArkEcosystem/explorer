@@ -32,7 +32,7 @@
         @stack('scripts')
     </head>
     <body>
-        <div id="app" class="flex flex-col antialiased bg-white">
+        <div id="app" class="flex flex-col antialiased bg-white dark:bg-theme-secondary-900">
             <x-ark-navbar
                 :navigation="[
                     ['route' => 'home', 'label' => trans('menus.delegate')],
@@ -54,7 +54,7 @@
             @show
 
             <main class="container flex-1 w-full mx-auto @unless($isLanding ?? false) pb-14 mt-16 @endif sm:max-w-full @unless($fullWidth ?? false) px-4 sm:px-8 lg:max-w-7xl @endif">
-                <div class="w-full bg-white rounded-lg">
+                <div class="w-full bg-white dark:bg-theme-secondary-900">
                     @yield('content')
                 </div>
             </main>
