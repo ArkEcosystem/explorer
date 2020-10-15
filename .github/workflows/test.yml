@@ -24,8 +24,8 @@ jobs:
       postgres:
         image: postgres:12
         env:
-          POSTGRES_DB: homestead
-          POSTGRES_USER: homestead
+          POSTGRES_DB: explorer
+          POSTGRES_USER: explorer
           POSTGRES_PASSWORD: password
         ports:
           - 5432:5432
