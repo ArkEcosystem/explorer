@@ -33,7 +33,7 @@
     </head>
     <body>
         <div id="app" class="flex flex-col antialiased bg-white dark:bg-theme-secondary-900">
-            <x-ark-navbar
+            <x-navbar
                 :navigation="[
                     ['route' => 'home', 'label' => trans('menus.delegate')],
                     ['route' => 'home', 'label' => trans('menus.top_accounts')],
