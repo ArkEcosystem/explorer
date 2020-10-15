@@ -17,7 +17,7 @@ class NetworkFactory
             case 'ark.development':
                 return new Development();
             default:
-                throw new InvalidArgumentException(__('exceptions.invalid_server_provider_type'));
+                throw new InvalidArgumentException(__('exceptions.invalid_network'));
         }
     }
 }
