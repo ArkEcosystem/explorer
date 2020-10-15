@@ -15,9 +15,10 @@ class ExplorerServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton(Network::class, function ($app) {
-            return NetworkFactory::make($app['config']['explorer']['network']);
-        });
+        $this->app->singleton(
+            Network::class,
+            fn ($app) => NetworkFactory::make($app['config']['explorer']['network'])
+        );
     }
 
     /**
