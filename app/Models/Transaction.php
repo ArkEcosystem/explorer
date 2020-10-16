@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Models;
+declare(strict_types=1);
+
+namespace  App\Models;
 
 use ArkEcosystem\Crypto\Configuration\Network;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -12,7 +14,7 @@ use Illuminate\Support\Carbon;
  * @property float $fee
  * @property float $amount
  */
-class Transaction extends Model
+final class Transaction extends Model
 {
     use HasFactory;
 
