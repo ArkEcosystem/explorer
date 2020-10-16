@@ -31,7 +31,11 @@
         <!-- Scripts -->
         @stack('scripts')
     </head>
-    <body>
+    <body
+        x-data="{ 'theme': 'light' }"
+        :class="{ 'theme-dark': theme === 'dark' }"
+        @toggle-dark-mode.window="theme === 'dark' ? theme = 'light' : theme = 'dark'"
+    >
         <div id="app" class="flex flex-col antialiased bg-white dark:bg-theme-secondary-900">
             <x-navbar.navbar
                 :navigation="[
