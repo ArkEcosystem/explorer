@@ -20,6 +20,7 @@ $rules = [
     'elseif'                                      => true,
     'encoding'                                    => true,
     'final_class'                                 => true,
+    'final_internal_class'                        => true,
     'full_opening_tag'                            => true,
     'fully_qualified_strict_types'                => true, // added by Shift
     'function_declaration'                        => true,
