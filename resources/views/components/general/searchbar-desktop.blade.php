@@ -50,7 +50,7 @@
 
                 <div class="flex items-center space-x-2 pr-8">
                     <input
-                        type="text"
+                        type="number"
                         placeholder="0.00"
                         class="w-full dark:text-theme-secondary-700"
                         wire:model="amountRangeFrom"
@@ -60,7 +60,7 @@
                     <span>-</span>
 
                     <input
-                        type="text"
+                        type="number"
                         placeholder="0.00"
                         class="w-full dark:text-theme-secondary-700"
                         wire:model="amountRangeTo"
@@ -76,7 +76,7 @@
 
                 <div class="flex items-center space-x-2 pr-8">
                     <input
-                        type="text"
+                        type="number"
                         placeholder="0.00"
                         class="w-full dark:text-theme-secondary-700"
                         wire:model="feeRangeFrom"
@@ -86,7 +86,7 @@
                     <span>-</span>
 
                     <input
-                        type="text"
+                        type="number"
                         placeholder="0.00"
                         class="w-full dark:text-theme-secondary-700"
                         wire:model="feeRangeTo"
