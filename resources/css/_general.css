@@ -116,6 +116,10 @@ body {
         content: "";
         @apply border-t border-theme-secondary-300 border-t w-full pb-8;
     }
+    .theme-dark .search-advanced-option:nth-child(3)::before,
+    .theme-dark .search-advanced-option:nth-child(4)::before {
+        @apply border-theme-secondary-800;
+    }
 }
 
 @screen xl {
