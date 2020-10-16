@@ -1,9 +1,11 @@
 includes:
     - ./vendor/nunomaduro/larastan/extension.neon
-	- ./vendor/ergebnis/phpstan-rules/rules.neon
+    - ./vendor/ergebnis/phpstan-rules/rules.neon
 
 parameters:
     paths:
         - app
-    level: 1
+    level: 0
+    ignoreErrors:
+        - '#Unsafe usage of new static#'
     checkMissingIterableValueType: false
