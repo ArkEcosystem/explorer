@@ -114,7 +114,7 @@ final class Transaction extends Model
     {
         $vendorFieldHex = $this->attributes['vendor_field'];
 
-        if (empty($vendorFieldHex)) {
+        if (is_null($vendorFieldHex)) {
             return null;
         }
 

@@ -13,13 +13,14 @@ final class NetworkFactory
 {
     public static function make(string $name): Network
     {
-        switch ($name) {
-            case 'ark.production':
-                return new Production();
-            case 'ark.development':
-                return new Development();
-            default:
-                throw new InvalidArgumentException(__('exceptions.invalid_network'));
+        if ($name === 'ark.production') {
+            return new Production();
         }
+
+        if ($name === 'ark.development') {
+            return new Development();
+        }
+
+        throw new InvalidArgumentException(__('exceptions.invalid_network'));
     }
 }
