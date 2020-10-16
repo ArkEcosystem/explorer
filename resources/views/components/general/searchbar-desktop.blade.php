@@ -48,7 +48,7 @@
             <div class="flex flex-col pl-8 xl:border-r border-theme-secondary-300 dark:border-theme-secondary-800 md:w-1/2 xl:flex-1">
                 <div class="text-sm font-semibold">@lang('forms.search.amount_range')</div>
 
-                <div class="flex items-center space-x-2">
+                <div class="flex items-center space-x-2 pr-8">
                     <input
                         type="text"
                         placeholder="0.00"
@@ -74,7 +74,7 @@
             <div class="flex flex-col pl-8 border-r border-theme-secondary-300 dark:border-theme-secondary-800 md:w-1/2 xl:flex-1">
                 <div class="text-sm font-semibold">@lang('forms.search.fee_range')</div>
 
-                <div class="flex items-center space-x-2">
+                <div class="flex items-center space-x-2 pr-8">
                     <input
                         type="text"
                         placeholder="0.00"
@@ -98,7 +98,7 @@
             <div class="flex flex-col px-8 md:w-1/2 xl:flex-1">
                 <div class="text-sm font-semibold">@lang('forms.search.date_range')</div>
 
-                <div class="">
+                <div>
                     <input
                         type="date"
                         class="bg-transparent -ml-7"
