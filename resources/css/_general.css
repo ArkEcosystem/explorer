@@ -62,15 +62,18 @@ body {
 }
 
 /* Searchbar */
+.searchbar {
+    @apply hidden fixed inset-0 overflow-y-auto z-40;
+}
 .search-container {
-    @apply flex flex-col rounded-lg bg-white fixed top-24 left-8 right-8 z-30 overflow-auto;
+    @apply flex flex-col rounded-lg bg-white absolute top-24 left-8 right-8 z-50 overflow-hidden;
 }
 .theme-dark .search-container {
     @apply bg-theme-secondary-900;
 }
 
 .search-advanced .search-container {
-    @apply bottom-24;
+    @apply mb-24;
 }
 
 .search-mobile {
@@ -95,6 +98,10 @@ body {
 }
 
 @screen md {
+    .searchbar {
+        position: unset;
+        @apply block;
+    }
     .search-container {
         position: unset;
     }

@@ -1,18 +1,18 @@
 {{-- TODO: Tidy up fields - review compared to design to see if they can be improved --}}
 <div
     x-data="{
-        showAdvanced: true,
+        showAdvanced: false,
         isMobileOpen: false,
     }"
     @mobile-search.window="isMobileOpen = true"
-    class="hidden md:block"
+    class="searchbar"
     x-bind:class="{
         'search-mobile': isMobileOpen,
         'search-advanced': showAdvanced,
     }"
 >
     <div
-        class="fixed top-0 right-0 bottom-0 left-0 bg-theme-secondary-900 opacity-25 z-30 md:hidden"
+        class="fixed inset-0 z-30 overflow-y-auto opacity-75 bg-theme-secondary-900 md:hidden"
         @click="isMobileOpen = false"
     ></div>
 
