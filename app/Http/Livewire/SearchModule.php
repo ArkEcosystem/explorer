@@ -18,9 +18,9 @@ class SearchModule extends Component
 
     public ?string $feeRangeTo;
 
-    public ?float $dateFrom;
+    public ?string $dateFrom;
 
-    public ?float $dateTo;
+    public ?string $dateTo;
 
     public function render()
     {
