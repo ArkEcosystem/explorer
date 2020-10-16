@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Livewire;
 
 use Livewire\Component;
 
-class SearchModule extends Component
+final class SearchModule extends Component
 {
     public ?string $term;
 
