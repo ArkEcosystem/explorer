@@ -1,3 +1,3 @@
 <div>
-    <x-general.searchbar-desktop />
+    <x-general.search.searchbar />
 </div>
