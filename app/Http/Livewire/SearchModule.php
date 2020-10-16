@@ -10,13 +10,13 @@ class SearchModule extends Component
 
     public ?string $type;
 
-    public ?float $amountRangeFrom;
+    public ?string $amountRangeFrom;
 
-    public ?float $amountRangeTo;
+    public ?string $amountRangeTo;
 
-    public ?float $feeRangeFrom;
+    public ?string $feeRangeFrom;
 
-    public ?float $feeRangeTo;
+    public ?string $feeRangeTo;
 
     public ?float $dateFrom;
 
