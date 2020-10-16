@@ -83,8 +83,8 @@
                     </div>
 
                     <div class="flex items-center ml-6 lg:ml-8">
-                        <div class="pl-8 border-l border-theme-primary-100 dark:border-theme-secondary-800">
-                            <livewire:navbar-price />
+                        <div class="pl-8 border-l border-theme-primary-100 font-semibold text-theme-secondary-900 dark:text-theme-secondary-600 dark:border-theme-secondary-800">
+                            <livewire:price-ticker />
                         </div>
                     </div>
                 </div>
