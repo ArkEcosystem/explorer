@@ -17,6 +17,10 @@ body {
     @apply flex px-8 mx-auto;
 }
 
+.content-container-full-width {
+    @apply flex mx-auto;
+}
+
 @screen sm {
     .content-container {
         @apply px-8;
@@ -24,6 +28,7 @@ body {
 }
 
 @screen lg {
+    .content-container-full-width,
     .content-container {
         @apply max-w-7xl;
     }
