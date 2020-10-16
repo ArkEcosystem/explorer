@@ -107,6 +107,8 @@
                             <livewire:price-ticker />
                         </div>
                     </div>
+
+                    <livewire:navbar-settings />
                 </div>
             </div>
         </div>
