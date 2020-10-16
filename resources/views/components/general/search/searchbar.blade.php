@@ -12,12 +12,12 @@
     }"
 >
     <div
-        class="fixed top-0 right-0 bottom-0 left-0 bg-theme-secondary-900 opacity-25 z-30 md:hidden"
+        class="fixed top-0 bottom-0 left-0 right-0 z-30 opacity-25 bg-theme-secondary-900 md:hidden"
         @click="isMobileOpen = false"
     ></div>
 
     <div class="search-container">
-        <div class="flex items-center py-6 px-8 space-x-8">
+        <div class="flex items-center px-8 py-6 space-x-8">
             <div class="flex-1">
                 <input
                     type="text"
@@ -37,7 +37,7 @@
             </div>
 
             <div
-                class="text-theme-secondary-900 dark:text-theme-secondary-600 hidden md:block"
+                class="hidden text-theme-secondary-900 dark:text-theme-secondary-600 md:block"
                 x-on:click="showAdvanced = !showAdvanced"
             >
                 <span x-show="!showAdvanced">@lang('actions.advanced_search')</span>
@@ -46,7 +46,7 @@
 
             <button
                 type="button"
-                class="button-primary hidden md:block"
+                class="hidden button-primary md:block"
                 wire:click="performSearch"
             >
                 @lang('actions.find_it')
@@ -73,7 +73,7 @@
             <div class="search-advanced-options">
                 <x-general.search.advanced-option :title="trans('forms.search.type')">
                     {{-- TODO: Enum of types and their values? --}}
-                    <select class="bg-transparent font-medium w-full text-theme-secondary-900 dark:text-theme-secondary-700">
+                    <select class="w-full font-medium bg-transparent text-theme-secondary-900 dark:text-theme-secondary-700">
                         <option value="">Multisignature Registration</option>
                     </select>
                 </x-general.search.advanced-option>
@@ -135,7 +135,7 @@
 
                         <input
                             type="date"
-                            class="bg-transparent -ml-6"
+                            class="-ml-6 bg-transparent"
                             wire:model="dateTo"
                             style="width: 49px;"
                         />
@@ -159,7 +159,7 @@
         </div>
 
         <div
-            class="bg-theme-primary-100 text-theme-primary-600 font-semibold text-center py-4 md:hidden"
+            class="py-4 font-semibold text-center bg-theme-primary-100 text-theme-primary-600 md:hidden"
             @click="showAdvanced = !showAdvanced"
         >
             <span x-show="!showAdvanced">@lang('actions.advanced_search')</span>

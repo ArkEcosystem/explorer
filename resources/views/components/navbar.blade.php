@@ -93,8 +93,8 @@
                         </div>
                     </div>
 
-                    <div class="hidden items-center ml-6 md:flex lg:ml-8">
-                        <div class="pl-8 border-l border-theme-primary-100 font-semibold text-theme-secondary-900 dark:text-theme-secondary-600 dark:border-theme-secondary-800">
+                    <div class="items-center hidden ml-6 md:flex lg:ml-8">
+                        <div class="pl-8 font-semibold border-l border-theme-primary-100 text-theme-secondary-900 dark:text-theme-secondary-600 dark:border-theme-secondary-800">
                             <livewire:price-ticker />
                         </div>
                     </div>
