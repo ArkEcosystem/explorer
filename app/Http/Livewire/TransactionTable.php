@@ -9,7 +9,7 @@ use App\ViewModels\ViewModelFactory;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-final class WalletTable extends Component
+final class TransactionTable extends Component
 {
     use WithPagination;
 
