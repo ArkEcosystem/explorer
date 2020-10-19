@@ -45,3 +45,15 @@ it('should get the formatted vote_balance', function () {
     expect($this->subject->formatted_vote_balance)->toBeFloat();
     expect($this->subject->formatted_vote_balance)->toBe(2000.0);
 });
+
+it('should find a wallet by its address', function () {
+    expect(Wallet::findByAddress($this->subject->address))->toBeInstanceOf(Wallet::class);
+});
+
+it('should find a wallet by its public_key', function () {
+    expect(Wallet::findByPublicKey($this->subject->public_key))->toBeInstanceOf(Wallet::class);
+});
+
+it('should find a wallet by its username', function () {
+    expect(Wallet::findByUsername($this->subject->username))->toBeInstanceOf(Wallet::class);
+});
