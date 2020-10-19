@@ -1,7 +1,7 @@
 <div class="table-list-mobile divide-y space-y-8">
     @foreach ($transactions as $transaction)
         <div class="table-list-mobile-row space-x-10 sm:space-x-8">
-            <div class="space-y-2">
+            <div class="space-y-6">
                 <div>ID</div>
                 <div>Timestamp</div>
                 <div>Sender</div>
@@ -10,7 +10,7 @@
                 <div>Fee</div>
             </div>
 
-            <div class="flex-1 space-y-2">
+            <div class="flex-1 space-y-6">
                 <div><a href="{{ $transaction->id }}" class="link font-semibold">{{ $transaction->id }}</a></div>
                 <div>{{ $transaction->timestamp }}</div>
                 <div><x-general.address address="{{ $transaction->sender }}" /></div>
