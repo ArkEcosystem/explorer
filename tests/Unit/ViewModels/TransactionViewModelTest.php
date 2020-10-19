@@ -25,7 +25,7 @@ beforeEach(function () {
         'block_id'          => $block->id,
         'fee'               => 1 * 1e8,
         'amount'            => 2 * 1e8,
-        'sender_public_key' => Wallet::factory()->create(['public_key' => 'sender'])->public_key,
+        'sender_public_key' => Wallet::factory()->create(['address' => 'sender'])->public_key,
         'recipient_id'      => Wallet::factory()->create(['address' => 'recipient'])->address,
     ]));
 });
