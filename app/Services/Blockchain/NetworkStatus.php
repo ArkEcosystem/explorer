@@ -17,9 +17,6 @@ final class NetworkStatus
         return Cache::remember('status.height:'.Network::name(), 8000, function () {
             return (int) Block::latestByHeight()->first()['height'];
         });
-        // return Cache::remember('status.height:'.Network::name(), 8000, function () {
-        //     return Http::baseUrl(Network::host())->get('blockchain')['data']['block']['height'];
-        // });
     }
 
     // @TODO: use the wallets table once it is available.
