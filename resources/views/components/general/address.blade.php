@@ -1,5 +1,5 @@
-<div class="flex space-x-3 items-center">
+<div class="flex items-center space-x-3">
     <x-general.avatar :identifier="$address" />
 
-    <div class="link font-semibold">{{ $address }}</div>
+    <div class="font-semibold link">{{ $address }}</div>
 </div>
