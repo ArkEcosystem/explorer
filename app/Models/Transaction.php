@@ -4,12 +4,10 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use ArkEcosystem\Crypto\Configuration\Network;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Carbon;
 
 /**
  * @property float $fee
@@ -71,6 +69,18 @@ final class Transaction extends Model
     }
 
     /**
+     * Scope a query to sort transactions by their forging time, new to old.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeLatestByTimestamp($query)
+    {
+        return $query->orderBy('timestamp', 'desc');
+    }
+
+    /**
      * Scope a query to only include transactions by the sender.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
@@ -97,16 +107,6 @@ final class Transaction extends Model
     }
 
     /**
-     * Get the human readable representation of the timestamp.
-     *
-     * @return \Illuminate\Support\Carbon
-     */
-    public function getTimestampCarbonAttribute(): Carbon
-    {
-        return Carbon::parse(Network::get()->epoch())->addSeconds($this->attributes['timestamp']);
-    }
-
-    /**
      * Get the human readable representation of the vendor field.
      *
      * @return string
@@ -124,26 +124,6 @@ final class Transaction extends Model
     }
 
     // @codeCoverageIgnoreEnd
-
-    /**
-     * Get the human readable representation of the fee.
-     *
-     * @return float
-     */
-    public function getFormattedFeeAttribute(): float
-    {
-        return $this->fee / 1e8;
-    }
-
-    /**
-     * Get the human readable representation of the amount.
-     *
-     * @return float
-     */
-    public function getFormattedAmountAttribute(): float
-    {
-        return $this->amount / 1e8;
-    }
 
     /**
      * Get the current connection name for the model.

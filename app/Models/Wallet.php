@@ -67,59 +67,15 @@ final class Wallet extends Model
     }
 
     /**
-     * Get the human readable representation of the balance.
+     * Scope a query to sort wallets by balance.
      *
-     * @return float
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function getFormattedBalanceAttribute(): float
+    public function scopeWealthy($query)
     {
-        return $this->balance / 1e8;
-    }
-
-    /**
-     * Get the human readable representation of the vote balance.
-     *
-     * @return float
-     */
-    public function getFormattedVoteBalanceAttribute(): float
-    {
-        return $this->vote_balance / 1e8;
-    }
-
-    /**
-     * Find a wallet by its address.
-     *
-     * @param string $value
-     *
-     * @return Wallet
-     */
-    public static function findByAddress(string $value): self
-    {
-        return static::whereAddress($value)->firstOrFail();
-    }
-
-    /**
-     * Find a wallet by its public-key.
-     *
-     * @param string $value
-     *
-     * @return Wallet
-     */
-    public static function findByPublicKey(string $value): self
-    {
-        return static::wherePublicKey($value)->firstOrFail();
-    }
-
-    /**
-     * Find a wallet by its username.
-     *
-     * @param string $value
-     *
-     * @return Wallet
-     */
-    public static function findByUsername(string $value): self
-    {
-        return static::whereUsername($value)->firstOrFail();
+        return $query->orderBy('balance', 'desc');
     }
 
     /**

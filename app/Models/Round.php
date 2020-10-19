@@ -33,16 +33,6 @@ final class Round extends Model
     }
 
     /**
-     * Get the human readable representation of the balance.
-     *
-     * @return float
-     */
-    public function getFormattedBalanceAttribute(): float
-    {
-        return $this->balance / 1e8;
-    }
-
-    /**
      * Get the current connection name for the model.
      *
      * @return string
