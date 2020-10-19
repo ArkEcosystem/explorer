@@ -14,6 +14,6 @@ it('should handle ARK Development', function () {
     expect(NetworkFactory::make('ark.development'))->toBeInstanceOf(Development::class);
 });
 
-it('should handle ARK Development', function () {
-    NetworkFactory::make('invalid');
+it('should throw if an unknown network is used', function () {
+    NetworkFactory::make('unknown');
 })->theows(InvalidArgumentException::class);
