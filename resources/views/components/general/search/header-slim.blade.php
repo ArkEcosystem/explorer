@@ -11,7 +11,7 @@
             class="hidden md:block"
             :class="{
                 'w-full absolute top-0 right-0': searchFocused,
-                'w-1/2 lg:w-5/12 xl:w-8/12': ! searchFocused,
+                'w-1/2 lg:w-5/12 xl:w-7/12': ! searchFocused,
             }"
             x-transition:enter="transition ease-out duration-100"
             x-transition:enter-start="width-auto transform"
