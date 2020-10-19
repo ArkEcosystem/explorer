@@ -9,8 +9,6 @@ use function Tests\configureExplorerDatabase;
 it('should render the page without any errors', function () {
     configureExplorerDatabase();
 
-    $this->withoutExceptionHandling();
-
     $this
         ->get(route('block.transactions', Block::factory()->create()))
         ->assertNoContent();
