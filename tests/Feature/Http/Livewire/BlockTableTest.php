@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 use App\Http\Livewire\BlockTable;
 use App\Models\Block;
-use ARKEcosystem\UserInterface\Support\DateFormat;
 
 use Livewire\Livewire;
 use function Tests\configureExplorerDatabase;
@@ -18,7 +17,7 @@ it('should list the first page of records', function () {
 
     foreach (Block::latestByHeight()->paginate()->items() as $block) {
         $component->assertSee($block->id);
-        $component->assertSee($block->timestamp_carbon->format(DateFormat::DATE));
+        $component->assertSee($block->formatted_timestamp);
         $component->assertSee($block->delegate->username);
         $component->assertSee($block->formatted_height);
         $component->assertSee($block->number_of_transactions);
