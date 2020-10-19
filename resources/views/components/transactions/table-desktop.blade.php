@@ -2,7 +2,7 @@
     <table>
         <thead>
             <tr>
-                <th>ID</th>
+                <th class="text-center">ID</th>
                 <th class="hidden lg:table-cell">Timestamp</th>
                 <th class="text-center hidden xl:table-cell">Type</th>
                 <th><span class="pl-14">Sender</span></th>
@@ -14,7 +14,13 @@
         <tbody>
             @foreach($transactions as $transaction)
                 <tr>
-                    <td><x-ark-external-link :url="$transaction->id" text="" inline /></td>
+                    <td>
+                        <div class="flex items-center">
+                            <a href="{{ $transaction->id }}" class="link mx-auto">
+                                @svg('link', 'h-4 w-4')
+                            </a>
+                        </div>
+                    </td>
                     <td class="hidden lg:table-cell">{{ $transaction->timestamp }}</td>
                     <td class="hidden xl:table-cell">
                         <div class="flex mx-auto items-center justify-center w-10 h-10 border-2 rounded-full text-theme-secondary-900 border-theme-secondary-900">
