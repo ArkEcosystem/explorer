@@ -15,7 +15,7 @@
             @foreach($blocks as $block)
                 <tr>
                     <td>{{ $block->id }}</td>
-                    <td>{{ $block->timestamp_carbon }}</td>
+                    <td>{{ $block->timestamp_carbon->format(DateFormat::DATE) }}</td>
                     <td>{{ $block->delegate->username }}</td>
                     <td>{{ $block->formatted_height }}</td>
                     <td>{{ $block->number_of_transactions }}</td>

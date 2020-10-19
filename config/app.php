@@ -227,6 +227,7 @@ return [
         'View'         => Illuminate\Support\Facades\View::class,
         'Network'      => App\Facades\Network::class,
         'Explorer'     => App\Explorer::class,
+        'DateFormat'   => ARKEcosystem\UserInterface\Support\DateFormat::class,
 
     ],
 
