@@ -328,14 +328,9 @@ final class TransactionViewModel extends ViewModel
 
     private function isTypeWithSubType(int $type, int $subType): bool
     {
-        if ($this->model->asset['type'] !== $type) {
-            return false;
-        }
+        $matchesType    = $this->model->asset['type'] === $type;
+        $matchesTSubype = $this->model->asset['subType'] === $subType;
 
-        if ($this->model->asset['subType'] !== $subType) {
-            return false;
-        }
-
-        return true;
+        return $matchesType && $matchesTSubype;
     }
 }

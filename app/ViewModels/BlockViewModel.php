@@ -7,15 +7,12 @@ namespace App\ViewModels;
 use App\Facades\Network;
 use App\Models\Block;
 use App\Services\NumberFormatter;
-use App\ViewModels\Concerns\HasTimestamp;
 use ARKEcosystem\UserInterface\Support\DateFormat;
 use Illuminate\Support\Carbon;
 use Spatie\ViewModels\ViewModel;
 
 final class BlockViewModel extends ViewModel
 {
-    use HasTimestamp;
-
     private Block $model;
 
     public function __construct(Block $block)
