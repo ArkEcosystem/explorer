@@ -8,6 +8,8 @@ use App\Facades\Network;
 use App\Models\Block;
 use App\Services\NumberFormatter;
 use App\ViewModels\Concerns\HasTimestamp;
+use ARKEcosystem\UserInterface\Support\DateFormat;
+use Illuminate\Support\Carbon;
 use Spatie\ViewModels\ViewModel;
 
 final class BlockViewModel extends ViewModel
@@ -24,6 +26,13 @@ final class BlockViewModel extends ViewModel
     public function id(): string
     {
         return $this->model->id;
+    }
+
+    public function timestamp(): string
+    {
+        return Carbon::parse(\ArkEcosystem\Crypto\Configuration\Network::get()->epoch())
+            ->addSeconds($this->model->timestamp)
+            ->format(DateFormat::TIME);
     }
 
     public function delegate(): string

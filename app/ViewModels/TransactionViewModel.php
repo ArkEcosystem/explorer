@@ -14,14 +14,13 @@ use App\Facades\Network;
 use App\Models\Transaction;
 use App\Services\Blockchain\NetworkStatus;
 use App\Services\NumberFormatter;
-use App\ViewModels\Concerns\HasTimestamp;
+use ARKEcosystem\UserInterface\Support\DateFormat;
+use Illuminate\Support\Carbon;
 use Spatie\ViewModels\ViewModel;
 
 final class TransactionViewModel extends ViewModel
 {
-    use HasTimestamp;
-
-    private Transaction $transaction;
+    private Transaction $model;
 
     public function __construct(Transaction $transaction)
     {
@@ -31,6 +30,13 @@ final class TransactionViewModel extends ViewModel
     public function id(): string
     {
         return $this->model->id;
+    }
+
+    public function timestamp(): string
+    {
+        return Carbon::parse(\ArkEcosystem\Crypto\Configuration\Network::get()->epoch())
+            ->addSeconds($this->model->timestamp)
+            ->format(DateFormat::TIME);
     }
 
     public function type(): string
