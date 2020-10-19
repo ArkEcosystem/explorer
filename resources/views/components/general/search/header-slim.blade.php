@@ -13,12 +13,6 @@
                 'w-full': searchFocused,
                 'w-1/2 lg:w-5/12 xl:w-7/12': ! searchFocused,
             }"
-            x-transition:enter="transition ease-out duration-100"
-            x-transition:enter-start="width-auto transform"
-            x-transition:enter-end="width-full transform"
-            x-transition:leave="transition ease-in duration-100"
-            x-transition:leave-start="width-full transform"
-            x-transition:leave-end="width-auto transform"
             x-cloak
         >
             <livewire:search-module :is-slim="true" />
