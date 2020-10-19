@@ -35,5 +35,5 @@ it('should get the votes as percentage from supply', function () {
     ]);
 
     expect($this->subject->votesPercentage())->toBeFloat();
-    expect($this->subject->votesPercentage())->toBe('1,000.00');
+    expect($this->subject->votesPercentage())->toBe(10.0);
 });
