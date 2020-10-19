@@ -3,10 +3,10 @@
         x-data="{ searchFocused: false }"
         @search-slim-expand="searchFocused = true"
         @search-slim-close="searchFocused = false"
-        class="flex items-center justify-between relative"
+        class="relative flex items-center justify-between"
     >
         <h1
-            class="header-2 font-bold whitespace-no-wrap text-theme-secondary-900 dark:text-theme-secondary-200"
+            class="font-bold whitespace-no-wrap header-2 text-theme-secondary-900 dark:text-theme-secondary-200"
             :class="{ hidden: searchFocused }"
         >
             {{ $title }}
