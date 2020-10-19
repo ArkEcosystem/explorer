@@ -8,9 +8,9 @@
             x-data="{ searchFocused: false }"
             @search-slim-expand="searchFocused = true"
             @search-slim-close="searchFocused = false"
-            class="hidden md:block"
+            class="hidden absolute top-0 right-0 md:block"
             :class="{
-                'w-full absolute top-0 right-0': searchFocused,
+                'w-full': searchFocused,
                 'w-1/2 lg:w-5/12 xl:w-7/12': ! searchFocused,
             }"
             x-transition:enter="transition ease-out duration-100"
