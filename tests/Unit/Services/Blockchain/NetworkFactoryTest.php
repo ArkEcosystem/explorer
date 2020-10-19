@@ -16,4 +16,4 @@ it('should handle ARK Development', function () {
 
 it('should throw if an unknown network is used', function () {
     NetworkFactory::make('unknown');
-})->theows(InvalidArgumentException::class);
+})->throws(InvalidArgumentException::class);
