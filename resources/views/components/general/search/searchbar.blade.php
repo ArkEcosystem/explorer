@@ -49,14 +49,6 @@
                 />
             </div>
 
-            {{-- <div
-                class="hidden mr-8 cursor-pointer text-theme-secondary-900 dark:text-theme-secondary-600 md:block"
-                @click="showAdvanced = !showAdvanced; isFocused = true; $dispatch('search-slim-expand')"
-            >
-                <span x-show="!showAdvanced">@lang('actions.advanced_search')</span>
-                <span x-show="showAdvanced">@lang('actions.hide_search')</span>
-            </div> --}}
-
             <button
                 type="button"
                 class="hidden text-theme-secondary-900 mr-8 rounded text-center transition-default font-normal hover:bg-theme-primary-100 dark:hover:bg-theme-secondary-800 dark:text-theme-secondary-600 md:block {{ ($slim ?? false) ? 'px-2 py-1 -my-2' : 'px-4 py-2' }}"
@@ -95,7 +87,6 @@
                 x-transition:leave-end="opacity-0 transform"
             @endunless
         >
-            {{-- <div class="flex flex-wrap items-center py-8 border-t border-theme-secondary-300 dark:border-theme-secondary-800"> --}}
             <div class="search-advanced-options">
                 <x-general.search.advanced-option :title="trans('forms.search.type')">
                     {{-- TODO: Enum of types and their values? --}}
