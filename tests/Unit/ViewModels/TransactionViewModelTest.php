@@ -32,7 +32,7 @@ beforeEach(function () {
 
 it('should get the url', function () {
     expect($this->subject->url())->toBeString();
-    expect($this->subject->url())->toBe(route('transaction', $this->subject->id));
+    expect($this->subject->url())->toBe(route('transaction', $this->subject->id()));
 });
 
 it('should determine if the transaction is incoming', function () {

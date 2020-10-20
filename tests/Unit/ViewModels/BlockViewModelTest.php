@@ -23,7 +23,7 @@ beforeEach(function () {
 
 it('should get the url', function () {
     expect($this->subject->url())->toBeString();
-    expect($this->subject->url())->toBe(route('block', $this->subject->id));
+    expect($this->subject->url())->toBe(route('block', $this->subject->id()));
 });
 
 it('should get the timestamp', function () {
