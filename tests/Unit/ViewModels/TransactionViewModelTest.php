@@ -85,3 +85,15 @@ it('should determine the transaction type', function (string $method, int $type,
 
     expect($subject->$method())->toBeFalse();
 })->with(transactionTypeSchemas());
+
+it('should determine the state icon', function () {
+    expect($this->subject->iconState())->toBeString();
+});
+
+it('should determine the type icon', function () {
+    expect($this->subject->iconType())->toBeString();
+});
+
+it('should determine the direction icon', function () {
+    expect($this->subject->iconDirection('sender'))->toBeString();
+});
