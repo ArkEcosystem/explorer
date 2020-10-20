@@ -12,7 +12,7 @@ it('should have a name', function () {
 });
 
 it('should have an alias', function () {
-    expect($this->subject->name())->toBe('devnet');
+    expect($this->subject->alias())->toBe('devnet');
 });
 
 it('should have a currency name', function () {
