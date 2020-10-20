@@ -30,8 +30,6 @@ yarn install
 cp .env.example .env
 php artisan key:generate
 php artisan migrate:fresh
-php artisan migrate --path=tests/migrations --database=explorer
-composer play
 php artisan storage:link
 yarn run watch
 
