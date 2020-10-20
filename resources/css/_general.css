@@ -185,7 +185,7 @@ body {
 
 /* Tabs */
 .tabs {
-    @apply flex bg-theme-secondary-100 rounded-lg font-semibold px-8 mb-4 select-none
+    @apply bg-theme-secondary-100 rounded-lg font-semibold px-8 mb-4 select-none
 }
 .theme-dark .tabs {
     @apply bg-theme-secondary-900 bg-black;
