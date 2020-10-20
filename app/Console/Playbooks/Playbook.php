@@ -9,7 +9,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 abstract class Playbook
 {
-    public static $timesRun = 0;
+    public static int $timesRun = 0;
 
     final public static function times(int $times): PlaybookDefinition
     {
