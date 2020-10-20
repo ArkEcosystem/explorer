@@ -1,10 +1,18 @@
 <div x-data="{ dropdownOpen: false, selected: 'transactions' }" x-cloak class="w-full">
-    <div class="hidden tabs space-x-8 md:flex">
-        <div class="tab-item" :class="{ 'tab-item-current': selected === 'transactions' }" @click="selected = 'transactions'">
+    <div class="hidden tabs md:flex">
+        <div
+            class="tab-item"
+            :class="{ 'tab-item-current': selected === 'transactions' }"
+            @click="selected = 'transactions'"
+        >
             @lang('pages.home.latest_transactions')
         </div>
 
-        <div class="tab-item" :class="{ 'tab-item-current': selected === 'blocks' }" @click="selected = 'blocks'">
+        <div
+            class="tab-item"
+            :class="{ 'tab-item-current': selected === 'blocks' }"
+            @click="selected = 'blocks'"
+        >
             @lang('pages.home.latest_blocks')
         </div>
     </div>
