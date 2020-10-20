@@ -15,7 +15,7 @@
 ### Requirements
 
 -   [Composer](https://getcomposer.org)
--   [Valet](https://laravel.com/docs/5.7/valet) or [Homestead](https://laravel.com/docs/5.7/homestead)
+-   [Valet](https://laravel.com/docs/8.x/valet) or [Homestead](https://laravel.com/docs/8.x/homestead)
 
 ### Development
 
