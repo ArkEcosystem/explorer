@@ -14,6 +14,7 @@ beforeEach(function () {
 
     $wallet = Wallet::factory()->create([
         'balance'      => 1000 * 1e8,
+        'nonce'        => 1000 * 1e8,
         'vote_balance' => 1000 * 1e8,
     ]);
 
@@ -30,6 +31,11 @@ beforeEach(function () {
 it('should get the balance', function () {
     expect($this->subject->balance())->toBeString();
     expect($this->subject->balance())->toBe('ARK 1,000.00');
+});
+
+it('should get the nonce', function () {
+    expect($this->subject->nonce())->toBeString();
+    expect($this->subject->nonce())->toBe('ARK 1,000.00');
 });
 
 it('should get the balance as percentage from supply', function () {
