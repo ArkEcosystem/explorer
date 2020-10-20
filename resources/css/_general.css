@@ -169,6 +169,9 @@ body {
 .table-list-mobile-row:first-child {
     @apply pt-0;
 }
+.theme-dark .table-list-mobile-row {
+    @apply flex border-theme-secondary-800 pt-8;
+}
 
 @screen md {
     .table-list-mobile {
