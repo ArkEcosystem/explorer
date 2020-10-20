@@ -10,6 +10,37 @@
 
 > Lead Maintainer: [John Doe](https://github.com/username)
 
+## Installation
+
+### Requirements
+
+-   [Composer](https://getcomposer.org)
+-   [Valet](https://laravel.com/docs/5.7/valet) or [Homestead](https://laravel.com/docs/5.7/homestead)
+
+### Development
+
+Currently the instructions are for Valet
+
+```bash
+git clone https://github.com/ArkEcosystem/explorer.ark.io.git
+cd explorer.ark.io
+composer install
+yarn install
+
+cp .env.example .env
+php artisan key:generate
+php artisan migrate:fresh
+php artisan migrate --path=tests/migrations --database=explorer
+composer play
+php artisan storage:link
+yarn run watch
+
+valet link explorer-ark-io
+```
+
+*Protip* Make sure you setup `EXPLORER_DB_*` to a local database in `.env` before running `composer play`.
+
+Afterwards, you can navigate to `explorer-ark-io.test` in your browser to see it in action
 
 ## Security
 
