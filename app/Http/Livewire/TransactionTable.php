@@ -7,11 +7,11 @@ namespace App\Http\Livewire;
 use App\Models\Transaction;
 use App\ViewModels\ViewModelFactory;
 use Livewire\Component;
-use Livewire\WithPagination;
+use ARKEcosystem\UserInterface\Http\Livewire\Concerns\HasPagination;
 
 final class TransactionTable extends Component
 {
-    use WithPagination;
+    use HasPagination;
 
     public bool $viewMore = false;
 
