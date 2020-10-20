@@ -12,14 +12,13 @@ use function Tests\configureExplorerDatabase;
 beforeEach(fn () => configureExplorerDatabase());
 
 it('should list the first page of records', function () {
-    Transaction::factory(100)->create();
+    Transaction::factory(60)->create();
 
     $component = Livewire::test(TransactionTable::class);
 
     foreach (ViewModelFactory::paginate(Transaction::latestByTimestamp()->paginate())->items() as $transaction) {
         $component->assertSee($transaction->id());
         $component->assertSee($transaction->timestamp());
-        $component->assertSee($transaction->type());
         $component->assertSee($transaction->sender());
         $component->assertSee($transaction->recipient());
         $component->assertSee($transaction->fee());

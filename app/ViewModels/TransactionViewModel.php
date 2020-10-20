@@ -27,6 +27,11 @@ final class TransactionViewModel extends ViewModel
         $this->model = $transaction;
     }
 
+    public function url(): string
+    {
+        return route('transaction', $this->model->id);
+    }
+
     public function id(): string
     {
         return $this->model->id;

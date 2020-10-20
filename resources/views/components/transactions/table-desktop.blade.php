@@ -16,7 +16,7 @@
                 <tr>
                     <td>
                         <div class="flex items-center">
-                            <a href="{{ $transaction->id() }}" class="mx-auto link">
+                            <a href="{{ $transaction->url() }}" class="mx-auto link">
                                 @svg('link', 'h-4 w-4')
                             </a>
                         </div>
