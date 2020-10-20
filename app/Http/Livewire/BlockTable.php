@@ -13,6 +13,13 @@ final class BlockTable extends Component
 {
     use WithPagination;
 
+    public bool $viewMore = false;
+
+    public function mount(bool $viewMore = false)
+    {
+        $this->viewMore = $viewMore;
+    }
+
     public function render()
     {
         return view('livewire.block-table', [
