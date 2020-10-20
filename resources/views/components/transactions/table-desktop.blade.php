@@ -2,13 +2,13 @@
     <table>
         <thead>
             <tr>
-                <th class="text-center">ID</th>
-                <th class="hidden lg:table-cell">Timestamp</th>
-                <th class="hidden text-center xl:table-cell">Type</th>
-                <th><span class="pl-14">Sender</span></th>
-                <th><span class="pl-14">Recipient</span></th>
-                <th class="text-right">Amount</th>
-                <th class="hidden text-right xl:table-cell">Fee</th>
+                <th class="text-center">@lang('general.transaction.id')</th>
+                <th class="hidden lg:table-cell">@lang('general.transaction.timestamp')</th>
+                <th class="hidden text-center xl:table-cell">@lang('general.transaction.type')</th>
+                <th><span class="pl-14">@lang('general.transaction.sender')</span></th>
+                <th><span class="pl-14">@lang('general.transaction.recipient')</span></th>
+                <th class="text-right">@lang('general.transaction.amount')</th>
+                <th class="hidden text-right xl:table-cell">@lang('general.transaction.fee')</th>
             </tr>
         </thead>
         <tbody>

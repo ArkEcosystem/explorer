@@ -2,12 +2,12 @@
     @foreach ($transactions as $transaction)
         <div class="space-x-10 table-list-mobile-row sm:space-x-8">
             <div class="space-y-6">
-                <div>ID</div>
-                <div>Timestamp</div>
-                <div>Sender</div>
-                <div>Recipient</div>
-                <div>Amount</div>
-                <div>Fee</div>
+                <div>@lang('general.transaction.id')</div>
+                <div>@lang('general.transaction.timestamp')</div>
+                <div>@lang('general.transaction.sender')</div>
+                <div>@lang('general.transaction.recipient')</div>
+                <div>@lang('general.transaction.amount')</div>
+                <div>@lang('general.transaction.fee')</div>
             </div>
 
             <div class="flex-1 space-y-6">
