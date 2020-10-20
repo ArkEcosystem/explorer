@@ -38,7 +38,7 @@ yarn run watch
 valet link explorer-ark-io
 ```
 
-*Protip* Make sure you setup `EXPLORER_DB_*` to a local database in `.env` before running `composer play`.
+*Protip:* You will need access to a Core Postgres database. The details can be specified in the `.env` file under `EXPLORER_DB_*`.
 
 Afterwards, you can navigate to `explorer-ark-io.test` in your browser to see it in action
 
