@@ -49,11 +49,6 @@ final class TransactionViewModel extends ViewModel
             ->format(DateFormat::TIME);
     }
 
-    public function type(): string
-    {
-        return $this->model->type;
-    }
-
     public function sender(): string
     {
         return $this->model->sender->address;

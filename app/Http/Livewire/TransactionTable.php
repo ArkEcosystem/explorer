@@ -99,15 +99,15 @@ final class TransactionTable extends Component
 
     public function render()
     {
-        /** @var \Illuminate\Database\Eloquent\Model */
-        $query = Transaction::latestByTimestamp();
-
         if ($this->state['type'] !== 'all') {
-            $query->addGlobalScope($this->scopes[$this->state['type']]);
+            $scopeClass = $this->scopes[$this->state['type']];
+
+            /* @var \Illuminate\Database\Eloquent\Model */
+            Transaction::addGlobalScope(new $scopeClass());
         }
 
         return view('livewire.transaction-table', [
-            'transactions' => ViewModelFactory::paginate($query->paginate()),
+            'transactions' => ViewModelFactory::paginate(Transaction::latestByTimestamp()->paginate()),
         ]);
     }
 }
