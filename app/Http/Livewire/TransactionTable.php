@@ -6,8 +6,8 @@ namespace App\Http\Livewire;
 
 use App\Models\Transaction;
 use App\ViewModels\ViewModelFactory;
-use Livewire\Component;
 use ARKEcosystem\UserInterface\Http\Livewire\Concerns\HasPagination;
+use Livewire\Component;
 
 final class TransactionTable extends Component
 {
