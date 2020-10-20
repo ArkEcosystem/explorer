@@ -11,12 +11,12 @@
             </div>
 
             <div class="flex-1 space-y-6">
-                <div><a href="{{ $transaction->id }}" class="font-semibold link">{{ $transaction->id }}</a></div>
-                <div>{{ $transaction->timestamp }}</div>
-                <div><x-general.address address="{{ $transaction->sender }}" /></div>
-                <div><x-general.address address="{{ $transaction->recipient ?? $transaction->sender }}" /></div>
-                <div>{{ $transaction->amount }}</div>
-                <div>{{ $transaction->fee }}</div>
+                <div><a href="{{ $transaction->id() }}" class="font-semibold link">{{ $transaction->id() }}</a></div>
+                <div>{{ $transaction->timestamp() }}</div>
+                <div><x-general.address address="{{ $transaction->sender() }}" /></div>
+                <div><x-general.address address="{{ $transaction->recipient() ?? $transaction->sender() }}" /></div>
+                <div>{{ $transaction->amount() }}</div>
+                <div>{{ $transaction->fee() }}</div>
             </div>
         </div>
     @endforeach
