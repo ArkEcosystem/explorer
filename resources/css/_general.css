@@ -164,13 +164,17 @@ body {
     @apply w-full;
 }
 .table-list-mobile-row {
-    @apply flex border-theme-secondary-300 pt-8;
+    @apply pt-8 border-t border-theme-secondary-300;
 }
 .table-list-mobile-row:first-child {
-    @apply pt-0;
+    @apply pt-0 border-t-0;
 }
 .theme-dark .table-list-mobile-row {
-    @apply flex border-theme-secondary-800 pt-8;
+    @apply border-theme-secondary-800;
+}
+
+.table-list-mobile-row td {
+    @apply py-2;
 }
 
 @screen md {
