@@ -53,6 +53,6 @@ final class WalletViewModel extends ViewModel
 
     public function qrCode(): string
     {
-        return QRCode::generate('ark:'.$this->address);
+        return QRCode::generate('ark:'.$this->model->address);
     }
 }
