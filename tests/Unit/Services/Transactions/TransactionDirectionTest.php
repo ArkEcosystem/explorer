@@ -2,32 +2,30 @@
 
 declare(strict_types=1);
 
-use App\Models\Block;
 use App\Models\Transaction;
 use App\Models\Wallet;
 
-use App\Services\Transactions\TransactionState;
+use App\Services\Transactions\TransactionDirection;
 use function Tests\configureExplorerDatabase;
 
 beforeEach(fn () => configureExplorerDatabase());
 
-it('should determine if the transaction is confirmed', function () {
-    Block::factory()->create(['height' => 2000]);
-
+it('should determine if the transaction is sent', function () {
     $transaction = Transaction::factory()->create([
-        'block_id'          => Block::factory()->create(['height' => 1000])->id,
         'sender_public_key' => Wallet::factory()->create(['address' => 'sender'])->public_key,
         'recipient_id'      => Wallet::factory()->create(['address' => 'recipient'])->address,
     ]);
 
-    expect((new TransactionState($transaction))->isConfirmed())->toBeTrue();
+    expect((new TransactionDirection($transaction))->isSent('sender'))->toBeTrue();
+    expect((new TransactionDirection($transaction))->isSent('recipient'))->toBeFalse();
 });
 
-it('should determine if the transaction is not confirmed', function () {
+it('should determine if the transaction is received', function () {
     $transaction = Transaction::factory()->create([
         'sender_public_key' => Wallet::factory()->create(['address' => 'sender'])->public_key,
         'recipient_id'      => Wallet::factory()->create(['address' => 'recipient'])->address,
     ]);
 
-    expect((new TransactionState($transaction))->isConfirmed())->toBeFalse();
+    expect((new TransactionDirection($transaction))->isReceived('recipient'))->toBeTrue();
+    expect((new TransactionDirection($transaction))->isReceived('sender'))->toBeFalse();
 });

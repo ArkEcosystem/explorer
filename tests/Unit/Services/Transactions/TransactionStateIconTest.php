@@ -22,21 +22,3 @@ it('should determine if the transaction is confirmed', function () {
 
     expect((new TransactionStateIcon($transaction))->name('sender'))->toBe('confirmed');
 });
-
-it('should determine if the transaction is sent', function () {
-    $transaction = Transaction::factory()->create([
-        'sender_public_key' => Wallet::factory()->create(['address' => 'sender'])->public_key,
-        'recipient_id'      => Wallet::factory()->create(['address' => 'recipient'])->address,
-    ]);
-
-    expect((new TransactionStateIcon($transaction))->name('sender'))->toBe('sent');
-});
-
-it('should determine if the transaction is received', function () {
-    $transaction = Transaction::factory()->create([
-        'sender_public_key' => Wallet::factory()->create(['address' => 'sender'])->public_key,
-        'recipient_id'      => Wallet::factory()->create(['address' => 'recipient'])->address,
-    ]);
-
-    expect((new TransactionStateIcon($transaction))->name('recipient'))->toBe('received');
-});

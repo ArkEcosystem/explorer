@@ -8,6 +8,8 @@ use App\Facades\Network;
 use App\Models\Transaction;
 use App\Services\Blockchain\NetworkStatus;
 use App\Services\NumberFormatter;
+use App\Services\Transactions\TransactionDirection;
+use App\Services\Transactions\TransactionDirectionIcon;
 use App\Services\Transactions\TransactionState;
 use App\Services\Transactions\TransactionStateIcon;
 use App\Services\Transactions\TransactionType;
@@ -24,11 +26,14 @@ final class TransactionViewModel extends ViewModel
 
     private TransactionState $state;
 
+    private TransactionDirection $direction;
+
     public function __construct(Transaction $transaction)
     {
-        $this->model = $transaction;
-        $this->type  = new TransactionType($transaction);
-        $this->state = new TransactionState($transaction);
+        $this->model     = $transaction;
+        $this->type      = new TransactionType($transaction);
+        $this->state     = new TransactionState($transaction);
+        $this->direction = new TransactionDirection($transaction);
     }
 
     public function url(): string
@@ -78,14 +83,19 @@ final class TransactionViewModel extends ViewModel
         return NumberFormatter::number(NetworkStatus::height() - $this->model->block->height);
     }
 
-    public function iconState(string $address): string
+    public function iconState(): string
     {
-        return (new TransactionStateIcon($this->model))->name($address);
+        return (new TransactionStateIcon($this->model))->name();
     }
 
     public function iconType(): string
     {
         return (new TransactionTypeIcon($this->model))->name();
+    }
+
+    public function iconDirection(string $address): string
+    {
+        return (new TransactionDirectionIcon($this->model))->name($address);
     }
 
     public function isConfirmed(): bool
@@ -95,12 +105,12 @@ final class TransactionViewModel extends ViewModel
 
     public function isSent(string $address): bool
     {
-        return $this->state->isSent($address);
+        return $this->direction->isSent($address);
     }
 
     public function isReceived(string $address): bool
     {
-        return $this->state->isReceived($address);
+        return $this->direction->isReceived($address);
     }
 
     public function isTransfer(): bool

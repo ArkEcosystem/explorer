@@ -23,14 +23,4 @@ final class TransactionState
 
         return $confirmations >= Network::confirmations();
     }
-
-    public function isSent(string $address): bool
-    {
-        return $this->transaction->sender->address === $address;
-    }
-
-    public function isReceived(string $address): bool
-    {
-        return $this->transaction->recipient->address === $address;
-    }
 }

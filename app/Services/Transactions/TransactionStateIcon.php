@@ -15,18 +15,10 @@ final class TransactionStateIcon
         $this->state = new TransactionState($transaction);
     }
 
-    public function name(string $address): string
+    public function name(): string
     {
         if ($this->state->isConfirmed()) {
             return 'confirmed';
-        }
-
-        if ($this->state->isSent($address)) {
-            return 'sent';
-        }
-
-        if ($this->state->isReceived($address)) {
-            return 'received';
         }
 
         return 'unknown';
