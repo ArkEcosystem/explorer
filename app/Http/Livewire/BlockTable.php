@@ -8,7 +8,6 @@ use App\Models\Block;
 use App\ViewModels\ViewModelFactory;
 use ARKEcosystem\UserInterface\Http\Livewire\Concerns\HasPagination;
 use Livewire\Component;
-use Livewire\WithPagination;
 
 final class BlockTable extends Component
 {
