@@ -33,10 +33,10 @@ return [
     ],
 
     'wallet' => [
-        'rank' => 'Rank',
+        'rank'    => 'Rank',
         'address' => 'Address',
-        'info' => 'Info',
+        'info'    => 'Info',
         'balance' => 'Balance',
-        'supply' => 'Supply',
+        'supply'  => 'Supply',
     ],
 ];

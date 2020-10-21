@@ -1,5 +1,5 @@
 <div class="bg-white dark:bg-theme-secondary-900">
-    <div class="py-16 content-container flex-col md:px-8">
+    <div class="flex-col py-16 content-container md:px-8">
         <h1 class="header-2">@lang('pages.wallets.title')</h1>
 
         <div class="mt-4">

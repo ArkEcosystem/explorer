@@ -7,7 +7,7 @@
     @endif
 @endforeach
 
-<div class="hidden table-container w-full md:block">
+<div class="hidden w-full table-container md:block">
     <table>
         <thead>
             <tr>
@@ -25,7 +25,7 @@
                     <td><x-general.address :address="$wallet->address()" /></td>
                     @if ($hasInfo)
                         <td class="text-center">
-                            <div class="flex items-center justify-center text-theme-secondary-500 space-x-2">
+                            <div class="flex items-center justify-center space-x-2 text-theme-secondary-500">
                                 @if ($wallet->isKnown())
                                     <div data-tippy-content="@lang('general.verified_address')">
                                         @svg('app-verified', 'w-5 h-5')

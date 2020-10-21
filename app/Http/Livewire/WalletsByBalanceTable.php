@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Livewire;
 
 use App\Models\Wallet;
@@ -7,9 +9,8 @@ use App\ViewModels\ViewModelFactory;
 use ARKEcosystem\UserInterface\Http\Livewire\Concerns\HasPagination;
 use Illuminate\View\View;
 use Livewire\Component;
-use Livewire\WithPagination;
 
-class WalletsByBalanceTable extends Component
+final class WalletsByBalanceTable extends Component
 {
     use HasPagination;
 
