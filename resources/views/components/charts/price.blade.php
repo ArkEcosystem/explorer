@@ -9,9 +9,9 @@
             <div class="flex relative w-full justify-between items-center">
                 <h2 class="text-2xl">@lang("pages.home.charts.{$identifier}")</h2>
 
-                <x-ark-dropdown dropdown-classes="left-0 w-32 mt-3" button-class="h-10 w-32 dropdown-button" :init-alpine="false">
+                <x-ark-dropdown dropdown-classes="left-0 w-32 mt-3" button-class="w-32 h-10 dropdown-button" :init-alpine="false">
                     @slot('button')
-                        <div class="flex flex-inline items-center w-full justify-end font-semibold text-theme-secondary-700 space-x-2">
+                        <div class="flex items-center justify-end w-full space-x-2 font-semibold flex-inline text-theme-secondary-700">
                             <span x-text="period"></span>
                             <span :class="{ 'rotate-180': open }" class="transition duration-150 ease-in-out">
                                 @svg('chevron-up', 'h-3 w-3')
