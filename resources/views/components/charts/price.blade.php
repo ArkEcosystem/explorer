@@ -31,7 +31,7 @@
                     </div>
                 </x-ark-dropdown>
             </div>
-            <div class="flex w-full justify-between mt-5">
+            <div class="flex justify-between w-full mt-5">
                 <div class="flex items-center pr-5 mr-5 border-r border-theme-secondary-200">
                    <div class="flex flex-col">
                         <span class="font-semibold text-theme-secondary-500">@lang('pages.home.charts.min_price')</span>
