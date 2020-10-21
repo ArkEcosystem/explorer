@@ -86,7 +86,7 @@ jobs:
                   commit_message: "style: resolve style guide violations"
                   branch: ${{ github.head_ref }}
 
-    test:
+    unit:
         needs: [merge_conflict_finder]
 
         runs-on: ubuntu-latest
