@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
+ * @property string $id
  * @property int $height
  * @property int $number_of_transactions
  * @property int $reward

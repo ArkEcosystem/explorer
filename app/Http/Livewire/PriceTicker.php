@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire;
 
-use App\Facades\Network;
-use App\Services\CryptoCompare;
-use App\Services\Settings;
 use Livewire\Component;
+use App\Facades\Network;
+use Illuminate\View\View;
+use App\Services\Settings;
+use App\Services\CryptoCompare;
 
 final class PriceTicker extends Component
 {
-    public function render()
+    public function render(): View
     {
         return view('livewire.price-ticker', [
             'from'  => Network::currency(),
