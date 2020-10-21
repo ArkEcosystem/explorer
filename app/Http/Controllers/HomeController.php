@@ -6,7 +6,6 @@ namespace App\Http\Controllers;
 
 use App\Services\Transactions\Aggregates\FeeByRangeAggregate;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 final class HomeController
@@ -18,7 +17,7 @@ final class HomeController
         $this->aggregate = $aggregate;
     }
 
-    public function __invoke(Request $request): View
+    public function __invoke(): View
     {
         return view('app.home', [
             'fees' => [
