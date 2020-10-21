@@ -4,9 +4,9 @@
 @endpush
 
 <div x-data="makeChart('{{ $identifier }}', '{{ $coloursScheme }}')" x-init="renderChart()" class="bg-white border-theme-secondary-100 dark:border-black dark:bg-theme-secondary-900">
-    <div class="content-container-full-width md:py-16 md:px-8 flex flex-col">
-        <div class="flex w-full flex-col">
-            <div class="flex relative w-full justify-between items-center">
+    <div class="flex flex-col content-container-full-width md:py-16 md:px-8">
+        <div class="flex flex-col w-full">
+            <div class="relative flex items-center justify-between w-full">
                 <h2 class="text-2xl">@lang("pages.home.charts.{$identifier}")</h2>
 
                 <x-ark-dropdown dropdown-classes="left-0 w-32 mt-3" button-class="w-32 h-10 dropdown-button" :init-alpine="false">
@@ -30,21 +30,21 @@
             <div class="flex justify-between w-full mt-5 mb-5">
                 <div class="flex items-center pr-5 mr-5 border-r border-theme-secondary-200">
                    <div class="flex flex-col">
-                        <span class="font-semibold text-theme-secondary-500 text-sm">@lang("pages.home.charts.min_{$identifier}")</span>
+                        <span class="text-sm font-semibold text-theme-secondary-500">@lang("pages.home.charts.min_{$identifier}")</span>
                         <span class="font-semibold" x-text="priceMin + ` ${currency}`"></span>
                     </div>
                 </div>
 
                 <div class="flex items-center pr-5 mr-5 border-r border-theme-secondary-200">
                     <div class="flex flex-col">
-                        <span class="font-semibold text-theme-secondary-500 text-sm">@lang("pages.home.charts.max_{$identifier}")</span>
+                        <span class="text-sm font-semibold text-theme-secondary-500">@lang("pages.home.charts.max_{$identifier}")</span>
                         <span class="font-semibold" x-text="priceMax + ` ${currency}`">0.02477504 BTC</span>
                     </div>
                 </div>
 
                 <div class="flex items-center pr-5 mr-5">
                     <div class="flex flex-col">
-                        <span class="font-semibold text-theme-secondary-500 text-sm">@lang("pages.home.charts.avg_{$identifier}")</span>
+                        <span class="text-sm font-semibold text-theme-secondary-500">@lang("pages.home.charts.avg_{$identifier}")</span>
                         <span class="font-semibold" x-text="priceAvg + ` ${currency}`">0.01570092 BTC</span>
                     </div>
                 </div>

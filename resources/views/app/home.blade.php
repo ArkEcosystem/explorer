@@ -8,7 +8,7 @@
     @section('content')
         <x-general.search.header />
 
-        <div class="hidden sm:flex flex-col space-y-10 lg:flex-row lg:space-y-0 w-full justify-center">
+        <div class="flex-col justify-center hidden w-full space-y-10 sm:flex lg:flex-row lg:space-y-0">
             <x-charts.price identifier="price" colours-scheme="#339A51" />
             <x-charts.price identifier="fees" colours-scheme="#FFAE10" />
 
