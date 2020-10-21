@@ -5,7 +5,6 @@ declare(strict_types=1);
 use App\Enums\CoreTransactionTypeEnum;
 use App\Enums\MagistrateTransactionEntityActionEnum;
 use App\Enums\MagistrateTransactionEntitySubTypeEnum;
-
 use App\Enums\MagistrateTransactionEntityTypeEnum;
 use App\Enums\MagistrateTransactionTypeEnum;
 use App\Enums\TransactionTypeGroupEnum;
@@ -13,16 +12,18 @@ use App\Models\Block;
 use App\Models\Transaction;
 use App\Models\Wallet;
 use App\ViewModels\TransactionViewModel;
+
+use function Spatie\Snapshots\assertMatchesSnapshot;
 use function Tests\configureExplorerDatabase;
 
 beforeEach(function () {
     configureExplorerDatabase();
 
-    $block = Block::factory()->create(['height' => 1]);
+    $this->block = Block::factory()->create(['height' => 1]);
     Block::factory()->create(['height' => 5000000]);
 
     $this->subject = new TransactionViewModel(Transaction::factory()->create([
-        'block_id'          => $block->id,
+        'block_id'          => $this->block->id,
         'fee'               => 1 * 1e8,
         'amount'            => 2 * 1e8,
         'sender_public_key' => Wallet::factory()->create(['address' => 'sender'])->public_key,
@@ -30,14 +31,19 @@ beforeEach(function () {
     ]));
 });
 
+it('should get the url', function () {
+    expect($this->subject->url())->toBeString();
+    expect($this->subject->url())->toBe(route('transaction', $this->subject->id()));
+});
+
 it('should determine if the transaction is incoming', function () {
-    expect($this->subject->isSent('sender'))->toBeTrue();
-    expect($this->subject->isSent('recipient'))->toBeFalse();
+    expect($this->subject->isReceived('recipient'))->toBeTrue();
+    expect($this->subject->isReceived('sender'))->toBeFalse();
 });
 
 it('should determine if the transaction is outgoing', function () {
-    expect($this->subject->isReceived('recipient'))->toBeTrue();
-    expect($this->subject->isReceived('sender'))->toBeFalse();
+    expect($this->subject->isSent('sender'))->toBeTrue();
+    expect($this->subject->isSent('recipient'))->toBeFalse();
 });
 
 it('should get the timestamp', function () {
@@ -45,14 +51,21 @@ it('should get the timestamp', function () {
     expect($this->subject->timestamp())->toBe('19 Oct 2020 (04:54:16)');
 });
 
+it('should get the block ID', function () {
+    expect($this->subject->blockId())->toBeString();
+    expect($this->subject->blockId())->toBe($this->block->id);
+});
+
 it('should get the fee', function () {
     expect($this->subject->fee())->toBeString();
-    expect($this->subject->fee())->toBe('ARK 1.00');
+
+    assertMatchesSnapshot($this->subject->fee());
 });
 
 it('should get the amount', function () {
     expect($this->subject->amount())->toBeString();
-    expect($this->subject->amount())->toBe('ARK 2.00');
+
+    assertMatchesSnapshot($this->subject->amount());
 });
 
 it('should get the confirmations', function () {
@@ -243,7 +256,7 @@ it('should determine the transaction type', function (string $method, int $type,
         MagistrateTransactionTypeEnum::ENTITY,
         TransactionTypeGroupEnum::MAGISTRATE,
         [
-            'type'    => MagistrateTransactionEntityTypeEnum::PLUGIN,
+            'type'    => MagistrateTransactionEntityTypeEnum::MODULE,
             'subType' => MagistrateTransactionEntitySubTypeEnum::NONE,
             'action'  => MagistrateTransactionEntityActionEnum::REGISTER,
         ],
@@ -252,7 +265,7 @@ it('should determine the transaction type', function (string $method, int $type,
         MagistrateTransactionTypeEnum::ENTITY,
         TransactionTypeGroupEnum::MAGISTRATE,
         [
-            'type'    => MagistrateTransactionEntityTypeEnum::PLUGIN,
+            'type'    => MagistrateTransactionEntityTypeEnum::MODULE,
             'subType' => MagistrateTransactionEntitySubTypeEnum::NONE,
             'action'  => MagistrateTransactionEntityActionEnum::RESIGN,
         ],
@@ -261,7 +274,7 @@ it('should determine the transaction type', function (string $method, int $type,
         MagistrateTransactionTypeEnum::ENTITY,
         TransactionTypeGroupEnum::MAGISTRATE,
         [
-            'type'    => MagistrateTransactionEntityTypeEnum::PLUGIN,
+            'type'    => MagistrateTransactionEntityTypeEnum::MODULE,
             'subType' => MagistrateTransactionEntitySubTypeEnum::NONE,
             'action'  => MagistrateTransactionEntityActionEnum::UPDATE,
         ],
@@ -324,3 +337,15 @@ it('should determine the transaction type', function (string $method, int $type,
         [],
     ],
 ]);
+
+it('should determine the state icon', function () {
+    expect($this->subject->iconState())->toBeString();
+});
+
+it('should determine the type icon', function () {
+    expect($this->subject->iconType())->toBeString();
+});
+
+it('should determine the direction icon', function () {
+    expect($this->subject->iconDirection('sender'))->toBeString();
+});
