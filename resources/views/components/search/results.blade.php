@@ -3,7 +3,13 @@
         <h1 class="header-2">@lang('pages.search_results.title')</h1>
 
         <div class="mt-4">
-            <livewire:transaction-table />
+            @if ($type === 'transaction')
+                <livewire:transaction-table />
+            @elseif ($type === 'block')
+                <livewire:block-table />
+            @else
+                <livewire:wallet-table />
+            @endif
         </div>
     </div>
 </div>

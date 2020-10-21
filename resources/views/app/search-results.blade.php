@@ -8,7 +8,7 @@
     @section('content')
         <x-general.search.header />
 
-        <x-search.results />
+        <x-search.results type="transaction" />
     @endsection
 
 @endcomponent
