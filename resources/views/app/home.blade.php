@@ -8,6 +8,10 @@
     @section('content')
         <x-home.header />
 
+        <div>
+            <x-charts.price />
+        </div>
+
         <x-home.content />
     @endsection
 
