@@ -16,7 +16,7 @@
                     <th class="text-center">@lang('general.wallet.info')</th>
                 @endif
                 <th class="text-right">@lang('general.wallet.balance')</th>
-                <th class="hidden text-right lg:table-cell">@lang('general.wallet.supply')</th>
+                <th width="120" class="hidden text-right lg:table-cell">@lang('general.wallet.supply')</th>
             </tr>
         </thead>
         <tbody>
