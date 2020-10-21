@@ -11,7 +11,7 @@ it('should format a number without a currency symbol', function () {
 });
 
 it('should format a number without a currency symbol from a satoshi value', function () {
-    assertMatchesSnapshot(NumberFormatter::currency(123 * 1e8, 'ARK'));
+    assertMatchesSnapshot(NumberFormatter::satoshi(123 * 1e8, 'ARK'));
 });
 
 it('should format a number with a currency symbol', function () {
