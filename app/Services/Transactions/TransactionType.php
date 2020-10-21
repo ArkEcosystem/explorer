@@ -250,10 +250,6 @@ final class TransactionType
             return false;
         }
 
-        if (is_null($this->transaction->asset)) {
-            return false;
-        }
-
         $matchesType   = $this->transaction->type === MagistrateTransactionTypeEnum::ENTITY;
         $matchesAction = Arr::get($this->transaction->asset, 'action') === $action;
 
