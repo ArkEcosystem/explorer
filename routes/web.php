@@ -9,6 +9,7 @@ use App\Http\Controllers\ListTransactionsByBlockController;
 use App\Http\Controllers\ListTransactionsByWalletController;
 use App\Http\Controllers\ListTransactionsController;
 use App\Http\Controllers\ListVotersByWalletController;
+use App\Http\Controllers\ListWalletsController;
 use App\Http\Controllers\ShowBlockController;
 use App\Http\Controllers\ShowDelegateMonitorController;
 use App\Http\Controllers\ShowTransactionController;
