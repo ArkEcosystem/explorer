@@ -1217,9 +1217,7 @@ window.makeChart = (identifier) => {
 
             const scaleCorrection = 1000;
 
-            let ctx = document
-                .getElementById(this.identifier)
-                .getContext("2d");
+            let ctx = document.getElementById(this.identifier).getContext("2d");
 
             this.chart = new Chart(ctx, {
                 type: "line",
@@ -1350,7 +1348,9 @@ window.makeChart = (identifier) => {
                         callbacks: {
                             label: (item) => {
                                 // TODO: Rounded circle on the left of the label
-                                return `${item.yLabel.toFixed(2)} ${this.currency}`;
+                                return `${item.yLabel.toFixed(2)} ${
+                                    this.currency
+                                }`;
                             },
                             title: (items, data) => {},
                         },
@@ -1375,7 +1375,7 @@ window.makeChart = (identifier) => {
         },
 
         setPeriod(period) {
-            this.period = period.charAt(0).toUpperCase() + period.slice(1);;
+            this.period = period.charAt(0).toUpperCase() + period.slice(1);
 
             updatedTicks = this.updateTicks();
 
@@ -1398,7 +1398,7 @@ window.makeChart = (identifier) => {
             //return formattedPeriods.find(formattedPeriod => formattedPeriod.key === this.period);
             */
 
-            /*const formattedPeri   ods = [
+        /*const formattedPeri   ods = [
                 {'key': 'day', 'display': 'Day' },
                 {'key': 'week', 'display': 'Week'},
                 {'key': 'month', 'display': 'Month'},
@@ -1406,7 +1406,7 @@ window.makeChart = (identifier) => {
                 {'key': 'year', 'display': 'Year' },
             ]
             return formattedPeriods;*/
-            //return formattedPeriods.find(formattedPeriod => formattedPeriod.key === period);
+        //return formattedPeriods.find(formattedPeriod => formattedPeriod.key === period);
         /*}*/
     };
 };
