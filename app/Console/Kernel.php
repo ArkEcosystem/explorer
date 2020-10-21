@@ -28,7 +28,7 @@ final class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command(CacheChartData::class)->everyTenMinutes();
+        $schedule->command(CacheChartData::class)->everyThirtyMinutes();
     }
 
     /**
