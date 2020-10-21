@@ -12,7 +12,7 @@
                         <td>
                             <div class="flex flex-col space-y-4">
                                 @if ($wallet->isKnown())
-                                    <div class="flex space-x-4 items-center">
+                                    <div class="flex items-center space-x-4">
                                         @svg('app-verified', 'w-5 h-5 text-theme-secondary-500')
 
                                         <span>@lang('general.verified_address')</span>
@@ -20,7 +20,7 @@
                                 @endif
 
                                 @if ($wallet->isOwnedByExchange())
-                                    <div class="flex space-x-4 items-center">
+                                    <div class="flex items-center space-x-4">
                                         @svg('app-exchange', 'w-5 h-5 text-theme-secondary-500')
 
                                         <span>@lang('general.exchange')</span>
