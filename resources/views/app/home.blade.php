@@ -9,7 +9,7 @@
         <x-home.header />
 
         <div>
-            <x-charts.price />
+            <x-charts.price identifier="price" />
         </div>
 
         <x-home.content />
