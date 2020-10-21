@@ -9,7 +9,7 @@ use Illuminate\View\View;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class TopWalletsTable extends Component
+class WalletsByBalanceTable extends Component
 {
     use HasPagination;
 
