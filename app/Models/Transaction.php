@@ -44,7 +44,14 @@ final class Transaction extends Model
      *
      * @var array
      */
-    protected $casts = ['asset' => 'array'];
+    protected $casts = [
+        'amount'     => 'int',
+        'asset'      => 'array',
+        'fee'        => 'int',
+        'timestamp'  => 'int',
+        'type_group' => 'int',
+        'type'       => 'int',
+    ];
 
     /**
      * A transaction belongs to a block.

@@ -31,6 +31,20 @@ final class Block extends Model
     public $incrementing = false;
 
     /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'height'                 => 'int',
+        'number_of_transactions' => 'int',
+        'reward'                 => 'int',
+        'timestamp'              => 'int',
+        'total_amount'           => 'int',
+        'total_fee'              => 'int',
+    ];
+
+    /**
      * A block has many transactions.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
