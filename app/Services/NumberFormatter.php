@@ -15,6 +15,6 @@ final class NumberFormatter
 
     public static function currency($value, string $currency): string
     {
-        return static::number($value).' '.$currency;
+        return static::number($value).' '.strtoupper($currency);
     }
 }
