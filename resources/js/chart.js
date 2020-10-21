@@ -1,7 +1,8 @@
-window.makeChart = (identifier) => {
+window.makeChart = (identifier, coloursScheme) => {
     return {
         period: "Day",
         identifier: identifier,
+        coloursScheme: coloursScheme,
         chart: null,
         data: {
             marketPrice: "0.03109000",
@@ -1228,7 +1229,7 @@ window.makeChart = (identifier) => {
                     labels: this.getMarketDayAverage().labels,
                     datasets: [
                         {
-                            borderColor: "#349A51",
+                            borderColor: this.coloursScheme,
                             pointRadius: 4,
                             pointHoverRadius: 12,
                             pointHoverBorderWidth: 3,
@@ -1385,28 +1386,5 @@ window.makeChart = (identifier) => {
             // Render the chart synchronously and without an animation.
             this.chart.update(0);
         },
-
-        /*getFormattedPeriods(localized) {
-            this.localizedPeriods = JSON.parse(localized);
-
-            const formattedPeriods = Object.keys(this.localized).map(element => ({ key: element, display: localized[element] }));
-
-            console.log(this.period);
-            //this.period = formattedPeriods.find(formattedPeriod => formattedPeriod.key === this.period.toString().toLowerCase());
-
-            return formattedPeriods;
-            //return formattedPeriods.find(formattedPeriod => formattedPeriod.key === this.period);
-            */
-
-            /*const formattedPeri   ods = [
-                {'key': 'day', 'display': 'Day' },
-                {'key': 'week', 'display': 'Week'},
-                {'key': 'month', 'display': 'Month'},
-                {'key': 'quarter', 'display': 'Quarter'},
-                {'key': 'year', 'display': 'Year' },
-            ]
-            return formattedPeriods;*/
-            //return formattedPeriods.find(formattedPeriod => formattedPeriod.key === period);
-        /*}*/
     };
 };

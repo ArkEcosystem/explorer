@@ -15,6 +15,11 @@ return [
             'max_price' => 'Max Price',
             'avg_price' => 'Avg Price',
 
+            'fees'     => 'Fees',
+            'min_fees' => 'Min Fees',
+            'max_fees' => 'Max Fees',
+            'avg_fees' => 'Avg Fees',
+
             'periods' => [
                 'day'       => 'Jour',
                 'week'      => 'Semaine',
