@@ -11,13 +11,20 @@ use Illuminate\View\View;
 
 final class HomeController
 {
+    private FeeByRangeAggregate $aggregate;
+
+    public function __construct(FeeByRangeAggregate $aggregate)
+    {
+        $this->aggregate = $aggregate;
+    }
+
     public function __invoke(Request $request): View
     {
         return view('app.home', [
             'fees' => [
-                'daily'   => FeeByRangeAggregate::aggregate(Carbon::now()->startOfDay(), Carbon::now()->endOfDay()),
-                'weekly'  => FeeByRangeAggregate::aggregate(Carbon::now()->subDays(7), Carbon::now()->endOfDay()),
-                'monthly' => FeeByRangeAggregate::aggregate(Carbon::now()->subDays(30), Carbon::now()->endOfDay()),
+                'daily'   => $this->aggregate->aggregate(Carbon::now()->startOfDay(), Carbon::now()->endOfDay()),
+                'weekly'  => $this->aggregate->aggregate(Carbon::now()->subDays(7), Carbon::now()->endOfDay()),
+                'monthly' => $this->aggregate->aggregate(Carbon::now()->subDays(30), Carbon::now()->endOfDay()),
             ],
         ]);
     }
