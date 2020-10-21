@@ -8,7 +8,6 @@ use App\Facades\Network;
 use App\Models\Block;
 use App\Services\NumberFormatter;
 use App\Services\Timestamp;
-use ARKEcosystem\UserInterface\Support\DateFormat;
 use Spatie\ViewModels\ViewModel;
 
 final class BlockViewModel extends ViewModel
