@@ -1,4 +1,4 @@
-name: Format
+name: UI
 
 on:
     pull_request:
@@ -6,7 +6,7 @@ on:
             - '**.css'
             - '**.js'
             - '**.php'
-            - '**.vue'
+            - '**.svg'
 
 jobs:
     prettier:
@@ -47,3 +47,14 @@ jobs:
               with:
                   commit_message: 'style: resolve style guide violations'
                   branch: ${{ github.head_ref }}
+
+    svg:
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v2
+
+            - uses: ericcornelissen/svgo-action@v1.0.1
+              with:
+                  conventional-commits: true
+                  repo-token: ${{ secrets.GH_TOKEN }}
