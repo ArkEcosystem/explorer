@@ -13,6 +13,8 @@ parameters:
         # Same as the null return type because a null value sometimes makes more sense than a specific default or exception.
         - '#with null as default value#'
         # Laravel
+        - '#Variable method call#'
+        - '#Dynamic call to static method#'
         - '#but return statement is missing#'
         - '#expects Illuminate\\Pagination\\LengthAwarePaginator, Illuminate\\Contracts\\Pagination\\LengthAwarePaginator given#'
         - '#InvalidArgumentException constructor expects string#'
