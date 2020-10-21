@@ -22,7 +22,7 @@ final class TransactionFactory extends Factory
             'type_group'        => $this->faker->word,
             'sender_public_key' => fn () => Wallet::factory()->create()->public_key,
             'recipient_id'      => fn () => Wallet::factory()->create()->address,
-            'timestamp'         => 112982056,
+            'timestamp'         => $this->faker->numberBetween(112982056, 119982056),
             'fee'               => $this->faker->numberBetween(1, 100) * 1e8,
             'amount'            => $this->faker->numberBetween(1, 100) * 1e8,
         ];
