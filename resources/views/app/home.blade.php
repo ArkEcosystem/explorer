@@ -6,7 +6,7 @@
     @endpush
 
     @section('content')
-        <x-home.header />
+        <x-general.search.header />
 
         <div>
             <x-charts.price identifier="price" />

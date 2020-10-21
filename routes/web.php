@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ListBlocksByWalletController;
 use App\Http\Controllers\ListBlocksController;
 use App\Http\Controllers\ListTransactionsByBlockController;
@@ -11,7 +10,6 @@ use App\Http\Controllers\ListTransactionsController;
 use App\Http\Controllers\ListVotersByWalletController;
 use App\Http\Controllers\ShowBlockController;
 use App\Http\Controllers\ShowDelegateMonitorController;
-use App\Http\Controllers\ShowTopWalletsController;
 use App\Http\Controllers\ShowTransactionController;
 use App\Http\Controllers\ShowWalletController;
 use Illuminate\Support\Facades\Route;
@@ -27,10 +25,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', HomeController::class)->name('home');
+Route::view('/', 'app.home')->name('home');
 // TODO: Remove once /blocks is implemented
 Route::view('/block', 'app.block')->name('block');
 
+Route::view('/wallets', 'app.wallets')->name('wallets');
 Route::get('/wallets/{wallet}', ShowWalletController::class)->name('wallet');
 Route::get('/wallets/{wallet}/voters', ListVotersByWalletController::class)->name('wallet.voters');
 Route::get('/wallets/{wallet}/blocks', ListBlocksByWalletController::class)->name('wallet.blocks');
@@ -44,4 +43,3 @@ Route::get('/transactions', ListTransactionsController::class)->name('transactio
 Route::get('/transactions/{transaction}', ShowTransactionController::class)->name('transaction');
 
 Route::get('/delegate-monitor', ShowDelegateMonitorController::class)->name('monitor');
-Route::get('/top-wallets', ShowTopWalletsController::class)->name('top-wallets');

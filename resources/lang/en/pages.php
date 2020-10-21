@@ -27,4 +27,8 @@ return [
         'latest_blocks'       => 'Latest Blocks',
     ],
 
+    'wallets' => [
+        'title' => 'Accounts',
+    ],
+
 ];
