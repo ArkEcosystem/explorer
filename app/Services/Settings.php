@@ -42,6 +42,7 @@ final class Settings
         if (static::darkTheme()) {
             return 'dark';
         }
+
         return 'light';
     }
 }
