@@ -32,9 +32,6 @@
                     return market;
                 },
                 renderChart() {
-                    this.generateChart();
-                },
-                generateChart() {
                     const themeColours = {
                         gridLines: "#DBDEE5",
                         ticks: "#B0B0B8",
@@ -71,7 +68,6 @@
                                 },
                             ],
                         },
-
                         // Configuration options go here
                         options: {
                             showScale: true,

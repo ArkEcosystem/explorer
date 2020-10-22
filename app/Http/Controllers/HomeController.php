@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Services\NumberFormatter;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\View\View;
@@ -35,13 +36,14 @@ final class HomeController
         $data     = Cache::get($cacheKey, []);
         $labels   = Arr::get($data, 'labels', []);
         $datasets = Arr::get($data, 'datasets', []);
+        $numbers  = collect($datasets)->map(fn ($dataset) => (float) $dataset);
 
         return [
             'labels'   => $labels,
             'datasets' => $datasets,
-            'min'      => collect($datasets)->min(),
-            'avg'      => collect($datasets)->avg(),
-            'max'      => collect($datasets)->max(),
+            'min'      => NumberFormatter::number($numbers->min()),
+            'avg'      => NumberFormatter::number($numbers->avg()),
+            'max'      => NumberFormatter::number($numbers->max()),
         ];
     }
 }
