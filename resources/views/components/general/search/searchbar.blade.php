@@ -1,7 +1,7 @@
 {{-- TODO: Tidy up fields - review compared to design to see if they can be improved --}}
 <div
     x-data="{
-        showAdvanced: false,
+        showAdvanced: {{ $advanced }},
         isMobileOpen: false,
         isFocused: false,
     }"
