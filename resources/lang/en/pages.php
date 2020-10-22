@@ -32,6 +32,10 @@ return [
         'latest_blocks'       => 'Latest Blocks',
     ],
 
+    'search_results' => [
+        'title' => 'Results',
+    ],
+
     'wallets' => [
         'title' => 'Accounts',
     ],
