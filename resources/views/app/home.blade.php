@@ -9,8 +9,8 @@
         <x-general.search.header />
 
         <div class="flex-col justify-center hidden w-full space-y-10 sm:flex lg:flex-row lg:space-y-0">
-            <x-charts.price identifier="price" colours-scheme="#339A51" />
-            <x-charts.price identifier="fees" colours-scheme="#FFAE10" />
+            <x-charts.price :data="$prices" identifier="price" colours-scheme="#339A51" />
+            <x-charts.price :data="$fees" identifier="fees" colours-scheme="#FFAE10" />
 
             <hr class="mt-12 border-t border-dashed text-theme-secondary-300 border-theme-secondary-300" />
         </div>

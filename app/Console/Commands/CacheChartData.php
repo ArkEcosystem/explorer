@@ -98,8 +98,8 @@ final class CacheChartData extends Command
             ->mapWithKeys(fn ($values, $key) => [$key => $values->first()]);
 
         return [
-            'labels'   => $datasets->keys(),
-            'datasets' => $datasets->values(),
+            'labels'   => $datasets->keys()->toArray(),
+            'datasets' => $datasets->values()->toArray(),
         ];
     }
 

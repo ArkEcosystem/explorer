@@ -1,121 +1,47 @@
 @push('scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.9.1/dayjs.min.js"></script>
-    {{-- <script src="{{ mix('js/chart.js')}}"></script> --}}
     <script>
         window.makeChart = (identifier, coloursScheme) => {
             return {
                 period: "Day",
-                identifier: identifier,
-                coloursScheme: coloursScheme,
+                identifier,
+                coloursScheme,
                 chart: null,
                 data: {
-                    marketPrice: "0.03109000",
-                    marketDailyAverage: "0.03100000",
-                    marketHistoricalDay: {
-                        labels: @json(Cache::get('chart.fees.day', [])['labels']),
-                        datasets: @json(Cache::get('chart.fees.day', [])['datasets']),
-                        min: 415.28,
-                        max: 3929.78,
-                    },
-                    marketHistoricalWeek: {
-                        labels: @json(Cache::get('chart.fees.week', [])['labels']),
-                        datasets: @json(Cache::get('chart.fees.week', [])['datasets']),
-                        min: 10454.97,
-                        max: 27012.17,
-                    },
-                    marketHistoricalMonth: {
-                        labels: @json(Cache::get('chart.fees.month', [])['labels']),
-                        datasets: @json(Cache::get('chart.fees.month', [])['datasets']),
-                        min: 10454.97,
-                        max: 27470.7,
-                    },
-                    marketHistoricalQuarter: {
-                        labels: @json(Cache::get('chart.fees.quarter', [])['labels']),
-                        datasets: @json(Cache::get('chart.fees.quarter', [])['datasets']),
-                        min: 10454.97,
-                        max: 73169.15,
-                    },
-                    marketHistoricalYear: {
-                        labels: @json(Cache::get('chart.fees.year', [])['labels']),
-                        datasets: @json(Cache::get('chart.fees.year', [])['datasets']),
-                        min: 7233.63,
-                        max: 258257.8,
-                    },
-                    marketVolume: "0",
+                    marketHistoricalDay: @json($data['day']),
+                    marketHistoricalWeek: @json($data['week']),
+                    marketHistoricalMonth: @json($data['month']),
+                    marketHistoricalQuarter: @json($data['quarter']),
+                    marketHistoricalYear: @json($data['year']),
                 },
-
                 currency: "{{ Network::currency() }}",
-
                 dateAt: "",
                 priceAt: null,
                 priceMin: null,
                 priceMax: null,
                 priceAvg: null,
-
                 dropdownOpen: false,
                 localizedPeriod: null,
-
                 calculatePriceAverage(datasets) {
                     const avg =
                         datasets.reduce((a, b) => a + b, 0) / datasets.length || 0;
 
                     return avg.toFixed(2);
                 },
+                getMarketAverage(period) {
+                    const marketKey = `marketHistorical${period}`
 
-                getMarketDayAverage() {
-                    this.priceMin = this.data.marketHistoricalDay.min;
-                    this.priceMax = this.data.marketHistoricalDay.max;
+                    this.priceMin = this.data[marketKey].min;
+                    this.priceMax = this.data[marketKey].max;
                     this.priceAvg = this.calculatePriceAverage(
-                        this.data.marketHistoricalDay.datasets
+                        this.data[marketKey].datasets
                     );
 
-                    return this.data.marketHistoricalDay;
+                    return this.data[marketKey];
                 },
-
-                getMarketWeekAverage() {
-                    this.priceMin = this.data.marketHistoricalWeek.min;
-                    this.priceMax = this.data.marketHistoricalWeek.max;
-                    this.priceAvg = this.calculatePriceAverage(
-                        this.data.marketHistoricalWeek.datasets
-                    );
-
-                    return this.data.marketHistoricalWeek;
-                },
-
-                getMarketMonthAverage() {
-                    this.priceMin = this.data.marketHistoricalMonth.min;
-                    this.priceMax = this.data.marketHistoricalMonth.max;
-                    this.priceAvg = this.calculatePriceAverage(
-                        this.data.marketHistoricalMonth.datasets
-                    );
-
-                    return this.data.marketHistoricalMonth;
-                },
-
-                getMarketQuarterAverage() {
-                    this.priceMin = this.data.marketHistoricalMonth.min;
-                    this.priceMax = this.data.marketHistoricalMonth.max;
-                    this.priceAvg = this.calculatePriceAverage(
-                        this.data.marketHistoricalMonth.datasets
-                    );
-
-                    return this.data.marketHistoricalMonth;
-                },
-
-                getMarketYearAverage() {
-                    this.priceMin = this.data.marketHistoricalMonth.min;
-                    this.priceMax = this.data.marketHistoricalMonth.max;
-                    this.priceAvg = this.calculatePriceAverage(
-                        this.data.marketHistoricalMonth.datasets
-                    );
-
-                    return this.data.marketHistoricalMonth;
-                },
-
                 renderChart() {
                     this.generateChart();
                 },
-
                 generateChart() {
                     const themeColours = {
                         gridLines: "#DBDEE5",
@@ -134,23 +60,21 @@
 
                     this.chart = new Chart(ctx, {
                         type: "line",
-
                         data: {
-                            labels: this.getMarketDayAverage().labels,
+                            labels: this.getMarketAverage('Day').labels,
                             datasets: [
                                 {
                                     borderColor: this.coloursScheme,
                                     pointRadius: 4,
                                     pointHoverRadius: 12,
                                     pointHoverBorderWidth: 3,
-                                    pointHoverBackgroundColor:
-                                        "rgba(204, 230, 211, 0.5)",
+                                    pointHoverBackgroundColor: "rgba(204, 230, 211, 0.5)",
                                     pointHitRadius: 12,
                                     pointBackgroundColor: "#FFFFFF",
                                     borderWidth: 3,
                                     type: "line",
                                     fill: false,
-                                    data: this.getMarketDayAverage().datasets,
+                                    data: this.getMarketAverage('Day').datasets,
                                     hidden: false,
                                 },
                             ],
@@ -184,7 +108,6 @@
                                         type: "linear",
                                         position: "left",
                                         stacked: true,
-
                                         gridLines: {
                                             color: themeColours.gridLines,
                                             display: true,
@@ -261,9 +184,7 @@
                                 callbacks: {
                                     label: (item) => {
                                         // TODO: Rounded circle on the left of the label
-                                        return `${item.yLabel.toFixed(2)} ${
-                                            this.currency
-                                        }`;
+                                        return `${item.yLabel.toFixed(2)} ${this.currency}`;
                                     },
                                     title: (items, data) => {},
                                 },
@@ -275,16 +196,11 @@
                 },
 
                 updateLabels() {
-                    let labels = eval(`this.getMarket${this.period}Average()`).labels;
-
-                    return labels;
+                    return this.getMarketAverage(this.period).labels;
                 },
 
                 updateTicks() {
-                    let periodMarketData = eval(`this.getMarket${this.period}Average()`)
-                        .datasets;
-
-                    return periodMarketData;
+                    return this.getMarketAverage(this.period).datasets;
                 },
 
                 setPeriod(period) {

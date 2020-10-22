@@ -21,11 +21,11 @@ return [
             'avg_fees' => 'Avg Fees',
 
             'periods' => [
-                'day'       => 'Jour',
-                'week'      => 'Semaine',
-                'month'     => 'Mois',
-                'quarter'   => 'Trimestre',
-                'year'      => 'Année',
+                'day'       => 'Day',
+                'week'      => 'Week',
+                'month'     => 'Month',
+                'quarter'   => 'Quarter',
+                'year'      => 'Year',
             ],
         ],
         'latest_transactions' => 'Latest Transactions',
