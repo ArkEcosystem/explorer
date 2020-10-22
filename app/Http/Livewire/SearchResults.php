@@ -4,11 +4,17 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire;
 
+use App\Services\Search\BlockSearch;
+use App\Services\Search\TransactionSearch;
+use App\Services\Search\WalletSearch;
 use Livewire\Component;
 
 final class SearchResults extends Component
 {
-    public array $state = ['type' => null];
+    public array $state = [
+        'type'    => null,
+        'results' => null,
+    ];
 
     protected $listeners = ['searchTriggered'];
 
@@ -17,15 +23,15 @@ final class SearchResults extends Component
         $this->state['type'] = $data['type'];
 
         if ($data['type'] === 'block') {
-            $this->emit('searchBlocks', $data);
+            $this->state['results'] = (new BlockSearch())->search($data);
         }
 
         if ($data['type'] === 'transaction') {
-            $this->emit('searchTransactions', $data);
+            $this->state['results'] = (new TransactionSearch())->search($data);
         }
 
         if ($data['type'] === 'wallet') {
-            $this->emit('searchWallets', $data);
+            $this->state['results'] = (new WalletSearch())->search($data);
         }
     }
 }
