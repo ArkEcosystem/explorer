@@ -58,9 +58,9 @@ final class CacheChartData extends Command
      */
     public function handle()
     {
-        // if (Network::canBeExchanged()) {
-        //     $this->cachePrices();
-        // }
+        if (Network::canBeExchanged()) {
+            $this->cachePrices();
+        }
 
         $this->cacheFees();
     }
