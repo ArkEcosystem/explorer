@@ -9,12 +9,14 @@ use App\Services\Search\BlockSearch;
 use App\Services\Search\TransactionSearch;
 use App\Services\Search\WalletSearch;
 use App\ViewModels\ViewModelFactory;
+use ARKEcosystem\UserInterface\Http\Livewire\Concerns\HasPagination;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\View\View;
 use Livewire\Component;
 
 final class SearchPage extends Component
 {
+    use HasPagination;
     use ManagesSearch;
 
     /** @phpstan-ignore-next-line */
@@ -29,6 +31,8 @@ final class SearchPage extends Component
 
     public function render(): View
     {
+        $this->performSearch();
+
         return view('livewire.search-page', [
             'results' => $this->results,
         ]);
