@@ -1389,6 +1389,6 @@ window.makeChart = (identifier, coloursScheme) => {
 
         isActivePeriod(period) {
             return period === this.period;
-        }
+        },
     };
 };
