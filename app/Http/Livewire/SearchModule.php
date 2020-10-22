@@ -7,7 +7,11 @@ namespace App\Http\Livewire;
 use App\Models\Block;
 use App\Models\Transaction;
 use App\Models\Wallet;
+use App\Services\Timestamp;
+use Carbon\Carbon;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Validation\Rule;
 use Livewire\Component;
 
 final class SearchModule extends Component
@@ -25,11 +29,12 @@ final class SearchModule extends Component
         'totalFeeTo'         => null,
         'generatorPublicKey' => null,
         // Transactions
-        'amountFrom'  => null,
-        'amountTo'    => null,
-        'feeFrom'     => null,
-        'feeTo'       => null,
-        'smartBridge' => null,
+        'transactionType' => null,
+        'amountFrom'      => null,
+        'amountTo'        => null,
+        'feeFrom'         => null,
+        'feeTo'           => null,
+        'smartBridge'     => null,
         // Wallets
         'username'    => null,
         'vote'        => null,
@@ -50,7 +55,7 @@ final class SearchModule extends Component
             // Generic
             'state'             => 'array',
             'state.term'        => ['nullable', 'string', 'max:255'],
-            'state.type'        => ['nullable', 'string'], // @TODO: validate based on an enum
+            'state.type'        => ['nullable', Rule::in(['blocks', 'transactions', 'wallets'])],
             'state.dateFrom'    => ['nullable', 'date'],
             'state.dateTo'      => ['nullable', 'date'],
             // Blocks
@@ -60,11 +65,12 @@ final class SearchModule extends Component
             'state.totalFeeTo'         => ['nullable', 'integer', 'min:0', 'max:100'],
             'state.generatorPublicKey' => ['nullable', 'string', 'max:255'],
             // Transactions
-            'state.amountFrom'  => ['nullable', 'integer', 'min:0', 'max:100'],
-            'state.amountTo'    => ['nullable', 'integer', 'min:0', 'max:100'],
-            'state.feeFrom'     => ['nullable', 'integer', 'min:0', 'max:100'],
-            'state.feeTo'       => ['nullable', 'integer', 'min:0', 'max:100'],
-            'state.smartBridge' => ['nullable', 'string', 'max:255'],
+            'state.transactionType' => ['nullable', 'string'], // @TODO: validate based on an enum
+            'state.amountFrom'      => ['nullable', 'integer', 'min:0', 'max:100'],
+            'state.amountTo'        => ['nullable', 'integer', 'min:0', 'max:100'],
+            'state.feeFrom'         => ['nullable', 'integer', 'min:0', 'max:100'],
+            'state.feeTo'           => ['nullable', 'integer', 'min:0', 'max:100'],
+            'state.smartBridge'     => ['nullable', 'string', 'max:255'],
             // Wallets
             'state.username'    => ['nullable', 'string', 'max:255'],
             'state.vote'        => ['nullable', 'string', 'max:255'],
@@ -72,41 +78,28 @@ final class SearchModule extends Component
             'state.balanceTo'   => ['nullable', 'integer', 'min:0', 'max:100'],
         ])['state'];
 
-        $this->searchBlocks($data);
+        if ($this->state['type'] === 'blocks') {
+            $this->searchBlocks($data);
+        }
 
-        $this->searchTransactions($data);
+        if ($this->state['type'] === 'transactions') {
+            $this->searchTransactions($data);
+        }
 
-        $this->searchWallets($data);
+        if ($this->state['type'] === 'wallets') {
+            $this->searchWallets($data);
+        }
     }
 
     private function searchBlocks(array $parameters): LengthAwarePaginator
     {
         $query = Block::query();
 
-        if ($parameters['totalAmountFrom'] && $parameters['totalAmountTo']) {
-            $query->whereBetween('total_amount', [$parameters['totalAmountFrom'], $parameters['totalAmountTo']]);
-        } elseif ($parameters['totalAmountFrom']) {
-            $query->where('total_amount', '>=', $parameters['totalAmountFrom']);
-        } elseif ($parameters['totalAmountTo']) {
-            $query->where('total_amount', '<=', $parameters['totalAmountTo']);
-        }
+        $this->queryValueRange($query, $parameters['totalAmountFrom'], $parameters['totalAmountTo']);
 
-        if ($parameters['totalFeeFrom'] && $parameters['totalFeeTo']) {
-            $query->whereBetween('total_fee', [$parameters['totalFeeFrom'], $parameters['totalFeeTo']]);
-        } elseif ($parameters['totalFeeFrom']) {
-            $query->where('total_fee', '>=', $parameters['totalFeeFrom']);
-        } elseif ($parameters['totalFeeTo']) {
-            $query->where('total_fee', '<=', $parameters['totalFeeTo']);
-        }
+        $this->queryValueRange($query, $parameters['totalFeeFrom'], $parameters['totalFeeTo']);
 
-        // @TODO: take the genesis timestamp into account
-        if ($parameters['dateFrom'] && $parameters['dateTo']) {
-            $query->whereBetween('timestamp', [$parameters['dateFrom'], $parameters['dateTo']]);
-        } elseif ($parameters['dateFrom']) {
-            $query->where('timestamp', '>=', $parameters['dateFrom']);
-        } elseif ($parameters['dateTo']) {
-            $query->where('timestamp', '<=', $parameters['dateTo']);
-        }
+        $this->queryDateRange($query, $parameters['dateFrom'], $parameters['dateTo']);
 
         if ($parameters['generatorPublicKey']) {
             $query->where('generator_public_key', $parameters['generatorPublicKey']);
@@ -119,30 +112,11 @@ final class SearchModule extends Component
     {
         $query = Transaction::query();
 
-        if ($parameters['amountFrom'] && $parameters['amountTo']) {
-            $query->whereBetween('amount', [$parameters['amountFrom'], $parameters['amountTo']]);
-        } elseif ($parameters['amountFrom']) {
-            $query->where('amount', '>=', $parameters['amountFrom']);
-        } elseif ($parameters['amountTo']) {
-            $query->where('amount', '<=', $parameters['amountTo']);
-        }
+        $this->queryValueRange($query, $parameters['amountFrom'], $parameters['amountTo']);
 
-        if ($parameters['feeFrom'] && $parameters['feeTo']) {
-            $query->whereBetween('fee', [$parameters['feeFrom'], $parameters['feeTo']]);
-        } elseif ($parameters['feeFrom']) {
-            $query->where('fee', '>=', $parameters['feeFrom']);
-        } elseif ($parameters['feeTo']) {
-            $query->where('fee', '<=', $parameters['feeTo']);
-        }
+        $this->queryValueRange($query, $parameters['feeFrom'], $parameters['feeTo']);
 
-        // @TODO: take the genesis timestamp into account
-        if ($parameters['dateFrom'] && $parameters['dateTo']) {
-            $query->whereBetween('timestamp', [$parameters['dateFrom'], $parameters['dateTo']]);
-        } elseif ($parameters['dateFrom']) {
-            $query->where('timestamp', '>=', $parameters['dateFrom']);
-        } elseif ($parameters['dateTo']) {
-            $query->where('timestamp', '<=', $parameters['dateTo']);
-        }
+        $this->queryDateRange($query, $parameters['dateFrom'], $parameters['dateTo']);
 
         if ($parameters['smartBridge']) {
             $query->where('vendor_field_hex', $parameters['smartBridge']);
@@ -155,13 +129,7 @@ final class SearchModule extends Component
     {
         $query = Wallet::query();
 
-        if ($parameters['balanceFrom'] && $parameters['balanceTo']) {
-            $query->whereBetween('balance', [$parameters['balanceFrom'], $parameters['balanceTo']]);
-        } elseif ($parameters['balanceFrom']) {
-            $query->where('balance', '>=', $parameters['balanceFrom']);
-        } elseif ($parameters['balanceTo']) {
-            $query->where('balance', '<=', $parameters['balanceTo']);
-        }
+        $this->queryValueRange($query, $parameters['balanceFrom'], $parameters['balanceTo']);
 
         if ($parameters['term']) {
             $query->where('address', $parameters['term']);
@@ -177,5 +145,39 @@ final class SearchModule extends Component
         }
 
         return $query->paginate();
+    }
+
+    private function queryDateRange(Builder $query, ?string $dateFrom, ?string $dateTo): Builder
+    {
+        if ($dateFrom) {
+            $dateFrom = Timestamp::fromUnix(Carbon::parse($dateFrom)->unix())->unix();
+        }
+
+        if ($dateTo) {
+            $dateTo = Timestamp::fromUnix(Carbon::parse($dateTo)->unix())->unix();
+        }
+
+        if ($dateFrom && $dateTo) {
+            $query->whereBetween('timestamp', [$dateFrom, $dateTo]);
+        } elseif ($dateFrom) {
+            $query->where('timestamp', '>=', $dateFrom);
+        } elseif ($dateTo) {
+            $query->where('timestamp', '<=', $dateTo);
+        }
+
+        return $query;
+    }
+
+    private function queryValueRange(Builder $query, ?string $from, ?string $to): Builder
+    {
+        if ($from && $to) {
+            $query->whereBetween('total_amount', [$from, $to]);
+        } elseif ($from) {
+            $query->where('total_amount', '>=', $from);
+        } elseif ($to) {
+            $query->where('total_amount', '<=', $to);
+        }
+
+        return $query;
     }
 }
