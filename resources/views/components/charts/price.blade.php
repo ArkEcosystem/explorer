@@ -29,15 +29,13 @@
                     return avg.toFixed(2);
                 },
                 getMarketAverage(period) {
-                    const marketKey = `marketHistorical${period}`
+                    const market = this.data[`marketHistorical${period}`]
 
-                    this.priceMin = this.data[marketKey].min;
-                    this.priceMax = this.data[marketKey].max;
-                    this.priceAvg = this.calculatePriceAverage(
-                        this.data[marketKey].datasets
-                    );
+                    this.priceMin = market.min;
+                    this.priceAvg = market.avg;
+                    this.priceMax = market.max;
 
-                    return this.data[marketKey];
+                    return market;
                 },
                 renderChart() {
                     this.generateChart();

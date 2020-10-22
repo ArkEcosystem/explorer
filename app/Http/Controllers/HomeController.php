@@ -40,6 +40,7 @@ final class HomeController
             'labels'   => $labels,
             'datasets' => $datasets,
             'min'      => collect($datasets)->min(),
+            'avg'      => collect($datasets)->avg(),
             'max'      => collect($datasets)->max(),
         ];
     }
