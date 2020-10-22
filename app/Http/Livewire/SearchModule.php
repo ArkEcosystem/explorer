@@ -25,31 +25,25 @@ final class SearchModule extends Component
     {
         $this->isSlim     = $isSlim;
         $this->isAdvanced = $isAdvanced;
-
-        $this->restoreState(request('state', []));
     }
 
     public function performSearch(): void
     {
         $data = $this->validateSearchQuery();
 
-        if ($this->isAdvanced) {
-            $this->emit('searchTriggered', $data);
-        } else {
-            if ($this->searchWallet()) {
-                return;
-            }
-
-            if ($this->searchTransaction()) {
-                return;
-            }
-
-            if ($this->searchBlock()) {
-                return;
-            }
-
-            $this->redirectRoute('search', ['state' => $data]);
+        if ($this->searchWallet()) {
+            return;
         }
+
+        if ($this->searchTransaction()) {
+            return;
+        }
+
+        if ($this->searchBlock()) {
+            return;
+        }
+
+        $this->redirectRoute('search', ['state' => $data]);
     }
 
     private function searchWallet(): bool
