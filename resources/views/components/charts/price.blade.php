@@ -106,7 +106,9 @@
                                             ...fontConfig,
                                             callback: (value, index, values) => {
                                                 // TODO: Proper implementation
-                                                if (index % 2 === 0) return;
+                                                if (index % 2 === 0) {
+                                                    return;
+                                                }
 
                                                 const formatConfig = {
                                                     currency: this.currency,
@@ -122,7 +124,7 @@
                                                     formatConfig.maximumFractionDigits = 3;
                                                 }
 
-                                                return `$${value}`;
+                                                return `${value} {{ Network::currencySymbol() }}`;
                                             },
                                         },
                                     },
