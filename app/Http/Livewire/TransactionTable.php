@@ -18,12 +18,16 @@ final class TransactionTable extends Component
     use HasPagination;
     use ManagesTransactionTypeScopes;
 
+    public $transactionsFilter;
+
     public array $state = [
         'type' => 'all',
     ];
 
     public function render(): View
     {
+        $this->state['type'] = $this->transactionsFilter;
+
         if ($this->state['type'] !== 'all') {
             $scopeClass = $this->scopes[$this->state['type']];
 

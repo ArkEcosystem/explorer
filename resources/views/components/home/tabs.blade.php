@@ -1,4 +1,33 @@
-<div x-data="{ dropdownOpen: false, selected: 'transactions' }" x-cloak class="w-full">
+<div x-data="{ dropdownOpen: false, selected: 'transactions', 'transactionsFilter': 'all' }" x-cloak class="w-full">
+    <div class="flex items-center justify-between relative">
+        <h2 class="text-3xl sm:text-4xl">@lang('pages.home.transactions_and_blocks')</h2>
+        <div x-show="selected === 'transactions'">
+            <x-ark-dropdown dropdown-classes="left-0 w-64 mt-3" button-class="w-64 h-10 dropdown-button"
+                :init-alpine="false">
+                @slot('button')
+                <div
+                    class="flex items-center justify-end w-full space-x-2 font-semibold flex-inline text-theme-secondary-700">
+                    <div>
+                        @lang('general.transaction.type'): <span x-text="transactionsFilter"></span>
+                    </div>
+                    <span :class="{ 'rotate-180': open }"
+                        class="flex transition duration-150 ease-in-out bg-theme-primary-100 rounded-full w-4 h-4 justify-center items-center">
+                        @svg('chevron-up', 'h-3 w-2 text-theme-primary-600')
+                    </span>
+                </div>
+                @endslot
+                <div class="py-3">
+                    @foreach(['all', 'transfer', 'vote', 'secondSignature', 'delegateRegistration',
+                    'multiSignature', 'ipfs', 'multiPayment', 'delegateResignation', 'businessRegistration',
+                    'businessUpdate', 'productEntityRegistration', 'productEntityResignation'] as $type)
+                    <div class="cursor-pointer dropdown-entry" @click="applyFilter('{{ $type }}'); transactionsFilter = '{{ $type }}'">
+                        {{ $type }}
+                    </div>
+                    @endforeach
+                </div>
+            </x-ark-dropdown>
+        </div>
+    </div>
     <div class="hidden tabs md:flex">
         <div
             class="tab-item transition-default"
@@ -46,10 +75,19 @@
     </div>
 
     <div x-show="selected === 'transactions'">
-        <livewire:transaction-table view-more />
+        <livewire:transaction-table id="test" view-more transactionsFilter="all" />
     </div>
 
     <div x-show="selected === 'blocks'">
         <livewire:block-table view-more />
     </div>
 </div>
+
+<script>
+    window.applyFilter = function(filter) {
+        let element = document.getElementById('transaction-list');
+        let component = window.livewire.find(element.getAttribute("wire:id"));
+
+        component.transactionsFilter = filter;
+    }
+</script>
