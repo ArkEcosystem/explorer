@@ -1369,8 +1369,7 @@ window.makeChart = (identifier, coloursScheme) => {
         },
 
         updateTicks() {
-            let periodMarketData = eval(`this.getMarket${this.period}Average()`)
-                .datasets;
+            let periodMarketData = eval(`this.getMarket${this.period}Average()`).datasets;
 
             return periodMarketData;
         },
