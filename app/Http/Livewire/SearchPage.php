@@ -17,6 +17,8 @@ final class SearchPage extends Component
 {
     use ManagesSearch;
 
+    protected $queryString = ['state'];
+
     private ?LengthAwarePaginator $results = null;
 
     public function mount(): void

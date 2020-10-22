@@ -20,6 +20,8 @@ final class SearchModule extends Component
 
     public bool $isSlim = false;
 
+    protected $queryString = ['state'];
+
     public function mount(bool $isSlim = false): void
     {
         $this->isSlim = $isSlim;
