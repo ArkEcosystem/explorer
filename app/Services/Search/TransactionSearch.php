@@ -93,7 +93,7 @@ final class TransactionSearch implements Search
     {
         if (Arr::has($parameters, 'transactionType')) {
             if (Arr::get($parameters, 'transactionType') !== 'all') {
-                $scopeClass = $this->scopes[$parameters];
+                $scopeClass = $this->scopes[$parameters['transactionType']];
 
                 /* @var \Illuminate\Database\Eloquent\Model */
                 Transaction::addGlobalScope(new $scopeClass());

@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Builder;
 trait FiltersDateRange
 {
     /** @phpstan-ignore-next-line */
-    private function queryDateRange(Builder $query, ?int $dateFrom, ?int $dateTo): Builder
+    private function queryDateRange(Builder $query, ?string $dateFrom, ?string $dateTo): Builder
     {
         if (! is_null($dateFrom)) {
             $dateFrom = Timestamp::fromUnix(Carbon::parse($dateFrom)->unix())->unix();
