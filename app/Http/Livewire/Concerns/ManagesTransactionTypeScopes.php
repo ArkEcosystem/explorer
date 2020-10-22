@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace App\Http\Livewire\Concerns;
+
 use App\Models\Scopes\BusinessEntityRegistrationScope;
 use App\Models\Scopes\BusinessEntityResignationScope;
 use App\Models\Scopes\BusinessEntityUpdateScope;
@@ -37,8 +39,6 @@ use App\Models\Scopes\TimelockRefundScope;
 use App\Models\Scopes\TimelockScope;
 use App\Models\Scopes\TransferScope;
 use App\Models\Scopes\VoteScope;
-
-namespace App\Http\Livewire\Concerns;
 
 trait ManagesTransactionTypeScopes
 {

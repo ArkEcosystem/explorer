@@ -16,9 +16,10 @@ final class SearchResults extends Component
         'results' => null,
     ];
 
+    /** @phpstan-ignore-next-line */
     protected $listeners = ['searchTriggered'];
 
-    public function searchTriggered(array $data)
+    public function searchTriggered(array $data): void
     {
         $this->state['type'] = $data['type'];
 

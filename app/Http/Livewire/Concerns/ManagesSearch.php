@@ -34,7 +34,7 @@ trait ManagesSearch
         'balanceTo'   => null,
     ];
 
-    protected function validateSearchQuery(): array
+    private function validateSearchQuery(): array
     {
         return $this->validate([
             // Generic
