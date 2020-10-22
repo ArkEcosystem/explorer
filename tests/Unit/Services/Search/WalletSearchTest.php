@@ -48,3 +48,38 @@ it('should search for a wallet by vote', function () {
 
     expect($result->get())->toHaveCount(1);
 });
+
+it('should search for a wallet by balance minimum', function () {
+    $wallet = Wallet::factory(10)->create(['balance' => 100])[0];
+    $wallet->update(['balance' => 1000]);
+
+    $result = (new WalletSearch())->search([
+        'balanceFrom' => 101,
+    ]);
+
+    expect($result->get())->toHaveCount(1);
+});
+
+it('should search for a wallet by balance maximum', function () {
+    $wallet = Wallet::factory(10)->create(['balance' => 100])[0];
+    $wallet->update(['balance' => 1000]);
+
+    $result = (new WalletSearch())->search([
+        'balanceTo' => 999,
+    ]);
+
+    expect($result->get())->toHaveCount(9);
+});
+
+it('should search for a wallet by balance range', function () {
+    Wallet::factory(10)->create(['balance' => 10]);
+    $wallet = Wallet::factory(10)->create(['balance' => 100])[0];
+    $wallet->update(['balance' => 1000]);
+
+    $result = (new WalletSearch())->search([
+        'balanceFrom' => 50,
+        'balanceTo'   => 100,
+    ]);
+
+    expect($result->get())->toHaveCount(9);
+});
