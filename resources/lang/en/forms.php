@@ -11,6 +11,7 @@ return [
         'smartbridge_placeholder' => 'Enter the Smartbridge that was in the transaction (optional)',
         'term_placeholder'        => 'Find a block, transaction, address or Delegate ...',
         'term_placeholder_mobile' => 'Search ...',
-        'type'                    => 'Type',
+        'type'                    => 'Search Type',
+        'transaction_type'        => 'Transaction Type',
     ],
 ];

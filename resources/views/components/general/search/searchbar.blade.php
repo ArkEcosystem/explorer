@@ -89,6 +89,14 @@
         >
             <div class="search-advanced-options">
                 <x-general.search.advanced-option :title="trans('forms.search.type')">
+                    <select class="w-full font-medium bg-transparent text-theme-secondary-900 dark:text-theme-secondary-700">
+                        <option value="block">Block</option>
+                        <option value="transaction">Transaction</option>
+                        <option value="wallet">Wallet</option>
+                    </select>
+                </x-general.search.advanced-option>
+
+                <x-general.search.advanced-option :title="trans('forms.search.transaction_type')">
                     {{-- TODO: Enum of types and their values? --}}
                     <select class="w-full font-medium bg-transparent text-theme-secondary-900 dark:text-theme-secondary-700">
                         <option value="">Multisignature Registration</option>
@@ -158,12 +166,8 @@
                         />
                     </div>
                 </x-general.search.advanced-option>
-            </div>
 
-            <div class="flex items-center p-8 space-x-8 border-t border-theme-secondary-300 dark:border-theme-secondary-800">
-                <div class="flex flex-col flex-1 space-y-2">
-                    <div class="text-sm font-semibold">@lang('forms.search.smartbridge')</div>
-
+                <x-general.search.advanced-option :title="trans('forms.search.smartbridge')">
                     <input
                         type="text"
                         placeholder="@lang('forms.search.smartbridge_placeholder')"
@@ -171,7 +175,7 @@
                         wire:model="state.smartBridge"
                         wire:keydown.enter="performSearch"
                     />
-                </div>
+                </x-general.search.advanced-option>
             </div>
         </div>
 

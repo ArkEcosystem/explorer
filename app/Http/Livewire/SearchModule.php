@@ -4,13 +4,8 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire;
 
-use App\Models\Block;
-use App\Models\Transaction;
-use App\Models\Wallet;
-use App\Services\Timestamp;
-use Carbon\Carbon;
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Illuminate\Database\Eloquent\Builder;
+use App\Services\Search\BlockSearch;
+use App\Services\Search\TransactionSearch;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
 
@@ -44,9 +39,12 @@ final class SearchModule extends Component
 
     public bool $isSlim = false;
 
-    public function mount(bool $isSlim = false): void
+    public bool $isAdvanced = false;
+
+    public function mount(bool $isSlim = false, bool $isAdvanced = false): void
     {
-        $this->isSlim = $isSlim;
+        $this->isSlim     = $isSlim;
+        $this->isAdvanced = $isAdvanced;
     }
 
     public function performSearch(): void
@@ -79,105 +77,17 @@ final class SearchModule extends Component
         ])['state'];
 
         if ($this->state['type'] === 'blocks') {
-            $this->searchBlocks($data);
+            $this->results = (new BlockSearch())->search($data)->paginate();
         }
 
         if ($this->state['type'] === 'transactions') {
-            $this->searchTransactions($data);
+            $this->results = (new TransactionSearch())->search($data)->paginate();
         }
 
         if ($this->state['type'] === 'wallets') {
-            $this->searchWallets($data);
-        }
-    }
-
-    private function searchBlocks(array $parameters): LengthAwarePaginator
-    {
-        $query = Block::query();
-
-        $this->queryValueRange($query, $parameters['totalAmountFrom'], $parameters['totalAmountTo']);
-
-        $this->queryValueRange($query, $parameters['totalFeeFrom'], $parameters['totalFeeTo']);
-
-        $this->queryDateRange($query, $parameters['dateFrom'], $parameters['dateTo']);
-
-        if ($parameters['generatorPublicKey']) {
-            $query->where('generator_public_key', $parameters['generatorPublicKey']);
+            $this->results = (new WalletSearch())->search($data)->paginate();
         }
 
-        return $query->paginate();
-    }
-
-    private function searchTransactions(array $parameters): LengthAwarePaginator
-    {
-        $query = Transaction::query();
-
-        $this->queryValueRange($query, $parameters['amountFrom'], $parameters['amountTo']);
-
-        $this->queryValueRange($query, $parameters['feeFrom'], $parameters['feeTo']);
-
-        $this->queryDateRange($query, $parameters['dateFrom'], $parameters['dateTo']);
-
-        if ($parameters['smartBridge']) {
-            $query->where('vendor_field_hex', $parameters['smartBridge']);
-        }
-
-        return $query->paginate();
-    }
-
-    private function searchWallets(array $parameters): LengthAwarePaginator
-    {
-        $query = Wallet::query();
-
-        $this->queryValueRange($query, $parameters['balanceFrom'], $parameters['balanceTo']);
-
-        if ($parameters['term']) {
-            $query->where('address', $parameters['term']);
-            $query->orWhere('public_key', $parameters['term']);
-        }
-
-        if ($parameters['username']) {
-            $query->where('username', $parameters['username']);
-        }
-
-        if ($parameters['vote']) {
-            $query->where('vote', $parameters['vote']);
-        }
-
-        return $query->paginate();
-    }
-
-    private function queryDateRange(Builder $query, ?string $dateFrom, ?string $dateTo): Builder
-    {
-        if ($dateFrom) {
-            $dateFrom = Timestamp::fromUnix(Carbon::parse($dateFrom)->unix())->unix();
-        }
-
-        if ($dateTo) {
-            $dateTo = Timestamp::fromUnix(Carbon::parse($dateTo)->unix())->unix();
-        }
-
-        if ($dateFrom && $dateTo) {
-            $query->whereBetween('timestamp', [$dateFrom, $dateTo]);
-        } elseif ($dateFrom) {
-            $query->where('timestamp', '>=', $dateFrom);
-        } elseif ($dateTo) {
-            $query->where('timestamp', '<=', $dateTo);
-        }
-
-        return $query;
-    }
-
-    private function queryValueRange(Builder $query, ?string $from, ?string $to): Builder
-    {
-        if ($from && $to) {
-            $query->whereBetween('total_amount', [$from, $to]);
-        } elseif ($from) {
-            $query->where('total_amount', '>=', $from);
-        } elseif ($to) {
-            $query->where('total_amount', '<=', $to);
-        }
-
-        return $query;
+        // $this->emitTo('', $data);
     }
 }
