@@ -22,12 +22,6 @@
                 priceAvg: null,
                 dropdownOpen: false,
                 localizedPeriod: null,
-                calculatePriceAverage(datasets) {
-                    const avg =
-                        datasets.reduce((a, b) => a + b, 0) / datasets.length || 0;
-
-                    return avg.toFixed(2);
-                },
                 getMarketAverage(period) {
                     const market = this.data[`marketHistorical${period}`]
 
