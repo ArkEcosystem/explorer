@@ -54,7 +54,7 @@ final class SearchModule extends Component
 
     private function searchWallet(): bool
     {
-        /** @var Wallet */
+        /** @var Wallet|null */
         $wallet = (new WalletSearch())->search(['term' => $this->state['term']])->first();
 
         if (is_null($wallet)) {
@@ -68,7 +68,7 @@ final class SearchModule extends Component
 
     private function searchTransaction(): bool
     {
-        /** @var Transaction */
+        /** @var Transaction|null */
         $transaction = (new TransactionSearch())->search(['term' => $this->state['term']])->first();
 
         if (is_null($transaction)) {
@@ -82,7 +82,7 @@ final class SearchModule extends Component
 
     private function searchBlock(): bool
     {
-        /** @var Block */
+        /** @var Block|null */
         $block = (new BlockSearch())->search(['term' => $this->state['term']])->first();
 
         if (is_null($block)) {
