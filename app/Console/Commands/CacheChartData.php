@@ -62,7 +62,7 @@ final class CacheChartData extends Command
             $this->cachePrices();
         }
 
-        $this->cacheFees($today);
+        $this->cacheFees();
     }
 
     private function cachePrices(): void
