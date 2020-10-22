@@ -108,6 +108,26 @@ final class TransactionViewModel extends ViewModel
         return NumberFormatter::number(NetworkStatus::height() - $block->height);
     }
 
+    public function voted(): string
+    {
+        if (! $this->isVote()) {
+            return null;
+        }
+
+        // TODO: Return delegate name
+        return $this->model->asset['votes'][0];
+    }
+
+    public function unvoted(): string
+    {
+        if (! $this->isUnvote()) {
+            return null;
+        }
+
+        // TODO: Return delegate name
+        return $this->model->asset['votes'][1];
+    }
+
     public function iconState(): string
     {
         return (new TransactionStateIcon($this->model))->name();
