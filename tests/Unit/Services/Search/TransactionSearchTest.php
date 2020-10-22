@@ -13,6 +13,17 @@ beforeEach(fn () => configureExplorerDatabase());
 
 it('should search for a transaction by id', function () {
     $transaction = Transaction::factory(10)->create()[0];
+    $transaction->update(['vendor_field_hex' => 'Hello World']);
+
+    $result = (new TransactionSearch())->search([
+        'smartBridge' => $transaction->vendor_field_hex,
+    ]);
+
+    expect($result->get())->toHaveCount(1);
+});
+
+it('should search for a transaction by vendor field', function () {
+    $transaction = Transaction::factory(10)->create()[0];
 
     $result = (new TransactionSearch())->search([
         'term' => $transaction->id,
