@@ -5,7 +5,7 @@
                 <tr>
                     <td width="150">@lang('general.transaction.id')</td>
                     <td>
-                        <a href="{{ $transaction->url() }}" class="font-semibold link">{{ $transaction->id() }}</a>
+                        <a href="{{ $transaction->url() }}" class="font-semibold link">{{ truncateMiddle($transaction->id()) }}</a>
                     </td>
                 </tr>
                 <tr>
