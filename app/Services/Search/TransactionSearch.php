@@ -19,6 +19,10 @@ final class TransactionSearch implements Search
     {
         $query = Transaction::query();
 
+        if ($parameters['term']) {
+            $query->where('id', $parameters['term']);
+        }
+
         $this->queryValueRange($query, $parameters['amountFrom'], $parameters['amountTo']);
 
         $this->queryValueRange($query, $parameters['feeFrom'], $parameters['feeTo']);

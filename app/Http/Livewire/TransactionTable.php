@@ -40,8 +40,10 @@ use App\Models\Scopes\TimelockScope;
 use App\Models\Scopes\TransferScope;
 use App\Models\Scopes\VoteScope;
 use App\Models\Transaction;
+use App\Services\Search\TransactionSearch;
 use App\ViewModels\ViewModelFactory;
 use ARKEcosystem\UserInterface\Http\Livewire\Concerns\HasPagination;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\View\View;
 use Livewire\Component;
 
@@ -51,14 +53,13 @@ final class TransactionTable extends Component
 
     public bool $viewMore = false;
 
-    public function mount(bool $viewMore = false): void
-    {
-        $this->viewMore = $viewMore;
-    }
+    protected ?LengthAwarePaginator $transactions = null;
 
     public array $state = [
         'type' => 'all',
     ];
+
+    protected $listeners = ['searchTransactions'];
 
     private array $scopes = [
         'businessEntityRegistration'    => BusinessEntityRegistrationScope::class,
@@ -98,17 +99,31 @@ final class TransactionTable extends Component
         'vote'                          => VoteScope::class,
     ];
 
+    public function mount(bool $viewMore = false): void
+    {
+        $this->viewMore = $viewMore;
+    }
+
+    public function searchTransactions(array $data): void
+    {
+        $this->transactions = (new TransactionSearch())->search($data)->paginate();
+    }
+
     public function render(): View
     {
-        if ($this->state['type'] !== 'all') {
-            $scopeClass = $this->scopes[$this->state['type']];
+        if (is_null($this->transactions)) {
+            $this->transactions = Transaction::latestByTimestamp()->paginate();
+        } else {
+            if ($this->state['type'] !== 'all') {
+                $scopeClass = $this->scopes[$this->state['type']];
 
-            /* @var \Illuminate\Database\Eloquent\Model */
-            Transaction::addGlobalScope(new $scopeClass());
+                /* @var \Illuminate\Database\Eloquent\Model */
+                Transaction::addGlobalScope(new $scopeClass());
+            }
         }
 
         return view('livewire.transaction-table', [
-            'transactions' => ViewModelFactory::paginate(Transaction::latestByTimestamp()->paginate()),
+            'transactions' => ViewModelFactory::paginate($this->transactions),
         ]);
     }
 }

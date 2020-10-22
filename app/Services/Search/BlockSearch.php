@@ -19,15 +19,19 @@ final class BlockSearch implements Search
     {
         $query = Block::query();
 
-        $this->queryValueRange($query, $parameters['totalAmountFrom'], $parameters['totalAmountTo']);
-
-        $this->queryValueRange($query, $parameters['totalFeeFrom'], $parameters['totalFeeTo']);
-
-        $this->queryDateRange($query, $parameters['dateFrom'], $parameters['dateTo']);
-
-        if ($parameters['generatorPublicKey']) {
-            $query->where('generator_public_key', $parameters['generatorPublicKey']);
+        if ($parameters['term']) {
+            $query = $query->where('id', $parameters['term']);
         }
+
+        // $this->queryValueRange($query, $parameters['totalAmountFrom'], $parameters['totalAmountTo']);
+
+        // $this->queryValueRange($query, $parameters['totalFeeFrom'], $parameters['totalFeeTo']);
+
+        // $this->queryDateRange($query, $parameters['dateFrom'], $parameters['dateTo']);
+
+        // if ($parameters['generatorPublicKey']) {
+        //     $query->where('generator_public_key', $parameters['generatorPublicKey']);
+        // }
 
         return $query;
     }
