@@ -6,9 +6,7 @@
     @elseif ($iconType === "vote")
         <x-general.address :address="$transaction->voted()">
             <x-slot name="icon">
-                <div class="transaction-icon">
-                    @svg('app-transactions.'.$iconType, 'w-4 h-4')
-                </div>
+                <x-transactions.icon :icon-type="$iconType" />
             </x-slot>
 
             <x-slot name="prefix">
@@ -20,9 +18,7 @@
     @elseif ($iconType === "unvote")
         <x-general.address :address="$transaction->unvoted()">
             <x-slot name="icon">
-                <div class="transaction-icon">
-                    @svg('app-transactions.'.$iconType, 'w-4 h-4')
-                </div>
+                <x-transactions.icon :icon-type="$iconType" />
             </x-slot>
 
             <x-slot name="prefix">
@@ -33,9 +29,7 @@
         </x-general.address>
     @else
         <div class="flex items-center space-x-3">
-            <div class="transaction-icon">
-                @svg('app-transactions.'.$iconType, 'w-4 h-4')
-            </div>
+            <x-transactions.icon :icon-type="$iconType" />
 
             <div class="font-semibold">@lang('general.transaction.vote-combination')</div>
         </div>
