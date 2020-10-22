@@ -32,6 +32,7 @@ return [
 
     'search_results' => [
         'title' => 'Results',
+        'no_results' => 'We could not find anything matching your search criteria, please try again!',
     ],
 
     'wallets' => [
