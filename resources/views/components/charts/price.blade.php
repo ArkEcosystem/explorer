@@ -202,6 +202,10 @@
                     // Render the chart synchronously and without an animation.
                     this.chart.update(0);
                 },
+
+                isActivePeriod(period) {
+                    return period === this.period;
+                },
             };
         };
     </script>
