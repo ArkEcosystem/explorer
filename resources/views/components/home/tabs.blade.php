@@ -1,5 +1,5 @@
 <div x-data="{ dropdownOpen: false, selected: 'transactions', 'transactionsFilter': 'all' }" x-cloak class="w-full">
-    <div class="flex items-center justify-between relative">
+    <div class="relative flex items-center justify-between">
         <h2 class="text-3xl sm:text-4xl">@lang('pages.home.transactions_and_blocks')</h2>
         <div x-show="selected === 'transactions'">
             <x-ark-dropdown dropdown-classes="left-0 w-64 mt-3" button-class="w-64 h-10 dropdown-button"
@@ -11,7 +11,7 @@
                         @lang('general.transaction.type'): <span x-text="transactionsFilter"></span>
                     </div>
                     <span :class="{ 'rotate-180': open }"
-                        class="flex transition duration-150 ease-in-out bg-theme-primary-100 rounded-full w-4 h-4 justify-center items-center">
+                        class="flex items-center justify-center w-4 h-4 transition duration-150 ease-in-out rounded-full bg-theme-primary-100">
                         @svg('chevron-up', 'h-3 w-2 text-theme-primary-600')
                     </span>
                 </div>
