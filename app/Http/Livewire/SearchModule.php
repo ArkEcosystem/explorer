@@ -5,13 +5,17 @@ declare(strict_types=1);
 namespace App\Http\Livewire;
 
 use App\Http\Livewire\Concerns\ManagesSearch;
+use App\Models\Block;
+use App\Models\Transaction;
+use App\Models\Wallet;
+use App\Services\Search\BlockSearch;
+use App\Services\Search\TransactionSearch;
+use App\Services\Search\WalletSearch;
 use Livewire\Component;
 
 final class SearchModule extends Component
 {
     use ManagesSearch;
-
-    public string $lw = '';
 
     public bool $isSlim = false;
 
@@ -22,10 +26,7 @@ final class SearchModule extends Component
         $this->isSlim     = $isSlim;
         $this->isAdvanced = $isAdvanced;
 
-        if ($isAdvanced) {
-            // This prevents a weird bug where Livewire updates the client URL to the internal component URL.
-            $this->queryString = ['lw'];
-        }
+        $this->restoreState(request('state', []));
     }
 
     public function performSearch(): void
@@ -34,9 +35,62 @@ final class SearchModule extends Component
 
         if ($this->isAdvanced) {
             $this->emit('searchTriggered', $data);
+        } else {
+            if ($this->searchWallet()) {
+                return;
+            }
+
+            if ($this->searchTransaction()) {
+                return;
+            }
+
+            if ($this->searchBlock()) {
+                return;
+            }
+
+            $this->redirectRoute('search', ['state' => $data]);
+        }
+    }
+
+    private function searchWallet(): bool
+    {
+        /** @var Wallet|null */
+        $wallet = (new WalletSearch())->search(['term' => $this->state['term']])->first();
+
+        if (is_null($wallet)) {
+            return false;
         }
 
-        // 1. We found a single match > Redirect to result page
-        // 2. We have an advanced search on any other page > Redirect to advanced page
+        $this->redirectRoute('wallet', $wallet->address);
+
+        return true;
+    }
+
+    private function searchTransaction(): bool
+    {
+        /** @var Transaction|null */
+        $transaction = (new TransactionSearch())->search(['term' => $this->state['term']])->first();
+
+        if (is_null($transaction)) {
+            return false;
+        }
+
+        $this->redirectRoute('transaction', $transaction->id);
+
+        return true;
+    }
+
+    private function searchBlock(): bool
+    {
+        /** @var Block|null */
+        $block = (new BlockSearch())->search(['term' => $this->state['term']])->first();
+
+        if (is_null($block)) {
+            return false;
+        }
+
+        $this->redirectRoute('block', $block->id);
+
+        return true;
     }
 }
