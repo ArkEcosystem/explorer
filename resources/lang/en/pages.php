@@ -28,6 +28,7 @@ return [
                 'year'      => 'Year',
             ],
         ],
+        'transactions_and_blocks' => 'Transaction & Blocks',
         'latest_transactions' => 'Latest Transactions',
         'latest_blocks'       => 'Latest Blocks',
     ],
