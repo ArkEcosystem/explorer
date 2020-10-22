@@ -13,8 +13,6 @@
             <x-charts.price identifier="fees" colours-scheme="#FFAE10" />
 
             <hr class="mt-12 border-t border-dashed text-theme-secondary-300 border-theme-secondary-300" />
-
-
         </div>
 
         <x-home.content />

@@ -1,6 +1,306 @@
 @push('scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.9.1/dayjs.min.js"></script>
-    <script src="{{ mix('js/chart.js')}}"></script>
+    {{-- <script src="{{ mix('js/chart.js')}}"></script> --}}
+    <script>
+        window.makeChart = (identifier, coloursScheme) => {
+            return {
+                period: "Day",
+                identifier: identifier,
+                coloursScheme: coloursScheme,
+                chart: null,
+                data: {
+                    marketPrice: "0.03109000",
+                    marketDailyAverage: "0.03100000",
+                    marketHistoricalDay: {
+                        labels: @json(Cache::get('chart.fees.day', [])['labels']),
+                        datasets: @json(Cache::get('chart.fees.day', [])['datasets']),
+                        min: 415.28,
+                        max: 3929.78,
+                    },
+                    marketHistoricalWeek: {
+                        labels: @json(Cache::get('chart.fees.week', [])['labels']),
+                        datasets: @json(Cache::get('chart.fees.week', [])['datasets']),
+                        min: 10454.97,
+                        max: 27012.17,
+                    },
+                    marketHistoricalMonth: {
+                        labels: @json(Cache::get('chart.fees.month', [])['labels']),
+                        datasets: @json(Cache::get('chart.fees.month', [])['datasets']),
+                        min: 10454.97,
+                        max: 27470.7,
+                    },
+                    marketHistoricalQuarter: {
+                        labels: @json(Cache::get('chart.fees.quarter', [])['labels']),
+                        datasets: @json(Cache::get('chart.fees.quarter', [])['datasets']),
+                        min: 10454.97,
+                        max: 73169.15,
+                    },
+                    marketHistoricalYear: {
+                        labels: @json(Cache::get('chart.fees.year', [])['labels']),
+                        datasets: @json(Cache::get('chart.fees.year', [])['datasets']),
+                        min: 7233.63,
+                        max: 258257.8,
+                    },
+                    marketVolume: "0",
+                },
+
+                currency: "{{ Network::currency() }}",
+
+                dateAt: "",
+                priceAt: null,
+                priceMin: null,
+                priceMax: null,
+                priceAvg: null,
+
+                dropdownOpen: false,
+                localizedPeriod: null,
+
+                calculatePriceAverage(datasets) {
+                    const avg =
+                        datasets.reduce((a, b) => a + b, 0) / datasets.length || 0;
+
+                    return avg.toFixed(2);
+                },
+
+                getMarketDayAverage() {
+                    this.priceMin = this.data.marketHistoricalDay.min;
+                    this.priceMax = this.data.marketHistoricalDay.max;
+                    this.priceAvg = this.calculatePriceAverage(
+                        this.data.marketHistoricalDay.datasets
+                    );
+
+                    return this.data.marketHistoricalDay;
+                },
+
+                getMarketWeekAverage() {
+                    this.priceMin = this.data.marketHistoricalWeek.min;
+                    this.priceMax = this.data.marketHistoricalWeek.max;
+                    this.priceAvg = this.calculatePriceAverage(
+                        this.data.marketHistoricalWeek.datasets
+                    );
+
+                    return this.data.marketHistoricalWeek;
+                },
+
+                getMarketMonthAverage() {
+                    this.priceMin = this.data.marketHistoricalMonth.min;
+                    this.priceMax = this.data.marketHistoricalMonth.max;
+                    this.priceAvg = this.calculatePriceAverage(
+                        this.data.marketHistoricalMonth.datasets
+                    );
+
+                    return this.data.marketHistoricalMonth;
+                },
+
+                getMarketQuarterAverage() {
+                    this.priceMin = this.data.marketHistoricalMonth.min;
+                    this.priceMax = this.data.marketHistoricalMonth.max;
+                    this.priceAvg = this.calculatePriceAverage(
+                        this.data.marketHistoricalMonth.datasets
+                    );
+
+                    return this.data.marketHistoricalMonth;
+                },
+
+                getMarketYearAverage() {
+                    this.priceMin = this.data.marketHistoricalMonth.min;
+                    this.priceMax = this.data.marketHistoricalMonth.max;
+                    this.priceAvg = this.calculatePriceAverage(
+                        this.data.marketHistoricalMonth.datasets
+                    );
+
+                    return this.data.marketHistoricalMonth;
+                },
+
+                renderChart() {
+                    this.generateChart();
+                },
+
+                generateChart() {
+                    const themeColours = {
+                        gridLines: "#DBDEE5",
+                        ticks: "#B0B0B8",
+                    };
+
+                    const fontConfig = {
+                        fontColor: themeColours.ticks,
+                        fontSize: 14,
+                        fontStyle: 600,
+                    };
+
+                    const scaleCorrection = 1000;
+
+                    let ctx = document.getElementById(this.identifier).getContext("2d");
+
+                    this.chart = new Chart(ctx, {
+                        type: "line",
+
+                        data: {
+                            labels: this.getMarketDayAverage().labels,
+                            datasets: [
+                                {
+                                    borderColor: this.coloursScheme,
+                                    pointRadius: 4,
+                                    pointHoverRadius: 12,
+                                    pointHoverBorderWidth: 3,
+                                    pointHoverBackgroundColor:
+                                        "rgba(204, 230, 211, 0.5)",
+                                    pointHitRadius: 12,
+                                    pointBackgroundColor: "#FFFFFF",
+                                    borderWidth: 3,
+                                    type: "line",
+                                    fill: false,
+                                    data: this.getMarketDayAverage().datasets,
+                                    hidden: false,
+                                },
+                            ],
+                        },
+
+                        // Configuration options go here
+                        options: {
+                            showScale: true,
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            elements: {
+                                line: {
+                                    cubicInterpolationMode: "monotone",
+                                    tension: 0,
+                                },
+                            },
+                            legend: {
+                                display: false,
+                            },
+                            layout: {
+                                padding: {
+                                    left: 0,
+                                    right: 0,
+                                    top: 10,
+                                    bottom: 10,
+                                },
+                            },
+                            scales: {
+                                yAxes: [
+                                    {
+                                        type: "linear",
+                                        position: "left",
+                                        stacked: true,
+
+                                        gridLines: {
+                                            color: themeColours.gridLines,
+                                            display: true,
+                                            drawBorder: false,
+                                        },
+                                        ticks: {
+                                            padding: 15,
+                                            ...fontConfig,
+                                            callback: (value, index, values) => {
+                                                // TODO: Proper implementation
+                                                if (index % 2 === 0) return;
+
+                                                const formatConfig = {
+                                                    currency: this.currency,
+                                                };
+
+                                                const price = value / scaleCorrection;
+
+                                                if (price < 1e-4) {
+                                                    formatConfig.maximumFractionDigits = 8;
+                                                } else if (price < 1e-2) {
+                                                    formatConfig.maximumFractionDigits = 5;
+                                                } else {
+                                                    formatConfig.maximumFractionDigits = 3;
+                                                }
+
+                                                return `$${value}`;
+                                            },
+                                        },
+                                    },
+                                ],
+                                xAxes: [
+                                    {
+                                        gridLines: {
+                                            color: themeColours.gridLines,
+                                            drawBorder: false,
+                                            display: true,
+                                        },
+                                        ticks: {
+                                            padding: 10,
+                                            ...fontConfig,
+                                            callback: (value, index, values) => {
+                                                if (
+                                                    this.period !== "Day" &&
+                                                    index === values.length - 1
+                                                ) {
+                                                    return "Today";
+                                                } else if (this.period === "Week") {
+                                                    const width = this.$el.clientWidth;
+
+                                                    if (width > 1200) {
+                                                        // TODO: DW returns a day of the week, where value would be "Friday" for example
+                                                        return value;
+                                                    } else {
+                                                        // TODO: DW returns the abbreviation of a day of the week, where value would be "FRI" for example
+                                                        return value;
+                                                    }
+                                                } else if (this.period === "Month") {
+                                                    return value;
+                                                }
+
+                                                return value;
+                                            },
+                                        },
+                                    },
+                                ],
+                            },
+                            tooltips: {
+                                displayColors: false,
+                                mode: "interpolate",
+                                intersect: false,
+                                mode: "index",
+                                axis: "x",
+                                callbacks: {
+                                    label: (item) => {
+                                        // TODO: Rounded circle on the left of the label
+                                        return `${item.yLabel.toFixed(2)} ${
+                                            this.currency
+                                        }`;
+                                    },
+                                    title: (items, data) => {},
+                                },
+                            },
+                        },
+                    });
+
+                    return this.chart;
+                },
+
+                updateLabels() {
+                    let labels = eval(`this.getMarket${this.period}Average()`).labels;
+
+                    return labels;
+                },
+
+                updateTicks() {
+                    let periodMarketData = eval(`this.getMarket${this.period}Average()`)
+                        .datasets;
+
+                    return periodMarketData;
+                },
+
+                setPeriod(period) {
+                    this.period = period.charAt(0).toUpperCase() + period.slice(1);
+
+                    updatedTicks = this.updateTicks();
+
+                    this.chart.data.labels = this.updateLabels();
+                    this.chart.data.datasets[0].data = updatedTicks;
+
+                    // Render the chart synchronously and without an animation.
+                    this.chart.update(0);
+                },
+            };
+        };
+    </script>
 @endpush
 
 <div x-data="makeChart('{{ $identifier }}', '{{ $coloursScheme }}')" x-init="renderChart()" class="bg-white border-theme-secondary-100 dark:border-black dark:bg-theme-secondary-900">

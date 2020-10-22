@@ -58,9 +58,9 @@ final class CacheChartData extends Command
      */
     public function handle()
     {
-        if (Network::canBeExchanged()) {
-            $this->cachePrices();
-        }
+        // if (Network::canBeExchanged()) {
+        //     $this->cachePrices();
+        // }
 
         $this->cacheFees();
     }
@@ -83,7 +83,7 @@ final class CacheChartData extends Command
         $fees  = new FeeByRangeAggregate();
         $today = Carbon::now()->endOfDay();
 
-        $this->cacheKeyValue('chart.fees.day', fn () => $fees->aggregate(Carbon::now()->startOfDay(), $today), 'H:s');
+        $this->cacheKeyValue('chart.fees.day', fn () => $fees->aggregate(Carbon::now()->subDay(), $today), 'H:s');
         $this->cacheKeyValue('chart.fees.week', fn () => $fees->aggregate(Carbon::now()->subDays(7), $today), 'd.m');
         $this->cacheKeyValue('chart.fees.month', fn () => $fees->aggregate(Carbon::now()->subDays(30), $today), 'd.m');
         $this->cacheKeyValue('chart.fees.quarter', fn () => $fees->aggregate(Carbon::now()->subDays(120), $today), 'd.m');
