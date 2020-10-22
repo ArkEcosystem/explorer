@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace App\Http\Livewire;
 
 use App\Http\Livewire\Concerns\ManagesSearch;
+use App\Models\Block;
+use App\Models\Transaction;
+use App\Models\Wallet;
 use App\Services\Search\BlockSearch;
 use App\Services\Search\TransactionSearch;
 use App\Services\Search\WalletSearch;
@@ -51,40 +54,43 @@ final class SearchModule extends Component
 
     private function searchWallet(): bool
     {
+        /** @var Wallet */
         $wallet = (new WalletSearch())->search(['term' => $this->state['term']])->first();
 
-        if ($wallet) {
-            $this->redirectRoute('wallet', $wallet->address);
-
-            return true;
+        if (is_null($wallet)) {
+            return false;
         }
 
-        return false;
+        $this->redirectRoute('wallet', $wallet->address);
+
+        return true;
     }
 
     private function searchTransaction(): bool
     {
+        /** @var Transaction */
         $transaction = (new TransactionSearch())->search(['term' => $this->state['term']])->first();
 
-        if ($transaction) {
-            $this->redirectRoute('transaction', $transaction->id);
-
-            return true;
+        if (is_null($transaction)) {
+            return false;
         }
 
-        return false;
+        $this->redirectRoute('transaction', $transaction->id);
+
+        return true;
     }
 
     private function searchBlock(): bool
     {
+        /** @var Block */
         $block = (new BlockSearch())->search(['term' => $this->state['term']])->first();
 
-        if ($block) {
-            $this->redirectRoute('block', $block->id);
-
-            return true;
+        if (is_null($block)) {
+            return false;
         }
 
-        return false;
+        $this->redirectRoute('block', $block->id);
+
+        return true;
     }
 }
