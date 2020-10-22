@@ -11,6 +11,7 @@ use App\Models\Wallet;
 use App\Services\Search\BlockSearch;
 use App\Services\Search\TransactionSearch;
 use App\Services\Search\WalletSearch;
+use Illuminate\View\View;
 use Livewire\Component;
 
 final class SearchModule extends Component
@@ -19,12 +20,14 @@ final class SearchModule extends Component
 
     public bool $isSlim = false;
 
-    public bool $isAdvanced = false;
-
-    public function mount(bool $isSlim = false, bool $isAdvanced = false): void
+    public function mount(bool $isSlim = false): void
     {
-        $this->isSlim     = $isSlim;
-        $this->isAdvanced = $isAdvanced;
+        $this->isSlim = $isSlim;
+    }
+
+    public function render(): View
+    {
+        return view('components.search', ['isAdvanced' => false]);
     }
 
     public function performSearch(): void
