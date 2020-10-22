@@ -9,7 +9,7 @@
         <x-general.search.header />
 
         <div class="content-container">
-            <div class="hidden sm:flex w-full flex-col lg:flex-row space-x-0 lg:space-x-10 py-16">
+            <div class="flex-col hidden w-full py-16 space-x-0 sm:flex lg:flex-row lg:space-x-10">
                 <x-charts.price :data="$prices" identifier="price" colours-scheme="#339A51" />
                 <x-charts.price :data="$fees" identifier="fees" colours-scheme="#FFAE10" />
             </div>
