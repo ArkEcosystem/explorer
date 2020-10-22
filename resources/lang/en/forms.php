@@ -6,9 +6,9 @@ return [
 
     'search' => [
 
-        'block' => 'Block',
+        'block'       => 'Block',
         'transaction' => 'Transaction',
-        'Wallet' => 'Wallet',
+        'Wallet'      => 'Wallet',
 
         'amount_range'            => 'Amount Range',
         'date_range'              => 'Date Range',
@@ -61,17 +61,17 @@ return [
 
     'settings' => [
         'currency' => [
-            'title' => 'Currency',
+            'title'       => 'Currency',
             'description' => 'Select display currency',
         ],
         'chart' => [
-            'title' => 'Statistics Chart',
+            'title'       => 'Statistics Chart',
             'description' => 'Enable/Disable statistics chart',
         ],
         'theme' => [
-            'title' => 'Dark Theme',
+            'title'       => 'Dark Theme',
             'description' => 'Enable/Disable dark theme',
         ],
-    ]
+    ],
 
 ];
