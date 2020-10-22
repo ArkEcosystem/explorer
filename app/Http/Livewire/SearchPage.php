@@ -17,6 +17,7 @@ final class SearchPage extends Component
 {
     use ManagesSearch;
 
+    /** @phpstan-ignore-next-line */
     protected $queryString = ['state'];
 
     private ?LengthAwarePaginator $results = null;
@@ -49,7 +50,9 @@ final class SearchPage extends Component
             $this->results = (new WalletSearch())->search($data)->paginate();
         }
 
-        $this->results = ViewModelFactory::paginate($this->results);
+        if (! is_null($this->results)) {
+            $this->results = ViewModelFactory::paginate($this->results);
+        }
     }
 
     private function restoreState(array $state): void
