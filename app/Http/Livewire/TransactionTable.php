@@ -18,10 +18,6 @@ final class TransactionTable extends Component
     use HasPagination;
     use ManagesTransactionTypeScopes;
 
-    public array $state = [
-        'type' => 'all',
-    ];
-
     public function render(): View
     {
         if ($this->state['type'] !== 'all') {

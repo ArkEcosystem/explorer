@@ -14,7 +14,9 @@ beforeEach(fn () => configureExplorerDatabase());
 it('should list the first page of records', function () {
     Wallet::factory(60)->create();
 
-    $component = Livewire::test(Wallets::class);
+    $component = Livewire::test(Wallets::class, [
+        'wallets' => Wallet::wealthy(),
+    ]);
 
     foreach (ViewModelFactory::paginate(Wallet::wealthy()->paginate())->items() as $wallet) {
         $component->assertSee($wallet->address());

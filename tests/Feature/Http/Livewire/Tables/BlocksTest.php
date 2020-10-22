@@ -13,7 +13,9 @@ beforeEach(fn () => configureExplorerDatabase());
 it('should list the first page of records', function () {
     Block::factory(60)->create();
 
-    $component = Livewire::test(Blocks::class);
+    $component = Livewire::test(Blocks::class, [
+        'blocks' => Block::latestByHeight(),
+    ]);
 
     foreach (ViewModelFactory::paginate(Block::latestByHeight()->paginate())->items() as $block) {
         $component->assertSee($block->id());
