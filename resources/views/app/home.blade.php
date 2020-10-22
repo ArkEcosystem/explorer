@@ -8,7 +8,7 @@
     @section('content')
         <x-general.search.header />
 
-        <div class="content-container-full-width justify-center md:py-16 md:px-8">
+        <div class="justify-center content-container-full-width md:py-16 md:px-8">
             <x-charts.price identifier="price" colours-scheme="#339A51" />
         </div>
 
