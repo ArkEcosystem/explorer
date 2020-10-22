@@ -3,7 +3,7 @@
         <div class="flex-col py-16 content-container md:px-8">
             <h1 class="header-2 mb-4">@lang('pages.search_results.title')</h1>
 
-            @if($state['results'])
+            @if($state['results'] && $state['results']->count())
                 <div>
                     @if ($state['type'] === 'block')
                         <livewire:tables.blocks :blocks="$state['results']" />
