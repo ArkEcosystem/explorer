@@ -202,7 +202,7 @@ body {
     @apply px-8 mb-4 font-semibold rounded-lg select-none bg-theme-secondary-100;
 }
 .theme-dark .tabs {
-    @apply bg-black bg-theme-secondary-900;
+    @apply bg-black;
 }
 
 .tab-item {
