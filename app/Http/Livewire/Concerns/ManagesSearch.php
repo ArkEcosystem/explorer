@@ -10,8 +10,8 @@ trait ManagesSearch
 {
     public array $state = [
         // Generic
-        'term'        => '2510ed26-691f-3c51-ba2f-66263ced6c93',
-        'type'        => 'block',
+        'term'        => 'd05bcf9b-ff25-38ce-a3c0-e542c7276b55',
+        'type'        => 'transaction',
         'dateFrom'    => null,
         'dateTo'      => null,
         // Blocks
@@ -21,7 +21,7 @@ trait ManagesSearch
         'totalFeeTo'         => null,
         'generatorPublicKey' => null,
         // Transactions
-        'transactionType' => null,
+        'transactionType' => 'transfer',
         'amountFrom'      => null,
         'amountTo'        => null,
         'feeFrom'         => null,

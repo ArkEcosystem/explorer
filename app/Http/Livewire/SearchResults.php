@@ -14,6 +14,8 @@ final class SearchResults extends Component
 
     public function searchTriggered(array $data)
     {
+        $this->state['type'] = $data['type'];
+
         if ($data['type'] === 'block') {
             $this->emit('searchBlocks', $data);
         }
@@ -25,7 +27,5 @@ final class SearchResults extends Component
         if ($data['type'] === 'wallet') {
             $this->emit('searchWallets', $data);
         }
-
-        $this->state['type'] = $data['type'];
     }
 }
