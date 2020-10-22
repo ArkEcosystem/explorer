@@ -22,7 +22,7 @@
                     </td>
                     <td class="hidden lg:table-cell">{{ $transaction->timestamp() }}</td>
                     <td><x-general.address :address="$transaction->sender()" /></td>
-                    <td><x-general.address :address="$transaction->recipient() ?? $transaction->sender()" /></td>
+                    <td><x-transactions.recipient :transaction="$transaction" /></td>
                     <td class="text-right">
                         <x-general.amount-fiat-tooltip :amount="$transaction->amount()" :fiat="$transaction->amountFiat()" />
                     </td>
