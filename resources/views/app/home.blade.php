@@ -8,9 +8,11 @@
     @section('content')
         <x-general.search.header />
 
-        <div class="justify-center py-16 content-container">
-            <x-charts.price :data="$prices" identifier="price" colours-scheme="#339A51" />
-            <x-charts.price :data="$fees" identifier="fees" colours-scheme="#FFAE10" />
+        <div class="content-container">
+            <div class="hidden sm:flex w-full flex-col lg:flex-row space-x-0 lg:space-x-10 py-16">
+                <x-charts.price :data="$prices" identifier="price" colours-scheme="#339A51" />
+                <x-charts.price :data="$fees" identifier="fees" colours-scheme="#FFAE10" />
+            </div>
         </div>
 
         <x-home.content />
