@@ -22,7 +22,7 @@
                 @endslot
                 <div class="py-3">
                     @foreach (array_keys(trans('pages.home.charts.periods')) as $period)
-                        <div class="cursor-pointer dropdown-entry" @click="setPeriod('{{ $period }}')">
+                        <div class="cursor-pointer dropdown-entry" :class="{ 'text-theme-danger-400 bg-theme-danger-100': isActivePeriod('{{ ucfirst($period) }}') === true}" @click="setPeriod('{{ $period }}')">
                             @lang("pages.home.charts.periods." . $period)
                         </div>
                     @endforeach

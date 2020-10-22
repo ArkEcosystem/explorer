@@ -1233,7 +1233,7 @@ window.makeChart = (identifier, coloursScheme) => {
                             pointHoverBorderWidth: 3,
                             pointHoverBackgroundColor:
                                 "rgba(204, 230, 211, 0.5)",
-                            pointHitRadius: 12,
+                            pointHitRadius: 1,
                             pointBackgroundColor: "#FFFFFF",
                             borderWidth: 3,
                             type: "line",
@@ -1344,7 +1344,7 @@ window.makeChart = (identifier, coloursScheme) => {
                         displayColors: false,
                         mode: "interpolate",
                         intersect: false,
-                        mode: "index",
+                        mode: "point",
                         axis: "x",
                         callbacks: {
                             label: (item) => {
@@ -1385,5 +1385,9 @@ window.makeChart = (identifier, coloursScheme) => {
             // Render the chart synchronously and without an animation.
             this.chart.update(0);
         },
+
+        isActivePeriod(period) {
+            return period === this.period;
+        }
     };
 };

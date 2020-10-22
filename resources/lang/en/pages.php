@@ -24,8 +24,6 @@ return [
                 'day'       => 'Day',
                 'week'      => 'Week',
                 'month'     => 'Month',
-                'quarter'   => 'Quarter',
-                'year'      => 'Year',
             ],
         ],
         'latest_transactions' => 'Latest Transactions',
