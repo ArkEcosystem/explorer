@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire\Tables;
 
-use App\Http\Livewire\Concerns\ManagesTransactionTypeScopes;
 use App\ViewModels\ViewModelFactory;
 use ARKEcosystem\UserInterface\Http\Livewire\Concerns\HasPagination;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
@@ -15,7 +14,6 @@ use Livewire\Component;
 final class Transactions extends Component
 {
     use HasPagination;
-    use ManagesTransactionTypeScopes;
 
     public bool $viewMore = false;
 
