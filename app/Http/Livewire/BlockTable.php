@@ -29,7 +29,6 @@ final class BlockTable extends Component
 
     public function searchBlocks(array $data): void
     {
-        dd('wat');
         $this->blocks = (new BlockSearch())->search($data)->paginate();
     }
 

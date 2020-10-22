@@ -11,9 +11,14 @@ final class SearchModule extends Component
 {
     use ManagesSearch;
 
+    public string $hello = 'world';
+
     public bool $isSlim = false;
 
     public bool $isAdvanced = false;
+
+    // This prevents a weird bug where Livewire updates the client URL to the internal component URL.
+    protected $queryString = ['hello'];
 
     public function mount(bool $isSlim = false, bool $isAdvanced = false): void
     {
