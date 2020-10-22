@@ -1218,9 +1218,7 @@ window.makeChart = (identifier, coloursScheme) => {
 
             const scaleCorrection = 1000;
 
-            let ctx = document
-                .getElementById(this.identifier)
-                .getContext("2d");
+            let ctx = document.getElementById(this.identifier).getContext("2d");
 
             this.chart = new Chart(ctx, {
                 type: "line",
@@ -1351,7 +1349,9 @@ window.makeChart = (identifier, coloursScheme) => {
                         callbacks: {
                             label: (item) => {
                                 // TODO: Rounded circle on the left of the label
-                                return `${item.yLabel.toFixed(2)} ${this.currency}`;
+                                return `${item.yLabel.toFixed(2)} ${
+                                    this.currency
+                                }`;
                             },
                             title: (items, data) => {},
                         },
@@ -1376,7 +1376,7 @@ window.makeChart = (identifier, coloursScheme) => {
         },
 
         setPeriod(period) {
-            this.period = period.charAt(0).toUpperCase() + period.slice(1);;
+            this.period = period.charAt(0).toUpperCase() + period.slice(1);
 
             updatedTicks = this.updateTicks();
 
