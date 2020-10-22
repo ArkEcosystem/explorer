@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 use App\Http\Livewire\SearchModule;
 use App\Models\Block;
-
 use App\Models\Transaction;
 use App\Models\Wallet;
 use Livewire\Livewire;
