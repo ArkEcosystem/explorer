@@ -44,3 +44,7 @@ it('should have a statistics chart setting', function () {
 it('should have a dark theme setting', function () {
     expect(Settings::darkTheme())->toBeTrue();
 });
+
+it('should return the active theme', function () {
+    expect(Settings::theme())->toBe('dark');
+});
