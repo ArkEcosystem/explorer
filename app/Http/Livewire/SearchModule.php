@@ -36,25 +36,25 @@ final class SearchModule extends Component
     {
         $data = $this->validateSearchQuery();
 
-        if ($this->searchWallet()) {
+        if ($this->searchWallet($data)) {
             return;
         }
 
-        if ($this->searchTransaction()) {
+        if ($this->searchTransaction($data)) {
             return;
         }
 
-        if ($this->searchBlock()) {
+        if ($this->searchBlock($data)) {
             return;
         }
 
         $this->redirectRoute('search', ['state' => $data]);
     }
 
-    private function searchWallet(): bool
+    private function searchWallet(array $data): bool
     {
         /** @var Wallet|null */
-        $wallet = (new WalletSearch())->search(['term' => $this->state['term']])->first();
+        $wallet = (new WalletSearch())->search($data)->first();
 
         if (is_null($wallet)) {
             return false;
@@ -65,10 +65,10 @@ final class SearchModule extends Component
         return true;
     }
 
-    private function searchTransaction(): bool
+    private function searchTransaction(array $data): bool
     {
         /** @var Transaction|null */
-        $transaction = (new TransactionSearch())->search(['term' => $this->state['term']])->first();
+        $transaction = (new TransactionSearch())->search($data)->first();
 
         if (is_null($transaction)) {
             return false;
@@ -79,10 +79,10 @@ final class SearchModule extends Component
         return true;
     }
 
-    private function searchBlock(): bool
+    private function searchBlock(array $data): bool
     {
         /** @var Block|null */
-        $block = (new BlockSearch())->search(['term' => $this->state['term']])->first();
+        $block = (new BlockSearch())->search($data)->first();
 
         if (is_null($block)) {
             return false;
