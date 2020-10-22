@@ -33732,62 +33732,71 @@ h4 {
 
 h1 {
   font-weight: 800;
-  font-size: 2.25rem;
-  margin-bottom: 0.5rem;
-  line-height: 1.375;
 }
 
-h2 {
-  font-size: 1.5rem;
-  margin-bottom: 0.25rem;
-}
-
-h3 {
-  font-size: 1.25rem;
-  margin-bottom: 0.25rem;
-}
-
-h4 {
-  font-size: 1.125rem;
-  margin-bottom: 0.25rem;
+.theme-dark h1,
+.theme-dark h2,
+.theme-dark h3,
+.theme-dark h4 {
+  color: var(--theme-color-secondary-200);
 }
 
 /** Headings without H **/
 
+.header-1,
+.header-2,
+.header-3,
+.header-4 {
+  font-weight: 700;
+  color: var(--theme-color-secondary-900);
+}
+
+.header-1 {
+  font-weight: 800;
+  color: var(--theme-color-secondary-900);
+}
+
+.theme-dark header-1,
+.theme-dark header-2,
+.theme-dark header-3,
+.theme-dark header-4 {
+  color: var(--theme-color-secondary-200);
+}
+
+/* Heading consistency */
+
+h1,
 .header-1 {
   font-size: 2.25rem;
   margin-bottom: 0.5rem;
-  font-weight: 800;
-  color: var(--theme-color-secondary-900);
   line-height: 1.375;
 }
 
+h2,
 .header-2 {
+  font-size: 1.875rem;
+  margin-bottom: 0.25rem;
+}
+
+h3,
+.header-3 {
   font-size: 1.5rem;
   margin-bottom: 0.25rem;
-  font-weight: 700;
-  color: var(--theme-color-secondary-900);
 }
 
-.header-3 {
-  font-size: 1.25rem;
-  margin-bottom: 0.25rem;
-  font-weight: 700;
-  color: var(--theme-color-secondary-900);
-}
-
+h4,
 .header-4 {
   font-size: 1.125rem;
   margin-bottom: 0.25rem;
-  font-weight: 700;
-  color: var(--theme-color-secondary-900);
 }
 
 /* Header Responsiveness */
 
 @media (min-width: 640px) {
   h3,
-    .header-3 {
+    h4,
+    .header-3,
+    .header-4 {
     font-size: 1.5rem;
   }
 }
@@ -33802,6 +33811,11 @@ h4 {
   h2,
     .header-2 {
     font-size: 2.25rem;
+  }
+
+  h3,
+    .header-3 {
+    font-size: 1.875rem;
   }
 }
 
