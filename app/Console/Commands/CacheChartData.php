@@ -78,7 +78,7 @@ final class CacheChartData extends Command
         }
     }
 
-    private function cacheFees(Carbon $today): void
+    private function cacheFees(): void
     {
         $fees  = new FeeByRangeAggregate();
         $today = Carbon::now()->endOfDay();
