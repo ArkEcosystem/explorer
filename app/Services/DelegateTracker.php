@@ -6,80 +6,83 @@ namespace App\Services;
 
 use App\Facades\Network;
 use App\Models\Block;
-use App\Models\Round;
+use Illuminate\Support\Collection;
 
 final class DelegateTracker
 {
-    public static function execute(int $height): array
+    private Collection $delegates;
+
+    public function __construct()
+    {
+        $this->delegates = (new Monitor())->activeDelegates();
+    }
+
+    public function execute(int $height): array
     {
         $lastBlock       = Block::latestByHeight()->firstOrFail();
         $maxDelegates    = Network::delegateCount();
         $blockTime       = Network::blockTime();
         $round           = RoundCalculator::calculate($height);
-        $activeDelegates = (new Monitor())->activeDelegates()->map(fn ($delegate) => $delegate->public_key);
+        $activeDelegates = $this->delegates->toBase()->map(fn ($delegate) => $delegate->public_key);
 
+        $blockTimeLookup = [];
         //     const blockTimeLookup = await Utils.forgingInfoCalculator.getBlockTimeLookup(this.app, height);
 
+        $forgingInfo = [];
         //     const forgingInfo: Contracts.Shared.ForgingInfo = Utils.forgingInfoCalculator.calculateForgingInfo(
         //         timestamp,
         //         height,
         //         blockTimeLookup,
         //     );
 
-        //     // Determine Next Forgers...
-        //     const nextForgers: string[] = [];
-        //     for (let i = 0; i <= maxDelegates; i++) {
-        //         const delegate: string | undefined =
-        //             activeDelegatesPublicKeys[(forgingInfo.currentForger + i) % maxDelegates];
+        // Determine Next Forgers...
+        $nextForgers = [];
+        for ($i = 0; $i < $maxDelegates; $i++) {
+            $delegate = $activeDelegates[($forgingInfo['currentForger'] + $i) % $maxDelegates];
 
-        //         if (delegate) {
-        //             nextForgers.push(delegate);
-        //         }
-        //     }
+            if ($delegate) {
+                $nextForgers[] = $delegate;
+            }
+        }
 
-        //     if (activeDelegatesPublicKeys.length < maxDelegates) {
-        //         return this.logger.warning(
-        //             `Tracker only has ${Utils.pluralize(
-        //                 "active delegate",
-        //                 activeDelegatesPublicKeys.length,
-        //                 true,
-        //             )} from a required ${maxDelegates}`,
-        //         );
-        //     }
+        if (count($activeDelegates) < $maxDelegates) {
+            return [];
+        }
 
-        //     // Determine Next Forger Usernames...
-        //     this.logger.debug(
-        //         `Next Forgers: ${JSON.stringify(
-        //             nextForgers.slice(0, 5).map((publicKey: string) => this.getUsername(publicKey)),
-        //         )}`,
-        //     );
+        // Map Next Forgers...
+        $result = [
+            'delegates'     => [],
+            'nextRoundTime' => ($maxDelegates - $forgingInfo['currentForger'] - 1) * $blockTime,
+        ];
 
-        //     const secondsToNextRound: number = (maxDelegates - forgingInfo.currentForger - 1) * blockTime;
+        foreach ($this->delegates as $delegate) {
+            $indexInNextForgers = 0;
+            for ($i = 0; $i < count($nextForgers); $i++) {
+                if ($nextForgers[$i] === $delegate->public_key) {
+                    $indexInNextForgers = $i;
 
-        //     for (const delegate of this.delegates) {
-        //         let indexInNextForgers = 0;
-        //         for (let i = 0; i < nextForgers.length; i++) {
-        //             if (nextForgers[i] === delegate.publicKey) {
-        //                 indexInNextForgers = i;
-        //                 break;
-        //             }
-        //         }
+                    break;
+                }
+            }
 
-        //         if (indexInNextForgers === 0) {
-        //             this.logger.debug(`${this.getUsername(delegate.publicKey)} will forge next.`);
-        //         } else if (indexInNextForgers <= maxDelegates - forgingInfo.nextForger) {
-        //             this.logger.debug(
-        //                 `${this.getUsername(delegate.publicKey)} will forge in ${Utils.prettyTime(
-        //                     indexInNextForgers * blockTime * 1000,
-        //                 )}.`,
-        //             );
-        //         } else {
-        //             this.logger.debug(`${this.getUsername(delegate.publicKey)} has already forged.`);
-        //         }
-        //     }
+            if ($indexInNextForgers === 0) {
+                $result['delegates'][$delegate->public_key] = [
+                    'status' => 'next',
+                    'time'   => 0,
+                ];
+            } elseif ($indexInNextForgers <= $maxDelegates - $forgingInfo['nextForger']) {
+                $result['delegates'][$delegate->public_key] = [
+                    'status' => 'pending',
+                    'time'   => $indexInNextForgers * $blockTime * 1000,
+                ];
+            } else {
+                $result['delegates'][$delegate->public_key] = [
+                    'status' => 'done',
+                    'time'   => 0,
+                ];
+            }
+        }
 
-        //     this.logger.debug(`Round ${round.round} will end in ${Utils.prettyTime(secondsToNextRound * 1000)}.`);
-
-        return [];
+        return $result;
     }
 }
