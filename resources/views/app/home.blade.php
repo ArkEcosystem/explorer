@@ -21,14 +21,14 @@
                         @endif
                     </div>
 
-                    <div class="hidden xl:flex flex-row w-full justify-between mb-12">
+                    <div class="flex-row justify-between hidden w-full mb-12 xl:flex">
                         <x-details-box title="Price" :value="$aggregates['price'] . ' ' . 'BTC'" icon="app-price" />
                         <x-details-box title="Lifetime Transaction Volume" :value="$aggregates['volume'] . ' ' . Network::currencySymbol()" icon="app-volume" />
 
                         <x-details-box title="Lifetime Transactions" :value="$aggregates['transactionsCount']" icon="app-transactions-amount" />
                         <x-details-box title="Total Votes" :value="$aggregates['votesCount'] . ' ' . Network::currencySymbol()" extra-value="74.08%" icon="app-votes" />
                     </div>
-                    <div class="flex xl:hidden flex-row w-full justify-between mb-12 space-x-18">
+                    <div class="flex flex-row justify-between w-full mb-12 xl:hidden space-x-18">
                         <div class="space-y-12">
                             <x-details-box title="Price" :value="$aggregates['price'] . ' ' . 'BTC'" icon="app-price" />
                             <x-details-box title="Lifetime Transactions" :value="$aggregates['transactionsCount']" icon="app-transactions-amount" />

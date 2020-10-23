@@ -7,9 +7,9 @@
         </div>
     @endif
     <div class="flex flex-col">
-        <span class="font-semibold text-theme-secondary-500 text-sm">{{ $title }}</span>
+        <span class="text-sm font-semibold text-theme-secondary-500">{{ $title }}</span>
         @if($value || is_numeric($value) ?? false)
-            <span class="font-semibold text-lg text-theme-secondary-700">{{ $value }} @if($extraValue ?? false) <span class="text-theme-secondary-500">{{ $extraValue }}</span> @endif</span>
+            <span class="text-lg font-semibold text-theme-secondary-700">{{ $value }} @if($extraValue ?? false) <span class="text-theme-secondary-500">{{ $extraValue }}</span> @endif</span>
         @else
             <span class="font-semibold text-theme-secondary-500">@lang('generic.not_specified')</span>
         @endif
