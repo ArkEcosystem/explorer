@@ -6,6 +6,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Facades\Cache;
@@ -61,25 +62,25 @@ final class Block extends Model
         return $this->hasMany(Transaction::class, 'block_id', 'id');
     }
 
-    // /**
-    //  * A block belongs to a delegate.
-    //  *
-    //  * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-    //  */
-    // public function delegate(): BelongsTo
-    // {
-    //     return $this->belongsTo(Wallet::class, 'generator_public_key', 'public_key');
-    // }
-
     /**
      * A block belongs to a delegate.
      *
-     * @return Wallet
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function getDelegateAttribute(): Wallet
+    public function delegate(): BelongsTo
     {
-        return Cache::tags(['delegates'])->get($this->generator_public_key);
+        return $this->belongsTo(Wallet::class, 'generator_public_key', 'public_key');
     }
+
+    // /**
+    //  * A block belongs to a delegate.
+    //  *
+    //  * @return Wallet
+    //  */
+    // public function getDelegateAttribute(): Wallet
+    // {
+    //     return Cache::tags(['delegates'])->get($this->generator_public_key);
+    // }
 
     /**
      * A block has one previous block.
