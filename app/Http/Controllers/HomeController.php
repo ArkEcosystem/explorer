@@ -4,14 +4,9 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\Aggregates\TransactionCountAggregate;
-use App\Aggregates\TransactionVolumeAggregate;
-use App\Aggregates\VoteCountAggregate;
-use App\Aggregates\VotePercentageAggregate;
-use App\Facades\Network;
-use App\Services\CryptoCompare;
+use App\Enums\CacheKeyEnum;
+use App\Services\ExchangeRate;
 use App\Services\NumberFormatter;
-use App\Services\Settings;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\View\View;
@@ -36,42 +31,13 @@ final class HomeController
                 'year'    => $this->getChart('chart.fees.year'),
             ],
             'aggregates' => [
-                'price'             => $this->getPrice(),
-                'volume'            => $this->getVolume(),
-                'transactionsCount' => $this->getTransactionsCount(),
-                'votesCount'        => $this->getVotesCount(),
-                'votesPercentage'   => $this->getVotesPercentage(),
+                'price'             => ExchangeRate::now(),
+                'volume'            => Cache::get(CacheKeyEnum::VOLUME),
+                'transactionsCount' => Cache::get(CacheKeyEnum::TRANSACTIONS_COUNT),
+                'votesCount'        => Cache::get(CacheKeyEnum::VOTES_COUNT),
+                'votesPercentage'   => Cache::get(CacheKeyEnum::VOTES_PERCENTAGE),
             ],
         ]);
-    }
-
-    private function getPrice()
-    {
-        return NumberFormatter::number(CryptoCompare::price(Network::currency(), Settings::currency()));
-    }
-
-    private function getVolume()
-    {
-        // TODO: cache this every X minutes
-        return (new TransactionVolumeAggregate())->aggregate();
-    }
-
-    private function getTransactionsCount()
-    {
-        // TODO: cache this every X minutes
-        return (new TransactionCountAggregate())->aggregate();
-    }
-
-    private function getVotesCount()
-    {
-        // TODO: cache this every X minutes
-        return (new VoteCountAggregate())->aggregate();
-    }
-
-    private function getVotesPercentage()
-    {
-        // TODO: cache this every X minutes
-        return (new VotePercentageAggregate())->aggregate();
     }
 
     private function getChart(string $cacheKey): array
