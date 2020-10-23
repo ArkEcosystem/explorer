@@ -8,6 +8,7 @@ use App\Facades\Network;
 use App\Models\Transaction;
 use App\Models\Wallet;
 use App\Services\Blockchain\NetworkStatus;
+use App\Services\ExchangeRate;
 use App\Services\NumberFormatter;
 use App\Services\Timestamp;
 use App\Services\Transactions\TransactionDirection;
@@ -17,6 +18,7 @@ use App\Services\Transactions\TransactionStateIcon;
 use App\Services\Transactions\TransactionType;
 use App\Services\Transactions\TransactionTypeIcon;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use Spatie\ViewModels\ViewModel;
 
 final class TransactionViewModel extends ViewModel
@@ -84,9 +86,9 @@ final class TransactionViewModel extends ViewModel
         return NumberFormatter::currency($this->model->fee / 1e8, Network::currency());
     }
 
-    public function feeFiat(): ?string
+    public function feeFiat(): string
     {
-        return null;
+        return ExchangeRate::convert($this->model->fee / 1e8, $this->model->timestamp);
     }
 
     public function amount(): string
@@ -94,9 +96,9 @@ final class TransactionViewModel extends ViewModel
         return NumberFormatter::currency($this->model->amount / 1e8, Network::currency());
     }
 
-    public function amountFiat(): ?string
+    public function amountFiat(): string
     {
-        return null;
+        return ExchangeRate::convert($this->model->amount / 1e8, $this->model->timestamp);
     }
 
     public function confirmations(): string
@@ -120,9 +122,11 @@ final class TransactionViewModel extends ViewModel
             return null;
         }
 
-        $publicKey = substr(Arr::get($this->model->asset, 'votes.0'), 1);
+        $publicKey = collect($this->model->asset['votes'])
+            ->filter(fn ($vote) => Str::startsWith($vote, '+'))
+            ->first();
 
-        return Wallet::where('public_key', $publicKey)->firstOrFail();
+        return Wallet::where('public_key', substr($publicKey, 1))->firstOrFail();
     }
 
     public function unvoted(): ?Wallet
@@ -135,9 +139,11 @@ final class TransactionViewModel extends ViewModel
             return null;
         }
 
-        $publicKey = substr(Arr::get($this->model->asset, 'votes.1'), 1);
+        $publicKey = collect($this->model->asset['votes'])
+            ->filter(fn ($vote) => Str::startsWith($vote, '-'))
+            ->first();
 
-        return Wallet::where('public_key', $publicKey)->firstOrFail();
+        return Wallet::where('public_key', substr($publicKey, 1))->firstOrFail();
     }
 
     public function iconState(): string
