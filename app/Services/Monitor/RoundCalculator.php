@@ -21,7 +21,7 @@ final class RoundCalculator
         $activeDelegates = Network::delegateCount();
         $milestoneHeight = 1;
 
-        $heightFromLastSpan = Block::latestByHeight()->firstOrFail() - $milestoneHeight;
+        $heightFromLastSpan = Block::latestByHeight()->firstOrFail()->height - $milestoneHeight;
         $roundIncrease      = floor($heightFromLastSpan / $activeDelegates);
         $nextRoundIncrease  = ($heightFromLastSpan + 1) % $activeDelegates === 0 ? 1 : 0;
 
