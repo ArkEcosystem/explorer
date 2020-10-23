@@ -116,6 +116,10 @@ final class TransactionViewModel extends ViewModel
             return null;
         }
 
+        if (is_null($this->model->asset)) {
+            return null;
+        }
+
         $publicKey = substr($this->model->asset['votes'][0], 1);
 
         return Wallet::where('public_key', $publicKey)->firstOrFail();
@@ -124,6 +128,10 @@ final class TransactionViewModel extends ViewModel
     public function unvoted(): ?Wallet
     {
         if (! $this->isUnvote()) {
+            return null;
+        }
+
+        if (is_null($this->model->asset)) {
             return null;
         }
 
