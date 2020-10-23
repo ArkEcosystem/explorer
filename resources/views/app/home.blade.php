@@ -21,7 +21,7 @@
                         @endif
                     </div>
 
-                    <div class="hidden xl:flex flex-row w-full justify-between mb-12">
+                    <div class="flex-row justify-between hidden w-full mb-12 xl:flex">
                         <x-details-box :title="trans('pages.home.network-details.price')" :value="$aggregates['price'] . ' ' . 'BTC'" icon="app-price" />
                         <x-details-box :title="trans('pages.home.network-details.lifetime_transactions_volume')" :value="$aggregates['volume'] . ' ' . Network::currencySymbol()" icon="app-volume" />
 
