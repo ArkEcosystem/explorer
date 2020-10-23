@@ -46,6 +46,10 @@ return [
         'no_results' => 'We could not find anything matching your search criteria, please try again!',
     ],
 
+    'transaction' => [
+        'title' => 'Transaction Details',
+    ],
+
     'wallets' => [
         'title' => 'Wallets',
     ],
