@@ -109,7 +109,7 @@ final class TransactionViewModel extends ViewModel
         return NumberFormatter::number(NetworkStatus::height() - $block->height);
     }
 
-    public function voted(): Wallet
+    public function voted(): ?Wallet
     {
         if (! $this->isVote()) {
             return null;
@@ -120,7 +120,7 @@ final class TransactionViewModel extends ViewModel
         return Wallet::where('public_key', $publicKey)->firstOrFail();
     }
 
-    public function unvoted(): Wallet
+    public function unvoted(): ?Wallet
     {
         if (! $this->isUnvote()) {
             return null;
