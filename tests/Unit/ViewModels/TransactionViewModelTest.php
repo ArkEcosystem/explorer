@@ -416,14 +416,15 @@ it('should fail to get the voted delegate if the transaction is not an unvote', 
     expect($subject->voted())->toBeNull();
 });
 
-it('should fail to get the voted delegate if the transaction has no asset', function () {
+it('should fail to get the voted delegate if the transaction asset is empty', function ($asset) {
     $subject = new TransactionViewModel(Transaction::factory()->create([
         'type'       => CoreTransactionTypeEnum::VOTE,
         'type_group' => TransactionTypeGroupEnum::CORE,
+        'asset'      => $asset,
     ]));
 
     expect($subject->voted())->toBeNull();
-});
+})->with([[[]], null]);
 
 it('should get the unvoted delegate', function () {
     $wallet = Wallet::factory()->create(['public_key' => 'publicKey']);
@@ -448,11 +449,12 @@ it('should fail to get the unvoted delegate if the transaction is not an unvote'
     expect($subject->unvoted())->toBeNull();
 });
 
-it('should fail to get the unvoted delegate if the transaction has no asset', function () {
+it('should fail to get the unvoted delegate if the transaction asset is empty', function ($asset) {
     $subject = new TransactionViewModel(Transaction::factory()->create([
         'type'       => CoreTransactionTypeEnum::VOTE,
         'type_group' => TransactionTypeGroupEnum::CORE,
+        'asset'      => $asset,
     ]));
 
     expect($subject->unvoted())->toBeNull();
-});
+})->with([[[]], null]);
