@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Monitor;
 
+use App\Facades\Network;
 use App\Models\Block;
 use App\Models\Round;
 use App\Models\Wallet;
@@ -17,7 +18,7 @@ final class Monitor
             ->whereNotNull('delegate')
             ->where('attributes->delegate->resigned', false)
             ->orderBy('vote_balance', 'desc')
-            ->limit(51)
+            ->limit(Network::delegateCount())
             ->get();
     }
 
@@ -26,8 +27,8 @@ final class Monitor
         return Wallet::query()
             ->whereNotNull('delegate')
             ->orderBy('vote_balance', 'desc')
-            ->skip(51)
-            ->limit(51)
+            ->skip(Network::delegateCount())
+            ->limit(Network::delegateCount())
             ->get();
     }
 
@@ -56,7 +57,7 @@ final class Monitor
     public function heightRange(int $round): Collection
     {
         return collect(range($round - 4, $round))->mapWithKeys(function ($round): array {
-            $roundStart = (int) $round * 51;
+            $roundStart = (int) $round * Network::delegateCount();
 
             return [
                 $round => [
@@ -95,6 +96,6 @@ final class Monitor
             ->latestByHeight()
             ->where('generator_public_key', $publicKey)
             ->limit(1)
-            ->pluck('height')[0] / 51);
+            ->pluck('height')[0] / Network::delegateCount());
     }
 }
