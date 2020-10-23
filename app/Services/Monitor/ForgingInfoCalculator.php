@@ -9,7 +9,7 @@ use App\Models\Block;
 
 final class ForgingInfoCalculator
 {
-    public function getBlockTimeLookup(int $height): array
+    public function getBlockTimeLookup(int $height): int
     {
         return Block::where('height', $height)->firstOrFail()->timestamp;
     }
