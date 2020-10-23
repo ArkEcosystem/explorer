@@ -8,8 +8,8 @@
                         <div>
                             @lang('general.transaction.type'): <span x-text="transactionTypeFilterLabel"></span>
                         </div>
-                        <span :class="{ 'rotate-180': open }" class="flex items-center justify-center w-4 h-4 transition duration-150 ease-in-out rounded-full bg-theme-primary-100">
-                            @svg('chevron-up', 'h-3 w-2 text-theme-primary-600')
+                        <span :class="{ 'rotate-180 bg-theme-primary-600 text-theme-secondary-100': dropdownOpen }" class="flex items-center justify-center w-4 h-4 transition duration-150 ease-in-out rounded-full bg-theme-primary-100 text-theme-primary-600">
+                            @svg('chevron-up', 'h-3 w-2')
                         </span>
                     </div>
                 @endslot
