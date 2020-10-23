@@ -31,7 +31,7 @@ final class CacheDelegates extends Command
      */
     public function handle()
     {
-        Wallet::whereNotNull('attributes->delegate->username')->orderBy('balance')->chunk(200, function ($wallets) {
+        Wallet::whereNotNull('attributes->delegate->username')->orderBy('balance')->chunk(200, function ($wallets): void {
             foreach ($wallets as $wallet) {
                 Cache::tags(['delegates'])->put($wallet->public_key, $wallet);
             }
