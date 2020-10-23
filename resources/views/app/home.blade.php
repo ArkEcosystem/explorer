@@ -22,13 +22,13 @@
                             @endif
                         </div>
 
-                        <div class="grid w-full grid-flow-row grid-cols-2 gap-6 pt-8 mt-5 mb-16 xl:grid-cols-4 gap-y-12 xl:gap-y-4">
+                        <div class="grid w-full grid-flow-row grid-cols-2 gap-6 pt-8 mt-5 mb-16 {{ Network::canbeExchanged() ?  'xl:grid-cols-4' : 'xl:grid-cols-3'}} gap-y-12 xl:gap-y-4">
                             @if(Network::canBeExchanged())
                                 <x-details-box :title="trans('pages.home.network-details.price')" :value="$aggregates['price'] . ' ' . 'BTC'" icon="app-price" />
                             @endif
                             <x-details-box :title="trans('pages.home.network-details.lifetime_transactions_volume')" :value="$aggregates['volume'] . ' ' . Network::currencySymbol()" icon="app-volume" />
                             <x-details-box :title="trans('pages.home.network-details.lifetime_transactions')" :value="$aggregates['transactionsCount']" icon="app-transactions-amount" />
-                            <x-details-box :title="trans('pages.home.network-details.total_votes')" :value="$aggregates['votesCount'] . ' ' . Network::currencySymbol()" :extra-value="$aggregates['votesPercentage'] . ' %'" icon="app-votes" />
+                            <x-details-box :title="trans('pages.home.network-details.total_votes')" :value="$aggregates['votesCount'] . ' ' . Network::currencySymbol()" :extra-value="$aggregates['votesPercentage']" icon="app-votes" />
                         </div>
                     </div>
                 </div>
