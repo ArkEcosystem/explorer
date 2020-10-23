@@ -393,7 +393,7 @@ it('should fail to get the recipient', function () {
     expect($this->subject->recipient())->toBe('n/a');
 });
 
-it('should get the username of the voted delegate', function () {
+it('should get the voted delegate', function () {
     $wallet = Wallet::factory()->create(['public_key' => 'publicKey']);
 
     $subject = new TransactionViewModel(Transaction::factory()->create([
@@ -406,7 +406,7 @@ it('should get the username of the voted delegate', function () {
     expect($subject->voted()->is($wallet))->toBeTrue();
 });
 
-it('should get the username of the unvoted delegate', function () {
+it('should get the unvoted delegate', function () {
     $wallet = Wallet::factory()->create(['public_key' => 'publicKey']);
 
     $subject = new TransactionViewModel(Transaction::factory()->create([
