@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @property int $balance
+ * @property int $round
  */
 final class Round extends Model
 {
@@ -39,6 +41,18 @@ final class Round extends Model
     public function delegate(): BelongsTo
     {
         return $this->belongsTo(Wallet::class, 'public_key', 'public_key');
+    }
+
+    /**
+     * Scope a query to sort rounds by number.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeNumber($query): Builder
+    {
+        return $query->orderBy('round', 'desc');
     }
 
     /**

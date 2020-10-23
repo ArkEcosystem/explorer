@@ -16,6 +16,7 @@ use App\Services\Transactions\TransactionState;
 use App\Services\Transactions\TransactionStateIcon;
 use App\Services\Transactions\TransactionType;
 use App\Services\Transactions\TransactionTypeIcon;
+use Illuminate\Support\Arr;
 use Spatie\ViewModels\ViewModel;
 
 final class TransactionViewModel extends ViewModel
@@ -115,7 +116,11 @@ final class TransactionViewModel extends ViewModel
             return null;
         }
 
-        $publicKey = substr($this->model->asset['votes'][0], 1);
+        if (is_null($this->model->asset)) {
+            return null;
+        }
+
+        $publicKey = substr(Arr::get($this->model->asset, 'votes.0'), 1);
 
         return Wallet::where('public_key', $publicKey)->firstOrFail();
     }
@@ -126,7 +131,11 @@ final class TransactionViewModel extends ViewModel
             return null;
         }
 
-        $publicKey = substr($this->model->asset['votes'][1], 1);
+        if (is_null($this->model->asset)) {
+            return null;
+        }
+
+        $publicKey = substr(Arr::get($this->model->asset, 'votes.1'), 1);
 
         return Wallet::where('public_key', $publicKey)->firstOrFail();
     }

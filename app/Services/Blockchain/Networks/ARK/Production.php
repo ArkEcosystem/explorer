@@ -57,7 +57,7 @@ final class Production implements Network
 
     public function usesMarketsquare(): bool
     {
-        return true;
+        return false;
     }
 
     public function epoch(): Carbon
