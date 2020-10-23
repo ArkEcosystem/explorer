@@ -1,4 +1,4 @@
-<div class="flex detail-box space-x-2">
+<div class="flex space-x-2 detail-box">
     @if(isset($icon))
         <div
             class="flex items-center justify-center p-2 rounded-full h-12 w-12 mr-3 bg-theme-secondary-200 {{ $iconWrapperClass ?? '' }}"
