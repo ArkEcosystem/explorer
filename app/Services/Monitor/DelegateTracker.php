@@ -25,8 +25,8 @@ final class DelegateTracker
         $round           = RoundCalculator::calculate($height);
         $activeDelegates = $this->delegates->toBase()->map(fn ($delegate) => $delegate->public_key);
 
-        $blockTimeLookup = (new self())->getBlockTimeLookup($lastBlock->height);
-        $forgingInfo     = (new self())->calculateForgingInfo($lastBlock->timestamp, $lastBlock->height, $blockTimeLookup);
+        $blockTimeLookup = (new ForgingInfoCalculator())->getBlockTimeLookup($lastBlock->height);
+        $forgingInfo     = (new ForgingInfoCalculator())->calculateForgingInfo($lastBlock->timestamp, $lastBlock->height, $blockTimeLookup);
 
         // Determine Next Forgers...
         $nextForgers = [];

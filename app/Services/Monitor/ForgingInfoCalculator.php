@@ -16,7 +16,7 @@ final class ForgingInfoCalculator
 
     public function calculateForgingInfo(int $timestamp, int $height): array
     {
-        $slotInfo = 0; // Crypto.Slots.getSlotInfo(getTimeStampForBlock, timestamp, height);
+        $slotInfo = (new Slots())->getSlotInfo($timestamp, $height);
 
         [$currentForger, $nextForger] = $this->findIndex($height, $slotInfo['slotNumber']);
 
