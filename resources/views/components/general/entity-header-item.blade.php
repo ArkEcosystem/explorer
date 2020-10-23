@@ -9,15 +9,15 @@
         </div>
     </div>
 
-    <div class="flex flex-col flex-1 justify-between font-semibold ml-4">
+    <div class="flex flex-col justify-between flex-1 ml-4 font-semibold">
         <div class="text-sm leading-tight text-theme-secondary-600 dark:text-theme-secondary-700">{{ $title }}</div>
 
         @if ($url ?? false)
-            <a href="{{ $url }}" class="link flex leading-tight">
+            <a href="{{ $url }}" class="flex leading-tight link">
                 <span class="truncate">{{ $text }}</span>
             </a>
         @else
-            <span class="truncate leading-tight text-theme-secondary-900 dark:text-theme-secondary-200">{{ $text }}</span>
+            <span class="leading-tight truncate text-theme-secondary-900 dark:text-theme-secondary-200">{{ $text }}</span>
         @endif
     </div>
 </div>
