@@ -14,6 +14,7 @@ final class WalletFactory extends Factory
     public function definition()
     {
         return [
+            'id'                => $this->faker->uuid,
             'address'           => $this->faker->uuid,
             'public_key'        => $this->faker->uuid,
             'balance'           => $this->faker->numberBetween(1, 1000) * 1e8,
