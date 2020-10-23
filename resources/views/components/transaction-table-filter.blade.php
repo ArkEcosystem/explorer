@@ -2,7 +2,7 @@
     <div class="relative flex items-center justify-between">
         <h2 class="text-3xl sm:text-4xl">@lang('pages.home.transactions_and_blocks')</h2>
         <div x-show="selected === 'transactions'">
-            <x-ark-dropdown dropdown-classes="left-0 w-64 mt-3" button-class="w-64 h-10 dropdown-button" :init-alpine="false">
+            <x-ark-dropdown dropdown-classes="left-0 w-64 mt-3 overflow-y-scroll h-128" button-class="w-64 h-10 dropdown-button" :init-alpine="false">
                 @slot('button')
                     <div class="flex items-center justify-end w-full space-x-2 font-semibold flex-inline text-theme-secondary-700">
                         <div>
@@ -14,48 +14,68 @@
                     </div>
                 @endslot
 
-                <div class="py-3">
-                    @foreach([
-                        'all',
-                        'businessEntityRegistration',
-                        'businessEntityResignation',
-                        'businessEntityUpdate',
-                        'delegateEntityRegistration',
-                        'delegateEntityResignation',
-                        'delegateEntityUpdate',
-                        'delegateRegistration',
-                        'delegateResignation',
-                        'entityRegistration',
-                        'entityResignation',
-                        'entityUpdate',
-                        'ipfs',
-                        'legacyBridgechainRegistration',
-                        'legacyBridgechainResignation',
-                        'legacyBridgechainUpdate',
-                        'legacyBusinessRegistration',
-                        'legacyBusinessResignation',
-                        'legacyBusinessUpdate',
-                        'moduleEntityRegistration',
-                        'moduleEntityResignation',
-                        'moduleEntityUpdate',
-                        'multiPayment',
-                        'multiSignature',
-                        'pluginEntityRegistration',
-                        'pluginEntityResignation',
-                        'pluginEntityUpdate',
-                        'productEntityRegistration',
-                        'productEntityResignation',
-                        'productEntityUpdate',
-                        'secondSignature',
-                        'timelockClaim',
-                        'timelockRefund',
-                        'timelock',
-                        'transfer',
-                        'vote',
-                    ] as $type)
-                    <div class="cursor-pointer dropdown-entry" @click="window.livewire.emit('filterTransactionsByType', '{{ $type }}'); transactionTypeFilter = '{{ $type }}'; transactionTypeFilterLabel = '@lang('forms.search.transaction_types.'.$type)'">
-                        @lang('forms.search.transaction_types.'.$type)
+                <div class="block py-3 justify-center items-center">
+                    <div class="dropdown-entry cursor-pointer text-theme-secondary-900" @click="window.livewire.emit('filterTransactionsByType', 'all'); transactionTypeFilter = 'all'; transactionTypeFilterLabel = '@lang('forms.search.transaction_types.all')'">
+                        @lang('forms.search.transaction_types.all')
                     </div>
+
+                    <div class="w-full border-b border-theme-secondary-300"></div>
+
+                    @foreach([
+                        'core' => [
+                            'transfer',
+                            'secondSignature',
+                            'delegateRegistration',
+                            'vote',
+                            'multiSignature',
+                            'ipfs',
+                            'multiPayment',
+                            'timelock',
+                            'timelockClaim',
+                            'timelockRefund',
+                        ],
+                        'magistrate' => [
+                            'businessEntityRegistration',
+                            'businessEntityResignation',
+                            'businessEntityUpdate',
+                            'delegateEntityRegistration',
+                            'delegateEntityResignation',
+                            'delegateEntityUpdate',
+                            'delegateResignation',
+                            'entityRegistration',
+                            'entityResignation',
+                            'entityUpdate',
+                            'legacyBridgechainRegistration',
+                            'legacyBridgechainResignation',
+                            'legacyBridgechainUpdate',
+                            'legacyBusinessRegistration',
+                            'legacyBusinessResignation',
+                            'legacyBusinessUpdate',
+                            'moduleEntityRegistration',
+                            'moduleEntityResignation',
+                            'moduleEntityUpdate',
+                            'pluginEntityRegistration',
+                            'pluginEntityResignation',
+                            'pluginEntityUpdate',
+                            'productEntityRegistration',
+                            'productEntityResignation',
+                            'productEntityUpdate',
+                        ],
+                    ] as $typeGroup => $types)
+                        <span class="flex w-full items-center text-left px-8 pt-8 leading-5 font-bold text-theme-secondary-500 text-sm">{{ ucfirst($typeGroup) }}</span>
+
+                        @foreach ($types as $type)
+                            <div
+                                class="cursor-pointer dropdown-entry text-theme-secondary-900"
+                                @click="window.livewire.emit('filterTransactionsByType', '{{ $type }}'); transactionTypeFilter = '{{ $type }}'; transactionTypeFilterLabel = '@lang('forms.search.transaction_types.'.$type)'"
+                            >
+                                @lang('forms.search.transaction_types.'.$type)
+                            </div>
+                        @endforeach
+
+                        @if (! $loop->last)
+                            <div class="w-full border-b border-theme-secondary-300"></div>
+                        @endif
                     @endforeach
                 </div>
             </x-ark-dropdown>
