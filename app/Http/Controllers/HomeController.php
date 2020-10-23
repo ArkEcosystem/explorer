@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Enums\CacheKeyEnum;
+use App\Facades\Network;
 use App\Services\ExchangeRate;
 use App\Services\NumberFormatter;
 use Illuminate\Support\Arr;
@@ -32,10 +33,10 @@ final class HomeController
             ],
             'aggregates' => [
                 'price'             => ExchangeRate::now(),
-                'volume'            => Cache::get(CacheKeyEnum::VOLUME),
+                'volume'            => NumberFormatter::currency(Cache::get(CacheKeyEnum::VOLUME), Network::currency()),
                 'transactionsCount' => Cache::get(CacheKeyEnum::TRANSACTIONS_COUNT),
                 'votesCount'        => Cache::get(CacheKeyEnum::VOTES_COUNT),
-                'votesPercentage'   => Cache::get(CacheKeyEnum::VOTES_PERCENTAGE),
+                'votesPercentage'   => NumberFormatter::percentage(Cache::get(CacheKeyEnum::VOTES_PERCENTAGE)),
             ],
         ]);
     }
