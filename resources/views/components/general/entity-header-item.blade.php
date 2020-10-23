@@ -13,11 +13,11 @@
         <div class="text-sm leading-tight text-theme-secondary-600">{{ $title }}</div>
 
         @if ($url ?? false)
-            <a href="{{ $url }}" class="link flex leading-tight text-theme-secondary-400">
+            <a href="{{ $url }}" class="link flex leading-tight">
                 <span class="truncate">{{ $text }}</span>
             </a>
         @else
-            <span class="truncate leading-tight">{{ $text }}</span>
+            <span class="truncate leading-tight text-theme-secondary-900">{{ $text }}</span>
         @endif
     </div>
 </div>
