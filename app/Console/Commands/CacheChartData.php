@@ -77,7 +77,7 @@ final class CacheChartData extends Command
         foreach ($this->currencies as $currency) {
             $prices = (new CryptoCompare())->historical(Network::currency(), $currency);
 
-            Cache::put('prices.'.$currency, Carbon::now()->addHour(), $prices);
+            Cache::put('prices.'.$currency, $prices);
 
             $this->cacheKeyValue('chart.prices.day', $prices->take(1), 'H:s');
             $this->cacheKeyValue('chart.prices.week', $prices->take(7), 'd.m');
@@ -120,8 +120,11 @@ final class CacheChartData extends Command
         ];
     }
 
+    /**
+     * @param mixed $value
+     */
     private function cacheKeyValue(string $key, $value, string $dateFormat): void
     {
-        Cache::put($key, Carbon::now()->addHour(), $this->groupByDate($value, $dateFormat));
+        Cache::put($key, $this->groupByDate($value, $dateFormat));
     }
 }
