@@ -8,7 +8,7 @@ use App\Facades\Network;
 use App\Models\Block;
 use Illuminate\Support\Collection;
 
-final class ForgingInfoCalculator
+final class DelegateTracker
 {
     private Collection $delegates;
 
@@ -25,8 +25,8 @@ final class ForgingInfoCalculator
         $round           = RoundCalculator::calculate($height);
         $activeDelegates = $this->delegates->toBase()->map(fn ($delegate) => $delegate->public_key);
 
-        $blockTimeLookup = (new ForgingInfoCalculator())->getBlockTimeLookup($lastBlock->height);
-        $forgingInfo     = (new ForgingInfoCalculator())->calculateForgingInfo($lastBlock->timestamp, $lastBlock->height, $blockTimeLookup);
+        $blockTimeLookup = (new self())->getBlockTimeLookup($lastBlock->height);
+        $forgingInfo     = (new self())->calculateForgingInfo($lastBlock->timestamp, $lastBlock->height, $blockTimeLookup);
 
         // Determine Next Forgers...
         $nextForgers = [];
