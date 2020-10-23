@@ -2,33 +2,20 @@
     <div class="flex-col py-16 content-container space-y-6">
         <x-general.search.header-slim :title="trans('pages.block.title')" />
 
-        <x-general.entity-header>
-            <x-slot name="top">
-                <div class="flex flex-col md:flex-row">
-                    <div class="hidden items-center md:flex">
-                        <div class="circled-icon text-theme-secondary-400 border-theme-danger-400">
-                            @svg('app-block-id', 'w-5 h-5')
-                        </div>
+        <x-general.entity-header
+            title="Block ID"
+            value="5e665af8f9805b0a8171b5badf6289ddff96e110e512725132c6f4e3dffea94e"
+        >
+            <x-slot name="logo">@svg('app-block-id', 'w-5 h-5')</x-slot>
+
+            <x-slot name="extra">
+                <div class="flex items-center space-x-2 text-theme-secondary-400 mt-6 md:mt-0">
+                    <div class="flex bg-theme-secondary-800 cursor-pointer px-3 h-full rounded hover:bg-theme-secondary-700 transition-default flex-1 md:flex-none items-center justify-center">
+                        @svg('chevron-left', 'w-6 h-6')
                     </div>
 
-                    <div class="flex flex-col flex-1 justify-between font-semibold md:ml-4">
-                        <div class="text-sm leading-tight text-theme-secondary-600">Block ID</div>
-
-                        <div class="flex items-center space-x-2 leading-tight text-theme-secondary-400">
-                            <span class="truncate">5e665af8f9805b0a8171b5badf6289ddff96e110e512725132c6f4e3dffea94e</span>
-
-                            @svg('copy', 'w-10 h-10 md:w-4 md:h-4')
-                        </div>
-                    </div>
-
-                    <div class="flex space-x-2 text-theme-secondary-400 mt-6 md:mt-0">
-                        <div class="flex bg-theme-secondary-800 cursor-pointer pl-3 pr-3 py-3 rounded hover:bg-theme-secondary-700 transition-default flex-1 md:flex-none items-center justify-center">
-                            @svg('chevron-left', 'w-6 h-6')
-                        </div>
-
-                        <div class="flex bg-theme-secondary-800 cursor-pointer pl-3 pr-3 py-3 rounded hover:bg-theme-secondary-700 transition-default flex-1 md:flex-none items-center justify-center">
-                            @svg('chevron-right', 'w-6 h-6')
-                        </div>
+                    <div class="flex bg-theme-secondary-800 cursor-pointer px-3 h-full rounded hover:bg-theme-secondary-700 transition-default flex-1 md:flex-none items-center justify-center">
+                        @svg('chevron-right', 'w-6 h-6')
                     </div>
                 </div>
             </x-slot>
