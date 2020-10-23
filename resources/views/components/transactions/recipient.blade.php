@@ -1,7 +1,9 @@
 @php($iconType = $transaction->iconType())
 
 <div>
-    @if ($transaction->isTransfer())
+    @if ($transaction->isUnknown())
+        <x-general.address :address="$transaction->recipient() ?? $transaction->sender()" />
+    @elseif ($transaction->isTransfer())
         <x-general.address :address="$transaction->recipient() ?? $transaction->sender()" />
     @elseif ($transaction->isVote())
         <x-general.address :address="$transaction->voted()->address">
