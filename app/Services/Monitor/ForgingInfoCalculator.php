@@ -18,7 +18,7 @@ final class ForgingInfoCalculator
     {
         $slotInfo = (new Slots())->getSlotInfo($timestamp, $height);
 
-        [$currentForger, $nextForger] = $this->findIndex($height, $slotInfo['slotNumber']);
+        [$currentForger, $nextForger] = $this->findIndex($slotInfo['slotNumber']);
 
         return [
             'currentForger'  => $currentForger,

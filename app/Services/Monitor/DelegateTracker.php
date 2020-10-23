@@ -26,7 +26,7 @@ final class DelegateTracker
         $activeDelegates = $this->delegates->toBase()->map(fn ($delegate) => $delegate->public_key);
 
         $blockTimeLookup = (new ForgingInfoCalculator())->getBlockTimeLookup($lastBlock->height);
-        $forgingInfo     = (new ForgingInfoCalculator())->calculateForgingInfo($lastBlock->timestamp, $lastBlock->height, $blockTimeLookup);
+        $forgingInfo     = (new ForgingInfoCalculator())->calculateForgingInfo($lastBlock->timestamp, $lastBlock->height);
 
         // Determine Next Forgers...
         $nextForgers = [];
