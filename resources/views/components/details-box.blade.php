@@ -1,9 +1,9 @@
-<div class="flex detail-box">
+<div class="flex detail-box space-x-2">
     @if(isset($icon))
         <div
-            class="flex items-center justify-center p-2 rounded-full h-12 w-12 mr-3 bg-theme-secondary-200 {{ $iconWrapperClass ?? 'border border-theme-secondary-300' }}"
+            class="flex items-center justify-center p-2 rounded-full h-12 w-12 mr-3 bg-theme-secondary-200 {{ $iconWrapperClass ?? '' }}"
         >
-            @svg($icon, 'h-4 w-4 text-theme-secondary-900'.($iconClass ?? ''))
+            @svg($icon, 'h-5 w-5 text-theme-secondary-900'.($iconClass ?? ''))
         </div>
     @endif
     <div class="flex flex-col">
