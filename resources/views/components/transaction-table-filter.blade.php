@@ -14,8 +14,8 @@
                     </div>
                 @endslot
 
-                <div class="block py-3 justify-center items-center">
-                    <div class="dropdown-entry cursor-pointer text-theme-secondary-900" @click="window.livewire.emit('filterTransactionsByType', 'all'); transactionTypeFilter = 'all'; transactionTypeFilterLabel = '@lang('forms.search.transaction_types.all')'">
+                <div class="items-center justify-center block py-3">
+                    <div class="cursor-pointer dropdown-entry text-theme-secondary-900" @click="window.livewire.emit('filterTransactionsByType', 'all'); transactionTypeFilter = 'all'; transactionTypeFilterLabel = '@lang('forms.search.transaction_types.all')'">
                         @lang('forms.search.transaction_types.all')
                     </div>
 
@@ -62,7 +62,7 @@
                             'productEntityUpdate',
                         ],
                     ] as $typeGroup => $types)
-                        <span class="flex w-full items-center text-left px-8 pt-8 leading-5 font-bold text-theme-secondary-500 text-sm">{{ ucfirst($typeGroup) }}</span>
+                        <span class="flex items-center w-full px-8 pt-8 text-sm font-bold leading-5 text-left text-theme-secondary-500">{{ ucfirst($typeGroup) }}</span>
 
                         @foreach ($types as $type)
                             <div
