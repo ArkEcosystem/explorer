@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Aggregates\TransactionCountAggregate;
+use App\Aggregates\TransactionVolumeAggregate;
 use App\Aggregates\VoteCountAggregate;
 use App\Aggregates\VotePercentageAggregate;
 use App\Facades\Network;
@@ -51,28 +52,26 @@ final class HomeController
 
     private function getVolume()
     {
-        // No aggregate yet for volume ?
-        return 42;
+        // TODO: cache this every X minutes
+        return (new TransactionVolumeAggregate())->aggregate();
     }
 
     private function getTransactionsCount()
     {
+        // TODO: cache this every X minutes
         return (new TransactionCountAggregate())->aggregate();
     }
 
     private function getVotesCount()
     {
+        // TODO: cache this every X minutes
         return (new VoteCountAggregate())->aggregate();
     }
 
     private function getVotesPercentage()
     {
-        return 42;
-        /* Doesnt work
-        Illuminate\Database\QueryException
-        SQLSTATE[42883]: Undefined function: 7 ERROR: function sum(character varying) does not exist
-        */
-        //return (new VotePercentageAggregate())->aggregate();
+        // TODO: cache this every X minutes
+        return (new VotePercentageAggregate())->aggregate();
     }
 
     private function getChart(string $cacheKey): array
