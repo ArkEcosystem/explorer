@@ -22,6 +22,14 @@ final class TransactionTable extends Component
         'type' => 'all',
     ];
 
+    /** @phpstan-ignore-next-line */
+    protected $listeners = ['filterTransactionsByType'];
+
+    public function filterTransactionsByType(string $value): void
+    {
+        $this->state['type'] = $value;
+    }
+
     public function render(): View
     {
         if ($this->state['type'] !== 'all') {

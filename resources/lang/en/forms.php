@@ -20,6 +20,7 @@ return [
         'type'                    => 'Search Type',
         'transaction_type'        => 'Transaction Type',
         'transaction_types'       => [
+            'all'                           => 'All',
             'businessEntityRegistration'    => 'Business Entity Registration',
             'businessEntityResignation'     => 'Business Entity Resignation',
             'businessEntityUpdate'          => 'Business Entity Update',
@@ -64,9 +65,13 @@ return [
             'title'       => 'Currency',
             'description' => 'Select display currency',
         ],
-        'chart' => [
-            'title'       => 'Statistics Chart',
-            'description' => 'Enable/Disable statistics chart',
+        'price_chart' => [
+            'title'       => 'Price Chart',
+            'description' => 'Enable/Disable price chart',
+        ],
+        'fee_chart' => [
+            'title'       => 'Fee Chart',
+            'description' => 'Enable/Disable fee chart',
         ],
         'theme' => [
             'title'       => 'Dark Theme',
