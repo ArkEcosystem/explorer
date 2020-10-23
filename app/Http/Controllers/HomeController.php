@@ -4,7 +4,13 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Aggregates\TransactionCountAggregate;
+use App\Aggregates\VoteCountAggregate;
+use App\Aggregates\VotePercentageAggregate;
+use App\Facades\Network;
+use App\Services\CryptoCompare;
 use App\Services\NumberFormatter;
+use App\Services\Settings;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\View\View;
@@ -28,7 +34,45 @@ final class HomeController
                 'quarter' => $this->getChart('chart.fees.quarter'),
                 'year'    => $this->getChart('chart.fees.year'),
             ],
+            'aggregates' => [
+                'price'             => $this->getPrice(),
+                'volume'            => $this->getVolume(),
+                'transactionsCount' => $this->getTransactionsCount(),
+                'votesCount'        => $this->getVotesCount(),
+                'votesPercentage'   => $this->getVotesPercentage()
+            ],
         ]);
+    }
+
+    private function getPrice()
+    {
+        return NumberFormatter::number(CryptoCompare::price(Network::currency(), Settings::currency()));
+    }
+
+    private function getVolume()
+    {
+        // No aggregate yet for volume ?
+        return 42;
+    }
+
+    private function getTransactionsCount()
+    {
+        return (new TransactionCountAggregate())->aggregate();
+    }
+
+    private function getVotesCount()
+    {
+        return (new VoteCountAggregate())->aggregate();
+    }
+
+    private function getVotesPercentage()
+    {
+        return 42;
+        /* Doesnt work
+        Illuminate\Database\QueryException
+        SQLSTATE[42883]: Undefined function: 7 ERROR: function sum(character varying) does not exist
+        */
+        //return (new VotePercentageAggregate())->aggregate();
     }
 
     private function getChart(string $cacheKey): array
