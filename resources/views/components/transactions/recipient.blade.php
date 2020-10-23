@@ -4,7 +4,7 @@
     @if ($iconType === 'unknown')
         <x-general.address :address="$transaction->recipient() ?? $transaction->sender()" />
     @elseif ($iconType === "vote")
-        <x-general.address :address="$transaction->voted()">
+        <x-general.address :address="$transaction->voted()->address">
             <x-slot name="icon">
                 <x-transactions.icon :icon-type="$iconType" />
             </x-slot>
@@ -16,7 +16,7 @@
             </x-slot>
         </x-general.address>
     @elseif ($iconType === "unvote")
-        <x-general.address :address="$transaction->unvoted()">
+        <x-general.address :address="$transaction->unvoted()->address">
             <x-slot name="icon">
                 <x-transactions.icon :icon-type="$iconType" />
             </x-slot>
