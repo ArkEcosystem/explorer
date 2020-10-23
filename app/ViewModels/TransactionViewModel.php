@@ -17,7 +17,6 @@ use App\Services\Transactions\TransactionState;
 use App\Services\Transactions\TransactionStateIcon;
 use App\Services\Transactions\TransactionType;
 use App\Services\Transactions\TransactionTypeIcon;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Spatie\ViewModels\ViewModel;
 
