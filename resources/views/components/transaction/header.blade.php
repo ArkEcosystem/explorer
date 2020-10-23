@@ -1,4 +1,4 @@
-<div class="dark:bg-black">
+<div class="dark:bg-theme-secondary-900">
     <div class="flex-col py-16 content-container space-y-6">
         <x-general.search.header-slim :title="trans('pages.transaction.title')" />
 

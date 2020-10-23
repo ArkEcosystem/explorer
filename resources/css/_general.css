@@ -265,6 +265,9 @@ body {
 .entity-header-item:last-child {
     @apply border-r-0;
 }
+.theme-dark .entity-header-item {
+    @apply border-theme-secondary-800;
+}
 
 @screen md {
     .entity-header-item:nth-child(odd) {

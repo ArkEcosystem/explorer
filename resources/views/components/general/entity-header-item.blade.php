@@ -1,6 +1,6 @@
 <div class="entity-header-item">
     <div class="flex items-center">
-        <div class="circled-icon text-theme-secondary-900 border-theme-secondary-900">
+        <div class="circled-icon text-theme-secondary-900 border-theme-secondary-900 dark:text-theme-secondary-600 dark:border-theme-secondary-600">
             @if ($icon ?? false)
                 @svg($icon, 'w-5 h-5')
             @elseif ($avatar ?? false)
@@ -10,14 +10,14 @@
     </div>
 
     <div class="flex flex-col flex-1 justify-between font-semibold ml-4">
-        <div class="text-sm leading-tight text-theme-secondary-600">{{ $title }}</div>
+        <div class="text-sm leading-tight text-theme-secondary-600 dark:text-theme-secondary-700">{{ $title }}</div>
 
         @if ($url ?? false)
             <a href="{{ $url }}" class="link flex leading-tight">
                 <span class="truncate">{{ $text }}</span>
             </a>
         @else
-            <span class="truncate leading-tight text-theme-secondary-900">{{ $text }}</span>
+            <span class="truncate leading-tight text-theme-secondary-900 dark:text-theme-secondary-200">{{ $text }}</span>
         @endif
     </div>
 </div>
