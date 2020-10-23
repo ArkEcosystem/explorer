@@ -27,4 +27,8 @@ interface Network
     public function usesMarketsquare(): bool;
 
     public function epoch(): Carbon;
+
+    public function delegateCount(): int;
+
+    public function blockTime(): int;
 }

@@ -64,4 +64,14 @@ final class Production implements Network
     {
         return Carbon::parse(Mainnet::new()->epoch());
     }
+
+    public function delegateCount(): int
+    {
+        return 51;
+    }
+
+    public function blockTime(): int
+    {
+        return 8;
+    }
 }
