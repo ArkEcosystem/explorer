@@ -6,8 +6,8 @@
                     <td width="100">@lang('general.wallet.address')</td>
                     <td>
                         <div class="flex flex-row items-center space-x-3">
-                            <div wire:loading.class="w-11 h-6 bg-theme-secondary-300 rounded-full animate-pulse"></div>
-                            <div wire:loading.class="w-full h-5 bg-theme-secondary-300 rounded-full animate-pulse"></div>
+                            <div wire:loading.class="h-6 rounded-full w-11 bg-theme-secondary-300 animate-pulse"></div>
+                            <div wire:loading.class="w-full h-5 rounded-full bg-theme-secondary-300 animate-pulse"></div>
                         </div>
 
                         <x-general.address :address="$wallet->address()" />
@@ -40,7 +40,7 @@
                 <tr>
                     <td>@lang('general.wallet.balance')</td>
                     <td>
-                        <div wire:loading.class="w-full h-5 bg-theme-secondary-300 rounded-full animate-pulse"></div>
+                        <div wire:loading.class="w-full h-5 rounded-full bg-theme-secondary-300 animate-pulse"></div>
 
                         <div wire:loading.class="hidden">
                             <x-general.amount-fiat-tooltip :amount="$wallet->balance()" :fiat="$wallet->balanceFiat()" />
@@ -50,7 +50,7 @@
                 <tr>
                     <td>@lang('general.wallet.supply')</td>
                     <td>
-                        <div wire:loading.class="w-full h-5 bg-theme-secondary-300 rounded-full animate-pulse"></div>
+                        <div wire:loading.class="w-full h-5 rounded-full bg-theme-secondary-300 animate-pulse"></div>
 
                         <div wire:loading.class="hidden">
                             {{ number_format($wallet->balancePercentage(), 2) }} %

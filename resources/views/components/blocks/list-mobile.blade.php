@@ -5,7 +5,7 @@
                 <tr>
                     <td width="150">@lang('general.block.id')</td>
                     <td>
-                        <div wire:loading.class="w-full h-4 bg-theme-secondary-300 rounded-md animate-pulse"></div>
+                        <div wire:loading.class="w-full h-4 rounded-md bg-theme-secondary-300 animate-pulse"></div>
 
                         <a href="{{ $block->url() }}" class="font-semibold link" wire:loading.class="hidden">
                             <x-truncate-middle :value="$block->id()" />
@@ -15,7 +15,7 @@
                 <tr>
                     <td>@lang('general.block.timestamp')</td>
                     <td>
-                        <div wire:loading.class="w-full h-4 bg-theme-secondary-300 rounded-md animate-pulse"></div>
+                        <div wire:loading.class="w-full h-4 rounded-md bg-theme-secondary-300 animate-pulse"></div>
                         {{--TODO: Everything disappear once we apply the wire:loading.class here, need to check, might just be me locally --}}
                         <span wire:loading.class="hidden">{{ $block->timestamp() }}</span>
                     </td>
@@ -24,8 +24,8 @@
                     <td>@lang('general.block.generated_by')</td>
                     <td>
                         <div class="flex flex-row items-center space-x-3">
-                            <div wire:loading.class="w-11 h-6 bg-theme-secondary-300 rounded-full animate-pulse"></div>
-                            <div wire:loading.class="w-full h-5 bg-theme-secondary-300 rounded-full animate-pulse"></div>
+                            <div wire:loading.class="h-6 rounded-full w-11 bg-theme-secondary-300 animate-pulse"></div>
+                            <div wire:loading.class="w-full h-5 rounded-full bg-theme-secondary-300 animate-pulse"></div>
                         </div>
 
                         <x-general.address :address="$block->delegate()" />
@@ -34,7 +34,7 @@
                 <tr>
                     <td>@lang('general.block.height')</td>
                     <td>
-                        <div wire:loading.class="w-full h-4 bg-theme-secondary-300 rounded-md animate-pulse"></div>
+                        <div wire:loading.class="w-full h-4 rounded-md bg-theme-secondary-300 animate-pulse"></div>
 
                         <span wire:loading.class="hidden">{{ $block->height() }}</span>
                     </td>
@@ -42,7 +42,7 @@
                 <tr>
                     <td>@lang('general.block.transactions')</td>
                     <td>
-                        <div wire:loading.class="w-full h-4 bg-theme-secondary-300 rounded-md animate-pulse"></div>
+                        <div wire:loading.class="w-full h-4 rounded-md bg-theme-secondary-300 animate-pulse"></div>
 
                         <span wire:loading.class="hidden">{{ $block->transactionCount() }}</span>
                     </td>
@@ -50,7 +50,7 @@
                 <tr>
                     <td>@lang('general.block.amount')</td>
                     <td>
-                        <div wire:loading.class="w-full h-4 bg-theme-secondary-300 rounded-md animate-pulse"></div>
+                        <div wire:loading.class="w-full h-4 rounded-md bg-theme-secondary-300 animate-pulse"></div>
 
                         <div wire:loading.class="hidden">
                             <x-general.amount-fiat-tooltip :amount="$block->amount()" :fiat="$block->amountFiat()" />
@@ -60,7 +60,7 @@
                 <tr>
                     <td>@lang('general.block.fee')</td>
                     <td>
-                        <div wire:loading.class="w-full h-4 bg-theme-secondary-300 rounded-md animate-pulse"></div>
+                        <div wire:loading.class="w-full h-4 rounded-md bg-theme-secondary-300 animate-pulse"></div>
 
                         <div wire:loading.class="hidden">
                             <x-general.amount-fiat-tooltip :amount="$block->fee()" :fiat="$block->feeFiat()" />
