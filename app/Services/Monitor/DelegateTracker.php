@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\Services;
+namespace App\Services\Monitor;
 
 use App\Facades\Network;
 use App\Models\Block;
 use Illuminate\Support\Collection;
 
-final class DelegateTracker
+final class ForgingInfoCalculator
 {
     private Collection $delegates;
 
@@ -25,15 +25,8 @@ final class DelegateTracker
         $round           = RoundCalculator::calculate($height);
         $activeDelegates = $this->delegates->toBase()->map(fn ($delegate) => $delegate->public_key);
 
-        $blockTimeLookup = [];
-        //     const blockTimeLookup = await Utils.forgingInfoCalculator.getBlockTimeLookup(this.app, height);
-
-        $forgingInfo = [];
-        //     const forgingInfo: Contracts.Shared.ForgingInfo = Utils.forgingInfoCalculator.calculateForgingInfo(
-        //         timestamp,
-        //         height,
-        //         blockTimeLookup,
-        //     );
+        $blockTimeLookup = (new ForgingInfoCalculator())->getBlockTimeLookup($lastBlock->height);
+        $forgingInfo     = (new ForgingInfoCalculator())->calculateForgingInfo($lastBlock->timestamp, $lastBlock->height, $blockTimeLookup);
 
         // Determine Next Forgers...
         $nextForgers = [];
@@ -57,6 +50,7 @@ final class DelegateTracker
 
         foreach ($this->delegates as $delegate) {
             $indexInNextForgers = 0;
+
             for ($i = 0; $i < count($nextForgers); $i++) {
                 if ($nextForgers[$i] === $delegate->public_key) {
                     $indexInNextForgers = $i;
