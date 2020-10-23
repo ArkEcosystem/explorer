@@ -28,7 +28,7 @@
                         <x-details-box :title="trans('pages.home.network-details.lifetime_transactions')" :value="$aggregates['transactionsCount']" icon="app-transactions-amount" />
                         <x-details-box :title="trans('pages.home.network-details.total_votes')" :value="$aggregates['votesCount'] . ' ' . Network::currencySymbol()" extra-value="74.08%" icon="app-votes" />
                     </div>
-                    <div class="flex xl:hidden flex-row w-full justify-between mb-12 space-x-18">
+                    <div class="flex flex-row justify-between w-full mb-12 xl:hidden space-x-18">
                         <div class="space-y-12">
                             <x-details-box :title="trans('pages.home.network-details.price')" :value="$aggregates['price'] . ' ' . 'BTC'" icon="app-price" />
                             <x-details-box :title="trans('pages.home.network-details.lifetime_transactions')" :value="$aggregates['transactionsCount']" icon="app-transactions-amount" />

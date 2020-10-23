@@ -39,7 +39,7 @@ final class HomeController
                 'volume'            => $this->getVolume(),
                 'transactionsCount' => $this->getTransactionsCount(),
                 'votesCount'        => $this->getVotesCount(),
-                'votesPercentage'   => $this->getVotesPercentage()
+                'votesPercentage'   => $this->getVotesPercentage(),
             ],
         ]);
     }
