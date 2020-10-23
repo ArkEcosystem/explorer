@@ -45,6 +45,13 @@ final class Block extends Model
     ];
 
     /**
+     * The relations to eager load on every query.
+     *
+     * @var array
+     */
+    protected $with = ['delegate'];
+
+    /**
      * A block has many transactions.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -54,12 +61,22 @@ final class Block extends Model
         return $this->hasMany(Transaction::class, 'block_id', 'id');
     }
 
+    // /**
+    //  * A block belongs to a delegate.
+    //  *
+    //  * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+    //  */
+    // public function delegate(): BelongsTo
+    // {
+    //     return $this->belongsTo(Wallet::class, 'generator_public_key', 'public_key');
+    // }
+
     /**
      * A block belongs to a delegate.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return Wallet
      */
-    public function getDelegateAttribute()
+    public function getDelegateAttribute(): Wallet
     {
         return Cache::tags(['delegates'])->get($this->generator_public_key);
     }
