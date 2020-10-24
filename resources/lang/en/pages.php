@@ -60,11 +60,16 @@ return [
         'confirmations'    => 'Confirmations',
     ],
 
+    'transactions' => [
+        'title' => 'Transactions',
+    ],
+
     'wallets' => [
         'title' => 'Wallets',
     ],
 
     'wallet' => [
+        'transaction_history'   => 'Transaction History',
         'all_transactions'      => 'All History',
         'received_transactions' => 'Incoming',
         'sent_transactions'     => 'Outgoing',
