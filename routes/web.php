@@ -26,12 +26,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', HomeController::class)->name('home');
 Route::view('/search', 'app.search-results')->name('search');
-
-Route::view('/wallets', 'app.wallets')->name('wallets');
-Route::get('/wallets/{wallet:address}', ShowWalletController::class)->name('wallet');
-Route::get('/wallets/{wallet:address}/voters', ListVotersByWalletController::class)->name('wallet.voters');
-Route::get('/wallets/{wallet:address}/blocks', ListBlocksByWalletController::class)->name('wallet.blocks');
-Route::get('/wallets/{wallet:address}/transactions', ListTransactionsByWalletController::class)->name('wallet.transactions');
+Route::get('/monitor', ShowDelegateMonitorController::class)->name('monitor');
 
 Route::view('/blocks', 'blocks')->name('blocks');
 Route::get('/blocks/{block}', ShowBlockController::class)->name('block');
@@ -40,4 +35,8 @@ Route::get('/blocks/{block}/transactions', ListTransactionsByBlockController::cl
 Route::view('/transactions', 'transactions')->name('transactions');
 Route::get('/transactions/{transaction}', ShowTransactionController::class)->name('transaction');
 
-Route::get('/monitor', ShowDelegateMonitorController::class)->name('monitor');
+Route::view('/wallets', 'app.wallets')->name('wallets');
+Route::get('/wallets/{wallet:address}', ShowWalletController::class)->name('wallet');
+Route::get('/wallets/{wallet:address}/voters', ListVotersByWalletController::class)->name('wallet.voters');
+Route::get('/wallets/{wallet:address}/blocks', ListBlocksByWalletController::class)->name('wallet.blocks');
+Route::get('/wallets/{wallet:address}/transactions', ListTransactionsByWalletController::class)->name('wallet.transactions');
