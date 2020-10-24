@@ -17,6 +17,7 @@ use App\Services\Transactions\TransactionState;
 use App\Services\Transactions\TransactionStateIcon;
 use App\Services\Transactions\TransactionType;
 use App\Services\Transactions\TransactionTypeIcon;
+use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
@@ -62,28 +63,32 @@ final class TransactionViewModel extends ViewModel
 
     public function sender(): string
     {
-        return Cache::rememberForever("sender:{$this->transaction->sender_public_key}", function () {
-            $wallet = $this->transaction->sender;
+        $wallet = Cache::remember(
+            "transaction:wallet:{$this->transaction->sender_public_key}",
+            Carbon::now()->addHour(),
+            fn () => $this->transaction->sender
+        );
 
-            if (is_null($wallet)) {
-                return 'n/a';
-            }
+        if (is_null($wallet)) {
+            return 'n/a';
+        }
 
-            return $wallet->address;
-        });
+        return $wallet->address;
     }
 
     public function recipient(): string
     {
-        return Cache::rememberForever("recipient:{$this->transaction->recipient_id}", function () {
-            $wallet = $this->transaction->recipient;
+        $wallet = Cache::remember(
+            "transaction:wallet:{$this->transaction->recipient_id}",
+            Carbon::now()->addHour(),
+            fn () => $this->transaction->recipient
+        );
 
-            if (is_null($wallet)) {
-                return 'n/a';
-            }
+        if (is_null($wallet)) {
+            return 'n/a';
+        }
 
-            return $wallet->address;
-        });
+        return $wallet->address;
     }
 
     public function fee(): string
@@ -108,7 +113,11 @@ final class TransactionViewModel extends ViewModel
 
     public function confirmations(): string
     {
-        $block = Cache::rememberForever("block:{$this->transaction->block_id}", fn () => $this->transaction->block);
+        $block = Cache::remember(
+            "transaction:confirmations:{$this->transaction->block_id}",
+            Carbon::now()->addHour(),
+            fn () => $this->transaction->block
+        );
 
         if (is_null($block)) {
             return NumberFormatter::number(0);
@@ -127,8 +136,9 @@ final class TransactionViewModel extends ViewModel
             ->filter(fn ($vote) => Str::startsWith($vote, '+'))
             ->first();
 
-        return Cache::rememberForever(
-            "vote:{$publicKey}",
+        return Cache::remember(
+            "transaction:wallet:{$publicKey}",
+            Carbon::now()->addHour(),
             fn () => Wallet::where('public_key', substr($publicKey, 1))->firstOrFail()
         );
     }
@@ -143,7 +153,11 @@ final class TransactionViewModel extends ViewModel
             ->filter(fn ($vote) => Str::startsWith($vote, '-'))
             ->first();
 
-        return Wallet::where('public_key', substr($publicKey, 1))->firstOrFail();
+        return Cache::remember(
+            "transaction:wallet:{$publicKey}",
+            Carbon::now()->addHour(),
+            fn () => Wallet::where('public_key', substr($publicKey, 1))->firstOrFail()
+        );
     }
 
     public function iconState(): string

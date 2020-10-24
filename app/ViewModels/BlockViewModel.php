@@ -41,7 +41,7 @@ final class BlockViewModel extends ViewModel
 
     public function delegate(): Wallet
     {
-        return Cache::rememberForever("block:{$this->block->id}:delegate", function () {
+        return Cache::rememberForever("block:delegate:{$this->block->id}", function () {
             /* @phpstan-ignore-next-line */
             return $this->block->delegate;
         });
@@ -105,7 +105,7 @@ final class BlockViewModel extends ViewModel
     private function findBlockWithHeight(int $height): ?string
     {
         $block = Cache::remember(
-            "findBlockWithHeight:$height",
+            "block:neighbour:$height",
             Carbon::now()->addHour(),
             fn () => Block::where('height', $height)->first()
         );
