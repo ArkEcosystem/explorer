@@ -68,15 +68,19 @@ it('should get the reward as fiat', function () {
 });
 
 it('should get the delegate', function () {
-    expect($this->subject->delegate())->toBeString();
-    expect($this->subject->delegate())->not()->toBe('n/a');
+    expect($this->subject->delegate())->toBeInstanceOf(Wallet::class);
 });
 
-it('should fail to get the delegate', function () {
+it('should get the delegate username', function () {
+    expect($this->subject->delegateUsername())->toBeString();
+    expect($this->subject->delegateUsername())->not()->toBe('Genesis');
+});
+
+it('should fail to get the delegate username', function () {
     $this->subject = new BlockViewModel(Block::factory()->create([
         'generator_public_key' => 'unknown',
     ]));
 
-    expect($this->subject->delegate())->toBeString();
-    expect($this->subject->delegate())->toBe('n/a');
+    expect($this->subject->delegateUsername())->toBeString();
+    expect($this->subject->delegateUsername())->toBe('Genesis');
 });
