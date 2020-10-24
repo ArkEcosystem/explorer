@@ -248,4 +248,9 @@ it('should apply directions through an event', function () {
 
     $component->assertDontSee($received->id);
     $component->assertSee($sent->id);
+
+    $component->emit('filterTransactionsByDirection', 'all');
+
+    $component->assertSee($received->id);
+    $component->assertSee($sent->id);
 });
