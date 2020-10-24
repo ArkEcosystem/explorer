@@ -11,21 +11,21 @@ use Illuminate\Support\Facades\Http;
 
 function configureExplorerDatabase(): void
 {
-    $database = database_path('explorer.sqlite');
+    // $database = database_path('explorer.sqlite');
 
-    File::delete($database);
+    // File::delete($database);
 
-    touch($database);
+    // touch($database);
 
-    Config::set('database.connections.explorer', [
-        'driver'                  => 'sqlite',
-        'url'                     => '',
-        'database'                => $database,
-        'prefix'                  => '',
-        'foreign_key_constraints' => true,
-    ]);
+    // Config::set('database.connections.explorer', [
+    //     'driver'                  => 'sqlite',
+    //     'url'                     => '',
+    //     'database'                => $database,
+    //     'prefix'                  => '',
+    //     'foreign_key_constraints' => true,
+    // ]);
 
-    Artisan::call('migrate', [
+    Artisan::call('migrate:fresh', [
         '--database' => 'explorer',
         '--path'     => 'tests/migrations',
     ]);
