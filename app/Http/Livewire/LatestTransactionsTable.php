@@ -7,13 +7,11 @@ namespace App\Http\Livewire;
 use App\Http\Livewire\Concerns\ManagesTransactionTypeScopes;
 use App\Models\Transaction;
 use App\ViewModels\ViewModelFactory;
-use ARKEcosystem\UserInterface\Http\Livewire\Concerns\HasPagination;
 use Illuminate\View\View;
 use Livewire\Component;
 
-final class TransactionTable extends Component
+final class LatestTransactionsTable extends Component
 {
-    use HasPagination;
     use ManagesTransactionTypeScopes;
 
     public array $state = [
@@ -38,7 +36,7 @@ final class TransactionTable extends Component
         }
 
         return view('livewire.transaction-table', [
-            'transactions' => ViewModelFactory::paginate(Transaction::latestByTimestamp()->paginate()),
+            'transactions' => ViewModelFactory::collection(Transaction::latestByTimestamp()->take(15)->get()),
         ]);
     }
 }

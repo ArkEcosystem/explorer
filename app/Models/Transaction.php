@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Arr;
+use GeneaLabs\LaravelModelCaching\Traits\Cachable;
 
 /**
  * @property string $id
@@ -23,6 +24,7 @@ use Illuminate\Support\Arr;
  */
 final class Transaction extends Model
 {
+    use Cachable;
     use HasFactory;
 
     /**
