@@ -147,6 +147,7 @@ function fakeKnownWallets(): void
 function fakeCryptoCompare(): void
 {
     Http::fake([
-        'cryptocompare.com/*' => Http::response(json_decode(file_get_contents(base_path('tests/fixtures/cryptocompare/historical.json')), true)),
+        'https://min-api.cryptocompare.com/data/price'    => Http::response(['USD' => 0.2907]),
+        'https://min-api.cryptocompare.com/data/histoday' => Http::response(json_decode(file_get_contents(base_path('tests/fixtures/cryptocompare/historical.json')), true)),
     ]);
 }
