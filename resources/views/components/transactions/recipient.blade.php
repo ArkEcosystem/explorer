@@ -1,9 +1,11 @@
 @php($iconType = $transaction->iconType())
 
-<div>
-    @if ($iconType === 'unknown')
+<div wire:loading.class="hidden" wire:key="{{ $transaction->id() }}">
+    @if ($transaction->isUnknown())
         <x-general.address :address="$transaction->recipient() ?? $transaction->sender()" />
-    @elseif ($iconType === "vote")
+    @elseif ($transaction->isTransfer())
+        <x-general.address :address="$transaction->recipient() ?? $transaction->sender()" />
+    @elseif ($transaction->isVote())
         <x-general.address :address="$transaction->voted()->address">
             <x-slot name="icon">
                 <x-transactions.icon :icon-type="$iconType" />
@@ -15,7 +17,7 @@
                 </span>
             </x-slot>
         </x-general.address>
-    @elseif ($iconType === "unvote")
+    @elseif ($transaction->isUnvote())
         <x-general.address :address="$transaction->unvoted()->address">
             <x-slot name="icon">
                 <x-transactions.icon :icon-type="$iconType" />
@@ -31,7 +33,9 @@
         <div class="flex items-center space-x-3">
             <x-transactions.icon :icon-type="$iconType" />
 
-            <div class="font-semibold">@lang('general.transaction.vote-combination')</div>
+            <div class="font-semibold">
+                @lang('general.transaction.'.$iconType)
+            </div>
         </div>
     @endif
 </div>

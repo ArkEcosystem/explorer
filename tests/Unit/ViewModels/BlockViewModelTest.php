@@ -3,8 +3,9 @@
 declare(strict_types=1);
 
 use App\Models\Block;
-use App\ViewModels\BlockViewModel;
+use App\Models\Wallet;
 
+use App\ViewModels\BlockViewModel;
 use function Spatie\Snapshots\assertMatchesSnapshot;
 use function Tests\configureExplorerDatabase;
 
@@ -29,7 +30,7 @@ it('should get the url', function () {
 
 it('should get the timestamp', function () {
     expect($this->subject->timestamp())->toBeString();
-    expect($this->subject->timestamp())->toBe('19 Oct 2020 (04:54:16)');
+    expect($this->subject->timestamp())->toBe('19 Oct 2020 04:54:16');
 });
 
 it('should get the height', function () {
@@ -68,15 +69,63 @@ it('should get the reward as fiat', function () {
 });
 
 it('should get the delegate', function () {
-    expect($this->subject->delegate())->toBeString();
-    expect($this->subject->delegate())->not()->toBe('n/a');
+    expect($this->subject->delegate())->toBeInstanceOf(Wallet::class);
 });
 
-it('should fail to get the delegate', function () {
+it('should get the delegate username', function () {
+    expect($this->subject->delegateUsername())->toBeString();
+    expect($this->subject->delegateUsername())->not()->toBe('Genesis');
+});
+
+it('should fail to get the delegate username', function () {
     $this->subject = new BlockViewModel(Block::factory()->create([
-        'generator_public_key' => 'unknown',
+        'generator_public_key' => Wallet::factory()->create([
+            'attributes' => [],
+        ])->public_key,
     ]));
 
-    expect($this->subject->delegate())->toBeString();
-    expect($this->subject->delegate())->toBe('n/a');
+    expect($this->subject->delegateUsername())->toBeString();
+    expect($this->subject->delegateUsername())->toBe('Genesis');
+});
+
+it('should get the previous block url', function () {
+    $previousBlock = Block::factory()->create(['height' => 1]);
+
+    $subject = new BlockViewModel(Block::factory()->create([
+        'previous_block' => $previousBlock->id,
+        'height'         => 2,
+    ]));
+
+    expect($subject->previousBlockUrl())->toBeString();
+});
+
+it('should fail to get the previous block url', function () {
+    $subject = new BlockViewModel(Block::factory()->create([
+        'previous_block' => null,
+        'height'         => 1,
+    ]));
+
+    expect($subject->previousBlockUrl())->toBeNull();
+});
+
+it('should get the next block url', function () {
+    $previousBlock = Block::factory()->create(['height' => 2]);
+
+    $subject = new BlockViewModel(Block::factory()->create([
+        'previous_block' => $previousBlock->id,
+        'height'         => 1,
+    ]));
+
+    expect($subject->nextBlockUrl())->toBeString();
+});
+
+it('should fail to get the next block url', function () {
+    $previousBlock = Block::factory()->create(['height' => 1]);
+
+    $subject = new BlockViewModel(Block::factory()->create([
+        'previous_block' => $previousBlock->id,
+        'height'         => 2,
+    ]));
+
+    expect($subject->nextBlockUrl())->toBeNull();
 });
