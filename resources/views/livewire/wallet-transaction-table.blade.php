@@ -6,7 +6,7 @@
             wire:click="$set('state.direction', 'all');"
             @click="direction = 'all'"
         >
-            @lang('pages.wallet.all_transactions') {{ $countAll }}
+            @lang('pages.wallet.all_transactions')
         </div>
 
         <div
@@ -47,7 +47,7 @@
 
             <div class="p-4">
                 <a wire:click="$set('state.direction', 'all');" @click="direction = 'all'" class="dropdown-entry">
-                    @lang('pages.wallet.all_transactions') {{ $countAll }}
+                    @lang('pages.wallet.all_transactions')
                 </a>
 
                 <a wire:click="$set('state.direction', 'received');" @click="direction = 'received'" class="dropdown-entry">

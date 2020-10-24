@@ -66,7 +66,6 @@ final class WalletTransactionTable extends Component
 
         return view('livewire.wallet-transaction-table', [
             'transactions'  => ViewModelFactory::paginate($query->latestByTimestamp()->paginate()),
-            'countAll'      => $this->getAllQuery()->count(),
             'countReceived' => $this->getReceivedQuery()->count(),
             'countSent'     => $this->getSentQuery()->count(),
         ]);
