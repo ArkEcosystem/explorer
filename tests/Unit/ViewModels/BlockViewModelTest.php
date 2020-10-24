@@ -3,8 +3,9 @@
 declare(strict_types=1);
 
 use App\Models\Block;
-use App\ViewModels\BlockViewModel;
+use App\Models\Wallet;
 
+use App\ViewModels\BlockViewModel;
 use function Spatie\Snapshots\assertMatchesSnapshot;
 use function Tests\configureExplorerDatabase;
 
