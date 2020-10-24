@@ -79,7 +79,9 @@ it('should get the delegate username', function () {
 
 it('should fail to get the delegate username', function () {
     $this->subject = new BlockViewModel(Block::factory()->create([
-        'generator_public_key' => 'unknown',
+        'generator_public_key' => Wallet::factory()->create([
+            'attributes' => [],
+        ])->public_key,
     ]));
 
     expect($this->subject->delegateUsername())->toBeString();
