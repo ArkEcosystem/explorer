@@ -37,7 +37,7 @@ final class LatestTransactionsTable extends Component
         }
 
         $transactions = Cache::remember(
-            'latestTransactionsTable',
+            'latestTransactionsTable.'.$this->state['type'],
             8,
             fn () => Transaction::latestByTimestamp()->take(15)->get()
         );
