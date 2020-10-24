@@ -17,7 +17,7 @@
                 }" x-cloak class="w-full">
                     <x-transaction-table-filter />
 
-                    <livewire:wallet-transaction-table :wallet="$wallet" />
+                    <livewire:wallet-transaction-table :address="$wallet->address" :public-key="$wallet->public_key" />
                 </div>
             </div>
         </div>

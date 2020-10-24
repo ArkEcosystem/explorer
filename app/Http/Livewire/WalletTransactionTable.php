@@ -6,7 +6,6 @@ namespace App\Http\Livewire;
 
 use App\Http\Livewire\Concerns\ManagesTransactionTypeScopes;
 use App\Models\Transaction;
-use App\Models\Wallet;
 use App\ViewModels\ViewModelFactory;
 use ARKEcosystem\UserInterface\Http\Livewire\Concerns\HasPagination;
 use Illuminate\Database\Eloquent\Builder;
@@ -19,6 +18,8 @@ final class WalletTransactionTable extends Component
     use ManagesTransactionTypeScopes;
 
     public array $state = [
+        'address'   => null,
+        'publicKey' => null,
         'type'      => 'all',
         'direction' => 'all',
     ];
@@ -29,11 +30,10 @@ final class WalletTransactionTable extends Component
         'filterTransactionsByType',
     ];
 
-    public Wallet $wallet;
-
-    public function mount(Wallet $wallet): void
+    public function mount(string $address, string $publicKey): void
     {
-        $this->wallet = $wallet;
+        $this->state['address']   = $address;
+        $this->state['publicKey'] = $publicKey;
     }
 
     public function filterTransactionsByDirection(string $value): void
@@ -74,20 +74,20 @@ final class WalletTransactionTable extends Component
     private function getAllQuery(): Builder
     {
         return Transaction::query()
-            ->where('sender_public_key', $this->wallet->public_key)
-            ->orWhere('recipient_id', $this->wallet->address)
-            ->orWhereJsonContains('asset->payments', [['recipientId' => $this->wallet->address]]);
+            ->where('sender_public_key', $this->state['publicKey'])
+            ->orWhere('recipient_id', $this->state['address'])
+            ->orWhereJsonContains('asset->payments', [['recipientId' => $this->state['address']]]);
     }
 
     private function getReceivedQuery(): Builder
     {
         return Transaction::query()
-            ->where('recipient_id', $this->wallet->address)
-            ->orWhereJsonContains('asset->payments', [['recipientId' => $this->wallet->address]]);
+            ->where('recipient_id', $this->state['address'])
+            ->orWhereJsonContains('asset->payments', [['recipientId' => $this->state['address']]]);
     }
 
     private function getSentQuery(): Builder
     {
-        return Transaction::where('sender_public_key', $this->wallet->public_key);
+        return Transaction::where('sender_public_key', $this->state['publicKey']);
     }
 }
