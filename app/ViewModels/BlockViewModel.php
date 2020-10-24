@@ -41,10 +41,11 @@ final class BlockViewModel extends ViewModel
 
     public function delegate(): Wallet
     {
-        return Cache::rememberForever("block:delegate:{$this->block->id}", function () {
-            /* @phpstan-ignore-next-line */
-            return $this->block->delegate;
-        });
+        return Cache::remember(
+            "block:delegate:{$this->block->id}",
+            Carbon::now()->addHour(),
+            fn (): ?Wallet => $this->block->delegate
+        );
     }
 
     public function delegateUsername(): string
