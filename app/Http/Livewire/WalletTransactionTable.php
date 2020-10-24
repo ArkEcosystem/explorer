@@ -52,16 +52,12 @@ final class WalletTransactionTable extends Component
             Transaction::addGlobalScope(resolve($this->scopes[$this->state['type']]));
         }
 
-        if ($this->state['direction'] === 'all') {
-            $query = $this->getAllQuery();
-        }
-
         if ($this->state['direction'] === 'received') {
             $query = $this->getReceivedQuery();
-        }
-
-        if ($this->state['direction'] === 'sent') {
+        } elseif ($this->state['direction'] === 'sent') {
             $query = $this->getSentQuery();
+        } else {
+            $query = $this->getAllQuery();
         }
 
         return view('livewire.wallet-transaction-table', [
