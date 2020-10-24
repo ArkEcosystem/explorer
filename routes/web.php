@@ -40,4 +40,4 @@ Route::get('/blocks/{block}/transactions', ListTransactionsByBlockController::cl
 Route::view('/transactions', 'transactions')->name('transactions');
 Route::get('/transactions/{transaction}', ShowTransactionController::class)->name('transaction');
 
-Route::get('/delegate-monitor', ShowDelegateMonitorController::class)->name('monitor');
+Route::get('/monitor', ShowDelegateMonitorController::class)->name('monitor');
