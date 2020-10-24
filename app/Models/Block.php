@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Cache;
  */
 final class Block extends Model
 {
-    use Cachable;
+    // use Cachable;
     use HasFactory;
 
     /**

@@ -18,7 +18,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 final class Wallet extends Model
 {
-    use Cachable;
+    // use Cachable;
     use HasFactory;
 
     /**

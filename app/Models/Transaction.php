@@ -24,7 +24,7 @@ use Illuminate\Support\Arr;
  */
 final class Transaction extends Model
 {
-    use Cachable;
+    // use Cachable;
     use HasFactory;
 
     /**
