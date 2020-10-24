@@ -62,7 +62,7 @@
     </div>
 
     <div id="transaction-list" class="w-full">
-        <x-transactions.table-desktop :transactions="$transactions" />
+        <x-transactions.table-desktop :transactions="$transactions" use-confirmations />
 
         <x-transactions.list-mobile :transactions="$transactions" />
 

@@ -48,9 +48,9 @@ final class WalletTransactionTable extends Component
 
     public function render(): View
     {
-        // if ($this->state['type'] !== 'all') {
-        //     Transaction::addGlobalScope(resolve($this->scopes[$this->state['type']]));
-        // }
+        if ($this->state['type'] !== 'all') {
+            Transaction::addGlobalScope(resolve($this->scopes[$this->state['type']]));
+        }
 
         if ($this->state['direction'] === 'all') {
             $query = $this->getAllQuery();
@@ -65,10 +65,10 @@ final class WalletTransactionTable extends Component
         }
 
         return view('livewire.wallet-transaction-table', [
-            'transactions'      => ViewModelFactory::paginate($query->latestByTimestamp()->paginate()),
-            'countAll'          => $this->getAllQuery()->count(),
-            'countReceived'     => $this->getReceivedQuery()->count(),
-            'countSent'         => $this->getSentQuery()->count(),
+            'transactions'  => ViewModelFactory::paginate($query->latestByTimestamp()->paginate()),
+            'countAll'      => $this->getAllQuery()->count(),
+            'countReceived' => $this->getReceivedQuery()->count(),
+            'countSent'     => $this->getSentQuery()->count(),
         ]);
     }
 
@@ -76,14 +76,15 @@ final class WalletTransactionTable extends Component
     {
         return Transaction::query()
             ->where('sender_public_key', $this->wallet->public_key)
-            ->orWhere('recipient_id', $this->wallet->address);
+            ->orWhere('recipient_id', $this->wallet->address)
+            ->orWhereJsonContains('asset->payments', [['recipientId' => $this->wallet->address]]);
     }
 
     private function getReceivedQuery(): Builder
     {
         return Transaction::query()
-            ->where('recipient_id', $this->wallet->address);
-        // ->orWhereJsonContains('asset->payments->recipientId', $this->wallet->address);
+            ->where('recipient_id', $this->wallet->address)
+            ->orWhereJsonContains('asset->payments', [['recipientId' => $this->wallet->address]]);
     }
 
     private function getSentQuery(): Builder
