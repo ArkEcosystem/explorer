@@ -39,12 +39,13 @@ final class BlockViewModel extends ViewModel
 
     public function delegate(): Wallet
     {
+        /* @phpstan-ignore-next-line */
         return $this->model->delegate;
     }
 
     public function delegateUsername(): string
     {
-        return Arr::get($this->delegate()->attributes, 'delegate.username', 'Genesis');
+        return Arr::get($this->delegate(), 'attributes.delegate.username', 'Genesis');
     }
 
     public function height(): string
