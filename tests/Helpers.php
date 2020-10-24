@@ -143,3 +143,10 @@ function fakeKnownWallets(): void
         ],
     ]);
 }
+
+function fakeCryptoCompare(): void
+{
+    Http::fake([
+        'cryptocompare.com/*' => Http::response(json_decode(file_get_contents(base_path('tests/fixtures/cryptocompare/historical.json')), true)),
+    ]);
+}
