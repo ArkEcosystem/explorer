@@ -216,3 +216,36 @@ it('should apply filters through an event', function () {
         $component->assertSee($transaction->amount());
     }
 });
+
+it('should apply directions through an event', function () {
+    $sent = Transaction::factory()->create([
+        'sender_public_key' => $this->subject->public_key,
+    ]);
+
+    $received = Transaction::factory()->create([
+        'recipient_id' => $this->subject->address,
+    ]);
+
+    $component = Livewire::test(WalletTransactionTable::class, [$this->subject->address, $this->subject->public_key]);
+
+    $component->emit('filterTransactionsByDirection', 'all');
+
+    foreach (ViewModelFactory::collection(collect([$sent, $received])) as $transaction) {
+        $component->assertSee($transaction->id());
+        $component->assertSee($transaction->timestamp());
+        $component->assertSee($transaction->sender());
+        $component->assertSee($transaction->recipient());
+        $component->assertSee($transaction->fee());
+        $component->assertSee($transaction->amount());
+    }
+
+    $component->emit('filterTransactionsByDirection', 'received');
+
+    $component->assertSee($received->id);
+    $component->assertDontSee($sent->id);
+
+    $component->emit('filterTransactionsByDirection', 'sent');
+
+    $component->assertDontSee($received->id);
+    $component->assertSee($sent->id);
+});
