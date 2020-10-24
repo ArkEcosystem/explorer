@@ -13,7 +13,7 @@ final class LatestBlocksTable extends Component
 {
     public function render(): View
     {
-        return view('livewire.block-table', [
+        return view('livewire.latest-blocks-table', [
             'blocks' => ViewModelFactory::collection(Block::latestByHeight()->take(15)->get()()),
         ]);
     }

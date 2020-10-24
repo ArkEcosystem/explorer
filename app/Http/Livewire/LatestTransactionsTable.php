@@ -35,7 +35,7 @@ final class LatestTransactionsTable extends Component
             Transaction::addGlobalScope(new $scopeClass());
         }
 
-        return view('livewire.transaction-table', [
+        return view('livewire.latest-transactions-table', [
             'transactions' => ViewModelFactory::collection(Transaction::latestByTimestamp()->take(15)->get()),
         ]);
     }
