@@ -64,4 +64,10 @@ return [
         'title' => 'Wallets',
     ],
 
+    'wallet' => [
+        'all_transactions'      => 'All History',
+        'received_transactions' => 'Incoming',
+        'sent_transactions'     => 'Outgoing',
+    ],
+
 ];
