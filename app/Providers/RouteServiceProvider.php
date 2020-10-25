@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
-use App\Models\Wallet;
 use App\Facades\Network;
-use ARKEcosystem\UserInterface\UI;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Cache\RateLimiting\Limit;
+use App\Models\Wallet;
 use ArkEcosystem\Crypto\Identities\Address;
-use Illuminate\Support\Facades\RateLimiter;
+use ARKEcosystem\UserInterface\UI;
+use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\Facades\Route;
 
 final class RouteServiceProvider extends ServiceProvider
 {
