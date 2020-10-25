@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace App\Providers;
 
 use App\Models\Wallet;
-use ArkEcosystem\Crypto\Identities\Address;
-use ArkEcosystem\Crypto\Networks\Devnet;
+use App\Facades\Network;
 use ARKEcosystem\UserInterface\UI;
-use Illuminate\Cache\RateLimiting\Limit;
-use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Cache\RateLimiting\Limit;
+use ArkEcosystem\Crypto\Identities\Address;
+use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
 final class RouteServiceProvider extends ServiceProvider
 {
@@ -43,7 +43,7 @@ final class RouteServiceProvider extends ServiceProvider
         });
 
         Route::bind('wallet', function (string $value): Wallet {
-            if (! Address::validate($value, Devnet::new())) {
+            if (! Address::validate($value, Network::config())) {
                 UI::useErrorMessage(404, trans('general.wallet_not_found', [$value]));
 
                 abort(404);
