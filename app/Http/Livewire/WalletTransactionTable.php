@@ -84,8 +84,6 @@ final class WalletTransactionTable extends Component
 
     private function getSentQuery(): Builder
     {
-        dd(Transaction::where('sender_public_key', $this->state['publicKey'])->count());
-
         return Transaction::where('sender_public_key', $this->state['publicKey']);
     }
 }
