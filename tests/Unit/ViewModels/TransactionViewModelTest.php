@@ -796,7 +796,19 @@ it('should get the participants', function () {
 });
 
 it('should get the type component', function () {
-    expect($this->subject->typeComponent())->toBeString();
+    $this->subject = new TransactionViewModel(Transaction::factory()->create([
+        'type'       => CoreTransactionTypeEnum::TRANSFER,
+        'type_group' => TransactionTypeGroupEnum::CORE,
+    ]));
+
+    expect($this->subject->typeComponent())->toBe('transaction.details.transfer');
+
+    $this->subject = new TransactionViewModel(Transaction::factory()->create([
+        'type'       => CoreTransactionTypeEnum::TIMELOCK,
+        'type_group' => TransactionTypeGroupEnum::CORE,
+    ]));
+
+    expect($this->subject->typeComponent())->toBe('transaction.details.fallback');
 });
 
 it('should get the extra component', function () {
