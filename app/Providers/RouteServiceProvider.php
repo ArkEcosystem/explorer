@@ -6,6 +6,7 @@ namespace App\Providers;
 
 use App\Models\Wallet;
 use ArkEcosystem\Crypto\Identities\Address;
+use ArkEcosystem\Crypto\Networks\Devnet;
 use ARKEcosystem\UserInterface\UI;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
@@ -42,7 +43,7 @@ final class RouteServiceProvider extends ServiceProvider
         });
 
         Route::bind('wallet', function (string $value): Wallet {
-            if (! Address::validate($value)) {
+            if (! Address::validate($value, Devnet::new())) {
                 UI::useErrorMessage(404, trans('general.wallet_not_found', [$value]));
 
                 abort(404);
