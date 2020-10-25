@@ -70,7 +70,7 @@ final class WalletViewModel extends ViewModel
 
     public function nonce(): string
     {
-        return NumberFormatter::number($this->wallet->nonce->toInt());
+        return NumberFormatter::number($this->wallet->nonce->toNumber());
     }
 
     public function votes(): string

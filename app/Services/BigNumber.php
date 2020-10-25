@@ -26,18 +26,23 @@ final class BigNumber
         return new static($value);
     }
 
-    public function plus(int $value): self
+    public function plus($value): self
     {
         $this->value = $this->value->plus($value);
 
         return $this;
     }
 
-    public function minus(int $value): self
+    public function minus($value): self
     {
         $this->value = $this->value->minus($value);
 
         return $this;
+    }
+
+    public function toNumber(): int
+    {
+        return $this->value->toInt();
     }
 
     public function toInt(): int
@@ -48,5 +53,10 @@ final class BigNumber
     public function toFloat(): float
     {
         return $this->value->exactlyDividedBy(1e8)->toFloat();
+    }
+
+    public function valueOf(): BigDecimal
+    {
+        return $this->value;
     }
 }

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Services\Transactions\Aggregates;
 
-use App\Services\BigNumber;
 use App\Services\NumberFormatter;
 use App\Services\Timestamp;
 use App\Services\Transactions\Aggregates\Concerns\HasQueries;
@@ -26,7 +25,9 @@ final class FeeByRangeAggregate
                 ->orderByDesc('timestamp')
                 ->get()
                 ->groupBy(fn ($date) => Timestamp::fromGenesis($date->timestamp)->format($format))
-                ->mapWithKeys(fn ($transactions, $day) => [$day => NumberFormatter::satoshi(BigNumber::new($transactions->sum('fee'))->toFloat())]);
+                ->mapWithKeys(fn ($transactions, $day) => [
+                    $day => NumberFormatter::satoshi($transactions->sumBigNumber('fee')->valueOf()),
+                ]);
         });
     }
 }
