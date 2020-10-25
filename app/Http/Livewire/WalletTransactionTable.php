@@ -57,7 +57,7 @@ final class WalletTransactionTable extends Component
         }
 
         if ($this->state['type'] !== 'all') {
-            $query->withScope($this->scopes[$this->state['type']]);
+            $query = $query->withScope($this->scopes[$this->state['type']]);
         }
 
         return view('livewire.wallet-transaction-table', [
