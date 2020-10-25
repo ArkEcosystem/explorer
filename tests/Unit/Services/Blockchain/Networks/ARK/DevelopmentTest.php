@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Services\Blockchain\NetworkFactory;
+use BitWasp\Bitcoin\Network\Network;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Http;
 
@@ -51,4 +52,8 @@ it('should determine if the network is on marketsquare', function () {
 
 it('should have an epoch', function () {
     expect($this->subject->epoch())->toBeInstanceOf(Carbon::class);
+});
+
+it('should have a config', function () {
+    expect($this->subject->config())->toBeInstanceOf(Network::class);
 });
