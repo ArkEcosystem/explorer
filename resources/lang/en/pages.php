@@ -77,6 +77,18 @@ return [
         'all_transactions'      => 'All History',
         'received_transactions' => 'Incoming',
         'sent_transactions'     => 'Outgoing',
+        'registrations'         => 'Registrations',
+        'delegate'              => [
+            'title'            => 'Delegate :0',
+            'rank'             => 'Rank',
+            'commission'       => 'Commission',
+            'payout_frequency' => 'Payout Frequency',
+            'payout_minimum'   => 'Payout Minimum',
+            'forged_total'     => 'Forged Total',
+            'votes'            => 'Votes :0',
+            'forged_blocks'    => 'Forged Blocks',
+            'productivity'     => 'Productivity',
+        ],
     ],
 
 ];

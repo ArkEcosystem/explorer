@@ -6,6 +6,14 @@
     @endpush
 
     @section('content')
+        @if($wallet->isDelegate())
+            <x-wallet.delegate :wallet="$wallet" />
+        @endif
+
+        @if($wallet->hasRegistrations())
+            <x-wallet.registrations :wallet="$wallet" />
+        @endif
+
         <div class="bg-white border-t-20 border-theme-secondary-100 dark:border-black dark:bg-theme-secondary-900">
             <div class="py-16 content-container md:px-8">
                 <div x-data="{
@@ -22,7 +30,7 @@
                         </div>
                     </div>
 
-                    <livewire:wallet-transaction-table :address="$wallet->address" :public-key="$wallet->public_key" />
+                    <livewire:wallet-transaction-table :address="$wallet->address()" :public-key="$wallet->publicKey()" />
                 </div>
             </div>
         </div>
