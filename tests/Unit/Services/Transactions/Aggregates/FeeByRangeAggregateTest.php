@@ -24,8 +24,8 @@ it('should determine if the transaction is sent', function () {
     ])->sortByDesc('timestamp');
 
     $result = (new FeeByRangeAggregate())->aggregate(
-    Timestamp::fromGenesis($start->last()->timestamp)->startOfDay(),
-    Timestamp::fromGenesis($end->last()->timestamp)->endOfDay()
+        Timestamp::fromGenesis($start->last()->timestamp)->startOfDay(),
+        Timestamp::fromGenesis($end->last()->timestamp)->endOfDay()
     );
 
     expect($result)->toBeInstanceOf(Collection::class);

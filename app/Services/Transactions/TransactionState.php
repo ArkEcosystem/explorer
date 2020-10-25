@@ -31,7 +31,7 @@ final class TransactionState
             return false;
         }
 
-        $confirmations = NetworkStatus::height() - $block->height;
+        $confirmations = NetworkStatus::height() - $block->height->toInt();
 
         return $confirmations >= Network::confirmations();
     }
