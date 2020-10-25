@@ -46,6 +46,9 @@ final class WalletViewModel extends ViewModel
         return Arr::get($this->wallet, 'attributes.delegate.username');
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function rank(): ?int
     {
         return Arr::get($this->wallet, 'attributes.delegate.rank');
@@ -121,6 +124,8 @@ final class WalletViewModel extends ViewModel
 
     /**
      * @TODO: needs marketsquare
+     *
+     * @codeCoverageIgnore
      */
     public function commission(): string
     {
@@ -129,6 +134,8 @@ final class WalletViewModel extends ViewModel
 
     /**
      * @TODO: needs marketsquare
+     *
+     * @codeCoverageIgnore
      */
     public function payoutFrequency(): string
     {
@@ -137,6 +144,8 @@ final class WalletViewModel extends ViewModel
 
     /**
      * @TODO: needs marketsquare
+     *
+     * @codeCoverageIgnore
      */
     public function payoutMinimum(): string
     {
