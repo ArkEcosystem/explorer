@@ -56,7 +56,7 @@ final class BlockViewModel extends ViewModel
 
     public function height(): string
     {
-        return NumberFormatter::number($this->block->height->toInt());
+        return NumberFormatter::number($this->block->height->toNumber());
     }
 
     public function transactionCount(): int
@@ -101,12 +101,12 @@ final class BlockViewModel extends ViewModel
 
     public function previousBlockUrl(): ?string
     {
-        return $this->findBlockWithHeight($this->block->height->minus(1)->toInt());
+        return $this->findBlockWithHeight($this->block->height->minus(1)->toNumber());
     }
 
     public function nextBlockUrl(): ?string
     {
-        return $this->findBlockWithHeight($this->block->height->plus(1)->toInt());
+        return $this->findBlockWithHeight($this->block->height->plus(1)->toNumber());
     }
 
     private function findBlockWithHeight(int $height): ?string

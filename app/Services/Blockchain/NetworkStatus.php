@@ -22,7 +22,7 @@ final class NetworkStatus
                 return 0;
             }
 
-            return $block->height->toInt();
+            return $block->height->toNumber();
         });
     }
 

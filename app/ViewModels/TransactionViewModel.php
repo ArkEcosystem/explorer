@@ -72,7 +72,7 @@ final class TransactionViewModel extends ViewModel
             fn () => $this->transaction->sender
         );
 
-        return NumberFormatter::number($wallet->nonce->toInt());
+        return NumberFormatter::number($wallet->nonce->toNumber());
     }
 
     public function sender(): string
@@ -226,7 +226,7 @@ final class TransactionViewModel extends ViewModel
             return NumberFormatter::number(0);
         }
 
-        return NumberFormatter::number(NetworkStatus::height() - $block->height->toInt());
+        return NumberFormatter::number(NetworkStatus::height() - $block->height->toNumber());
     }
 
     public function voted(): ?Wallet
