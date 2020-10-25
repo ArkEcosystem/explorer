@@ -10,7 +10,6 @@ use App\Models\Wallet;
 use App\Services\Blockchain\NetworkStatus;
 use App\Services\ExchangeRate;
 use App\Services\NumberFormatter;
-use App\Services\QRCode;
 use App\Services\Timestamp;
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
@@ -80,11 +79,6 @@ final class WalletViewModel extends ViewModel
     public function votesPercentage(): string
     {
         return NumberFormatter::percentage(Percentage::calculate($this->wallet->attributes['delegate']['voteBalance'] / 1e8, NetworkStatus::supply()));
-    }
-
-    public function qrCode(): string
-    {
-        return QRCode::generate('ark:'.$this->wallet->address);
     }
 
     public function amountForged(): string
