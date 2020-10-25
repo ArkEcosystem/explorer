@@ -11,7 +11,7 @@ final class BigNumber
     private BigDecimal $value;
 
     /**
-     * @param int|string $value
+     * @param int|float|string $value
      */
     private function __construct($value)
     {
@@ -19,13 +19,16 @@ final class BigNumber
     }
 
     /**
-     * @param int|string $value
+     * @param int|float|string $value
      */
-    public static function new($value)
+    public static function new($value): self
     {
         return new static($value);
     }
 
+    /**
+     * @param BigDecimal|int|string $value
+     */
     public function plus($value): self
     {
         $this->value = $this->value->plus($value);
@@ -33,6 +36,9 @@ final class BigNumber
         return $this;
     }
 
+    /**
+     * @param BigDecimal|int|string $value
+     */
     public function minus($value): self
     {
         $this->value = $this->value->minus($value);
