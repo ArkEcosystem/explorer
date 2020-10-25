@@ -48,16 +48,16 @@ final class WalletTransactionTable extends Component
 
     public function render(): View
     {
-        if ($this->state['type'] !== 'all') {
-            Transaction::addGlobalScope(resolve($this->scopes[$this->state['type']]));
-        }
-
         if ($this->state['direction'] === 'received') {
             $query = $this->getReceivedQuery();
         } elseif ($this->state['direction'] === 'sent') {
             $query = $this->getSentQuery();
         } else {
             $query = $this->getAllQuery();
+        }
+
+        if ($this->state['type'] !== 'all') {
+            $query->withScope($this->scopes[$this->state['type']]);
         }
 
         return view('livewire.wallet-transaction-table', [
@@ -84,6 +84,8 @@ final class WalletTransactionTable extends Component
 
     private function getSentQuery(): Builder
     {
+        dd(Transaction::where('sender_public_key', $this->state['publicKey'])->count());
+
         return Transaction::where('sender_public_key', $this->state['publicKey']);
     }
 }

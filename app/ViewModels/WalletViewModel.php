@@ -6,7 +6,6 @@ namespace App\ViewModels;
 
 use App\Facades\Network;
 use App\Models\Scopes\EntityRegistrationScope;
-use App\Models\Transaction;
 use App\Models\Wallet;
 use App\Services\Blockchain\NetworkStatus;
 use App\Services\ExchangeRate;
@@ -175,16 +174,14 @@ final class WalletViewModel extends ViewModel
 
     public function hasRegistrations(): bool
     {
-        Transaction::addGlobalScope(new EntityRegistrationScope());
-
-        return $this->wallet->sentTransactions()->count() > 0;
+        return $this->wallet->sentTransactions()->withScope(EntityRegistrationScope::class)->count() > 0;
     }
 
     public function registrations(): Collection
     {
-        Transaction::addGlobalScope(new EntityRegistrationScope());
-
-        return ViewModelFactory::collection($this->wallet->sentTransactions()->get());
+        return ViewModelFactory::collection(
+            $this->wallet->sentTransactions()->withScope(EntityRegistrationScope::class)->get()
+        );
     }
 
     private function findWalletByKnown(): ?array
