@@ -58,8 +58,8 @@ it('should get the balance as percentage from supply', function () {
         ],
     ]);
 
-    expect($this->subject->balancePercentage())->toBeFloat();
-    expect($this->subject->balancePercentage())->toBe(10.0);
+    expect($this->subject->balancePercentage())->toBeString();
+    expect($this->subject->balancePercentage())->toBe('10%');
 });
 
 it('should get the votes', function () {
@@ -75,8 +75,8 @@ it('should get the votes as percentage from supply', function () {
         ],
     ]);
 
-    expect($this->subject->votesPercentage())->toBeFloat();
-    expect($this->subject->votesPercentage())->toBe(10.0);
+    expect($this->subject->votesPercentage())->toBeString();
+    expect($this->subject->votesPercentage())->toBe('10%');
 });
 
 it('should generate a QR Code', function () {
