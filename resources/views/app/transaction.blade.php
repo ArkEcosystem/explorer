@@ -18,6 +18,14 @@
 
     @section('content')
         <x-transaction.header :transaction="$transaction" />
+
+        <x-details.grid>
+            <x-dynamic-component :component="$transaction->typeComponent()" :transaction="$transaction" />
+        </x-details.grid>
+
+        @if($transaction->hasExtraData())
+            <x-dynamic-component :component="$transaction->extraComponent()" :transaction="$transaction" />
+        @endif
     @endsection
 
 @endcomponent

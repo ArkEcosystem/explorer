@@ -58,10 +58,25 @@ return [
         'fee'              => 'Fee',
         'amount'           => 'Amount',
         'confirmations'    => 'Confirmations',
+        'participants'     => 'Participants',
+        'vote'             => 'Vote',
+        'unvote'           => 'Unvote',
+        'recipient_list'   => 'Recipient List',
+    ],
+
+    'transactions' => [
+        'title' => 'Transactions',
     ],
 
     'wallets' => [
         'title' => 'Wallets',
+    ],
+
+    'wallet' => [
+        'transaction_history'   => 'Transaction History',
+        'all_transactions'      => 'All History',
+        'received_transactions' => 'Incoming',
+        'sent_transactions'     => 'Outgoing',
     ],
 
 ];
