@@ -10,6 +10,7 @@
                                 <x-truncate-middle :value="$transaction->id()" />
                             </x-slot>
                         </x-general.loading-state.text>
+
                         <a href="{{ $transaction->url() }}" class="font-semibold link" wire:loading.class="hidden">
                             <x-truncate-middle :value="$transaction->id()" />
                         </a>
