@@ -443,18 +443,22 @@ final class DelegateTracker
 
         $seeds = [];
         for ($i = 0; $i < $delCount; $i++) {
+            $elements = [];
+
             for ($x = 0; $x < 4 && $i < $delCount; $i++, $x++) {
                 $newIndex             = intval($currentSeed[$x]) % $delCount;
                 $b                    = $delegates[$newIndex];
                 $delegates[$newIndex] = $delegates[$i];
                 $delegates[$i]        = $b;
+
+                $elements = [
+                    'i'        => $i,
+                    'x'        => $x,
+                    'newIndex' => $newIndex,
+                ];
             }
 
-            $seeds[bin2hex($currentSeed)] = [
-                'i'        => $i,
-                'x'        => $x,
-                'newIndex' => $newIndex,
-            ];
+            $seeds[bin2hex($currentSeed)] = $elements;
 
             $currentSeed = hex2bin(hash('sha256', $currentSeed));
         }
@@ -466,7 +470,13 @@ final class DelegateTracker
 
         foreach ($seeds as $hash => $math) {
             foreach (static::EXPECTED['seeds'][$hash] as $element) {
-                dump($math, $element);
+                dump([
+                    'i'        => $math['i'] === $element['i'],
+                    'x'        => $math['x'] === $element['x'],
+                    'newIndex' => $math['newIndex'] === $element['newIndex'],
+                    $math,
+                    $element,
+                ]);
             }
             dd();
         }
