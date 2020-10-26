@@ -21,7 +21,7 @@
             <x-truncate-middle :value="$address" />
         </a>
 
-        <a href="{{ route('wallet', $address) }}" class="font-semibold link hidden sm:flex md:hidden">
+        <a href="{{ route('wallet', $address) }}" class="hidden font-semibold link sm:flex md:hidden">
             {{ $address }}
         </a>
     </div>
