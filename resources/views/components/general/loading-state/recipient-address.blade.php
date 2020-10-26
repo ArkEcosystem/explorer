@@ -5,7 +5,7 @@
 
     <div
         wire:loading.class.remove="hidden"
-        class="text-transparent rounded-full hidden loading-state"
+        class="hidden text-transparent rounded-full loading-state"
     >
         @if ($address ?? false)
             <x-truncate-middle :value="$address" />
