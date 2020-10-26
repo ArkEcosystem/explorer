@@ -468,14 +468,14 @@ final class DelegateTracker
             'SEEDS_DIFFS' => array_diff(array_keys($seeds), array_keys(static::EXPECTED['seeds'])),
         ]);
 
-        foreach ($seeds as $hash => $math) {
-            foreach (static::EXPECTED['seeds'][$hash] as $element) {
+        foreach ($seeds as $hash => $actual) {
+            foreach (static::EXPECTED['seeds'][$hash] as $expected) {
                 dump([
-                    'i'        => $math['i'] === $element['i'],
-                    'x'        => $math['x'] === $element['x'],
-                    'newIndex' => $math['newIndex'] === $element['newIndex'],
-                    $math,
-                    $element,
+                    'i'        => $actual['i'] === $expected['i'],
+                    'x'        => $actual['x'] === $expected['x'],
+                    'newIndex' => $actual['newIndex'] === $expected['newIndex'],
+                    'actual'   => $actual,
+                    'expected' => $expected,
                 ]);
             }
             dd();
