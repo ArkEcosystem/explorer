@@ -8,7 +8,7 @@
                 </div>
                 <span
                     :class="{ 'rotate-180 bg-theme-primary-600 text-theme-secondary-100': dropdownOpen }"
-                    class="flex items-center justify-center w-5 h-5 transition duration-150 ease-in-out rounded-full bg-theme-primary-100 dark:bg-theme-secondary-800 text-theme-primary-600 dark:text-theme-secondary-200 font-semibold"
+                    class="flex items-center justify-center w-5 h-5 font-semibold transition duration-150 ease-in-out rounded-full bg-theme-primary-100 dark:bg-theme-secondary-800 text-theme-primary-600 dark:text-theme-secondary-200"
                 >
                     @svg('chevron-down', 'h-2 w-3')
                 </span>
