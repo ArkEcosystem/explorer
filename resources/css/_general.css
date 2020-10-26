@@ -284,3 +284,14 @@ body {
         @apply border-r border-theme-secondary-300;
     }
 }
+
+/* Dropdowns Scrolling */
+.dropdown-scrolling::-webkit-scrollbar {
+    @apply rounded-lg bg-theme-primary-100;
+    width: 6px;
+    height: 6px;
+}
+
+.dropdown-scrolling::-webkit-scrollbar-thumb {
+    @apply rounded-lg bg-theme-primary-200;
+}
