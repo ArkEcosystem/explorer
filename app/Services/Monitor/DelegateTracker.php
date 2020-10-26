@@ -451,7 +451,7 @@ final class DelegateTracker
                 $delegates[$newIndex] = $delegates[$i];
                 $delegates[$i]        = $b;
 
-                $elements = [
+                $elements[] = [
                     'i'        => $i,
                     'x'        => $x,
                     'newIndex' => $newIndex,
@@ -469,15 +469,18 @@ final class DelegateTracker
         ]);
 
         foreach ($seeds as $hash => $actual) {
-            foreach (static::EXPECTED['seeds'][$hash] as $expected) {
+            $expected = static::EXPECTED['seeds'][$hash];
+
+            for ($i = 0; $i < count($expected); $i++) {
                 dump([
-                    'i'        => $actual['i'] === $expected['i'],
-                    'x'        => $actual['x'] === $expected['x'],
-                    'newIndex' => $actual['newIndex'] === $expected['newIndex'],
-                    'actual'   => $actual,
-                    'expected' => $expected,
+                    'i'        => $expected[$i]['i'] === $actual[$i]['i'],
+                    'x'        => $expected[$i]['x'] === $actual[$i]['x'],
+                    'newIndex' => $expected[$i]['newIndex'] === $actual[$i]['newIndex'],
+                    'expected' => $expected[$i],
+                    'actual'   => $actual[$i],
                 ]);
             }
+
             dd();
         }
 
