@@ -5,7 +5,8 @@ declare(strict_types=1);
 use App\Http\Livewire\MonitorStatistics;
 use Livewire\Livewire;
 
-it('should update the currency', function () {
+// @TODO: make assertions about the visibility of the data
+it('should render the component', function () {
     Livewire::test(MonitorStatistics::class)
         ->assertSee(trans('pages.monitor.statistics.delegate_registrations'))
         ->assertSee(trans('pages.monitor.statistics.block_reward'))
