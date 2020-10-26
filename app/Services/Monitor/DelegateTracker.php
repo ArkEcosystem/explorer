@@ -12,24 +12,21 @@ final class DelegateTracker
 {
     public static function execute(Collection $delegates): array
     {
-        // Arrange
+        // Arrange Block
         $lastBlock = Block::current();
         $height    = $lastBlock->height->toNumber();
         $timestamp = $lastBlock->timestamp;
 
-        // Act
-        $maxDelegates    = Network::delegateCount();
-        $blockTime       = Network::blockTime();
-        // $activeDelegates = $delegates->toBase()->map(fn ($delegate) => $delegate->public_key);
-        $activeDelegates = static::getActiveDelegates(
-            $delegates
-                ->toBase()
-                ->map(fn ($delegate) => $delegate->public_key)
-                ->toArray(), $height
-        );
-        $forgingInfo     = ForgingInfoCalculator::calculateForgingInfo($timestamp, $height);
+        // Arrange Delegates
+        $activeDelegates = $delegates->toBase()->map(fn ($delegate) => $delegate->public_key);
+        $activeDelegates = static::getActiveDelegates($activeDelegates->toArray(), $height);
 
-        dd($forgingInfo);
+        // Arrange Constants
+        $maxDelegates = Network::delegateCount();
+        $blockTime    = Network::blockTime();
+
+        // Act
+        $forgingInfo = ForgingInfoCalculator::calculateForgingInfo($timestamp, $height);
 
         // Determine Next Forgers...
         $nextForgers = [];
@@ -96,11 +93,12 @@ final class DelegateTracker
 
         for ($i = 0, $delCount = count($delegates); $i < $delCount; $i++) {
             for ($x = 0; $x < 4 && $i < $delCount; $i++, $x++) {
-                $newIndex             = $currentSeed[$x] % $delCount;
+                $newIndex             = intval($currentSeed[$x]) % $delCount;
                 $b                    = $delegates[$newIndex];
                 $delegates[$newIndex] = $delegates[$i];
                 $delegates[$i]        = $b;
             }
+
             $currentSeed = hash('sha256', $currentSeed);
         }
 
