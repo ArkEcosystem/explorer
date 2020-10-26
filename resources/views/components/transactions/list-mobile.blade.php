@@ -9,9 +9,6 @@
                         <a href="{{ $transaction->url() }}" class="font-semibold link truncated-id" wire:loading.class="hidden">
                             <x-truncate-middle :value="$transaction->id()" />
                         </a>
-                        <a href="{{ $transaction->url() }}" class="font-semibold link truncated-id md:hidden" wire:loading.class="hidden">
-                            {{ $transaction->id() }}
-                        </a>
                     </td>
                 </tr>
                 <tr>
