@@ -285,17 +285,6 @@ body {
     }
 }
 
-@media (min-width: 640px) and (max-width: 767px) {
-    .truncated-address:first-of-type {
-        @apply hidden;
-    }
-}
-
-@media (max-width: 639px) {
-    .truncated-address:nth-of-type(2n) {
-        @apply hidden;
-    }
-}
 /* Loading States */
 .loading-state {
     @apply bg-theme-secondary-300 animate-pulse;
