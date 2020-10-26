@@ -17,15 +17,19 @@ final class DelegateTracker
         $height    = $lastBlock->height->toNumber();
         $timestamp = $lastBlock->timestamp;
 
-        // dd((new Slots())->getSlotNumber($timestamp));
-
         // Act
         $maxDelegates    = Network::delegateCount();
         $blockTime       = Network::blockTime();
-        // $round           = RoundCalculator::calculate($height);
-        $activeDelegates = $delegates->toBase()->map(fn ($delegate) => $delegate->public_key);
-        // $blockTimeLookup = (new ForgingInfoCalculator())->getBlockTimeLookup($lastBlock->height->toNumber());
-        $forgingInfo     = (new ForgingInfoCalculator())->calculateForgingInfo($timestamp, $height);
+        // $activeDelegates = $delegates->toBase()->map(fn ($delegate) => $delegate->public_key);
+        $activeDelegates = static::getActiveDelegates(
+            $delegates
+                ->toBase()
+                ->map(fn ($delegate) => $delegate->public_key)
+                ->toArray(), $height
+        );
+        $forgingInfo     = ForgingInfoCalculator::calculateForgingInfo($timestamp, $height);
+
+        dd($forgingInfo);
 
         // Determine Next Forgers...
         $nextForgers = [];
@@ -82,8 +86,24 @@ final class DelegateTracker
             }
         }
 
-        return $result;
+        return collect($result)->sortBy('order')->toArray();
+    }
 
-        // return collect($result)->sortBy('order')->toArray();
+    private static function getActiveDelegates(array $delegates, int $height): array
+    {
+        $seedSource  = (string) RoundCalculator::calculate($height)['round'];
+        $currentSeed = hash('sha256', $seedSource);
+
+        for ($i = 0, $delCount = count($delegates); $i < $delCount; $i++) {
+            for ($x = 0; $x < 4 && $i < $delCount; $i++, $x++) {
+                $newIndex             = $currentSeed[$x] % $delCount;
+                $b                    = $delegates[$newIndex];
+                $delegates[$newIndex] = $delegates[$i];
+                $delegates[$i]        = $b;
+            }
+            $currentSeed = hash('sha256', $currentSeed);
+        }
+
+        return $delegates;
     }
 }

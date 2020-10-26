@@ -5,15 +5,9 @@ declare(strict_types=1);
 namespace App\Services\Monitor;
 
 use App\Facades\Network;
-use App\Models\Block;
 
 final class ForgingInfoCalculator
 {
-    public static function getBlockTimeLookup(int $height): int
-    {
-        return Block::where('height', $height)->firstOrFail()->timestamp;
-    }
-
     public static function calculateForgingInfo(int $timestamp, int $height): array
     {
         $slotInfo = (new Slots())->getSlotInfo($timestamp, $height);
