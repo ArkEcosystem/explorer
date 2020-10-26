@@ -352,23 +352,23 @@ final class DelegateTracker
     {
         // Arrange Block
         $lastBlock = Block::current();
-        $height    = 5720529; // $lastBlock->height->toNumber();
-        $timestamp = 113620904; // $lastBlock->timestamp;
+        $height    = $lastBlock->height->toNumber(); // 5720529;
+        $timestamp = $lastBlock->timestamp; // 113620904;
 
         // Arrange Delegates
         $activeDelegates = $delegates->toBase()->map(fn ($delegate) => $delegate->public_key);
 
-        dump([
-            'INPUT_EQUAL' => $activeDelegates->toArray() === static::EXPECTED['input'],
-            'INPUT_DIFFS' => array_diff($activeDelegates->toArray(), static::EXPECTED['input']),
-        ]);
+        // dump([
+        //     'INPUT_EQUAL' => $activeDelegates->toArray() === static::EXPECTED['input'],
+        //     'INPUT_DIFFS' => array_diff($activeDelegates->toArray(), static::EXPECTED['input']),
+        // ]);
 
         $activeDelegates = static::getActiveDelegates($activeDelegates->toArray(), $height);
 
-        dd([
-            'OUTPUT_EQUAL' => $activeDelegates === static::EXPECTED['output'],
-            'OUTPUT_DIFFS' => array_diff($activeDelegates, static::EXPECTED['output']),
-        ]);
+        // dd([
+        //     'OUTPUT_EQUAL' => $activeDelegates === static::EXPECTED['output'],
+        //     'OUTPUT_DIFFS' => array_diff($activeDelegates, static::EXPECTED['output']),
+        // ]);
 
         // Arrange Constants
         $maxDelegates = Network::delegateCount();
@@ -446,7 +446,7 @@ final class DelegateTracker
             $elements = [];
 
             for ($x = 0; $x < 4 && $i < $delCount; $i++, $x++) {
-                $newIndex             = intval($currentSeed[$x]) % $delCount;
+                $newIndex             = intval(unpack('C*', $currentSeed)[$x + 1]) % $delCount;
                 $b                    = $delegates[$newIndex];
                 $delegates[$newIndex] = $delegates[$i];
                 $delegates[$i]        = $b;
@@ -463,26 +463,24 @@ final class DelegateTracker
             $currentSeed = hex2bin(hash('sha256', $currentSeed));
         }
 
-        dump([
-            'SEEDS_EQUAL' => array_keys($seeds) === array_keys(static::EXPECTED['seeds']),
-            'SEEDS_DIFFS' => array_diff(array_keys($seeds), array_keys(static::EXPECTED['seeds'])),
-        ]);
+        // dump([
+        //     'SEEDS_EQUAL' => array_keys($seeds) === array_keys(static::EXPECTED['seeds']),
+        //     'SEEDS_DIFFS' => array_diff(array_keys($seeds), array_keys(static::EXPECTED['seeds'])),
+        // ]);
 
-        foreach ($seeds as $hash => $actual) {
-            $expected = static::EXPECTED['seeds'][$hash];
+        // foreach ($seeds as $hash => $actual) {
+        //     $expected = static::EXPECTED['seeds'][$hash];
 
-            for ($i = 0; $i < count($expected); $i++) {
-                dump([
-                    'i'        => $expected[$i]['i'] === $actual[$i]['i'],
-                    'x'        => $expected[$i]['x'] === $actual[$i]['x'],
-                    'newIndex' => $expected[$i]['newIndex'] === $actual[$i]['newIndex'],
-                    'expected' => $expected[$i],
-                    'actual'   => $actual[$i],
-                ]);
-            }
-
-            dd();
-        }
+        //     for ($i = 0; $i < count($expected); $i++) {
+        //         dump([
+        //             'i'        => $expected[$i]['i'] === $actual[$i]['i'],
+        //             'x'        => $expected[$i]['x'] === $actual[$i]['x'],
+        //             'newIndex' => $expected[$i]['newIndex'] === $actual[$i]['newIndex'],
+        //             'expected' => $expected[$i],
+        //             'actual'   => $actual[$i],
+        //         ]);
+        //     }
+        // }
 
         return $delegates;
     }
