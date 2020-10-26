@@ -83,7 +83,9 @@ final class DelegateTracker
             }
         }
 
-        return collect($result)->sortBy('order')->toArray();
+        ksort($result);
+
+        return $result;
     }
 
     private static function getActiveDelegates(array $delegates, int $height): array

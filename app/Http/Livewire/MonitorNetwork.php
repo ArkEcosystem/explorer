@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\View\View;
 use Livewire\Component;
 
-final class DelegateTracker extends Component
+final class MonitorNetwork extends Component
 {
     public function render(): View
     {
