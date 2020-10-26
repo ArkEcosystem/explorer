@@ -4,8 +4,8 @@
     transactionTypeFilter: 'all',
     transactionTypeFilterLabel: 'All',
 }" x-cloak class="w-full">
-    <div class="w-full mb-8">
-        <div class="relative flex items-end justify-between">
+    <div class="w-full md:mb-8">
+        <div class="relative flex flex-col justify-between md:items-end md:flex-row md:justify-start">
             <h2 class="text-3xl sm:text-4xl">@lang('pages.home.transactions_and_blocks')</h2>
 
             <div x-show="selected === 'transactions'">
