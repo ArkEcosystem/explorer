@@ -4,6 +4,7 @@ parameters:
     excludes_analyse:
         - app/Console/Playbooks
         - app/Console/Commands/RunPlaybookCommand.php
+        - app/Services/Monitor
     level: 8
     ignoreErrors:
         # This error is caused by some Illuminate and Livewire classes not being abstract.
