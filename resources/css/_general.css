@@ -304,3 +304,12 @@ body {
 .dropdown-scrolling {
     scrollbar-color: #e5f0f8 #bad6f0;
 }
+
+/* Loading States */
+.loading-state {
+    @apply bg-theme-secondary-300 animate-pulse;
+}
+
+.theme-dark .loading-state {
+    @apply bg-theme-secondary-800;
+}

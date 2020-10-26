@@ -15,7 +15,6 @@
             </div>
         @endslot
 
-        {{--w-60 will offset the navbar but then the button won't take the full width, which sucks--}}
         <div class="items-center justify-center block py-3 overflow-y-scroll h-128 dropdown-scrolling">
             <div class="cursor-pointer dropdown-entry text-theme-secondary-900 dark:text-theme-secondary-200" @click="window.livewire.emit('filterTransactionsByType', 'all'); transactionTypeFilter = 'all'; transactionTypeFilterLabel = '@lang('forms.search.transaction_types.all')'">
                 @lang('forms.search.transaction_types.all')
