@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Models\Casts\BigInteger;
+use App\Services\BigNumber;
 use GeneaLabs\LaravelModelCaching\Traits\Cachable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -13,8 +15,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 /**
  * @property string $address
  * @property string $public_key
- * @property int $balance
- * @property int $nonce
+ * @property BigNumber $balance
+ * @property BigNumber $nonce
  * @property array $attributes
  */
 final class Wallet extends Model
@@ -35,8 +37,8 @@ final class Wallet extends Model
      * @var array
      */
     protected $casts = [
-        'balance'    => 'int',
-        'nonce'      => 'int',
+        'balance'    => BigInteger::class,
+        'nonce'      => BigInteger::class,
         'attributes' => 'array',
     ];
 
@@ -93,6 +95,16 @@ final class Wallet extends Model
     public function scopeWealthy($query): Builder
     {
         return $query->orderBy('balance', 'desc');
+    }
+
+    /**
+     * Get the route key for the model.
+     *
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'address';
     }
 
     /**

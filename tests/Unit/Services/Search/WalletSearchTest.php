@@ -16,7 +16,7 @@ it('should search for a wallet by address', function () {
         'term' => $wallet->address,
     ]);
 
-    expect($result->get())->toHaveCount(1);
+    expect($result->first()->is($wallet))->toBeTrue();
 });
 
 it('should search for a wallet by public_key', function () {
@@ -40,7 +40,13 @@ it('should search for a wallet by username', function () {
 });
 
 it('should search for a wallet by vote', function () {
-    $wallet = Wallet::factory(10)->create()[0];
+    Wallet::factory(10)->create();
+
+    $wallet = Wallet::factory()->create([
+        'attributes' => [
+            'vote' => 'public_key',
+        ],
+    ]);
 
     $result = (new WalletSearch())->search([
         'vote' => $wallet->attributes['vote'],

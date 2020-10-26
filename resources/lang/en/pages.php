@@ -73,11 +73,25 @@ return [
     ],
 
     'wallet' => [
+        'title'                 => 'Address Details',
+        'address'               => 'Address',
         'transaction_history'   => 'Transaction History',
         'all_transactions'      => 'All History',
         'received_transactions' => 'Incoming',
         'sent_transactions'     => 'Outgoing',
         'registrations'         => 'Registrations',
+        'voting_for'            => 'Voting For',
+        'rank'                  => 'Rank',
+        'commission'            => 'Commission',
+        'balance'               => 'Balance',
+        'hide_options'          => 'Hide Options',
+        'show_options'          => 'Show Options',
+        'amount'                => 'Amount',
+        'smartbridge'           => 'Smartbridge',
+        'qrcode'                => [
+            'title'       => 'QR Code',
+            'description' => 'Scan for address',
+        ],
         'delegate'              => [
             'title'            => 'Delegate :0',
             'rank'             => 'Rank',

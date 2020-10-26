@@ -74,4 +74,9 @@ final class Development implements Network
     {
         return 8;
     }
+
+    public function config(): \BitWasp\Bitcoin\Network\Network
+    {
+        return Devnet::new();
+    }
 }

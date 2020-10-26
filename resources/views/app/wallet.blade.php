@@ -6,6 +6,10 @@
     @endpush
 
     @section('content')
+        <x-wallet.header :wallet="$wallet" />
+
+        <livewire:wallet-qr-code :address="$wallet->address()" />
+
         @if($wallet->isDelegate())
             <x-wallet.delegate :wallet="$wallet" />
         @endif
