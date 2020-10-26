@@ -8,6 +8,7 @@ use App\Facades\Network;
 use App\Models\Block;
 use App\Models\Wallet;
 use App\Services\Blockchain\NetworkStatus;
+use App\Services\Monitor\DelegateTracker;
 use App\Services\Monitor\Monitor;
 use App\Services\NumberFormatter;
 use Carbon\Carbon;
