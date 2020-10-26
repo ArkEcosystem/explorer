@@ -285,13 +285,13 @@ body {
     }
 }
 
-@media (min-width: 530px) and (max-width: 767px) {
+@media (min-width: 640px) and (max-width: 767px) {
     .truncated-address:first-of-type {
         @apply hidden;
     }
 }
 
-@media (max-width: 529px) {
+@media (max-width: 639px) {
     .truncated-address:nth-of-type(2n) {
         @apply hidden;
     }
