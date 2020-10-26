@@ -17,6 +17,8 @@ final class DelegateTracker
         $height    = $lastBlock->height->toNumber();
         $timestamp = $lastBlock->timestamp;
 
+        // dd((new Slots())->getSlotNumber($timestamp));
+
         // Act
         $maxDelegates    = Network::delegateCount();
         $blockTime       = Network::blockTime();
@@ -41,8 +43,8 @@ final class DelegateTracker
 
         // Map Next Forgers...
         $result = [
-            'delegates'     => [],
-            'nextRoundTime' => ($maxDelegates - $forgingInfo['currentForger'] - 1) * $blockTime,
+            // 'delegates'     => [],
+            // 'nextRoundTime' => ($maxDelegates - $forgingInfo['currentForger'] - 1) * $blockTime,
         ];
 
         foreach ($delegates as $delegate) {
@@ -57,26 +59,31 @@ final class DelegateTracker
             }
 
             if ($indexInNextForgers === 0) {
-                $result['delegates'][$indexInNextForgers] = [
+                $result[$indexInNextForgers] = [
                     'publicKey' => $delegate->public_key,
                     'status'    => 'next',
                     'time'      => 0,
+                    'order'     => $indexInNextForgers,
                 ];
             } elseif ($indexInNextForgers <= $maxDelegates - $forgingInfo['nextForger']) {
-                $result['delegates'][$indexInNextForgers] = [
+                $result[$indexInNextForgers] = [
                     'publicKey' => $delegate->public_key,
                     'status'    => 'pending',
                     'time'      => $indexInNextForgers * $blockTime * 1000,
+                    'order'     => $indexInNextForgers,
                 ];
             } else {
-                $result['delegates'][$indexInNextForgers] = [
+                $result[$indexInNextForgers] = [
                     'publicKey' => $delegate->public_key,
                     'status'    => 'done',
                     'time'      => 0,
+                    'order'     => $indexInNextForgers,
                 ];
             }
         }
 
         return $result;
+
+        // return collect($result)->sortBy('order')->toArray();
     }
 }

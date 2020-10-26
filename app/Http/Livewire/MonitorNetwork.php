@@ -23,10 +23,18 @@ final class MonitorNetwork extends Component
     {
         $tracking = DelegateTracker::execute(Monitor::activeDelegates());
 
+        // dd(
+
+        //     collect($tracking)
+        //         ->map(fn ($delegate) => Wallet::where('public_key', $delegate['publicKey'])->firstOrFail()->attributes['delegate']['username'])
+        //         ->toArray()
+
+        // );
+
         $delegates = [];
 
-        for ($i = 0; $i < count($tracking['delegates']); $i++) {
-            $delegate = array_values($tracking['delegates'])[$i];
+        for ($i = 0; $i < count($tracking); $i++) {
+            $delegate = array_values($tracking)[$i];
 
             $delegates[] = [
                 'order'         => $i + 1,
