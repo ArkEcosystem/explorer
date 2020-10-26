@@ -79,7 +79,6 @@ final class MonitorNetwork extends Component
         return Wallet::query()
             ->whereNotNull('attributes->delegate->username')
             ->whereRaw("(\"attributes\"->'delegate'->>'rank')::numeric <= ?", [Network::delegateCount()])
-            ->orderByRaw("(\"attributes\"->'delegate'->>'rank')::numeric ASC")
-            ->get();
+            ->orderByRaw("(\"attributes\"->'delegate'->>'rank')::numeric ASC");
     }
 }
