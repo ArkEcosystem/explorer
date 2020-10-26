@@ -90,8 +90,9 @@ final class DelegateTracker
     {
         $seedSource  = (string) RoundCalculator::calculate($height)['round'];
         $currentSeed = hash('sha256', $seedSource);
+        $delCount    = count($delegates);
 
-        for ($i = 0, $delCount = count($delegates); $i < $delCount; $i++) {
+        for ($i = 0; $i < $delCount; $i++) {
             for ($x = 0; $x < 4 && $i < $delCount; $i++, $x++) {
                 $newIndex             = intval($currentSeed[$x]) % $delCount;
                 $b                    = $delegates[$newIndex];
