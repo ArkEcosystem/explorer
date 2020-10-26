@@ -6,6 +6,7 @@ namespace App\Console;
 
 use App\Console\Commands\CacheChartData;
 use App\Console\Commands\CacheDelegates;
+use App\Console\Commands\CacheDelegateAggregates;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
