@@ -284,3 +284,21 @@ body {
         @apply border-r border-theme-secondary-300;
     }
 }
+
+@media (min-width: 530px) and (max-width: 767px) {
+    .truncated-address:first-of-type {
+        @apply hidden;
+    }
+    .truncated-id:first-of-type {
+        @apply hidden;
+    }
+}
+
+@media (max-width: 529px) {
+    .truncated-address:nth-of-type(2n) {
+        @apply hidden;
+    }
+    .truncated-id:nth-of-type(2n) {
+        @apply hidden;
+    }
+}

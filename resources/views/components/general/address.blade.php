@@ -10,8 +10,12 @@
             {{ $prefix }}
         @endif
 
-        <a href="{{ route('wallet', $address) }}" class="font-semibold link">
+        <a href="{{ route('wallet', $address) }}" class="font-semibold link truncated-address">
             <x-truncate-middle :value="$address" />
+        </a>
+
+        <a href="{{ route('wallet', $address) }}" class="font-semibold link truncated-address md:hidden">
+            {{ $address }}
         </a>
     </div>
 </div>

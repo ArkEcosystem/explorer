@@ -6,8 +6,11 @@
                     <td width="150">@lang('general.transaction.id')</td>
                     <td>
                         <div wire:loading.class="w-full h-4 rounded-md bg-theme-secondary-300 animate-pulse"></div>
-                        <a href="{{ $transaction->url() }}" class="font-semibold link" wire:loading.class="hidden">
+                        <a href="{{ $transaction->url() }}" class="font-semibold link truncated-id" wire:loading.class="hidden">
                             <x-truncate-middle :value="$transaction->id()" />
+                        </a>
+                        <a href="{{ $transaction->url() }}" class="font-semibold link truncated-id md:hidden" wire:loading.class="hidden">
+                            {{ $transaction->id() }}
                         </a>
                     </td>
                 </tr>
