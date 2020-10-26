@@ -14,7 +14,7 @@ final class DelegateTracker
     {
         // Arrange Block
         $lastBlock = Block::current();
-        $height    = $lastBlock->height->toNumber();
+        $height    = $lastBlock->height->toNumber(); // Monitor::heightRangeByRound(Monitor::roundNumber())[0];
         $timestamp = $lastBlock->timestamp;
 
         // Arrange Delegates

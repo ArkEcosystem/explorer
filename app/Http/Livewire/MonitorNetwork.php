@@ -22,14 +22,6 @@ final class MonitorNetwork extends Component
     {
         $tracking = DelegateTracker::execute(Monitor::activeDelegates());
 
-        // dd(
-
-        //     collect($tracking)
-        //         ->map(fn ($delegate) => Wallet::where('public_key', $delegate['publicKey'])->firstOrFail()->attributes['delegate']['username'])
-        //         ->toArray()
-
-        // );
-
         $delegates = [];
 
         for ($i = 0; $i < count($tracking); $i++) {
@@ -41,7 +33,7 @@ final class MonitorNetwork extends Component
                     return Wallet::where('public_key', $delegate['publicKey'])->firstOrFail()->attributes['delegate']['username'];
                 }),
                 'forging_at'    => Carbon::now()->addMilliseconds($delegate['time']),
-                'last_block'    => Cache::rememberForever('currentBlock', fn () => Block::current()),
+                'last_block'    => null,
                 // Status
                 'is_success'    => false, // $missedCount === 0,
                 'is_warning'    => false, // $missedCount === 1,
