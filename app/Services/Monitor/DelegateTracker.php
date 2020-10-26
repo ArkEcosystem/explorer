@@ -14,7 +14,7 @@ final class DelegateTracker
     {
         // Arrange Block
         $lastBlock = Block::current();
-        $height    = $lastBlock->height->toNumber(); // Monitor::heightRangeByRound(Monitor::roundNumber())[0];
+        $height    = $lastBlock->height->toNumber();
         $timestamp = $lastBlock->timestamp;
 
         // Arrange Delegates
@@ -89,7 +89,7 @@ final class DelegateTracker
     private static function getActiveDelegates(array $delegates, int $height): array
     {
         $seedSource  = (string) RoundCalculator::calculate($height)['round'];
-        $currentSeed = hash('sha256', $seedSource);
+        $currentSeed = hex2bin(hash('sha256', $seedSource));
         $delCount    = count($delegates);
 
         for ($i = 0; $i < $delCount; $i++) {
@@ -100,7 +100,7 @@ final class DelegateTracker
                 $delegates[$i]        = $b;
             }
 
-            $currentSeed = hash('sha256', $currentSeed);
+            $currentSeed = hex2bin(hash('sha256', $currentSeed));
         }
 
         return $delegates;

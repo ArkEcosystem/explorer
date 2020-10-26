@@ -16,11 +16,11 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\View\View;
 use Livewire\Component;
 
-final class MonitorNetwork extends Component
+final class DelegateTracker extends Component
 {
     public function render(): View
     {
-        $tracking = DelegateTracker::execute(Monitor::activeDelegates());
+        $tracking = DelegateTracker::execute(Monitor::roundDelegates(Monitor::roundNumber()));
 
         $delegates = [];
 
