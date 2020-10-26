@@ -287,11 +287,20 @@ body {
 
 /* Dropdowns Scrolling */
 .dropdown-scrolling::-webkit-scrollbar {
-    @apply rounded-lg bg-theme-primary-100;
+    @apply rounded-lg;
     width: 6px;
-    height: 6px;
+    height: 4px;
+}
+
+.dropdown-scrolling::-webkit-scrollbar-track-piece:start {
+    background: transparent;
+    margin-top: 3rem;
 }
 
 .dropdown-scrolling::-webkit-scrollbar-thumb {
     @apply rounded-lg bg-theme-primary-200;
+}
+
+.dropdown-scrolling {
+    scrollbar-color: #e5f0f8 #bad6f0;
 }

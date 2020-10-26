@@ -1,5 +1,5 @@
 <div x-cloak>
-    <x-ark-dropdown dropdown-classes="left-0 w-64 mt-3 overflow-y-scroll h-128 dropdown-scrolling dark:bg-theme-secondary-900" button-class="items-end w-64 h-10 pb-0 pr-0 dropdown-button" :init-alpine="false">
+    <x-ark-dropdown dropdown-classes="left-0 w-64 mt-3 dark:bg-theme-secondary-900 w-full" button-class="items-end w-64 h-10 pb-0 pr-0 dropdown-button" :init-alpine="false">
         @slot('button')
             <div class="flex items-center justify-end w-full space-x-2 font-semibold flex-inline">
                 <div>
@@ -15,12 +15,13 @@
             </div>
         @endslot
 
-        <div class="items-center justify-center block py-3">
+        {{--w-60 will offset the navbar but then the button won't take the full width, which sucks--}}
+        <div class="items-center justify-center block py-3 overflow-y-scroll h-128 dropdown-scrolling">
             <div class="cursor-pointer dropdown-entry text-theme-secondary-900 dark:text-theme-secondary-200" @click="window.livewire.emit('filterTransactionsByType', 'all'); transactionTypeFilter = 'all'; transactionTypeFilterLabel = '@lang('forms.search.transaction_types.all')'">
                 @lang('forms.search.transaction_types.all')
             </div>
 
-            <hr class="mx-8 border-b border-dashed border-theme-secondary-300">
+            <hr class="mx-8 mt-4 border-b border-dashed border-theme-secondary-300">
 
             @foreach([
                 'core' => [
@@ -76,7 +77,7 @@
                 @endforeach
 
                 @if (! $loop->last)
-                    <hr class="mx-8 border-b border-dashed border-theme-secondary-300">
+                    <hr class="mx-8 mt-3 border-b border-dashed border-theme-secondary-300">
                 @endif
             @endforeach
         </div>
