@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b19a38e967e079b62b5438277f18ef3e",
+    "content-hash": "aacc9a1f50f3c1caae6deaca35320edb",
     "packages": [
         {
             "name": "arkecosystem/crypto",
@@ -9808,6 +9808,48 @@
                 }
             ],
             "time": "2020-06-27T23:57:46+00:00"
+        },
+        {
+            "name": "furqansiddiqui/bip39-mnemonic-php",
+            "version": "0.1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/furqansiddiqui/bip39-mnemonic-php.git",
+                "reference": "98342e3ea35f5b4973a5a5ff19761b8cd09d2fe3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/furqansiddiqui/bip39-mnemonic-php/zipball/98342e3ea35f5b4973a5a5ff19761b8cd09d2fe3",
+                "reference": "98342e3ea35f5b4973a5a5ff19761b8cd09d2fe3",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "php": ">=7.2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "FurqanSiddiqui\\BIP39\\": [
+                        "src"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "BIP39 Mnemonics implementation in PHP",
+            "keywords": [
+                "BIP-0039",
+                "bip39",
+                "mnemonics"
+            ],
+            "support": {
+                "issues": "https://github.com/furqansiddiqui/bip39-mnemonic-php/issues",
+                "source": "https://github.com/furqansiddiqui/bip39-mnemonic-php/tree/0.1.3"
+            },
+            "time": "2019-03-30T14:30:41+00:00"
         },
         {
             "name": "fzaninotto/faker",
