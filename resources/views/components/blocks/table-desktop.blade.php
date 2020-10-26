@@ -30,7 +30,7 @@
                     </td>
                     <td class="hidden lg:table-cell">
                         <x-general.loading-state.text :text="$block->timestamp()" />
-                        {{--TODO: Everything dissapear once we apply the wire:loading.class here, to investigate, might just be me locally --}}
+
                         <span wire:loading.class="hidden">{{ $block->timestamp() }}</span>
                     </td>
                     <td>
