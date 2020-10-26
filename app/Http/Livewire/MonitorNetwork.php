@@ -20,7 +20,7 @@ final class MonitorNetwork extends Component
 {
     public function render(): View
     {
-        $tracking = self::execute(Monitor::roundDelegates(Monitor::roundNumber()));
+        $tracking = DelegateTracker::execute(Monitor::roundDelegates(Monitor::roundNumber()));
 
         $delegates = [];
 
