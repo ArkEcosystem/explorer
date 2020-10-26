@@ -11,7 +11,7 @@
         :init-alpine="false"
     >
         @slot('button')
-            <div class="transaction-filter-button-container space-x-2">
+            <div class="space-x-2 transaction-filter-button-container">
                 <div>
                     <span>@lang('general.transaction.type'):</span>
 
