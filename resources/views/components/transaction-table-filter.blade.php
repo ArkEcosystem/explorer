@@ -17,7 +17,7 @@
 
                     <span
                         x-text="transactionTypeFilterLabel"
-                        class="text-theme-secondary-900 md:text-theme-secondary-700"
+                        class="text-theme-secondary-900 md:text-theme-secondary-700 dark:text-theme-secondary-200"
                     ></span>
                 </div>
 
