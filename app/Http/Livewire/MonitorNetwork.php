@@ -12,7 +12,6 @@ use App\Services\Monitor\DelegateTracker;
 use App\Services\Monitor\Monitor;
 use App\Services\NumberFormatter;
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\View\View;
 use Livewire\Component;
@@ -80,14 +79,5 @@ final class MonitorNetwork extends Component
         return view('livewire.monitor-network', [
             'delegates' => $delegates,
         ]);
-    }
-
-    public function activeQuery(): Builder
-    {
-        return Wallet::query()
-            ->whereNotNull('attributes->delegate->username')
-            ->whereRaw("(\"attributes\"->'delegate'->>'rank')::numeric <= ?", [Network::delegateCount()])
-            ->orderByRaw("(\"attributes\"->'delegate'->>'rank')::numeric ASC")
-            ->get();
     }
 }
