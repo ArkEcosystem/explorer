@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Livewire;
 
 use App\Http\Livewire\Concerns\HasDelegateQueries;
+use App\ViewModels\ViewModelFactory;
 use Illuminate\View\View;
 use Livewire\Component;
 
@@ -35,7 +36,7 @@ final class MonitorDelegateTable extends Component
         }
 
         return view('livewire.monitor-delegate-table', [
-            'delegates' => $delegates,
+            'delegates' => ViewModelFactory::collection($delegates),
         ]);
     }
 }

@@ -14,14 +14,17 @@ trait HasDelegateQueries
     {
         return Wallet::query()
             ->whereNotNull('attributes->delegate->username')
-            ->where('attributes->delegate->rank', '<=', Network::delegateCount());
+            ->where('attributes->delegate->rank', '<=', Network::delegateCount())
+            ->orderBy('attributes->delegate->rank', 'asc')
+            ->limit(Network::delegateCount());
     }
 
     public function standbyQuery(): Builder
     {
         return Wallet::query()
             ->whereNotNull('attributes->delegate->username')
-            ->where('attributes->delegate->rank', '>', Network::delegateCount());
+            ->where('attributes->delegate->rank', '>', Network::delegateCount())
+            ->orderBy('attributes->delegate->rank', 'asc');
     }
 
     public function resignedQuery(): Builder
