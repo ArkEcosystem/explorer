@@ -14,7 +14,12 @@ it('should aggregate the total amount forged by the given public keys', function
         'generator_public_key' => 'generator',
     ])->pluck('generator_public_key')->toArray();
 
+    Block::factory(10)->create([
+        'generator_public_key' => 'another-generator',
+    ]);
+
     $result = (new TotalBlocksByPublicKeysAggregate())->aggregate(['generator']);
 
     expect($result)->toBeArray();
+    expect($result)->toBe(['generator' => 10]);
 });
