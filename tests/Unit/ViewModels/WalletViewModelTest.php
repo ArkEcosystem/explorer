@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Enums\CoreTransactionTypeEnum;
 use App\Enums\MagistrateTransactionEntityActionEnum;
 
 use App\Enums\MagistrateTransactionTypeEnum;
@@ -65,7 +66,7 @@ it('should get the balance as percentage from supply', function () {
     ]);
 
     expect($this->subject->balancePercentage())->toBeString();
-    expect($this->subject->balancePercentage())->toBe('10%');
+    expect($this->subject->balancePercentage())->toBe('10.00%');
 });
 
 it('should get the votes', function () {
@@ -82,7 +83,7 @@ it('should get the votes as percentage from supply', function () {
     ]);
 
     expect($this->subject->votesPercentage())->toBeString();
-    expect($this->subject->votesPercentage())->toBe('10%');
+    expect($this->subject->votesPercentage())->toBe('10.00%');
 });
 
 it('should sum up the amount forged', function () {
@@ -214,4 +215,96 @@ it('should get the wallet of the vote', function () {
     Cache::put('votes.'.$vote->public_key, $vote);
 
     expect($this->subject->vote())->toBeInstanceOf(WalletViewModel::class);
+});
+
+it('should fail to get the wallet of the vote if it is not cached', function () {
+    expect($this->subject->vote())->toBeNull();
+
+    $vote = Wallet::factory()->create();
+
+    $this->subject = new WalletViewModel(Wallet::factory()->create([
+        'attributes' => [
+            'vote' => $vote->public_key,
+        ],
+    ]));
+
+    expect($this->subject->vote())->toBeNull();
+});
+
+it('should get the performance if the wallet is a delegate', function () {
+    $this->subject = new WalletViewModel(Wallet::factory()->create([
+        'balance'      => '100000000000',
+        'nonce'        => 1000,
+        'attributes'   => [
+            'delegate' => [],
+        ],
+    ]));
+
+    expect($this->subject->performance())->toBeArray();
+});
+
+it('should fail to get the performance if the wallet is not a delegate', function () {
+    $this->subject = new WalletViewModel(Wallet::factory()->create([
+        'balance'      => '100000000000',
+        'nonce'        => 1000,
+        'attributes'   => [],
+    ]));
+
+    expect($this->subject->performance())->toBeEmpty();
+});
+
+it('should determine if the delegate just missed a block', function () {
+    Cache::put('performance:'.$this->subject->publicKey(), [true, false, true, true, true]);
+
+    expect($this->subject->justMissed())->toBeFalse();
+
+    Cache::put('performance:'.$this->subject->publicKey(), [true, false, true, false, true]);
+
+    expect($this->subject->justMissed())->toBeFalse();
+
+    Cache::put('performance:'.$this->subject->publicKey(), [true, true, true, true, false]);
+
+    expect($this->subject->justMissed())->toBeTrue();
+});
+
+it('should determine if the delegate keeps is missing blocks', function () {
+    Cache::put('performance:'.$this->subject->publicKey(), [true, false, true, true, true]);
+
+    expect($this->subject->isMissing())->toBeFalse();
+
+    Cache::put('performance:'.$this->subject->publicKey(), [true, false, true, false, true]);
+
+    expect($this->subject->isMissing())->toBeTrue();
+});
+
+it('should get the resignation id', function () {
+    $this->subject = new WalletViewModel(Wallet::factory()->create([
+        'balance'      => '100000000000',
+        'nonce'        => 1000,
+        'attributes'   => [
+            'delegate' => [
+                'resigned' => true,
+            ],
+        ],
+    ]));
+
+    Transaction::factory()->create([
+        'type'              => CoreTransactionTypeEnum::DELEGATE_RESIGNATION,
+        'type_group'        => TransactionTypeGroupEnum::CORE,
+        'sender_public_key' => $this->subject->publicKey(),
+    ]);
+
+    expect($this->subject->resignationId())->toBeString();
+});
+
+it('should fail to get the resignation id if the delegate is not resigned', function () {
+    $this->subject = new WalletViewModel(Wallet::factory()->create([
+        'balance'      => '100000000000',
+        'nonce'        => 1000,
+        'attributes'   => [
+            'delegate' => [],
+        ],
+    ]));
+
+    expect($this->subject->resignationId())->toBeNull();
 });

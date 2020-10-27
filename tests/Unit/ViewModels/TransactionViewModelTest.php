@@ -720,16 +720,25 @@ it('should get the payments', function () {
         'type_group' => TransactionTypeGroupEnum::CORE,
         'asset'      => [
             'payments' => [
-                ['amount' => 10, 'recipientId' => 'A'],
-                ['amount' => 20, 'recipientId' => 'B'],
-                ['amount' => 30, 'recipientId' => 'C'],
-                ['amount' => 40, 'recipientId' => 'D'],
-                ['amount' => 50, 'recipientId' => 'E'],
+                ['amount' => '1000000000', 'recipientId' => 'A'],
+                ['amount' => '2000000000', 'recipientId' => 'B'],
+                ['amount' => '3000000000', 'recipientId' => 'C'],
+                ['amount' => '4000000000', 'recipientId' => 'D'],
+                ['amount' => '5000000000', 'recipientId' => 'E'],
             ],
         ],
     ]));
 
     assertMatchesSnapshot($this->subject->payments());
+});
+
+it('should fail to get the payments if the transaction is not a multi payment', function () {
+    $this->subject = new TransactionViewModel(Transaction::factory()->create([
+        'type'       => CoreTransactionTypeEnum::TRANSFER,
+        'type_group' => TransactionTypeGroupEnum::CORE,
+    ]));
+
+    expect($this->subject->payments())->toBeEmpty();
 });
 
 it('should get the recipients count', function () {
@@ -766,6 +775,15 @@ it('should get the recipients count', function () {
     expect($this->subject->recipientsCount())->toBe('5');
 });
 
+it('should fail to get the recipients count if the transaction is not a multi payment', function () {
+    $this->subject = new TransactionViewModel(Transaction::factory()->create([
+        'type'       => CoreTransactionTypeEnum::TRANSFER,
+        'type_group' => TransactionTypeGroupEnum::CORE,
+    ]));
+
+    expect($this->subject->recipientsCount())->toBe('0');
+});
+
 it('should get the participants', function () {
     $this->subject = new TransactionViewModel(Transaction::factory()->create([
         'type'       => CoreTransactionTypeEnum::MULTI_SIGNATURE,
@@ -793,6 +811,15 @@ it('should get the participants', function () {
     ]));
 
     expect($this->subject->participants())->toHaveCount(5);
+});
+
+it('should fail to get the participants if the transaction is not a multi signature registrations', function () {
+    $this->subject = new TransactionViewModel(Transaction::factory()->create([
+        'type'       => CoreTransactionTypeEnum::TRANSFER,
+        'type_group' => TransactionTypeGroupEnum::CORE,
+    ]));
+
+    expect($this->subject->participants())->toBeEmpty();
 });
 
 it('should get the type component', function () {
@@ -1083,3 +1110,20 @@ it('should determine if the transaction has extra data', function (bool $outcome
         [],
     ],
 ]);
+
+it('should get the entity name', function () {
+    $subject = new TransactionViewModel(Transaction::factory()->create([
+        'type'       => MagistrateTransactionTypeEnum::ENTITY,
+        'type_group' => TransactionTypeGroupEnum::MAGISTRATE,
+        'asset'      => [
+            'type'    => MagistrateTransactionEntityTypeEnum::MODULE,
+            'subType' => MagistrateTransactionEntitySubTypeEnum::NONE,
+            'action'  => MagistrateTransactionEntityActionEnum::REGISTER,
+            'data'    => [
+                'name' => 'john',
+            ],
+        ],
+    ]));
+
+    expect($subject->entityName())->toBe('john');
+});

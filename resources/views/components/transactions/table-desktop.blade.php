@@ -4,7 +4,7 @@
             <tr>
                 <th class="text-center">@lang('general.transaction.id')</th>
                 <th class="hidden lg:table-cell">@lang('general.transaction.timestamp')</th>
-                <th><span class="pl-14">@lang('general.transaction.sender')</span></th>
+                <th><span class="pl-24">@lang('general.transaction.sender')</span></th>
                 <th><span class="pl-14">@lang('general.transaction.recipient')</span></th>
                 <th class="text-right">@lang('general.transaction.amount')</th>
                 <th class="hidden text-right xl:table-cell">@lang('general.transaction.fee')</th>
@@ -31,7 +31,11 @@
                         <span wire:loading.class="hidden">{{ $transaction->timestamp() }}</span>
                     </td>
                     <td>
-                        <x-general.address :address="$transaction->sender()" with-loading />
+                        @isset($useDirection)
+                            <x-transactions.sender :transaction="$transaction" :wallet="$wallet" with-loading />
+                        @else
+                            <x-general.address :address="$transaction->sender()" with-loading />
+                        @endif
                     </td>
                     <td>
                         <x-transactions.recipient :transaction="$transaction" with-loading />
@@ -40,7 +44,15 @@
                         <x-general.loading-state.text :text="$transaction->amount()" />
 
                         <div wire:loading.class="hidden">
-                            <x-general.amount-fiat-tooltip :amount="$transaction->amount()" :fiat="$transaction->amountFiat()" />
+                            @isset($useDirection)
+                                @if($transaction->isSent($wallet->address()))
+                                    <x-general.amount-fiat-tooltip :amount="$transaction->amount()" :fiat="$transaction->amountFiat()" is-sent />
+                                @else
+                                    <x-general.amount-fiat-tooltip :amount="$transaction->amount()" :fiat="$transaction->amountFiat()" is-received />
+                                @endif
+                            @else
+                                <x-general.amount-fiat-tooltip :amount="$transaction->amount()" :fiat="$transaction->amountFiat()" />
+                            @endisset
                         </div>
                     </td>
                     <td class="hidden text-right xl:table-cell">

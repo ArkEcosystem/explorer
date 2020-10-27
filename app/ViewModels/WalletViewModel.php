@@ -4,8 +4,11 @@ declare(strict_types=1);
 
 namespace App\ViewModels;
 
+use App\Contracts\ViewModel;
 use App\Facades\Network;
+use App\Models\Scopes\DelegateResignationScope;
 use App\Models\Scopes\EntityRegistrationScope;
+use App\Models\Transaction;
 use App\Models\Wallet;
 use App\Services\BigNumber;
 use App\Services\Blockchain\NetworkStatus;
@@ -16,9 +19,8 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Mattiasgeniar\Percentage\Percentage;
-use Spatie\ViewModels\ViewModel;
 
-final class WalletViewModel extends ViewModel
+final class WalletViewModel implements ViewModel
 {
     private Wallet $wallet;
 
@@ -182,13 +184,11 @@ final class WalletViewModel extends ViewModel
         return Arr::has($this->wallet, 'attributes.delegate');
     }
 
-    // @TODO: base view model calls this even if we don't use it
     public function hasRegistrations(): bool
     {
         return $this->wallet->sentTransactions()->withScope(EntityRegistrationScope::class)->count() > 0;
     }
 
-    // @TODO: base view model calls this even if we don't use it
     public function registrations(): Collection
     {
         return ViewModelFactory::collection($this->wallet->sentTransactions()->withScope(EntityRegistrationScope::class)->get());
@@ -214,14 +214,39 @@ final class WalletViewModel extends ViewModel
         return new static($wallet);
     }
 
-    public function isMissing(): bool
+    public function resignationId(): ?string
     {
-        return false;
+        if (! Arr::has($this->wallet, 'attributes.delegate.resigned')) {
+            return null;
+        }
+
+        return Cache::rememberForever('resignationId:'.$this->wallet->address, function () {
+            return Transaction::withScope(DelegateResignationScope::class)->firstOrFail()->id;
+        });
     }
 
-    public function hasMissedRecently(): bool
+    public function performance(): array
     {
-        return false;
+        if (! $this->isDelegate()) {
+            return [];
+        }
+
+        return Cache::get('performance:'.$this->publicKey(), []);
+    }
+
+    public function justMissed(): bool
+    {
+        $missedOne  = collect($this->performance())->filter(fn ($performance) => $performance === false)->count() === 1;
+        $missedLast = collect($this->performance())->last() === false;
+
+        return $missedOne && $missedLast;
+    }
+
+    public function isMissing(): bool
+    {
+        return collect($this->performance())
+            ->filter(fn ($performance) => $performance === false)
+            ->count() > 1;
     }
 
     private function findWalletByKnown(): ?array
