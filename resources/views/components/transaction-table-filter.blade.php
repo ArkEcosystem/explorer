@@ -12,7 +12,7 @@
         @slot('button')
             <div class="flex items-center justify-end w-full space-x-2 font-semibold flex-inline">
                 <div>
-                    <span class="text-theme-secondary-500">@lang('general.transaction.type'): </span>
+                    <span class="text-theme-secondary-500 dark:text-theme-secondary-600">@lang('general.transaction.type'): </span>
                     <span class="text-theme-secondary-700"x-text="transactionTypeFilterLabel"></span>
                 </div>
 
