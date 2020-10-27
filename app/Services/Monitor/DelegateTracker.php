@@ -387,10 +387,6 @@ final class DelegateTracker
             }
         }
 
-        if (count($activeDelegates) < $maxDelegates) {
-            return [];
-        }
-
         // Map Next Forgers...
         $result = [
             // 'delegates'     => [],
