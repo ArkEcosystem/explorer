@@ -35,7 +35,7 @@ final class CachePastRoundPerformanceByPublicKey implements ShouldQueue
             return [
                 $round => [
                     'min' => $roundStart,
-                    'max' => $roundStart + 50,
+                    'max' => $roundStart + (Network::delegateCount() - 1),
                 ],
             ];
         })->map(function ($round): bool {
