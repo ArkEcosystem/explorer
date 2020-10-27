@@ -1,4 +1,4 @@
-<div class="flex flex-row items-center space-x-3">
+<div class="flex items-center justify-between flex-row-reverse md:flex-row md:space-x-3 md:justify-start">
     <div>
         <div wire:loading.class="w-6 h-6 rounded-full md:w-11 md:h-11 loading-state"></div>
     </div>
