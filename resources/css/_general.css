@@ -322,7 +322,7 @@ body {
 }
 
 .transaction-filter-dropdown {
-    @apply right-0 w-full mt-3 overflow-y-scroll h-128;
+    @apply right-0 w-full mt-3 h-128;
 }
 .theme-dark .transaction-filter-dropdown {
     @apply bg-theme-secondary-900;
