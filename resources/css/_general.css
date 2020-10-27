@@ -352,11 +352,11 @@ body {
     }
 
     .transaction-filter-dropdown {
-        @apply w-64;
+        @apply w-84;
     }
 
     .transaction-filter-button {
-        @apply items-end w-64 h-10 pb-0 pr-0;
+        @apply items-end w-84 h-10 pb-0 pr-0;
     }
 
     .transaction-filter-button-container {
