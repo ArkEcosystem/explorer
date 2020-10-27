@@ -29,8 +29,8 @@
                         <x-general.address :address="$delegate->username()" />
                     </td>
                     <td>
-                        @foreach($delegate->performance() as $performance)
-                            @if($performance)
+                        @foreach($delegate->performance() as $performed)
+                            @if($performed)
                                 {{-- @TODO: svg icon --}}
                                 Forged
                             @else
