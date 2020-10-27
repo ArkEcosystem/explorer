@@ -9,6 +9,7 @@ use function Tests\configureExplorerDatabase;
 
 beforeEach(fn () => configureExplorerDatabase());
 
+// @TODO: make assertions about data visibility
 it('should render without errors', function () {
     $component = Livewire::test(MonitorDelegateTable::class);
 });
