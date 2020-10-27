@@ -12,8 +12,9 @@
             @php($address = $transaction->recipient() ?? $transaction->sender())
             <x-general.address :address="$address" />
         @elseif ($transaction->isVote())
-            @php($address = $transaction->voted()->address)
-            <x-general.address :address="$address">
+            @php($voteTransaction = $transaction->voted())
+
+            <x-general.username :transaction="$voteTransaction">
                 <x-slot name="icon">
                     <x-transactions.icon :icon-type="$iconType" />
                 </x-slot>
@@ -23,10 +24,11 @@
                         @lang('general.transaction.vote')
                     </span>
                 </x-slot>
-            </x-general.address>
+            </x-general.username>
         @elseif ($transaction->isUnvote())
-            @php($address = $transaction->unvoted()->address)
-            <x-general.address :address="$address">
+            @php($unvoteTransaction = $transaction->unvoted())
+
+            <x-general.username :transaction="$unvoteTransaction">
                 <x-slot name="icon">
                     <x-transactions.icon :icon-type="$iconType" />
                 </x-slot>
@@ -36,7 +38,7 @@
                         @lang('general.transaction.unvote')
                     </span>
                 </x-slot>
-            </x-general.address>
+            </x-general.username>
         @else
             <div class="flex items-center space-x-3">
                 <x-transactions.icon :icon-type="$iconType" />
