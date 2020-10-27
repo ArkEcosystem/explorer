@@ -294,7 +294,6 @@ body {
 
 .dropdown-scrolling::-webkit-scrollbar-track-piece:start {
     background: transparent;
-    margin-top: 3rem;
 }
 
 .dropdown-scrolling::-webkit-scrollbar-thumb {
@@ -302,7 +301,7 @@ body {
 }
 
 .dropdown-scrolling {
-    scrollbar-color: #e5f0f8 #bad6f0;
+    scrollbar-color: #bad6f0 transparent;
 }
 
 /* Loading States */
