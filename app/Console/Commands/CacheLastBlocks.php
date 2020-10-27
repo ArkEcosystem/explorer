@@ -16,7 +16,7 @@ final class CacheLastBlocks extends Command
      *
      * @var string
      */
-    protected $signature = 'blocks:latest';
+    protected $signature = 'cache:last-blocks';
 
     /**
      * The console command description.

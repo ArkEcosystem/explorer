@@ -24,7 +24,7 @@ final class CacheLastBlockByPublicKey implements ShouldQueue
         $this->publicKey = $publicKey;
     }
 
-    public function handle()
+    public function handle(): void
     {
         $block = Block::query()
             ->without(['delegate'])

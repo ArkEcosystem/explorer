@@ -15,7 +15,7 @@ final class HorizonServiceProvider extends HorizonApplicationServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         parent::boot();
 
@@ -33,9 +33,10 @@ final class HorizonServiceProvider extends HorizonApplicationServiceProvider
      *
      * @return void
      */
-    protected function gate()
+    protected function gate(): void
     {
-        Gate::define('viewHorizon', function ($user) {
+        Gate::define('viewHorizon', function ($user): bool {
+            /* @phpstan-ignore-next-line */
             return in_array($user->email, [
                 //
             ], true);
