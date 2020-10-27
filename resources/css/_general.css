@@ -200,7 +200,7 @@ body {
 }
 
 .tab-item {
-    @apply relative pt-8 ml-16 border-transparent cursor-pointer pb-7 border-b-3;
+    @apply relative pt-8 ml-16 border-transparent cursor-pointer pb-7 border-b-4;
 }
 .tab-item:first-child {
     @apply ml-0;
