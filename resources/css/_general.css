@@ -285,6 +285,25 @@ body {
     }
 }
 
+/* Dropdowns Scrolling */
+.dropdown-scrolling::-webkit-scrollbar {
+    @apply rounded-lg;
+    width: 6px;
+    height: 4px;
+}
+
+.dropdown-scrolling::-webkit-scrollbar-track-piece:start {
+    background: transparent;
+}
+
+.dropdown-scrolling::-webkit-scrollbar-thumb {
+    @apply rounded-lg bg-theme-primary-200;
+}
+
+.dropdown-scrolling {
+    scrollbar-color: #bad6f0 transparent;
+}
+
 /* Loading States */
 .loading-state {
     @apply bg-theme-secondary-300 animate-pulse;
@@ -305,6 +324,9 @@ body {
 .transaction-filter-dropdown {
     @apply right-0 w-full mt-3 overflow-y-scroll h-128;
 }
+.theme-dark .transaction-filter-dropdown {
+    @apply bg-theme-secondary-900;
+}
 
 .transaction-filter-button {
     @apply w-full font-semibold text-left text-theme-secondary-900;
@@ -320,6 +342,9 @@ body {
 .transaction-filter-button-icon {
     @apply flex items-center justify-center transition duration-150 ease-in-out rounded-full text-theme-secondary-400 w-6 h-6;
 }
+.theme-dark .transaction-filter-button-icon {
+    @apply bg-theme-secondary-800 text-theme-secondary-200;
+}
 
 @screen md {
     .transaction-filter-wrapper {
@@ -331,7 +356,7 @@ body {
     }
 
     .transaction-filter-button {
-        @apply items-end w-64 h-10 pb-0;
+        @apply items-end w-64 h-10 pb-0 pr-0;
     }
 
     .transaction-filter-button-container {

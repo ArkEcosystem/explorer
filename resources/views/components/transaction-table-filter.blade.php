@@ -13,7 +13,7 @@
         @slot('button')
             <div class="space-x-2 transaction-filter-button-container">
                 <div>
-                    <span>@lang('general.transaction.type'):</span>
+                    <span class="text-theme-secondary-500">@lang('general.transaction.type'):</span>
 
                     <span
                         x-text="transactionTypeFilterLabel"
@@ -30,15 +30,15 @@
             </div>
         @endslot
 
-        <div class="items-center justify-center block py-3">
+        <div class="items-center justify-center block py-3 overflow-y-scroll h-128 dropdown-scrolling">
             <div
-                class="cursor-pointer dropdown-entry text-theme-secondary-900"
+                class="cursor-pointer dropdown-entry text-theme-secondary-900 dark:text-theme-secondary-200"
                 @click="window.livewire.emit('filterTransactionsByType', 'all'); transactionTypeFilter = 'all'; transactionTypeFilterLabel = '@lang('forms.search.transaction_types.all')'"
             >
                 @lang('forms.search.transaction_types.all')
             </div>
 
-            <div class="w-full border-b border-theme-secondary-300"></div>
+            <hr class="mx-8 mt-4 border-b border-dashed border-theme-secondary-300">
 
             @foreach([
                 'core' => [
@@ -82,11 +82,11 @@
                     'productEntityUpdate',
                 ],
             ] as $typeGroup => $types)
-                <span class="flex items-center w-full px-8 pt-8 text-sm font-bold leading-5 text-left text-theme-secondary-500">{{ ucfirst($typeGroup) }}</span>
+                <span class="flex items-center w-full px-8 pt-8 text-sm font-bold leading-5 text-left text-theme-secondary-500">{{ strtoupper($typeGroup) }}</span>
 
                 @foreach ($types as $type)
                     <div
-                        class="cursor-pointer dropdown-entry text-theme-secondary-900"
+                        class="cursor-pointer dropdown-entry text-theme-secondary-900 dark:text-theme-secondary-200"
                         @click="window.livewire.emit('filterTransactionsByType', '{{ $type }}'); transactionTypeFilter = '{{ $type }}'; transactionTypeFilterLabel = '@lang('forms.search.transaction_types.'.$type)'"
                     >
                         @lang('forms.search.transaction_types.'.$type)
@@ -94,7 +94,7 @@
                 @endforeach
 
                 @if (! $loop->last)
-                    <div class="w-full border-b border-theme-secondary-300"></div>
+                    <hr class="mx-8 mt-3 border-b border-dashed border-theme-secondary-300">
                 @endif
             @endforeach
         </div>
