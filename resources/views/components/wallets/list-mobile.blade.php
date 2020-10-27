@@ -1,14 +1,14 @@
 <div class="space-y-8 divide-y md:hidden">
     @foreach ($wallets as $wallet)
         <div class="flex flex-col space-y-3 w-full pt-8 {{ $loop->first ? '' : 'border-t'}} border-theme-secondary-300">
-            <div class="flex w-full justify-between">
+            <div class="flex justify-between w-full">
                 @lang('general.wallet.address')
 
                 <x-general.address :address="$wallet->address()" with-loading />
             </div>
 
             @if ($wallet->isKnown() || $wallet->isOwnedByExchange())
-            <div class="flex w-full justify-between">
+            <div class="flex justify-between w-full">
                 @lang('general.wallet.info')
 
                 <div class="flex flex-col space-y-4">
@@ -45,7 +45,7 @@
             </div>
             @endif
 
-            <div class="flex w-full justify-between">
+            <div class="flex justify-between w-full">
                 @lang('general.wallet.balance')
 
                 <x-general.loading-state.text :text="$wallet->balance()" />
@@ -55,7 +55,7 @@
                 </div>
             </div>
 
-            <div class="flex w-full justify-between">
+            <div class="flex justify-between w-full">
                 @lang('general.wallet.supply')
 
                 <x-general.loading-state.text :text="$wallet->balancePercentage()" />
