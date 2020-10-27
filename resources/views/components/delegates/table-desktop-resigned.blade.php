@@ -15,7 +15,7 @@
                             <x-general.loading-state.icon icon="link" class="mx-auto" />
 
                             <a href="{{ route('transaction', $delegate->resignationId()) }}" class="mx-auto link" wire:loading.class="hidden">
-                                @svg('app-tx-id', 'h-4 w-4')
+                                @svg('app-details', 'h-4 w-4')
                             </a>
                         </div>
                     </td>
