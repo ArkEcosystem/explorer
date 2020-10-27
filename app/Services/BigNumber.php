@@ -69,6 +69,7 @@ final class BigNumber implements Stringable
 
     /**
      * @codeCoverageIgnore
+     *
      * @return string
      */
     public function __toString()
