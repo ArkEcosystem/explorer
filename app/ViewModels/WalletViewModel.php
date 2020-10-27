@@ -52,9 +52,9 @@ final class WalletViewModel implements ViewModel
     /**
      * @codeCoverageIgnore
      */
-    public function rank(): ?int
+    public function rank(): ?string
     {
-        return Arr::get($this->wallet, 'attributes.delegate.rank');
+        return NumberFormatter::ordinal(Arr::get($this->wallet, 'attributes.delegate.rank', 0));
     }
 
     public function balance(): string
@@ -92,6 +92,11 @@ final class WalletViewModel implements ViewModel
         return NumberFormatter::percentage(BigNumber::new(Percentage::calculate($voteBalance, NetworkStatus::supply()))->toFloat());
     }
 
+    public function voterCount(): string
+    {
+        return NumberFormatter::number(Wallet::where('attributes->vote', $this->publicKey())->count());
+    }
+
     public function amountForged(): string
     {
         $result = Arr::get(Cache::get('delegates.totalAmounts', []), $this->wallet->public_key, 0);
@@ -111,6 +116,13 @@ final class WalletViewModel implements ViewModel
         $result = Arr::get(Cache::get('delegates.totalRewards', []), $this->wallet->public_key, 0);
 
         return NumberFormatter::currency(BigNumber::new($result)->toFloat(), Network::currency());
+    }
+
+    public function blocksForged(): string
+    {
+        $result = Arr::get(Cache::get('delegates.totalBlocks', []), $this->wallet->public_key, 0);
+
+        return NumberFormatter::number($result);
     }
 
     public function isKnown(): bool

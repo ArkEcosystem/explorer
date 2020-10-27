@@ -102,6 +102,7 @@ return [
             'votes'            => 'Votes :0',
             'forged_blocks'    => 'Forged Blocks',
             'productivity'     => 'Productivity',
+            'voters'           => 'Voters',
         ],
     ],
 
@@ -130,6 +131,14 @@ return [
             'next_delegate'          => 'Next',
             'blocks_generated'       => '(:0/:1) Blocks Generated',
         ],
+    ],
+
+    'blocks_by_wallet' => [
+        'title' => 'Forged Blocks',
+    ],
+
+    'voters_by_wallet' => [
+        'title' => 'Voting for Delegate',
     ],
 
 ];
