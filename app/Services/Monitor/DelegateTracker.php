@@ -375,7 +375,7 @@ final class DelegateTracker
         $blockTime    = Network::blockTime();
 
         // Act
-        $forgingInfo = ForgingInfoCalculator::calculateForgingInfo($timestamp, $height);
+        $forgingInfo = ForgingInfoCalculator::calculate($timestamp, $height);
 
         // Determine Next Forgers...
         $nextForgers = [];

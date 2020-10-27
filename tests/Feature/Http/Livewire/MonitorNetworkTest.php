@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 use App\Http\Livewire\MonitorNetwork;
 use App\Models\Block;
-
 use App\Models\Round;
 use App\Models\Wallet;
 use Illuminate\Support\Facades\Cache;
