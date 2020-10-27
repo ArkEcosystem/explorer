@@ -79,11 +79,30 @@ final class CacheChartData extends Command
 
             Cache::put('prices.'.$currency, $prices);
 
-            $this->cacheKeyValue('chart.prices.day', $prices->take(1), 'H:s');
-            $this->cacheKeyValue('chart.prices.week', $prices->take(7), 'd.m');
-            $this->cacheKeyValue('chart.prices.month', $prices->take(30), 'd.m');
-            $this->cacheKeyValue('chart.prices.quarter', $prices->take(120), 'W');
-            $this->cacheKeyValue('chart.prices.year', $prices->take(365), 'M');
+            $this->cacheKeyValue(
+                'chart.prices.day',
+                $this->groupByDate($prices->take(1), 'H:s'),
+            );
+
+            $this->cacheKeyValue(
+                'chart.prices.week',
+                $this->groupByDate($prices->take(7), 'd.m'),
+            );
+
+            $this->cacheKeyValue(
+                'chart.prices.month',
+                $this->groupByDate($prices->take(30), 'd.m'),
+            );
+
+            $this->cacheKeyValue(
+                'chart.prices.quarter',
+                $this->groupByDate($prices->take(120), 'W'),
+            );
+
+            $this->cacheKeyValue(
+                'chart.prices.year',
+                $this->groupByDate($prices->take(365), 'M'),
+            );
         }
     }
 
@@ -92,11 +111,30 @@ final class CacheChartData extends Command
         $fees  = new FeeByRangeAggregate();
         $today = Carbon::now()->endOfDay();
 
-        $this->cacheKeyValue('chart.fees.day', $fees->aggregate(Carbon::now()->subDay(), $today, 'H:s'));
-        $this->cacheKeyValue('chart.fees.week', $fees->aggregate(Carbon::now()->subDays(7), $today, 'd.m'));
-        $this->cacheKeyValue('chart.fees.month', $fees->aggregate(Carbon::now()->subDays(30), $today, 'd.m'));
-        $this->cacheKeyValue('chart.fees.quarter', $fees->aggregate(Carbon::now()->subDays(120), $today, 'W'));
-        $this->cacheKeyValue('chart.fees.year', $fees->aggregate(Carbon::now()->subDays(365), $today, 'M'));
+        $this->cacheKeyValue(
+            'chart.fees.day',
+            $this->groupByDate($fees->aggregate(Carbon::now()->subDay(), $today, 'H:s'), 'H:s')
+        );
+
+        $this->cacheKeyValue(
+            'chart.fees.week',
+            $fees->aggregate(Carbon::now()->subDays(7), $today, 'd.m')
+        );
+
+        $this->cacheKeyValue(
+            'chart.fees.month',
+            $fees->aggregate(Carbon::now()->subDays(30), $today, 'd.m')
+        );
+
+        $this->cacheKeyValue(
+            'chart.fees.quarter',
+            $fees->aggregate(Carbon::now()->subDays(120), $today, 'M')
+        );
+
+        $this->cacheKeyValue(
+            'chart.fees.year',
+            $fees->aggregate(Carbon::now()->subDays(365), $today, 'M')
+        );
     }
 
     private function cacheStatistics(): void
@@ -107,14 +145,19 @@ final class CacheChartData extends Command
         Cache::put(CacheKeyEnum::VOTES_PERCENTAGE, (new VotePercentageAggregate())->aggregate());
     }
 
-    /**
-     * @param mixed $value
-     */
     private function cacheKeyValue(string $key, Collection $datasets): void
     {
         Cache::put($key, [
             'labels'   => $datasets->keys()->toArray(),
             'datasets' => $datasets->values()->toArray(),
         ]);
+    }
+
+    private function groupByDate(Collection $datasets, string $dateFormat): Collection
+    {
+        return $datasets
+            ->groupBy(fn ($_, $key) => Carbon::parse($key)->format($dateFormat))
+            ->mapWithKeys(fn ($values, $key) => [$key => $values->first()])
+            ->ksort();
     }
 }
