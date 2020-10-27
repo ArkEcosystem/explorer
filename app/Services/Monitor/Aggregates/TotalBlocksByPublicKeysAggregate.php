@@ -15,7 +15,7 @@ final class TotalBlocksByPublicKeysAggregate
             ->selectRaw('COUNT(*), generator_public_key')
             ->groupBy('generator_public_key')
             ->get()
-            ->mapWithKeys(fn ($delegate) => [$delegate->generator_public_key => $delegate->sum])
+            ->mapWithKeys(fn ($delegate) => [$delegate->generator_public_key => $delegate->count])
             ->toArray();
     }
 }
