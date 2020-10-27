@@ -1,6 +1,6 @@
 <div>
     <div
-        class="flex items-center flex-row-reverse md:flex-row md:space-x-3 md:justify-start"
+        class="flex flex-row-reverse items-center md:flex-row md:space-x-3 md:justify-start"
         @if ($withLoading ?? false)
             wire:loading.class="hidden"
             {{ $loadingAttribute ?? ''}}
@@ -12,7 +12,7 @@
             {{ $icon }}
         @endunless
 
-        <div class="mr-4 md:mr-0 flex items-center">
+        <div class="flex items-center mr-4 md:mr-0">
             @if ($prefix ?? false)
                 {{ $prefix }}
             @endif
