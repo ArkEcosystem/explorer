@@ -28,4 +28,16 @@ return [
         'image'       => '',
     ],
 
+    'blocks_by_wallet' => [
+        'title'       => 'Block History',
+        'description' => '',
+        'image'       => '',
+    ],
+
+    'voters_by_wallet' => [
+        'title'       => 'Voting for Delegate',
+        'description' => '',
+        'image'       => '',
+    ],
+
 ];
