@@ -18,6 +18,7 @@ final class NetworkStatusBlock extends Component
     {
         $marketCap = 0;
 
+        // @codeCoverageIgnore
         if (Network::canBeExchanged()) {
             $marketCap = NetworkStatus::supply() * CryptoCompare::price(Network::currency(), Settings::currency());
         }

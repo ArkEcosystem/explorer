@@ -48,18 +48,6 @@ final class Round extends Model
     }
 
     /**
-     * Scope a query to sort rounds by number.
-     *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     *
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function scopeNumber($query): Builder
-    {
-        return $query->orderBy('round', 'desc');
-    }
-
-    /**
      * Get the current connection name for the model.
      *
      * @return string

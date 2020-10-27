@@ -22,7 +22,7 @@ final class Monitor
 
     public static function roundNumber(): int
     {
-        return Round::number()->firstOrFail()->round;
+        return Round::orderBy('round', 'desc')->firstOrFail()->round;
     }
 
     public static function lastFiveRounds(int $round): Collection
