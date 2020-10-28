@@ -32,6 +32,9 @@
 
                 return market;
             },
+            updateChart() {
+                this.chart.update();
+            },
             renderChart() {
                 let themeColours = {
                     light: {
@@ -225,7 +228,7 @@
 <div
     x-data="makeChart('{{ $identifier }}', '{{ $coloursScheme }}')"
     x-init="renderChart()"
-    x-on:toggle-dark-mode.window="renderChart()"
+    x-on:toggle-dark-mode.window="updateChart()"
     class="flex flex-col w-full bg-white border-theme-secondary-100 dark:border-black dark:bg-theme-secondary-900">
     <div class="flex flex-col w-full">
         <div class="relative flex items-center justify-between w-full">
