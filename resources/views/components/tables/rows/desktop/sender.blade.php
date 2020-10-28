@@ -1,1 +1,5 @@
-<x-general.address :address="$model->sender()" with-loading />
+<x-general.address
+    :address="$model->sender()->address()"
+    :username="$model->sender()->username()"
+    with-loading
+/>

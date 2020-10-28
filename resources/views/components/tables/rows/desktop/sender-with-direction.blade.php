@@ -10,13 +10,16 @@
             </div>
         </div>
 
-        <x-general.avatar :identifier="$model->sender()" />
+        <x-general.avatar :identifier="$model->sender()->address()" />
     </div>
 
     <div class="flex flex-col space-y-2">
         <span class="text-lg font-semibold text-theme-secondary-700">
             <div wire:loading.class="hidden">
-                <x-general.address-iconless :address="$model->sender()" />
+                <x-general.address-iconless
+                    :address="$model->sender()->address()"
+                    :username="$model->sender()->username()"
+                />
             </div>
         </span>
     </div>

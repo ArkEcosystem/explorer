@@ -10,13 +10,16 @@
             </div>
         </div>
 
-        <x-general.avatar :identifier="$transaction->sender()" />
+        <x-general.avatar :identifier="$transaction->sender()->address()" />
     </div>
 
     <div class="flex flex-col space-y-2">
         <span class="text-lg font-semibold text-theme-secondary-700">
             <div wire:loading.class="hidden">
-                <x-general.address-iconless :address="$transaction->sender()" />
+                <x-general.address-iconless
+                    :address="$transaction->sender()->address()"
+                    :username="$transaction->sender()->username()"
+                />
             </div>
         </span>
     </div>

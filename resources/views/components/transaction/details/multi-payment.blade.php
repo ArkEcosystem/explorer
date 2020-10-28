@@ -1,7 +1,8 @@
 <x-details.address
     :title="trans('general.transaction.sender')"
     :transaction="$transaction"
-    :address="$transaction->sender()"
+    :address="$transaction->sender()->address()"
+    :username="$transaction->sender()->username()"
     icon="app-volume" />
 
 <x-details.generic :title="trans('general.transaction.recipient')" icon="app-volume">

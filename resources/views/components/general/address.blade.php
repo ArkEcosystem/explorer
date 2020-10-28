@@ -18,11 +18,19 @@
             @endif
 
             <a href="{{ route('wallet', $address) }}" class="font-semibold link sm:hidden md:flex">
-                <x-truncate-middle :value="$address" />
+                @if ($username ?? false)
+                    {{ $username }}
+                @else
+                    <x-truncate-middle :value="$address" />
+                @endif
             </a>
 
             <a href="{{ route('wallet', $address) }}" class="hidden font-semibold link sm:flex md:hidden">
-                {{ $address }}
+                @if ($username ?? false)
+                    {{ $username }}
+                @else
+                    {{ $address }}
+                @endif
             </a>
         </div>
     </div>

@@ -2,18 +2,20 @@
 
 <div wire:key="{{ $transaction->id() }}">
     @php($address = null)
+    @php($username = null)
     @php($text = trans('general.transaction.'.$iconType))
 
     <div @if ($withLoading ?? false) wire:loading.class="hidden" @endif>
-        @if ($transaction->isUnknown())
-            @php($address = $transaction->recipient() ?? $transaction->sender())
-            <x-general.address :address="$address" />
-        @elseif ($transaction->isTransfer())
-            @php($address = $transaction->recipient() ?? $transaction->sender())
-            <x-general.address :address="$address" />
+        @if ($transaction->isTransfer() || $transaction->isUnknown())
+            @php($address = $transaction->recipient()->address())
+            @php($username = $transaction->recipient()->username())
+
+            <x-general.address :address="$address" :username="$username" />
         @elseif ($transaction->isVote())
-            @php($address = $transaction->voted()->username())
-            <x-general.address :address="$address">
+            @php($address = $transaction->voted()->address())
+            @php($username = $transaction->voted()->username())
+
+            <x-general.address :address="$address" :username="$username">
                 <x-slot name="icon">
                     <x-transactions.icon :icon-type="$iconType" />
                 </x-slot>
@@ -25,8 +27,10 @@
                 </x-slot>
             </x-general.address>
         @elseif ($transaction->isUnvote())
-            @php($address = $transaction->unvoted()->username())
-            <x-general.address :address="$address">
+            @php($address = $transaction->unvoted()->address())
+            @php($username = $transaction->unvoted()->username())
+
+            <x-general.address :address="$address" :username="$username">
                 <x-slot name="icon">
                     <x-transactions.icon :icon-type="$iconType" />
                 </x-slot>
@@ -49,6 +53,6 @@
     </div>
 
     @if ($withLoading ?? false)
-        <x-general.loading-state.recipient-address :address="$address" :text="$text" />
+        <x-general.loading-state.recipient-address :address="$address" :username="$username" :text="$text" />
     @endif
 </div>
