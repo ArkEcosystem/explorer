@@ -15,14 +15,4 @@
         <x-home.content />
     @endsection
 
-    @push('scripts')
-        <script>
-            document.addEventListener("DOMContentLoaded", () => {
-                window.addEventListener('livewire:load', () => {
-                    window.livewire.emit('performedInitialLoad', true);
-                });
-            });
-        </script>
-    @endpush
-
 @endcomponent
