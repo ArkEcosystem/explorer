@@ -2,7 +2,7 @@
     <table>
         <thead>
             <tr>
-                <th class="text-center"></th>
+                <th class="text-center">&nbsp;</th>
                 <th class="hidden lg:table-cell">@lang('general.transaction.timestamp')</th>
                 <th><span class="pl-24">@lang('general.transaction.sender')</span></th>
                 <th><span class="pl-14">@lang('general.transaction.recipient')</span></th>
