@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\ViewModels\Concerns\Transaction;
 
 use App\Models\Wallet;
+use App\ViewModels\ViewModelFactory;
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;
@@ -25,7 +26,7 @@ trait InteractsWithVotes
         return Cache::remember(
             "transaction:wallet:{$publicKey}",
             Carbon::now()->addHour(),
-            fn () => Wallet::where('public_key', substr($publicKey, 1))->firstOrFail()
+            fn () => ViewModelFactory::make(Wallet::where('public_key', substr($publicKey, 1))->firstOrFail())
         );
     }
 
@@ -42,7 +43,7 @@ trait InteractsWithVotes
         return Cache::remember(
             "transaction:wallet:{$publicKey}",
             Carbon::now()->addHour(),
-            fn () => Wallet::where('public_key', substr($publicKey, 1))->firstOrFail()
+            fn () => ViewModelFactory::make(Wallet::where('public_key', substr($publicKey, 1))->firstOrFail())
         );
     }
 }
