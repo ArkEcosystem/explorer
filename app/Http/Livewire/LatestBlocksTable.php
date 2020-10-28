@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire;
 
+use App\Http\Livewire\Concerns\PerformsInitialLoad;
 use App\Models\Block;
 use App\ViewModels\ViewModelFactory;
 use Illuminate\Support\Facades\Cache;
@@ -12,6 +13,11 @@ use Livewire\Component;
 
 final class LatestBlocksTable extends Component
 {
+    use PerformsInitialLoad;
+
+    /** @phpstan-ignore-next-line */
+    protected $listeners = ['performedInitialLoad'];
+
     public function render(): View
     {
         $blocks = Cache::remember(

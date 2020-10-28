@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Livewire;
 
 use App\Http\Livewire\Concerns\ManagesTransactionTypeScopes;
+use App\Http\Livewire\Concerns\PerformsInitialLoad;
 use App\Models\Transaction;
 use App\ViewModels\ViewModelFactory;
 use Illuminate\Support\Facades\Cache;
@@ -14,13 +15,14 @@ use Livewire\Component;
 final class LatestTransactionsTable extends Component
 {
     use ManagesTransactionTypeScopes;
+    use PerformsInitialLoad;
 
     public array $state = [
         'type' => 'all',
     ];
 
     /** @phpstan-ignore-next-line */
-    protected $listeners = ['filterTransactionsByType'];
+    protected $listeners = ['filterTransactionsByType', 'performedInitialLoad'];
 
     public function filterTransactionsByType(string $value): void
     {
