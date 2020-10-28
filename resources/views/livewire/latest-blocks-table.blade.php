@@ -1,7 +1,5 @@
 <div id="block-list" class="w-full" wire:poll.{{ Network::blockTime() }}s>
     @if ($performedInitialLoad)
-        {{-- @TODO: we need to use components here that don't get triggered by wire:loading --}}
-
         <x-blocks.table-desktop :blocks="$blocks" />
 
         <x-blocks.list-mobile :blocks="$blocks" />

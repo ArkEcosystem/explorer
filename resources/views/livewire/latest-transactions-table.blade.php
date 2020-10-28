@@ -1,7 +1,5 @@
 <div id="transaction-list" class="w-full" wire:poll.{{ Network::blockTime() }}s>
     @if ($performedInitialLoad)
-        {{-- @TODO: we need to use components here that don't get triggered by wire:loading --}}
-
         <x-transactions.table-desktop :transactions="$transactions" />
 
         <x-transactions.list-mobile :transactions="$transactions" />
