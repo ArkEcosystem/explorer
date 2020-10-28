@@ -315,7 +315,7 @@ body {
 
 /* Transaction Dropdown Filter */
 .transaction-filter-wrapper {
-    @apply relative w-full p-2 mt-8 mb-2 border rounded-lg border-theme-secondary-300;
+    @apply relative w-full p-2 mb-2 border rounded-lg border-theme-secondary-300;
 }
 .theme-dark .transaction-filter-wrapper {
     @apply border-theme-secondary-800;
