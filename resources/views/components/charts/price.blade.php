@@ -33,7 +33,11 @@
                 return market;
             },
             updateChart() {
-                this.chart.update();
+                this.isDarkTheme = ! this.isDarkTheme;
+
+                this.chart.destroy();
+
+                this.renderChart();
             },
             renderChart() {
                 let themeColours = {
