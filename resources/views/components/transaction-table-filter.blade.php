@@ -87,6 +87,9 @@
                 @foreach ($types as $type)
                     <div
                         class="cursor-pointer dropdown-entry text-theme-secondary-900 dark:text-theme-secondary-200"
+                        :class="{
+                            'dropdown-entry-selected': transactionTypeFilter === '{{ $type }}'
+                        }"
                         @click="window.livewire.emit('filterTransactionsByType', '{{ $type }}'); transactionTypeFilter = '{{ $type }}'; transactionTypeFilterLabel = '@lang('forms.search.transaction_types.'.$type)'"
                     >
                         @lang('forms.search.transaction_types.'.$type)
