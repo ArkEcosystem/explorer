@@ -12,7 +12,7 @@
             <x-home.charts :prices="$prices" :fees="$fees" :aggregates="$aggregates" />
         @endif
 
-        <x-home.content />
+        {{-- <x-home.content /> --}}
     @endsection
 
 @endcomponent

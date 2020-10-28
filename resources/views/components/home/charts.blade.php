@@ -3,12 +3,24 @@
         <div class="flex flex-col w-full pt-16 space-x-0 lg:flex-row lg:space-x-10">
             @if(Network::canBeExchanged())
                 @if(Settings::usesPriceChart())
-                    <x-charts.price :data="$prices" identifier="price" colours-scheme="#339A51" />
+                    <x-charts.price
+                        :data="$prices"
+                        identifier="price"
+                        colours-scheme="#339A51"
+                        alpine-show="toggle-price-chart"
+                        :is-visible="Settings::usesPriceChart()"
+                    />
                 @endif
             @endif
 
             @if(Settings::usesFeeChart())
-                <x-charts.price :data="$fees" identifier="fees" colours-scheme="#FFAE10" />
+                <x-charts.price
+                    :data="$fees"
+                    identifier="fees"
+                    colours-scheme="#FFAE10"
+                    alpine-show="toggle-fee-chart"
+                    :is-visible="Settings::usesFeeChart()"
+                />
             @endif
         </div>
 
