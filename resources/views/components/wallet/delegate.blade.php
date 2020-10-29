@@ -32,7 +32,7 @@
 
                 <x-details-box icon="app-volume">
                     <x-slot name="title">
-                        @lang('pages.wallet.delegate.votes', [NumberFormatter::percentage($wallet->votesPercentage())])
+                        @lang('pages.wallet.delegate.votes', [App\Services\NumberFormatter::percentage($wallet->votesPercentage())])
                     </x-slot>
 
                     {{ $wallet->votes() }} <a href="{{ route('wallet.voters', $wallet->address()) }}" class="link">@lang('general.see_all')</a>

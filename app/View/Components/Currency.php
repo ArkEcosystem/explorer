@@ -14,7 +14,7 @@ final class Currency extends Component
     public function render(): Closure
     {
         return function (array $data): string {
-            return NumberFormatter::currency((string) $data['slot'], Network::currency());
+            return NumberFormatter::currency(trim((string) $data['slot']), Network::currency());
         };
     }
 }

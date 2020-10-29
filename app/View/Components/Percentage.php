@@ -13,7 +13,7 @@ final class Percentage extends Component
     public function render(): Closure
     {
         return function (array $data): string {
-            return NumberFormatter::percentage((string) $data['slot']);
+            return NumberFormatter::percentage(trim((string) $data['slot']));
         };
     }
 }

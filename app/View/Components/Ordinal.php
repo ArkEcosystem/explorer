@@ -13,7 +13,7 @@ final class Ordinal extends Component
     public function render(): Closure
     {
         return function (array $data): string {
-            return NumberFormatter::ordinal((string) $data['slot']);
+            return NumberFormatter::ordinal(trim((string) $data['slot']));
         };
     }
 }

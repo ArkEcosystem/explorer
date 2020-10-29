@@ -13,7 +13,7 @@ final class Number extends Component
     public function render(): Closure
     {
         return function (array $data): string {
-            return NumberFormatter::number((string) $data['slot']);
+            return NumberFormatter::number(trim((string) $data['slot']));
         };
     }
 }

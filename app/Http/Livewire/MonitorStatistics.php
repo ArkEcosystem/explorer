@@ -27,9 +27,9 @@ final class MonitorStatistics extends Component
         ]);
     }
 
-    private function delegateRegistrations(): string
+    private function delegateRegistrations(): int
     {
-        return Cache::remember('delegateRegistrations', Network::blockTime(), function (): string {
+        return Cache::remember('delegateRegistrations', Network::blockTime(), function (): int {
             return Transaction::withScope(DelegateRegistrationScope::class)->count();
         });
     }
