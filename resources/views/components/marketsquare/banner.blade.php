@@ -8,10 +8,12 @@
             </div>
 
             <div class="flex flex-col justify-between space-y-2 font-semibold md:ml-4">
-                <div class="text-sm leading-tight text-theme-primary-300 dark:text-theme-secondary-700">For more {{ $transaction->typeLabel() }} details</div>
+                <div class="text-sm leading-tight text-theme-primary-300 dark:text-theme-secondary-700">
+                    @lang('general.more_details', ['transactionType' => $transaction->typeLabel()])
+                </div>
 
                 <div class="flex items-center space-x-2 leading-tight">
-                    <span class="text-white dark:text-theme-secondary-200">Learn more <span class="hidden sm:contents">at MarketSquare</span></span>
+                    <span class="text-white dark:text-theme-secondary-200">@lang('general.learn_more') <span class="hidden sm:contents">@lang('generic.at') MarketSquare</span></span>
                     <a href="#" class="mx-auto link">
                         @svg('link', 'h-4 w-4 text-white')
                     </a>
