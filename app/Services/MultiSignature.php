@@ -13,8 +13,7 @@ final class MultiSignature
     {
         $command = sprintf(
             "%s %s %s '%s'",
-            // static::nodejs(),
-            '/var/folders/ww/91vljl993771lt_x4g3wv3840000gn/T/fnm_multishell_20080_1603977028882/bin/node',
+            static::nodejs(),
             base_path('musig.js'),
             Network::alias(),
             json_encode(['min' => $min, 'publicKeys' => $publicKeys])
