@@ -4,7 +4,6 @@ parameters:
     excludes_analyse:
         - app/Console/Playbooks
         - app/Console/Commands/RunPlaybookCommand.php
-        - app/Services/Avatar.php
         - app/Services/Monitor
     level: 8
     ignoreErrors:
