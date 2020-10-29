@@ -1,9 +1,9 @@
-<div class="w-full" wire:loading>
+<x-loading.visible>
     <x-transactions.table-desktop-skeleton use-confirmations use-direction />
 
     <x-transactions.table-mobile-skeleton use-confirmations use-direction />
-</div>
+</x-loading.visible>
 
-<div class="w-full" wire:loading.remove>
+<x-loading.hidden>
     {{ $slot }}
-</div>
+</x-loading.hidden>
