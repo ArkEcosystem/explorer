@@ -10,11 +10,7 @@
     @endpush
 
     @section('content')
-        <x-general.avatar identifier="DJpFwW39QnQvQRQJF2MCfAoKvsX4DJ28jq" />
-
-        {{ Avatar::make('DJpFwW39QnQvQRQJF2MCfAoKvsX4DJ28jq') }}
-
-        {{-- <x-wallet.header :wallet="$wallet" />
+        <x-wallet.header :wallet="$wallet" />
 
         <livewire:wallet-qr-code :address="$wallet->address()" />
 
@@ -45,7 +41,7 @@
                     <livewire:wallet-transaction-table :address="$wallet->address()" :public-key="$wallet->publicKey()" />
                 </div>
             </div>
-        </div> --}}
+        </div>
     @endsection
 
 @endcomponent
