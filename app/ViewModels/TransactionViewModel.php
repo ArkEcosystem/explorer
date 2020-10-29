@@ -92,7 +92,7 @@ final class TransactionViewModel implements ViewModel
     public function amount(): string
     {
         if ($this->isMultiPayment()) {
-            $amount = collect(Arr::get($this->transaction->asset, 'payments', []))->sum('amount') / 1e8;
+            $amount = collect(Arr::get($this->transaction->asset, 'payments') ?? [])->sum('amount') / 1e8;
         } else {
             $amount = $this->transaction->amount->toFloat();
         }

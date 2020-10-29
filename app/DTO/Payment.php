@@ -32,7 +32,7 @@ final class Payment
 
     public function amountFiat(): string
     {
-        return ExchangeRate::convert((float) $this->amount, $this->timestamp);
+        return ExchangeRate::convert($this->amount, $this->timestamp);
     }
 
     public function address(): string
