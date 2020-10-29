@@ -884,6 +884,15 @@ it('should get the multi signature wallet', function () {
     expect($result->address())->toBe('DMNBBtYt1teAKxA2BpiTW9PA3gX3Ad5dyk');
 });
 
+it('should fail to get the multi signature wallet if the transaction is not a multi signature registrations', function () {
+    $this->subject = new TransactionViewModel(Transaction::factory()->create([
+        'type'       => CoreTransactionTypeEnum::TRANSFER,
+        'type_group' => TransactionTypeGroupEnum::CORE,
+    ]));
+
+    expect($this->subject->multiSignatureWallet())->toBeEmpty();
+});
+
 it('should get the type component', function () {
     $this->subject = new TransactionViewModel(Transaction::factory()->create([
         'type'       => CoreTransactionTypeEnum::TRANSFER,
