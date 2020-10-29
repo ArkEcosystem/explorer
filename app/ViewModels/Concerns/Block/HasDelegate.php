@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Cache;
 
 trait HasDelegate
 {
-    public function delegate(): Wallet
+    public function delegate(): ?Wallet
     {
         return Cache::remember(
             "block:delegate:{$this->block->id}",
@@ -22,11 +22,11 @@ trait HasDelegate
 
     public function address(): string
     {
-        return Arr::get($this->delegate(), 'attributes.delegate.address', 'Genesis');
+        return Arr::get($this->delegate() ?? [], 'attributes.delegate.address', 'Genesis');
     }
 
     public function username(): string
     {
-        return Arr::get($this->delegate(), 'attributes.delegate.username', 'Genesis');
+        return Arr::get($this->delegate() ?? [], 'attributes.delegate.username', 'Genesis');
     }
 }

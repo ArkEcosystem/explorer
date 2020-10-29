@@ -8,9 +8,7 @@
     @section('content')
         <x-general.search.header />
 
-        @if(Settings::usesCharts())
-            <x-home.charts :prices="$prices" :fees="$fees" :aggregates="$aggregates" />
-        @endif
+        <x-home.charts :prices="$prices" :fees="$fees" :aggregates="$aggregates" />
 
         <x-home.content />
     @endsection
