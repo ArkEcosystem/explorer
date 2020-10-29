@@ -16,7 +16,7 @@
                     <x-ark-input
                         :label="trans('pages.wallet.amount')"
                         class="mt-5"
-                        type="text"
+                        type="number"
                         id="amount"
                         name="amount"
                         :errors="$errors"
