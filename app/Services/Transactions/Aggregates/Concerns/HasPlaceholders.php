@@ -28,7 +28,6 @@ trait HasPlaceholders
             $times[] = gmdate($format, $timestamp);
         }
 
-        /* @phpstan-ignore-next-line */
         return collect(array_combine($times, $times));
     }
 }
