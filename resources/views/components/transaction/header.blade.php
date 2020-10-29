@@ -17,7 +17,7 @@
                     />
                     <x-general.entity-header-item
                         :title="trans('pages.transaction.amount')"
-                        icon="app-amount"
+                        icon="app-transactions-amount"
                         :text="$transaction->amount()"
                     />
                     <x-general.entity-header-item
