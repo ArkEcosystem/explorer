@@ -13,7 +13,7 @@ final class Satoshi extends Component
     public function render(): Closure
     {
         return function (array $data): string {
-            return NumberFormatter::satoshi($data['slot']);
+            return NumberFormatter::satoshi((string) $data['slot']);
         };
     }
 }
