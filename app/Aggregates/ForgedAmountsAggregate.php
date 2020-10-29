@@ -14,9 +14,6 @@ final class ForgedAmountsAggregate implements Aggregate
 {
     public function aggregate(): string
     {
-        return NumberFormatter::currency(
-            BigNumber::new(Block::sum('total_amount'))->toFloat(),
-            Network::currency()
-        );
+        return BigNumber::new(Block::sum('total_amount'))->toFloat();
     }
 }

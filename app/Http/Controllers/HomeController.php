@@ -33,10 +33,10 @@ final class HomeController
             ],
             'aggregates' => [
                 'price'             => ExchangeRate::now(),
-                'volume'            => NumberFormatter::currency(Cache::get(CacheKeyEnum::VOLUME), Network::currency()),
+                'volume'            => Cache::get(CacheKeyEnum::VOLUME),
                 'transactionsCount' => Cache::get(CacheKeyEnum::TRANSACTIONS_COUNT),
                 'votesCount'        => Cache::get(CacheKeyEnum::VOTES_COUNT),
-                'votesPercentage'   => NumberFormatter::percentage(Cache::get(CacheKeyEnum::VOTES_PERCENTAGE)),
+                'votesPercentage'   => Cache::get(CacheKeyEnum::VOTES_PERCENTAGE),
             ],
         ]);
     }
@@ -51,9 +51,9 @@ final class HomeController
         return [
             'labels'   => $labels,
             'datasets' => $datasets,
-            'min'      => NumberFormatter::number($numbers->min()),
-            'avg'      => NumberFormatter::number($numbers->avg()),
-            'max'      => NumberFormatter::number($numbers->max()),
+            'min'      => $numbers->min(),
+            'avg'      => $numbers->avg(),
+            'max'      => $numbers->max(),
         ];
     }
 }

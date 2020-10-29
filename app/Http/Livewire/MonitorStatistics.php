@@ -21,7 +21,7 @@ final class MonitorStatistics extends Component
     {
         return view('livewire.monitor-statistics', [
             'delegateRegistrations' => $this->delegateRegistrations(),
-            'blockReward'           => NumberFormatter::currency(Network::blockReward(), Network::currency()),
+            'blockReward'           => Network::blockReward(),
             'feesCollected'         => $this->feesCollected(),
             'votes'                 => $this->votes(),
             'votesPercentage'       => $this->votesPercentage(),
@@ -31,28 +31,28 @@ final class MonitorStatistics extends Component
     private function delegateRegistrations(): string
     {
         return Cache::remember('delegateRegistrations', Network::blockTime(), function (): string {
-            return NumberFormatter::number(Transaction::withScope(DelegateRegistrationScope::class)->count());
+            return Transaction::withScope(DelegateRegistrationScope::class)->count();
         });
     }
 
     private function feesCollected(): string
     {
         return Cache::remember('feesCollected', Network::blockTime(), function (): string {
-            return NumberFormatter::currency((new DailyFeeAggregate())->aggregate(), Network::currency());
+            return (new DailyFeeAggregate())->aggregate();
         });
     }
 
     private function votes(): string
     {
         return Cache::remember('votes', Network::blockTime(), function (): string {
-            return NumberFormatter::currency((new VoteCountAggregate())->aggregate(), Network::currency());
+            return (new VoteCountAggregate())->aggregate();
         });
     }
 
     private function votesPercentage(): string
     {
         return Cache::remember('votesPercentage', Network::blockTime(), function (): string {
-            return NumberFormatter::percentage((new VotePercentageAggregate())->aggregate());
+            return (new VotePercentageAggregate())->aggregate();
         });
     }
 }

@@ -14,9 +14,9 @@ final class DelegateRegistrationCountAggregate implements Aggregate
 {
     public function aggregate(): string
     {
-        return NumberFormatter::number(Transaction::where([
+        return Transaction::where([
             'type'       => CoreTransactionTypeEnum::DELEGATE_REGISTRATION,
             'type_group' => TransactionTypeGroupEnum::CORE,
-        ])->count());
+        ])->count();
     }
 }

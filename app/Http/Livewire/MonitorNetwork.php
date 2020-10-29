@@ -67,7 +67,7 @@ final class MonitorNetwork extends Component
     private function transactions(): string
     {
         return Cache::remember('MonitorNetwork:transactions', Network::blockTime(), function (): string {
-            return NumberFormatter::number(Block::whereBetween('height', Monitor::heightRangeByRound(Monitor::roundNumber()))->sum('number_of_transactions'));
+            return Block::whereBetween('height', Monitor::heightRangeByRound(Monitor::roundNumber()))->sum('number_of_transactions');
         });
     }
 

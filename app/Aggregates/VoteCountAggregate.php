@@ -14,9 +14,9 @@ final class VoteCountAggregate implements Aggregate
 {
     public function aggregate(): string
     {
-        return NumberFormatter::number(Transaction::where([
+        return Transaction::where([
             'type'       => CoreTransactionTypeEnum::VOTE,
             'type_group' => TransactionTypeGroupEnum::CORE,
-        ])->count());
+        ])->count();
     }
 }
