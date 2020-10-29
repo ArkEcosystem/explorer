@@ -12,6 +12,6 @@ final class ForgedRewardsAggregate implements Aggregate
 {
     public function aggregate(): string
     {
-        return BigNumber::new(Block::sum('reward'))->toFloat();
+        return (string) BigNumber::new(Block::sum('reward'))->toFloat();
     }
 }

@@ -12,7 +12,7 @@ final class Number extends Component
 {
     public function render(): Closure
     {
-        return function (array $data) {
+        return function (array $data): string {
             return NumberFormatter::number($data['slot']);
         };
     }

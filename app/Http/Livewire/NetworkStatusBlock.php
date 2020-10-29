@@ -7,7 +7,6 @@ namespace App\Http\Livewire;
 use App\Facades\Network;
 use App\Services\Blockchain\NetworkStatus;
 use App\Services\CryptoCompare;
-use App\Services\NumberFormatter;
 use App\Services\Settings;
 use Illuminate\View\View;
 use Livewire\Component;
@@ -28,7 +27,7 @@ final class NetworkStatusBlock extends Component
             'height'    => NetworkStatus::height(),
             'network'   => Network::name(),
             'supply'    => NetworkStatus::supply(),
-            'marketCap' => $marketCap, Settings::currency(),
+            'marketCap' => $marketCap,
         ]);
     }
 }

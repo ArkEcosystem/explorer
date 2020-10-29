@@ -12,7 +12,7 @@ final class Satoshi extends Component
 {
     public function render(): Closure
     {
-        return function (array $data) {
+        return function (array $data): string {
             return NumberFormatter::satoshi($data['slot']);
         };
     }
