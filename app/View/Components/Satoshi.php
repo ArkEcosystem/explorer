@@ -1,32 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\View\Components;
 
+use App\Services\NumberFormatter;
+use Closure;
 use Illuminate\View\Component;
 
-class Satoshi extends Component
+final class Satoshi extends Component
 {
-    /**
-     * Create a new component instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public function render(): Closure
     {
-        //
-    }
-
-    /**
-     * Get the view / contents that represent the component.
-     *
-     * @return \Illuminate\Contracts\View\View|string
-     */
-    public function render()
-    {
-        return <<<'blade'
-<div>
-    <!-- Simplicity is the consequence of refined emotions. - Jean D'Alembert -->
-</div>
-blade;
+        return function (array $data) {
+            return NumberFormatter::satoshi($data['slot']);
+        };
     }
 }

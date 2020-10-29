@@ -1,32 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\View\Components;
 
+use App\Services\NumberFormatter;
+use Closure;
 use Illuminate\View\Component;
 
-class Ordinal extends Component
+final class Ordinal extends Component
 {
-    /**
-     * Create a new component instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public function render(): Closure
     {
-        //
-    }
-
-    /**
-     * Get the view / contents that represent the component.
-     *
-     * @return \Illuminate\Contracts\View\View|string
-     */
-    public function render()
-    {
-        return <<<'blade'
-<div>
-    <!-- I begin to speak only when I am certain what I will say is not better left unsaid - Cato the Younger -->
-</div>
-blade;
+        return function (array $data) {
+            return NumberFormatter::ordinal($data['slot']);
+        };
     }
 }
