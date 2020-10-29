@@ -40,4 +40,14 @@ trait CanBeDelegate
     {
         return NumberFormatter::ordinal(Arr::get($this->wallet, 'attributes.delegate.rank', 0));
     }
+
+    /**
+     * @codeCoverageIgnore
+     */
+    public function formattedRank(): ?string
+    {
+        $rank = Arr::get($this->wallet, 'attributes.delegate.rank', 0);
+
+        return "#{$rank}";
+    }
 }

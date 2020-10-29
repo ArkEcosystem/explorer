@@ -49,7 +49,7 @@
                         <x-general.entity-header-item
                             :title="trans('pages.wallet.rank')"
                             icon="app-votes"
-                            :text="$vote->rank()"
+                            :text="$vote->formattedRank()"
                         />
                         @if (Network::usesMarketSquare())
                             <x-general.entity-header-item
