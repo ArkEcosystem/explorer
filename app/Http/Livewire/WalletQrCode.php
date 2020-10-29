@@ -26,7 +26,7 @@ final class WalletQrCode extends Component
         'smartbridge' => ['required', 'string', 'max:255'],
     ];
 
-    public function updated($propertyName)
+    public function updated(string $propertyName): void
     {
         $this->validateOnly($propertyName);
     }
