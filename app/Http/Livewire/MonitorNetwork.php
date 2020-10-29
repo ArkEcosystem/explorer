@@ -9,7 +9,6 @@ use App\Facades\Network;
 use App\Models\Block;
 use App\Services\Monitor\DelegateTracker;
 use App\Services\Monitor\Monitor;
-use App\Services\NumberFormatter;
 use App\ViewModels\ViewModelFactory;
 use App\ViewModels\WalletViewModel;
 use Carbon\Carbon;

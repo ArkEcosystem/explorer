@@ -6,7 +6,6 @@ namespace App\Aggregates;
 
 use App\Contracts\Aggregate;
 use App\Models\Transaction;
-use App\Services\NumberFormatter;
 
 final class TransactionCountAggregate implements Aggregate
 {

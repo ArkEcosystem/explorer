@@ -10,7 +10,6 @@ use App\Aggregates\VotePercentageAggregate;
 use App\Facades\Network;
 use App\Models\Scopes\DelegateRegistrationScope;
 use App\Models\Transaction;
-use App\Services\NumberFormatter;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\View\View;
 use Livewire\Component;
