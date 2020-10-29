@@ -11,8 +11,8 @@
             </x-slot>
 
             <x-slot name="extra">
-                <div class="flex flex-col md:flex-row flex-1 lg:pl-4 md:space-x-4 lg:space-x-4 font-semibold lg:border-l lg:ml-8 border-theme-secondary-800">
-                    <div class="hidden md:flex items-center">
+                <div class="flex flex-col flex-1 font-semibold md:flex-row lg:pl-4 md:space-x-4 lg:space-x-4 lg:border-l lg:ml-8 border-theme-secondary-800">
+                    <div class="items-center hidden md:flex">
                         <div class="w-12 h-12 border-theme-secondary-700 circled-icon text-theme-secondary-700">
                             @svg('wallet', 'w-4 h-4')
                         </div>
