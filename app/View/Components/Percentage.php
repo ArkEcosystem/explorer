@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class Percentage extends Component
+final class Percentage extends Component
 {
     /**
      * Create a new component instance.

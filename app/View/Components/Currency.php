@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class Currency extends Component
+final class Currency extends Component
 {
     /**
      * Create a new component instance.
