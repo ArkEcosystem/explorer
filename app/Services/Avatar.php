@@ -33,9 +33,7 @@ final class Avatar
         $genColor = function () use (&$defaultColors, $twister): string {
             $index = (int) floor(count($defaultColors) * $twister->random());
 
-            $color = array_splice($defaultColors, $index, 1)[0];
-
-            return $color;
+            return array_splice($defaultColors, $index, 1)[0];
         };
 
         $backgroundString = '<rect fill="'.$genColor().'" width="100" height="100"/>';
