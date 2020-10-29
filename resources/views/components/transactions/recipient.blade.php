@@ -7,15 +7,9 @@
 
     <div @if ($withLoading ?? false) wire:loading.class="hidden" @endif>
         @if ($transaction->isTransfer() || $transaction->isUnknown())
-            @php($address = $transaction->recipient()->address())
-            @php($username = $transaction->recipient()->username())
-
-            <x-general.address :address="$address" :username="$username" />
+            <x-general.address :model="$transaction->recipient()" />
         @elseif ($transaction->isVote())
-            @php($address = $transaction->voted()->address())
-            @php($username = $transaction->voted()->username())
-
-            <x-general.address :address="$address" :username="$username">
+            <x-general.address :model="$transaction->voted()">
                 <x-slot name="icon">
                     <x-transactions.icon :icon-type="$iconType" />
                 </x-slot>
@@ -27,10 +21,7 @@
                 </x-slot>
             </x-general.address>
         @elseif ($transaction->isUnvote())
-            @php($address = $transaction->unvoted()->address())
-            @php($username = $transaction->unvoted()->username())
-
-            <x-general.address :address="$address" :username="$username">
+            <x-general.address :model="$transaction->unvoted()">
                 <x-slot name="icon">
                     <x-transactions.icon :icon-type="$iconType" />
                 </x-slot>
