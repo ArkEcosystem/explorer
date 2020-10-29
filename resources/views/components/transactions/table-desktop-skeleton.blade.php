@@ -39,7 +39,9 @@
                         <x-tables.rows.desktop.skeleton.fee />
                     </td>
                     @isset($useConfirmations)
+                    <td class="hidden text-right xl:table-cell">
                         <x-tables.rows.desktop.skeleton.confirmations />
+                    </td>
                     @endisset
                 </tr>
             </x-skeleton>
