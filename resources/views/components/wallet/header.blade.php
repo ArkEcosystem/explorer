@@ -11,14 +11,14 @@
             </x-slot>
 
             <x-slot name="extra">
-                <div class="flex flex-row flex-1 pl-4 space-x-4 font-semibold border-l md:ml-8 border-theme-secondary-800">
-                    <div class="flex items-center">
+                <div class="flex flex-col md:flex-row flex-1 lg:pl-4 md:space-x-4 lg:space-x-4 font-semibold lg:border-l lg:ml-8 border-theme-secondary-800">
+                    <div class="hidden md:flex items-center">
                         <div class="w-12 h-12 border-theme-secondary-700 circled-icon text-theme-secondary-700">
                             @svg('wallet', 'w-4 h-4')
                         </div>
                     </div>
 
-                    <div class="flex flex-col space-y-4">
+                    <div class="flex flex-col space-y-2 md:space-y-4">
                         <div class="text-sm leading-tight text-theme-secondary-600 dark:text-theme-secondary-700">
                             @lang('pages.wallet.balance')
                         </div>
@@ -31,13 +31,13 @@
                     </div>
                 </div>
 
-                <div class="flex items-center mt-6 space-x-2 text-theme-secondary-200 md:mt-0">
+                <div class="flex items-center mt-6 space-x-2 text-theme-secondary-200 lg:mt-0">
                     {{-- @TODO: public key button --}}
-                    <a href="#" class="flex items-center justify-center flex-1 w-16 px-3 rounded cursor-pointer bg-theme-secondary-800 hover:bg-theme-primary-600 transition-default md:flex-none h-11">
+                    <a href="#" class="flex items-center justify-center flex-1 w-16 px-3 rounded cursor-pointer bg-theme-secondary-800 hover:bg-theme-primary-600 transition-default lg:flex-none h-11">
                         @svg('app-key', 'w-6 h-6')
                     </a>
 
-                    <button @click="livewire.emit('toggleQrCode')" type="button" class="flex items-center justify-center flex-1 w-16 px-3 rounded cursor-pointer bg-theme-primary-600 hover:bg-theme-primary-600 transition-default md:flex-none h-11">
+                    <button @click="livewire.emit('toggleQrCode')" type="button" class="flex items-center justify-center flex-1 w-16 px-3 rounded cursor-pointer bg-theme-primary-600 hover:bg-theme-primary-700 transition-default lg:flex-none h-11">
                         @svg('app-qr-code', 'w-6 h-6')
                     </button>
                 </div>
