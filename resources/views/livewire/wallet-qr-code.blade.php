@@ -19,6 +19,7 @@
                         type="text"
                         id="amount"
                         name="amount"
+                        :errors="$errors"
                         required
                         autofocus
                     />
@@ -29,6 +30,7 @@
                         type="text"
                         id="smartbridge"
                         name="smartbridge"
+                        :errors="$errors"
                         required
                     />
                 </div>

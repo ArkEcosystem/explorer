@@ -40,13 +40,13 @@ final class Payment
         return $this->address;
     }
 
-    public function recipient(): string
-    {
-        return $this->address;
-    }
-
     public function username(): ?string
     {
         return $this->username;
+    }
+
+    public function recipient(): self
+    {
+        return $this;
     }
 }

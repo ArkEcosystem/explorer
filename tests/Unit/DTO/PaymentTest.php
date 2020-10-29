@@ -14,4 +14,5 @@ it('should make an instance that has all properties', function () {
     expect($subject->amount())->toBe(456);
     expect($subject->address())->toBe('address');
     expect($subject->username())->toBe('username');
+    expect($subject->recipient())->toBeInstanceOf(Payment::class);
 });
