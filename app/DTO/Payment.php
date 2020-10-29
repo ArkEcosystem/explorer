@@ -10,7 +10,7 @@ final class Payment
 {
     private int $timestamp;
 
-    private float $amount;
+    private int $amount;
 
     private string $address;
 
@@ -20,19 +20,19 @@ final class Payment
     public function __construct(int $timestamp, string $amount, string $address, ?string $username = null)
     {
         $this->timestamp   = $timestamp;
-        $this->amount      = (float) $amount;
+        $this->amount      = (int) $amount;
         $this->address     = $address;
         $this->username    = $username;
     }
 
-    public function amount(): float
+    public function amount(): int
     {
         return $this->amount;
     }
 
     public function amountFiat(): string
     {
-        return ExchangeRate::convert($this->amount, $this->timestamp);
+        return ExchangeRate::convert((float) $this->amount, $this->timestamp);
     }
 
     public function address(): string

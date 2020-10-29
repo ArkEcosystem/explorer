@@ -9,7 +9,7 @@ use function Tests\configureExplorerDatabase;
 it('should make an instance that has all properties', function () {
     configureExplorerDatabase();
 
-    $subject = new Payment(123, '456', 'recipient', 'username');
+    $subject = new Payment(123, '456', 'address', 'username');
 
     expect($subject->amount())->toBe(456);
     expect($subject->address())->toBe('address');
