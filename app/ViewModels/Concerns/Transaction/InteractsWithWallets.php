@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Cache;
 
 trait InteractsWithWallets
 {
-    public function sender(): WalletViewModel
+    public function sender(): ?WalletViewModel
     {
         $wallet = $this->transaction->sender;
 
