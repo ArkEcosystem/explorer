@@ -1,4 +1,4 @@
-<div class="flex pt-16 space-y-6 content-container">
+<div class="flex pt-8 space-y-6 content-container">
     <div class="flex flex-row justify-center w-full p-8 rounded-lg sm:justify-between h-30 lg:h-32 bg-theme-primary-600">
         <div class="flex flex-row items-center justify-between space-x-4">
             <div class="flex items-center">
