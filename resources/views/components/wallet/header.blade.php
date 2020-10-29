@@ -14,7 +14,7 @@
                 <div class="flex flex-row flex-1 pl-4 font-semibold border-l md:ml-8 border-theme-secondary-800 space-x-4">
                     <div class="flex items-center">
                         <div class="w-12 h-12 border-theme-secondary-700 circled-icon text-theme-secondary-700">
-                            @svg('app-marketsquare', 'w-4 h-4')
+                            @svg('wallet', 'w-4 h-4')
                         </div>
                     </div>
 
