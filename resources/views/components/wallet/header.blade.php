@@ -18,7 +18,7 @@
                         </div>
                     </div>
 
-                    <div class="flex flex-col space-y-2 md:space-y-4">
+                    <div class="flex flex-col space-y-4">
                         <div class="text-sm leading-tight text-theme-secondary-600 dark:text-theme-secondary-700">
                             @lang('pages.wallet.balance')
                         </div>
