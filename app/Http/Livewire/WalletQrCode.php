@@ -20,7 +20,7 @@ final class WalletQrCode extends Component
     /** @phpstan-ignore-next-line */
     protected $listeners = ['toggleQrCode'];
 
-    public function updatedAmount(string $propertyName): void
+    public function updated(string $propertyName): void
     {
         $this->validateOnly($propertyName, [
             'amount'      => ['required', 'numeric'],
