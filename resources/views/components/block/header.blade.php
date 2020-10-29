@@ -45,7 +45,7 @@
                     <x-general.entity-header-item
                         :title="trans('pages.block.total_rewards')"
                         icon="app-reward"
-                        :text="$block->total()"
+                        :text="$block->totalReward()"
                     />
                 </div>
             </x-slot>
