@@ -46,8 +46,7 @@ final class LatestTransactionsTable extends Component
     public function pollTransactions(): void
     {
         $this->transactions = Cache::remember('latestTransactionsTable:'.$this->state['type'], Network::blockTime(), function () {
-            // $query = Transaction::latestByTimestamp();
-            $query = Transaction::orderBy('timestamp', 'asc');
+            $query = Transaction::latestByTimestamp();
 
             if ($this->state['type'] !== 'all') {
                 $scopeClass = $this->scopes[$this->state['type']];

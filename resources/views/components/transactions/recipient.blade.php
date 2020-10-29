@@ -1,10 +1,6 @@
 @php($iconType = $transaction->iconType())
 
 <div wire:key="{{ $transaction->id() }}">
-    @php($address = null)
-    @php($username = null)
-    @php($text = trans('general.transaction.'.$iconType))
-
     <div>
         @if ($transaction->isTransfer() || $transaction->isUnknown())
             <x-general.address :model="$transaction->recipient()" />
@@ -37,13 +33,9 @@
                 <x-transactions.icon :icon-type="$iconType" />
 
                 <div class="font-semibold text-theme-secondary-900 dark:text-theme-secondary-200">
-                    {{ $text }}
+                    @lang('general.transaction.'.$iconType)
                 </div>
             </div>
         @endif
     </div>
-
-    @if ($withLoading ?? false)
-        <x-general.loading-state.recipient-address :address="$address" :username="$username" :text="$text" />
-    @endif
 </div>
