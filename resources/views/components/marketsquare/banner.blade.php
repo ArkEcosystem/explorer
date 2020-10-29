@@ -1,13 +1,13 @@
 <div class="flex pt-16 space-y-6 content-container">
-    <div class="p-8 flex flex-row w-full justify-center sm:justify-between h-30 lg:h-32 bg-theme-primary-600 dark:bg-theme-secondary-900 rounded-lg">
-        <div class="flex flex-row justify-between items-center space-x-4">
-            <div class="items-center flex">
-                <div class="circled-icon text-theme-secondary-400 border-white w-12 h-12">
+    <div class="flex flex-row justify-center w-full p-8 rounded-lg sm:justify-between h-30 lg:h-32 bg-theme-primary-600 dark:bg-theme-secondary-900">
+        <div class="flex flex-row items-center justify-between space-x-4">
+            <div class="flex items-center">
+                <div class="w-12 h-12 border-white circled-icon text-theme-secondary-400">
                     @svg('app-marketsquare', 'w-4 h-4 text-white')
                 </div>
             </div>
 
-            <div class="flex flex-col justify-between font-semibold md:ml-4 space-y-2">
+            <div class="flex flex-col justify-between space-y-2 font-semibold md:ml-4">
                 <div class="text-sm leading-tight text-theme-primary-300 dark:text-theme-secondary-700">For more {{ $transaction->typeLabel() }} details</div>
 
                 <div class="flex items-center space-x-2 leading-tight">
@@ -19,7 +19,7 @@
             </div>
         </div>
 
-        <div class="hidden lg:flex flex-row items-center">
+        <div class="flex-row items-center hidden lg:flex">
             <div class="relative inline-block text-white">
                 @svg('app-marketsquare', 'h-6 ml-2 md:h-8 lg:h-12 lg:ml-0 text-white')
             </div>
