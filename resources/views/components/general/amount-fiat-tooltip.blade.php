@@ -1,5 +1,3 @@
-{{-- @TODO: do we really need +/- symbols and color coding? Seems overkill --}}
-
 @if(isset($isSent))
     <span class="p-2 font-bold border rounded text-theme-danger-400 border-theme-danger-100 dark:text-theme-danger-600 dark:border-theme-danger-600">
         @if($amount > 0) - @endif
