@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Enums\CacheKeyEnum;
 use App\Services\ExchangeRate;
+use App\Services\NumberFormatter;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\View\View;
@@ -49,9 +50,9 @@ final class HomeController
         return [
             'labels'   => $labels,
             'datasets' => $datasets,
-            'min'      => $numbers->min(),
-            'avg'      => $numbers->avg(),
-            'max'      => $numbers->max(),
+            'min'      => NumberFormatter::number($numbers->min()),
+            'avg'      => NumberFormatter::number($numbers->avg()),
+            'max'      => NumberFormatter::number($numbers->max()),
         ];
     }
 }

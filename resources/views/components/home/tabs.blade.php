@@ -66,6 +66,6 @@
     </div>
 
     <div x-show="selected === 'blocks'">
-        {{-- <livewire:latest-blocks-table /> --}}
+        <livewire:latest-blocks-table />
     </div>
 </div>
