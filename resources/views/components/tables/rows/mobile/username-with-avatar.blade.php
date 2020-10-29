@@ -6,5 +6,5 @@
         <div class="w-full h-5 rounded-full bg-theme-secondary-300 animate-pulse"></div>
     </div>
 
-    <x-general.address :model="$model" />
+    <x-general.identity :model="$model" />
 </div>
