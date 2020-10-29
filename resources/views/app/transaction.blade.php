@@ -19,7 +19,9 @@
     @section('content')
         <x-transaction.header :transaction="$transaction" />
 
-        <x-marketsquare-banner />
+        @if (Network::usesMarketSquare())
+            <x-marketsquare-banner />
+        @endif
 
         <x-details.grid>
             <x-dynamic-component :component="$transaction->typeComponent()" :transaction="$transaction" />
