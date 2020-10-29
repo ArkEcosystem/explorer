@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Enums\CacheKeyEnum;
-use App\Facades\Network;
 use App\Services\ExchangeRate;
-use App\Services\NumberFormatter;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\View\View;
