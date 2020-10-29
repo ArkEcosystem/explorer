@@ -34,4 +34,20 @@ trait HasTransactions
     {
         return ExchangeRate::convert($this->block->total_fee->toFloat(), $this->block->timestamp);
     }
+
+    public function total(): string
+    {
+        return NumberFormatter::currency(
+            $this->block->reward->plus($this->block->total_fee)->toFloat(),
+            Network::currency()
+        );
+    }
+
+    public function totalFiat(): string
+    {
+        return ExchangeRate::convert(
+            $this->block->reward->plus($this->block->total_fee)->toFloat(),
+            $this->block->timestamp
+        );
+    }
 }
