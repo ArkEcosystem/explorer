@@ -19,6 +19,8 @@
     @section('content')
         <x-transaction.header :transaction="$transaction" />
 
+        <x-marketsquare-banner />
+
         <x-details.grid>
             <x-dynamic-component :component="$transaction->typeComponent()" :transaction="$transaction" />
         </x-details.grid>
