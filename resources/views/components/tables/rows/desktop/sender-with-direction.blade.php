@@ -16,10 +16,7 @@
     <div class="flex flex-col space-y-2">
         <span class="text-lg font-semibold text-theme-secondary-700">
             <div wire:loading.class="hidden">
-                <x-general.address-iconless
-                    :address="$model->sender()->address()"
-                    :username="$model->sender()->username()"
-                />
+                <x-general.address-iconless :model="$model->sender()" />
             </div>
         </span>
     </div>

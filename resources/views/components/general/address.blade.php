@@ -7,7 +7,7 @@
         @endif
     >
         @unless ($icon ?? false)
-            <x-general.avatar :identifier="$address" />
+            <x-general.avatar :identifier="$model->address()" />
         @else
             {{ $icon }}
         @endunless
@@ -17,25 +17,25 @@
                 {{ $prefix }}
             @endif
 
-            <a href="{{ route('wallet', $address) }}" class="font-semibold link sm:hidden md:flex">
-                @if ($username ?? false)
-                    {{ $username }}
+            <a href="{{ route('wallet', $model->address()) }}" class="font-semibold link sm:hidden md:flex">
+                @if ($model->username())
+                    {{ $model->username() }}
                 @else
-                    <x-truncate-middle :value="$address" />
+                    <x-truncate-middle :value="$model->address()" />
                 @endif
             </a>
 
-            <a href="{{ route('wallet', $address) }}" class="hidden font-semibold link sm:flex md:hidden">
-                @if ($username ?? false)
-                    {{ $username }}
+            <a href="{{ route('wallet', $model->address()) }}" class="hidden font-semibold link sm:flex md:hidden">
+                @if ($model->username())
+                    {{ $model->username() }}
                 @else
-                    {{ $address }}
+                    {{ $model->address() }}
                 @endif
             </a>
         </div>
     </div>
 
     @if ($withLoading ?? false)
-        <x-general.loading-state.recipient-address :address="$address" />
+        <x-general.loading-state.recipient-address :address="$model->address()" />
     @endif
 </div>

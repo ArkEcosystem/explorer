@@ -15,7 +15,7 @@ trait InteractsWithWallets
     {
         $wallet = $this->transaction->sender;
 
-        if (! $wallet) {
+        if (is_null($wallet)) {
             return null;
         }
 
@@ -30,8 +30,8 @@ trait InteractsWithWallets
     {
         $wallet = $this->transaction->recipient;
 
-        if (! $wallet) {
-            return $this->recipient();
+        if (is_null($wallet)) {
+            return $this->sender();
         }
 
         return Cache::remember(
