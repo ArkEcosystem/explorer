@@ -4,7 +4,7 @@
             <x-transactions.table-skeleton />
         </div>
     @else
-        <div wire:poll.{{ Network::blockTime() }}s="pollTransactions">
+        <div wire:poll="pollTransactions">
             <x-transactions.table-desktop :transactions="$transactions" />
 
             <x-transactions.list-mobile :transactions="$transactions" />

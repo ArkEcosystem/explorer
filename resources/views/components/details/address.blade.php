@@ -2,7 +2,7 @@
     <div class="flex flex-col space-y-2">
         <span class="text-sm font-semibold text-theme-secondary-500">{{ $title }}</span>
         <span class="text-lg font-semibold text-theme-secondary-700">
-            <div wire:loading.class="hidden" wire:key="{{ $transaction->id() }}">
+            <div wire:key="{{ $transaction->id() }}">
                 <x-general.address-iconless :model="$model" />
             </div>
         </span>

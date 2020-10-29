@@ -2,7 +2,6 @@
     <div
         class="flex flex-row-reverse items-center md:flex-row md:space-x-3 md:justify-start"
         @if ($withLoading ?? false)
-            wire:loading.class="hidden"
             {{ $loadingAttribute ?? ''}}
         @endif
     >

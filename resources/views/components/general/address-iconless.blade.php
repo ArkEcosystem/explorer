@@ -1,4 +1,4 @@
-<div class="flex items-center justify-between space-x-3" {{ $loadingAttribute ?? ''}} wire:loading.class="hidden">
+<div class="flex items-center justify-between space-x-3" {{ $loadingAttribute ?? ''}}>
     <div class="flex items-center">
         @if ($prefix ?? false)
             {{ $prefix }}

@@ -5,7 +5,7 @@
     @php($username = null)
     @php($text = trans('general.transaction.'.$iconType))
 
-    <div @if ($withLoading ?? false) wire:loading.class="hidden" @endif>
+    <div>
         @if ($transaction->isTransfer() || $transaction->isUnknown())
             <x-general.address :model="$transaction->recipient()" />
         @elseif ($transaction->isVote())
