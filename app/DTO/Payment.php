@@ -4,25 +4,48 @@ declare(strict_types=1);
 
 namespace App\DTO;
 
+use App\Services\ExchangeRate;
+
 final class Payment
 {
-    private string $amount;
+    private int $timestamp;
 
-    private string $recipient;
+    private float $amount;
 
-    public function __construct(string $amount, string $recipient)
+    private string $address;
+
+    private ?string $username = null;
+
+    public function __construct(int $timestamp, string $amount, string $address, ?string $username = null)
     {
-        $this->amount    = $amount;
-        $this->recipient = $recipient;
+        $this->timestamp   = $timestamp;
+        $this->amount      = (float) $amount;
+        $this->address     = $address;
+        $this->username    = $username;
     }
 
-    public function amount(): string
+    public function amount(): float
     {
         return $this->amount;
     }
 
+    public function amountFiat(): string
+    {
+        return ExchangeRate::convert($this->amount, $this->timestamp);
+    }
+
+    public function address(): string
+    {
+        return $this->address;
+    }
+
     public function recipient(): string
     {
-        return $this->recipient;
+        return $this->address;
+    }
+
+    public function username(): ?string
+    {
+        return $this->username;
     }
 }

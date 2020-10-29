@@ -9,8 +9,9 @@ use function Tests\configureExplorerDatabase;
 it('should make an instance that has all properties', function () {
     configureExplorerDatabase();
 
-    $subject = new Payment('amount', 'recipient');
+    $subject = new Payment(123, '456', 'recipient', 'username');
 
-    expect($subject->amount())->toBe('amount');
-    expect($subject->recipient())->toBe('recipient');
+    expect($subject->amount())->toBe(456);
+    expect($subject->address())->toBe('address');
+    expect($subject->username())->toBe('username');
 });
