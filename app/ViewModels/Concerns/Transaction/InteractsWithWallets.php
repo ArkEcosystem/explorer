@@ -26,7 +26,7 @@ trait InteractsWithWallets
         );
     }
 
-    public function recipient(): WalletViewModel
+    public function recipient(): ?WalletViewModel
     {
         $wallet = $this->transaction->recipient;
 
