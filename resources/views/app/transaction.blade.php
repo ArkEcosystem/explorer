@@ -20,7 +20,7 @@
         <x-transaction.header :transaction="$transaction" />
 
         @if (Network::usesMarketSquare())
-            <x-marketsquare-banner />
+            <x-marketsquare.banner :transaction="$transaction" />
         @endif
 
         <x-details.grid>
