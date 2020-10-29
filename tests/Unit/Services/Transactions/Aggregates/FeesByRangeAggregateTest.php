@@ -26,7 +26,8 @@ it('should aggregate the fees for the given range', function () {
 
     $result = (new FeesByRangeAggregate())->aggregate(
         Timestamp::fromGenesis($start->last()->timestamp)->startOfDay(),
-        Timestamp::fromGenesis($end->last()->timestamp)->endOfDay()
+        Timestamp::fromGenesis($end->last()->timestamp)->endOfDay(),
+        'Y-m-d'
     );
 
     expect($result)->toBeInstanceOf(Collection::class);

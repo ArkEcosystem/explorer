@@ -14,7 +14,7 @@ final class FeesByRangeAggregate
 {
     use HasQueries;
 
-    public function aggregate(Carbon $start, Carbon $end, string $format = 'Y-m-d'): Collection
+    public function aggregate(Carbon $start, Carbon $end, string $format): Collection
     {
         $cacheKey = sprintf('fees-by-range:%s:%s', $start->unix(), $end->unix());
 
@@ -24,9 +24,7 @@ final class FeesByRangeAggregate
                 ->orderBy('timestamp')
                 ->get()
                 ->groupBy(fn ($date) => Timestamp::fromGenesis($date->timestamp)->format($format))
-                ->mapWithKeys(fn ($transactions, $day) => [
-                    $day => $transactions->sumBigNumber('fee')->toNumber() / 1e8,
-                ]);
+                ->mapWithKeys(fn ($transactions, $day) => [$day => $transactions->sumBigNumber('fee')->toNumber() / 1e8]);
         });
     }
 }
