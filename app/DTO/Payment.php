@@ -16,6 +16,7 @@ final class Payment
 
     private ?string $username = null;
 
+    /* @phpstan-ignore-next-line */
     public function __construct(int $timestamp, string $amount, string $address, ?string $username = null)
     {
         $this->timestamp   = $timestamp;
