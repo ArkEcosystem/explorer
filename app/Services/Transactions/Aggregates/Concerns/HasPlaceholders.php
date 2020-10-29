@@ -9,26 +9,26 @@ use Illuminate\Support\Collection;
 
 trait HasPlaceholders
 {
-    private function mergeWithPlaceholders(Collection $aggregate, int $end, int $step, string $format): Collection
+    private function mergeWithPlaceholders(Collection $aggregate, Collection $placeholders): Collection
     {
         $result = [];
 
-        foreach ($this->placeholders($end, $step, $format) as $key) {
-            $result[$key] = Arr::get($aggregate, $key, 0);
+        foreach ($placeholders as $placeholder) {
+            $result[$placeholder] = Arr::get($aggregate, $placeholder, 0);
         }
 
         return collect($result);
     }
 
-    private function placeholders(int $end, int $step, string $format): array
+    private function placeholders(int $start, int $end, int $step, string $format): Collection
     {
         $times = [];
 
-        foreach (range(0, $end, $step) as $timestamp) {
+        foreach (range($start, $end, $step) as $timestamp) {
             $times[] = gmdate($format, $timestamp);
         }
 
         /* @phpstan-ignore-next-line */
-        return array_combine($times, $times);
+        return collect(array_combine($times, $times));
     }
 }

@@ -18,9 +18,7 @@ final class FeesByDayAggregate
     {
         return $this->mergeWithPlaceholders(
             (new FeesByRangeAggregate())->aggregate(Carbon::now()->subDay()->startOfDay(), Carbon::now()->endOfDay(), 'H:i'),
-            86400,
-            3600,
-            'H:i'
+            $this->placeholders(0, 86400, 3600, 'H:i')->take(24)
         );
     }
 }

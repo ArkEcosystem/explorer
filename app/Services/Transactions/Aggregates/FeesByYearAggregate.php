@@ -18,9 +18,7 @@ final class FeesByYearAggregate
     {
         return $this->mergeWithPlaceholders(
             (new FeesByRangeAggregate())->aggregate(Carbon::now()->subDays(365)->startOfDay(), Carbon::now()->endOfDay(), 'M'),
-            365 * 86400,
-            86400,
-            'M'
+            $this->placeholders(0, 365 * 86400, 86400, 'M')->take(365)
         );
     }
 }

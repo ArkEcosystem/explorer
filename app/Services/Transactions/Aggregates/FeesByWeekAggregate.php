@@ -18,9 +18,7 @@ final class FeesByWeekAggregate
     {
         return $this->mergeWithPlaceholders(
             (new FeesByRangeAggregate())->aggregate(Carbon::now()->subDays(7)->startOfDay(), Carbon::now()->endOfDay(), 'd.m'),
-            7 * 86400,
-            86400,
-            'd.m'
+            $this->placeholders(Carbon::now()->startOfYear()->diffInDays() * 86400, 7 * 86400, 86400, 'd.m')->take(7)
         );
     }
 }

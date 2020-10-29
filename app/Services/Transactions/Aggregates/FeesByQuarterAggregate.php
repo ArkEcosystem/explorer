@@ -18,9 +18,7 @@ final class FeesByQuarterAggregate
     {
         return $this->mergeWithPlaceholders(
             (new FeesByRangeAggregate())->aggregate(Carbon::now()->subDays(90)->startOfDay(), Carbon::now()->endOfDay(), 'M'),
-            90 * 86400,
-            86400,
-            'M'
+            $this->placeholders(Carbon::now()->startOfYear()->diffInDays() * 86400, 90 * 86400, 86400, 'M')->take(3)->reverse()
         );
     }
 }
