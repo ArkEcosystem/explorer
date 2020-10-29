@@ -10,7 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 
-final class FeeByRangeAggregate
+final class FeesByRangeAggregate
 {
     use HasQueries;
 
