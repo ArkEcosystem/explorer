@@ -33,15 +33,15 @@
         </div>
     </div>
 
-    <div wire:loading>
+    <x-loading.visible>
         <x-delegates.table-desktop-monitor-skeleton />
 
         <x-delegates.table-mobile-monitor-skeleton />
-    </div>
+    </x-loading.visible>
 
-    <div wire:loading.remove>
+    <x-loading.hidden>
         <x-delegates.table-desktop-monitor :delegates="$delegates" />
 
         {{-- <x-delegates.table-mobile-monitor-skeleton :delegates="$delegates" /> --}}
-    </div>
+    </x-loading.hidden>
 </div>
