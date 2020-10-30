@@ -4,10 +4,14 @@
 
         <x-general.entity-header :value="$wallet->address()">
             <x-slot name="title">
-                @if($wallet->isDelegate())
-                    @lang('pages.wallet.address_delegate', [$wallet->username()])
+                @isset($useGenerator)
+                    @lang('pages.wallet.address_generator', [$wallet->username()])
                 @else
-                    @lang('pages.wallet.address')
+                    @if($wallet->isDelegate())
+                        @lang('pages.wallet.address_delegate', [$wallet->username()])
+                    @else
+                        @lang('pages.wallet.address')
+                    @endif
                 @endif
             </x-slot>
 
@@ -23,14 +27,16 @@
                 {{ $slot }}
 
                 <div class="flex items-center mt-6 space-x-2 text-theme-secondary-200 lg:mt-0">
-                    <x-wallet.heading.actions.public-key />
+                    <x-wallet.heading.actions.public-key :public-key="$wallet->publicKey()" />
 
                     <x-wallet.heading.actions.qr-code :wallet="$wallet" />
                 </div>
             </x-slot>
 
-            @isset($extra)
-                {{ $extra }}
+            @isset($extension)
+                <x-slot name="bottom">
+                    {{ $extension }}
+                </x-slot>
             @endisset
         </x-general.entity-header>
     </div>
