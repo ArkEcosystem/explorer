@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-use Carbon\Carbon;
 use App\Models\Transaction;
 use App\Services\Timestamp;
-use Illuminate\Support\Collection;
-
-use function Tests\configureExplorerDatabase;
-use function Spatie\Snapshots\assertMatchesSnapshot;
 use App\Services\Transactions\Aggregates\FeesByQuarterAggregate;
+use Carbon\Carbon;
+
+use Illuminate\Support\Collection;
+use function Spatie\Snapshots\assertMatchesSnapshot;
+use function Tests\configureExplorerDatabase;
 
 beforeEach(fn () => configureExplorerDatabase());
 
