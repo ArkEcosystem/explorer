@@ -30,16 +30,16 @@ trait CanVote
         return new static($wallet);
     }
 
-    public function votePercentage(): float
+    public function votePercentage(): ?float
     {
         if (! Arr::has($this->wallet, 'attributes.vote')) {
-            return 0;
+            return null;
         }
 
         $delegate = Cache::get('votes.'.Arr::get($this->wallet, 'attributes.vote'));
 
         if (is_null($delegate)) {
-            return 0;
+            return null;
         }
 
         return Percentage::calculate($this->wallet->balance->toNumber(), (float) $delegate->attributes['delegate']['voteBalance']);
