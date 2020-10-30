@@ -10,9 +10,17 @@
                     <div class="text-sm leading-tight text-theme-secondary-600 dark:text-theme-secondary-700">{{ $title }}</div>
 
                     <div class="flex items-center space-x-2 leading-tight">
-                        <span class="truncate text-theme-secondary-400 dark:text-theme-secondary-200">{{ $value }}</span>
+                        <span class="flex text-theme-secondary-400 dark:text-theme-secondary-200">
+                            <span class="hidden md:inline-block">
+                                {{ $value }}
+                            </span>
 
-                        <x-ark-clipboard :value="$value" class="flex items-center w-auto h-auto text-theme-secondary-600" no-styling />
+                            <span class="md:hidden">
+                                <x-truncate-middle :value="$value" :length="16" />
+                            </span>
+
+                            <x-ark-clipboard :value="$value" class="flex items-center w-auto h-auto ml-2 text-theme-secondary-600" no-styling />
+                        </span>
                     </div>
                 </div>
             </div>
