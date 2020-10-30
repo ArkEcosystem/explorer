@@ -13,7 +13,7 @@
             {{ $transaction->voted()->username() }}
         </a>
     </x-slot>
-</x-general.amount-fiat-tooltip>
+</x-general.entity-header-item>
 
 <x-general.entity-header-item
     :title="trans('pages.transaction.fee')"
@@ -22,7 +22,7 @@
     <x-slot name="text">
         <x-currency>{{ $transaction->fee() }}</x-currency>
     </x-slot>
-</x-general.amount-fiat-tooltip>
+</x-general.entity-header-item>
 
 <x-general.entity-header-item
     :title="trans('pages.transaction.confirmations')"
@@ -31,4 +31,4 @@
     <x-slot name="text">
         <x-number>{{ $transaction->confirmations() }}</x-number>
     </x-slot>
-</x-general.amount-fiat-tooltip>
+</x-general.entity-header-item>

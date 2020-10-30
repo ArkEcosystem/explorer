@@ -5,4 +5,4 @@
     <x-slot name="text">
         <x-currency>{{ $transaction->amount() }}</x-currency>
     </x-slot>
-</x-general.amount-fiat-tooltip>
+</x-general.entity-header-item>
