@@ -1,6 +1,6 @@
 @if ($model->isNext())
     @lang('pages.monitor.now')
-@elseif ($model->forgingAt()->isPast())
+@elseif ($model->isDone())
     @lang('pages.monitor.completed')
 @else
     {{ $model->forgingAt()->diffForHumans() }}
