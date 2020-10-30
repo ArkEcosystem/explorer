@@ -13,6 +13,7 @@
         <x-wallet.header :wallet="$wallet" />
 
         <livewire:wallet-qr-code :address="$wallet->address()" />
+        <livewire:wallet-public-key :public-key="$wallet->publicKey()" />
 
         @if($wallet->isDelegate())
             <x-wallet.delegate :wallet="$wallet" />
