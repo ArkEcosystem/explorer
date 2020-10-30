@@ -35,10 +35,11 @@ final class Slot
             $this->$key = $value;
         }
 
+        // @TODO: performance
         $this->currentRoundBlocks = Block::query()
-        ->where('generator_public_key', $data['publicKey'])
-        ->whereBetween('height', $heightRange)
-        ->count();
+            ->where('generator_public_key', $data['publicKey'])
+            ->whereBetween('height', $heightRange)
+            ->count();
     }
 
     public function order(): int
@@ -99,11 +100,6 @@ final class Slot
     public function missedCount(): int
     {
         return NetworkStatus::height() - $this->lastBlock['height'];
-    }
-
-    public function isPastSlot(): bool
-    {
-        return $this->time === 0;
     }
 
     public function isDone(): bool
