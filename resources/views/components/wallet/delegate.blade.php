@@ -5,27 +5,41 @@
         </div>
 
         <div class="flex flex-wrap w-full divide-y divide-dashed divide-theme-secondary-300 dark:divide-theme-secondary-800">
-            @if(Network::usesMarketSquare())
-                <div class="grid w-full grid-flow-row grid-cols-1 gap-6 pt-8 mb-8 md:grid-cols-2 lg:grid-cols-4 gap-y-12 md:gap-y-4">
-                    <x-details-box :title="trans('pages.wallet.delegate.rank')" icon="app-volume" icon-wrapper-class="bg-theme-danger-200" icon-class="text-theme-danger-400">
-                        {{ $wallet->rank() }}/{{ Network::confirmations() }}
-                    </x-details-box>
+            <div class="grid w-full grid-flow-row grid-cols-1 gap-6 pt-8 mb-8 md:grid-cols-2 lg:grid-cols-4 gap-y-12 md:gap-y-4">
+                <x-details-box :title="trans('pages.wallet.delegate.rank')" icon="app-rank" icon-wrapper-class="bg-theme-danger-200" icon-class="text-theme-danger-400">
+                    @if ($wallet->rank() > Network::delegateCount())
+                        {{ $wallet->rank() }}
+                    @else
+                        {{ $wallet->rank() }}/{{ Network::delegateCount() }}
+                    @endif
+                </x-details-box>
 
-                    <x-details-box :title="trans('pages.wallet.delegate.commission')" icon="app-volume" icon-wrapper-class="bg-theme-danger-200" icon-class="text-theme-danger-400">
+                <x-details-box :title="trans('pages.wallet.delegate.commission')" icon="app-percent" icon-wrapper-class="bg-theme-danger-200" icon-class="text-theme-danger-400">
+                    @if($wallet->commission())
                         <x-percentage>{{ $wallet->commission() }}</x-percentage>
-                    </x-details-box>
+                    @else
+                        @lang('generic.not_specified')
+                    @endif
+                </x-details-box>
 
-                    <x-details-box :title="trans('pages.wallet.delegate.payout_frequency')" icon="app-volume" icon-wrapper-class="bg-theme-danger-200" icon-class="text-theme-danger-400">
+                <x-details-box :title="trans('pages.wallet.delegate.payout_frequency')" icon="app-price" icon-wrapper-class="bg-theme-danger-200" icon-class="text-theme-danger-400">
+                    @if($wallet->payoutFrequency())
                         {{ $wallet->payoutFrequency() }}
-                    </x-details-box>
+                    @else
+                        @lang('generic.not_specified')
+                    @endif
+                </x-details-box>
 
-                    <x-details-box :title="trans('pages.wallet.delegate.payout_minimum')" icon="app-volume" icon-wrapper-class="bg-theme-danger-200" icon-class="text-theme-danger-400">
+                <x-details-box :title="trans('pages.wallet.delegate.payout_minimum')" icon="app-min" icon-wrapper-class="bg-theme-danger-200" icon-class="text-theme-danger-400">
+                    @if($wallet->payoutMinimum())
                         <x-currency>{{ $wallet->payoutMinimum() }}</x-currency>
-                    </x-details-box>
-                </div>
-            @endif
+                    @else
+                        @lang('generic.not_specified')
+                    @endif
+                </x-details-box>
+            </div>
 
-            <div class="grid w-full grid-flow-row grid-cols-1 gap-6 pt-8 pb-8 border-b border-dotted md:grid-cols-2 lg:grid-cols-4 gap-y-12 md:gap-y-4 border-theme-secondary-300 dark:border-theme-secondary-800">
+            <div class="grid w-full grid-flow-row grid-cols-1 gap-6 pt-8 pb-8 border-b border-dashed md:grid-cols-2 lg:grid-cols-4 gap-y-12 md:gap-y-4 border-theme-secondary-300 dark:border-theme-secondary-800">
                 <x-details-box :title="trans('pages.wallet.delegate.forged_total')" icon="app-volume">
                     <x-currency>{{ $wallet->amountForged() }}</x-currency>
                 </x-details-box>
