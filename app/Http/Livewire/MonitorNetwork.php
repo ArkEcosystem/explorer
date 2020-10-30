@@ -32,9 +32,9 @@ final class MonitorNetwork extends Component
         for ($i = 0; $i < count($tracking); $i++) {
             $delegate = array_values($tracking)[$i];
 
-            if (Cache::missing('lastBlock:'.$delegate['publicKey'])) {
-                CacheLastBlockByPublicKey::dispatchSync($delegate['publicKey']);
-            }
+            // if (Cache::missing('lastBlock:'.$delegate['publicKey'])) {
+            //     CacheLastBlockByPublicKey::dispatchSync($delegate['publicKey']);
+            // }
 
             $delegates[] = new Slot([
                 'publicKey'  => $delegate['publicKey'],
