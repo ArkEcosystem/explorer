@@ -30,7 +30,9 @@
             </x-slot>
 
             @isset($extension)
-                {{ $extension }}
+                <x-slot name="bottom">
+                    {{ $extension }}
+                </x-slot>
             @endisset
         </x-general.entity-header>
     </div>
