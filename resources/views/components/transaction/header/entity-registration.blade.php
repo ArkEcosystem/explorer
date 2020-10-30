@@ -18,7 +18,7 @@
 
 <x-general.entity-header-item
     :title="trans('pages.transaction.category')"
-    icon="app-transactions-amount"
+    icon="app-smartbridge"
 >
     <x-slot name="text">
         @lang('generic.not_specified')
