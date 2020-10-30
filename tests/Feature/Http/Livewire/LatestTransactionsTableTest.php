@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-use App\Models\Block;
-use Ramsey\Uuid\Uuid;
-use App\Models\Wallet;
-use Livewire\Livewire;
+use App\Enums\CoreTransactionTypeEnum;
+use App\Enums\TransactionTypeGroupEnum;
 use App\Facades\Network;
+use App\Http\Livewire\LatestTransactionsTable;
+use App\Models\Block;
 use App\Models\Transaction;
+use App\Models\Wallet;
 use App\Services\NumberFormatter;
 use App\ViewModels\ViewModelFactory;
-use App\Enums\CoreTransactionTypeEnum;
 
-use App\Enums\TransactionTypeGroupEnum;
+use Livewire\Livewire;
+use Ramsey\Uuid\Uuid;
 use function Tests\configureExplorerDatabase;
-use App\Http\Livewire\LatestTransactionsTable;
 
 beforeEach(fn () => configureExplorerDatabase());
 

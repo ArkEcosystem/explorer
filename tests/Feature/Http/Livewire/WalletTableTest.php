@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-use App\Models\Wallet;
-use Livewire\Livewire;
 use App\Facades\Network;
+use App\Http\Livewire\WalletTable;
+use App\Models\Wallet;
 
 use App\Services\NumberFormatter;
-use App\Http\Livewire\WalletTable;
 use App\ViewModels\ViewModelFactory;
+use Livewire\Livewire;
 use function Tests\configureExplorerDatabase;
 
 beforeEach(fn () => configureExplorerDatabase());
