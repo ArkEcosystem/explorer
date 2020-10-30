@@ -3,9 +3,7 @@
         <div class="flex flex-col space-y-8 lg:flex-row lg:space-y-0">
             <div class="flex md:space-x-4">
                 <div class="items-center hidden md:flex">
-                    <div class="circled-icon text-theme-secondary-400 border-theme-danger-400">
-                        {!! $logo !!}
-                    </div>
+                    {!! $logo !!}
                 </div>
 
                 <div class="flex flex-col justify-between flex-1 space-y-4 font-semibold lg:ml-4 md:space-y-0">
