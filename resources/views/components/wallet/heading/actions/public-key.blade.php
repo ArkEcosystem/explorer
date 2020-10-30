@@ -8,12 +8,8 @@
         <div class="flex flex-col p-10 space-y-2 leading-tight">
             <span class="text-sm font-semibold text-theme-secondary-400 dark:text-theme-secondary-700">@lang('pages.wallet.public_key.title')</span>
             <span class="flex font-semibold link">
-                <span class="hidden md:inline-block">
+                <span class="inline-block truncate">
                     {{ $publicKey }}
-                </span>
-
-                <span class="md:hidden">
-                    <x-truncate-middle :value="$publicKey" :length="16" />
                 </span>
 
                 <x-ark-clipboard :value="$publicKey" class="flex items-center w-auto h-auto ml-2 text-theme-primary-300 dark:text-theme-secondary-600" no-styling />
