@@ -40,8 +40,12 @@
                     <x-general.entity-header-item
                         :title="trans('pages.block.transaction_volume')"
                         icon="app-votes"
-                        :text="$block->amount()"
-                    />
+                    >
+                        <x-slot name="text">
+                            <x-currency>{{ $block->amount() }}</x-currency>
+                        </x-slot>
+                    </x-general.amount-fiat-tooltip>
+
                     <x-general.entity-header-item
                         icon="app-reward"
                         :text="$block->totalReward()"
