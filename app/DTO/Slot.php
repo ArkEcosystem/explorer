@@ -86,6 +86,26 @@ final class Slot
         return $this->status;
     }
 
+    public function isPastSlot(): bool
+    {
+        return $this->time === 0;
+    }
+
+    public function isDone(): bool
+    {
+        return $this->status === 'done';
+    }
+
+    public function isNext(): bool
+    {
+        return $this->status === 'next';
+    }
+
+    public function isPending(): bool
+    {
+        return $this->status === 'pending';
+    }
+
     public function time(): int
     {
         return $this->time;

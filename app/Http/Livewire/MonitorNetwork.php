@@ -7,6 +7,7 @@ namespace App\Http\Livewire;
 use App\DTO\Slot;
 use App\Facades\Network;
 use App\Models\Block;
+use App\Services\Blockchain\NetworkStatus;
 use App\Services\Monitor\DelegateTracker;
 use App\Services\Monitor\Monitor;
 use App\ViewModels\ViewModelFactory;
@@ -21,21 +22,29 @@ final class MonitorNetwork extends Component
     public function render(): View
     {
         // $tracking = DelegateTracker::execute(Monitor::roundDelegates(112168));
-        $tracking = DelegateTracker::execute(Monitor::activeDelegates(Monitor::roundNumber()));
+
+        $roundNumber = Monitor::roundNumber();
+        $heightRange = Monitor::heightRangeByRound($roundNumber);
+        $tracking    = DelegateTracker::execute(Monitor::activeDelegates(Monitor::roundNumber()));
 
         $delegates = [];
 
         for ($i = 0; $i < count($tracking); $i++) {
             $delegate = array_values($tracking)[$i];
 
+            $hasBlockInCurrentRound = Block::query()
+                ->where('generator_public_key', $delegate['publicKey'])
+                ->whereBetween('height', $heightRange)
+                ->count();
+
             $delegates[] = new Slot([
                 'order'         => $i + 1,
                 'wallet'        => ViewModelFactory::make(Cache::tags(['delegates'])->get($delegate['publicKey'])),
                 'forging_at'    => Carbon::now()->addMilliseconds($delegate['time']),
-                'last_block'    => Cache::get('lastBlock:'.$delegate['publicKey']),
-                'is_success'    => false, // $missedCount === 0,
-                'is_warning'    => false, // $missedCount === 1,
-                'is_danger'     => false, // $missedCount >= 2,
+                'last_block'    => $lastBlock = Cache::get('lastBlock:'.$delegate['publicKey']),
+                'is_success'    => $hasBlockInCurrentRound >= 1,
+                'is_warning'    => $hasBlockInCurrentRound < 1,
+                'is_danger'     => (NetworkStatus::height() - $lastBlock->height->toNumber()) >= 2,
                 'missed_count'  => 0,
                 'status'        => $delegate['status'],
                 'time'          => $delegate['time'],
@@ -65,7 +74,7 @@ final class MonitorNetwork extends Component
 
     private function transactions(): int
     {
-        return Cache::remember('MonitorNetwork:transactions', Network::blockTime(), function (): int {
+        return (int) Cache::remember('MonitorNetwork:transactions', Network::blockTime(), function (): int {
             return Block::whereBetween('height', Monitor::heightRangeByRound(Monitor::roundNumber()))->sum('number_of_transactions');
         });
     }

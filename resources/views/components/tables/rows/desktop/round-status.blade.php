@@ -1,4 +1,8 @@
-@if (optional($model->forgingAt())->isFuture())
+@if ($model->isNext())
+    <span class="font-bold text-theme-secondary-500">
+        @svg('app-status-waiting', 'w-8 h-8')
+    </span>
+@elseif ($model->isPending())
     <span class="font-bold text-theme-gray-500">
         @svg('app-status-waiting', 'w-8 h-8')
     </span>
