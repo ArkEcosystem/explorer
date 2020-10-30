@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace App\ViewModels\Concerns\Wallet;
 
-use App\Facades\Network;
-use App\Services\BigNumber;
-use App\Services\NumberFormatter;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;
 
@@ -14,43 +11,35 @@ trait CanForge
 {
     public function amountForged(): string
     {
-        $result = Arr::get(Cache::get('delegates.totalAmounts', []), $this->wallet->public_key, 0);
-
-        return NumberFormatter::currency(BigNumber::new($result)->toFloat(), Network::currency());
+        return Arr::get(Cache::get('delegates.totalAmounts', []), $this->wallet->public_key, 0);
     }
 
     public function feesForged(): string
     {
-        $result = Arr::get(Cache::get('delegates.totalFees', []), $this->wallet->public_key, 0);
-
-        return NumberFormatter::currency(BigNumber::new($result)->toFloat(), Network::currency());
+        return Arr::get(Cache::get('delegates.totalFees', []), $this->wallet->public_key, 0);
     }
 
     public function rewardsForged(): string
     {
-        $result = Arr::get(Cache::get('delegates.totalRewards', []), $this->wallet->public_key, 0);
-
-        return NumberFormatter::currency(BigNumber::new($result)->toFloat(), Network::currency());
+        return Arr::get(Cache::get('delegates.totalRewards', []), $this->wallet->public_key, 0);
     }
 
     public function blocksForged(): string
     {
-        $result = Arr::get(Cache::get('delegates.totalBlocks', []), $this->wallet->public_key, 0);
-
-        return NumberFormatter::number($result);
+        return Arr::get(Cache::get('delegates.totalBlocks', []), $this->wallet->public_key, 0);
     }
 
     public function forgedBlocks(): string
     {
-        return NumberFormatter::number(Arr::get($this->wallet, 'attributes.delegate.producedBlocks', 0));
+        return Arr::get($this->wallet, 'attributes.delegate.producedBlocks', 0);
     }
 
     /**
      * @TODO: needs monitor to be implemented
      */
-    public function productivity(): string
+    public function productivity(): int
     {
-        return NumberFormatter::percentage(0);
+        return 0;
     }
 
     public function performance(): array
