@@ -3,11 +3,11 @@
 declare(strict_types=1);
 
 use App\Facades\Network;
-use App\Models\Block;
-use Livewire\Livewire;
 use App\Http\Livewire\BlockTable;
+use App\Models\Block;
 use App\Services\NumberFormatter;
 use App\ViewModels\ViewModelFactory;
+use Livewire\Livewire;
 use function Tests\configureExplorerDatabase;
 
 beforeEach(fn () => configureExplorerDatabase());

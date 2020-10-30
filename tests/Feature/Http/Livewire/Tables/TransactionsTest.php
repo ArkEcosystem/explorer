@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-use Livewire\Livewire;
 use App\Facades\Network;
+use App\Http\Livewire\Tables\Transactions;
 use App\Models\Transaction;
 use App\Services\NumberFormatter;
 
 use App\ViewModels\ViewModelFactory;
-use App\Http\Livewire\Tables\Transactions;
+use Livewire\Livewire;
 use function Tests\configureExplorerDatabase;
 
 beforeEach(fn () => configureExplorerDatabase());
