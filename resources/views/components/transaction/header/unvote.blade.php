@@ -5,7 +5,7 @@
 />
 
 <x-general.entity-header-item
-    :title="trans('pages.transaction.vote')"
+    :title="trans('pages.transaction.unvote')"
     :avatar="$transaction->unvoted()->username()"
 >
     <x-slot name="text">
