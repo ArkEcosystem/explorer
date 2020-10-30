@@ -10,14 +10,7 @@
     @endpush
 
     @section('content')
-<<<<<<< HEAD
-        <x-wallet.header :wallet="$wallet" />
-
-        <livewire:wallet-qr-code :address="$wallet->address()" />
-        <livewire:wallet-public-key :public-key="$wallet->publicKey()" />
-=======
         <x-wallet.heading.wallet :wallet="$wallet" />
->>>>>>> develop
 
         @if($wallet->isDelegate())
             <x-wallet.delegate :wallet="$wallet" />
