@@ -24,6 +24,9 @@
         <meta property="og:url" content="{{ url()->full() }}" />
         <meta property="og:type" content="website" />
 
+        <meta property="og:title" content="@lang('metatags.home.title')" />
+        <meta property="og:description" content="@lang('metatags.home.description')">
+
         <!-- Styles -->
         <link href="{{ mix('css/app.css') }}" rel="stylesheet">
         @livewireStyles
