@@ -37,10 +37,9 @@
                 </div>
 
                 <div class="flex items-center mt-6 space-x-2 text-theme-secondary-200 md:mt-0">
-                    {{-- @TODO: public key button --}}
-                    <a href="#" class="flex items-center justify-center flex-1 w-16 px-3 rounded cursor-pointer bg-theme-secondary-800 hover:bg-theme-primary-600 transition-default lg:flex-none h-11">
+                    <button @click="livewire.emit('togglePublicKey')" type="button" class="flex items-center justify-center flex-1 w-16 px-3 rounded cursor-pointer bg-theme-secondary-800 hover:bg-theme-primary-600 transition-default lg:flex-none h-11">
                         @svg('key', 'w-6 h-6')
-                    </a>
+                    </button>
 
                     <button @click="livewire.emit('toggleQrCode')" type="button" class="flex items-center justify-center flex-1 w-16 px-3 rounded cursor-pointer bg-theme-primary-600 hover:bg-theme-primary-700 transition-default lg:flex-none h-11">
                         @svg('app-qr-code', 'w-6 h-6')
