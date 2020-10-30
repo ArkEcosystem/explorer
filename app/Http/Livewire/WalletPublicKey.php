@@ -19,6 +19,6 @@ final class WalletPublicKey extends Component
 
     public function togglePublicKey(): void
     {
-        $this->isOpen = !$this->isOpen;
+        $this->isOpen = ! $this->isOpen;
     }
 }
