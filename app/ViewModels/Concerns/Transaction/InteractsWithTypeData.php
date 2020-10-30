@@ -14,6 +14,17 @@ trait InteractsWithTypeData
         return trans('general.transaction.'.$this->iconType());
     }
 
+    public function headerComponent(): string
+    {
+        $view = 'transaction.header.'.Str::slug($this->iconType());
+
+        if (View::exists("components.$view")) {
+            return $view;
+        }
+
+        return 'transaction.header.fallback';
+    }
+
     public function typeComponent(): string
     {
         $view = 'transaction.details.'.Str::slug($this->iconType());
