@@ -15,7 +15,9 @@
             wire:click="$set('state.direction', 'received');"
             @click="direction = 'received'"
         >
-            @lang('pages.wallet.received_transactions', [$countReceived])
+            <span>@lang('pages.wallet.received_transactions')</span>
+
+            <span class="text-sm px-1 ml-1 rounded bg-theme-primary-100">{{ $countReceived }}</span>
         </div>
 
         <div
@@ -24,7 +26,9 @@
             wire:click="$set('state.direction', 'sent');"
             @click="direction = 'sent'"
         >
-            @lang('pages.wallet.sent_transactions', [$countSent])
+            <span>@lang('pages.wallet.sent_transactions', [$countSent])</span>
+
+            <span class="text-sm px-1 ml-1 rounded bg-theme-primary-100">{{ $countSent }}</span>
         </div>
     </div>
 
@@ -51,11 +55,15 @@
                 </a>
 
                 <a wire:click="$set('state.direction', 'received');" @click="direction = 'received'" class="dropdown-entry">
-                    @lang('pages.wallet.received_transactions', [$countReceived])
+                    <span>@lang('pages.wallet.received_transactions')</span>
+
+                    <span class="text-sm px-1 ml-2 rounded bg-theme-primary-100">{{ $countReceived }}</span>
                 </a>
 
                 <a wire:click="$set('state.direction', 'sent');" @click="direction = 'sent'" class="dropdown-entry">
-                    @lang('pages.wallet.sent_transactions', [$countSent])
+                    <span>@lang('pages.wallet.sent_transactions')</span>
+
+                    <span class="text-sm px-1 ml-2 rounded bg-theme-primary-100">{{ $countSent }}</span>
                 </a>
             </div>
         </x-ark-dropdown>
