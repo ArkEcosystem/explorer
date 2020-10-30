@@ -9,27 +9,27 @@ use Illuminate\Support\Facades\Cache;
 
 trait CanForge
 {
-    public function amountForged(): string
+    public function amountForged(): int
     {
         return Arr::get(Cache::get('delegates.totalAmounts', []), $this->wallet->public_key, 0);
     }
 
-    public function feesForged(): string
+    public function feesForged(): int
     {
         return Arr::get(Cache::get('delegates.totalFees', []), $this->wallet->public_key, 0);
     }
 
-    public function rewardsForged(): string
+    public function rewardsForged(): int
     {
         return Arr::get(Cache::get('delegates.totalRewards', []), $this->wallet->public_key, 0);
     }
 
-    public function blocksForged(): string
+    public function blocksForged(): int
     {
         return Arr::get(Cache::get('delegates.totalBlocks', []), $this->wallet->public_key, 0);
     }
 
-    public function forgedBlocks(): string
+    public function forgedBlocks(): int
     {
         return Arr::get($this->wallet, 'attributes.delegate.producedBlocks', 0);
     }
