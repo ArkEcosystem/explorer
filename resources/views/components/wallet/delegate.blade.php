@@ -10,7 +10,7 @@
                     @if ($wallet->rank() > Network::delegateCount())
                         {{ $wallet->rank() }}
                     @else
-                        {{ $wallet->rank() }} <span class="text-theme-secondary-500">/{{ Network::delegateCount() }}</span>
+                        {{ $wallet->rank() }} <span class="text-theme-secondary-500 dark:text-theme-secondary-700">/{{ Network::delegateCount() }}</span>
                     @endif
                 </x-details-box>
 
