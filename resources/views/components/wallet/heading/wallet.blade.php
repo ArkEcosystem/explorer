@@ -3,7 +3,7 @@
         <x-currency>{{ $wallet->balance() }}</x-currency>
     </x-wallet.heading.frame-item>
 
-    <x-slot name="extra">
+    <x-slot name="extension">
         @if($wallet->isVoting())
             @php($vote = $wallet->vote())
 
