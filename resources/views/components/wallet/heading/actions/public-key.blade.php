@@ -4,27 +4,20 @@
         @svg('key', 'w-6 h-6')
     </button>
 
-    <div x-show="visible" class="origin-top-left absolute bg-white mt-2 rounded-md shadow-lg z-10 w-128" x-cloak>
-        {{--<x-ark-modal class="w-full mx-6" width-class="max-w-sm"
-            alpine-close="visible = false" title-class="header-2">--}}
-
-            {{--@slot('description')--}}
-            <div class="flex flex-col space-x-2 leading-tight">
-                <span>@lang('pages.wallet.public_key.title')</span>
-                <span class="flex text-theme-secondary-400 dark:text-theme-secondary-200 link">
-                    <span class="hidden lg:inline-block">
-                        {{ $publicKey }}
-                    </span>
-
-                    <span class="lg:hidden">
-                        <x-truncate-middle :value="$publicKey" :length="16" />
-                    </span>
-
-                    <x-ark-clipboard :value="$publicKey"
-                        class="flex items-center w-auto h-auto ml-2 text-theme-secondary-600" no-styling />
+    <div x-show="visible" class="absolute right-0 bg-white rounded-lg shadow-lg z-10 w-128 mt-4" x-cloak>
+        <div class="flex flex-col leading-tight p-8 space-y-2">
+            <span class="font-semibold text-theme-secondary-400 text-sm">@lang('pages.wallet.public_key.title')</span>
+            <span class="flex text-theme-secondary-400 dark:text-theme-secondary-200 link font-semibold">
+                <span class="hidden lg:inline-block">
+                    {{ $publicKey }}
                 </span>
-            </div>
-            {{--@endslot--}}
-        {{--</x-ark-modal>--}}
+
+                <span class="lg:hidden">
+                    <x-truncate-middle :value="$publicKey" :length="16" />
+                </span>
+
+                <x-ark-clipboard :value="$publicKey" class="flex items-center w-auto h-auto ml-2 text-theme-primary-300" no-styling />
+            </span>
+        </div>
     </div>
 </div>
