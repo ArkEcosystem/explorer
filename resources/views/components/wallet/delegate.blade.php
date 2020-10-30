@@ -4,13 +4,13 @@
             <h2 class="text-xl sm:text-2xl">@lang('pages.wallet.delegate.title', [$wallet->username()])</h2>
         </div>
 
-        <div class="flex flex-wrap w-full divide-y divide-dashed divide-theme-secondary-300 dark:divide-theme-secondary-800">
-            <div class="grid w-full grid-flow-row grid-cols-1 gap-6 pt-8 mb-8 md:grid-cols-2 lg:grid-cols-4 gap-y-12 md:gap-y-4">
+        <div class="flex flex-wrap w-full divide-theme-secondary-300 dark:divide-theme-secondary-800">
+            <div class="grid w-full grid-flow-row grid-cols-1 gap-6 pt-8 pb-8 mb-8 border-b border-dashed border-theme-secondary-300 dark:border-theme-secondary-800 md:grid-cols-2 lg:grid-cols-4 gap-y-12 md:gap-y-4">
                 <x-details-box :title="trans('pages.wallet.delegate.rank')" icon="app-rank" icon-wrapper-class="bg-theme-danger-100" icon-class="text-theme-danger-400">
                     @if ($wallet->rank() > Network::delegateCount())
                         {{ $wallet->rank() }}
                     @else
-                        {{ $wallet->rank() }}/{{ Network::delegateCount() }}
+                        {{ $wallet->rank() }} <span class="text-color-secondary-400">/{{ Network::delegateCount() }}</span>
                     @endif
                 </x-details-box>
 
@@ -39,7 +39,7 @@
                 </x-details-box>
             </div>
 
-            <div class="grid w-full grid-flow-row grid-cols-1 gap-6 pt-8 pb-8 border-b border-dotted md:grid-cols-2 lg:grid-cols-4 gap-y-12 md:gap-y-4 border-theme-secondary-300 dark:border-theme-secondary-800">
+            <div class="grid w-full grid-flow-row grid-cols-1 gap-6 pb-8 border-b border-dashed md:grid-cols-2 lg:grid-cols-4 gap-y-12 md:gap-y-4 border-theme-secondary-300 dark:border-theme-secondary-800">
                 <x-details-box :title="trans('pages.wallet.delegate.forged_total')" icon="app-forged" shallow>
                     <x-currency>{{ $wallet->totalForged() }}</x-currency>
                 </x-details-box>
