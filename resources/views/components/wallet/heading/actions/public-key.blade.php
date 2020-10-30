@@ -4,7 +4,7 @@
         @svg('key', 'w-6 h-6')
     </button>
 
-    <div x-show="visible" class="origin-top-left absolute bg-white mt-2 rounded-md shadow-lg z-10 w-128" x-cloak>
+    <div x-show="visible" class="absolute z-10 mt-2 origin-top-left bg-white rounded-md shadow-lg w-128" x-cloak>
         {{--<x-ark-modal class="w-full mx-6" width-class="max-w-sm"
             alpine-close="visible = false" title-class="header-2">--}}
 
