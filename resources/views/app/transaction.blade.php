@@ -1,8 +1,8 @@
 @component('layouts.app', ['isLanding' => true, 'fullWidth' => true])
 
     @push('metatags')
-        <meta property="og:title" content="@lang('metatags.transaction.title')" />
-        <meta property="og:description" content="@lang('metatags.transaction.description')">
+        <meta property="og:title" content="@lang('metatags.home.title')" />
+        <meta property="og:description" content="@lang('metatags.home.description')">
     @endpush
 
     @push('scripts')
