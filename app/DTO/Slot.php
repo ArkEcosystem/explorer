@@ -101,7 +101,7 @@ final class Slot
 
     public function missedCount(): int
     {
-        return abs(NetworkStatus::height() - $this->lastBlock['height']);
+        return (int) abs(NetworkStatus::height() - $this->lastBlock['height']);
     }
 
     public function isDone(): bool
