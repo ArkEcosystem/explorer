@@ -10,7 +10,7 @@ use App\ViewModels\WalletViewModel;
 use Carbon\Carbon;
 use function Tests\configureExplorerDatabase;
 
-it('should make an instance that has all properties', function () {
+it('should make an instance that has all properties', function (string $status) {
     configureExplorerDatabase();
 
     $wallet = Wallet::factory()->create();
@@ -24,8 +24,8 @@ it('should make an instance that has all properties', function () {
             'publicKey' => $wallet->public_key,
             'height'    => Block::factory()->create()->height->toNumber(),
         ],
-        'status'       => 'next',
-        'status'       => 'next',
+        'status' => $status,
+        'time'   => 0,
     ], [1, 5]);
 
     expect($subject->order())->toBeInt();
@@ -40,4 +40,4 @@ it('should make an instance that has all properties', function () {
     expect($subject->isNext())->toBeBool();
     expect($subject->isPending())->toBeBool();
     expect($subject->status())->toBeString();
-});
+})->with(['done', 'next', 'pending']);
