@@ -51,7 +51,7 @@ final class Kernel extends ConsoleKernel
     /**
      * Define the application's command short schedule.
      *
-     * @param ShortSchedule $schedule
+     * @param ShortSchedule $shortSchedule
      *
      * @return void
      */

@@ -25,6 +25,8 @@ final class Slot
 
     private int $time;
 
+    private int $currentRoundBlocks;
+
     public function __construct(array $data, array $heightRange)
     {
         foreach ($data as $key => $value) {
@@ -99,7 +101,7 @@ final class Slot
 
     public function missedCount(): int
     {
-        return NetworkStatus::height() - $this->lastBlock['height'];
+        return abs(NetworkStatus::height() - $this->lastBlock['height']);
     }
 
     public function isDone(): bool
