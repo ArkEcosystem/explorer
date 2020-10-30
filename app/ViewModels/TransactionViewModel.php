@@ -66,7 +66,7 @@ final class TransactionViewModel implements ViewModel
         return Timestamp::fromGenesisHuman($this->transaction->timestamp);
     }
 
-    public function nonce(): string
+    public function nonce(): int
     {
         $wallet = Cache::remember(
             "transaction:wallet:{$this->transaction->sender_public_key}",
