@@ -10,7 +10,7 @@
     @if ($model->keepsMissing())
         <span class="font-bold text-theme-danger-500">
             @svg('app-status-undone', 'w-8 h-8')
-            @lang('pages.monitor.danger', [$model->missedCount()])
+            @lang('pages.monitor.danger', [App\Services\NumberFormatter::number($model->missedCount())])
         </span>
     @elseif ($model->justMissed())
         <span class="font-bold text-theme-warning-500">
