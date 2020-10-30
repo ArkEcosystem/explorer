@@ -6,8 +6,8 @@ namespace App\Http\Livewire;
 
 use App\DTO\Slot;
 use App\Facades\Network;
+use App\Jobs\CacheLastBlockByPublicKey;
 use App\Models\Block;
-use App\Services\Blockchain\NetworkStatus;
 use App\Services\Monitor\DelegateTracker;
 use App\Services\Monitor\Monitor;
 use App\ViewModels\ViewModelFactory;
@@ -32,23 +32,18 @@ final class MonitorNetwork extends Component
         for ($i = 0; $i < count($tracking); $i++) {
             $delegate = array_values($tracking)[$i];
 
-            $hasBlockInCurrentRound = Block::query()
-                ->where('generator_public_key', $delegate['publicKey'])
-                ->whereBetween('height', $heightRange)
-                ->count();
+            if (Cache::missing('lastBlock:'.$delegate['publicKey'])) {
+                CacheLastBlockByPublicKey::dispatchSync($delegate['publicKey']);
+            }
 
             $delegates[] = new Slot([
-                'order'         => $i + 1,
-                'wallet'        => ViewModelFactory::make(Cache::tags(['delegates'])->get($delegate['publicKey'])),
-                'forging_at'    => Carbon::now()->addMilliseconds($delegate['time']),
-                'last_block'    => $lastBlock = Cache::get('lastBlock:'.$delegate['publicKey']),
-                'is_success'    => $hasBlockInCurrentRound >= 1,
-                'is_warning'    => $hasBlockInCurrentRound < 1,
-                'is_danger'     => (NetworkStatus::height() - $lastBlock->height->toNumber()) >= 2,
-                'missed_count'  => 0,
-                'status'        => $delegate['status'],
-                'time'          => $delegate['time'],
-            ]);
+                'publicKey'  => $delegate['publicKey'],
+                'order'      => $i + 1,
+                'wallet'     => ViewModelFactory::make(Cache::tags(['delegates'])->get($delegate['publicKey'])),
+                'forging_at' => Carbon::now()->addMilliseconds($delegate['time']),
+                'last_block' => Cache::get('lastBlock:'.$delegate['publicKey']),
+                'status'     => $delegate['status'],
+            ], $heightRange);
         }
 
         return view('livewire.monitor-network', [

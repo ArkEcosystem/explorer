@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace App\DTO;
 
+use App\Facades\Network;
+use App\Models\Block;
+use App\Services\Blockchain\NetworkStatus;
 use App\ViewModels\WalletViewModel;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
@@ -18,19 +21,11 @@ final class Slot
 
     private array $lastBlock;
 
-    private bool $isSuccess;
-
-    private bool $isWarning;
-
-    private bool $isDanger;
-
-    private int $missedCount;
-
     private string $status;
 
     private int $time;
 
-    public function __construct(array $data)
+    public function __construct(array $data, array $heightRange)
     {
         foreach ($data as $key => $value) {
             /* @phpstan-ignore-next-line */
@@ -39,6 +34,11 @@ final class Slot
             /* @phpstan-ignore-next-line */
             $this->$key = $value;
         }
+
+        $this->currentRoundBlocks = Block::query()
+        ->where('generator_public_key', $data['publicKey'])
+        ->whereBetween('height', $heightRange)
+        ->count();
     }
 
     public function order(): int
@@ -61,29 +61,44 @@ final class Slot
         return $this->lastBlock;
     }
 
-    public function isSuccess(): bool
+    public function hasForged(): bool
     {
-        return $this->isSuccess;
+        if ($this->isPending()) {
+            return false;
+        }
+
+        return $this->currentRoundBlocks >= 1;
     }
 
-    public function isWarning(): bool
+    public function justMissed(): bool
     {
-        return $this->isWarning;
+        if ($this->isNext()) {
+            return false;
+        }
+
+        if ($this->isPending()) {
+            return false;
+        }
+
+        return $this->missedCount() > (Network::delegateCount() * 2);
     }
 
-    public function isDanger(): bool
+    public function keepsMissing(): bool
     {
-        return $this->isDanger;
+        if ($this->isNext()) {
+            return false;
+        }
+
+        if ($this->isPending()) {
+            return false;
+        }
+
+        return $this->missedCount() > (Network::delegateCount() * 3);
     }
 
     public function missedCount(): int
     {
-        return $this->missedCount;
-    }
-
-    public function status(): string
-    {
-        return $this->status;
+        return NetworkStatus::height() - $this->lastBlock['height'];
     }
 
     public function isPastSlot(): bool
@@ -106,8 +121,8 @@ final class Slot
         return $this->status === 'pending';
     }
 
-    public function time(): int
+    public function status(): string
     {
-        return $this->time;
+        return $this->status;
     }
 }
