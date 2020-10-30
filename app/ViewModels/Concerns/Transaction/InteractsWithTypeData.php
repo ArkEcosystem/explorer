@@ -16,7 +16,7 @@ trait InteractsWithTypeData
 
     public function headerComponent(): string
     {
-        $view = 'transaction.header.'.Str::slug($this->iconType());
+        $view = 'transaction.header.'.$this->componentSlug();
 
         if (View::exists("components.$view")) {
             return $view;

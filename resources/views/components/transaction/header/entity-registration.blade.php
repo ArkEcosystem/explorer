@@ -3,7 +3,7 @@
     icon="app-transactions-amount"
 >
     <x-slot name="text">
-        {{ $transaction->entityType() }}
+        @lang('pages.transaction.'.$transaction->entityType())
     </x-slot>
 </x-general.entity-header-item>
 
@@ -21,7 +21,7 @@
     icon="app-transactions-amount"
 >
     <x-slot name="text">
-        {{ $transaction->entityCategory() }}
+        @lang('generic.not_specified')
     </x-slot>
 </x-general.entity-header-item>
 
@@ -30,6 +30,8 @@
     icon="app-transactions-amount"
 >
     <x-slot name="text">
-        {{ $transaction->entityHash() }}
+        <a href="https://cloudflare-ipfs.com/ipfs/{{ $transaction->entityHash() }}" class="font-semibold link">
+            <x-truncate-middle :value="$transaction->entityHash()" />
+        </a>
     </x-slot>
 </x-general.entity-header-item>

@@ -1,4 +1,10 @@
 <x-general.entity-header-item
+    :title="trans('pages.transaction.transaction_type')"
+    icon="app-transactions.transfer"
+    :text="$transaction->typeLabel()"
+/>
+
+<x-general.entity-header-item
     :title="trans('pages.transaction.amount')"
     icon="app-transactions-amount"
 >

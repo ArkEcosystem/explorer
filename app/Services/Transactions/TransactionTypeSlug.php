@@ -7,7 +7,7 @@ namespace App\Services\Transactions;
 use App\Models\Transaction;
 use App\Services\Transactions\Concerns\ManagesTransactionTypes;
 
-final class TransactionTypeIcon
+final class TransactionTypeSlug
 {
     use ManagesTransactionTypes;
 
@@ -18,11 +18,22 @@ final class TransactionTypeIcon
         $this->type = new TransactionType($transaction);
     }
 
-    public function name(): string
+    public function generic(): string
     {
-        foreach ($this->typesExact as $method => $icon) {
+        foreach ($this->typesGeneric as $method => $slug) {
             if ($this->type->$method()) {
-                return $icon;
+                return $slug;
+            }
+        }
+
+        return 'unknown';
+    }
+
+    public function exact(): string
+    {
+        foreach ($this->typesExact as $method => $slug) {
+            if ($this->type->$method()) {
+                return $slug;
             }
         }
 
