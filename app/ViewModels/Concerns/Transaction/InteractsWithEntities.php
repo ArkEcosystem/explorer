@@ -8,8 +8,23 @@ use Illuminate\Support\Arr;
 
 trait InteractsWithEntities
 {
+    public function entityType(): ?string
+    {
+        return Arr::get($this->transaction, 'asset.data.name');
+    }
+
     public function entityName(): ?string
     {
         return Arr::get($this->transaction, 'asset.data.name');
+    }
+
+    public function entityCategory(): ?string
+    {
+        return null;
+    }
+
+    public function entityHash(): ?string
+    {
+        return Arr::get($this->transaction, 'asset.data.hash');
     }
 }

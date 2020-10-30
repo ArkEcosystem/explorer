@@ -65,6 +65,10 @@ return [
         'recipient_list'          => 'Recipient List',
         'musig_participants'      => 'M-of-N Multisig',
         'musig_participants_text' => ':0 of :1',
+        'transaction_type'        => 'Transaction Type',
+        'name'                    => 'Name',
+        'category'                => 'Category',
+        'ipfs_hash'               => 'IPFS Hash',
     ],
 
     'transactions' => [
