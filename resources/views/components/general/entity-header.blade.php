@@ -4,7 +4,7 @@
             <div class="flex md:space-x-4">
                 <div class="items-center hidden md:flex">
                     <div class="circled-icon text-theme-secondary-400 border-theme-danger-400">
-                        {{ $logo }}
+                        {!! $logo !!}
                     </div>
                 </div>
 

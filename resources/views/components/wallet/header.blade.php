@@ -2,12 +2,21 @@
     <div class="flex-col pt-16 mb-16 space-y-6 content-container">
         <x-general.search.header-slim :title="trans('pages.wallet.title')" />
 
-        <x-general.entity-header
-            :title="trans('pages.wallet.address')"
-            :value="$wallet->address()"
-        >
+        <x-general.entity-header :value="$wallet->address()">
+            <x-slot name="title">
+                @if($wallet->isDelegate())
+                    @lang('pages.wallet.address_delegate', [$wallet->username()])
+                @else
+                    @lang('pages.wallet.address')
+                @endif
+            </x-slot>
+
             <x-slot name="logo">
-                <x-general.avatar :identifier="$wallet->address()" size="w-8 h-8" />
+                @if($wallet->isDelegate())
+                    <x-headings.avatar-with-icon :model="$wallet" icon="app-delegate" />
+                @else
+                    <x-headings.avatar :model="$wallet" />
+                @endif
             </x-slot>
 
             <x-slot name="extra">
@@ -25,7 +34,7 @@
 
                         <div class="flex items-center space-x-2 leading-tight">
                             <span class="truncate text-theme-secondary-400 dark:text-theme-secondary-200">
-                                {{ $wallet->balance() }}
+                                <x-currency>{{ $wallet->balance() }}</x-currency>
                             </span>
                         </div>
                     </div>
@@ -57,8 +66,11 @@
                         <x-general.entity-header-item
                             :title="trans('pages.wallet.rank')"
                             icon="app-votes"
-                            :text="$vote->rank()"
-                        />
+                        >
+                            <x-slot name="text">
+                                @lang('pages.wallet.vote_rank', [$vote->rank()])
+                            </x-slot>
+                        </x-general.entity-header-item>
                         @if (Network::usesMarketSquare())
                             <x-general.entity-header-item
                                 :title="trans('pages.wallet.commission')"

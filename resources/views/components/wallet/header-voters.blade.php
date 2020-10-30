@@ -7,7 +7,7 @@
             :value="$wallet->address()"
         >
             <x-slot name="logo">
-                <x-general.avatar :identifier="$wallet->address()" size="w-8 h-8" />
+                <x-headings.avatar-with-icon :model="$wallet" icon="app-delegate" />
             </x-slot>
 
             <x-slot name="extra">
@@ -25,7 +25,7 @@
 
                         <div class="flex items-center space-x-2 leading-tight">
                             <span class="truncate text-theme-secondary-400 dark:text-theme-secondary-200">
-                                {{ $wallet->voterCount() }}
+                                <x-number>{{ $wallet->voterCount() }}</x-number>
                             </span>
                         </div>
                     </div>

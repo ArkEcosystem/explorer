@@ -76,10 +76,11 @@ return [
     'wallet' => [
         'title'                 => 'Address Details',
         'address'               => 'Address',
+        'address_delegate'      => ':0 Address',
         'transaction_history'   => 'Transaction History',
         'all_transactions'      => 'All History',
-        'received_transactions' => 'Incoming <span>:0</span>',
-        'sent_transactions'     => 'Outgoing <span>:0</span>',
+        'received_transactions' => 'Incoming',
+        'sent_transactions'     => 'Outgoing',
         'registrations'         => 'Registrations',
         'voting_for'            => 'Voting For',
         'rank'                  => 'Rank',
@@ -89,6 +90,7 @@ return [
         'show_options'          => 'Show Options',
         'amount'                => 'Amount',
         'smartbridge'           => 'Smartbridge',
+        'vote_rank'             => '#:0',
         'qrcode'                => [
             'title'       => 'QR Code',
             'description' => 'Scan for address',
@@ -99,10 +101,10 @@ return [
             'commission'       => 'Commission',
             'payout_frequency' => 'Payout Frequency',
             'payout_minimum'   => 'Payout Minimum',
-            'forged_total'     => 'Forged Total',
+            'forged_total'     => 'Total Forged',
             'votes'            => 'Votes :0',
             'forged_blocks'    => 'Forged Blocks',
-            'productivity'     => 'Productivity',
+            'productivity'     => 'Productivity (30 Days)',
             'voters'           => 'Voters',
         ],
     ],
@@ -139,7 +141,8 @@ return [
     ],
 
     'voters_by_wallet' => [
-        'title' => 'Voting for Delegate',
+        'title'    => 'Voting for Delegate',
+        'subtitle' => 'Voters',
     ],
 
 ];

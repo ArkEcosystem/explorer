@@ -6,7 +6,9 @@
             :title="trans('pages.block.block_id')"
             :value="$block->id()"
         >
-            <x-slot name="logo">@svg('app-block-id', 'w-5 h-5')</x-slot>
+            <x-slot name="logo">
+                @svg('app-block-id', 'w-5 h-5')
+            </x-slot>
 
             <x-slot name="extra">
                 <div class="flex items-center mt-6 space-x-2 text-theme-secondary-400 md:mt-0">
@@ -40,16 +42,21 @@
                     <x-general.entity-header-item
                         :title="trans('pages.block.transaction_volume')"
                         icon="app-votes"
-                        :text="$block->amount()"
-                    />
-                    <x-general.entity-header-item
-                        icon="app-reward"
-                        :text="$block->totalReward()"
                     >
+                        <x-slot name="text">
+                            <x-currency>{{ $block->amount() }}</x-currency>
+                        </x-slot>
+                    </x-general.amount-fiat-tooltip>
+
+                    <x-general.entity-header-item icon="app-reward">
                         <x-slot name="title">
                             <span data-tippy-content="@lang('pages.block.total_rewards_tooltip', [$block->reward()])">
                                 @lang('pages.block.total_rewards')
                             </span>
+                        </x-slot>
+
+                        <x-slot name="text">
+                            <x-currency>{{ $block->totalReward() }}</x-currency>
                         </x-slot>
                     </x-general.entity-header-item>
                 </div>
