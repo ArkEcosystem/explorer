@@ -1,5 +1,4 @@
 <div class="dark:bg-theme-secondary-900">
-    @dd($extension)
     <div class="flex-col pt-16 mb-16 space-y-6 content-container">
         <x-general.search.header-slim :title="trans($title)" />
 
