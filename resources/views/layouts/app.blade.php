@@ -20,7 +20,7 @@
 
         <!-- Meta --->
         @stack('metatags')
-        <meta property="og:image" content="{{ url('/') }}/images/meta-image.png" />
+        <meta property="og:image" content="{{ url('/') }}/images/explorer-min.png" />
         <meta property="og:url" content="{{ url()->full() }}" />
         <meta property="og:type" content="website" />
 
