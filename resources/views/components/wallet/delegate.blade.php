@@ -6,7 +6,7 @@
 
         <div class="flex flex-wrap w-full divide-y divide-dashed divide-theme-secondary-300 dark:divide-theme-secondary-800">
             <div class="grid w-full grid-flow-row grid-cols-1 gap-6 pt-8 mb-8 md:grid-cols-2 lg:grid-cols-4 gap-y-12 md:gap-y-4">
-                <x-details-box :title="trans('pages.wallet.delegate.rank')" icon="app-rank" icon-wrapper-class="bg-theme-danger-200" icon-class="text-theme-danger-400">
+                <x-details-box :title="trans('pages.wallet.delegate.rank')" icon="app-rank" icon-wrapper-class="bg-theme-danger-100" icon-class="text-theme-danger-400">
                     @if ($wallet->rank() > Network::delegateCount())
                         {{ $wallet->rank() }}
                     @else
@@ -14,7 +14,7 @@
                     @endif
                 </x-details-box>
 
-                <x-details-box :title="trans('pages.wallet.delegate.commission')" icon="app-percent" icon-wrapper-class="bg-theme-danger-200" icon-class="text-theme-danger-400">
+                <x-details-box :title="trans('pages.wallet.delegate.commission')" icon="app-percent" icon-wrapper-class="bg-theme-danger-100" icon-class="text-theme-danger-400">
                     @if($wallet->commission())
                         <x-percentage>{{ $wallet->commission() }}</x-percentage>
                     @else
@@ -22,7 +22,7 @@
                     @endif
                 </x-details-box>
 
-                <x-details-box :title="trans('pages.wallet.delegate.payout_frequency')" icon="app-price" icon-wrapper-class="bg-theme-danger-200" icon-class="text-theme-danger-400">
+                <x-details-box :title="trans('pages.wallet.delegate.payout_frequency')" icon="app-price" icon-wrapper-class="bg-theme-danger-100" icon-class="text-theme-danger-400">
                     @if($wallet->payoutFrequency())
                         {{ $wallet->payoutFrequency() }}
                     @else
@@ -30,7 +30,7 @@
                     @endif
                 </x-details-box>
 
-                <x-details-box :title="trans('pages.wallet.delegate.payout_minimum')" icon="app-min" icon-wrapper-class="bg-theme-danger-200" icon-class="text-theme-danger-400">
+                <x-details-box :title="trans('pages.wallet.delegate.payout_minimum')" icon="app-min" icon-wrapper-class="bg-theme-danger-100" icon-class="text-theme-danger-400">
                     @if($wallet->payoutMinimum())
                         <x-currency>{{ $wallet->payoutMinimum() }}</x-currency>
                     @else
