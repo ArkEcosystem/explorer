@@ -2,10 +2,12 @@
 
 declare(strict_types=1);
 
-use App\Http\Livewire\BlockTable;
+use App\Facades\Network;
 use App\Models\Block;
-use App\ViewModels\ViewModelFactory;
 use Livewire\Livewire;
+use App\Http\Livewire\BlockTable;
+use App\Services\NumberFormatter;
+use App\ViewModels\ViewModelFactory;
 use function Tests\configureExplorerDatabase;
 
 beforeEach(fn () => configureExplorerDatabase());
@@ -19,9 +21,9 @@ it('should list the first page of records', function () {
         $component->assertSee($block->id());
         $component->assertSee($block->timestamp());
         $component->assertSee($block->username());
-        $component->assertSee($block->height());
-        $component->assertSee($block->transactionCount());
-        $component->assertSee($block->amount());
-        $component->assertSee($block->fee());
+        $component->assertSee(NumberFormatter::number($block->height()));
+        $component->assertSee(NumberFormatter::number($block->transactionCount()));
+        $component->assertSee(NumberFormatter::currency($block->amount(), Network::currency()));
+        $component->assertSee(NumberFormatter::currency($block->fee(), Network::currency()));
     }
 });
