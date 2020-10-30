@@ -41,7 +41,7 @@
             </x-details-box>
 
             <x-details-box :title="trans('pages.home.network-details.lifetime_transactions')" icon="app-transactions-amount">
-                {{ $aggregates['transactionsCount'] }}
+                <x-number>{{ $aggregates['transactionsCount'] }}</x-number>
             </x-details-box>
 
             <x-details-box :title="trans('pages.home.network-details.total_votes')" icon="app-votes">
