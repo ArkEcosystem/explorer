@@ -1,6 +1,6 @@
 <x-general.entity-header-item
     :title="trans('pages.transaction.transaction_type')"
-    icon="app-transactions-amount"
+    icon="app-transactions.{{ $transaction->iconType() }}"
 >
     <x-slot name="text">
         @lang('pages.transaction.'.$transaction->entityType())
@@ -27,7 +27,7 @@
 
 <x-general.entity-header-item
     :title="trans('pages.transaction.ipfs_hash')"
-    icon="app-transactions-amount"
+    icon="app-transactions.ipfs"
 >
     <x-slot name="text">
         <a href="https://cloudflare-ipfs.com/ipfs/{{ $transaction->entityHash() }}" class="font-semibold link">
