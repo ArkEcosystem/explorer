@@ -4,10 +4,10 @@
         @svg('key', 'w-6 h-6')
     </button>
 
-    <div @click.away="publicKeyModalVisible = false" x-show="publicKeyModalVisible" class="absolute right-0 z-40 mt-4 bg-white rounded-lg shadow-lg w-128" x-cloak>
-        <div class="flex flex-col p-8 space-y-2 leading-tight">
-            <span class="text-sm font-semibold text-theme-secondary-400">@lang('pages.wallet.public_key.title')</span>
-            <span class="flex font-semibold text-theme-secondary-400 dark:text-theme-secondary-200 link">
+    <div @click.away="publicKeyModalVisible = false" x-show="publicKeyModalVisible" class="absolute right-0 z-40 mt-4 bg-white dark:bg-theme-secondary-900 rounded-lg shadow-lg w-128" x-cloak>
+        <div class="flex flex-col p-10 space-y-2 leading-tight">
+            <span class="text-sm font-semibold text-theme-secondary-400 dark:text-theme-secondary-700">@lang('pages.wallet.public_key.title')</span>
+            <span class="flex font-semibold link">
                 <span class="hidden lg:inline-block">
                     {{ $publicKey }}
                 </span>
@@ -16,7 +16,7 @@
                     <x-truncate-middle :value="$publicKey" :length="16" />
                 </span>
 
-                <x-ark-clipboard :value="$publicKey" class="flex items-center w-auto h-auto ml-2 text-theme-primary-300" no-styling />
+                <x-ark-clipboard :value="$publicKey" class="flex items-center w-auto h-auto ml-2 text-theme-primary-300 dark:text-theme-secondary-600" no-styling />
             </span>
         </div>
     </div>
