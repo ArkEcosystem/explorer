@@ -5,7 +5,7 @@
     icon="app-volume" />
 
 <x-details.generic :title="trans('general.transaction.recipient')" icon="app-volume">
-    {{ $transaction->recipientsCount() }} @lang('general.transaction.recipients')
+    <x-number>{{ $transaction->recipientsCount() }}</x-number> @lang('general.transaction.recipients')
 </x-details.generic>
 
 <x-details.generic :title="trans('general.transaction.block_id')" icon="app-block-id">
