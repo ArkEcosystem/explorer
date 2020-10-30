@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
+use App\Facades\Network;
+use App\Http\Livewire\WalletBlockTable;
 use App\Models\Block;
 use App\Models\Wallet;
-use Livewire\Livewire;
-use App\Facades\Network;
 use App\Services\NumberFormatter;
 use App\ViewModels\ViewModelFactory;
-use function Tests\fakeCryptoCompare;
-use App\Http\Livewire\WalletBlockTable;
+use Livewire\Livewire;
 use function Tests\configureExplorerDatabase;
+use function Tests\fakeCryptoCompare;
 
 beforeEach(function () {
     fakeCryptoCompare();
@@ -32,7 +32,7 @@ it('should list all blocks for the given public key', function () {
         $component->assertSee($block->timestamp());
         $component->assertSee(NumberFormatter::number($block->height()));
         $component->assertSee(NumberFormatter::number($block->transactionCount()));
-        $component->assertSee(NumberFormatter::currency($block->amount(), Networkf::currency()));
+        $component->assertSee(NumberFormatter::currency($block->amount(), Network::currency()));
         $component->assertSee(NumberFormatter::currency($block->fee(), Network::currency()));
     }
 });

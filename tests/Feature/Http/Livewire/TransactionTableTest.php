@@ -60,8 +60,8 @@ it('should apply filters', function () {
         $component->assertDontSee($transaction->timestamp());
         $component->assertDontSee($transaction->sender()->address());
         $component->assertDontSee($transaction->recipient()->address());
-        $component->assertDontSee($transaction->fee());
-        $component->assertDontSee($transaction->amount());
+        $component->assertDontSee(NumberFormatter::currency($transaction->fee(), Network::currency()));
+        $component->assertDontSee(NumberFormatter::currency($transaction->amount(), Network::currency()));
     }
 
     $expected = Transaction::factory(10)->create([
@@ -76,8 +76,8 @@ it('should apply filters', function () {
         $component->assertSee($transaction->timestamp());
         $component->assertSee($transaction->sender()->address());
         $component->assertSee($transaction->recipient()->address());
-        $component->assertSee($transaction->fee());
-        $component->assertSee($transaction->amount());
+        $component->assertSee(NumberFormatter::currency($transaction->fee(), Network::currency()));
+        $component->assertSee(NumberFormatter::currency($transaction->amount(), Network::currency()));
     }
 });
 
@@ -107,8 +107,8 @@ it('should apply filters through an event', function () {
         $component->assertDontSee($transaction->timestamp());
         $component->assertDontSee($transaction->sender()->address());
         $component->assertDontSee($transaction->recipient()->address());
-        $component->assertDontSee($transaction->fee());
-        $component->assertDontSee($transaction->amount());
+        $component->assertDontSee(NumberFormatter::currency($transaction->fee(), Network::currency()));
+        $component->assertDontSee(NumberFormatter::currency($transaction->amount(), Network::currency()));
     }
 
     $expected = Transaction::factory(10)->create([
@@ -123,7 +123,7 @@ it('should apply filters through an event', function () {
         $component->assertSee($transaction->timestamp());
         $component->assertSee($transaction->sender()->address());
         $component->assertSee($transaction->recipient()->address());
-        $component->assertSee($transaction->fee());
-        $component->assertSee($transaction->amount());
+        $component->assertSee(NumberFormatter::currency($transaction->fee(), Network::currency()));
+        $component->assertSee(NumberFormatter::currency($transaction->amount(), Network::currency()));
     }
 });
