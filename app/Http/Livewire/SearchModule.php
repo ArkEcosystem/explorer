@@ -30,7 +30,10 @@ final class SearchModule extends Component
 
     public function render(): View
     {
-        return view('components.search', ['isAdvanced' => false]);
+        return view('components.search', [
+            'isAdvanced' => false,
+            'type'       => $this->state['type'],
+        ]);
     }
 
     public function performSearch(): void
