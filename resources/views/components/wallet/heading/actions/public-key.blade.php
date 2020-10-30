@@ -4,7 +4,7 @@
         @svg('key', 'w-6 h-6')
     </button>
 
-    <div @click.away="publicKeyModalVisible = false" x-show="publicKeyModalVisible" class="absolute right-0 z-40 mt-4 bg-white dark:bg-theme-secondary-900 rounded-lg shadow-lg w-128" x-cloak>
+    <div @click.away="publicKeyModalVisible = false" x-show="publicKeyModalVisible" class="absolute left-0 md:right-0 z-10 mt-4 bg-white dark:bg-theme-secondary-900 rounded-lg shadow-lg w-128" x-cloak>
         <div class="flex flex-col p-10 space-y-2 leading-tight">
             <span class="text-sm font-semibold text-theme-secondary-400 dark:text-theme-secondary-700">@lang('pages.wallet.public_key.title')</span>
             <span class="flex font-semibold link">
