@@ -1,10 +1,10 @@
-<div x-data="{ publicKeyModalVisible: false }" class="lg:relative flex-1">
+<div x-data="{ publicKeyModalVisible: false }" class="flex-1 lg:relative">
     <button type="button" @click="publicKeyModalVisible = !publicKeyModalVisible"
         class="flex items-center justify-center w-full px-3 rounded cursor-pointer lg:w-auto bg-theme-secondary-800 hover:bg-theme-primary-600 transition-default lg:flex-none h-11">
         @svg('key', 'w-6 h-6')
     </button>
 
-    <div @click.away="publicKeyModalVisible = false" x-show="publicKeyModalVisible" class="absolute right-0 left-0 lg:left-auto mx-8 lg:mx-0 z-10 w-auto mt-4 bg-white rounded-lg shadow-lg dark:bg-theme-secondary-900" x-cloak>
+    <div @click.away="publicKeyModalVisible = false" x-show="publicKeyModalVisible" class="absolute left-0 right-0 z-10 w-auto mx-8 mt-4 bg-white rounded-lg shadow-lg lg:left-auto lg:mx-0 dark:bg-theme-secondary-900" x-cloak>
         <div class="flex flex-col p-10 space-y-2 leading-tight">
             <span class="text-sm font-semibold text-theme-secondary-400 dark:text-theme-secondary-700">@lang('pages.wallet.public_key.title')</span>
             <span class="flex font-semibold link">
