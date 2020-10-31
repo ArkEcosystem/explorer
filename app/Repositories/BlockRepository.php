@@ -5,12 +5,10 @@ declare(strict_types=1);
 namespace App\Repositories;
 
 use App\Models\Block;
-use App\Repositories\Concerns\ManagesCache;
+use App\Contracts\BlockRepository as Contract;
 
-final class BlockRepository
+final class BlockRepository implements Contract
 {
-    use ManagesCache;
-
     public function findByHeight(int $height): Block
     {
         return Block::where('height', $height)->firstOrFail();

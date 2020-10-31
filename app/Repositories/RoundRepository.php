@@ -5,13 +5,11 @@ declare(strict_types=1);
 namespace App\Repositories;
 
 use App\Models\Round;
-use App\Repositories\Concerns\ManagesCache;
+use App\Contracts\RoundRepository as Contract;
 use Illuminate\Support\Collection;
 
-final class RoundRepository
+final class RoundRepository implements Contract
 {
-    use ManagesCache;
-
     public function allByRound(int $round): Collection
     {
         return Round::query()

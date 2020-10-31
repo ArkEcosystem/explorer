@@ -4,13 +4,11 @@ declare(strict_types=1);
 
 namespace App\Repositories;
 
+use App\Contracts\WalletRepository as Contract;
 use App\Models\Wallet;
-use App\Repositories\Concerns\ManagesCache;
 
-final class WalletRepository
+final class WalletRepository implements Contract
 {
-    use ManagesCache;
-
     public function findByAddress(string $address): Wallet
     {
         return Wallet::where('address', $address)->firstOrFail();

@@ -5,14 +5,12 @@ declare(strict_types=1);
 namespace App\Repositories;
 
 use App\Models\Transaction;
-use App\Repositories\Concerns\ManagesCache;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
+use App\Contracts\TransactionRepository as Contract;
 
-final class TransactionRepository
+final class TransactionRepository implements Contract
 {
-    use ManagesCache;
-
     public function allByWallet(string $address, string $publicKey): Collection
     {
         return Transaction::query()
