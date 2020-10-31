@@ -30,7 +30,7 @@ final class EloquentServiceProvider extends ServiceProvider
         $this->registerRepositories();
     }
 
-    public function registerScopes(): void
+    private function registerScopes(): void
     {
         Builder::macro('withScope', function ($scope, ...$parameters): Builder {
             /** @var Builder $query */
@@ -50,7 +50,7 @@ final class EloquentServiceProvider extends ServiceProvider
         });
     }
 
-    public function registerRepositories(): void
+    private function registerRepositories(): void
     {
         $this->app->bind(BlockRepositoryContract::class, function (): BlockRepositoryWithCache {
             return new BlockRepositoryWithCache(new BlockRepository());
