@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services\Transactions;
 
 use App\Models\Transaction;
+use Illuminate\Support\Facades\View;
 
 final class TransactionTypeComponent
 {
@@ -33,12 +34,15 @@ final class TransactionTypeComponent
 
     private function getView(string $group): string
     {
-        if ($view = sprintf("transaction.$group.".$this->slug->exact())) {
-            return $view;
-        }
+        $views = [
+            sprintf("transaction.$group.".$this->slug->exact()),
+            sprintf("transaction.$group.".$this->slug->generic()),
+        ];
 
-        if ($view = sprintf("transaction.$group.".$this->slug->generic())) {
-            return $view;
+        foreach ($views as $view) {
+            if (View::exists("components.$view")) {
+                return $view;
+            }
         }
 
         return "transaction.$group.fallback";
