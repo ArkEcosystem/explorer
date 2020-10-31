@@ -8,6 +8,7 @@ use App\Models\Block;
 use Illuminate\Support\Facades\Cache;
 use function Tests\configureExplorerDatabase;
 
+// @TODO: add tests for different scenarios (missed for days, dropped out for days and got back in)
 it('should cache the productivity for the public key', function () {
     configureExplorerDatabase();
 
