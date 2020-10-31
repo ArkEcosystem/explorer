@@ -52,19 +52,19 @@ final class EloquentServiceProvider extends ServiceProvider
 
     public function registerRepositories(): void
     {
-        $this->app->bind(BlockRepositoryContract::class, function () {
+        $this->app->bind(BlockRepositoryContract::class, function (): BlockRepositoryWithCache {
             return new BlockRepositoryWithCache(new BlockRepository());
         });
 
-        $this->app->bind(RoundRepositoryContract::class, function () {
+        $this->app->bind(RoundRepositoryContract::class, function (): RoundRepositoryWithCache {
             return new RoundRepositoryWithCache(new RoundRepository());
         });
 
-        $this->app->bind(TransactionRepositoryContract::class, function () {
+        $this->app->bind(TransactionRepositoryContract::class, function (): TransactionRepositoryWithCache {
             return new TransactionRepositoryWithCache(new TransactionRepository());
         });
 
-        $this->app->bind(WalletRepositoryContract::class, function () {
+        $this->app->bind(WalletRepositoryContract::class, function (): WalletRepositoryWithCache {
             return new WalletRepositoryWithCache(new WalletRepository());
         });
     }
