@@ -20,4 +20,4 @@
     }
 @endphp
 
-@svg($icon, $size.($style ?? '').($class ?? ''))
+@svg($name, $size.($style ?? '').($class ?? ''))
