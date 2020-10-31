@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\Contracts\BlockRepository;
 use App\Enums\CacheKeyEnum;
 use App\Services\ExchangeRate;
 use App\Services\NumberFormatter;
@@ -16,8 +15,6 @@ final class HomeController
 {
     public function __invoke(): View
     {
-        app(BlockRepository::class)->findByHeight(5);
-
         return view('app.home', [
             'prices' => [
                 'day'     => $this->getChart('chart.prices.day'),
