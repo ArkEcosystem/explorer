@@ -27,9 +27,9 @@
                 {{ $slot }}
 
                 <div class="flex items-center mt-6 space-x-2 text-theme-secondary-200 lg:mt-0">
-                    <x-wallet.heading.actions.public-key :public-key="$wallet->publicKey()" />
+                    <x-page-headers.wallet.actions.public-key :public-key="$wallet->publicKey()" />
 
-                    <x-wallet.heading.actions.qr-code :wallet="$wallet" />
+                    <x-page-headers.wallet.actions.qr-code :wallet="$wallet" />
                 </div>
             </x-slot>
 
