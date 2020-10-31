@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Repositories;
 
+use App\Contracts\TransactionRepository as Contract;
 use App\Models\Transaction;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
-use App\Contracts\TransactionRepository as Contract;
 
 final class TransactionRepository implements Contract
 {
