@@ -9,11 +9,13 @@
         'base' => 'w-5 h-5',
     ][$size ?? 'base'];
 
-    $style = isset($style) ? [
-        'secondary' => 'text-theme-secondary-500',
-        'success'   => 'text-theme-success-500',
-        'danger'    => 'text-theme-danger-500',
-    ][$style] ? '';
+    if (isset($style)) {
+        $style = [
+            'secondary' => 'text-theme-secondary-500',
+            'success'   => 'text-theme-success-500',
+            'danger'    => 'text-theme-danger-500',
+        ][$style];
+    }
 @endphp
 
-@svg($icon, $size.$style.($class ?? ''))
+@svg($icon, $size.($style ?? '').($class ?? ''))
