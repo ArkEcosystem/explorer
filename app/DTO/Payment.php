@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\DTO;
 
-use App\Models\Wallet;
+use App\Contracts\WalletRepository;
 use App\Services\ExchangeRate;
 use Illuminate\Support\Arr;
 
@@ -23,7 +23,10 @@ final class Payment
         $this->timestamp   = $timestamp;
         $this->amount      = $payment['amount'] / 1e8;
         $this->address     = $payment['recipientId'];
-        $this->username    = Arr::get(Wallet::where('address', $payment['recipientId'])->firstOrFail(), 'attributes.delegate.username');
+        $this->username    = Arr::get(
+            resolve(WalletRepository::class)->findByAddress($payment['recipientId']),
+            'attributes.delegate.username'
+        );
     }
 
     public function amount(): float
