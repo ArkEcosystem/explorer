@@ -38,14 +38,8 @@ final class CacheProductivityByPublicKey implements ShouldQueue
             ->where('generator_public_key', $this->publicKey)
             ->count();
 
-        dump(
-            $delegate->attributes['delegate']['username']
-            .' : '.
-            $blocksDelegateActual
-            .' : '.
-            Percentage::calculate($blocksDelegateActual, $blocksDelegateExpected)
-        );
+        $productivity = Percentage::calculate($blocksDelegateActual, $blocksDelegateExpected);
 
-        // Cache::put('productivity:'.$this->publicKey, $productivity);
+        Cache::put('productivity:'.$this->publicKey, $productivity);
     }
 }
