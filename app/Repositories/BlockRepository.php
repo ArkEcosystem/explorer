@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Repositories;
 
-use App\Models\Block;
 use App\Contracts\BlockRepository as Contract;
+use App\Models\Block;
 
 final class BlockRepository implements Contract
 {

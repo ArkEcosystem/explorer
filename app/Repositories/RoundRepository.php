@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Repositories;
 
-use App\Models\Round;
 use App\Contracts\RoundRepository as Contract;
+use App\Models\Round;
 use Illuminate\Support\Collection;
 
 final class RoundRepository implements Contract
