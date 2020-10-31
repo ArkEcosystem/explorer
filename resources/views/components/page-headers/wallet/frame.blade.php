@@ -17,13 +17,13 @@
 
             <x-slot name="logo">
                 @if($wallet->isDelegate())
-                    <x-headings.avatar-with-icon :model="$wallet" icon="app-delegate" />
+                    <x-page-headers.avatar-with-icon :model="$wallet" icon="app-delegate" />
                 @else
-                    <x-headings.avatar :model="$wallet" />
+                    <x-page-headers.avatar :model="$wallet" />
                 @endif
             </x-slot>
 
-            <x-slot name="extra">
+            <x-slot name="extension">
                 {{ $slot }}
 
                 <div class="flex items-center mt-6 space-x-2 text-theme-secondary-200 lg:mt-0">
