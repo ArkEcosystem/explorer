@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace App\Console\Commands;
 
 use App\Facades\Wallets;
+use App\Services\Monitor\Aggregates\TotalAmountsByPublicKeysAggregate;
+use App\Services\Monitor\Aggregates\TotalBlocksByPublicKeysAggregate;
+use App\Services\Monitor\Aggregates\TotalFeesByPublicKeysAggregate;
+use App\Services\Monitor\Aggregates\TotalRewardsByPublicKeysAggregate;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Cache;
-use App\Services\Monitor\Aggregates\TotalFeesByPublicKeysAggregate;
-use App\Services\Monitor\Aggregates\TotalBlocksByPublicKeysAggregate;
-use App\Services\Monitor\Aggregates\TotalAmountsByPublicKeysAggregate;
-use App\Services\Monitor\Aggregates\TotalRewardsByPublicKeysAggregate;
 
 final class CacheDelegateAggregates extends Command
 {
