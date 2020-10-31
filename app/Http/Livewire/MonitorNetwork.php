@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire;
 
-use App\Contracts\RoundRepository;
 use App\DTO\Slot;
 use App\Facades\Network;
+use App\Facades\Rounds;
 use App\Jobs\CacheLastBlockByPublicKey;
 use App\Models\Block;
 use App\Services\Monitor\DelegateTracker;
@@ -20,20 +20,13 @@ use Livewire\Component;
 
 final class MonitorNetwork extends Component
 {
-    private RoundRepository $rounds;
-
-    public function mount(): void
-    {
-        $this->rounds = resolve(RoundRepository::class);
-    }
-
     public function render(): View
     {
         // $tracking = DelegateTracker::execute(Monitor::roundDelegates(112168));
 
-        $roundNumber = $this->rounds->currentRound()->round;
+        $roundNumber = Rounds::currentRound()->round;
         $heightRange = Monitor::heightRangeByRound($roundNumber);
-        $tracking    = DelegateTracker::execute($this->rounds->allByRound($roundNumber));
+        $tracking    = DelegateTracker::execute(Rounds::allByRound($roundNumber));
 
         $delegates = [];
 

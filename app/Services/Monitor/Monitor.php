@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace App\Services\Monitor;
 
-use App\Contracts\RoundRepository;
 use App\Facades\Network;
+use App\Facades\Rounds;
 
 final class Monitor
 {
     public static function roundNumber(): int
     {
-        return resolve(RoundRepository::class)->currentRound()->round;
+        return Rounds::currentRound()->round;
     }
 
     public static function heightRangeByRound(int $round): array

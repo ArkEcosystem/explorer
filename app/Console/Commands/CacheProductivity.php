@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
-use App\Contracts\RoundRepository;
+use App\Facades\Rounds;
 use App\Jobs\CacheProductivityByPublicKey;
 use App\Services\Monitor\Monitor;
 use Illuminate\Console\Command;
@@ -32,8 +32,7 @@ final class CacheProductivity extends Command
      */
     public function handle()
     {
-        resolve(RoundRepository::class)
-            ->allByRound(Monitor::roundNumber())
+        Rounds::allByRound(Monitor::roundNumber())
             ->each(fn ($round) => CacheProductivityByPublicKey::dispatch($round->public_key));
     }
 }

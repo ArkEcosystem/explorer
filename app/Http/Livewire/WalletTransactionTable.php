@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire;
 
-use App\Contracts\WalletRepository;
+use App\Facades\Wallets;
 use App\Http\Livewire\Concerns\ManagesTransactionTypeScopes;
 use App\Models\Transaction;
 use App\ViewModels\ViewModelFactory;
@@ -58,7 +58,7 @@ final class WalletTransactionTable extends Component
         }
 
         return view('livewire.wallet-transaction-table', [
-            'wallet'        => ViewModelFactory::make(resolve(WalletRepository::class)->findByAddress($this->state['address'])),
+            'wallet'        => ViewModelFactory::make(Wallets::findByAddress($this->state['address'])),
             'transactions'  => ViewModelFactory::paginate($query->latestByTimestamp()->paginate()),
             'countReceived' => $this->getReceivedQuery()->count(),
             'countSent'     => $this->getSentQuery()->count(),
