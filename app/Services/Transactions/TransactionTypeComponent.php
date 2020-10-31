@@ -18,7 +18,7 @@ final class TransactionTypeComponent
 
     public function header(): string
     {
-        return $this->getView('page-headers', 'header');
+        return $this->getView('page-headers', 'transaction');
     }
 
     public function details(): string
