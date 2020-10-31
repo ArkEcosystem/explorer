@@ -8,7 +8,9 @@
         >
             <span>@lang('pages.monitor.active')</span>
 
-            <span class="px-1 ml-1 text-sm rounded bg-theme-primary-100">{{ $countActive }}</span>
+            @if ($countActive)
+                <span class="info-badge">{{ $countActive }}</span>
+            @endif
         </div>
 
         <div
@@ -19,7 +21,7 @@
         >
             <span>@lang('pages.monitor.standby')</span>
 
-            <span class="px-1 ml-1 text-sm rounded bg-theme-primary-100">{{ $countStandby }}</span>
+            <span class="info-badge">{{ $countStandby }}</span>
         </div>
 
         <div
@@ -30,7 +32,7 @@
         >
             <span>@lang('pages.monitor.resigned')</span>
 
-            <span class="px-1 ml-1 text-sm rounded bg-theme-primary-100">{{ $countResigned }}</span>
+            <span class="info-badge">{{ $countResigned }}</span>
         </div>
     </div>
 
@@ -67,19 +69,21 @@
             <a wire:click="$emit('filterByDelegateStatus', 'active');" @click="status = 'active'" class="dropdown-entry">
                 <span>@lang('pages.monitor.active')</span>
 
-                <span class="px-1 ml-2 text-sm rounded bg-theme-primary-100">{{ $countActive }}</span>
+                @if ($countActive)
+                    <span class="info-badge">{{ $countActive }}</span>
+                @endif
             </a>
 
             <a wire:click="$emit('filterByDelegateStatus', 'standby');" @click="status = 'standby'" class="dropdown-entry">
                 <span>@lang('pages.monitor.standby')</span>
 
-                <span class="px-1 ml-2 text-sm rounded bg-theme-primary-100">{{ $countStandby }}</span>
+                <span class="info-badge">{{ $countStandby }}</span>
             </a>
 
             <a wire:click="$emit('filterByDelegateStatus', 'resigned');" @click="status = 'resigned'" class="dropdown-entry">
                 <span>@lang('pages.monitor.resigned')</span>
 
-                <span class="px-1 ml-2 text-sm rounded bg-theme-primary-100">{{ $countResigned }}</span>
+                <span class="info-badge">{{ $countResigned }}</span>
             </a>
         </div>
     </x-ark-dropdown>

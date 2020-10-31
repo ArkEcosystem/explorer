@@ -316,7 +316,7 @@ body {
 }
 
 .transaction-filter-dropdown {
-    @apply right-0 w-full mt-3 h-128;
+    @apply right-0 w-full mt-3 h-64;
 }
 .theme-dark .transaction-filter-dropdown {
     @apply bg-theme-secondary-900;
@@ -346,7 +346,7 @@ body {
     }
 
     .transaction-filter-dropdown {
-        @apply w-84;
+        @apply w-84 h-128;
     }
 
     .transaction-filter-button {
@@ -360,4 +360,21 @@ body {
     .transaction-filter-button-icon {
         @apply w-4 h-4 bg-theme-primary-100 text-theme-primary-600;
     }
+}
+
+/* Tab Badge */
+.info-badge {
+    @apply ml-1 text-sm rounded bg-theme-primary-100;
+    padding: 2px 6px;
+}
+.theme-dark .info-badge {
+    @apply bg-theme-secondary-900 text-theme-secondary-700;
+}
+
+/* Vote Percentage */
+.vote-percentage {
+    @apply inline-block text-theme-secondary-500 w-16;
+}
+.theme-dark .vote-percentage {
+    @apply text-theme-secondary-600;
 }
