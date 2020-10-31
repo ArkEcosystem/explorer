@@ -34,9 +34,9 @@
     </div>
 
     <x-loading.visible>
-        <x-tables.desktop.skeleton.round />
+        <x-tables.desktop.skeleton.monitor.round />
 
-        <x-tables.mobile.skeleton.round />
+        <x-tables.mobile.skeleton.monitor.round />
     </x-loading.visible>
 
     <x-loading.hidden>
