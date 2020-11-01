@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace App\Providers;
 
 use App\Services\BigNumber;
+use App\View\Components\TableSkeleton;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
 final class AppServiceProvider extends ServiceProvider
@@ -44,5 +46,7 @@ final class AppServiceProvider extends ServiceProvider
             /* @phpstan-ignore-next-line */
             return collect($this->items);
         });
+
+        Blade::component('table-skeleton', TableSkeleton::class);
     }
 }
