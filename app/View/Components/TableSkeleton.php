@@ -17,7 +17,7 @@ final class TableSkeleton extends Component
     public function __construct(string $device, array $items)
     {
         $this->device  = $device;
-        $this->items   = collect($this->items);
+        $this->items   = collect($items);
     }
 
     public function render(): View
