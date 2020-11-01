@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Facades;
 
 use App\Contracts\TransactionRepository;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Facade;
 
