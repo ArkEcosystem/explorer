@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\View\Components;
 
+use Illuminate\Support\Collection;
 use Illuminate\View\Component;
 use Illuminate\View\View;
 
@@ -11,21 +12,23 @@ final class TableSkeleton extends Component
 {
     private string $device;
 
-    private array $headers;
+    private Collection $items;
 
-    private array $rows;
-
-    public function __construct(string $device, array $headers, array $rows)
+    public function __construct(string $device, array $items)
     {
         $this->device  = $device;
-        $this->headers = $headers;
-        $this->rows    = $rows;
+        $this->items   = collect($this->items);
     }
 
     public function render(): View
     {
-        $headers = collect($this->headers)->map(fn ($name) => "tables.headers.{$this->device}.$name");
-        $rows    = collect($this->rows)->map(fn ($name) => "tables.rows.{$this->device}.skeletons.$name");
+        if ($this->device === 'desktop') {
+            $headers = $this->items->map(fn ($name) => "tables.headers.{$this->device}.$name");
+            $rows    = $this->items->values()->map(fn ($name) => "tables.rows.{$this->device}.skeletons.$name");
+        } else {
+            $headers = collect([]); // Mobile has no separate headers
+            $rows    = $this->items->map(fn ($name) => "tables.rows.{$this->device}.skeletons.$name");
+        }
 
         /* @phpstan-ignore-next-line */
         return view("components.tables.skeletons.{$this->device}", [

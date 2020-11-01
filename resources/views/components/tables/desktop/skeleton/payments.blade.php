@@ -1,8 +1,7 @@
 <x-table-skeleton
     device="desktop"
-    :headers="[
+    :items="[
         'general.transaction.recipient' => 'address',
         'general.transaction.amount'    => 'number',
     ]"
-    :rows="['text', 'number']"
 />

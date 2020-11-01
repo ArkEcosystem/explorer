@@ -1,10 +1,9 @@
 <x-table-skeleton
     device="desktop"
-    :headers="[
+    :items="[
         'general.wallet.address' => 'address',
-        'general.wallet.info'    => 'number',
+        'general.wallet.info'    => 'text',
         'general.wallet.balance' => 'number',
         'general.wallet.supply'  => 'number',
     ]"
-    :rows="['address', 'text', 'number', 'number']"
 />

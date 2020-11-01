@@ -1,23 +1,11 @@
 @if (Network::usesMarketSquare())
     <x-table-skeleton
         device="mobile"
-        :headers="[]"
-        :rows="[
-            'text',
-            'address',
-            'number',
-            'text',
-            'text'
-        ]"
+        :items="['text', 'address', 'number', 'text', 'text']"
     />
 @else
     <x-table-skeleton
         device="mobile"
-        :headers="[]"
-        :rows="[
-            'text',
-            'address',
-            'number'
-        ]"
+        :items="['text', 'address', 'number']"
     />
 @endif
