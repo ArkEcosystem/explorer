@@ -6,25 +6,31 @@ namespace App\Services\Cache;
 
 use App\Contracts\Cache as Contract;
 use Illuminate\Cache\TaggedCache;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 
 final class CryptoCompareCache implements Contract
 {
     use Concerns\ManagesCache;
 
-    public function cryptoHistorical(string $source, string $target, string $format): string
-    {
-        return $this->cacheKey('historical.%s.%s.%s', [$source, $target, $format]);
-    }
-
-    public function cryptoPrice(string $source, string $target): string
+    public function getPrice(string $source, string $target): string
     {
         return $this->cacheKey('price.%s.%s', [$source, $target]);
     }
 
-    public function prices(string $currency): string
+    public function setPrice(string $source, string $target, string $value): void
     {
-        return $this->cacheKey('prices.%s', [$currency]);
+        $this->put($this->cacheKey('price.%s.%s', [$source, $target]), $value);
+    }
+
+    public function getPrices(string $currency): string
+    {
+        return $this->get($this->cacheKey('prices.%s', [$currency]));
+    }
+
+    public function setPrices(string $currency, Collection $prices): void
+    {
+        $this->put($this->cacheKey('prices.%s', [$currency]), $prices);
     }
 
     public function getCache(): TaggedCache

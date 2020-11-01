@@ -5,11 +5,6 @@ declare(strict_types=1);
 namespace App\Services\Cache;
 
 use App\Contracts\Cache as Contract;
-use App\Services\Transactions\Aggregates\FeesByDayAggregate;
-use App\Services\Transactions\Aggregates\FeesByMonthAggregate;
-use App\Services\Transactions\Aggregates\FeesByQuarterAggregate;
-use App\Services\Transactions\Aggregates\FeesByWeekAggregate;
-use App\Services\Transactions\Aggregates\FeesByYearAggregate;
 use Illuminate\Cache\TaggedCache;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
@@ -19,9 +14,9 @@ final class FeeChartCache implements Contract
     use Concerns\ManagesCache;
     use Concerns\ManagesChart;
 
-    public function setDay(): Collection
+    public function setDay(Collection $value): void
     {
-        return $this->put('fees_per_day', (new FeesByDayAggregate())->aggregate());
+        $this->put('fees_per_day', $value);
     }
 
     public function getDay(): Collection
@@ -29,9 +24,9 @@ final class FeeChartCache implements Contract
         return $this->get('fees_per_day');
     }
 
-    public function setWeek(): Collection
+    public function setWeek(Collection $value): void
     {
-        return $this->put('fees_per_week', (new FeesByWeekAggregate())->aggregate());
+        $this->put('fees_per_week', $value);
     }
 
     public function getWeek(): Collection
@@ -39,9 +34,9 @@ final class FeeChartCache implements Contract
         return $this->get('fees_per_week');
     }
 
-    public function setMonth(): Collection
+    public function setMonth(Collection $value): void
     {
-        return $this->put('fees_per_month', (new FeesByMonthAggregate())->aggregate());
+        $this->put('fees_per_month', $value);
     }
 
     public function getMonth(): Collection
@@ -49,9 +44,9 @@ final class FeeChartCache implements Contract
         return $this->get('fees_per_month');
     }
 
-    public function setQuarter(): Collection
+    public function setQuarter(Collection $value): void
     {
-        return $this->put('fees_per_quarter', (new FeesByQuarterAggregate())->aggregate());
+        $this->put('fees_per_quarter', $value);
     }
 
     public function getQuarter(): Collection
@@ -59,9 +54,9 @@ final class FeeChartCache implements Contract
         return $this->get('fees_per_quarter');
     }
 
-    public function setYear(): Collection
+    public function setYear(Collection $value): void
     {
-        return $this->put('fees_per_year', (new FeesByYearAggregate())->aggregate());
+        $this->put('fees_per_year', $value);
     }
 
     public function getYear(): Collection

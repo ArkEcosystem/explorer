@@ -20,9 +20,9 @@ final class PriceChartCache implements Contract
         return $this->get('day');
     }
 
-    public function setDay(Collection $prices): Collection
+    public function setDay(string $currency, Collection $prices): Collection
     {
-        return $this->remember('day', fn () => $this->groupByDate($prices->take(1), 'H:s'));
+        return $this->put("day.$currency", $this->groupByDate($prices->take(1), 'H:s'));
     }
 
     public function getWeek(Collection $prices): Collection
@@ -30,9 +30,9 @@ final class PriceChartCache implements Contract
         return $this->get('week');
     }
 
-    public function setWeek(Collection $prices): Collection
+    public function setWeek(string $currency, Collection $prices): Collection
     {
-        return $this->remember('week', fn () => $this->groupByDate($prices->take(7), 'd.m'));
+        return $this->put("week.$currency", $this->groupByDate($prices->take(7), 'd.m'));
     }
 
     public function getMonth(Collection $prices): Collection
@@ -40,9 +40,9 @@ final class PriceChartCache implements Contract
         return $this->get('month');
     }
 
-    public function setMonth(Collection $prices): Collection
+    public function setMonth(string $currency, Collection $prices): Collection
     {
-        return $this->remember('month', fn () => $this->groupByDate($prices->take(30), 'd.m'));
+        return $this->put("month.$currency", $this->groupByDate($prices->take(30), 'd.m'));
     }
 
     public function getQuarter(Collection $prices): Collection
@@ -50,9 +50,9 @@ final class PriceChartCache implements Contract
         return $this->get('quarter');
     }
 
-    public function setQuarter(Collection $prices): Collection
+    public function setQuarter(string $currency, Collection $prices): Collection
     {
-        return $this->remember('quarter', fn () => $this->groupByDate($prices->take(120), 'W'));
+        return $this->put("quarter.$currency", $this->groupByDate($prices->take(120), 'W'));
     }
 
     public function getYear(Collection $prices): Collection
@@ -60,9 +60,9 @@ final class PriceChartCache implements Contract
         return $this->get('year');
     }
 
-    public function setYear(Collection $prices): Collection
+    public function setYear(string $currency, Collection $prices): Collection
     {
-        return $this->remember('year', fn () => $this->groupByDate($prices->take(365), 'M'));
+        return $this->put("year.$currency", $this->groupByDate($prices->take(365), 'M'));
     }
 
     public function getCache(): TaggedCache

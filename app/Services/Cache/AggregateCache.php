@@ -4,58 +4,94 @@ declare(strict_types=1);
 
 namespace App\Services\Cache;
 
-use App\Aggregates\TransactionCountAggregate;
-use App\Aggregates\TransactionVolumeAggregate;
-use App\Aggregates\VoteCountAggregate;
-use App\Aggregates\VotePercentageAggregate;
 use App\Contracts\Cache as Contract;
 use Carbon\Carbon;
-use Closure;
 use Illuminate\Cache\TaggedCache;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 
 final class AggregateCache implements Contract
 {
     use Concerns\ManagesCache;
 
-    public function feesByRange(Carbon $start, Carbon $end, ?Closure $callback): string
+    public function getFeesByRange(Carbon $start, Carbon $end): Collection
     {
-        return $this->remember('fees_by_range.%s.%s', [$start->unix(), $end->unix()], $callback);
+        return $this->get($this->cacheKey('fees_by_range.%s.%s', [$start->unix(), $end->unix()]));
     }
 
-    public function volume(): string
+    public function setFeesByRange(Carbon $start, Carbon $end, Collection $value): void
     {
-        return $this->remember('volume', fn () => (new TransactionVolumeAggregate())->aggregate());
+        $this->put($this->cacheKey('fees_by_range.%s.%s', [$start->unix(), $end->unix()]), $value);
     }
 
-    public function transactionsCount(): string
+    public function getVolume(): string
     {
-        return $this->remember('transactions_count', fn () => (new TransactionCountAggregate())->aggregate());
+        return $this->get('volume');
     }
 
-    public function votesCount(): string
+    public function setVolume(string $value): void
     {
-        return $this->remember('votes_count', fn () => (new VoteCountAggregate())->aggregate());
+        $this->put('volume', $value);
     }
 
-    public function votesPercentage(): string
+    public function getTransactionsCount(): string
     {
-        return $this->remember('votes_percentage', fn () => (new VotePercentageAggregate())->aggregate());
+        return $this->get('transactions_count');
     }
 
-    public function votes(?Closure $callback): string
+    public function setTransactionsCount(string $value): void
     {
-        return $this->remember('votes', $callback);
+        $this->put('transactions_count', $value);
     }
 
-    public function delegateRegistrationCount(?Closure $callback): string
+    public function getVotesCount(): string
     {
-        return $this->remember('delegate_registration_count', $callback);
+        return $this->get('votes_count');
     }
 
-    public function feesCollected(): string
+    public function setVotesCount(string $value): void
     {
-        return $this->cacheKey('fees_collected');
+        $this->put('votes_count', $value);
+    }
+
+    public function getVotesPercentage(): string
+    {
+        return $this->get('votes_percentage');
+    }
+
+    public function setVotesPercentage(string $value): void
+    {
+        $this->put('votes_percentage', $value);
+    }
+
+    public function getVotes(): string
+    {
+        return $this->get('votes');
+    }
+
+    public function setVotes(string $value): void
+    {
+        $this->put('votes', $value);
+    }
+
+    public function getDelegateRegistrationCount(): string
+    {
+        return $this->get('delegate_registration_count');
+    }
+
+    public function setDelegateRegistrationCount(string $value): void
+    {
+        $this->put('delegate_registration_count', $value);
+    }
+
+    public function getFeesCollected(): string
+    {
+        return $this->get('fees_collected');
+    }
+
+    public function setFeesCollected(string $value): void
+    {
+        $this->put('fees_collected');
     }
 
     public function getCache(): TaggedCache

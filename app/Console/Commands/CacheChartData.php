@@ -4,11 +4,21 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
+use App\Aggregates\TransactionCountAggregate;
+use App\Aggregates\TransactionVolumeAggregate;
+use App\Aggregates\VoteCountAggregate;
+use App\Aggregates\VotePercentageAggregate;
 use App\Facades\Network;
 use App\Services\Cache\AggregateCache;
+use App\Services\Cache\CryptoCompareCache;
 use App\Services\Cache\FeeChartCache;
 use App\Services\Cache\PriceChartCache;
 use App\Services\CryptoCompare;
+use App\Services\Transactions\Aggregates\FeesByDayAggregate;
+use App\Services\Transactions\Aggregates\FeesByMonthAggregate;
+use App\Services\Transactions\Aggregates\FeesByQuarterAggregate;
+use App\Services\Transactions\Aggregates\FeesByWeekAggregate;
+use App\Services\Transactions\Aggregates\FeesByYearAggregate;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
@@ -74,34 +84,37 @@ final class CacheChartData extends Command
         foreach ($this->currencies as $currency) {
             $prices = (new CryptoCompare())->historical(Network::currency(), $currency);
 
-            Cache::put('prices.'.$currency, $prices);
+            $cache = new CryptoCompareCache();
+            $cache->setPrices($currency, $prices);
 
             $cache = new PriceChartCache();
-            $cache->setDay($prices);
-            $cache->setWeek($prices);
-            $cache->setMonth($prices);
-            $cache->setQuarter($prices);
-            $cache->setYear($prices);
+            $cache->setDay($currency, $prices);
+            $cache->setWeek($currency, $prices);
+            $cache->setMonth($currency, $prices);
+            $cache->setQuarter($currency, $prices);
+            $cache->setYear($currency, $prices);
         }
     }
 
     private function cacheFees(): void
     {
         $cache = new FeeChartCache();
-        $cache->setDay();
-        $cache->setWeek();
-        $cache->setMonth();
-        $cache->setQuarter();
-        $cache->setYear();
+
+        $cache->setDay((new FeesByDayAggregate())->aggregate());
+        $cache->setWeek((new FeesByWeekAggregate())->aggregate());
+        $cache->setMonth((new FeesByMonthAggregate())->aggregate());
+        $cache->setQuarter((new FeesByQuarterAggregate())->aggregate());
+        $cache->setYear((new FeesByYearAggregate())->aggregate());
     }
 
     private function cacheStatistics(): void
     {
         $cache = new AggregateCache();
-        $cache->volume();
-        $cache->transactionsCount();
-        $cache->voteCount();
-        $cache->votesPercentage();
+
+        $cache->volume((new TransactionVolumeAggregate())->aggregate());
+        $cache->transactionsCount((new TransactionCountAggregate())->aggregate());
+        $cache->votesCount((new VoteCountAggregate())->aggregate());
+        $cache->votesPercentage((new VotePercentageAggregate())->aggregate());
     }
 
     private function cacheKeyValue(string $key, Collection $datasets): void
