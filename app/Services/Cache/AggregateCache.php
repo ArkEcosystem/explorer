@@ -4,7 +4,15 @@ declare(strict_types=1);
 
 namespace App\Services\Cache;
 
+use App\Aggregates\DailyFeeAggregate;
+use App\Aggregates\TransactionCountAggregate;
+use App\Aggregates\TransactionVolumeAggregate;
+use App\Aggregates\VoteCountAggregate;
+use App\Aggregates\VotePercentageAggregate;
 use App\Contracts\Cache as Contract;
+use App\Facades\Network;
+use App\Models\Scopes\DelegateRegistrationScope;
+use App\Models\Transaction;
 use Carbon\Carbon;
 use Illuminate\Cache\TaggedCache;
 use Illuminate\Support\Collection;
@@ -19,79 +27,41 @@ final class AggregateCache implements Contract
         return $this->get($this->cacheKey('fees_by_range.%s.%s', [$start->unix(), $end->unix()]));
     }
 
-    public function setFeesByRange(Carbon $start, Carbon $end, Collection $value): void
-    {
-        $this->put($this->cacheKey('fees_by_range.%s.%s', [$start->unix(), $end->unix()]), $value);
-    }
-
     public function getVolume(): string
     {
-        return $this->get('volume');
-    }
-
-    public function setVolume(string $value): void
-    {
-        $this->put('volume', $value);
+        return $this->remember('volume', 60, fn () => (new TransactionVolumeAggregate())->aggregate());
     }
 
     public function getTransactionsCount(): string
     {
-        return $this->get('transactions_count');
-    }
-
-    public function setTransactionsCount(string $value): void
-    {
-        $this->put('transactions_count', $value);
-    }
-
-    public function getVotesCount(): string
-    {
-        return $this->get('votes_count');
-    }
-
-    public function setVotesCount(string $value): void
-    {
-        $this->put('votes_count', $value);
-    }
-
-    public function getVotesPercentage(): string
-    {
-        return $this->get('votes_percentage');
-    }
-
-    public function setVotesPercentage(string $value): void
-    {
-        $this->put('votes_percentage', $value);
+        return $this->remember('transactions_count', 60, fn () => (new TransactionCountAggregate())->aggregate());
     }
 
     public function getVotes(): string
     {
-        return $this->get('votes');
+        return $this->remember('votes', Network::blockTime(), fn (): string => (new VoteCountAggregate())->aggregate());
     }
 
-    public function setVotes(string $value): void
+    public function getVotesCount(): string
     {
-        $this->put('votes', $value);
+        return $this->remember('votes_count', 60, fn () => (new VoteCountAggregate())->aggregate());
     }
 
-    public function getDelegateRegistrationCount(): string
+    public function getVotesPercentage(): string
     {
-        return $this->get('delegate_registration_count');
+        return $this->remember('votes_percentage', 60, fn () => (new VotePercentageAggregate())->aggregate());
     }
 
-    public function setDelegateRegistrationCount(string $value): void
+    public function getDelegateRegistrationCount(): int
     {
-        $this->put('delegate_registration_count', $value);
+        return (int) $this->remember('delegate_registration_count', Network::blockTime(), function (): int {
+            return Transaction::withScope(DelegateRegistrationScope::class)->count();
+        });
     }
 
     public function getFeesCollected(): string
     {
-        return $this->get('fees_collected');
-    }
-
-    public function setFeesCollected(string $value): void
-    {
-        $this->put('fees_collected');
+        return $this->remember('fees_collected', Network::blockTime(), fn (): string => (new DailyFeeAggregate())->aggregate());
     }
 
     public function getCache(): TaggedCache

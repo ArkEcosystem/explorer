@@ -19,9 +19,17 @@ trait ManagesCache
     /**
      * @return mixed
      */
-    private function remember(string $key, Closure $callback, int $ttl = 60)
+    private function remember(string $key, int $ttl, Closure $callback)
     {
         return $this->getCache()->remember($key, $ttl, $callback);
+    }
+
+    /**
+     * @return mixed
+     */
+    private function rememberForever(string $key, Closure $callback)
+    {
+        return $this->getCache()->rememberForever($key, $callback);
     }
 
     /**

@@ -4,12 +4,10 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire;
 
-use App\Facades\Network;
 use App\Http\Livewire\Concerns\ManagesTransactionTypeScopes;
-use App\Models\Transaction;
+use App\Services\Cache\TableCache;
 use App\ViewModels\ViewModelFactory;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\View\View;
 use Livewire\Component;
 
@@ -47,17 +45,6 @@ final class LatestTransactionsTable extends Component
 
     public function pollTransactions(): void
     {
-        $this->transactions = Cache::remember('latestTransactionsTable:'.$this->state['type'], Network::blockTime(), function () {
-            $query = Transaction::latestByTimestamp();
-
-            if ($this->state['type'] !== 'all') {
-                $scopeClass = $this->scopes[$this->state['type']];
-
-                /* @var \Illuminate\Database\Eloquent\Model */
-                $query = $query->withScope($scopeClass);
-            }
-
-            return $query->take(15)->get();
-        });
+        $this->transactions = (new TableCache())->latestTransactions($this->state['type'], $this->scopes);
     }
 }

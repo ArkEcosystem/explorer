@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace App\Services\Cache;
 
 use App\Contracts\Cache as Contract;
+use App\Models\Scopes\DelegateResignationScope;
+use App\Models\Transaction;
+use App\Models\Wallet;
 use Illuminate\Cache\TaggedCache;
 use Illuminate\Support\Facades\Cache;
 
@@ -17,39 +20,53 @@ final class WalletCache implements Contract
         return $this->cacheKey('known');
     }
 
-    public function byAddress(string $address): string
+    public function getByAddress(string $address): string
     {
-        return $this->cacheKey('%s.address', [$address]);
+        return $this->remember($this->cacheKey('%s.address', [$address]), 60, function () {
+            return Wallet::where('public_key', $address)->firstOrFail();
+        });
     }
 
-    public function byPublicKey(string $publicKey): string
+    public function getByPublicKey(string $publicKey): string
     {
-        return $this->cacheKey('%s.publicKey', [$publicKey]);
+        return $this->remember($this->cacheKey('%s.publicKey', [$publicKey]), 60, function () {
+            return Wallet::where('public_key', $publicKey)->firstOrFail();
+        });
     }
 
-    public function lastBlock(string $publicKey): string
+    public function getLastBlock(string $publicKey): string
     {
-        return $this->cacheKey('%s.lastBlock', [$publicKey]);
+        return $this->remember($this->cacheKey('%s.lastBlock', [$publicKey]), 60, function () {
+            //
+        });
     }
 
-    public function performance(string $publicKey): string
+    public function getPerformance(string $publicKey): string
     {
-        return $this->cacheKey('%s.performance', [$publicKey]);
+        return $this->remember($this->cacheKey('%s.performance', [$publicKey]), 60, function () {
+            //
+        });
     }
 
-    public function productivity(string $publicKey): string
+    public function getProductivity(string $publicKey): string
     {
-        return $this->cacheKey('%s.productivity', [$publicKey]);
+        return $this->remember($this->cacheKey('%s.productivity', [$publicKey]), 60, function () {
+            //
+        });
     }
 
-    public function resignationId(string $address): string
+    public function getResignationId(string $address): string
     {
-        return $this->cacheKey('%s.resignationId', [$address]);
+        return $this->remember($this->cacheKey('%s.resignationId', [$address]), 60, function () {
+            return Transaction::withScope(DelegateResignationScope::class)->firstOrFail()->id;
+        });
     }
 
-    public function votes(string $publicKey): string
+    public function getVotes(string $publicKey): string
     {
-        return $this->cacheKey('%s.votes', [$publicKey]);
+        return $this->remember($this->cacheKey('%s.votes', [$publicKey]), 60, function () {
+            //
+        });
     }
 
     public function getCache(): TaggedCache
