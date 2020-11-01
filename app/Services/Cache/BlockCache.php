@@ -9,15 +9,15 @@ use Illuminate\Support\Facades\Cache;
 
 final class BlockCache
 {
-    use Concerns\HasCacheKey;
+    use Concerns\ManagesCache;
 
-    public static function get(): TaggedCache
+    public function byId(string $id): string
     {
-        return Cache::tags('block');
+        return $this->cacheKey('id.%s', [$id]);
     }
 
-    public static function byId(string $id): string
+    public function getCache(): TaggedCache
     {
-        return static::cacheKey('id.%s', [$id]);
+        return Cache::tags('block');
     }
 }

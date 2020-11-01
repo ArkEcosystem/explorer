@@ -4,35 +4,36 @@ declare(strict_types=1);
 
 namespace App\Services\Cache;
 
+use App\Contracts\Cache as Contract;
 use Illuminate\Cache\TaggedCache;
 use Illuminate\Support\Facades\Cache;
 
-final class MonitorCache
+final class MonitorCache implements Contract
 {
-    use Concerns\HasCacheKey;
+    use Concerns\ManagesCache;
 
-    public static function get(): TaggedCache
+    public function blockCount(): string
+    {
+        return $this->cacheKey('block_count');
+    }
+
+    public function currentDelegate(): string
+    {
+        return $this->cacheKey('current_delegate');
+    }
+
+    public function nextDelegate(): string
+    {
+        return $this->cacheKey('next_delegate');
+    }
+
+    public function transactions(): string
+    {
+        return $this->cacheKey('transactions');
+    }
+
+    public function getCache(): TaggedCache
     {
         return Cache::tags('monitor');
-    }
-
-    public static function blockCount(): string
-    {
-        return static::cacheKey('block_count');
-    }
-
-    public static function currentDelegate(): string
-    {
-        return static::cacheKey('current_delegate');
-    }
-
-    public static function nextDelegate(): string
-    {
-        return static::cacheKey('next_delegate');
-    }
-
-    public static function transactions(): string
-    {
-        return static::cacheKey('transactions');
     }
 }

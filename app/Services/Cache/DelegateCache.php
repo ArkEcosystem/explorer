@@ -4,35 +4,36 @@ declare(strict_types=1);
 
 namespace App\Services\Cache;
 
+use App\Contracts\Cache as Contract;
 use Illuminate\Cache\TaggedCache;
 use Illuminate\Support\Facades\Cache;
 
-final class DelegateCache
+final class DelegateCache implements Contract
 {
-    use Concerns\HasCacheKey;
+    use Concerns\ManagesCache;
 
-    public static function get(): TaggedCache
+    public function totalAmounts(): string
+    {
+        return $this->cacheKey('total_amounts');
+    }
+
+    public function totalBlocks(): string
+    {
+        return $this->cacheKey('total_blocks');
+    }
+
+    public function totalFees(): string
+    {
+        return $this->cacheKey('total_fees');
+    }
+
+    public function totalRewards(): string
+    {
+        return $this->cacheKey('total_rewards');
+    }
+
+    public function getCache(): TaggedCache
     {
         return Cache::tags('delegate');
-    }
-
-    public static function totalAmounts(): string
-    {
-        return static::cacheKey('total_amounts');
-    }
-
-    public static function totalBlocks(): string
-    {
-        return static::cacheKey('total_blocks');
-    }
-
-    public static function totalFees(): string
-    {
-        return static::cacheKey('total_fees');
-    }
-
-    public static function totalRewards(): string
-    {
-        return static::cacheKey('total_rewards');
     }
 }
