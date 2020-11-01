@@ -4,18 +4,11 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
-use App\Aggregates\TransactionCountAggregate;
-use App\Aggregates\TransactionVolumeAggregate;
-use App\Aggregates\VoteCountAggregate;
-use App\Aggregates\VotePercentageAggregate;
-use App\Enums\CacheKeyEnum;
 use App\Facades\Network;
+use App\Services\Cache\AggregateCache;
+use App\Services\Cache\FeeChartCache;
+use App\Services\Cache\PriceChartCache;
 use App\Services\CryptoCompare;
-use App\Services\Transactions\Aggregates\FeesByDayAggregate;
-use App\Services\Transactions\Aggregates\FeesByMonthAggregate;
-use App\Services\Transactions\Aggregates\FeesByQuarterAggregate;
-use App\Services\Transactions\Aggregates\FeesByWeekAggregate;
-use App\Services\Transactions\Aggregates\FeesByYearAggregate;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
@@ -83,52 +76,32 @@ final class CacheChartData extends Command
 
             Cache::put('prices.'.$currency, $prices);
 
-            $this->cacheKeyValue(
-                'chart.prices.day',
-                $this->groupByDate($prices->take(1), 'H:s'),
-            );
-
-            $this->cacheKeyValue(
-                'chart.prices.week',
-                $this->groupByDate($prices->take(7), 'd.m'),
-            );
-
-            $this->cacheKeyValue(
-                'chart.prices.month',
-                $this->groupByDate($prices->take(30), 'd.m'),
-            );
-
-            $this->cacheKeyValue(
-                'chart.prices.quarter',
-                $this->groupByDate($prices->take(120), 'W'),
-            );
-
-            $this->cacheKeyValue(
-                'chart.prices.year',
-                $this->groupByDate($prices->take(365), 'M'),
-            );
+            $cache = new PriceChartCache();
+            $cache->setDay($prices);
+            $cache->setWeek($prices);
+            $cache->setMonth($prices);
+            $cache->setQuarter($prices);
+            $cache->setYear($prices);
         }
     }
 
     private function cacheFees(): void
     {
-        $this->cacheKeyValue('chart.fees.day', (new FeesByDayAggregate())->aggregate());
-
-        $this->cacheKeyValue('chart.fees.week', (new FeesByWeekAggregate())->aggregate());
-
-        $this->cacheKeyValue('chart.fees.month', (new FeesByMonthAggregate())->aggregate());
-
-        $this->cacheKeyValue('chart.fees.quarter', (new FeesByQuarterAggregate())->aggregate());
-
-        $this->cacheKeyValue('chart.fees.year', (new FeesByYearAggregate())->aggregate());
+        $cache = new FeeChartCache();
+        $cache->setDay();
+        $cache->setWeek();
+        $cache->setMonth();
+        $cache->setQuarter();
+        $cache->setYear();
     }
 
     private function cacheStatistics(): void
     {
-        Cache::put(CacheKeyEnum::VOLUME, (new TransactionVolumeAggregate())->aggregate());
-        Cache::put(CacheKeyEnum::TRANSACTIONS_COUNT, (new TransactionCountAggregate())->aggregate());
-        Cache::put(CacheKeyEnum::VOTES_COUNT, (new VoteCountAggregate())->aggregate());
-        Cache::put(CacheKeyEnum::VOTES_PERCENTAGE, (new VotePercentageAggregate())->aggregate());
+        $cache = new AggregateCache();
+        $cache->volume();
+        $cache->transactionsCount();
+        $cache->voteCount();
+        $cache->votesPercentage();
     }
 
     private function cacheKeyValue(string $key, Collection $datasets): void
