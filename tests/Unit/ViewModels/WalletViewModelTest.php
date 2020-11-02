@@ -303,11 +303,13 @@ it('should get the resignation id', function () {
         ],
     ]));
 
-    Transaction::factory()->create([
+    $transaction = Transaction::factory()->create([
         'type'              => CoreTransactionTypeEnum::DELEGATE_RESIGNATION,
         'type_group'        => TransactionTypeGroupEnum::CORE,
         'sender_public_key' => $this->subject->publicKey(),
     ]);
+
+    (new WalletCache())->setResignationId($transaction->sender_public_key, $transaction->id);
 
     expect($this->subject->resignationId())->toBeString();
 });
