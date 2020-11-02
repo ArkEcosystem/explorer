@@ -119,7 +119,9 @@ final class WalletTransactionTable extends Component
     {
         $query = Transaction::with('block');
 
-        return $this->applyTypeScope(Transaction::where('sender_public_key', $this->state['publicKey']));
+        $this->applyTypeScope(Transaction::where('sender_public_key', $this->state['publicKey']));
+
+        return $query;
     }
 
     private function applyTypeScope(Builder $query): Builder
