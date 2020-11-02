@@ -26,7 +26,6 @@ final class MemoryWallet
 
     public static function fromPublicKey(string $publicKey): self
     {
-        // @TODO: cache the address to avoid the slow derivation
         return new static(Identity::address($publicKey), $publicKey);
     }
 
