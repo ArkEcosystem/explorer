@@ -29,10 +29,10 @@
                 </x-slot>
             </x-general.identity>
         @else
-            <div class="flex items-center space-x-3">
+            <div class="flex flex-row-reverse md:flex-row items-center">
                 <x-transactions.icon :icon-type="$iconType" />
 
-                <div class="font-semibold text-theme-secondary-900 dark:text-theme-secondary-200">
+                <div class="font-semibold text-theme-secondary-900 dark:text-theme-secondary-200 mr-3 md:mr-0 md:ml-3">
                     @lang('general.transaction.'.$iconType)
                 </div>
             </div>
