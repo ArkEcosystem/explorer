@@ -1,7 +1,7 @@
 <div>
     @lang('labels.transaction_count')
 
-    <div class="inline">
+    <span>
         {{ $model->transactionCount() }}
-    </div>
+    </span>
 </div>

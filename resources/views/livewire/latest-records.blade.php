@@ -1,6 +1,6 @@
 <div x-data="{
     tabsOpen: false,
-    selected: 'blocks',
+    selected: 'transactions',
     transactionTypeFilter: 'all',
     transactionTypeFilterLabel: 'All',
 }" x-cloak class="w-full">
