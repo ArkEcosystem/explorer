@@ -35,6 +35,8 @@ EXPLORER_DB_USERNAME=homestead
 EXPLORER_DB_PASSWORD=password
 ```
 
+*Important:* You will need access to a Core database. The details can be specified in the `.env` file under `EXPLORER_DB_*`.
+
 ### Cronjobs
 
 Explorer performs a lot of tasks in the background. These tasks are executed on a specific schedule and require the task scheduler to be set up. Take a look at the official [Starting The Scheduler](https://laravel.com/docs/8.x/scheduling#starting-the-scheduler) guide by [Laravel](https://laravel.com/).
