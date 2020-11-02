@@ -309,7 +309,7 @@ it('should get the resignation id', function () {
         'sender_public_key' => $this->subject->publicKey(),
     ]);
 
-    (new WalletCache())->setResignationId($transaction->sender_public_key, $transaction->id);
+    (new WalletCache())->setResignationId($this->subject->publicKey(), $transaction->id);
 
     expect($this->subject->resignationId())->toBeString();
 });

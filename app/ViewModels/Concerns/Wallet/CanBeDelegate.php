@@ -20,7 +20,7 @@ trait CanBeDelegate
             return null;
         }
 
-        if (! is_null($this->wallet->public_key)) {
+        if (is_null($this->wallet->public_key)) {
             return null;
         }
 

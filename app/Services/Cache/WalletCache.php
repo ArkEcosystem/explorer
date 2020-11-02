@@ -53,14 +53,14 @@ final class WalletCache implements Contract
         $this->put(sprintf('productivity/%s', $publicKey), $value);
     }
 
-    public function getResignationId(string $address): ?string
+    public function getResignationId(string $publicKey): ?string
     {
-        return $this->get(sprintf('resignation_id/%s', $address));
+        return $this->get(sprintf('resignation_id/%s', $publicKey));
     }
 
-    public function setResignationId(string $address, string $id): void
+    public function setResignationId(string $publicKey, string $id): void
     {
-        $this->put(sprintf('resignation_id/%s', $address), $id);
+        $this->put(sprintf('resignation_id/%s', $publicKey), $id);
     }
 
     public function getVote(string $publicKey): ?Wallet
