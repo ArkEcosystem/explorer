@@ -10,6 +10,7 @@ use App\Aggregates\TransactionVolumeAggregate;
 use App\Aggregates\VoteCountAggregate;
 use App\Aggregates\VotePercentageAggregate;
 use App\Models\Block;
+use App\Models\Scopes\DelegateRegistrationScope;
 use App\Models\Transaction;
 use App\Models\Wallet;
 use App\Services\Cache\NetworkCache;
@@ -50,13 +51,13 @@ final class CacheNetworkStatistics extends Command
 
         $cache->setSupply(fn () => Wallet::sum('balance'));
 
-        $cache->getVolume(fn () => (new TransactionVolumeAggregate())->aggregate());
+        $cache->setVolume(fn () => (new TransactionVolumeAggregate())->aggregate());
 
-        $cache->getTransactionsCount(fn () => (new TransactionCountAggregate())->aggregate());
+        $cache->setTransactionsCount(fn () => (new TransactionCountAggregate())->aggregate());
 
-        $cache->getVotesCount(fn () => (new VoteCountAggregate())->aggregate());
+        $cache->setVotesCount(fn () => (new VoteCountAggregate())->aggregate());
 
-        $cache->getVotesPercentage(fn () => (new VotePercentageAggregate())->aggregate());
+        $cache->setVotesPercentage(fn () => (new VotePercentageAggregate())->aggregate());
 
         $cache->setDelegateRegistrationCount(fn () => Transaction::withScope(DelegateRegistrationScope::class)->count());
 

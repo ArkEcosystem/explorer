@@ -9,8 +9,8 @@ use App\Services\Cache\NetworkCache;
 use App\Services\Cache\PriceChartCache;
 use App\Services\ExchangeRate;
 use App\Services\NumberFormatter;
+use App\Services\Settings;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Collection;
 use Illuminate\View\View;
 
 final class HomeController
@@ -19,11 +19,11 @@ final class HomeController
     {
         return view('app.home', [
             'prices' => [
-                'day'     => $this->getChart($prices->getDay()),
-                'week'    => $this->getChart($prices->getWeek()),
-                'month'   => $this->getChart($prices->getMonth()),
-                'quarter' => $this->getChart($prices->getQuarter()),
-                'year'    => $this->getChart($prices->getYear()),
+                'day'     => $this->getChart($prices->getDay(Settings::currency())),
+                'week'    => $this->getChart($prices->getWeek(Settings::currency())),
+                'month'   => $this->getChart($prices->getMonth(Settings::currency())),
+                'quarter' => $this->getChart($prices->getQuarter(Settings::currency())),
+                'year'    => $this->getChart($prices->getYear(Settings::currency())),
             ],
             'fees' => [
                 'day'     => $this->getChart($fees->getDay()),
@@ -42,7 +42,7 @@ final class HomeController
         ]);
     }
 
-    private function getChart(Collection $data): array
+    private function getChart(array $data): array
     {
         $labels   = Arr::get($data, 'labels', []);
         $datasets = Arr::get($data, 'datasets', []);

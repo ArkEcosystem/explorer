@@ -14,44 +14,24 @@ final class MonitorCache implements Contract
 {
     use Concerns\ManagesCache;
 
-    public function getBlockCount(): string
-    {
-        return $this->get('getBlockCount');
-    }
-
     public function setBlockCount(\Closure $callback): string
     {
-        return $this->remember('getBlockCount', Network::blockTime(), $callback);
-    }
-
-    public function getTransactions(): int
-    {
-        return (int) $this->get('getTransactions');
+        return $this->remember('block_count', Network::blockTime(), $callback);
     }
 
     public function setTransactions(\Closure $callback): int
     {
-        return $this->remember('getTransactions', Network::blockTime(), $callback);
-    }
-
-    public function getCurrentDelegate(): WalletViewModel
-    {
-        return $this->get('getCurrentDelegate');
+        return $this->remember('transactions', Network::blockTime(), $callback);
     }
 
     public function setCurrentDelegate(\Closure $callback): WalletViewModel
     {
-        return $this->remember('getCurrentDelegate', Network::blockTime(), $callback);
-    }
-
-    public function getNextDelegate(): WalletViewModel
-    {
-        return $this->get('getNextDelegate');
+        return $this->remember('current_delegate', Network::blockTime(), $callback);
     }
 
     public function setNextDelegate(\Closure $callback): WalletViewModel
     {
-        return $this->remember('getNextDelegate', Network::blockTime(), $callback);
+        return $this->remember('next_delegate', Network::blockTime(), $callback);
     }
 
     public function getCache(): TaggedCache

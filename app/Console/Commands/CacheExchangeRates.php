@@ -51,12 +51,7 @@ final class CacheExchangeRates extends Command
         'USD',
     ];
 
-    /**
-     * Execute the console command.
-     *
-     * @return int
-     */
-    public function handle(CryptoCompareCache $crypto, PriceChartCache $chart)
+    public function handle(CryptoCompareCache $crypto, PriceChartCache $chart): void
     {
         if (! Network::canBeExchanged()) {
             return;

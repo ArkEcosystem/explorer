@@ -12,42 +12,42 @@ final class DelegateCache implements Contract
 {
     use Concerns\ManagesCache;
 
-    public function getTotalAmounts(): string
+    public function getTotalAmounts(): array
     {
-        return $this->get('total_amounts');
+        return $this->get('total_amounts', []);
     }
 
-    public function setTotalAmounts(\Closure $callback): string
+    public function setTotalAmounts(\Closure $callback): array
     {
         return $this->remember('total_amounts', now()->addHour(), $callback);
     }
 
-    public function getTotalBlocks(): string
+    public function getTotalBlocks(): array
     {
-        return $this->get('total_blocks');
+        return $this->get('total_blocks', []);
     }
 
-    public function setTotalBlocks(\Closure $callback): string
+    public function setTotalBlocks(\Closure $callback): array
     {
         return $this->remember('total_blocks', now()->addHour(), $callback);
     }
 
-    public function getTotalFees(): string
+    public function getTotalFees(): array
     {
-        return $this->get('total_fees');
+        return $this->get('total_fees', []);
     }
 
-    public function setTotalFees(\Closure $callback): string
+    public function setTotalFees(\Closure $callback): array
     {
         return $this->remember('total_fees', now()->addHour(), $callback);
     }
 
-    public function getTotalRewards(): string
+    public function getTotalRewards(): array
     {
-        return $this->get('total_rewards');
+        return $this->get('total_rewards', []);
     }
 
-    public function setTotalRewards(\Closure $callback): string
+    public function setTotalRewards(\Closure $callback): array
     {
         return $this->remember('total_rewards', now()->addHour(), $callback);
     }

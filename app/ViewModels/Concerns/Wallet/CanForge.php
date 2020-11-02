@@ -46,7 +46,13 @@ trait CanForge
             return 0;
         }
 
-        return (float) (new WalletCache())->getProductivity($this->publicKey());
+        $publicKey = $this->publicKey();
+
+        if (is_null($publicKey)) {
+            return 0;
+        }
+
+        return (new WalletCache())->getProductivity($publicKey);
     }
 
     public function performance(): array
@@ -55,7 +61,13 @@ trait CanForge
             return [];
         }
 
-        return (new WalletCache())->getPerformance($this->publicKey());
+        $publicKey = $this->publicKey();
+
+        if (is_null($publicKey)) {
+            return [];
+        }
+
+        return (new WalletCache())->getPerformance($publicKey);
     }
 
     public function justMissed(): bool

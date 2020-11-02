@@ -12,8 +12,12 @@ final class ExchangeRate
 {
     public static function convert(float $amount, int $timestamp): string
     {
-        $prices       = (new CryptoCompareCache())->getPrices(Settings::currency());
-        $exchangeRate = Arr::get($prices, Carbon::parse(static::timestamp($timestamp))->format('Y-m-d'), 0);
+        try {
+            $prices       = (new CryptoCompareCache())->getPrices(Settings::currency());
+            $exchangeRate = Arr::get($prices, Carbon::parse(static::timestamp($timestamp))->format('Y-m-d'), 0);
+        } catch (\Throwable $th) {
+            $exchangeRate = 0;
+        }
 
         return NumberFormatter::currency($amount * $exchangeRate, Settings::currency());
     }

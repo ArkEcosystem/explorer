@@ -14,7 +14,7 @@ final class FeeChartCache implements Contract
     use Concerns\ManagesCache;
     use Concerns\ManagesChart;
 
-    public function getDay(): Collection
+    public function getDay(): array
     {
         return $this->get('day');
     }
@@ -24,7 +24,7 @@ final class FeeChartCache implements Contract
         $this->put('day', $this->chartjs($data));
     }
 
-    public function getWeek(): Collection
+    public function getWeek(): array
     {
         return $this->get('week');
     }
@@ -34,7 +34,7 @@ final class FeeChartCache implements Contract
         $this->put('week', $this->chartjs($data));
     }
 
-    public function getMonth(): Collection
+    public function getMonth(): array
     {
         return $this->get('month');
     }
@@ -44,7 +44,7 @@ final class FeeChartCache implements Contract
         $this->put('month', $this->chartjs($data));
     }
 
-    public function getQuarter(): Collection
+    public function getQuarter(): array
     {
         return $this->get('quarter');
     }
@@ -54,7 +54,7 @@ final class FeeChartCache implements Contract
         $this->put('quarter', $this->chartjs($data));
     }
 
-    public function getYear(): Collection
+    public function getYear(): array
     {
         return $this->get('year');
     }

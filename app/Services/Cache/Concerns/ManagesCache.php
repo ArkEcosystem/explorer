@@ -10,11 +10,13 @@ use Closure;
 trait ManagesCache
 {
     /**
+     * @param null|mixed $default
+     *
      * @return mixed
      */
-    private function get(string $key)
+    private function get(string $key, $default = null)
     {
-        return $this->getCache()->get(md5($key));
+        return $this->getCache()->get(md5($key), $default);
     }
 
     /**
@@ -25,14 +27,6 @@ trait ManagesCache
     private function remember(string $key, $ttl, Closure $callback)
     {
         return $this->getCache()->remember(md5($key), $ttl, $callback);
-    }
-
-    /**
-     * @return mixed
-     */
-    private function rememberForever(string $key, Closure $callback)
-    {
-        return $this->getCache()->rememberForever(md5($key), $callback);
     }
 
     /**

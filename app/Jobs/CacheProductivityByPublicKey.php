@@ -29,7 +29,7 @@ final class CacheProductivityByPublicKey implements ShouldQueue
 
     public function handle(): void
     {
-        (new WalletCache())->setProductivity($this->publicKey, function () {
+        (new WalletCache())->setProductivity($this->publicKey, function (): float {
             $delegate = Wallet::where('public_key', $this->publicKey)->firstOrFail();
 
             $blocksTotal            = (86400 * 30) / Network::blockTime();

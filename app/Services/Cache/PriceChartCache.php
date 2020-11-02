@@ -14,54 +14,54 @@ final class PriceChartCache implements Contract
     use Concerns\ManagesCache;
     use Concerns\ManagesChart;
 
-    public function getDay(): Collection
+    public function getDay(string $currency): array
     {
-        return $this->get('day');
+        return $this->get("day/$currency");
     }
 
-    public function setDay(string $currency, Collection $data): Collection
+    public function setDay(string $currency, Collection $data): array
     {
-        return $this->put("day.$currency", $this->chartjs($data));
+        return $this->remember("day/$currency", now()->addHour(), fn () => $this->chartjs($data));
     }
 
-    public function getWeek(): Collection
+    public function getWeek(string $currency): array
     {
-        return $this->get('week');
+        return $this->get("week/$currency");
     }
 
-    public function setWeek(string $currency, Collection $data): Collection
+    public function setWeek(string $currency, Collection $data): array
     {
-        return $this->put("week.$currency", $this->chartjs($data));
+        return $this->remember("week/$currency", now()->addHour(), fn () => $this->chartjs($data));
     }
 
-    public function getMonth(): Collection
+    public function getMonth(string $currency): array
     {
-        return $this->get('month');
+        return $this->get("month/$currency");
     }
 
-    public function setMonth(string $currency, Collection $data): Collection
+    public function setMonth(string $currency, Collection $data): array
     {
-        return $this->put("month.$currency", $this->chartjs($data));
+        return $this->remember("month/$currency", now()->addHour(), fn () => $this->chartjs($data));
     }
 
-    public function getQuarter(): Collection
+    public function getQuarter(string $currency): array
     {
-        return $this->get('quarter');
+        return $this->get("quarter/$currency");
     }
 
-    public function setQuarter(string $currency, Collection $data): Collection
+    public function setQuarter(string $currency, Collection $data): array
     {
-        return $this->put("quarter.$currency", $this->chartjs($data));
+        return $this->remember("quarter/$currency", now()->addHour(), fn () => $this->chartjs($data));
     }
 
-    public function getYear(): Collection
+    public function getYear(string $currency): array
     {
-        return $this->get('year');
+        return $this->get("year/$currency");
     }
 
-    public function setYear(string $currency, Collection $data): Collection
+    public function setYear(string $currency, Collection $data): array
     {
-        return $this->put("year.$currency", $this->chartjs($data));
+        return $this->remember("year/$currency", now()->addHour(), fn () => $this->chartjs($data));
     }
 
     public function getCache(): TaggedCache

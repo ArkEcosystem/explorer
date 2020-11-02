@@ -20,7 +20,12 @@ final class BlockRepositoryWithCache implements BlockRepository
         $this->blocks = $blocks;
     }
 
-    public function findByHeight(int $height): Block
+    public function findById($id): Block
+    {
+        return $this->remember(fn () => $this->blocks->findById($id));
+    }
+
+    public function findByHeight($height): Block
     {
         return $this->remember(fn () => $this->blocks->findByHeight($height));
     }

@@ -17,11 +17,17 @@ trait CanVote
 
     public function vote(): ?self
     {
-        if (! Arr::has($this->wallet, 'attributes.vote')) {
+        if (is_null($this->wallet->public_key)) {
             return null;
         }
 
-        $delegate = (new WalletCache())->getVote($this->wallet->public_key);
+        $vote = Arr::get($this->wallet, 'attributes.vote');
+
+        if (is_null($vote)) {
+            return null;
+        }
+
+        $delegate = (new WalletCache())->getVote($vote);
 
         if (is_null($delegate)) {
             return null;
@@ -32,11 +38,17 @@ trait CanVote
 
     public function votePercentage(): ?float
     {
-        if (! Arr::has($this->wallet, 'attributes.vote')) {
+        if (is_null($this->wallet->public_key)) {
             return null;
         }
 
-        $delegate = (new WalletCache())->getVote($this->wallet->public_key);
+        $vote = Arr::get($this->wallet, 'attributes.vote');
+
+        if (is_null($vote)) {
+            return null;
+        }
+
+        $delegate = (new WalletCache())->getVote($vote);
 
         if (is_null($delegate)) {
             return null;
