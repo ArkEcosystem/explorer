@@ -37,4 +37,5 @@ it('should render without errors', function () {
     });
 
     $component = Livewire::test(MonitorNetwork::class);
+    $component->set('state.canPoll', true);
 });
