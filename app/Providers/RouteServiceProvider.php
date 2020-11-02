@@ -44,15 +44,11 @@ final class RouteServiceProvider extends ServiceProvider
         });
 
         Route::bind('wallet', function (string $value): Wallet {
-            abort_unless(Address::validate($value, Network::config()), 404);
+            return $this->findWallet($value, fn () => Wallets::findByAddress($value));
+        });
 
-            try {
-                return Wallets::findByAddress($value);
-            } catch (\Throwable $th) {
-                UI::useErrorMessage(404, trans('general.wallet_not_found', [$value]));
-
-                abort(404);
-            }
+        Route::bind('walletWithVoters', function (string $value): Wallet {
+            return $this->findWallet($value, fn () => Wallets::findByAddress($value)->load('voters'));
         });
     }
 
@@ -64,5 +60,18 @@ final class RouteServiceProvider extends ServiceProvider
     private function configureRateLimiting()
     {
         RateLimiter::for('api', fn (): Limit => Limit::perMinute(60));
+    }
+
+    private function findWallet(string $value, \Closure $callback): Wallet
+    {
+        abort_unless(Address::validate($value, Network::config()), 404);
+
+        try {
+            return $callback();
+        } catch (\Throwable $th) {
+            UI::useErrorMessage(404, trans('general.wallet_not_found', [$value]));
+
+            abort(404);
+        }
     }
 }

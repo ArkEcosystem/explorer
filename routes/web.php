@@ -33,5 +33,5 @@ Route::get('/transactions/{transaction}', ShowTransactionController::class)->nam
 
 Route::view('/wallets', 'app.wallets')->name('wallets');
 Route::get('/wallets/{wallet}', ShowWalletController::class)->name('wallet');
-Route::get('/wallets/{wallet}/voters', ListVotersByWalletController::class)->name('wallet.voters');
+Route::get('/wallets/{walletWithVoters}/voters', ListVotersByWalletController::class)->name('wallet.voters');
 Route::get('/wallets/{wallet}/blocks', ListBlocksByWalletController::class)->name('wallet.blocks');
