@@ -1,5 +1,7 @@
 @if(isset($withoutBorder) && $withoutBorder === true)
 <div class="flex items-center justify-between pb-4">
+@elseif(isset($responsiveBorder) && $responsiveBorder === true)
+<div class="flex items-center justify-between pb-4 border-b border-theme-secondary-300 dark:border-theme-secondary-800 md:border-none">
 @else
 <div class="flex items-center justify-between pb-4 border-b border-theme-secondary-300 dark:border-theme-secondary-800">
 @endif
