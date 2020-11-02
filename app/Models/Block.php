@@ -29,6 +29,13 @@ final class Block extends Model
     use HasFactory;
 
     /**
+     * The "type" of the primary key ID.
+     *
+     * @var string
+     */
+    public $keyType = 'string';
+
+    /**
      * Indicates if the IDs are auto-incrementing.
      *
      * @var bool
@@ -48,8 +55,6 @@ final class Block extends Model
         'total_amount'           => BigInteger::class,
         'total_fee'              => BigInteger::class,
     ];
-
-    public $keyType = 'string';
 
     // /**
     //  * The relations to eager load on every query.
