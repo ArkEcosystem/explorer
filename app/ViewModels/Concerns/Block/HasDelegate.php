@@ -4,15 +4,14 @@ declare(strict_types=1);
 
 namespace App\ViewModels\Concerns\Block;
 
-use App\Facades\Wallets;
-use App\Models\Wallet;
+use App\DTO\MemoryWallet;
 use Illuminate\Support\Arr;
 
 trait HasDelegate
 {
-    public function delegate(): ?Wallet
+    public function delegate(): ?MemoryWallet
     {
-        return Wallets::findByPublicKey($this->block->generator_public_key);
+        return MemoryWallet::fromPublicKey($this->block->generator_public_key);
     }
 
     public function address(): string
@@ -22,6 +21,6 @@ trait HasDelegate
 
     public function username(): string
     {
-        return Arr::get($this->delegate() ?? [], 'attributes.delegate.username', 'Genesis');
+        return $this->delegate()->username() ?? 'Genesis';
     }
 }
