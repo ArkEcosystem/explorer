@@ -13,18 +13,18 @@ final class MemoryWallet
 
     public ?string $publicKey = null;
 
-    private function __construct(string $address, ?string $publicKey = null)
+    private function __construct(string $address, ?string $publicKey)
     {
         $this->address   = $address;
         $this->publicKey = $publicKey;
     }
 
-    public static function fromAddress(string $address)
+    public static function fromAddress(string $address): self
     {
-        return new static($address);
+        return new static($address, null);
     }
 
-    public static function fromPublicKey(string $publicKey)
+    public static function fromPublicKey(string $publicKey): self
     {
         // @TODO: cache the address to avoid the slow derivation
         return new static(Identity::address($publicKey), $publicKey);
