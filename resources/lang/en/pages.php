@@ -172,7 +172,7 @@ return [
     ],
 
     'blocks_by_wallet' => [
-        'title' => 'Forged Blocks',
+        'title' => 'Block History',
     ],
 
     'voters_by_wallet' => [
