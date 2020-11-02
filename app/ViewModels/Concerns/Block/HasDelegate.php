@@ -22,6 +22,7 @@ trait HasDelegate
 
     public function username(): string
     {
+
         return Arr::get($this->delegate() ?? [], 'attributes.delegate.username', 'Genesis');
     }
 }
