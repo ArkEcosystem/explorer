@@ -73,8 +73,7 @@ final class WalletTransactionTable extends Component
 
     private function getAllQuery(): Builder
     {
-        $query = Transaction::query();
-        $query->with('block');
+        $query = Transaction::with('block');
 
         $query->where(function ($query): void {
             $query->where('sender_public_key', $this->state['publicKey']);
@@ -99,8 +98,7 @@ final class WalletTransactionTable extends Component
 
     private function getReceivedQuery(): Builder
     {
-        $query = Transaction::query();
-        $query->with('block');
+        $query = Transaction::with('block');
 
         $query->where(function ($query): void {
             $query->where('recipient_id', $this->state['address']);
@@ -119,12 +117,9 @@ final class WalletTransactionTable extends Component
 
     private function getSentQuery(): Builder
     {
-        $query = Transaction::query();
-        $query->with('block');
+        $query = Transaction::with('block');
 
-        $this->applyTypeScope(Transaction::where('sender_public_key', $this->state['publicKey']));
-
-        return $query;
+        return $this->applyTypeScope(Transaction::where('sender_public_key', $this->state['publicKey']));
     }
 
     private function applyTypeScope(Builder $query): Builder
