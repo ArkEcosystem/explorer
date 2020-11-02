@@ -51,13 +51,6 @@ final class Block extends Model
 
     public $keyType = 'string';
 
-    // /**
-    //  * The relations to eager load on every query.
-    //  *
-    //  * @var array
-    //  */
-    // protected $with = ['delegate'];
-
     /**
      * A block has many transactions.
      *
