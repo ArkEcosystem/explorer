@@ -22,7 +22,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property string $block_id
  * @property string|null $recipient_id
  * @property string $sender_public_key
- * @property string $block_height
+ * @property int $block_height
  */
 final class Transaction extends Model
 {
@@ -55,7 +55,7 @@ final class Transaction extends Model
         'timestamp'    => 'int',
         'type_group'   => 'int',
         'type'         => 'int',
-        'block_height' => 'string',
+        'block_height' => 'int',
     ];
 
     /**

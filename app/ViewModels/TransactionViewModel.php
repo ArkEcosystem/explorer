@@ -98,6 +98,6 @@ final class TransactionViewModel implements ViewModel
 
     public function confirmations(): int
     {
-        return abs((new NetworkCache())->getHeight() - $this->transaction->block_height);
+        return (int) abs((new NetworkCache())->getHeight() - $this->transaction->block_height);
     }
 }
