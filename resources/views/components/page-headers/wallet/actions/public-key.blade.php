@@ -12,7 +12,7 @@
                     {{ $publicKey }}
                 </span>
 
-                <x-clipboard :value="$publicKey" />
+                <x-clipboard :value="$publicKey" colors="text-theme-primary-300 dark:text-theme-secondary-600"/>
             </span>
         </div>
     </div>
