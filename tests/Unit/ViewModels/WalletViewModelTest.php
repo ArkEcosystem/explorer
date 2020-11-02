@@ -326,6 +326,14 @@ it('should fail to get the resignation id if the delegate is not resigned', func
     expect($this->subject->resignationId())->toBeNull();
 });
 
+it('should fail to get the resignation id if the wallet has no public key', function () {
+    $this->subject = new WalletViewModel(Wallet::factory()->create([
+        'public_key' => null,
+    ]));
+
+    expect($this->subject->resignationId())->toBeNull();
+});
+
 it('should get the vote weight as percentage', function () {
     expect($this->subject->votePercentage())->toBeNull();
 
