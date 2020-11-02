@@ -12,7 +12,7 @@
         </span>
     </div>
 
-    <div class="flex items-center justify-center p-2">
-        <x-general.avatar :identifier="$model->address()" />
+    <div class="flex items-center justify-center">
+        <x-general.avatar :identifier="$model->address()" avatar-size="w-11 h-11"/>
     </div>
 </div>
