@@ -49,6 +49,8 @@ final class Block extends Model
         'total_fee'              => BigInteger::class,
     ];
 
+    public $keyType = 'string';
+
     // /**
     //  * The relations to eager load on every query.
     //  *
