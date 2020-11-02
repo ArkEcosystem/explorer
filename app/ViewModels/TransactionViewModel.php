@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\ViewModels;
 
 use App\Contracts\ViewModel;
-use App\Facades\Blocks;
 use App\Facades\Wallets;
 use App\Models\Transaction;
 use App\Services\Cache\NetworkCache;

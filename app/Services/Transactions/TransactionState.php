@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Services\Transactions;
 
-use App\Facades\Blocks;
 use App\Facades\Network;
 use App\Models\Transaction;
 use App\Services\Cache\NetworkCache;
