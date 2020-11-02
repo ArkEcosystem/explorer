@@ -16,7 +16,7 @@ final class CacheResignationIds extends Command
      *
      * @var string
      */
-    protected $signature = 'command:name';
+    protected $signature = 'cache:resignation-ids';
 
     /**
      * The console command description.
