@@ -4,4 +4,4 @@
 
 <x-grid.block-id :model="$transaction" />
 
-<x-grid.nonce :model="$transaction" without-border />
+<x-grid.nonce :model="$transaction" />
