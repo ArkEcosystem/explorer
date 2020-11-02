@@ -7,8 +7,6 @@
 
             <x-tables.rows.mobile.block-forger :model="$block" />
 
-            <x-tables.rows.mobile.block-height :model="$block" />
-
             <x-tables.rows.mobile.transaction-count :model="$block" />
 
             <x-tables.rows.mobile.amount :model="$block" />
