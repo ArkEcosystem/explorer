@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Services\Blockchain\Networks\ARK;
 
 use App\Contracts\Network;
+use App\Services\Cache\WalletCache;
 use ArkEcosystem\Crypto\Networks\Mainnet;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 
 final class Production implements Network
@@ -39,8 +39,7 @@ final class Production implements Network
 
     public function knownWallets(): array
     {
-        return Cache::rememberForever(
-            'ark.production.wallets.known',
+        return (new WalletCache())->setKnown(
             fn () => Http::get('https://raw.githubusercontent.com/ArkEcosystem/common/master/mainnet/known-wallets-extended.json')->json()
         );
     }
@@ -82,6 +81,6 @@ final class Production implements Network
 
     public function config(): \BitWasp\Bitcoin\Network\Network
     {
-        return Mainnet::new();
+        return new Mainnet();
     }
 }

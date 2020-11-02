@@ -6,8 +6,10 @@ namespace App\Repositories;
 
 use App\Contracts\WalletRepository;
 use App\Models\Wallet;
+use Illuminate\Cache\TaggedCache;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
 
 final class WalletRepositoryWithCache implements WalletRepository
 {
@@ -35,6 +37,11 @@ final class WalletRepositoryWithCache implements WalletRepository
         return $this->wallets->allWithPublicKey();
     }
 
+    public function allWithMultiSignature(): Builder
+    {
+        return $this->wallets->allWithMultiSignature();
+    }
+
     public function findByAddress(string $address): Wallet
     {
         return $this->remember(fn () => $this->wallets->findByAddress($address));
@@ -53,5 +60,10 @@ final class WalletRepositoryWithCache implements WalletRepository
     public function findByUsername(string $username): Wallet
     {
         return $this->remember(fn () => $this->wallets->findByUsername($username));
+    }
+
+    private function getCache(): TaggedCache
+    {
+        return Cache::tags('wallets');
     }
 }

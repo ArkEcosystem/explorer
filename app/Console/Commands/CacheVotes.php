@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
-use App\Facades\Wallets;
 use App\Models\Wallet;
+use App\Services\Cache\WalletCache;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Cache;
 
 final class CacheVotes extends Command
 {
@@ -30,16 +29,19 @@ final class CacheVotes extends Command
      *
      * @return int
      */
-    public function handle()
+    public function handle(WalletCache $cache)
     {
-        $publicKeys = Wallets::allWithVote()
+        $publicKeys = Wallet::query()
             ->distinct('attributes->vote')
+            ->whereNotNull('attributes->delegate->username')
             ->pluck('attributes')
             ->pluck('vote')
             ->toArray();
 
-        Wallet::whereIn('public_key', $publicKeys)
-            ->get()
-            ->each(fn ($wallet) => Cache::put('votes.'.$wallet->public_key, $wallet));
+        Wallet::whereIn('public_key', $publicKeys)->get()->each(function ($wallet) use ($cache): void {
+            if (! is_null($wallet->public_key)) {
+                $cache->setVote($wallet->public_key, fn () => $wallet);
+            }
+        });
     }
 }

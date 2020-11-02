@@ -4,11 +4,16 @@ declare(strict_types=1);
 
 namespace App\Console;
 
-use App\Console\Commands\CacheChartData;
 use App\Console\Commands\CacheDelegateAggregates;
 use App\Console\Commands\CacheDelegates;
+use App\Console\Commands\CacheExchangeRates;
+use App\Console\Commands\CacheFeeChart;
 use App\Console\Commands\CacheLastBlocks;
+use App\Console\Commands\CacheMultiSignatureAddresses;
+use App\Console\Commands\CacheNetworkStatistics;
 use App\Console\Commands\CachePastRoundPerformance;
+use App\Console\Commands\CacheRealTimeStatistics;
+use App\Console\Commands\CacheUsernames;
 use App\Console\Commands\CacheVotes;
 use App\Facades\Network;
 use App\Jobs\CacheProductivityByPublicKey;
@@ -36,11 +41,19 @@ final class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command(CacheChartData::class)->everyThirtyMinutes();
+        $schedule->command(CacheExchangeRates::class)->everyThirtyMinutes();
 
         $schedule->command(CacheDelegates::class)->everyTenMinutes();
 
         $schedule->command(CacheDelegateAggregates::class)->everyFiveMinutes();
+
+        $schedule->command(CacheNetworkStatistics::class)->everyMinute();
+
+        $schedule->command(CacheFeeChart::class)->everyMinute();
+
+        $schedule->command(CacheUsernames::class)->everyMinute();
+
+        $schedule->command(CacheMultiSignatureAddresses::class)->everyMinute();
 
         $schedule->command(CacheLastBlocks::class)->everyMinute();
 
@@ -61,6 +74,8 @@ final class Kernel extends ConsoleKernel
     protected function shortSchedule(ShortSchedule $shortSchedule)
     {
         $shortSchedule->command(CacheLastBlocks::class)->everySeconds(Network::blockTime());
+
+        $shortSchedule->command(CacheRealTimeStatistics::class)->everySeconds(Network::blockTime());
     }
 
     /**

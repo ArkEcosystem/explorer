@@ -12,6 +12,7 @@ use App\Enums\TransactionTypeGroupEnum;
 use App\Models\Block;
 use App\Models\Transaction;
 use App\Models\Wallet;
+use App\Services\Cache\NetworkCache;
 use App\ViewModels\TransactionViewModel;
 use App\ViewModels\WalletViewModel;
 use ArkEcosystem\Crypto\Identities\Address;
@@ -24,11 +25,13 @@ beforeEach(function () {
     $this->block = Block::factory()->create(['height' => 1]);
     Block::factory()->create(['height' => 5000000]);
 
+    (new NetworkCache())->setHeight(5000000);
+
     $this->subject = new TransactionViewModel(Transaction::factory()->create([
         'block_id'          => $this->block->id,
         'fee'               => '100000000',
         'amount'            => '200000000',
-        'sender_public_key' => Wallet::factory()->create(['address' => 'sender'])->public_key,
+        'sender_public_key' => Wallet::factory()->create(['address' => 'D6Z26L69gdk9qYmTv5uzk3uGepigtHY4ax'])->public_key,
         'recipient_id'      => Wallet::factory()->create(['address' => 'recipient'])->address,
     ]));
 });
@@ -40,11 +43,11 @@ it('should get the url', function () {
 
 it('should determine if the transaction is incoming', function () {
     expect($this->subject->isReceived('recipient'))->toBeTrue();
-    expect($this->subject->isReceived('sender'))->toBeFalse();
+    expect($this->subject->isReceived('D6Z26L69gdk9qYmTv5uzk3uGepigtHY4ax'))->toBeFalse();
 });
 
 it('should determine if the transaction is outgoing', function () {
-    expect($this->subject->isSent('sender'))->toBeTrue();
+    expect($this->subject->isSent('D6Z26L69gdk9qYmTv5uzk3uGepigtHY4ax'))->toBeTrue();
     expect($this->subject->isSent('recipient'))->toBeFalse();
 });
 
@@ -620,24 +623,16 @@ it('should fail to get the confirmations', function () {
     expect($this->subject->confirmations())->toBe(0);
 });
 
-it('should fail to get the sender', function () {
-    $this->subject = new TransactionViewModel(Transaction::factory()->create([
-        'sender_public_key' => 'unknown',
-    ]));
-
-    expect($this->subject->sender())->toBeNull();
-});
-
 it('should fallback to the sender if no recipient exists', function () {
     $this->subject = new TransactionViewModel(Transaction::factory()->create([
-        'recipient_id' => 'unknown',
+        'recipient_id' => null,
     ]));
 
     expect($this->subject->recipient())->toEqual($this->subject->sender());
 });
 
 it('should get the voted delegate', function () {
-    $wallet = Wallet::factory()->create(['public_key' => 'publicKey']);
+    Wallet::factory()->create(['public_key' => 'publicKey']);
 
     $subject = new TransactionViewModel(Transaction::factory()->create([
         'type'       => CoreTransactionTypeEnum::VOTE,
@@ -1314,23 +1309,6 @@ it('should determine if the transaction has extra data', function (bool $outcome
     ],
 ]);
 
-it('should get the entity name', function () {
-    $subject = new TransactionViewModel(Transaction::factory()->create([
-        'type'       => MagistrateTransactionTypeEnum::ENTITY,
-        'type_group' => TransactionTypeGroupEnum::MAGISTRATE,
-        'asset'      => [
-            'type'    => MagistrateTransactionEntityTypeEnum::MODULE,
-            'subType' => MagistrateTransactionEntitySubTypeEnum::NONE,
-            'action'  => MagistrateTransactionEntityActionEnum::REGISTER,
-            'data'    => [
-                'name' => 'john',
-            ],
-        ],
-    ]));
-
-    expect($subject->entityName())->toBe('john');
-});
-
 it('should determine if the transaction type is unknown', function () {
     $subject = new TransactionViewModel(Transaction::factory()->create([
         'type'       => 123,
@@ -1338,4 +1316,64 @@ it('should determine if the transaction type is unknown', function () {
     ]));
 
     expect($subject->isUnknown())->toBeTrue();
+});
+
+it('should get the entity type', function () {
+    $subject = new TransactionViewModel(Transaction::factory()->create([
+        'type'       => MagistrateTransactionTypeEnum::ENTITY,
+        'type_group' => TransactionTypeGroupEnum::MAGISTRATE,
+        'asset'      => [
+            'type'    => MagistrateTransactionEntityTypeEnum::PRODUCT,
+            'subType' => MagistrateTransactionEntitySubTypeEnum::NONE,
+            'action'  => MagistrateTransactionEntityActionEnum::REGISTER,
+            'data'    => ['name' => 'John', 'ipfsData' => 'ipfs'],
+        ],
+    ]));
+
+    expect($subject->entityType())->toBe('product-entity-registration');
+});
+
+it('should get the entity name', function () {
+    $subject = new TransactionViewModel(Transaction::factory()->create([
+        'type'       => MagistrateTransactionTypeEnum::ENTITY,
+        'type_group' => TransactionTypeGroupEnum::MAGISTRATE,
+        'asset'      => [
+            'type'    => MagistrateTransactionEntityTypeEnum::PRODUCT,
+            'subType' => MagistrateTransactionEntitySubTypeEnum::NONE,
+            'action'  => MagistrateTransactionEntityActionEnum::REGISTER,
+            'data'    => ['name' => 'John', 'ipfsData' => 'ipfs'],
+        ],
+    ]));
+
+    expect($subject->entityName())->toBe('John');
+});
+
+it('should get the entity category', function () {
+    $subject = new TransactionViewModel(Transaction::factory()->create([
+        'type'       => MagistrateTransactionTypeEnum::ENTITY,
+        'type_group' => TransactionTypeGroupEnum::MAGISTRATE,
+        'asset'      => [
+            'type'    => MagistrateTransactionEntityTypeEnum::PRODUCT,
+            'subType' => MagistrateTransactionEntitySubTypeEnum::NONE,
+            'action'  => MagistrateTransactionEntityActionEnum::REGISTER,
+            'data'    => ['name' => 'John', 'ipfsData' => 'ipfs'],
+        ],
+    ]));
+
+    expect($subject->entityCategory())->toBeNull();
+});
+
+it('should get the entity hash', function () {
+    $subject = new TransactionViewModel(Transaction::factory()->create([
+        'type'       => MagistrateTransactionTypeEnum::ENTITY,
+        'type_group' => TransactionTypeGroupEnum::MAGISTRATE,
+        'asset'      => [
+            'type'    => MagistrateTransactionEntityTypeEnum::PRODUCT,
+            'subType' => MagistrateTransactionEntitySubTypeEnum::NONE,
+            'action'  => MagistrateTransactionEntityActionEnum::REGISTER,
+            'data'    => ['name' => 'John', 'ipfsData' => 'ipfs'],
+        ],
+    ]));
+
+    expect($subject->entityHash())->toBe('ipfs');
 });
