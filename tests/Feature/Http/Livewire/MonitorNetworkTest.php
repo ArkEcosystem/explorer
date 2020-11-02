@@ -31,7 +31,7 @@ it('should render without errors', function () {
 
         Cache::tags(['delegates'])->put($wallet->public_key, $wallet);
 
-        (new WalletCache())->setLastBlock($wallet->public_key, fn () => [
+        (new WalletCache())->setLastBlock($wallet->public_key, [
             'id'     => $block->id,
             'height' => $block->height->toNumber(),
         ]);
