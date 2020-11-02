@@ -236,10 +236,17 @@ body {
 
 /* Transaction Icon */
 .transaction-icon {
-    @apply circled-icon text-theme-secondary-900 border-theme-secondary-900;
+    @apply text-theme-secondary-900 border-theme-secondary-900;
 }
+
 .theme-dark .transaction-icon {
     @apply text-theme-secondary-600 border-theme-secondary-600;
+}
+
+@screen md {
+    .transaction-icon {
+        @apply circled-icon;
+    }
 }
 
 @screen xl {
@@ -336,8 +343,11 @@ body {
 .transaction-filter-button-icon {
     @apply flex items-center justify-center transition duration-150 ease-in-out rounded-full text-theme-secondary-400 w-6 h-6;
 }
-.theme-dark .transaction-filter-button-icon {
-    @apply bg-theme-secondary-800 text-theme-secondary-200;
+
+@screen md {
+    .theme-dark .transaction-filter-button-icon {
+        @apply bg-theme-secondary-800 text-theme-secondary-200;
+    }
 }
 
 @screen md {
@@ -377,4 +387,24 @@ body {
 }
 .theme-dark .vote-percentage {
     @apply text-theme-secondary-600;
+}
+
+/* Transaction & Block details */
+.details-grid > * {
+    @apply border-b border-theme-secondary-300;
+}
+
+.details-grid > *:last-child {
+    @apply border-b-0;
+}
+
+.theme-dark .details-grid > * {
+    @apply border-theme-secondary-800;
+}
+
+@screen md {
+    .details-grid > *:nth-child(2n + 1):nth-last-child(-n + 2),
+    .details-grid > *:nth-child(2n + 1):nth-last-child(-n + 2) ~ * {
+        @apply border-b-0;
+    }
 }
