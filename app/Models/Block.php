@@ -56,8 +56,6 @@ final class Block extends Model
         'total_fee'              => BigInteger::class,
     ];
 
-    public $keyType = 'string';
-
     /**
      * A block has many transactions.
      *
