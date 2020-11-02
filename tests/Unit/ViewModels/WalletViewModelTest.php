@@ -207,7 +207,7 @@ it('should get the wallet of the vote', function () {
         ],
     ]));
 
-    (new WalletCache())->setVote($vote->public_key, fn () => $vote);
+    (new WalletCache())->setVote($vote->public_key, $vote);
 
     expect($this->subject->vote())->toBeInstanceOf(WalletViewModel::class);
 });
@@ -265,19 +265,19 @@ it('should fail to get the performance if the wallet has no public key', functio
 });
 
 it('should determine if the delegate just missed a block', function () {
-    (new WalletCache())->setPerformance($this->subject->publicKey(), fn () => [true, false, true, true, true]);
+    (new WalletCache())->setPerformance($this->subject->publicKey(), [true, false, true, true, true]);
 
     expect($this->subject->justMissed())->toBeFalse();
 
     Cache::flush();
 
-    (new WalletCache())->setPerformance($this->subject->publicKey(), fn () => [true, false, true, false, true]);
+    (new WalletCache())->setPerformance($this->subject->publicKey(), [true, false, true, false, true]);
 
     expect($this->subject->justMissed())->toBeFalse();
 
     Cache::flush();
 
-    (new WalletCache())->setPerformance($this->subject->publicKey(), fn () => [true, true, true, true, false]);
+    (new WalletCache())->setPerformance($this->subject->publicKey(), [true, true, true, true, false]);
 
     expect($this->subject->justMissed())->toBeTrue();
 });
@@ -303,11 +303,13 @@ it('should get the resignation id', function () {
         ],
     ]));
 
-    Transaction::factory()->create([
+    $transaction = Transaction::factory()->create([
         'type'              => CoreTransactionTypeEnum::DELEGATE_RESIGNATION,
         'type_group'        => TransactionTypeGroupEnum::CORE,
         'sender_public_key' => $this->subject->publicKey(),
     ]);
+
+    (new WalletCache())->setResignationId($this->subject->publicKey(), $transaction->id);
 
     expect($this->subject->resignationId())->toBeString();
 });
@@ -319,6 +321,14 @@ it('should fail to get the resignation id if the delegate is not resigned', func
         'attributes'   => [
             'delegate' => [],
         ],
+    ]));
+
+    expect($this->subject->resignationId())->toBeNull();
+});
+
+it('should fail to get the resignation id if the wallet has no public key', function () {
+    $this->subject = new WalletViewModel(Wallet::factory()->create([
+        'public_key' => null,
     ]));
 
     expect($this->subject->resignationId())->toBeNull();
@@ -340,7 +350,7 @@ it('should get the vote weight as percentage', function () {
 
     expect($this->subject->votePercentage())->toBeNull();
 
-    (new WalletCache())->setVote($vote->public_key, fn () => $vote);
+    (new WalletCache())->setVote($vote->public_key, $vote);
 
     expect($this->subject->votePercentage())->toBeFloat();
     expect($this->subject->votePercentage())->toBe(10.0);
@@ -365,7 +375,7 @@ it('should fail to get the productivity if the wallet is a delegate', function (
     expect($this->subject->productivity())->toBeFloat();
     expect($this->subject->productivity())->toBe(0.0);
 
-    (new WalletCache())->setProductivity($this->subject->publicKey(), fn () => 10);
+    (new WalletCache())->setProductivity($this->subject->publicKey(), 10);
 
     expect($this->subject->productivity())->toBeFloat();
     expect($this->subject->productivity())->toBe(10.0);

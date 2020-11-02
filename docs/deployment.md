@@ -73,10 +73,10 @@ php artisan cache:delegate-aggregates
 php artisan cache:delegates
 php artisan cache:exchange-rates
 php artisan cache:chart-fee
-php artisan cache:musig
 php artisan cache:past-round-performance
 php artisan cache:productivity
 php artisan cache:votes
+php artisan cache:resignation-ids
 ```
 
 ## Updates

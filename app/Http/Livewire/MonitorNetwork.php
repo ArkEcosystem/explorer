@@ -7,7 +7,6 @@ namespace App\Http\Livewire;
 use App\DTO\Slot;
 use App\Facades\Network;
 use App\Facades\Rounds;
-use App\Jobs\CacheLastBlockByPublicKey;
 use App\Models\Block;
 use App\Services\Cache\MonitorCache;
 use App\Services\Cache\WalletCache;
@@ -16,37 +15,57 @@ use App\Services\Monitor\Monitor;
 use App\ViewModels\ViewModelFactory;
 use App\ViewModels\WalletViewModel;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 use Illuminate\View\View;
 use Livewire\Component;
 
 final class MonitorNetwork extends Component
 {
+    public array $state = ['canPoll' => false];
+
+    /** @phpstan-ignore-next-line */
+    protected $listeners = [
+        'togglePolling',
+        'filterByDelegateStatus' => 'disablePolling',
+    ];
+
+    public function togglePolling(): void
+    {
+        $this->state['canPoll'] = ! $this->state['canPoll'];
+    }
+
+    public function disablePolling(): void
+    {
+        $this->state['canPoll'] = false;
+    }
+
     public function render(): View
     {
+        if ($this->state['canPoll'] === false) {
+            return view('livewire.monitor-network');
+        }
+
         // $tracking = DelegateTracker::execute(Monitor::roundDelegates(112168));
 
         $roundNumber = Rounds::currentRound()->round;
         $heightRange = Monitor::heightRangeByRound($roundNumber);
         $tracking    = DelegateTracker::execute(Rounds::allByRound($roundNumber));
+        $roundBlocks = $this->getBlocksByRange(Arr::pluck($tracking, 'publicKey'), $heightRange);
 
         $delegates = [];
 
         for ($i = 0; $i < count($tracking); $i++) {
             $delegate = array_values($tracking)[$i];
 
-            // if (Cache::missing('lastBlock:'.$delegate['publicKey'])) {
-            //     CacheLastBlockByPublicKey::dispatchSync($delegate['publicKey']);
-            // }
-
             $delegates[] = new Slot([
                 'publicKey'  => $delegate['publicKey'],
                 'order'      => $i + 1,
-                'wallet'     => ViewModelFactory::make(Cache::tags(['delegates'])->get($delegate['publicKey'])),
+                'wallet'     => ViewModelFactory::make((new WalletCache())->getDelegate($delegate['publicKey'])),
                 'forging_at' => Carbon::now()->addMilliseconds($delegate['time']),
                 'last_block' => (new WalletCache())->getLastBlock($delegate['publicKey']),
                 'status'     => $delegate['status'],
-            ], $heightRange);
+            ], $roundBlocks);
         }
 
         return view('livewire.monitor-network', [
@@ -60,7 +79,7 @@ final class MonitorNetwork extends Component
         ]);
     }
 
-    public function getBlockCount(array $delegates): string
+    private function getBlockCount(array $delegates): string
     {
         return (new MonitorCache())->setBlockCount(function () use ($delegates): string {
             return trans('pages.monitor.statistics.blocks_generated', [
@@ -70,25 +89,33 @@ final class MonitorNetwork extends Component
         });
     }
 
-    public function getTransactions(): int
+    private function getTransactions(): int
     {
         return (new MonitorCache())->setTransactions(function (): int {
             return (int) Block::whereBetween('height', Monitor::heightRangeByRound(Monitor::roundNumber()))->sum('number_of_transactions');
         });
     }
 
-    public function getCurrentDelegate(array $delegates): WalletViewModel
+    private function getCurrentDelegate(array $delegates): WalletViewModel
     {
         return (new MonitorCache())->setCurrentDelegate(function () use ($delegates): WalletViewModel {
             return $this->getSlotsByStatus($delegates, 'next')->wallet();
         });
     }
 
-    public function getNextDelegate(array $delegates): WalletViewModel
+    private function getNextDelegate(array $delegates): WalletViewModel
     {
         return (new MonitorCache())->setNextDelegate(function () use ($delegates): WalletViewModel {
             return $this->getSlotsByStatus($delegates, 'pending')->wallet();
         });
+    }
+
+    private function getBlocksByRange(array $publicKeys, array $heightRange): Collection
+    {
+        return Block::query()
+            ->whereIn('generator_public_key', $publicKeys)
+            ->whereBetween('height', $heightRange)
+            ->get();
     }
 
     private function getSlotsByStatus(array $slots, string $status): Slot
