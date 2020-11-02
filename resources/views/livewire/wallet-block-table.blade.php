@@ -2,7 +2,7 @@
     <x-skeletons.blocks>
         <x-tables.desktop.blocks :blocks="$blocks" without-generator />
 
-        <x-tables.mobile.blocks :blocks="$blocks" />
+        <x-tables.mobile.blocks :blocks="$blocks" without-generator />
 
         <x-general.pagination :results="$blocks" class="mt-8" />
 
