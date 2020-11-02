@@ -73,6 +73,16 @@ final class Wallet extends Model
     }
 
     /**
+     * A wallet has many voters if it is a delegate.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function voters(): HasMany
+    {
+        return $this->hasMany(self::class, 'attributes->vote', 'public_key');
+    }
+
+    /**
      * Scope a query to only include transactions by the recipient.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
