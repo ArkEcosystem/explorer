@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace App\Services\Cache;
 
 use App\Contracts\Cache as Contract;
-use Carbon\Carbon;
 use Illuminate\Cache\TaggedCache;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 
 final class NetworkCache implements Contract
@@ -92,11 +90,6 @@ final class NetworkCache implements Contract
     public function setFeesCollected(string $value): void
     {
         $this->put('fees_collected', $value);
-    }
-
-    public function setFeesByRange(Carbon $start, Carbon $end, Collection $value): void
-    {
-        $this->put(sprintf('fees_by_range/%s/%s', $start->unix(), $end->unix()), $value);
     }
 
     public function getCache(): TaggedCache
