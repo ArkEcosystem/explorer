@@ -6,6 +6,8 @@ namespace App\Repositories;
 
 use App\Contracts\BlockRepository;
 use App\Models\Block;
+use Illuminate\Cache\TaggedCache;
+use Illuminate\Support\Facades\Cache;
 
 final class BlockRepositoryWithCache implements BlockRepository
 {
@@ -21,5 +23,10 @@ final class BlockRepositoryWithCache implements BlockRepository
     public function findByHeight(int $height): Block
     {
         return $this->remember(fn () => $this->blocks->findByHeight($height));
+    }
+
+    private function getCache(): TaggedCache
+    {
+        return Cache::tags('blocks');
     }
 }

@@ -5,10 +5,7 @@ declare(strict_types=1);
 namespace App\Services\Cache;
 
 use App\Contracts\Cache as Contract;
-use App\DTO\Slot;
 use App\Facades\Network;
-use App\Models\Block;
-use App\Services\Monitor\Monitor;
 use App\ViewModels\WalletViewModel;
 use Illuminate\Cache\TaggedCache;
 use Illuminate\Support\Facades\Cache;
@@ -17,46 +14,48 @@ final class MonitorCache implements Contract
 {
     use Concerns\ManagesCache;
 
-    public function getCache(): TaggedCache
+    public function getBlockCount(): string
     {
-        return Cache::tags('monitor');
+        return $this->get('getBlockCount');
     }
 
-    public function getBlockCount(array $delegates): string
+    public function setBlockCount(\Closure $callback): string
     {
-        return $this->getCache()->remember('getBlockCount', Network::blockTime(), function () use ($delegates): string {
-            return trans('pages.monitor.statistics.blocks_generated', [
-                collect($delegates)->filter(fn ($slot) => $slot->status() === 'done')->count(),
-                Network::delegateCount(),
-            ]);
-        });
+        return $this->remember('getBlockCount', Network::blockTime(), $callback);
     }
 
     public function getTransactions(): int
     {
-        return (int) $this->getCache()->remember('getTransactions', Network::blockTime(), function (): int {
-            return (int) Block::whereBetween('height', Monitor::heightRangeByRound(Monitor::roundNumber()))->sum('number_of_transactions');
-        });
+        return (int) $this->get('getTransactions');
     }
 
-    public function getCurrentDelegate(array $delegates): WalletViewModel
+    public function setTransactions(\Closure $callback): int
     {
-        return $this->getCache()->remember('getCurrentDelegate', Network::blockTime(), function () use ($delegates): WalletViewModel {
-            return $this->getSlotsByStatus($delegates, 'next')->wallet();
-        });
+        return $this->remember('getTransactions', Network::blockTime(), $callback);
     }
 
-    public function getNextDelegate(array $delegates): WalletViewModel
+    public function getCurrentDelegate(): WalletViewModel
     {
-        return $this->getCache()->remember('getNextDelegate', Network::blockTime(), function () use ($delegates): WalletViewModel {
-            return $this->getSlotsByStatus($delegates, 'pending')->wallet();
-        });
+        return $this->get('getCurrentDelegate');
     }
 
-    private function getSlotsByStatus(array $slots, string $status): Slot
+    public function setCurrentDelegate(\Closure $callback): WalletViewModel
     {
-        return collect($slots)
-            ->filter(fn ($slot) => $slot->status() === $status)
-            ->first();
+        return $this->remember('getCurrentDelegate', Network::blockTime(), $callback);
+    }
+
+    public function getNextDelegate(): WalletViewModel
+    {
+        return $this->get('getNextDelegate');
+    }
+
+    public function setNextDelegate(\Closure $callback): WalletViewModel
+    {
+        return $this->remember('getNextDelegate', Network::blockTime(), $callback);
+    }
+
+    public function getCache(): TaggedCache
+    {
+        return Cache::tags('monitor');
     }
 }

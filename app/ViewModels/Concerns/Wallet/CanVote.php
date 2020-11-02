@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\ViewModels\Concerns\Wallet;
 
+use App\Services\Cache\WalletCache;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Cache;
 use Mattiasgeniar\Percentage\Percentage;
 
 trait CanVote
@@ -21,13 +21,13 @@ trait CanVote
             return null;
         }
 
-        $wallet = Cache::get('votes.'.Arr::get($this->wallet, 'attributes.vote'));
+        $delegate = (new WalletCache())->getVote($this->wallet->public_key);
 
-        if (is_null($wallet)) {
+        if (is_null($delegate)) {
             return null;
         }
 
-        return new static($wallet);
+        return new static($delegate);
     }
 
     public function votePercentage(): ?float
@@ -36,7 +36,7 @@ trait CanVote
             return null;
         }
 
-        $delegate = Cache::get('votes.'.Arr::get($this->wallet, 'attributes.vote'));
+        $delegate = (new WalletCache())->getVote($this->wallet->public_key);
 
         if (is_null($delegate)) {
             return null;

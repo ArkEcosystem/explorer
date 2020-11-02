@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire;
 
+use App\Models\Block;
 use App\Services\Cache\TableCache;
 use App\ViewModels\ViewModelFactory;
 use Illuminate\Support\Collection;
@@ -28,6 +29,6 @@ final class LatestBlocksTable extends Component
 
     public function pollBlocks(): void
     {
-        $this->blocks = (new TableCache())->latestBlocks();
+        $this->blocks = (new TableCache())->setLatestBlocks(fn () => Block::latestByHeight()->take(15)->get());
     }
 }

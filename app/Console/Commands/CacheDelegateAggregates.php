@@ -6,6 +6,10 @@ namespace App\Console\Commands;
 
 use App\Facades\Wallets;
 use App\Services\Cache\DelegateCache;
+use App\Services\Monitor\Aggregates\TotalAmountsByPublicKeysAggregate;
+use App\Services\Monitor\Aggregates\TotalBlocksByPublicKeysAggregate;
+use App\Services\Monitor\Aggregates\TotalFeesByPublicKeysAggregate;
+use App\Services\Monitor\Aggregates\TotalRewardsByPublicKeysAggregate;
 use Illuminate\Console\Command;
 
 final class CacheDelegateAggregates extends Command
@@ -29,14 +33,16 @@ final class CacheDelegateAggregates extends Command
      *
      * @return int
      */
-    public function handle()
+    public function handle(DelegateCache $cache)
     {
         $publicKeys = Wallets::allWithUsername()->pluck('public_key')->toArray();
 
-        $cache = new DelegateCache();
-        $cache->getTotalAmounts($publicKeys);
-        $cache->getTotalBlocks($publicKeys);
-        $cache->getTotalFees($publicKeys);
-        $cache->getTotalRewards($publicKeys);
+        $cache->setTotalAmounts(fn () => (new TotalFeesByPublicKeysAggregate())->aggregate($publicKeys));
+
+        $cache->setTotalBlocks(fn () => (new TotalAmountsByPublicKeysAggregate())->aggregate($publicKeys));
+
+        $cache->setTotalFees(fn () => (new TotalRewardsByPublicKeysAggregate())->aggregate($publicKeys));
+
+        $cache->setTotalRewards(fn () => (new TotalBlocksByPublicKeysAggregate())->aggregate($publicKeys));
     }
 }

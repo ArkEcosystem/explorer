@@ -4,45 +4,46 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\Enums\CacheKeyEnum;
+use App\Services\Cache\FeeChartCache;
+use App\Services\Cache\NetworkCache;
+use App\Services\Cache\PriceChartCache;
 use App\Services\ExchangeRate;
 use App\Services\NumberFormatter;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Collection;
 use Illuminate\View\View;
 
 final class HomeController
 {
-    public function __invoke(): View
+    public function __invoke(NetworkCache $network, PriceChartCache $prices, FeeChartCache $fees): View
     {
         return view('app.home', [
             'prices' => [
-                'day'     => $this->getChart('chart.prices.day'),
-                'week'    => $this->getChart('chart.prices.week'),
-                'month'   => $this->getChart('chart.prices.month'),
-                'quarter' => $this->getChart('chart.prices.quarter'),
-                'year'    => $this->getChart('chart.prices.year'),
+                'day'     => $this->getChart($prices->getDay()),
+                'week'    => $this->getChart($prices->getWeek()),
+                'month'   => $this->getChart($prices->getMonth()),
+                'quarter' => $this->getChart($prices->getQuarter()),
+                'year'    => $this->getChart($prices->getYear()),
             ],
             'fees' => [
-                'day'     => $this->getChart('chart.fees.day'),
-                'week'    => $this->getChart('chart.fees.week'),
-                'month'   => $this->getChart('chart.fees.month'),
-                'quarter' => $this->getChart('chart.fees.quarter'),
-                'year'    => $this->getChart('chart.fees.year'),
+                'day'     => $this->getChart($fees->getDay()),
+                'week'    => $this->getChart($fees->getWeek()),
+                'month'   => $this->getChart($fees->getMonth()),
+                'quarter' => $this->getChart($fees->getQuarter()),
+                'year'    => $this->getChart($fees->getYear()),
             ],
             'aggregates' => [
                 'price'             => ExchangeRate::now(),
-                'volume'            => Cache::get(CacheKeyEnum::VOLUME),
-                'transactionsCount' => Cache::get(CacheKeyEnum::TRANSACTIONS_COUNT),
-                'votesCount'        => Cache::get(CacheKeyEnum::VOTES_COUNT),
-                'votesPercentage'   => Cache::get(CacheKeyEnum::VOTES_PERCENTAGE),
+                'volume'            => $network->getVolume(),
+                'transactionsCount' => $network->getTransactionsCount(),
+                'votesCount'        => $network->getVotesCount(),
+                'votesPercentage'   => $network->getVotesPercentage(),
             ],
         ]);
     }
 
-    private function getChart(string $cacheKey): array
+    private function getChart(Collection $data): array
     {
-        $data     = Cache::get($cacheKey, []);
         $labels   = Arr::get($data, 'labels', []);
         $datasets = Arr::get($data, 'datasets', []);
         $numbers  = collect($datasets)->map(fn ($dataset) => (float) $dataset);

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Services\Cache;
 
 use App\Contracts\Cache as Contract;
-use Carbon\Carbon;
 use Illuminate\Cache\TaggedCache;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
@@ -15,66 +14,58 @@ final class PriceChartCache implements Contract
     use Concerns\ManagesCache;
     use Concerns\ManagesChart;
 
-    public function getDay(Collection $prices): Collection
+    public function getDay(): Collection
     {
         return $this->get('day');
     }
 
-    public function setDay(string $currency, Collection $prices): Collection
+    public function setDay(string $currency, Collection $data): Collection
     {
-        return $this->put("day.$currency", $this->groupByDate($prices->take(1), 'H:s'));
+        return $this->put("day.$currency", $this->chartjs($data));
     }
 
-    public function getWeek(Collection $prices): Collection
+    public function getWeek(): Collection
     {
         return $this->get('week');
     }
 
-    public function setWeek(string $currency, Collection $prices): Collection
+    public function setWeek(string $currency, Collection $data): Collection
     {
-        return $this->put("week.$currency", $this->groupByDate($prices->take(7), 'd.m'));
+        return $this->put("week.$currency", $this->chartjs($data));
     }
 
-    public function getMonth(Collection $prices): Collection
+    public function getMonth(): Collection
     {
         return $this->get('month');
     }
 
-    public function setMonth(string $currency, Collection $prices): Collection
+    public function setMonth(string $currency, Collection $data): Collection
     {
-        return $this->put("month.$currency", $this->groupByDate($prices->take(30), 'd.m'));
+        return $this->put("month.$currency", $this->chartjs($data));
     }
 
-    public function getQuarter(Collection $prices): Collection
+    public function getQuarter(): Collection
     {
         return $this->get('quarter');
     }
 
-    public function setQuarter(string $currency, Collection $prices): Collection
+    public function setQuarter(string $currency, Collection $data): Collection
     {
-        return $this->put("quarter.$currency", $this->groupByDate($prices->take(120), 'W'));
+        return $this->put("quarter.$currency", $this->chartjs($data));
     }
 
-    public function getYear(Collection $prices): Collection
+    public function getYear(): Collection
     {
         return $this->get('year');
     }
 
-    public function setYear(string $currency, Collection $prices): Collection
+    public function setYear(string $currency, Collection $data): Collection
     {
-        return $this->put("year.$currency", $this->groupByDate($prices->take(365), 'M'));
+        return $this->put("year.$currency", $this->chartjs($data));
     }
 
     public function getCache(): TaggedCache
     {
         return Cache::tags('price_chart');
-    }
-
-    private function groupByDate(Collection $datasets, string $dateFormat): Collection
-    {
-        return $datasets
-            ->groupBy(fn ($_, $key) => Carbon::parse($key)->format($dateFormat))
-            ->mapWithKeys(fn ($values, $key) => [$key => $values->first()])
-            ->ksort();
     }
 }

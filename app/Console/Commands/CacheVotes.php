@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Console\Commands;
 
 use App\Models\Wallet;
+use App\Services\Cache\WalletCache;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Cache;
 
 final class CacheVotes extends Command
 {
@@ -29,7 +29,7 @@ final class CacheVotes extends Command
      *
      * @return int
      */
-    public function handle()
+    public function handle(WalletCache $cache)
     {
         $publicKeys = Wallet::query()
             ->distinct('attributes->vote')
@@ -40,6 +40,6 @@ final class CacheVotes extends Command
 
         Wallet::whereIn('public_key', $publicKeys)
             ->get()
-            ->each(fn ($wallet) => Cache::put('votes.'.$wallet->public_key, $wallet));
+            ->each(fn ($wallet) => $cache->setVote($wallet->public_key, $wallet));
     }
 }

@@ -4,79 +4,84 @@ declare(strict_types=1);
 
 namespace App\Services\Cache;
 
-use App\Actions\CalculateProductivityByPublicKey;
-use App\Actions\FindLastBlockByPublicKey;
 use App\Contracts\Cache as Contract;
-use App\Models\Scopes\DelegateResignationScope;
-use App\Models\Transaction;
 use App\Models\Wallet;
-use App\Services\Timestamp;
 use Illuminate\Cache\TaggedCache;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 
 final class WalletCache implements Contract
 {
     use Concerns\ManagesCache;
 
-    public function known(): string
+    public function getKnown(): array
     {
-        return $this->cacheKey('known');
+        return $this->get('known');
     }
 
-    public function getByAddress(string $address): string
+    public function setKnown(\Closure $callback): array
     {
-        return $this->remember($this->cacheKey('%s.address', [$address]), 60, function () use ($address) {
-            return Wallet::where('public_key', $address)->firstOrFail();
-        });
+        return $this->remember('known', now()->addDay(), $callback);
     }
 
-    public function getByPublicKey(string $publicKey): string
+    public function getLastBlock(string $publicKey): array
     {
-        return $this->remember($this->cacheKey('%s.publicKey', [$publicKey]), 60, function () use ($publicKey) {
-            return Wallet::where('public_key', $publicKey)->firstOrFail();
-        });
+        return $this->get(sprintf('%s.lastBlock', [$publicKey]));
     }
 
-    public function getLastBlock(string $publicKey): string
+    public function setLastBlock(string $publicKey, \Closure $callback): array
     {
-        return $this->remember($this->cacheKey('%s.lastBlock', [$publicKey]), 60, function () use ($publicKey) {
-            $block = FindLastBlockByPublicKey::execute($publicKey);
-
-            return [
-                'id'                   => $block->id,
-                'height'               => $block->height->toNumber(),
-                'timestamp'            => Timestamp::fromGenesis($block->timestamp)->unix(),
-                'generator_public_key' => $block->generator_public_key,
-            ];
-        });
+        return $this->remember(sprintf('%s.lastBlock', [$publicKey]), now()->addMinute(), $callback);
     }
 
-    public function getPerformance(string $publicKey): string
+    public function getPerformance(string $publicKey): Collection
     {
-        return $this->remember($this->cacheKey('%s.performance', [$publicKey]), 60, function () {
-            //
-        });
+        return $this->get(sprintf('%s.performance', [$publicKey]));
     }
 
-    public function getProductivity(string $publicKey): string
+    public function setPerformance(string $publicKey, Collection $data): Collection
     {
-        return $this->remember($this->cacheKey('%s.productivity', [$publicKey]), 60, function () use ($publicKey) {
-            return CalculateProductivityByPublicKey::execute($publicKey);
-        });
+        return $this->put(sprintf('%s.performance', [$publicKey]), $data);
+    }
+
+    public function getProductivity(string $publicKey): float
+    {
+        return $this->get(sprintf('%s.productivity', [$publicKey]));
+    }
+
+    public function setProductivity(string $publicKey, \Closure $callback): float
+    {
+        return $this->remember(sprintf('%s.productivity', [$publicKey]), now()->addMinute(), $callback);
     }
 
     public function getResignationId(string $address): string
     {
-        return $this->remember($this->cacheKey('%s.resignationId', [$address]), 60, function () {
-            return Transaction::withScope(DelegateResignationScope::class)->firstOrFail()->id;
-        });
+        return $this->get(sprintf('%s.resignationId', [$address]));
+    }
+
+    public function setResignationId(string $address, \Closure $callback): string
+    {
+        return $this->remember(sprintf('%s.resignationId', [$address]), now()->addMinute(), $callback);
+    }
+
+    public function getVote(string $publicKey): string
+    {
+        return $this->get(sprintf('%s.vote', [$publicKey]));
+    }
+
+    public function setVote(string $publicKey, \Closure $callback): Wallet
+    {
+        return $this->remember(sprintf('%s.vote', [$publicKey]), now()->addMinute(), $callback);
     }
 
     public function getVotes(string $publicKey): string
     {
-        return $this->remember($this->cacheKey('%s.votes', [$publicKey]), 60, function () {
-            //
-        });
+        return $this->get(sprintf('%s.votes', [$publicKey]));
+    }
+
+    public function setVotes(string $publicKey, \Closure $callback): string
+    {
+        return $this->remember(sprintf('%s.votes', [$publicKey]), now()->addMinute(), $callback);
     }
 
     public function getCache(): TaggedCache

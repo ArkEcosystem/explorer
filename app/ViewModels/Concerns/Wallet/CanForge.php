@@ -4,37 +4,35 @@ declare(strict_types=1);
 
 namespace App\ViewModels\Concerns\Wallet;
 
+use App\Services\Cache\DelegateCache;
+use App\Services\Cache\WalletCache;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Cache;
 
 trait CanForge
 {
     public function totalForged(): float
     {
-        $fees    = (int) Arr::get(Cache::get('delegates.totalFees', []), $this->wallet->public_key, 0);
-        $rewards = (int) Arr::get(Cache::get('delegates.totalRewards', []), $this->wallet->public_key, 0);
-
-        return ($fees + $rewards) / 1e8;
+        return ($this->feesForged() + $this->rewardsForged()) / 1e8;
     }
 
     public function amountForged(): int
     {
-        return (int) Arr::get(Cache::get('delegates.totalAmounts', []), $this->wallet->public_key, 0);
+        return (int) Arr::get((new DelegateCache())->getTotalAmounts(), $this->wallet->public_key, 0);
     }
 
     public function feesForged(): int
     {
-        return (int) Arr::get(Cache::get('delegates.totalFees', []), $this->wallet->public_key, 0);
+        return (int) Arr::get((new DelegateCache())->getTotalFees(), $this->wallet->public_key, 0);
     }
 
     public function rewardsForged(): int
     {
-        return (int) Arr::get(Cache::get('delegates.totalRewards', []), $this->wallet->public_key, 0);
+        return (int) Arr::get((new DelegateCache())->getTotalRewards(), $this->wallet->public_key, 0);
     }
 
     public function blocksForged(): int
     {
-        return (int) Arr::get(Cache::get('delegates.totalBlocks', []), $this->wallet->public_key, 0);
+        return (int) Arr::get((new DelegateCache())->getTotalBlocks(), $this->wallet->public_key, 0);
     }
 
     public function forgedBlocks(): int
@@ -48,7 +46,7 @@ trait CanForge
             return 0;
         }
 
-        return (float) Cache::get('productivity:'.$this->publicKey(), 0);
+        return (float) (new WalletCache())->getProductivity($this->publicKey());
     }
 
     public function performance(): array
@@ -57,7 +55,7 @@ trait CanForge
             return [];
         }
 
-        return Cache::get('performance:'.$this->publicKey(), []);
+        return (new WalletCache())->getPerformance($this->publicKey());
     }
 
     public function justMissed(): bool

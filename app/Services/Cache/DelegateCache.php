@@ -5,10 +5,6 @@ declare(strict_types=1);
 namespace App\Services\Cache;
 
 use App\Contracts\Cache as Contract;
-use App\Services\Monitor\Aggregates\TotalAmountsByPublicKeysAggregate;
-use App\Services\Monitor\Aggregates\TotalBlocksByPublicKeysAggregate;
-use App\Services\Monitor\Aggregates\TotalFeesByPublicKeysAggregate;
-use App\Services\Monitor\Aggregates\TotalRewardsByPublicKeysAggregate;
 use Illuminate\Cache\TaggedCache;
 use Illuminate\Support\Facades\Cache;
 
@@ -16,24 +12,44 @@ final class DelegateCache implements Contract
 {
     use Concerns\ManagesCache;
 
-    public function getTotalAmounts(array $publicKeys): string
+    public function getTotalAmounts(): string
     {
-        return $this->rememberForever('total_amounts', fn () => (new TotalFeesByPublicKeysAggregate())->aggregate($publicKeys));
+        return $this->get('total_amounts');
     }
 
-    public function getTotalBlocks(array $publicKeys): string
+    public function setTotalAmounts(\Closure $callback): string
     {
-        return $this->rememberForever('total_blocks', fn () => (new TotalAmountsByPublicKeysAggregate())->aggregate($publicKeys));
+        return $this->remember('total_amounts', now()->addHour(), $callback);
     }
 
-    public function getTotalFees(array $publicKeys): string
+    public function getTotalBlocks(): string
     {
-        return $this->rememberForever('total_fees', fn () => (new TotalRewardsByPublicKeysAggregate())->aggregate($publicKeys));
+        return $this->get('total_blocks');
     }
 
-    public function getTotalRewards(array $publicKeys): string
+    public function setTotalBlocks(\Closure $callback): string
     {
-        return $this->rememberForever('total_rewards', fn () => (new TotalBlocksByPublicKeysAggregate())->aggregate($publicKeys));
+        return $this->remember('total_blocks', now()->addHour(), $callback);
+    }
+
+    public function getTotalFees(): string
+    {
+        return $this->get('total_fees');
+    }
+
+    public function setTotalFees(\Closure $callback): string
+    {
+        return $this->remember('total_fees', now()->addHour(), $callback);
+    }
+
+    public function getTotalRewards(): string
+    {
+        return $this->get('total_rewards');
+    }
+
+    public function setTotalRewards(\Closure $callback): string
+    {
+        return $this->remember('total_rewards', now()->addHour(), $callback);
     }
 
     public function getCache(): TaggedCache
