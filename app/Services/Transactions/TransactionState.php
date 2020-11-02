@@ -21,7 +21,7 @@ final class TransactionState
     public function isConfirmed(): bool
     {
         try {
-            $block = Blocks::findById($this->transaction->block_id);
+            $block = $this->transaction->block;
 
             $confirmations = (new NetworkCache())->getHeight() - $block->height->toNumber();
 

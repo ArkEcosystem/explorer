@@ -100,7 +100,7 @@ final class TransactionViewModel implements ViewModel
     public function confirmations(): int
     {
         try {
-            $block = Blocks::findById($this->transaction->block_id);
+            $block = $this->transaction->block;
 
             return abs(( new NetworkCache())->getHeight() - $block->height->toNumber());
         } catch (\Throwable $th) {
