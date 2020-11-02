@@ -6,7 +6,12 @@
                 @if($model->isDelegate())
                     <x-general.identity-delegate :model="$model" />
                 @else
-                    <x-general.identity-iconless :model="$model" without-truncate />
+                    <span class="inline lg:hidden">
+                        <x-general.identity-iconless :model="$model" :length="16" />
+                    </span>
+                    <span class="hidden lg:inline">
+                        <x-general.identity-iconless :model="$model" :length="32" />
+                    </span>
                 @endif
             </div>
         </span>
