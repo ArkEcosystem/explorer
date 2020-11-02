@@ -8,7 +8,7 @@ use App\DTO\MemoryWallet;
 
 trait HasDelegate
 {
-    public function delegate(): ?MemoryWallet
+    public function delegate(): MemoryWallet
     {
         return MemoryWallet::fromPublicKey($this->block->generator_public_key);
     }
