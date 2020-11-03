@@ -1,11 +1,11 @@
 <div class="flex flex-row">
-    <div class="items-center flex">
+    <div class="flex items-center">
         <div class="circled-icon text-theme-secondary-400 border-theme-danger-400">
             {{ $logo }}
         </div>
     </div>
 
-    <div class="flex flex-col justify-between flex-1 font-semibold ml-4">
+    <div class="flex flex-col justify-between flex-1 ml-4 font-semibold">
         <div class="text-sm leading-tight text-theme-secondary-600 dark:text-theme-secondary-700">
             {{ $title }}
         </div>
