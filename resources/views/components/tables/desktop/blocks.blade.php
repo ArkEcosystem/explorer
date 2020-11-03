@@ -2,7 +2,7 @@
     <table>
         <thead>
             <tr>
-                <th class="text-center">&nbsp;</th>
+                <th class="text-center">@lang('general.block.id')</th>
                 <th class="hidden md:table-cell">@lang('general.block.timestamp')</th>
                 @if(!isset($withoutGenerator))
                     <th><span class="pl-14">@lang('general.block.generated_by')</span></th>
