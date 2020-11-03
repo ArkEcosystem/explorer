@@ -40,7 +40,7 @@ final class Development implements Network
     public function knownWallets(): array
     {
         return (new WalletCache())->setKnown(
-            fn () => Http::get('https://raw.githubusercontent.com/ArkEcosystem/common/master/devnet/known-wallets-extended.json')->json()
+            fn () => Http::get('https://raw.githubusercontent.com/ArkEcosystem/common/master/mainnet/known-wallets-extended.json')->json()
         );
     }
 
