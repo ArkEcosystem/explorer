@@ -35,7 +35,7 @@
                     type="text"
                     placeholder="@lang('forms.search.term_placeholder')"
                     class="hidden w-full dark:text-theme-secondary-700 dark:bg-theme-secondary-900 {{ ($isSlim ?? false) ? 'xl:block' : 'sm:block' }}"
-                    wire:model="state.term"
+                    wire:model.defer="state.term"
                     wire:keydown.enter="performSearch"
                     @if ($isSlim ?? false) x-on:focus="isFocused = true; $dispatch('search-slim-expand')" @endif
                 />
@@ -44,7 +44,7 @@
                     type="text"
                     placeholder="@lang('forms.search.term_placeholder_mobile')"
                     class="w-full dark:text-theme-secondary-700 dark:bg-theme-secondary-900 {{ ($isSlim ?? false) ? 'xl:hidden' : 'sm:hidden' }}"
-                    wire:model="state.term"
+                    wire:model.defer="state.term"
                     wire:keydown.enter="performSearch"
                 />
             </div>
