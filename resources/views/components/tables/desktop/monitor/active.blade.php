@@ -5,7 +5,7 @@
                 <th>@lang('general.delegates.rank')</th>
                 <th><span class="pl-14">@lang('general.delegates.name')</span></th>
                 <th><span class="pl-14">@lang('general.delegates.status')</span></th>
-                <th class="hidden lg:table-cell text-right">@lang('general.delegates.votes')</th>
+                <th class="hidden text-right lg:table-cell">@lang('general.delegates.votes')</th>
                 @if (Network::usesMarketSquare())
                     <th>@lang('general.delegates.profile')</th>
                     <th>@lang('general.delegates.commission')</th>
@@ -25,7 +25,7 @@
                     <td wire:key="{{ $delegate->username() }}-round-status-history">
                         <x-tables.rows.desktop.round-status-history :model="$delegate" />
                     </td>
-                    <td class="hidden lg:table-cell text-right">
+                    <td class="hidden text-right lg:table-cell">
                         <x-tables.rows.desktop.votes :model="$delegate" />
                     </td>
                     @if (Network::usesMarketSquare())
