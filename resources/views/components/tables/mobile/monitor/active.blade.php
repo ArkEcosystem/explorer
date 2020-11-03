@@ -1,7 +1,7 @@
 <div class="w-full table-container md:hidden">
-    <table class="divide-y-0">
-        <thead class="divide-y-0">
-            <tr class="divide-y-0">
+    <table>
+        <thead>
+            <tr>
                 <th>@lang('general.delegates.rank')</th>
                 <th><span class="pl-14">@lang('general.delegates.name')</span></th>
                 <th><span class="pl-14">@lang('general.delegates.status')</span></th>
