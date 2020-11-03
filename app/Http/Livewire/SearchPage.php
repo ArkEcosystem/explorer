@@ -26,6 +26,7 @@ final class SearchPage extends Component
     protected $queryString = ['state'];
 
     private ?LengthAwarePaginator $results = null;
+
     public ?string $resultsType = null;
 
     public function mount(): void
