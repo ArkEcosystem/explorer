@@ -419,3 +419,16 @@ body {
 .round-status-history:not(:last-child) {
     @apply hidden;
 }
+
+/* Delegate Stats Grid */
+@screen md {
+    .delegate-statistics-grid > *:nth-child(2n + 1) {
+        @apply border-r border-theme-secondary-800;
+    }
+}
+
+@screen xl {
+    .delegate-statistics-grid > *:not(:last-child) {
+        @apply border-r border-theme-secondary-800;
+    }
+}
