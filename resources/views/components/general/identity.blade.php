@@ -1,7 +1,7 @@
 <div>
     <div class="flex {{ $withoutReverse ?? false ? '' : 'flex-row-reverse' }} items-center md:flex-row space-x-3 md:justify-start">
         @unless ($icon ?? false)
-            <x-general.avatar :identifier="$model->address()" avatar-size="{{ $avatarSize ?? false ? $avatarSize : 'w-11 h-11' }}" />
+            <x-general.avatar :identifier="$model->address()" avatar-size="{{ $avatarSize ?? 'w-11 h-11' }}" />
         @else
             {{ $icon }}
         @endunless
