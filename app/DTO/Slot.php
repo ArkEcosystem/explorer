@@ -13,6 +13,8 @@ use Illuminate\Support\Str;
 
 final class Slot
 {
+    private string $publicKey;
+
     private int $order;
 
     private WalletViewModel $wallet;
@@ -38,6 +40,11 @@ final class Slot
         $this->currentRoundBlocks = $roundBlocks
             ->where('generator_public_key', $data['publicKey'])
             ->count();
+    }
+
+    public function publicKey(): string
+    {
+        return $this->publicKey;
     }
 
     public function order(): int
