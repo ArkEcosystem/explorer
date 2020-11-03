@@ -115,7 +115,7 @@ final class WalletCache implements Contract
 
     public function getVoterCount(string $publicKey): int
     {
-        return (int) $this->get(sprintf('voter_count/%s', $publicKey));
+        return (int) $this->get(sprintf('voter_count/%s', $publicKey), 0);
     }
 
     public function setVoterCount(string $publicKey, int $count): void
