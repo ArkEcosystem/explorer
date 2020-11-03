@@ -3,8 +3,8 @@
         <thead>
             <tr>
                 <th>@lang('general.delegates.rank')</th>
-                <th><span class="pl-14">@lang('general.delegates.name')</span></th>
-                <th><span class="pl-14">@lang('general.delegates.status')</span></th>
+                <th>@lang('general.delegates.name')</th>
+                <th class="text-right">@lang('general.delegates.status')</th>
             </tr>
         </thead>
         <tbody>
@@ -16,7 +16,7 @@
                     <td>
                         <x-tables.rows.mobile.username-with-avatar :model="$delegate" />
                     </td>
-                    <td>
+                    <td class="justify-end">
                         <x-tables.rows.mobile.round-status-history :model="$delegate" />
                     </td>
                 </tr>

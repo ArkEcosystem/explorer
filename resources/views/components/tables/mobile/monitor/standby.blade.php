@@ -3,8 +3,8 @@
         <thead>
             <tr>
                 <th>@lang('general.delegates.rank')</th>
-                <th><span class="pl-14">@lang('general.delegates.name')</span></th>
-                <th><span class="pl-14">@lang('general.delegates.votes')</span></th>
+                <th>@lang('general.delegates.name')</th>
+                <th>@lang('general.delegates.votes')</th>
             </tr>
         </thead>
         <tbody>

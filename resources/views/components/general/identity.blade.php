@@ -13,7 +13,7 @@
 
             <a href="{{ route('wallet', $model->address()) }}" class="font-semibold link sm:hidden md:flex">
                 @if ($model->username())
-                    {{ $model->username() }}
+                    <p class="w-20 truncate">{{ $model->username() }}</p>
                 @else
                     @isset($withoutTruncate)
                         {{ $model->address() }}
