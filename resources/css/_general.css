@@ -416,8 +416,10 @@ body {
 }
 
 /* Delegate Monitor - status */
-.round-status-history:not(:last-child) {
-    @apply hidden;
+@media (min-width: 360px) and (max-width: 639px) {
+    .round-status-history:not(:last-child) {
+        @apply hidden;
+    }
 }
 
 /* Delegate Stats Grid */

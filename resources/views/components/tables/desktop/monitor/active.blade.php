@@ -5,12 +5,12 @@
                 <th>@lang('general.delegates.rank')</th>
                 <th><span class="pl-14">@lang('general.delegates.name')</span></th>
                 <th><span class="pl-14">@lang('general.delegates.status')</span></th>
-                <th class="text-right">@lang('general.delegates.votes')</th>
+                <th class="hidden lg:table-cell text-right">@lang('general.delegates.votes')</th>
                 @if (Network::usesMarketSquare())
-                <th>@lang('general.delegates.profile')</th>
-                <th>@lang('general.delegates.commission')</th>
+                    <th>@lang('general.delegates.profile')</th>
+                    <th>@lang('general.delegates.commission')</th>
                 @endif
-                <th width="120" class="hidden text-right lg:table-cell">@lang('general.delegates.productivity')</th>
+                <th width="120" class="hidden text-right md:table-cell">@lang('general.delegates.productivity')</th>
             </tr>
         </thead>
         <tbody>
@@ -25,18 +25,18 @@
                     <td wire:key="{{ $delegate->username() }}-round-status-history">
                         <x-tables.rows.desktop.round-status-history :model="$delegate" />
                     </td>
-                    <td class="text-right">
+                    <td class="hidden lg:table-cell text-right">
                         <x-tables.rows.desktop.votes :model="$delegate" />
                     </td>
                     @if (Network::usesMarketSquare())
-                    <td>
-                        <x-tables.rows.desktop.marketsquare-profile :model="$delegate" />
-                    </td>
-                    <td>
-                        <x-tables.rows.desktop.marketsquare-commission :model="$delegate" />
-                    </td>
+                        <td>
+                            <x-tables.rows.desktop.marketsquare-profile :model="$delegate" />
+                        </td>
+                        <td>
+                            <x-tables.rows.desktop.marketsquare-commission :model="$delegate" />
+                        </td>
                     @endif
-                    <td class="hidden text-right lg:table-cell">
+                    <td class="hidden text-right md:table-cell">
                         <x-tables.rows.desktop.productivity :model="$delegate" />
                     </td>
                 </tr>

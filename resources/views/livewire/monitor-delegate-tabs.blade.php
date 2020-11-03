@@ -59,9 +59,21 @@
             <div class="flex items-center space-x-4">
                 <x-icon name="menu-open" size="sm" />
 
-                <div x-show="status === 'active'">@lang('pages.monitor.active')</div>
-                <div x-show="status === 'standby'">@lang('pages.monitor.standby')</div>
-                <div x-show="status === 'resigned'">@lang('pages.monitor.resigned')</div>
+                <div x-show="status === 'active' && component === 'list'">
+                    @lang('pages.monitor.active')
+                    @if($countActive)<span class="info-badge">{{ $countActive }}</span>@endif
+                </div>
+                <div x-show="status === 'standby' && component === 'list'">
+                    @lang('pages.monitor.standby')
+                    <span class="info-badge">{{ $countStandby }}</span>
+                </div>
+                <div x-show="status === 'resigned' && component === 'list'">
+                    @lang('pages.monitor.resigned')
+                    <span class="info-badge">{{ $countResigned }}</span>
+                </div>
+                <div x-show="component === 'monitor'">
+                    @lang('pages.monitor.title')
+                </div>
             </div>
         </x-slot>
 
@@ -84,6 +96,11 @@
                 <span>@lang('pages.monitor.resigned')</span>
 
                 <span class="info-badge">{{ $countResigned }}</span>
+            </a>
+
+            <a @click="component === 'monitor' ? component = 'list' : component = 'monitor'"
+                class="dropdown-entry">
+                <span>@lang('pages.monitor.title')</span>
             </a>
         </div>
     </x-ark-dropdown>
