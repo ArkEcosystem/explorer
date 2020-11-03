@@ -22,13 +22,13 @@
                     <td>
                         <x-tables.rows.desktop.slot-id :model="$delegate" />
                     </td>
-                    <td>
+                    <td wire:key="{{ $delegate->username() }}-username">
                         <x-tables.rows.desktop.username-with-avatar :model="$delegate->wallet()" />
                     </td>
                     <td>
                         <x-tables.rows.desktop.slot-time :model="$delegate" />
                     </td>
-                    <td>
+                    <td wire:key="{{ $delegate->username() }}-round-status">
                         <x-tables.rows.desktop.round-status :model="$delegate" />
                     </td>
                     <td class="hidden text-right lg:table-cell">
