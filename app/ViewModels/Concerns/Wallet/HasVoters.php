@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\ViewModels\Concerns\Wallet;
 
-use App\Models\Wallet;
 use App\Services\BigNumber;
 use App\Services\Cache\NetworkCache;
+use App\Services\Cache\WalletCache;
 use Mattiasgeniar\Percentage\Percentage;
 
 trait HasVoters
@@ -25,6 +25,6 @@ trait HasVoters
 
     public function voterCount(): int
     {
-        return Wallet::where('attributes->vote', $this->publicKey())->count();
+        return (new WalletCache())->getVoterCount($this->publicKey());
     }
 }
