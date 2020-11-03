@@ -24,13 +24,14 @@ Next up is preparing the application by copying all necessary files, generating 
 ```bash
 cp .env.prod .env
 php artisan key:generate
+touch database/database.sqlite
 php artisan migrate:fresh
 php artisan storage:link
 ```
 
 ### Configuring Environment
 
-Finally you'll need to open the `.env` file and edit the following variables.
+Finally you'll need to open the `.env` file and edit the following variables. You can leave all other variables at their defaults.
 
 ```bash
 APP_NAME=Laravel
@@ -54,7 +55,7 @@ Explorer performs a lot of tasks in the background. These tasks are executed on 
 
 ### Daemons
 
-Explorer performs a lot of tasks in the background. These tasks are executed on a specific schedule and require the task scheduler to be set up. Take a look at the official [Starting The Scheduler](https://laravel.com/docs/8.x/scheduling#starting-the-scheduler) guide by [Laravel](https://laravel.com/).
+Explorer performs a lot of tasks in the background. These tasks are executed on a specific schedule and require the task scheduler to be set up. Take a look at the official [Starting The Scheduler](https://laravel.com/docs/8.x/scheduling#starting-the-scheduler) guide by [Spatie](https://laravel.com/).
 
 #### Starting Horizon
 
