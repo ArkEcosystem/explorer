@@ -20,9 +20,6 @@ module.exports = {
             width: {
                 ...defaultConfig.theme.extend.width,
                 '84': '21rem',
-            },
-            padding: {
-                'px-2': '2px',
             }
         },
     },
