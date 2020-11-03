@@ -250,7 +250,7 @@ body {
 }
 
 @screen md {
-    .delegate-details > .detail-box:nth-child(2n+1) {
+    .delegate-details > .detail-box:nth-child(2n + 1) {
         @apply border-r pr-6 border-theme-secondary-300;
     }
 }
