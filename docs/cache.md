@@ -65,7 +65,7 @@ php artisan cache:musig
 ## Cache wallets that have received a vote
 
 ```
-php artisan cache:votes
+php artisan cache:usernames
 ```
 
 ## Cache real-time statistics like height and supply
@@ -78,4 +78,10 @@ php artisan cache:real-time-statistics
 
 ```
 php artisan cache:resignation-ids
+```
+
+## Cache all the data with a single command
+
+```
+php artisan cache:all
 ```
