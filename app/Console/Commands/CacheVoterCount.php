@@ -29,7 +29,7 @@ final class CacheVoterCount extends Command
      *
      * @return int
      */
-    public function handle()
+    public function handle(): void
     {
         Wallets::allWithUsername()->each(fn ($wallet) => CacheVoterCountByPublicKey::dispatch($wallet->public_key));
     }
