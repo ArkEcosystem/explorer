@@ -7,7 +7,7 @@
             <div class="hidden sm:block">@lang('general.market_cap'): <x-currency>{{ $marketCap }}</x-currency></div>
 
             <div class="md:hidden">
-                {{ $from }}/{{ $to }}: {{ $price }}
+                <livewire:price-ticker />
             </div>
         @endif
     </div>
