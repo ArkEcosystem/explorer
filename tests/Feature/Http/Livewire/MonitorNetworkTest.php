@@ -42,4 +42,5 @@ it('should render without errors', function () {
     createRoundWithDelegates();
 
     $component = Livewire::test(MonitorNetwork::class);
+    $component->call('pollDelegates');
 });
