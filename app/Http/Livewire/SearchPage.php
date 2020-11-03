@@ -26,6 +26,7 @@ final class SearchPage extends Component
     protected $queryString = ['state'];
 
     private ?LengthAwarePaginator $results = null;
+    public ?string $resultsType = null;
 
     public function mount(): void
     {
@@ -57,6 +58,7 @@ final class SearchPage extends Component
             $this->results = (new WalletSearch())->search($data)->paginate();
         }
 
+        $this->resultsType = $data['type'];
         if (! is_null($this->results)) {
             $this->results = ViewModelFactory::paginate($this->results);
         }

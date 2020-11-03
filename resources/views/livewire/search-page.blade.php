@@ -23,15 +23,15 @@
 
             @if($results && $results->count())
                 <div>
-                    @if ($state['type'] === 'block')
+                    @if ($resultsType === 'block')
                         <x-tables.blocks :blocks="$results" />
                     @endif
 
-                    @if ($state['type'] === 'transaction')
+                    @if ($resultsType === 'transaction')
                         <x-tables.transactions :transactions="$results" />
                     @endif
 
-                    @if ($state['type'] === 'wallet')
+                    @if ($resultsType === 'wallet')
                         <x-tables.wallets :wallets="$results" />
                     @endif
                 </div>
