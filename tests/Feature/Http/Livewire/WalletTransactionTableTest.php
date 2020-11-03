@@ -47,6 +47,23 @@ it('should list all transactions', function () {
     }
 });
 
+it('should list all transactions for cold wallet', function () {
+    $received = Transaction::factory()->create([
+        'recipient_id' => $this->subject->address,
+    ]);
+
+    $component = Livewire::test(WalletTransactionTable::class, [$this->subject->address, null]);
+    $component->set('state.direction', 'all');
+
+    $transaction = ViewModelFactory::make($received);
+    $component->assertSee($transaction->id());
+    $component->assertSee($transaction->timestamp());
+    $component->assertSee($transaction->sender()->address());
+    $component->assertSee($transaction->recipient()->address());
+    $component->assertSee(NumberFormatter::currency($transaction->fee(), Network::currency()));
+    $component->assertSee(NumberFormatter::currency($transaction->amount(), Network::currency()));
+});
+
 it('should list received transactions (non-multi)', function () {
     $sent = Transaction::factory()->create([
         'sender_public_key' => $this->subject->public_key,

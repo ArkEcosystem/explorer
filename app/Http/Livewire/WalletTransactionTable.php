@@ -31,7 +31,7 @@ final class WalletTransactionTable extends Component
         'filterTransactionsByType',
     ];
 
-    public function mount(string $address, string $publicKey): void
+    public function mount(string $address, ?string $publicKey): void
     {
         $this->state['address']   = $address;
         $this->state['publicKey'] = $publicKey;
