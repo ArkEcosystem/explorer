@@ -4,7 +4,11 @@ Deploying the Explorer requires a few things to guarantee smooth operation. If y
 
 ## Installation
 
+> Before continuing with this guide: You will need access to the database of a core instance. The credentials can be specified in the `.env` file under `EXPLORER_DB_*`.
+
 ### Clone
+
+Before getting started you'll have to clone the repository and install the composer and yarn dependencies. The yarn dependencies are needed for the `@arkecosystem/crypto` package which is used to derive multi-signature addresses.
 
 ```bash
 git clone https://github.com/ArkEcosystem/explorer.ark.io.git explorer
@@ -15,6 +19,8 @@ yarn install
 
 ### Preparing Application
 
+Next up is preparing the application by copying all necessary files, generating an application key and migrating the database.
+
 ```bash
 cp .env.prod .env
 php artisan key:generate
@@ -24,10 +30,13 @@ php artisan storage:link
 
 ### Configuring Environment
 
+Finally you'll need to open the `.env` file and edit the following variables.
+
 ```bash
 APP_NAME=Laravel
 APP_URL=http://localhost
 
+EXPLORER_NETWORK=ark.production
 EXPLORER_DB_HOST=127.0.0.1
 EXPLORER_DB_PORT=5432
 EXPLORER_DB_DATABASE=homestead
@@ -35,7 +44,7 @@ EXPLORER_DB_USERNAME=homestead
 EXPLORER_DB_PASSWORD=password
 ```
 
-*Important:* You will need access to a Core database. The details can be specified in the `.env` file under `EXPLORER_DB_*`.
+> We do recommend to set `PDO_ATTR_PERSISTENT` to `true` (which is the default) to make use of persistent PostgreSQL connections. This greatly increases the execution time of database queries on pages that execute a lot of queries because the server won't have to establish a new connection for every query.
 
 ### Cronjobs
 
