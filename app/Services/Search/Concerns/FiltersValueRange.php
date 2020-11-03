@@ -19,11 +19,11 @@ trait FiltersValueRange
         }
 
         if (! is_null($from) && $from > 0) {
-            $query->where($column, '>=', $from);
+            $query->where($column, '>=', $from * 1e8);
         }
 
         if (! is_null($to) && $to > 0) {
-            $query->where($column, '<=', $to);
+            $query->where($column, '<=', $to * 1e8);
         }
 
         return $query;
