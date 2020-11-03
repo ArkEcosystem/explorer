@@ -36,7 +36,6 @@
                     placeholder="@lang('forms.search.term_placeholder')"
                     class="hidden w-full dark:text-theme-secondary-700 dark:bg-theme-secondary-900 {{ ($isSlim ?? false) ? 'xl:block' : 'sm:block' }}"
                     wire:model="state.term"
-                    wire:keydown.enter="performSearch"
                     @if ($isSlim ?? false) x-on:focus="isFocused = true; $dispatch('search-slim-expand')" @endif
                 />
 
@@ -45,7 +44,6 @@
                     placeholder="@lang('forms.search.term_placeholder_mobile')"
                     class="w-full dark:text-theme-secondary-700 dark:bg-theme-secondary-900 {{ ($isSlim ?? false) ? 'xl:hidden' : 'sm:hidden' }}"
                     wire:model="state.term"
-                    wire:keydown.enter="performSearch"
                 />
             </div>
 
@@ -62,14 +60,12 @@
                 <button
                     type="button"
                     class="hidden button-primary md:block"
-                    wire:click="performSearch"
                 >
                     @lang('actions.find_it')
                 </button>
             @else
                 <div
                     class="cursor-pointer text-theme-primary-300 hover:text-theme-primary-400 dark:text-theme-secondary-500 dark:hover:text-theme-secondary-400 @unless($isSlim ?? false) md:hidden @endif"
-                    wire:click="performSearch"
                 >
                     <x-icon name="search" />
                 </div>
@@ -105,7 +101,6 @@
                                 placeholder="0.00"
                                 class="w-full dark:text-theme-secondary-200 dark:bg-theme-secondary-900"
                                 wire:model="state.heightFrom"
-                                wire:keydown.enter="performSearch"
                             />
 
                             <span>-</span>
@@ -115,7 +110,6 @@
                                 placeholder="0.00"
                                 class="w-full dark:text-theme-secondary-200 dark:bg-theme-secondary-900"
                                 wire:model="state.heightTo"
-                                wire:keydown.enter="performSearch"
                             />
                         </div>
                     </x-general.search.advanced-option>
@@ -127,7 +121,6 @@
                                 placeholder="0.00"
                                 class="w-full dark:text-theme-secondary-200 dark:bg-theme-secondary-900"
                                 wire:model="state.totalAmountFrom"
-                                wire:keydown.enter="performSearch"
                             />
 
                             <span>-</span>
@@ -137,7 +130,6 @@
                                 placeholder="0.00"
                                 class="w-full dark:text-theme-secondary-200 dark:bg-theme-secondary-900"
                                 wire:model="state.totalAmountTo"
-                                wire:keydown.enter="performSearch"
                             />
                         </div>
                     </x-general.search.advanced-option>
@@ -149,7 +141,6 @@
                                 placeholder="0.00"
                                 class="w-full dark:text-theme-secondary-200 dark:bg-theme-secondary-900"
                                 wire:model="state.totalFeeFrom"
-                                wire:keydown.enter="performSearch"
                             />
 
                             <span>-</span>
@@ -159,7 +150,6 @@
                                 placeholder="0.00"
                                 class="w-full dark:text-theme-secondary-200 dark:bg-theme-secondary-900"
                                 wire:model="state.totalFeeTo"
-                                wire:keydown.enter="performSearch"
                             />
                         </div>
                     </x-general.search.advanced-option>
@@ -171,7 +161,6 @@
                                 placeholder="0.00"
                                 class="w-full dark:text-theme-secondary-200 dark:bg-theme-secondary-900"
                                 wire:model="state.rewardFrom"
-                                wire:keydown.enter="performSearch"
                             />
 
                             <span>-</span>
@@ -181,7 +170,6 @@
                                 placeholder="0.00"
                                 class="w-full dark:text-theme-secondary-200 dark:bg-theme-secondary-900"
                                 wire:model="state.rewardTo"
-                                wire:keydown.enter="performSearch"
                             />
                         </div>
                     </x-general.search.advanced-option>
@@ -257,7 +245,6 @@
                                 placeholder="0.00"
                                 class="w-full dark:text-theme-secondary-200 dark:bg-theme-secondary-900"
                                 wire:model="state.amountFrom"
-                                wire:keydown.enter="performSearch"
                             />
 
                             <span>-</span>
@@ -267,7 +254,6 @@
                                 placeholder="0.00"
                                 class="w-full dark:text-theme-secondary-200 dark:bg-theme-secondary-900"
                                 wire:model="state.amountTo"
-                                wire:keydown.enter="performSearch"
                             />
                         </div>
                     </x-general.search.advanced-option>
@@ -279,7 +265,6 @@
                                 placeholder="0.00"
                                 class="w-full dark:text-theme-secondary-200 dark:bg-theme-secondary-900"
                                 wire:model="state.feeFrom"
-                                wire:keydown.enter="performSearch"
                             />
 
                             <span>-</span>
@@ -289,7 +274,6 @@
                                 placeholder="0.00"
                                 class="w-full dark:text-theme-secondary-200 dark:bg-theme-secondary-900"
                                 wire:model="state.feeTo"
-                                wire:keydown.enter="performSearch"
                             />
                         </div>
                     </x-general.search.advanced-option>
@@ -300,7 +284,6 @@
                             placeholder="@lang('forms.search.smartbridge_placeholder')"
                             class="w-full dark:text-theme-secondary-200 dark:bg-theme-secondary-900"
                             wire:model="state.smartBridge"
-                            wire:keydown.enter="performSearch"
                         />
                     </x-general.search.advanced-option>
 
@@ -333,7 +316,6 @@
                                 placeholder="0.00"
                                 class="w-full dark:text-theme-secondary-200 dark:bg-theme-secondary-900"
                                 wire:model="state.balanceFrom"
-                                wire:keydown.enter="performSearch"
                             />
 
                             <span>-</span>
@@ -343,7 +325,6 @@
                                 placeholder="0.00"
                                 class="w-full dark:text-theme-secondary-200 dark:bg-theme-secondary-900"
                                 wire:model="state.balanceTo"
-                                wire:keydown.enter="performSearch"
                             />
                         </div>
                     </x-general.search.advanced-option>
@@ -354,7 +335,6 @@
                             placeholder="@lang('forms.search.username')"
                             class="w-full dark:text-theme-secondary-200 dark:bg-theme-secondary-900"
                             wire:model="state.username"
-                            wire:keydown.enter="performSearch"
                         />
                     </x-general.search.advanced-option>
 
@@ -364,7 +344,6 @@
                             placeholder="@lang('forms.search.vote')"
                             class="w-full dark:text-theme-secondary-200 dark:bg-theme-secondary-900"
                             wire:model="state.vote"
-                            wire:keydown.enter="performSearch"
                         />
                     </x-general.search.advanced-option>
                 @endif
