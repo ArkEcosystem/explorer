@@ -62,12 +62,15 @@ final class SearchPage extends Component
         }
     }
 
+    // @codeCoverageIgnoreStart
     public function gotoPage(int $page): void
     {
         $this->emit('pageChanged');
         $this->page = $page;
         $this->performSearch();
     }
+
+    // @codeCoverageIgnoreEnd
 
     private function restoreState(array $state): void
     {
