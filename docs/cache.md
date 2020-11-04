@@ -56,18 +56,6 @@ php artisan cache:past-round-performance
 php artisan cache:productivity
 ```
 
-## Cache usernames of all delegates
-
-```
-php artisan cache:musig
-```
-
-## Cache wallets that have received a vote
-
-```
-php artisan cache:usernames
-```
-
 ## Cache real-time statistics like height and supply
 
 ```
@@ -80,8 +68,20 @@ php artisan cache:real-time-statistics
 php artisan cache:resignation-ids
 ```
 
-## Cache all the data with a single command
+## Cache wallets that have received a vote
 
 ```
-php artisan cache:all
+php artisan cache:usernames
+```
+
+## Cache the voter count for each delegate
+
+```
+php artisan cache:voter-count
+```
+
+## Cache wallets that have been voted for to avoid duplicate queries
+
+```
+php artisan cache:votes
 ```

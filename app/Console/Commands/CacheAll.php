@@ -40,10 +40,12 @@ final class CacheAll extends Command
             'musig',
             'statistics',
             'past-round-performance',
-            'past-round-performance',
-            'usernames',
+            'productivity',
             'real-time-statistics',
             'resignation-ids',
+            'usernames',
+            'voter-count',
+            'votes',
         ];
 
         foreach ($commands as $command) {
