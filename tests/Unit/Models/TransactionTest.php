@@ -5,7 +5,6 @@ declare(strict_types=1);
 use App\Models\Block;
 use App\Models\Transaction;
 use App\Models\Wallet;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use function Tests\configureExplorerDatabase;
 
@@ -35,14 +34,6 @@ it('should belong to a recipient', function () {
 
     expect($this->subject->recipient())->toBeInstanceOf(BelongsTo::class);
     expect($this->subject->recipient)->toBeInstanceOf(Wallet::class);
-});
-
-it('should only query transactions that were sent by the given public key', function () {
-    expect($this->subject->sendBy('some-public-key'))->toBeInstanceOf(Builder::class);
-});
-
-it('should only query transactions that were received by the given address', function () {
-    expect($this->subject->receivedBy('some-address'))->toBeInstanceOf(Builder::class);
 });
 
 it('should get the vendor field', function () {
