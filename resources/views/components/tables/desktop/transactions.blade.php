@@ -3,7 +3,7 @@
         <thead>
             <tr>
                 <x-tables.headers.desktop.text name="general.transaction.id" />
-                <x-tables.headers.desktop.text name="general.transaction.timestamp" />
+                <x-tables.headers.desktop.text responsive name="general.transaction.timestamp" />
                 <x-tables.headers.desktop.address name="general.transaction.sender" />
                 <x-tables.headers.desktop.address name="general.transaction.recipient" />
                 <x-tables.headers.desktop.number name="general.transaction.amount" />
@@ -43,11 +43,11 @@
                             <x-tables.rows.desktop.amount :model="$transaction" />
                         @endisset
                     </td>
-                    <td class="hidden text-right xl:table-cell">
+                    <td class="hidden text-right lg:table-cell">
                         <x-tables.rows.desktop.fee :model="$transaction" />
                     </td>
                     @isset($useConfirmations)
-                    <td class="hidden text-right xl:table-cell" wire:key="{{ $transaction->id() }}-confirmations">
+                    <td class="hidden text-right lg:table-cell" wire:key="{{ $transaction->id() }}-confirmations">
                         <x-tables.rows.desktop.confirmations :model="$transaction" />
                     </td>
                     @endisset

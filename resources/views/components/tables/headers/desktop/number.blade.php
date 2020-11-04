@@ -1,5 +1,5 @@
 @isset($responsive)
-    <th class="hidden text-right xl:table-cell">@lang($name)</th>
+    <th class="hidden text-right lg:table-cell">@lang($name)</th>
 @else
     <th class="text-right">@lang($name)</th>
 @endisset
