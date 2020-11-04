@@ -105,7 +105,7 @@ final class Slots
     private function getLatestHeight(?int $height): int
     {
         if (is_null($height)) {
-            return Block::current()->height->toNumber();
+            return Block::withScope(OrderByHeightScope::class)->firstOrFail()->height->toNumber();
         }
 
         return $height;
