@@ -103,7 +103,9 @@ body {
     @apply flex flex-col max-w-full px-8 py-8 border-b border-theme-secondary-300;
 }
 
-.search-advanced-options .search-advanced-option-wrapper:last-of-type .search-advanced-option {
+.search-advanced-options
+    .search-advanced-option-wrapper:last-of-type
+    .search-advanced-option {
     @apply border-b-0;
 }
 
@@ -129,7 +131,9 @@ body {
         @apply py-0 my-6 border-b-0;
     }
 
-    .search-advanced-options .search-advanced-option-wrapper:nth-of-type(2n+1) .search-advanced-option {
+    .search-advanced-options
+        .search-advanced-option-wrapper:nth-of-type(2n + 1)
+        .search-advanced-option {
         @apply border-r;
     }
 
@@ -141,8 +145,13 @@ body {
         @apply border-theme-secondary-800;
     }
 
-    .search-advanced-options .search-advanced-option-wrapper:nth-of-type(2n+1):nth-last-of-type(-n + 2),
-    .search-advanced-options .search-advanced-option-wrapper:nth-of-type(2n+1):nth-last-of-type(-n + 2) ~ .search-advanced-option-wrapper {
+    .search-advanced-options
+        .search-advanced-option-wrapper:nth-of-type(2n + 1):nth-last-of-type(-n
+            + 2),
+    .search-advanced-options
+        .search-advanced-option-wrapper:nth-of-type(2n + 1):nth-last-of-type(-n
+            + 2)
+        ~ .search-advanced-option-wrapper {
         @apply border-b-0;
     }
 }
@@ -156,16 +165,25 @@ body {
         @apply flex-1;
     }
 
-    .search-advanced-options .search-advanced-option-wrapper .search-advanced-option {
+    .search-advanced-options
+        .search-advanced-option-wrapper
+        .search-advanced-option {
         @apply border-r;
     }
 
-    .search-advanced-options .search-advanced-option-wrapper:nth-of-type(3n+3) .search-advanced-option {
+    .search-advanced-options
+        .search-advanced-option-wrapper:nth-of-type(3n + 3)
+        .search-advanced-option {
         @apply border-r-0;
     }
 
-    .search-advanced-options .search-advanced-option-wrapper:nth-of-type(3n+1):nth-last-of-type(-n + 3),
-    .search-advanced-options .search-advanced-option-wrapper:nth-of-type(3n+1):nth-last-of-type(-n + 3) ~ .search-advanced-option-wrapper {
+    .search-advanced-options
+        .search-advanced-option-wrapper:nth-of-type(3n + 1):nth-last-of-type(-n
+            + 3),
+    .search-advanced-options
+        .search-advanced-option-wrapper:nth-of-type(3n + 1):nth-last-of-type(-n
+            + 3)
+        ~ .search-advanced-option-wrapper {
         @apply border-b-0;
     }
 }
