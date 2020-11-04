@@ -11,7 +11,7 @@
     <div class="flex-col hidden w-full divide-y sm:flex divide-dashed divide-theme-secondary-300 dark:divide-theme-secondary-800">
         <div class="flex flex-col w-full pt-16 space-x-0 lg:flex-row lg:space-x-10">
             @if(Network::canBeExchanged())
-                <x-charts.price
+                <x-chart
                     :data="$prices"
                     identifier="price"
                     colours-scheme="#339A51"
@@ -20,7 +20,7 @@
                 />
             @endif
 
-            <x-charts.price
+            <x-chart
                 :data="$fees"
                 identifier="fees"
                 colours-scheme="#FFAE10"
@@ -45,7 +45,7 @@
             </x-details-box>
 
             <x-details-box :title="trans('pages.home.network-details.total_votes')" icon="app-votes">
-                <x-number>{{ $aggregates['votesCount'] }}</x-number>
+                <x-currency>{{ $aggregates['votesCount'] }}</x-currency>
                 <span class="text-theme-secondary-500 dark:text-theme-secondary-700">
                     <x-percentage>{{ $aggregates['votesPercentage'] }}</x-percentage>
                 </span>

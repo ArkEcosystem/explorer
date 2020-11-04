@@ -12,7 +12,7 @@
     @endsection
 
     @section('content')
-        <x-block.header :block="$block" />
+        <x-page-headers.block :block="$block" />
 
         <x-details.grid>
             <x-grid.height :model="$block" />
@@ -23,7 +23,7 @@
 
             <x-grid.fee :model="$block" />
 
-            <x-grid.confirmations :model="$block" without-border />
+            <x-grid.confirmations :model="$block" />
         </x-details.grid>
 
         @if($transactions->isNotEmpty())

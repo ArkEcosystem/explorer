@@ -5,14 +5,16 @@ declare(strict_types=1);
 namespace App\DTO;
 
 use App\Facades\Network;
-use App\Models\Block;
-use App\Services\Blockchain\NetworkStatus;
+use App\Services\Cache\NetworkCache;
 use App\ViewModels\WalletViewModel;
 use Carbon\Carbon;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
 final class Slot
 {
+    private string $publicKey;
+
     private int $order;
 
     private WalletViewModel $wallet;
@@ -23,11 +25,9 @@ final class Slot
 
     private string $status;
 
-    private int $time;
-
     private int $currentRoundBlocks;
 
-    public function __construct(array $data, array $heightRange)
+    public function __construct(array $data, Collection $roundBlocks)
     {
         foreach ($data as $key => $value) {
             /* @phpstan-ignore-next-line */
@@ -37,11 +37,14 @@ final class Slot
             $this->$key = $value;
         }
 
-        // @TODO: performance
-        $this->currentRoundBlocks = Block::query()
+        $this->currentRoundBlocks = $roundBlocks
             ->where('generator_public_key', $data['publicKey'])
-            ->whereBetween('height', $heightRange)
             ->count();
+    }
+
+    public function publicKey(): string
+    {
+        return $this->publicKey;
     }
 
     public function order(): int
@@ -101,7 +104,7 @@ final class Slot
 
     public function missedCount(): int
     {
-        return (int) abs(NetworkStatus::height() - $this->lastBlock['height']);
+        return (int) abs((new NetworkCache())->getHeight() - $this->lastBlock['height']);
     }
 
     public function isDone(): bool

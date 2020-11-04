@@ -13,14 +13,15 @@ final class CreateTransactionsTable extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->string('id');
             $table->string('block_id');
+            $table->string('block_height');
             $table->unsignedBigInteger('type');
             $table->unsignedBigInteger('type_group');
             $table->string('sender_public_key');
-            $table->string('recipient_id');
+            $table->string('recipient_id')->nullable();
             $table->unsignedBigInteger('timestamp');
             $table->unsignedBigInteger('amount');
             $table->unsignedBigInteger('fee');
-            $table->binary('vendor_field_hex')->nullable();
+            $table->binary('vendor_field')->nullable();
             $table->json('asset')->nullable();
             $table->timestamps();
         });

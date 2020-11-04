@@ -16,20 +16,20 @@
         <tbody>
             @foreach($transactions as $transaction)
                 <tr>
-                    <td>
+                    <td wire:key="{{ $transaction->id() }}-id">
                         <x-tables.rows.desktop.transaction-id :model="$transaction" />
                     </td>
                     <td class="hidden lg:table-cell">
                         <x-tables.rows.desktop.timestamp :model="$transaction" />
                     </td>
-                    <td>
+                    <td wire:key="{{ $transaction->id() }}-sender">
                         @isset($useDirection)
                             <x-tables.rows.desktop.sender-with-direction :model="$transaction" :wallet="$wallet" />
                         @else
                             <x-tables.rows.desktop.sender :model="$transaction" />
                         @endif
                     </td>
-                    <td>
+                    <td wire:key="{{ $transaction->id() }}-recipient">
                         <x-tables.rows.desktop.recipient :model="$transaction" />
                     </td>
                     <td class="text-right">
@@ -47,7 +47,7 @@
                         <x-tables.rows.desktop.fee :model="$transaction" />
                     </td>
                     @isset($useConfirmations)
-                    <td class="hidden text-right xl:table-cell">
+                    <td class="hidden text-right xl:table-cell" wire:key="{{ $transaction->id() }}-confirmations">
                         <x-tables.rows.desktop.confirmations :model="$transaction" />
                     </td>
                     @endisset

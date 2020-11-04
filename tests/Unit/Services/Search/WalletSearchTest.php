@@ -19,8 +19,10 @@ it('should search for a wallet by address', function () {
     expect($result->first()->is($wallet))->toBeTrue();
 });
 
-it('should search for a wallet by public_key', function () {
-    $wallet = Wallet::factory(10)->create()[0];
+it('should search for a wallet by public key', function () {
+    Wallet::factory(10)->create(['public_key' => '123']);
+
+    $wallet = Wallet::factory()->create();
 
     $result = (new WalletSearch())->search([
         'term' => $wallet->public_key,
@@ -56,8 +58,8 @@ it('should search for a wallet by vote', function () {
 });
 
 it('should search for a wallet by balance minimum', function () {
-    $wallet = Wallet::factory(10)->create(['balance' => 100])[0];
-    $wallet->update(['balance' => 1000]);
+    $wallet = Wallet::factory(10)->create(['balance' => 100 * 1e8])[0];
+    $wallet->update(['balance' => 1000 * 1e8]);
 
     $result = (new WalletSearch())->search([
         'balanceFrom' => 101,
@@ -67,8 +69,8 @@ it('should search for a wallet by balance minimum', function () {
 });
 
 it('should search for a wallet by balance maximum', function () {
-    $wallet = Wallet::factory(10)->create(['balance' => 100])[0];
-    $wallet->update(['balance' => 1000]);
+    $wallet = Wallet::factory(10)->create(['balance' => 100 * 1e8])[0];
+    $wallet->update(['balance' => 1000 * 1e8]);
 
     $result = (new WalletSearch())->search([
         'balanceTo' => 999,
@@ -78,9 +80,9 @@ it('should search for a wallet by balance maximum', function () {
 });
 
 it('should search for a wallet by balance range', function () {
-    Wallet::factory(10)->create(['balance' => 10]);
-    $wallet = Wallet::factory(10)->create(['balance' => 100])[0];
-    $wallet->update(['balance' => 1000]);
+    Wallet::factory(10)->create(['balance' => 10 * 1e8]);
+    $wallet = Wallet::factory(10)->create(['balance' => 100 * 1e8])[0];
+    $wallet->update(['balance' => 1000 * 1e8]);
 
     $result = (new WalletSearch())->search([
         'balanceFrom' => 50,

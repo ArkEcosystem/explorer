@@ -4,8 +4,11 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
+use App\Facades\Rounds;
 use App\Jobs\CacheLastBlockByPublicKey;
+use App\Models\Block;
 use App\Models\Round;
+use App\Services\Cache\NetworkCache;
 use App\Services\Monitor\Monitor;
 use Illuminate\Console\Command;
 
@@ -32,6 +35,8 @@ final class CacheLastBlocks extends Command
      */
     public function handle()
     {
+        resolve(NetworkCache::class)->setHeight(Block::latestByHeight()->firstOrFail()->height->toNumber());
+
         /*
          * We are iterating over each round participant and dispatch a job to cache the last block.
          *
@@ -40,11 +45,7 @@ final class CacheLastBlocks extends Command
          * look for an exact record which can make use of indices to greatly speed up the process.
          */
 
-        Round::query()
-            ->where('round', Monitor::roundNumber())
-            ->orderBy('balance', 'desc')
-            ->orderBy('public_key', 'asc')
-            ->get(['public_key'])
+        Rounds::allByRound(Monitor::roundNumber())
             ->each(fn ($round) => CacheLastBlockByPublicKey::dispatch($round->public_key));
     }
 }

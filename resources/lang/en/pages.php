@@ -69,6 +69,7 @@ return [
         'name'                    => 'Name',
         'category'                => 'Category',
         'ipfs_hash'               => 'IPFS Hash',
+        'delegate_username'       => 'Delegate Name',
         // Type Labels (Different than in other places :facepalm:)
         'business-entity-registration'    => 'Registration (Business)',
         'business-entity-resignation'     => 'Resignation (Business)',
@@ -120,6 +121,7 @@ return [
         'amount'                => 'Amount',
         'smartbridge'           => 'Smartbridge',
         'vote_rank'             => '#:0',
+        'no_results'            => 'We could not find anything matching!',
         'qrcode'                => [
             'title'       => 'QR Code',
             'description' => 'Scan for address',
@@ -171,12 +173,15 @@ return [
     ],
 
     'blocks_by_wallet' => [
-        'title' => 'Forged Blocks',
+        'title'       => 'Forged Blocks',
+        'table_title' => 'Block History',
+        'no_results'  => 'Delegate <span class="font-bold">:0</span> has not yet forged. Once he becomes active his blocks will appear here.',
     ],
 
     'voters_by_wallet' => [
-        'title'    => 'Voting for Delegate',
-        'subtitle' => 'Voters',
+        'title'      => 'Voting for Delegate',
+        'subtitle'   => 'Voters',
+        'no_results' => 'Delegate <span class="font-bold">:0</span> has no voters yet. You can be the first!',
     ],
 
     'blocks' => [

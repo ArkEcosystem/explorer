@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 namespace App\ViewModels\Concerns\Wallet;
 
-use App\Models\Scopes\DelegateResignationScope;
-use App\Models\Transaction;
+use App\Services\Cache\WalletCache;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Cache;
 
 trait CanBeDelegate
 {
@@ -18,17 +16,25 @@ trait CanBeDelegate
 
     public function resignationId(): ?string
     {
+        if (is_null($this->wallet->public_key)) {
+            return null;
+        }
+
         if (! Arr::has($this->wallet, 'attributes.delegate.resigned')) {
             return null;
         }
 
-        return Cache::rememberForever('resignationId:'.$this->wallet->address, function () {
-            return Transaction::withScope(DelegateResignationScope::class)->firstOrFail()->id;
-        });
+        return (new WalletCache())->getResignationId($this->wallet->public_key);
     }
 
     public function username(): ?string
     {
+        $knownWallet = $this->findWalletByKnown();
+
+        if (! is_null($knownWallet)) {
+            return $knownWallet['name'];
+        }
+
         return Arr::get($this->wallet, 'attributes.delegate.username');
     }
 

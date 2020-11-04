@@ -6,12 +6,12 @@ namespace App\Jobs;
 
 use App\Facades\Network;
 use App\Models\Block;
+use App\Services\Cache\WalletCache;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Cache;
 
 final class CachePastRoundPerformanceByPublicKey implements ShouldQueue
 {
@@ -29,7 +29,7 @@ final class CachePastRoundPerformanceByPublicKey implements ShouldQueue
 
     public function handle(): void
     {
-        $result = collect(range($this->round - 6, $this->round - 2))->mapWithKeys(function ($round): array {
+        (new WalletCache())->setPerformance($this->publicKey, collect(range($this->round - 6, $this->round - 2))->mapWithKeys(function ($round): array {
             $roundStart = (int) $round * Network::delegateCount();
 
             return [
@@ -43,8 +43,6 @@ final class CachePastRoundPerformanceByPublicKey implements ShouldQueue
                 ->where('generator_public_key', $this->publicKey)
                 ->whereBetween('height', [$round['min'], $round['max']])
                 ->count() > 0;
-        });
-
-        Cache::put('performance:'.$this->publicKey, $result->values()->toArray());
+        })->values()->toArray());
     }
 }

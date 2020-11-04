@@ -8,7 +8,6 @@ use App\Services\Timestamp;
 use App\Services\Transactions\Aggregates\Concerns\HasQueries;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Cache;
 
 final class FeesByRangeAggregate
 {
@@ -16,15 +15,11 @@ final class FeesByRangeAggregate
 
     public function aggregate(Carbon $start, Carbon $end, string $format): Collection
     {
-        $cacheKey = sprintf('fees-by-range:%s:%s', $start->unix(), $end->unix());
-
-        return Cache::remember($cacheKey, 3600, function () use ($start, $end, $format) {
-            return $this
-                ->dateRangeQuery($start, $end)
-                ->orderBy('timestamp')
-                ->get()
-                ->groupBy(fn ($date) => Timestamp::fromGenesis($date->timestamp)->format($format))
-                ->mapWithKeys(fn ($transactions, $day) => [$day => $transactions->sumBigNumber('fee')->toNumber() / 1e8]);
-        });
+        return $this
+            ->dateRangeQuery($start, $end)
+            ->orderBy('timestamp')
+            ->get()
+            ->groupBy(fn ($date) => Timestamp::fromGenesis($date->timestamp)->format($format))
+            ->mapWithKeys(fn ($transactions, $day) => [$day => $transactions->sumBigNumber('fee')->toNumber() / 1e8]);
     }
 }

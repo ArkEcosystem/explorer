@@ -4,40 +4,21 @@ declare(strict_types=1);
 
 namespace App\ViewModels\Concerns\Transaction;
 
-use App\ViewModels\ViewModelFactory;
-use App\ViewModels\WalletViewModel;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\Cache;
+use App\DTO\MemoryWallet;
 
 trait InteractsWithWallets
 {
-    public function sender(): ?WalletViewModel
+    public function sender(): ?MemoryWallet
     {
-        $wallet = $this->transaction->sender;
-
-        if (is_null($wallet)) {
-            return null;
-        }
-
-        return Cache::remember(
-            "transaction:wallet:{$wallet->address}",
-            Carbon::now()->addHour(),
-            fn () => ViewModelFactory::make($wallet)
-        );
+        return MemoryWallet::fromPublicKey($this->transaction->sender_public_key);
     }
 
-    public function recipient(): ?WalletViewModel
+    public function recipient(): ?MemoryWallet
     {
-        $wallet = $this->transaction->recipient;
-
-        if (is_null($wallet)) {
+        if (is_null($this->transaction->recipient_id)) {
             return $this->sender();
         }
 
-        return Cache::remember(
-            "transaction:wallet:{$wallet->address}",
-            Carbon::now()->addHour(),
-            fn () => ViewModelFactory::make($wallet)
-        );
+        return MemoryWallet::fromAddress($this->transaction->recipient_id);
     }
 }
