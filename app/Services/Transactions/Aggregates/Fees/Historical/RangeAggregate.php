@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Services\Transactions\Aggregates\Fees\Historical;
 
 use App\Services\Timestamp;
-use App\Services\Transactions\Aggregates\Concerns\HasQueries;
+use App\Services\Transactions\Aggregates\Fees\Concerns\HasQueries;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
 

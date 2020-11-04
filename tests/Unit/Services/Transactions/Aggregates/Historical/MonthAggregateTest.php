@@ -4,21 +4,21 @@ declare(strict_types=1);
 
 use App\Models\Transaction;
 use App\Services\Timestamp;
-use App\Services\Transactions\Aggregates\FeesByWeekAggregate;
-use Carbon\Carbon;
+use App\Services\Transactions\Aggregates\Fees\Historical\MonthAggregate;
 
+use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use function Spatie\Snapshots\assertMatchesSnapshot;
 use function Tests\configureExplorerDatabase;
 
 beforeEach(fn () => configureExplorerDatabase());
 
-it('should aggregate the fees for 7 days', function () {
+it('should aggregate the fees for 30 days', function () {
     Carbon::setTestNow(Carbon::now());
 
     $start = Transaction::factory(10)->create([
         'fee'       => '100000000',
-        'timestamp' => Timestamp::now()->subWeek()->unix(),
+        'timestamp' => Timestamp::now()->subDays(30)->startOfDay()->unix(),
     ])->sortByDesc('timestamp');
 
     $end = Transaction::factory(10)->create([
@@ -26,7 +26,7 @@ it('should aggregate the fees for 7 days', function () {
         'timestamp' => Timestamp::now()->endOfDay()->unix(),
     ])->sortByDesc('timestamp');
 
-    $result = (new FeesByWeekAggregate())->aggregate(
+    $result = (new MonthAggregate())->aggregate(
         Timestamp::fromGenesis($start->last()->timestamp)->startOfDay(),
         Timestamp::fromGenesis($end->last()->timestamp)->endOfDay()
     );

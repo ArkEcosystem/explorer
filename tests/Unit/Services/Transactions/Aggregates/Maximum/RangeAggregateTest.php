@@ -3,10 +3,8 @@
 declare(strict_types=1);
 
 use App\Models\Transaction;
-
 use App\Services\Timestamp;
-use App\Services\Transactions\Aggregates\AverageFeeAggregate;
-
+use App\Services\Transactions\Aggregates\Fees\Maximum\RangeAggregate;
 use function Tests\configureExplorerDatabase;
 
 beforeEach(fn () => configureExplorerDatabase());
@@ -20,11 +18,11 @@ it('should determine the average fee for the given date range', function () {
 
     $transactions = Transaction::get();
 
-    $result = (new AverageFeeAggregate())->aggregate(
-    Timestamp::fromGenesis($transactions->last()->timestamp)->startOfDay(),
-    Timestamp::fromGenesis($transactions->last()->timestamp)->endOfDay()
+    $result = (new RangeAggregate())->aggregate(
+        Timestamp::fromGenesis($transactions->last()->timestamp)->startOfDay(),
+        Timestamp::fromGenesis($transactions->last()->timestamp)->endOfDay()
     );
 
     expect($result)->toBeFloat();
-    expect($result)->toBe(3.0);
+    expect($result)->toBe(5.0);
 });

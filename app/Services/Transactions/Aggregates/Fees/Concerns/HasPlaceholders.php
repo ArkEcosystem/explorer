@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Services\Transactions\Aggregates\Concerns;
+namespace App\Services\Transactions\Aggregates\Fees\Concerns;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;

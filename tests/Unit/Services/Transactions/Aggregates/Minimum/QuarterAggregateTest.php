@@ -3,34 +3,32 @@
 declare(strict_types=1);
 
 use App\Models\Transaction;
-use App\Services\Timestamp;
-use App\Services\Transactions\Aggregates\FeesByMonthAggregate;
-use Carbon\Carbon;
 
-use Illuminate\Support\Collection;
-use function Spatie\Snapshots\assertMatchesSnapshot;
+use App\Services\Timestamp;
+use App\Services\Transactions\Aggregates\Fees\Minimum\QuarterAggregate;
+use Carbon\Carbon;
 use function Tests\configureExplorerDatabase;
 
 beforeEach(fn () => configureExplorerDatabase());
 
-it('should aggregate the fees for 30 days', function () {
+it('should determine the average fee for the given date range', function () {
     Carbon::setTestNow(Carbon::now());
 
     $start = Transaction::factory(10)->create([
         'fee'       => '100000000',
-        'timestamp' => Timestamp::now()->subDays(30)->startOfDay()->unix(),
+        'timestamp' => Timestamp::now()->subDays(90)->unix(),
     ])->sortByDesc('timestamp');
 
     $end = Transaction::factory(10)->create([
-        'fee'       => '100000000',
+        'fee'       => '200000000',
         'timestamp' => Timestamp::now()->endOfDay()->unix(),
     ])->sortByDesc('timestamp');
 
-    $result = (new FeesByMonthAggregate())->aggregate(
+    $result = (new QuarterAggregate())->aggregate(
         Timestamp::fromGenesis($start->last()->timestamp)->startOfDay(),
         Timestamp::fromGenesis($end->last()->timestamp)->endOfDay()
     );
 
-    expect($result)->toBeInstanceOf(Collection::class);
-    // assertMatchesSnapshot($result);
+    expect($result)->toBeFloat();
+    expect($result)->toBe(1.0);
 });

@@ -3,17 +3,19 @@
 declare(strict_types=1);
 
 use App\Models\Transaction;
-
 use App\Services\Timestamp;
-use App\Services\Transactions\Aggregates\FeesByRangeAggregate;
-use Illuminate\Support\Collection;
+use App\Services\Transactions\Aggregates\Fees\Historical\YearAggregate;
 
+use Carbon\Carbon;
+use Illuminate\Support\Collection;
 use function Spatie\Snapshots\assertMatchesSnapshot;
 use function Tests\configureExplorerDatabase;
 
 beforeEach(fn () => configureExplorerDatabase());
 
-it('should aggregate the fees for the given range', function () {
+it('should aggregate the fees for 12 months', function () {
+    Carbon::setTestNow(Carbon::now());
+
     $start = Transaction::factory(10)->create([
         'fee'       => '100000000',
         'timestamp' => 112982056,
@@ -21,13 +23,12 @@ it('should aggregate the fees for the given range', function () {
 
     $end = Transaction::factory(10)->create([
         'fee'       => '100000000',
-        'timestamp' => 122982056,
+        'timestamp' => Timestamp::now()->endOfDay()->unix(),
     ])->sortByDesc('timestamp');
 
-    $result = (new FeesByRangeAggregate())->aggregate(
+    $result = (new YearAggregate())->aggregate(
         Timestamp::fromGenesis($start->last()->timestamp)->startOfDay(),
-        Timestamp::fromGenesis($end->last()->timestamp)->endOfDay(),
-        'Y-m-d'
+        Timestamp::fromGenesis($end->last()->timestamp)->endOfDay()
     );
 
     expect($result)->toBeInstanceOf(Collection::class);

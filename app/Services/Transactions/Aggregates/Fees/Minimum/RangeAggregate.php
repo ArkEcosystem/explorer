@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Services\Transactions\Aggregates\Fees\Minimum;
 
 use App\Services\BigNumber;
-use App\Services\Transactions\Aggregates\Concerns\HasQueries;
+use App\Services\Transactions\Aggregates\Fees\Concerns\HasQueries;
 use Carbon\Carbon;
 
 final class RangeAggregate
@@ -14,6 +14,6 @@ final class RangeAggregate
 
     public function aggregate(Carbon $start, Carbon $end): float
     {
-        return BigNumber::new($this->dateRangeQuery($start, $end)->min('fee'))->toFloat();
+        return BigNumber::new($this->dateRangeQuery($start, $end)->min('fee') ?? 0)->toFloat();
     }
 }
