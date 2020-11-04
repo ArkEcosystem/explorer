@@ -16,12 +16,12 @@ it('should determine the average fee for the given date range', function () {
     Transaction::factory(10)->create([
         'fee'       => '100000000',
         'timestamp' => Timestamp::now()->subWeek()->unix(),
-    ])->sortByDesc('timestamp');
+    ]);
 
     Transaction::factory(10)->create([
         'fee'       => '200000000',
         'timestamp' => Timestamp::now()->endOfDay()->unix(),
-    ])->sortByDesc('timestamp');
+    ]);
 
     $result = (new WeekAggregate())->aggregate();
 
