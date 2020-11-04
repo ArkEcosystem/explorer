@@ -7,9 +7,9 @@
                 <x-tables.headers.desktop.address name="general.transaction.sender" />
                 <x-tables.headers.desktop.address name="general.transaction.recipient" />
                 <x-tables.headers.desktop.number name="general.transaction.amount" />
-                <x-tables.headers.desktop.number name="general.transaction.fee" />
+                <x-tables.headers.desktop.number responsive name="general.transaction.fee" />
                 @isset($useConfirmations)
-                    <x-tables.headers.desktop.number name="general.transaction.confirmations" />
+                    <x-tables.headers.desktop.number responsive name="general.transaction.confirmations" />
                 @endisset
             </tr>
         </thead>
