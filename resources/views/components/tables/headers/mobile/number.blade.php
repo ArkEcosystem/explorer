@@ -1,1 +1,1 @@
-<th>@lang($name)</th>
+<th class="{{ $alignment ?? 'text-right' }}">@lang($name)</th>

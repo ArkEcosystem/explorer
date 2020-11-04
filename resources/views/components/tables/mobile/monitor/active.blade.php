@@ -2,9 +2,9 @@
     <table>
         <thead>
             <tr>
-                <th>@lang('general.delegates.rank')</th>
-                <th>@lang('general.delegates.name')</th>
-                <th class="text-right">@lang('general.delegates.status')</th>
+                <x-tables.headers.mobile.number name="general.delegates.rank" alignment="text-left" />
+                <x-tables.headers.mobile.text name="general.delegates.name" />
+                <x-tables.headers.mobile.status name="general.delegates.status" alignment="text-left sm:text-right"/>
             </tr>
         </thead>
         <tbody>
@@ -16,7 +16,7 @@
                     <td>
                         <x-tables.rows.mobile.username-with-avatar :model="$delegate" />
                     </td>
-                    <td class="justify-end">
+                    <td>
                         <x-tables.rows.mobile.round-status-history :model="$delegate" />
                     </td>
                 </tr>
