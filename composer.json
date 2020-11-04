@@ -18,7 +18,6 @@
         "doctrine/dbal": "^2.10",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^2.0",
-        "genealabs/laravel-model-caching": "^0.11.0",
         "guzzlehttp/guzzle": "^6.5",
         "konceiver/laravel-data-bags": "^1.1",
         "laravel/framework": "^8.1",

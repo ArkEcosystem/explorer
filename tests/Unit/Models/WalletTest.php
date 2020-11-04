@@ -36,10 +36,6 @@ it('should have many blocks', function () {
     expect($this->subject->blocks)->toBeInstanceOf(Collection::class);
 });
 
-it('should order wallets by their balance from high to low', function () {
-    expect($this->subject->wealthy())->toBeInstanceOf(Builder::class);
-});
-
 it('should only query wallets that vote for the given public key', function () {
     expect($this->subject->vote('some-public-key'))->toBeInstanceOf(Builder::class);
 });

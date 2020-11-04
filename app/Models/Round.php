@@ -17,7 +17,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 final class Round extends Model
 {
-    // use Cachable;
     use HasFactory;
 
     /**
