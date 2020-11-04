@@ -14,6 +14,16 @@ final class FeeCache implements Contract
     use Concerns\ManagesCache;
     use Concerns\ManagesChart;
 
+    public function all(string $period): array
+    {
+        return [
+            'historical' => $this->getHistorical($period),
+            'min'        => $this->getMinimum($period),
+            'avg'        => $this->getAverage($period),
+            'max'        => $this->getMaximum($period),
+        ];
+    }
+
     public function getHistorical(string $period): array
     {
         return $this->get(sprintf('historical/%s', $period));
