@@ -35,16 +35,3 @@ it('should belong to a recipient', function () {
     expect($this->subject->recipient())->toBeInstanceOf(BelongsTo::class);
     expect($this->subject->recipient)->toBeInstanceOf(Wallet::class);
 });
-
-it('should get the vendor field', function () {
-    expect($this->subject->vendor_field)->toBeNull();
-
-    // UPDATE transactions SET vendor_field_hex = ('\\x' || ENCODE(vendor_field_hex, 'escape'))::BYTEA;
-
-    $this->subject->update([
-        'vendor_field' => bin2hex('Hello World'),
-    ]);
-
-    expect($this->subject->vendor_field)->toBeString();
-    expect($this->subject->vendor_field)->toBe('48656c6c6f20576f726c64');
-});
