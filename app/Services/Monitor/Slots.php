@@ -6,6 +6,7 @@ namespace App\Services\Monitor;
 
 use App\Facades\Network;
 use App\Models\Block;
+use App\Models\Scopes\OrderByHeightScope;
 use Carbon\Carbon;
 
 final class Slots
