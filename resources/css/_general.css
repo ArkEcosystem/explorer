@@ -443,6 +443,3 @@ body {
         @apply border-r border-theme-secondary-800;
     }
 }
-
-table tbody tr:hover {
-}
