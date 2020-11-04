@@ -10,7 +10,7 @@
             <div class="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-4">
                 <x-general.entity-header-item
                     :title="trans('pages.wallet.voting_for')"
-                    :avatar="$vote->username()"
+                    :avatar="$vote->address()"
                     :text="$vote->username()"
                     :url="route('wallet', $vote->address())"
                 />
@@ -19,7 +19,11 @@
                     icon="app-votes"
                 >
                     <x-slot name="text">
-                        @lang('pages.wallet.vote_rank', [$vote->rank()])
+                        @if ($wallet->isResigned())
+                            <x-details.resigned />
+                        @else
+                            @lang('pages.wallet.vote_rank', [$vote->rank()])
+                        @endif
                     </x-slot>
                 </x-general.entity-header-item>
                 @if (Network::usesMarketSquare())
