@@ -4,7 +4,7 @@
         showAdvanced: {{ $isAdvanced ? 'true' : 'false' }},
         isMobileOpen: false,
         isFocused: false,
-        searchType: {{ $type }},
+        searchType: {{ $type ?? 'block' }},
     }"
     @mobile-search.window="isMobileOpen = true"
     class="searchbar @if ($isSlim ?? false) searchbar-slim @endif"
@@ -91,7 +91,7 @@
         >
             <div class="search-advanced-options">
                 <x-general.search.advanced-option :title="trans('forms.search.type')">
-                    <select wire:model.defer="state.type" class="w-full font-medium bg-transparent text-theme-secondary-900 dark:text-theme-secondary-200">
+                    <select x-model="searchType" wire:model.defer="state.type" class="w-full font-medium bg-transparent text-theme-secondary-900 dark:text-theme-secondary-200">
                         <option value="block">@lang('forms.search.block')</option>
                         <option value="transaction">@lang('forms.search.transaction')</option>
                         <option value="wallet">@lang('forms.search.wallet')</option>
