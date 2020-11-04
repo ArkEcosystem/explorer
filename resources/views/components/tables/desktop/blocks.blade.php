@@ -27,10 +27,10 @@
                             <x-tables.rows.desktop.block-forger :model="$block" />
                         </td>
                     @endif
-                    <td>
+                    <td class="text-right">
                         <x-tables.rows.desktop.block-height :model="$block" />
                     </td>
-                    <td>
+                    <td class="text-right">
                         <x-tables.rows.desktop.transaction-count :model="$block" />
                     </td>
                     <td class="text-right">
