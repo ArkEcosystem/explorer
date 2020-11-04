@@ -17,7 +17,7 @@
 
             <x-slot name="logo">
                 @if($wallet->isDelegate())
-                    @if ($wallet->resignationId())
+                    @if ($wallet->isResigned())
                         <x-page-headers.avatar-with-icon :model="$wallet" icon="app.transactions-delegate-resignation" />
                     @else
                         <x-page-headers.avatar-with-icon :model="$wallet" icon="app-delegate" />

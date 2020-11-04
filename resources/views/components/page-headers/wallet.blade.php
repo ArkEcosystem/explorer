@@ -19,7 +19,7 @@
                     icon="app-votes"
                 >
                     <x-slot name="text">
-                        @if ($wallet->resignationId())
+                        @if ($wallet->isResigned())
                             <x-details.resigned />
                         @else
                             @lang('pages.wallet.vote_rank', [$vote->rank()])
