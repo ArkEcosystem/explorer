@@ -1,41 +1,41 @@
 <div id="delegate-list" class="w-full">
     <x-loading.visible>
-        @if($this->state['status'] === 'resigned')
+        <span x-show="status === 'resigned'">
             <x-tables.desktop.skeleton.monitor.resigned />
             <x-tables.mobile.skeleton.monitor.resigned />
-        @endif
+        </span>
 
-        @if($this->state['status'] === 'standby')
+        <span x-show="status === 'standby'">
             <x-tables.desktop.skeleton.monitor.standby />
             <x-tables.mobile.skeleton.monitor.standby />
-        @endif
+        </span>
 
-        @if($this->state['status'] === 'active')
+        <span x-show="status === 'active'">
             <x-tables.desktop.skeleton.monitor.active />
             <x-tables.mobile.skeleton.monitor.active />
-        @endif
+        </span>
     </x-loading.visible>
 
-    @if($this->state['status'] === 'resigned')
+    <span x-show="status === 'resigned'">
         <x-loading.hidden>
             <x-tables.desktop.monitor.resigned :delegates="$delegates" />
             <x-tables.mobile.monitor.resigned :delegates="$delegates" />
         </x-loading.hidden>
-    @endif
+    </span>
 
-    @if($this->state['status'] === 'standby')
+    <span x-show="status === 'standby'">
         <x-loading.hidden>
             <x-tables.desktop.monitor.standby :delegates="$delegates" />
             <x-tables.mobile.monitor.standby :delegates="$delegates" />
         </x-loading.hidden>
-    @endif
+    </span>
 
-    @if($this->state['status'] === 'active')
+    <span x-show="status === 'active'">
         <x-loading.hidden>
             <x-tables.desktop.monitor.active :delegates="$delegates" />
             <x-tables.mobile.monitor.active :delegates="$delegates" />
         </x-loading.hidden>
-    @endif
+    </span>
 
     <script>
         window.addEventListener('livewire:load', () => window.livewire.on('pageChanged', () => scrollToQuery('#transaction-list')));
