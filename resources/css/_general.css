@@ -432,10 +432,14 @@ body {
     }
 }
 
-/* Delegate Monitor - status */
-@media (min-width: 360px) and (max-width: 639px) {
-    .round-status-history:not(:last-child) {
-        @apply hidden;
+/* Delegate Monitor */
+.round-status-history > span:not(:first-child) {
+    @apply hidden;
+}
+
+@screen sm {
+    .round-status-history > span {
+        @apply block;
     }
 }
 
