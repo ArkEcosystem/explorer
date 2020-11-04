@@ -1,16 +1,12 @@
 #!/usr/bin/env bash
 
-#sudo echo never | tee /sys/kernel/mm/transparent_hugepage/enabled
-#sudo echo never | tee /sys/kernel/mm/transparent_hugepage/defrag
-#sudo sysctl -w net.core.somaxconn=512
 sudo chown -R explorer:www-data /var/www/explorer
 touch database/database.sqlite
-#sudo supervisord & 
 #--- run installs 
 composer install
 yarn install
+#--- fire up services
 sudo supervisord & 
-#touch database/database.sqlite
 sudo chmod -R 775 /var/www/explorer/database
 sudo chmod -R 775 /var/www/explorer/storage
 sudo chmod -R 775 /var/www/explorer/bootstrap/cache 
