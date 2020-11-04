@@ -9,17 +9,17 @@
             @endif
         </div>
         <div class="flex flex-wrap w-full sm:flex-no-wrap sm:flex-row md:flex-wrap sm:justify-between sm:divide-x md:divide-x-0 divide-theme-secondary-300 dark:divide-theme-secondary-800">
-            @if(! $wallet->resignationId())
-                <div class="grid w-full grid-flow-row grid-cols-1 gap-6 pb-8 mb-8 border-b border-dashed sm:pt-8 sm:pt-0 md:pt-8 sm:pb-0 md:pb-8 sm:mb-0 md:mb-8 sm:border-b-0 md:border-b border-theme-secondary-300 dark:border-theme-secondary-800 md:grid-cols-2 lg:grid-cols-4 gap-y-10 delegate-details">
-                    <x-details-box :title="trans('pages.wallet.delegate.rank')" icon="app-rank" icon-wrapper-class="bg-theme-danger-100 dark:bg-theme-danger-400" icon-text-class="text-theme-danger-400 dark:text-theme-secondary-200">
-                        @if ($wallet->rank() > Network::delegateCount())
-                            <x-number>{{ $wallet->rank() }}</x-number>
-                        @elseif($wallet->resignationId())
-                            <x-details.resigned />
-                        @else
-                            <x-number>{{ $wallet->rank() }}</x-number> <span class="text-theme-secondary-500 dark:text-theme-secondary-200">/{{ Network::delegateCount() }}</span>
-                        @endif
-                    </x-details-box>
+            @if (! $wallet->resignationId())
+            <div class="grid w-full grid-flow-row grid-cols-1 gap-6 pb-8 mb-8 border-b border-dashed sm:pt-8 sm:pt-0 md:pt-8 sm:pb-0 md:pb-8 sm:mb-0 md:mb-8 sm:border-b-0 md:border-b border-theme-secondary-300 dark:border-theme-secondary-800 md:grid-cols-2 lg:grid-cols-4 gap-y-10 boxes-details">
+                <x-details-box :title="trans('pages.wallet.delegate.rank')" icon="app-rank" icon-wrapper-class="bg-theme-danger-100 dark:bg-theme-danger-400" icon-text-class="text-theme-danger-400 dark:text-theme-secondary-200">
+                    @if ($wallet->rank() > Network::delegateCount())
+                        <x-number>{{ $wallet->rank() }}</x-number>
+                    @elseif($wallet->resignationId())
+                        <x-details.resigned />
+                    @else
+                        <x-number>{{ $wallet->rank() }}</x-number> <span class="text-theme-secondary-500 dark:text-theme-secondary-200">/{{ Network::delegateCount() }}</span>
+                    @endif
+                </x-details-box>
 
                     <x-details-box :title="trans('pages.wallet.delegate.commission')" icon="app-percent" icon-wrapper-class="bg-theme-danger-100 dark:bg-theme-danger-400" icon-text-class="text-theme-danger-400 dark:text-theme-secondary-200">
                         @if($wallet->commission())
