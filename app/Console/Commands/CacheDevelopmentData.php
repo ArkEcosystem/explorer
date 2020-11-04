@@ -8,21 +8,21 @@ use App\Services\Cache\DelegateCache;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Artisan;
 
-final class CacheAll extends Command
+final class CacheDevelopmentData extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'cache:all';
+    protected $signature = 'dev:cache';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Caches all the cachable data';
+    protected $description = 'Executes all caching commands. Do not use this in production.';
 
     /**
      * Execute the console command.
