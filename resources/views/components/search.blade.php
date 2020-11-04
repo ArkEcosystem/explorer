@@ -4,7 +4,7 @@
         showAdvanced: {{ $isAdvanced ? 'true' : 'false' }},
         isMobileOpen: false,
         isFocused: false,
-        searchType: {{ $type ?? 'block' }},
+        searchType: '{{ $type ?? 'block' }}',
     }"
     @mobile-search.window="isMobileOpen = true"
     class="searchbar @if ($isSlim ?? false) searchbar-slim @endif"
@@ -98,7 +98,7 @@
                     </select>
                 </x-general.search.advanced-option>
 
-                <div x-show="searchType === 'block'">
+                <template x-if="searchType === 'block'">
                     <x-general.search.advanced-option :title="trans('forms.search.height_range')">
                         <div class="flex items-center space-x-2">
                             <input
@@ -120,7 +120,9 @@
                             />
                         </div>
                     </x-general.search.advanced-option>
+                </template>
 
+                <template x-if="searchType === 'block'">
                     <x-general.search.advanced-option :title="trans('forms.search.total_amount_range')">
                         <div class="flex items-center space-x-2">
                             <input
@@ -142,7 +144,9 @@
                             />
                         </div>
                     </x-general.search.advanced-option>
+                </template>
 
+                <template x-if="searchType === 'block'">
                     <x-general.search.advanced-option :title="trans('forms.search.total_fee_range')">
                         <div class="flex items-center space-x-2">
                             <input
@@ -164,7 +168,9 @@
                             />
                         </div>
                     </x-general.search.advanced-option>
+                </template>
 
+                <template x-if="searchType === 'block'">
                     <x-general.search.advanced-option :title="trans('forms.search.reward_range')">
                         <div class="flex items-center space-x-2">
                             <input
@@ -186,7 +192,9 @@
                             />
                         </div>
                     </x-general.search.advanced-option>
+                </template>
 
+                <template x-if="searchType === 'block'">
                     <x-general.search.advanced-option :title="trans('forms.search.date_range')">
                         <div>
                             <input
@@ -206,9 +214,9 @@
                             />
                         </div>
                     </x-general.search.advanced-option>
-                </div>
+                </template>
 
-                <div x-show="searchType === 'transaction'">
+                <template x-if="searchType === 'transaction'">
                     <x-general.search.advanced-option :title="trans('forms.search.transaction_type')">
                         {{-- TODO: Enum of types and their values? --}}
                         <select wire:model.defer="state.transactionType" class="w-full font-medium bg-transparent text-theme-secondary-900 dark:text-theme-secondary-200">
@@ -250,7 +258,9 @@
                             <option value="vote">@lang('forms.search.transaction_types.vote')</option>
                         </select>
                     </x-general.search.advanced-option>
+                </template>
 
+                <template x-if="searchType === 'transaction'">
                     <x-general.search.advanced-option :title="trans('forms.search.amount_range')">
                         <div class="flex items-center space-x-2">
                             <input
@@ -272,7 +282,9 @@
                             />
                         </div>
                     </x-general.search.advanced-option>
+                </template>
 
+                <template x-if="searchType === 'transaction'">
                     <x-general.search.advanced-option :title="trans('forms.search.fee_range')">
                         <div class="flex items-center space-x-2">
                             <input
@@ -294,7 +306,9 @@
                             />
                         </div>
                     </x-general.search.advanced-option>
+                </template>
 
+                <template x-if="searchType === 'transaction'">
                     <x-general.search.advanced-option :title="trans('forms.search.smartbridge')">
                         <input
                             type="text"
@@ -304,7 +318,9 @@
                             wire:keydown.enter="performSearch"
                         />
                     </x-general.search.advanced-option>
+                </template>
 
+                <template x-if="searchType === 'transaction'">
                     <x-general.search.advanced-option :title="trans('forms.search.date_range')">
                         <div>
                             <input
@@ -324,9 +340,9 @@
                             />
                         </div>
                     </x-general.search.advanced-option>
-                </div>
+                </template>
 
-                <div x-show="searchType === 'wallet'">
+                <template x-if="searchType === 'wallet'">
                     <x-general.search.advanced-option :title="trans('forms.search.balance_range')">
                         <div class="flex items-center space-x-2">
                             <input
@@ -348,7 +364,9 @@
                             />
                         </div>
                     </x-general.search.advanced-option>
+                </template>
 
+                <template x-if="searchType === 'wallet'">
                     <x-general.search.advanced-option :title="trans('forms.search.username')">
                         <input
                             type="text"
@@ -358,7 +376,9 @@
                             wire:keydown.enter="performSearch"
                         />
                     </x-general.search.advanced-option>
+                </template>
 
+                <template x-if="searchType === 'wallet'">
                     <x-general.search.advanced-option :title="trans('forms.search.vote')">
                         <input
                             type="text"
@@ -368,7 +388,7 @@
                             wire:keydown.enter="performSearch"
                         />
                     </x-general.search.advanced-option>
-                </div>
+                </template>
             </div>
         </div>
 
