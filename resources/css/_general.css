@@ -433,8 +433,12 @@ body {
 }
 
 /* Delegate Monitor */
-.round-status-history > span:not(:first-child) {
+.round-status-history > span {
     @apply hidden;
+}
+
+.round-status-history > span:first-child {
+    @apply block;
 }
 
 @screen sm {
