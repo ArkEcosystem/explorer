@@ -2,7 +2,7 @@
     <div class="flex w-10/12 tabs">
         <div
             class="tab-item transition-default"
-            :class="{ 'tab-item-current': status === 'active' }"
+            :class="{ 'tab-item-current': status === 'active' && component !== 'monitor' }"
             wire:click="$emit('filterByDelegateStatus', 'active');"
             @click="component = 'list'; status = 'active'"
         >
@@ -15,7 +15,7 @@
 
         <div
             class="tab-item transition-default"
-            :class="{ 'tab-item-current': status === 'standby' }"
+            :class="{ 'tab-item-current': status === 'standby' && component !== 'monitor' }"
             wire:click="$emit('filterByDelegateStatus', 'standby');"
             @click="component = 'list'; status = 'standby'"
         >
@@ -26,7 +26,7 @@
 
         <div
             class="tab-item transition-default"
-            :class="{ 'tab-item-current': status === 'resigned' }"
+            :class="{ 'tab-item-current': status === 'resigned' && component !== 'monitor' }"
             wire:click="$emit('filterByDelegateStatus', 'resigned');"
             @click="component = 'list'; status = 'resigned'"
         >
@@ -43,7 +43,10 @@
             :class="{ 'tab-item-current': component === 'monitor' }"
             @click="component === 'monitor' ? component = 'list' : component = 'monitor'"
         >
-            @lang('pages.monitor.title')
+            <div class="flex justify-center space-x-2">
+                <span>@svg('app-monitor', 'w-5 h-5 text-theme-secondary-700')</span>
+                <span>@lang('pages.monitor.title')</span>
+            </div>
         </div>
     </div>
 </div>
