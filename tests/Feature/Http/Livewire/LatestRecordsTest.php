@@ -53,11 +53,12 @@ it('should list the first page of transactions', function () {
 it('should apply filters for transactions', function () {
     $block = Block::factory()->create();
     $wallet = Wallet::factory()->create([
-        'public_key' => 'public_key',
+        // 'public_key' => 'public_key',
         'address'    => 'address',
     ]);
 
     $component = Livewire::test(LatestRecords::class);
+    $component->call('pollTransactions');
 
     $notExpected = Transaction::factory(10)->create([
         'id'                => (string) Uuid::uuid4(),
@@ -76,8 +77,10 @@ it('should apply filters for transactions', function () {
         $component->assertDontSee($transaction->timestamp());
         $component->assertDontSee($transaction->sender()->address());
         $component->assertDontSee($transaction->recipient()->address());
-        $component->assertDontSee($transaction->fee());
-        $component->assertDontSee($transaction->amount());
+        // TODO: too generic of a fee to say that we don't see it
+        // $component->assertDontSee($transaction->fee());
+        // TODO: too generic of a fee to say that we don't see it
+        // $component->assertDontSee($transaction->amount());
     }
 
     $expected = Transaction::factory(10)->create([
@@ -85,7 +88,7 @@ it('should apply filters for transactions', function () {
         'type'       => CoreTransactionTypeEnum::VOTE,
     ]);
 
-    $component->set('state.type', 'vote');
+    $component->emit('filterTransactionsByType', 'vote');
 
     foreach (ViewModelFactory::collection($expected) as $transaction) {
         $component->assertSee($transaction->id());
@@ -95,7 +98,7 @@ it('should apply filters for transactions', function () {
         $component->assertSee($transaction->fee());
         $component->assertSee($transaction->amount());
     }
-})->skip('Figure out how circumvent wire:loading in tests');
+})->only();
 
 it('should apply filters through an event for transactions', function () {
     $block = Block::factory()->create();
