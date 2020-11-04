@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace App\Services\Blockchain;
 
+use App\Contracts\Network as Contract;
 use App\Services\Cache\WalletCache;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Http;
 
-final class Network
+final class Network implements Contract
 {
     private array $config;
 
