@@ -16,12 +16,12 @@ final class FeeCache implements Contract
 
     public function getHistorical(string $period): array
     {
-        return $this->get(sprintf('minimum/%s', $period));
+        return $this->get(sprintf('historical/%s', $period));
     }
 
     public function setHistorical(string $period, Collection $data): void
     {
-        $this->put(sprintf('minimum/%s', $period), $this->chartjs($data));
+        $this->put(sprintf('historical/%s', $period), $this->chartjs($data));
     }
 
     public function getMinimum(string $period): float
