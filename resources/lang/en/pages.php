@@ -145,7 +145,7 @@ return [
     ],
 
     'monitor' => [
-        'title'      => 'Monitor',
+        'title'      => 'Delegates',
         'active'     => 'Active',
         'standby'    => 'Standby',
         'resigned'   => 'Resigned',
