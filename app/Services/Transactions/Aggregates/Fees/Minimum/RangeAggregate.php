@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\Services\Transactions\Aggregates;
+namespace App\Services\Transactions\Aggregates\Fees\Minimum;
 
 use App\Services\BigNumber;
 use App\Services\Transactions\Aggregates\Concerns\HasQueries;
 use Carbon\Carbon;
 
-final class MinimumFeeAggregate
+final class RangeAggregate
 {
     use HasQueries;
 

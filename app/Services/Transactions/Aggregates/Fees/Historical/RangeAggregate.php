@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace App\Services\Transactions\Aggregates;
+namespace App\Services\Transactions\Aggregates\Fees\Historical;
 
 use App\Services\Timestamp;
 use App\Services\Transactions\Aggregates\Concerns\HasQueries;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
 
-final class FeesByRangeAggregate
+final class RangeAggregate
 {
     use HasQueries;
 

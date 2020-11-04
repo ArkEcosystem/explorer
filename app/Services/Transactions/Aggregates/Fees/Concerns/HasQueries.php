@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Services\Transactions\Aggregates\Concerns;
+namespace App\Services\Transactions\Aggregates\Fees\Concerns;
 
 use App\Models\Transaction;
 use App\Services\Timestamp;

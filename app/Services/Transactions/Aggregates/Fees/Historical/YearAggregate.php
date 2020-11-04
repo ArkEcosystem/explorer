@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace App\Services\Transactions\Aggregates;
+namespace App\Services\Transactions\Aggregates\Fees\Historical;
 
 use App\Services\Transactions\Aggregates\Concerns\HasPlaceholders;
 use App\Services\Transactions\Aggregates\Concerns\HasQueries;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
 
-final class FeesByMonthAggregate
+final class YearAggregate
 {
     use HasPlaceholders;
     use HasQueries;
@@ -17,8 +17,8 @@ final class FeesByMonthAggregate
     public function aggregate(): Collection
     {
         return $this->mergeWithPlaceholders(
-            (new FeesByRangeAggregate())->aggregate(Carbon::now()->subDays(30)->startOfDay(), Carbon::now()->endOfDay(), 'd.m'),
-            $this->placeholders(Carbon::now()->startOfYear()->diffInDays() * 86400, 30 * 86400, 86400, 'd.m')->take(30)
+            (new RangeAggregate())->aggregate(Carbon::now()->subDays(365)->startOfDay(), Carbon::now()->endOfDay(), 'M'),
+            $this->placeholders(0, 365 * 86400, 86400, 'M')->take(365)
         );
     }
 }
