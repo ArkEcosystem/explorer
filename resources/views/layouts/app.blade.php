@@ -23,7 +23,11 @@
         <meta property="og:url" content="{{ url()->full() }}" />
         <meta property="og:type" content="website" />
 
-        <x-data-bag key="metatags" resolver="path" view="components.metatags" />
+        @hasSection('metatags')
+            @yield('metatags')
+        @else
+            <x-data-bag key="metatags" resolver="path" view="components.metatags" />
+        @endif
 
         <!-- Styles -->
         <link href="{{ mix('css/app.css') }}" rel="stylesheet">
