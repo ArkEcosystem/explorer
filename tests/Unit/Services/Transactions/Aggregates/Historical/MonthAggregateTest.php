@@ -16,20 +16,17 @@ beforeEach(fn () => configureExplorerDatabase());
 it('should aggregate the fees for 30 days', function () {
     Carbon::setTestNow('2021-01-01 00:00:00');
 
-    $start = Transaction::factory(10)->create([
+    Transaction::factory(10)->create([
         'fee'       => '100000000',
         'timestamp' => Timestamp::now()->subDays(30)->startOfDay()->unix(),
-    ])->sortByDesc('timestamp');
+    ]);
 
-    $end = Transaction::factory(10)->create([
+    Transaction::factory(10)->create([
         'fee'       => '100000000',
         'timestamp' => Timestamp::now()->endOfDay()->unix(),
-    ])->sortByDesc('timestamp');
+    ]);
 
-    $result = (new MonthAggregate())->aggregate(
-        Timestamp::fromGenesis($start->last()->timestamp)->startOfDay(),
-        Timestamp::fromGenesis($end->last()->timestamp)->endOfDay()
-    );
+    $result = (new MonthAggregate())->aggregate();
 
     expect($result)->toBeInstanceOf(Collection::class);
     assertMatchesSnapshot($result);
