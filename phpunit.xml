@@ -60,7 +60,6 @@
         <server name="EXPLORER_DB_DATABASE" value="explorer"/>
         <server name="EXPLORER_DB_USERNAME" value="explorer"/>
         <server name="EXPLORER_DB_PASSWORD" value="password"/>
-        <server name="EXPLORER_NODEJS" value="/usr/local/bin/node"/>
         <server name="PDO_ATTR_PERSISTENT" value="false"/>
     </php>
     <listeners>
