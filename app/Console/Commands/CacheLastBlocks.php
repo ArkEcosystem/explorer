@@ -36,7 +36,7 @@ final class CacheLastBlocks extends Command
      */
     public function handle()
     {
-        resolve(NetworkCache::class)->setHeight(Block::withScope(OrderByHeightScope::class)->height->toNumber());
+        resolve(NetworkCache::class)->setHeight(Block::withScope(OrderByHeightScope::class)->firstOrFail()->height->toNumber());
 
         /*
          * We are iterating over each round participant and dispatch a job to cache the last block.
