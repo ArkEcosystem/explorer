@@ -140,6 +140,7 @@ return [
             'forged_blocks'    => 'Forged Blocks',
             'productivity'     => 'Productivity (30 Days)',
             'voters'           => 'Voters',
+            'resigned'         => 'Resigned',
         ],
     ],
 
@@ -159,6 +160,7 @@ return [
         'completed'  => 'Completed',
         'next'       => 'Next',
         'now'        => 'Now',
+        'monitor'    => 'Monitor',
         'statistics' => [
             'delegate_registrations' => 'Delegate Registrations',
             'block_reward'           => 'Block Reward',
