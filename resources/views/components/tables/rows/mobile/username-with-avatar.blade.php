@@ -1,1 +1,1 @@
-<x-general.identity :model="$model" avatar-size="h-7 w-7" without-reverse />
+<x-general.identity :model="$model" without-reverse />
