@@ -11,21 +11,21 @@ use function Tests\configureExplorerDatabase;
 beforeEach(fn () => configureExplorerDatabase());
 
 it('should determine the average fee for the given date range', function () {
-    Carbon::setTestNow('2021-01-01 00:00:00');
+    Carbon::setTestNow(Carbon::now());
 
-    $start = Transaction::factory()->create([
+    $start = Transaction::factory(10)->create([
         'fee'       => '100000000',
         'timestamp' => Timestamp::now()->subDays(365)->unix(),
-    ]);
+    ])->sortByDesc('timestamp');
 
-    $end = Transaction::factory()->create([
+    $end = Transaction::factory(10)->create([
         'fee'       => '200000000',
         'timestamp' => Timestamp::now()->endOfDay()->unix(),
-    ]);
+    ])->sortByDesc('timestamp');
 
     $result = (new YearAggregate())->aggregate(
-        $start->timestamp,
-        $end->timestamp
+        Timestamp::fromGenesis($start->last()->timestamp)->startOfDay(),
+        Timestamp::fromGenesis($end->last()->timestamp)->endOfDay()
     );
 
     expect($result)->toBeFloat();
