@@ -1,7 +1,7 @@
 <div class="flex space-x-2 detail-box">
     @isset($icon)
         @isset($shallow)
-            <div class="circled-icon flex-shrink-0 text-theme-secondary-900 border-theme-secondary-900 dark:text-theme-secondary-600 dark:border-theme-secondary-600">
+            <div class="flex-shrink-0 circled-icon text-theme-secondary-900 border-theme-secondary-900 dark:text-theme-secondary-600 dark:border-theme-secondary-600">
                 <x-icon :name="$icon" />
             </div>
         @else
