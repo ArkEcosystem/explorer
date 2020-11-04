@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Services\Transactions\Aggregates\Fees\Average;
 
-use Carbon\Carbon;
 use App\Services\BigNumber;
 use App\Services\Transactions\Aggregates\Fees\Concerns\HasQueries;
+use Carbon\Carbon;
 
 final class RangeAggregate
 {
