@@ -2,9 +2,9 @@
     <table>
         <thead>
             <tr>
-                <th>@lang('general.delegates.rank')</th>
-                <th>@lang('general.delegates.name')</th>
-                <th>@lang('general.delegates.votes')</th>
+                <x-tables.headers.mobile.number name="general.delegates.rank" />
+                <x-tables.headers.mobile.text name="general.delegates.name" />
+                <x-tables.headers.mobile.number name="general.delegates.votes" />
             </tr>
         </thead>
         <tbody>

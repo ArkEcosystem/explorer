@@ -2,8 +2,8 @@
     <table>
         <thead>
             <tr>
-                <th><span class="pl-14">@lang('general.delegates.name')</span></th>
-                <th><span class="pl-14">@lang('general.delegates.votes')</span></th>
+                <x-tables.headers.mobile.text name="general.delegates.name" />
+                <x-tables.headers.mobile.number name="general.delegates.votes" />
             </tr>
         </thead>
         <tbody>
