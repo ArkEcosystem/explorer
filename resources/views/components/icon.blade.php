@@ -1,5 +1,3 @@
-{{-- @TODO: consider class component --}}
-
 @php
     $size = [
         'xs'   => 'w-3 h-3 ',
@@ -20,4 +18,4 @@
     }
 @endphp
 
-@svg($name, $size . ($style ?? '') . ($class ?? ''))
+@svg($name, $size . ($style ?? '') . ($class ?? ''), ['wire:key' => Str::random(8)])
