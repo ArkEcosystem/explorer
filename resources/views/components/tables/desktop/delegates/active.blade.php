@@ -3,7 +3,7 @@
         <thead>
             <tr>
                 <x-tables.headers.desktop.number name="general.delegates.rank" alignment="text-left" />
-                <x-tables.headers.desktop.text name="general.delegates.name" />
+                <x-tables.headers.desktop.address name="general.delegates.name" />
                 <x-tables.headers.desktop.status name="general.delegates.status" />
                 <x-tables.headers.desktop.number name="general.delegates.votes" responsive breakpoint="lg"/>
                 @if (Network::usesMarketSquare())

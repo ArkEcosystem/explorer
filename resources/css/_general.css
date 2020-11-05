@@ -514,3 +514,14 @@ body {
         @apply border-r border-theme-secondary-800;
     }
 }
+
+/* Delegate name truncation */
+.delegate-name-truncate {
+    @apply w-24 truncate;
+}
+
+@media (min-width: 400px) {
+    .delegate-name-truncate {
+        @apply w-full;
+    }
+}

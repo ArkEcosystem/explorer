@@ -4,7 +4,7 @@
             <tr>
                 <x-tables.headers.mobile.number name="general.delegates.rank" alignment="text-left" />
                 <x-tables.headers.mobile.text name="general.delegates.name" />
-                <x-tables.headers.mobile.status name="general.delegates.status" alignment="text-left sm:text-right"/>
+                <x-tables.headers.mobile.status name="general.delegates.status" alignment="text-right"/>
             </tr>
         </thead>
         <tbody>

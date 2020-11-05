@@ -1,5 +1,5 @@
 <div class="justify-between hidden md:flex">
-    <div class="flex w-10/12 tabs">
+    <div class="flex w-9/12 lg:w-10/12 tabs">
         <div
             class="tab-item transition-default"
             :class="{ 'tab-item-current': status === 'active' && component !== 'monitor' }"
@@ -36,7 +36,7 @@
         </div>
     </div>
 
-    <div class="w-2/12 text-center tabs md:ml-6">
+    <div class="w-3/12 lg:w-2/12 text-center tabs md:ml-6">
         <div
             class="tab-item transition-default"
             :class="{ 'tab-item-current': component === 'monitor' }"
@@ -62,22 +62,22 @@
                 <x-icon name="menu-open" size="sm" />
 
                 <div x-show="status === 'active'">
-                    @lang('pages.monitor.active')
+                    @lang('pages.delegates.active')
                     @if($countActive)<span class="info-badge">{{ $countActive }}</span>@endif
                 </div>
 
                 <div x-show="status === 'standby'">
-                    @lang('pages.monitor.standby')
+                    @lang('pages.delegates.standby')
                     <span class="info-badge">{{ $countStandby }}</span>
                 </div>
 
                 <div x-show="status === 'resigned'">
-                    @lang('pages.monitor.resigned')
+                    @lang('pages.delegates.resigned')
                     <span class="info-badge">{{ $countResigned }}</span>
                 </div>
 
-                <div x-show="component">
-                    @lang('pages.monitor.title')
+                <div x-show="component === 'monitor'">
+                    @lang('pages.delegates.monitor')
                 </div>
             </div>
         </x-slot>
@@ -105,7 +105,7 @@
 
             <a @click="component === 'monitor' ? component = 'list' : component = 'monitor'"
                 class="dropdown-entry">
-                <span>@lang('pages.monitor.title')</span>
+                <span>@lang('pages.delegates.monitor')</span>
             </a>
         </div>
     </x-ark-dropdown>

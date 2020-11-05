@@ -75,8 +75,9 @@ return [
     ],
 
     'delegates' => [
+        'id'           => 'ID',
         'rank'         => 'Rank',
-        'name'         => 'Delegate Name',
+        'name'         => 'Name',
         'status'       => 'Status',
         'votes'        => 'Votes',
         'profile'      => 'Profile',
