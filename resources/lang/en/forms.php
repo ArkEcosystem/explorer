@@ -20,7 +20,6 @@ return [
         'reward_range'                   => 'Reward Range',
         'smartbridge'                    => 'Smartbridge',
         'smartbridge_placeholder'        => 'Enter the Smartbridge that was in the transaction (optional)',
-        'smartbridge_placeholder_mobile' => 'Enther the Smartbridge...',
         'term_placeholder'               => 'Find a block, transaction, address or Delegate ...',
         'term_placeholder_mobile'        => 'Search ...',
         'type'                           => 'Search Type',
