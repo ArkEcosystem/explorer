@@ -16,6 +16,6 @@ final class MultiSignature
             base_path('musig.js'),
             Network::alias(),
             json_encode(['min' => $min, 'publicKeys' => $publicKeys])
-        )));
+        )) ?? '');
     }
 }
