@@ -136,8 +136,8 @@ it('should search for multipayment transactions by amount range', function () {
 
     $result = (new TransactionSearch())->search([
         'transactionType' => 'multiPayment',
-        'amountFrom' => 900,
-        'amountTo'   => 1100,
+        'amountFrom'      => 900,
+        'amountTo'        => 1100,
     ]);
 
     expect($result->get())->toHaveCount(1);
