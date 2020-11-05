@@ -527,6 +527,6 @@ body {
 }
 
 /* Smartbridge Placeholder truncation */
-.smartbridge-placeholder::placeholder{
-    text-overflow:ellipsis;
+.smartbridge-placeholder::placeholder {
+    text-overflow: ellipsis;
 }
