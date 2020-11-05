@@ -72,11 +72,11 @@
 
         <x-footer />
 
+        <!-- Scripts -->
+        <script src="{{ mix('js/app.js') }}"></script>
+
         @livewireScripts()
 
         @stack('extraStyle')
-
-        <!-- Scripts -->
-        <script src="{{ mix('js/app.js') }}" defer></script>
     </body>
 </html>
