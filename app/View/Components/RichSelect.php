@@ -10,15 +10,18 @@ class RichSelect extends Component
 
     public array $options;
 
+    public ?string $dispatchEvent;
+
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct(array $options, string $placeholder = '')
+    public function __construct(array $options, string $placeholder = '', ?string $dispatchEvent = null)
     {
         $this->options = $options;
         $this->placeholder = $placeholder;
+        $this->dispatchEvent = $dispatchEvent;
     }
 
     /**

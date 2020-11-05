@@ -1,7 +1,7 @@
 <x-general.search.advanced-option :title="trans('forms.search.type')">
     <x-rich-select
-        wire:model="state.type"
-        wire:key="state_type"
+        :dispatch-event="'search-type-changed'"
+        wire:model.defer="state.type"
         :options="[
             'block' => __('forms.search.block'),
             'transaction' => __('forms.search.transaction'),

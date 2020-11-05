@@ -13,6 +13,7 @@
         'search-advanced': showAdvanced,
         'search-focused': isFocused,
     }"
+    @search-type-changed.window="searchType = $event.detail;"
 >
     <div
         class="fixed inset-0 z-30 overflow-y-auto opacity-75 bg-theme-secondary-900 md:hidden"

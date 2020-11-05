@@ -2,6 +2,11 @@
     class="relative w-full"
     x-data="{
         options: {{ json_encode($options) }},
+        onInput($dispatch) {
+            @isset($dispatchEvent)
+            $dispatch('{{$dispatchEvent}}', this.value)
+            @endisset
+        },
         init: function() {
             var e = this;
             this.$nextTick(() => {
@@ -68,7 +73,7 @@
     }"
     x-init="init()"
 >
-    <input x-ref="input" {{ $attributes }} type="hidden" />
+    <input x-ref="input" {{ $attributes }} type="hidden" @input="onInput($dispatch)" />
 
     <button
         x-ref="button"
@@ -105,7 +110,7 @@
             tabindex="-1"
             role="listbox"
             aria-labelledby="listbox-label"
-            class="py-3 bg-white rounded-md shadow-xs outline-none dark:bg-theme-secondary-800 dark:text-theme-secondary-200 hover:outline-none"
+            class="py-3 overflow-auto bg-white rounded-md shadow-xs outline-none dark:bg-theme-secondary-800 dark:text-theme-secondary-200 hover:outline-none max-h-80"
         >
             <template x-for="(optionValue, index) in Object.keys(options)" :key="optionValue">
                 <li
