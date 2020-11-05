@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class RichSelect extends Component
+final class RichSelect extends Component
 {
     public string $placeholder = '';
 
@@ -25,12 +27,12 @@ class RichSelect extends Component
      */
     public function __construct(array $options, ?string $initialValue = null, string $placeholder = '', ?string $dispatchEvent = null, ?string $buttonClass = null, ?string $wrapperClass = null)
     {
-        $this->options = $options;
-        $this->initialValue = $initialValue;
-        $this->placeholder = $placeholder;
+        $this->options       = $options;
+        $this->initialValue  = $initialValue;
+        $this->placeholder   = $placeholder;
         $this->dispatchEvent = $dispatchEvent;
-        $this->wrapperClass = $wrapperClass;
-        $this->buttonClass = $buttonClass;
+        $this->wrapperClass  = $wrapperClass;
+        $this->buttonClass   = $buttonClass;
     }
 
     /**
