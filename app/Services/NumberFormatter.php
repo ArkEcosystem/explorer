@@ -42,6 +42,8 @@ final class NumberFormatter
     public static function currency($value, string $currency): string
     {
         if (Str::contains((string) $value, ['.', ','])) {
+            $value = ResolveScientificNotation::execute((float) $value);
+
             return $value.' '.strtoupper($currency);
         }
 
