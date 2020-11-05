@@ -7,7 +7,7 @@
             </x-slot>
 
             <x-slot name="title">
-                @lang("pages.monitor.statistics.delegate_registrations")
+                @lang("pages.delegates.statistics.delegate_registrations")
             </x-slot>
 
             <x-number>{{ $delegateRegistrations }}</x-number>
@@ -19,7 +19,7 @@
             </x-slot>
 
             <x-slot name="title">
-                @lang("pages.monitor.statistics.block_reward")
+                @lang("pages.delegates.statistics.block_reward")
             </x-slot>
 
             <x-currency>{{ $blockReward }}</x-currency>
@@ -31,7 +31,7 @@
             </x-slot>
 
             <x-slot name="title">
-                @lang("pages.monitor.statistics.fees_collected")
+                @lang("pages.delegates.statistics.fees_collected")
             </x-slot>
 
             <x-currency>{{ $feesCollected }}</x-currency>
@@ -43,7 +43,7 @@
             </x-slot>
 
             <x-slot name="title">
-                @lang("pages.monitor.statistics.votes")
+                @lang("pages.delegates.statistics.votes")
             </x-slot>
 
             <x-currency>{{ $votes }}</x-currency>

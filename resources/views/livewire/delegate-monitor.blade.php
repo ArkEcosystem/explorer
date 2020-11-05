@@ -11,12 +11,12 @@
                 <div class="p-8 bg-theme-secondary-100 border-theme-secondary-300 dark:border-theme-secondary-800 dark:bg-theme-secondary-900">
                     <div class="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-4">
                         <x-general.entity-header-item
-                            :title="trans('pages.monitor.statistics.block_count')"
+                            :title="trans('pages.delegates.statistics.block_count')"
                             :text="$statistics['blockCount']"
                             icon="app-block-id"
                         />
                         <x-general.entity-header-item
-                            :title="trans('pages.monitor.statistics.transactions')"
+                            :title="trans('pages.delegates.statistics.transactions')"
                             icon="app-transaction"
                         >
                             <x-slot name="text">
@@ -26,14 +26,14 @@
                             </x-slot>
                         </x-general.entity-header-item>
                         <x-general.entity-header-item
-                            :title="trans('pages.monitor.statistics.current_delegate')"
+                            :title="trans('pages.delegates.statistics.current_delegate')"
                             :text="$statistics['currentDelegate']->username()"
                             :url="route('wallet', $statistics['currentDelegate']->address())"
                             icon="app-current-delegate"
                             icon-size="md"
                         />
                         <x-general.entity-header-item
-                            :title="trans('pages.monitor.statistics.next_delegate')"
+                            :title="trans('pages.delegates.statistics.next_delegate')"
                             :text="$statistics['nextDelegate']->username()"
                             :url="route('wallet', $statistics['nextDelegate']->address())"
                             icon="app-next-delegate"
