@@ -63,7 +63,10 @@
 
                 <div x-show="status === 'active' && component === 'list'">
                     @lang('pages.monitor.active')
-                    @if($countActive)<span class="info-badge">{{ $countActive }}</span>@endif
+
+                    @if($countActive)
+                        <span class="info-badge">{{ $countActive }}</span>
+                    @endif
                 </div>
                 <div x-show="status === 'standby' && component === 'list'">
                     @lang('pages.monitor.standby')
