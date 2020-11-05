@@ -44,7 +44,7 @@
                     @mouseenter="hoverin($event.target)"
                     @mouseout="hoverout($event.target)"
                 >
-                    <td @if ($loop->first) class=""  @endif wire:key="{{ $transaction->id() }}-id">
+                    <td wire:key="{{ $transaction->id() }}-id">
                         <x-tables.rows.desktop.transaction-id :model="$transaction" />
                     </td>
                     <td class="hidden lg:table-cell">
