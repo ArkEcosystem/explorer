@@ -11,7 +11,9 @@ final class NumberFormatter
      */
     public static function number($value): string
     {
-        return number_format((float) $value, 8);
+        $formatter = new \NumberFormatter('en_US', \NumberFormatter::DECIMAL);
+
+        return $formatter->format($value);
     }
 
     /**
@@ -37,6 +39,6 @@ final class NumberFormatter
      */
     public static function currency($value, string $currency): string
     {
-        return static::number($value).' '.strtoupper($currency);
+        return $value.' '.strtoupper($currency);
     }
 }
