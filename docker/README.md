@@ -1,15 +1,15 @@
-# ARK Explorer Docker
+# ARK Explorer - Docker
 
 <p align="center">
-    <img src="./ark-core-docker.png" width="100%" height="100%" />
+    <img src="./banner.png" width="100%" height="100%" />
 </p>
 
-## Upcoming 
+## Upcoming
 
 ARK Explorer images will be available at [Docker Hub](https://hub.docker.com/r/arkecosystem/explorer) after official release.
 
 
-## Deployment 
+## Deployment
 
 > Before continuing with this guide: You will need access to the database of a core instance. The credentials can be specified in the `.env` file under `EXPLORER_DB_*`.
 
@@ -38,7 +38,7 @@ EXPLORER_DB_PASSWORD=YOUR_CORE_DATABASE_PASSWORD
 
 ### Run ARK Explorer - official ARK Explorer image at [Docker Hub](https://hub.docker.com/r/arkecosystem/explorer)
 
-To be added after release. 
+To be added after release.
 
 ### Build and run ARK Explorer - build yourself a local image
 
@@ -73,13 +73,13 @@ After successful container startup Explorer should be accessible at http://local
 
 ```bash
 bash purge_all.sh
-``` 
+```
 
 ### Zero Downtime Updates
 
 To be added ...
 
- 
+
 ## Security
 
 If you discover a security vulnerability within this package, please send an e-mail to security@ark.io. All security vulnerabilities will be promptly addressed.
@@ -91,4 +91,3 @@ This project exists thanks to all the people who [contribute](../../contributors
 ## License
 
 [MIT](LICENSE) © [ARK Ecosystem](https://ark.io)
-
