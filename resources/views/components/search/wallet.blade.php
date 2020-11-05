@@ -1,5 +1,6 @@
 <x-general.search.advanced-option :title="trans('forms.search.type')">
     <x-rich-select
+        initial-value="wallet"
         :dispatch-event="'search-type-changed'"
         wire:model.defer="state.type"
         :options="[

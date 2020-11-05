@@ -8,7 +8,6 @@
             @endisset
         },
         init: function() {
-            var e = this;
             this.$nextTick(() => {
                 this.optionsCount = this.$refs.listbox.children.length;
             });
@@ -16,7 +15,7 @@
         optionsCount: null,
         open: false,
         selected: 1,
-        value: null,
+        value: @isset($initialValue) '{{ $initialValue }}' @else null @endif,
         choose: function(value) {
             this.value = value;
             this.open = false;
@@ -57,7 +56,6 @@
         onArrowUp: function() {
             const { listbox } = this.$refs;
             this.selected = this.selected - 1 < 0 ? this.optionsCount - 1 : this.selected - 1;
-            console.log(this.selected, this.optionsCount )
             listbox.children[this.selected].scrollIntoView({
                 block: 'nearest'
             });
@@ -65,7 +63,6 @@
         onArrowDown: function() {
             const { listbox } = this.$refs;
             this.selected = this.selected + 1 > this.optionsCount - 1 ? 1 : this.selected + 1;
-            console.log(this.selected)
             listbox.children[this.selected].scrollIntoView({
                 block: 'nearest'
             });
@@ -122,7 +119,10 @@
                     @click="choose(optionValue)"
                     @mouseenter="selected = index"
                     @mouseleave="selected = null"
-                    :class="{ 'dropdown-entry-selected': value === optionValue }"
+                    :class="{
+                        'dropdown-entry-selected': value === optionValue,
+                        'bg-theme-primary-50': selected === index
+                    }"
                     class="py-1 cursor-pointer dropdown-entry"
                     x-text="options[optionValue]"
                 ></li>

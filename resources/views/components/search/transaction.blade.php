@@ -1,5 +1,6 @@
 <x-general.search.advanced-option :title="trans('forms.search.type')">
     <x-rich-select
+        initial-value="transaction"
         :dispatch-event="'search-type-changed'"
         wire:model.defer="state.type"
         :options="[
@@ -12,16 +13,12 @@
 
 <x-general.search.advanced-option :title="trans('forms.search.transaction_type')">
     <x-rich-select
+        initial-value="all"
         wire:model.defer="state.transactionType"
         :options="collect(trans('forms.search.transaction_types'))->mapWithKeys(function ($value, $key) {
             return [$key => $value];
         })->toArray()"
     />
-    {{-- <select wire:model.defer="state.transactionType" class="w-full font-medium bg-transparent text-theme-secondary-900 dark:text-theme-secondary-200">
-        @foreach(trans('forms.search.transaction_types') as $key => $value)
-            <option value="{{ $key }}">{{ $value }}</option>
-        @endforeach
-    </select> --}}
 </x-general.search.advanced-option>
 
 <x-general.search.advanced-option :title="trans('forms.search.amount_range')">
