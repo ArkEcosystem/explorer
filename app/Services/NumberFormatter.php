@@ -41,7 +41,7 @@ final class NumberFormatter
      */
     public static function currency($value, string $currency): string
     {
-        if (Str::contains($value, ['.', ','])) {
+        if (Str::contains((string) $value, ['.', ','])) {
             return $value.' '.strtoupper($currency);
         }
 
