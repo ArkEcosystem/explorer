@@ -31,9 +31,13 @@
 
         <!-- Styles -->
         <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+        {{-- TODO: use bundled --}}
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/pikaday/css/pikaday.css">
         @livewireStyles
 
         <!-- Scripts -->
+        {{-- TODO: use bundled --}}
+        <script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>
         @stack('scripts')
     </head>
     <body
