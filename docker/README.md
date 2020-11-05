@@ -1,13 +1,6 @@
 # ARK Explorer - Docker
 
-<p align="center">
-    <img src="../banner.png" width="100%" height="100%" />
-</p>
-
-## Upcoming
-
-ARK Explorer images will be available at [Docker Hub](https://hub.docker.com/r/arkecosystem/explorer) after official release.
-
+ARK Explorer images will be available at [Docker Hub](https://hub.docker.com/r/arkecosystem/explorer).
 
 ## Deployment
 
@@ -78,16 +71,3 @@ bash purge_all.sh
 ### Zero Downtime Updates
 
 To be added ...
-
-
-## Security
-
-If you discover a security vulnerability within this package, please send an e-mail to security@ark.io. All security vulnerabilities will be promptly addressed.
-
-## Credits
-
-This project exists thanks to all the people who [contribute](../../contributors).
-
-## License
-
-[MIT](LICENSE) © [ARK Ecosystem](https://ark.io)
