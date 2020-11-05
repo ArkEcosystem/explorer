@@ -1,9 +1,9 @@
 <div>
     @if(! count($delegates))
         <div wire:poll="pollDelegates" wire:key="poll_delegates_skeleton">
-            <x-tables.desktop.skeleton.monitor.round />
+            <x-tables.desktop.skeleton.delegates.round />
 
-            <x-tables.mobile.skeleton.monitor.round />
+            <x-tables.mobile.skeleton.delegates.round />
         </div>
     @else
         <div id="network-list" class="w-full" wire:poll.{{ Network::blockTime() }}s="pollDelegates" wire:key="poll_delegates_real">
@@ -43,9 +43,9 @@
                 </div>
             </div>
 
-            <x-tables.desktop.monitor.round :delegates="$delegates" />
+            <x-tables.desktop.delegates.round :delegates="$delegates" />
 
-            {{-- <x-tables.mobile.monitor.round :delegates="$delegates" /> --}}
+            {{-- <x-tables.mobile.delegates.round :delegates="$delegates" /> --}}
         </div>
     @endif
 </div>
