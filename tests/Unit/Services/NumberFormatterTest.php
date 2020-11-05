@@ -20,12 +20,12 @@ it('should format a number without a currency symbol from a satoshi value', func
 
 it('should format a number with a currency symbol', function () {
     assertMatchesSnapshot(NumberFormatter::currency(123, 'ARK'));
+    assertMatchesSnapshot(NumberFormatter::currency(1e8, 'ARK'));
 });
 
 it('should format a number with a currency symbol if it has a [.]', function () {
     assertMatchesSnapshot(NumberFormatter::currency(123.456, 'ARK'));
     assertMatchesSnapshot(NumberFormatter::currency('0.000003', 'ARK'));
-    assertMatchesSnapshot(NumberFormatter::currency(1E8, 'ARK'));
 });
 
 it('should format a number with a currency symbol if it has a [,]', function () {
