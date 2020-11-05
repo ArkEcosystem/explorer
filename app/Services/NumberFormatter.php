@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Services;
 
+use Illuminate\Support\Str;
+
 final class NumberFormatter
 {
     /**
@@ -39,6 +41,16 @@ final class NumberFormatter
      */
     public static function currency($value, string $currency): string
     {
+        if (Str::contains((string) $value, ',')) {
+            return $value.' '.strtoupper($currency);
+        }
+
+        if (Str::contains((string) $value, '.')) {
+            $value = (float) ResolveScientificNotation::execute((float) $value);
+
+            return rtrim(number_format($value, 8), '0').' '.strtoupper($currency);
+        }
+
         return static::number($value).' '.strtoupper($currency);
     }
 }

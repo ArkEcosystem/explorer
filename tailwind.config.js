@@ -13,12 +13,14 @@ module.exports = {
                 20: '20px',
             },
             height: {
+                '7': '1.75rem',
                 '11': '2.75rem',
                 '30': '7.5rem',
                 '128': '32rem',
             },
             width: {
                 ...defaultConfig.theme.extend.width,
+                '7': '1.75rem',
                 '84': '21rem',
             }
         },
@@ -54,6 +56,15 @@ module.exports = {
             });
         }),
     ],
+    purge: {
+        ...defaultConfig.purge,
+        options: {
+            whitelistPatterns: [
+                ...defaultConfig.purge.options.whitelistPatterns,
+                /^pika-/,
+            ],
+        },
+    },
     future: {
         ...defaultConfig.future,
         defaultLineHeights: true,
