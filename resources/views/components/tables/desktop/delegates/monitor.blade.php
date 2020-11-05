@@ -2,11 +2,11 @@
     <table>
         <thead>
             <tr>
-                <th>@lang('pages.delegates.order')</th>
-                <th><span class="pl-14">@lang('pages.delegates.name')</span></th>
-                <th>@lang('pages.delegates.forging_at')</th>
-                <th>@lang('pages.delegates.status')</th>
-                <th width="120" class="text-right">@lang('pages.delegates.block_id')</th>
+                <x-tables.headers.desktop.number name="pages.delegates.order" alignment="text-left" />
+                <x-tables.headers.desktop.address name="pages.delegates.name" />
+                <x-tables.headers.desktop.text name="pages.delegates.forging_at" alignment="text-center" />
+                <x-tables.headers.desktop.status name="pages.delegates.status" />
+                <x-tables.headers.desktop.text name="pages.delegates.block_id" />
             </tr>
         </thead>
         <tbody>
