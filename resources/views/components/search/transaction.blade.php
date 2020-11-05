@@ -1,5 +1,7 @@
 <x-general.search.advanced-option :title="trans('forms.search.type')">
     <x-rich-select
+        wrapper-class=""
+        button-class="block font-medium text-left bg-transparent text-theme-secondary-900 dark:text-theme-secondary-200"
         initial-value="transaction"
         :dispatch-event="'search-type-changed'"
         wire:model.defer="state.type"
@@ -13,6 +15,8 @@
 
 <x-general.search.advanced-option :title="trans('forms.search.transaction_type')">
     <x-rich-select
+        wrapper-class=""
+        button-class="block font-medium text-left bg-transparent text-theme-secondary-900 dark:text-theme-secondary-200"
         initial-value="all"
         wire:model.defer="state.transactionType"
         :options="collect(trans('forms.search.transaction_types'))->mapWithKeys(function ($value, $key) {

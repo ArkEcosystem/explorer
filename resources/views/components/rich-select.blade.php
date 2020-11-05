@@ -1,5 +1,5 @@
 <div
-    class="relative w-full"
+    class="relative {{ $wrapperClass ?? 'w-full' }}"
     x-data="{
         options: {{ json_encode($options) }},
         onInput($dispatch) {
@@ -81,10 +81,14 @@
         aria-haspopup="listbox"
         :aria-expanded="open"
         aria-labelledby="listbox-label"
-        class="inline-block w-full px-4 py-3 text-left form-select transition-default"
+        class="relative pr-10 {{ $buttonClass ?? 'inline-block w-full px-4 py-3 text-left form-input transition-default' }}"
     >
         <span x-show="options[value]" x-text="options[value]" class="block truncate"></span>
         <span x-show="!options[value]" class="block truncate">@if(isset($placeholder) && $placeholder) {{ $placeholder }} @else &nbsp; @endif</span>
+
+        <span class="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none">
+            <x-icon name="chevron-down" size="xs" />
+        </span>
     </button>
 
     <div
@@ -94,7 +98,7 @@
         x-transition:leave="transition ease-in duration-100"
         x-transition:leave-start="opacity-100"
         x-transition:leave-end="opacity-0"
-        class="absolute w-full mt-1"
+        class="absolute w-full mt-1 min-w-max-content"
         style="display: none;"
     >
         <ul
