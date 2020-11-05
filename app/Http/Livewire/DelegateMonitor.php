@@ -47,11 +47,13 @@ final class DelegateMonitor extends Component
 
         for ($i = 0; $i < count($tracking); $i++) {
             $delegate = array_values($tracking)[$i];
-
+            $wallet = ViewModelFactory::make((new WalletCache())->getDelegate($delegate['publicKey']));
             $delegates[] = new Slot([
+                'address'    => $wallet->address(),
+                'username'   => $wallet->username(),
                 'publicKey'  => $delegate['publicKey'],
                 'order'      => $i + 1,
-                'wallet'     => ViewModelFactory::make((new WalletCache())->getDelegate($delegate['publicKey'])),
+                'wallet'     => $wallet,
                 'forging_at' => Carbon::now()->addMilliseconds($delegate['time']),
                 'last_block' => (new WalletCache())->getLastBlock($delegate['publicKey']),
                 'status'     => $delegate['status'],
