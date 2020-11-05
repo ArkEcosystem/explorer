@@ -1,9 +1,13 @@
 <x-general.search.advanced-option :title="trans('forms.search.type')">
-    <select x-model="searchType" wire:model.defer="state.type" class="w-full font-medium bg-transparent text-theme-secondary-900 dark:text-theme-secondary-200">
-        <option value="block">@lang('forms.search.block')</option>
-        <option value="transaction">@lang('forms.search.transaction')</option>
-        <option value="wallet">@lang('forms.search.wallet')</option>
-    </select>
+    <x-rich-select
+        wire:model="state.type"
+        wire:key="state_type"
+        :options="[
+            'block' => __('forms.search.block'),
+            'transaction' => __('forms.search.transaction'),
+            'wallet' => __('forms.search.wallet'),
+        ]"
+    />
 </x-general.search.advanced-option>
 
 <x-general.search.advanced-option :title="trans('forms.search.balance_range')">
