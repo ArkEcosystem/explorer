@@ -25,7 +25,7 @@ return [
         'term_placeholder_mobile'        => 'Search ...',
         'type'                           => 'Search Type',
         'transaction_type'               => 'Transaction Type',
-        'transaction_types'       => [
+        'transaction_types'              => [
             'all'                           => 'All',
             'businessEntityRegistration'    => 'Business Entity Registration',
             'businessEntityResignation'     => 'Business Entity Resignation',
