@@ -4,9 +4,9 @@
             <tr>
                 <th>@lang('pages.delegates.order')</th>
                 <th><span class="pl-14">@lang('pages.delegates.name')</span></th>
-                <th><span class="pl-14">@lang('pages.delegates.forging_at')</span></th>
+                <th>@lang('pages.delegates.forging_at')</th>
                 <th>@lang('pages.delegates.status')</th>
-                <th width="120" class="hidden text-right lg:table-cell">@lang('pages.delegates.block_id')</th>
+                <th width="120" class="text-right">@lang('pages.delegates.block_id')</th>
             </tr>
         </thead>
         <tbody>
@@ -31,7 +31,7 @@
                     <td wire:key="{{ $delegate->publicKey() }}-round-status-{{ $delegate->status() }}">
                         <x-tables.rows.desktop.round-status :model="$delegate" />
                     </td>
-                    <td class="hidden text-right lg:table-cell">
+                    <td class="text-right">
                         <x-tables.rows.desktop.wallet-last-block :model="$delegate" />
                     </td>
                 </tr>
