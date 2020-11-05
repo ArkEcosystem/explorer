@@ -1,5 +1,30 @@
-<div class="hidden table-container md:block">
-    <table>
+<div x-data="{
+    hoverin(row) {
+        const overlay = this.$refs.hoverOverlay;
+        const width = row.offsetWidth + 20;
+        const height = row.offsetHeight - 10;
+        const viewportOffset = row.getBoundingClientRect();
+        const top = viewportOffset.top + window.scrollY + 5;
+        const left = viewportOffset.left + window.scrollX - 10;
+        overlay.style.width  = `${width}px`;
+        overlay.style.height  = `${height}px`;
+        overlay.style.left  = `${left}px`;
+        overlay.style.top  = `${top}px`;
+        overlay.style.display = 'block';
+    },
+    hoverout(row) {
+        const overlay = this.$refs.hoverOverlay;
+        overlay.style.display = 'none';
+    },
+
+}" class="hidden table-container md:block">
+    <div
+        x-ref="hoverOverlay"
+        wire:ignore
+        class="absolute block border-l-4 border-r-4 pointer-events-none rounded-xl border-theme-primary-50 bg-theme-primary-50"
+    ></div>
+
+    <table class="relative">
         <thead>
             <tr>
                 <x-tables.headers.desktop.text name="general.transaction.id" />
@@ -15,8 +40,11 @@
         </thead>
         <tbody>
             @foreach($transactions as $transaction)
-                <tr>
-                    <td wire:key="{{ $transaction->id() }}-id">
+                <tr
+                    @mouseenter="hoverin($event.target)"
+                    @mouseout="hoverout($event.target)"
+                >
+                    <td @if ($loop->first) class=""  @endif wire:key="{{ $transaction->id() }}-id">
                         <x-tables.rows.desktop.transaction-id :model="$transaction" />
                     </td>
                     <td class="hidden lg:table-cell">
@@ -55,4 +83,6 @@
             @endforeach
         </tbody>
     </table>
+
+
 </div>
