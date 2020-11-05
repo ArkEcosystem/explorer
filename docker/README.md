@@ -6,7 +6,6 @@ ARK Explorer images will be available at [Docker Hub](https://hub.docker.com/r/a
 
 > Before continuing with this guide: You will need access to the database of a core instance. The credentials can be specified in the `.env` file under `EXPLORER_DB_*`.
 
-
 ### Clone source and prepare Environment
 
 ```bash
