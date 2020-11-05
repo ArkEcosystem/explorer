@@ -89,7 +89,7 @@
             @endunless
             x-cloak
         >
-            <div class="search-advanced-options">
+            <div class="search-advanced-options" x-show="searchType === 'block'">
                 <x-general.search.advanced-option :title="trans('forms.search.type')">
                     <select x-model="searchType" wire:model.defer="state.type" class="w-full font-medium bg-transparent text-theme-secondary-900 dark:text-theme-secondary-200">
                         <option value="block">@lang('forms.search.block')</option>
@@ -98,263 +98,277 @@
                     </select>
                 </x-general.search.advanced-option>
 
-                <template x-if="searchType === 'block'">
-                    <x-general.search.advanced-option :title="trans('forms.search.height_range')">
-                        <div class="flex items-center space-x-2">
-                            <input
-                                type="number"
-                                placeholder="0.00"
-                                class="w-full dark:text-theme-secondary-200 dark:bg-theme-secondary-900"
-                                wire:model.defer="state.heightFrom"
-                                wire:keydown.enter="performSearch"
-                            />
-
-                            <span>-</span>
-
-                            <input
-                                type="number"
-                                placeholder="0.00"
-                                class="w-full dark:text-theme-secondary-200 dark:bg-theme-secondary-900"
-                                wire:model.defer="state.heightTo"
-                                wire:keydown.enter="performSearch"
-                            />
-                        </div>
-                    </x-general.search.advanced-option>
-                </template>
-
-                <template x-if="searchType === 'block'">
-                    <x-general.search.advanced-option :title="trans('forms.search.total_amount_range')">
-                        <div class="flex items-center space-x-2">
-                            <input
-                                type="number"
-                                placeholder="0.00"
-                                class="w-full dark:text-theme-secondary-200 dark:bg-theme-secondary-900"
-                                wire:model.defer="state.totalAmountFrom"
-                                wire:keydown.enter="performSearch"
-                            />
-
-                            <span>-</span>
-
-                            <input
-                                type="number"
-                                placeholder="0.00"
-                                class="w-full dark:text-theme-secondary-200 dark:bg-theme-secondary-900"
-                                wire:model.defer="state.totalAmountTo"
-                                wire:keydown.enter="performSearch"
-                            />
-                        </div>
-                    </x-general.search.advanced-option>
-                </template>
-
-                <template x-if="searchType === 'block'">
-                    <x-general.search.advanced-option :title="trans('forms.search.total_fee_range')">
-                        <div class="flex items-center space-x-2">
-                            <input
-                                type="number"
-                                placeholder="0.00"
-                                class="w-full dark:text-theme-secondary-200 dark:bg-theme-secondary-900"
-                                wire:model.defer="state.totalFeeFrom"
-                                wire:keydown.enter="performSearch"
-                            />
-
-                            <span>-</span>
-
-                            <input
-                                type="number"
-                                placeholder="0.00"
-                                class="w-full dark:text-theme-secondary-200 dark:bg-theme-secondary-900"
-                                wire:model.defer="state.totalFeeTo"
-                                wire:keydown.enter="performSearch"
-                            />
-                        </div>
-                    </x-general.search.advanced-option>
-                </template>
-
-                <template x-if="searchType === 'block'">
-                    <x-general.search.advanced-option :title="trans('forms.search.reward_range')">
-                        <div class="flex items-center space-x-2">
-                            <input
-                                type="number"
-                                placeholder="0.00"
-                                class="w-full dark:text-theme-secondary-200 dark:bg-theme-secondary-900"
-                                wire:model.defer="state.rewardFrom"
-                                wire:keydown.enter="performSearch"
-                            />
-
-                            <span>-</span>
-
-                            <input
-                                type="number"
-                                placeholder="0.00"
-                                class="w-full dark:text-theme-secondary-200 dark:bg-theme-secondary-900"
-                                wire:model.defer="state.rewardTo"
-                                wire:keydown.enter="performSearch"
-                            />
-                        </div>
-                    </x-general.search.advanced-option>
-                </template>
-
-                <template x-if="searchType === 'block'">
-                    <x-general.search.advanced-option :title="trans('forms.search.date_range')">
-                        <div>
-                            <input
-                                type="date"
-                                class="bg-transparent -ml-7"
-                                wire:model.defer="state.dateFrom"
-                                style="width: 49px;"
-                            />
-
-                            <span>-</span>
-
-                            <input
-                                type="date"
-                                class="-ml-6 bg-transparent"
-                                wire:model.defer="state.dateTo"
-                                style="width: 49px;"
-                            />
-                        </div>
-                    </x-general.search.advanced-option>
-                </template>
-
-                <template x-if="searchType === 'transaction'">
-                    <x-general.search.advanced-option :title="trans('forms.search.transaction_type')">
-                        <select wire:model.defer="state.transactionType" class="w-full font-medium bg-transparent text-theme-secondary-900 dark:text-theme-secondary-200">
-                            @foreach(trans('forms.search.transaction_types') as $key => $value)
-                                <option value="{{ $key }}">{{ $value }}</option>
-                            @endforeach
-                        </select>
-                    </x-general.search.advanced-option>
-                </template>
-
-                <template x-if="searchType === 'transaction'">
-                    <x-general.search.advanced-option :title="trans('forms.search.amount_range')">
-                        <div class="flex items-center space-x-2">
-                            <input
-                                type="number"
-                                placeholder="0.00"
-                                class="w-full dark:text-theme-secondary-200 dark:bg-theme-secondary-900"
-                                wire:model.defer="state.amountFrom"
-                                wire:keydown.enter="performSearch"
-                            />
-
-                            <span>-</span>
-
-                            <input
-                                type="number"
-                                placeholder="0.00"
-                                class="w-full dark:text-theme-secondary-200 dark:bg-theme-secondary-900"
-                                wire:model.defer="state.amountTo"
-                                wire:keydown.enter="performSearch"
-                            />
-                        </div>
-                    </x-general.search.advanced-option>
-                </template>
-
-                <template x-if="searchType === 'transaction'">
-                    <x-general.search.advanced-option :title="trans('forms.search.fee_range')">
-                        <div class="flex items-center space-x-2">
-                            <input
-                                type="number"
-                                placeholder="0.00"
-                                class="w-full dark:text-theme-secondary-200 dark:bg-theme-secondary-900"
-                                wire:model.defer="state.feeFrom"
-                                wire:keydown.enter="performSearch"
-                            />
-
-                            <span>-</span>
-
-                            <input
-                                type="number"
-                                placeholder="0.00"
-                                class="w-full dark:text-theme-secondary-200 dark:bg-theme-secondary-900"
-                                wire:model.defer="state.feeTo"
-                                wire:keydown.enter="performSearch"
-                            />
-                        </div>
-                    </x-general.search.advanced-option>
-                </template>
-
-                <template x-if="searchType === 'transaction'">
-                    <x-general.search.advanced-option :title="trans('forms.search.smartbridge')">
+                <x-general.search.advanced-option :title="trans('forms.search.height_range')">
+                    <div class="flex items-center space-x-2">
                         <input
-                            type="text"
-                            placeholder="@lang('forms.search.smartbridge_placeholder')"
+                            type="number"
+                            placeholder="0.00"
                             class="w-full dark:text-theme-secondary-200 dark:bg-theme-secondary-900"
-                            wire:model.defer="state.smartBridge"
+                            wire:model.defer="state.heightFrom"
+                            wire:key="state_height_from"
                             wire:keydown.enter="performSearch"
                         />
-                    </x-general.search.advanced-option>
-                </template>
 
-                <template x-if="searchType === 'transaction'">
-                    <x-general.search.advanced-option :title="trans('forms.search.date_range')">
-                        <div>
-                            <input
-                                type="date"
-                                class="bg-transparent -ml-7"
-                                wire:model.defer="state.dateFrom"
-                                style="width: 49px;"
-                            />
+                        <span>-</span>
 
-                            <span>-</span>
-
-                            <input
-                                type="date"
-                                class="-ml-6 bg-transparent"
-                                wire:model.defer="state.dateTo"
-                                style="width: 49px;"
-                            />
-                        </div>
-                    </x-general.search.advanced-option>
-                </template>
-
-                <template x-if="searchType === 'wallet'">
-                    <x-general.search.advanced-option :title="trans('forms.search.balance_range')">
-                        <div class="flex items-center space-x-2">
-                            <input
-                                type="number"
-                                placeholder="0.00"
-                                class="w-full dark:text-theme-secondary-200 dark:bg-theme-secondary-900"
-                                wire:model.defer="state.balanceFrom"
-                                wire:keydown.enter="performSearch"
-                            />
-
-                            <span>-</span>
-
-                            <input
-                                type="number"
-                                placeholder="0.00"
-                                class="w-full dark:text-theme-secondary-200 dark:bg-theme-secondary-900"
-                                wire:model.defer="state.balanceTo"
-                                wire:keydown.enter="performSearch"
-                            />
-                        </div>
-                    </x-general.search.advanced-option>
-                </template>
-
-                <template x-if="searchType === 'wallet'">
-                    <x-general.search.advanced-option :title="trans('forms.search.username')">
                         <input
-                            type="text"
-                            placeholder="@lang('forms.search.username')"
+                            type="number"
+                            placeholder="0.00"
                             class="w-full dark:text-theme-secondary-200 dark:bg-theme-secondary-900"
-                            wire:model.defer="state.username"
+                            wire:model.defer="state.heightTo"
+                            wire:key="state_height_to"
                             wire:keydown.enter="performSearch"
                         />
-                    </x-general.search.advanced-option>
-                </template>
+                    </div>
+                </x-general.search.advanced-option>
 
-                <template x-if="searchType === 'wallet'">
-                    <x-general.search.advanced-option :title="trans('forms.search.vote')">
+                <x-general.search.advanced-option :title="trans('forms.search.total_amount_range')">
+                    <div class="flex items-center space-x-2">
                         <input
-                            type="text"
-                            placeholder="@lang('forms.search.vote')"
+                            type="number"
+                            placeholder="0.00"
                             class="w-full dark:text-theme-secondary-200 dark:bg-theme-secondary-900"
-                            wire:model.defer="state.vote"
+                            wire:model.defer="state.totalAmountFrom"
+                            wire:key="state_total_amount_from"
                             wire:keydown.enter="performSearch"
                         />
-                    </x-general.search.advanced-option>
-                </template>
+
+                        <span>-</span>
+
+                        <input
+                            type="number"
+                            placeholder="0.00"
+                            class="w-full dark:text-theme-secondary-200 dark:bg-theme-secondary-900"
+                            wire:model.defer="state.totalAmountTo"
+                            wire:key="state_total_amount_to"
+                            wire:keydown.enter="performSearch"
+                        />
+                    </div>
+                </x-general.search.advanced-option>
+
+                <x-general.search.advanced-option :title="trans('forms.search.total_fee_range')">
+                    <div class="flex items-center space-x-2">
+                        <input
+                            type="number"
+                            placeholder="0.00"
+                            class="w-full dark:text-theme-secondary-200 dark:bg-theme-secondary-900"
+                            wire:model.defer="state.totalFeeFrom"
+                            wire:key="state_total_fee_from"
+                            wire:keydown.enter="performSearch"
+                        />
+
+                        <span>-</span>
+
+                        <input
+                            type="number"
+                            placeholder="0.00"
+                            class="w-full dark:text-theme-secondary-200 dark:bg-theme-secondary-900"
+                            wire:model.defer="state.totalFeeTo"
+                            wire:key="state_total_fee_to"
+                            wire:keydown.enter="performSearch"
+                        />
+                    </div>
+                </x-general.search.advanced-option>
+
+                <x-general.search.advanced-option :title="trans('forms.search.reward_range')">
+                    <div class="flex items-center space-x-2">
+                        <input
+                            type="number"
+                            placeholder="0.00"
+                            class="w-full dark:text-theme-secondary-200 dark:bg-theme-secondary-900"
+                            wire:model.defer="state.rewardFrom"
+                            wire:key="state_reward_from"
+                            wire:keydown.enter="performSearch"
+                        />
+
+                        <span>-</span>
+
+                        <input
+                            type="number"
+                            placeholder="0.00"
+                            class="w-full dark:text-theme-secondary-200 dark:bg-theme-secondary-900"
+                            wire:model.defer="state.rewardTo"
+                            wire:key="state_reward_to"
+                            wire:keydown.enter="performSearch"
+                        />
+                    </div>
+                </x-general.search.advanced-option>
+
+                <x-general.search.advanced-option :title="trans('forms.search.date_range')">
+                    <div>
+                        <input
+                            type="date"
+                            class="bg-transparent -ml-7"
+                            wire:model.defer="state.dateFrom"
+                            wire:key="state_date_from"
+                            style="width: 49px;"
+                        />
+
+                        <span>-</span>
+
+                        <input
+                            type="date"
+                            class="-ml-6 bg-transparent"
+                            wire:model.defer="state.dateTo"
+                            wire:key="state_date_to"
+                            style="width: 49px;"
+                        />
+                    </div>
+                </x-general.search.advanced-option>
+            </div>
+
+            <div class="search-advanced-options" x-show="searchType === 'transaction'">
+                <x-general.search.advanced-option :title="trans('forms.search.type')">
+                    <select x-model="searchType" wire:model.defer="state.type" class="w-full font-medium bg-transparent text-theme-secondary-900 dark:text-theme-secondary-200">
+                        <option value="block">@lang('forms.search.block')</option>
+                        <option value="transaction">@lang('forms.search.transaction')</option>
+                        <option value="wallet">@lang('forms.search.wallet')</option>
+                    </select>
+                </x-general.search.advanced-option>
+
+                <x-general.search.advanced-option :title="trans('forms.search.transaction_type')">
+                    <select wire:model.defer="state.transactionType" class="w-full font-medium bg-transparent text-theme-secondary-900 dark:text-theme-secondary-200">
+                        @foreach(trans('forms.search.transaction_types') as $key => $value)
+                            <option value="{{ $key }}">{{ $value }}</option>
+                        @endforeach
+                    </select>
+                </x-general.search.advanced-option>
+
+                <x-general.search.advanced-option :title="trans('forms.search.amount_range')">
+                    <div class="flex items-center space-x-2">
+                        <input
+                            type="number"
+                            placeholder="0.00"
+                            class="w-full dark:text-theme-secondary-200 dark:bg-theme-secondary-900"
+                            wire:model.defer="state.amountFrom"
+                            wire:key="state_amount_from"
+                            wire:keydown.enter="performSearch"
+                        />
+
+                        <span>-</span>
+
+                        <input
+                            type="number"
+                            placeholder="0.00"
+                            class="w-full dark:text-theme-secondary-200 dark:bg-theme-secondary-900"
+                            wire:model.defer="state.amountTo"
+                            wire:key="state_amount_to"
+                            wire:keydown.enter="performSearch"
+                        />
+                    </div>
+                </x-general.search.advanced-option>
+
+                <x-general.search.advanced-option :title="trans('forms.search.fee_range')">
+                    <div class="flex items-center space-x-2">
+                        <input
+                            type="number"
+                            placeholder="0.00"
+                            class="w-full dark:text-theme-secondary-200 dark:bg-theme-secondary-900"
+                            wire:model.defer="state.feeFrom"
+                            wire:key="state_fee_from"
+                            wire:keydown.enter="performSearch"
+                        />
+
+                        <span>-</span>
+
+                        <input
+                            type="number"
+                            placeholder="0.00"
+                            class="w-full dark:text-theme-secondary-200 dark:bg-theme-secondary-900"
+                            wire:model.defer="state.feeTo"
+                            wire:key="state_fee_to"
+                            wire:keydown.enter="performSearch"
+                        />
+                    </div>
+                </x-general.search.advanced-option>
+
+                <x-general.search.advanced-option :title="trans('forms.search.smartbridge')">
+                    <input
+                        type="text"
+                        placeholder="@lang('forms.search.smartbridge_placeholder')"
+                        class="w-full dark:text-theme-secondary-200 dark:bg-theme-secondary-900"
+                        wire:model.defer="state.smartBridge"
+                        wire:keydown.enter="performSearch"
+                    />
+                </x-general.search.advanced-option>
+
+                <x-general.search.advanced-option :title="trans('forms.search.date_range')">
+                    <div>
+                        <input
+                            type="date"
+                            class="bg-transparent -ml-7"
+                            wire:model.defer="state.dateFrom"
+                            wire:key="state_date_from"
+                            style="width: 49px;"
+                        />
+
+                        <span>-</span>
+
+                        <input
+                            type="date"
+                            class="-ml-6 bg-transparent"
+                            wire:model.defer="state.dateTo"
+                            wire:key="state_date_to"
+                            style="width: 49px;"
+                        />
+                    </div>
+                </x-general.search.advanced-option>
+            </div>
+
+            <div class="search-advanced-options" x-show="searchType === 'wallet'">
+                <x-general.search.advanced-option :title="trans('forms.search.type')">
+                    <select x-model="searchType" wire:model.defer="state.type" class="w-full font-medium bg-transparent text-theme-secondary-900 dark:text-theme-secondary-200">
+                        <option value="block">@lang('forms.search.block')</option>
+                        <option value="transaction">@lang('forms.search.transaction')</option>
+                        <option value="wallet">@lang('forms.search.wallet')</option>
+                    </select>
+                </x-general.search.advanced-option>
+
+                <x-general.search.advanced-option :title="trans('forms.search.balance_range')">
+                    <div class="flex items-center space-x-2">
+                        <input
+                            type="number"
+                            placeholder="0.00"
+                            class="w-full dark:text-theme-secondary-200 dark:bg-theme-secondary-900"
+                            wire:model.defer="state.balanceFrom"
+                            wire:key="state_balance_from"
+                            wire:keydown.enter="performSearch"
+                        />
+
+                        <span>-</span>
+
+                        <input
+                            type="number"
+                            placeholder="0.00"
+                            class="w-full dark:text-theme-secondary-200 dark:bg-theme-secondary-900"
+                            wire:model.defer="state.balanceTo"
+                            wire:key="state_balance_to"
+                            wire:keydown.enter="performSearch"
+                        />
+                    </div>
+                </x-general.search.advanced-option>
+
+                <x-general.search.advanced-option :title="trans('forms.search.username')">
+                    <input
+                        type="text"
+                        placeholder="@lang('forms.search.username')"
+                        class="w-full dark:text-theme-secondary-200 dark:bg-theme-secondary-900"
+                        wire:model.defer="state.username"
+                        wire:key="state_username"
+                        wire:keydown.enter="performSearch"
+                    />
+                </x-general.search.advanced-option>
+
+                <x-general.search.advanced-option :title="trans('forms.search.vote')">
+                    <input
+                        type="text"
+                        placeholder="@lang('forms.search.vote')"
+                        class="w-full dark:text-theme-secondary-200 dark:bg-theme-secondary-900"
+                        wire:model.defer="state.vote"
+                        wire:key="state_vote"
+                        wire:keydown.enter="performSearch"
+                    />
+                </x-general.search.advanced-option>
             </div>
         </div>
 
