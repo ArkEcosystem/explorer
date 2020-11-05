@@ -3,7 +3,7 @@
         @lang('labels.marketsquare_profile')
 
         <a href="{{ $model->profileUrl() }}">
-            {{-- @TODO: Blue MSQ Icon --}}
+            <x-icon name="marketsquare" size="sm" />
         </a>
     </div>
 @endif

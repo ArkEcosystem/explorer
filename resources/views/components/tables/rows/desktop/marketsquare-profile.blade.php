@@ -1,5 +1,5 @@
 @if (Network::usesMarketSquare())
     <a href="{{ $model->profileUrl() }}">
-        {{-- @TODO: Blue MSQ Icon --}}
+        <x-icon name="marketsquare" size="sm" />
     </a>
 @endif
