@@ -11,9 +11,7 @@ final class NumberFormatter
      */
     public static function number($value): string
     {
-        $formatter = new \NumberFormatter('en_US', \NumberFormatter::DECIMAL);
-
-        return $formatter->format($value);
+        return number_format((float) $value, 8);
     }
 
     /**
