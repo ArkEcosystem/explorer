@@ -1,5 +1,10 @@
 <div x-data="{
-    hoverin(row) {
+    closest (el, predicate) {
+        do if (predicate(el)) return el;
+        while (el = el && el.parentNode);
+    },
+    hoverin(e) {
+        const row = e.target;
         const overlay = this.$refs.hoverOverlay;
         const width = row.offsetWidth + 20;
         const height = row.offsetHeight - 10;
@@ -12,11 +17,13 @@
         overlay.style.top  = `${top}px`;
         overlay.style.display = 'block';
     },
-    hoverout(row) {
-        const overlay = this.$refs.hoverOverlay;
-        overlay.style.display = 'none';
+    hoverout(e) {
+        const hoveredAnotherRow = !! e.relatedTarget.closest('tbody')
+        if (!hoveredAnotherRow) {
+            const overlay = this.$refs.hoverOverlay;
+            overlay.style.display = 'none';
+        }
     },
-
 }" class="hidden table-container md:block">
     <div
         x-ref="hoverOverlay"
@@ -41,8 +48,8 @@
         <tbody>
             @foreach($transactions as $transaction)
                 <tr
-                    @mouseenter="hoverin($event.target)"
-                    @mouseout="hoverout($event.target)"
+                    @mouseenter="hoverin($event)"
+                    @mouseout="hoverout($event)"
                 >
                     <td wire:key="{{ $transaction->id() }}-id">
                         <x-tables.rows.desktop.transaction-id :model="$transaction" />
