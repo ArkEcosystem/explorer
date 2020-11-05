@@ -1,11 +1,11 @@
 .pika-table td.is-disabled {
-    background-color: #fcfdfd;
+    @apply bg-theme-secondary-50;
 }
 
 .pika-button .is-selected {
-    background-color: #075af2;
+    @apply bg-theme-primary-700;
 }
 
 .pika-button:hover {
-    background-color: #007dff;
+    @apply bg-theme-info-600;
 }
