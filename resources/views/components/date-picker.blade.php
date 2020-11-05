@@ -1,3 +1,19 @@
+@push('scripts')
+    <style>
+        .pika-table td.is-disabled {
+            background-color: #fcfdfd;
+        }
+
+        .pika-button .is-selected {
+            background-color: #075af2;
+        }
+
+        .pika-button:hover {
+            background-color: #007dff;
+        }
+    </style>
+@endpush
+
 <input
     x-data
     x-ref="input"
