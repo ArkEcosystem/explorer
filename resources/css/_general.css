@@ -491,3 +491,21 @@ body {
         @apply border-r border-theme-secondary-800;
     }
 }
+
+/* Table hover - might move to laravel-ui later */
+.table-container table tbody tr {
+    @apply transition-default;
+}
+
+.table-container table tbody tr:hover {
+    @apply bg-theme-secondary-100;
+    transform: scale(1.015);
+}
+
+.table-container table tbody tr:hover td:first-child {
+    @apply rounded-l-lg;
+}
+
+.table-container table tbody tr:hover td:last-child {
+    @apply rounded-r-lg;
+}

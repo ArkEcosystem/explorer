@@ -11,10 +11,12 @@
         <input
             type="number"
             placeholder="0.00"
-            class="w-full dark:text-theme-secondary-200 dark:bg-theme-secondary-900"
+            class="dark:text-theme-secondary-200 dark:bg-theme-secondary-900"
+            style="max-width: 100%"
             wire:model.defer="state.heightFrom"
             wire:key="state_height_from"
             wire:keydown.enter="performSearch"
+            onkeypress="this.style.width = ((this.value.length + 3) * 8) + 'px';"
         />
 
         <span>-</span>
