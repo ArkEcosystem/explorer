@@ -25,7 +25,7 @@
                     </div>
 
                     <div x-show="component === 'table'">
-                        <livewire:delegate-tables />
+                        <livewire:delegate-table />
                     </div>
                 </div>
             </div>
