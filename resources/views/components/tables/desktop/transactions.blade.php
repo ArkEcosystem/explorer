@@ -24,7 +24,7 @@
     <div
         x-ref="hoverOverlay"
         wire:ignore
-        class="absolute rounded-md pointer-events-none bg-theme-primary-50"
+        class="absolute rounded-md pointer-events-none bg-theme-secondary-100"
         style="display: none"
     ></div>
 
