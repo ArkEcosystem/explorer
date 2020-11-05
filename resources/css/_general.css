@@ -144,8 +144,6 @@ body {
     .theme-dark .search-advanced-option-wrapper {
         @apply border-theme-secondary-800;
     }
-
-
 }
 
 /* We need this to only be applied between md and xl */
