@@ -20,11 +20,13 @@ trait InteractsWithMarketSquare
             return null;
         }
 
-        if (! $this->isDelegate()) {
+        $username = $this->username();
+
+        if (is_null($username)) {
             return null;
         }
 
-        return 'https://marketsquare.io/delegates/'.Str::slug($this->username());
+        return 'https://marketsquare.io/delegates/'.Str::slug($username);
     }
 
     /**
