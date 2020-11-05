@@ -61,17 +61,17 @@
             <div class="flex items-center space-x-4">
                 <x-icon name="menu-open" size="sm" />
 
-                <div x-show="status === 'active'">
+                <div x-show="status === 'active' && component !== 'monitor'">
                     @lang('pages.delegates.active')
                     @if($countActive)<span class="info-badge">{{ $countActive }}</span>@endif
                 </div>
 
-                <div x-show="status === 'standby'">
+                <div x-show="status === 'standby' && component !== 'monitor'">
                     @lang('pages.delegates.standby')
                     <span class="info-badge">{{ $countStandby }}</span>
                 </div>
 
-                <div x-show="status === 'resigned'">
+                <div x-show="status === 'resigned' && component !== 'monitor'">
                     @lang('pages.delegates.resigned')
                     <span class="info-badge">{{ $countResigned }}</span>
                 </div>
