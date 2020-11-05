@@ -1,8 +1,4 @@
 <div x-data="{
-    closest (el, predicate) {
-        do if (predicate(el)) return el;
-        while (el = el && el.parentNode);
-    },
     hoverin(e) {
         const row = e.target;
         const overlay = this.$refs.hoverOverlay;
@@ -28,7 +24,8 @@
     <div
         x-ref="hoverOverlay"
         wire:ignore
-        class="absolute block border-l-4 border-r-4 pointer-events-none rounded-xl border-theme-primary-50 bg-theme-primary-50"
+        class="absolute rounded-md pointer-events-none bg-theme-primary-50"
+        style="display: none"
     ></div>
 
     <table class="relative">
