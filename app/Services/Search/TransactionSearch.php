@@ -42,6 +42,7 @@ use App\Models\Scopes\TransferScope;
 use App\Models\Scopes\VoteScope;
 use App\Models\Transaction;
 use App\Services\Search\Concerns\FiltersDateRange;
+use App\Services\Search\Concerns\FiltersMultiPaymentValueRange;
 use App\Services\Search\Concerns\FiltersValueRange;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
@@ -50,6 +51,7 @@ final class TransactionSearch implements Search
 {
     use FiltersDateRange;
     use FiltersValueRange;
+    use FiltersMultiPaymentValueRange;
 
     private array $scopes = [
         'businessEntityRegistration'    => BusinessEntityRegistrationScope::class,
@@ -92,6 +94,7 @@ final class TransactionSearch implements Search
     public function search(array $parameters): Builder
     {
         $query = Transaction::query();
+        $isMultiPayment = false;
 
         if (Arr::has($parameters, 'transactionType')) {
             if (Arr::get($parameters, 'transactionType') !== 'all') {
@@ -99,6 +102,8 @@ final class TransactionSearch implements Search
 
                 /* @var \Illuminate\Database\Eloquent\Model */
                 $query = $query->withScope($scopeClass);
+
+                $isMultiPayment = $scopeClass === MultiPaymentScope::class;
             }
         }
 
@@ -106,7 +111,11 @@ final class TransactionSearch implements Search
             $query->where('id', $parameters['term']);
         }
 
-        $this->queryValueRange($query, 'amount', Arr::get($parameters, 'amountFrom'), Arr::get($parameters, 'amountTo'));
+        if (!$isMultiPayment) {
+            $this->queryValueRange($query, 'amount', Arr::get($parameters, 'amountFrom'), Arr::get($parameters, 'amountTo'));
+        } else {
+            $this->queryMultiPaymentValueRange($query, Arr::get($parameters, 'amountFrom'), Arr::get($parameters, 'amountTo'));
+        }
 
         $this->queryValueRange($query, 'fee', Arr::get($parameters, 'feeFrom'), Arr::get($parameters, 'feeTo'));
 
@@ -116,6 +125,7 @@ final class TransactionSearch implements Search
             $query->where('vendor_field', $parameters['smartBridge']);
         }
 
+//        $query->dump();
         return $query;
     }
 }
