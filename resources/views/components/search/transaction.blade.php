@@ -66,7 +66,7 @@
     <input
         type="text"
         placeholder="@lang('forms.search.smartbridge_placeholder_mobile')"
-        class="w-full block sm:hidden dark:text-theme-secondary-200 dark:bg-theme-secondary-900"
+        class="block w-full sm:hidden dark:text-theme-secondary-200 dark:bg-theme-secondary-900"
         wire:model.defer="state.smartBridge"
         wire:keydown.enter="performSearch"
     />
@@ -74,7 +74,7 @@
     <input
         type="text"
         placeholder="@lang('forms.search.smartbridge_placeholder')"
-        class="w-full hidden sm:block dark:text-theme-secondary-200 dark:bg-theme-secondary-900"
+        class="hidden w-full sm:block dark:text-theme-secondary-200 dark:bg-theme-secondary-900"
         wire:model.defer="state.smartBridge"
         wire:keydown.enter="performSearch"
     />
