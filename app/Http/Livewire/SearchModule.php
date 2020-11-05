@@ -29,12 +29,6 @@ final class SearchModule extends Component
         $this->isSlim = $isSlim;
     }
 
-    public function updated($propertyName)
-    {
-        info($this->state);
-        // $this->validateOnly($propertyName);
-    }
-
     public function render(): View
     {
         return view('components.search', [
