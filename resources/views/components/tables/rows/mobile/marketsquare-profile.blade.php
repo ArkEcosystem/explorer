@@ -2,6 +2,8 @@
     <div>
         @lang('labels.marketsquare_profile')
 
-        {{-- @TODO: MSQ Profile --}}
+        <a href="{{ $model->profileUrl() }}">
+            {{-- @TODO: Blue MSQ Icon --}}
+        </a>
     </div>
 @endif
