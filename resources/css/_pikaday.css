@@ -1,4 +1,4 @@
-.pika-table td.is-disabled {
+.pika-table td.is-disabled .pika-button {
     @apply bg-theme-secondary-50 !important;
 }
 
