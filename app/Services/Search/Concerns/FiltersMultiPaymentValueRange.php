@@ -24,21 +24,23 @@ trait FiltersMultiPaymentValueRange
 
         $query->where('amount', '=', 0);
 
-        $query->whereExists(function (\Illuminate\Database\Query\Builder $qq) use ($useSatoshi, $to, $from): void {
-            $qq->selectRaw('i.id')
-               ->fromRaw("( SELECT id, (jsonb_array_elements(asset -> 'payments') ->> 'amount')::bigint am FROM transactions t WHERE t.id = id ) i")
-               ->whereRaw('i.id = transactions.id')
-               ->groupBy('i.id')
-               ->when(! is_null($from) && $from > 0, function ($q) use ($useSatoshi, $from): void {
-                   $q->havingRaw('sum(am) >= ?', [
-                       (int) $from * ($useSatoshi ? 1e8 : 1),
-                   ]);
-               })
-               ->when(! is_null($to) && $to > 0, function ($q) use ($useSatoshi, $to): void {
-                   $q->havingRaw('sum(am) <= ?', [
-                       (int) $to * ($useSatoshi ? 1e8 : 1),
-                   ]);
-               });
+        $query->whereExists(function (\Illuminate\Database\Query\Builder $query) use ($useSatoshi, $to, $from): void {
+            $query->selectRaw('i.id')
+                ->fromRaw("( SELECT id, (jsonb_array_elements(asset -> 'payments') ->> 'amount')::bigint am FROM transactions t WHERE t.id = id ) i")
+                ->whereRaw('i.id = transactions.id')
+                ->groupBy('i.id');
+
+            if (! is_null($from) && $from > 0) {
+                $query->havingRaw('sum(am) >= ?', [
+                    (int) $from * ($useSatoshi ? 1e8 : 1),
+                ]);
+            }
+
+            if (! is_null($to) && $to > 0) {
+                $query->havingRaw('sum(am) <= ?', [
+                    (int) $to * ($useSatoshi ? 1e8 : 1),
+                ]);
+            }
         });
 
         return $query;
