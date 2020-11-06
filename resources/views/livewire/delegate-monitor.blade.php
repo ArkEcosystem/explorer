@@ -45,8 +45,7 @@
 
             <x-tables.desktop.delegates.monitor :delegates="$delegates" :round="$round" />
 
-            {{-- @TODO --}}
-            {{-- <x-tables.mobile.delegates.monitor :delegates="$delegates" /> --}}
+            <x-tables.mobile.delegates.monitor :delegates="$delegates" />
         </div>
     @endif
 </div>
