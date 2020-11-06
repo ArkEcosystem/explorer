@@ -84,25 +84,6 @@ final class SearchModule extends Component
         ]);
     }
 
-    /**
-     * Map the transaction options as the rich select component expects.
-     */
-    protected function getTransactionOptions(): array
-    {
-        return collect($this->transactionOptionsValues)
-            ->mapWithKeys(function ($options, $group) {
-                $key = strtoupper($group);
-                $value = collect($options)
-                    ->mapWithKeys(function ($option) {
-                        return [$option => __('forms.search.transaction_types.'.$option)];
-                    })->toArray();
-
-                return [
-                    $key => $value,
-                ];
-            })->toArray();
-    }
-
     public function performSearch(): void
     {
         $data = $this->validateSearchQuery();
@@ -160,5 +141,24 @@ final class SearchModule extends Component
         $callback($model);
 
         return true;
+    }
+
+    /**
+     * Map the transaction options as the rich select component expects.
+     */
+    private function getTransactionOptions(): array
+    {
+        return collect($this->transactionOptionsValues)
+            ->mapWithKeys(function ($options, $group): array {
+                $key = strtoupper($group);
+                $value = collect($options)
+                    ->mapWithKeys(function ($option): array {
+                        return [$option => __('forms.search.transaction_types.'.$option)];
+                    })->toArray();
+
+                return [
+                    $key => $value,
+                ];
+            })->toArray();
     }
 }
