@@ -11,9 +11,18 @@ final class WalletFactory extends Factory
 {
     protected $model = Wallet::class;
 
+    private static $wallets;
+
+    public function __construct()
+    {
+        if (self::$wallets === null) {
+            self::$wallets = json_decode(file_get_contents(base_path('tests/fixtures/wallets.json')), true);
+        }
+    }
+
     public function definition()
     {
-        $wallet = $this->faker->randomElement(json_decode(file_get_contents(base_path('tests/fixtures/wallets.json')), true));
+        $wallet = $this->faker->randomElement(self::$wallets);
 
         return [
             'id'                => $this->faker->uuid,
