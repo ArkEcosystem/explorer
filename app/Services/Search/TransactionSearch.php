@@ -92,7 +92,7 @@ final class TransactionSearch implements Search
 
     public function search(array $parameters): Builder
     {
-        $query          = Transaction::query();
+        $query = Transaction::query();
 
         if (Arr::has($parameters, 'transactionType')) {
             if (Arr::get($parameters, 'transactionType') !== 'all') {
