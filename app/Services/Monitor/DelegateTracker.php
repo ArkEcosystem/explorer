@@ -9,6 +9,16 @@ use App\Models\Block;
 use App\Models\Scopes\OrderByHeightScope;
 use Illuminate\Support\Collection;
 
+/**
+ * @NOTE
+ *
+ * All code that is commented out in this class should NOT be removed.
+ *
+ * This code serves as control data to ensure that our results are matching
+ * the results that core calculates. If there are any changes to core code
+ * in terms of forging list or tracking calculations we will need to update
+ * this code with example data from core and ensure that the results match.
+ */
 final class DelegateTracker
 {
     // const EXPECTED = [
@@ -373,6 +383,16 @@ final class DelegateTracker
 
         // Act
         $forgingInfo = ForgingInfoCalculator::calculate($timestamp, $height);
+
+        // // Determine Next Forgers...
+        // $nextForgers = [];
+        // for ($i = 0; $i < $maxDelegates; $i++) {
+        //     $delegate = $activeDelegates[($forgingInfo['currentForger'] + $i) % $maxDelegates];
+
+        //     if ($delegate) {
+        //         $nextForgers[] = $delegate;
+        //     }
+        // }
 
         // Map Next Forgers...
         return collect($activeDelegates)
