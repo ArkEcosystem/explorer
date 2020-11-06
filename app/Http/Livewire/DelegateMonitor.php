@@ -55,7 +55,7 @@ final class DelegateMonitor extends Component
                 'forging_at' => Carbon::now()->addMilliseconds($delegate['time']),
                 'last_block' => (new WalletCache())->getLastBlock($delegate['publicKey']),
                 'status'     => $delegate['status'],
-            ], $roundBlocks);
+            ], $roundBlocks, $roundNumber);
         }
 
         $this->delegates = $delegates;
