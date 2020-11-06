@@ -395,13 +395,15 @@ final class DelegateTracker
         // }
 
         // Map Next Forgers...
+        $forgingIndex = 2;
+
         return collect($activeDelegates)
-            ->map(function ($publicKey, $index) use ($forgingInfo) {
+            ->map(function ($publicKey, $index) use (&$forgingIndex, $forgingInfo) {
                 if ($index === $forgingInfo['nextForger']) {
                     return [
                         'publicKey' => $publicKey,
                         'status'    => 'next',
-                        'time'      => 0,
+                        'time'      => Network::blockTime() * 1000,
                         'order'     => $index,
                     ];
                 }
@@ -410,7 +412,7 @@ final class DelegateTracker
                     return [
                         'publicKey' => $publicKey,
                         'status'    => 'pending',
-                        'time'      => $index * Network::blockTime() * 1000,
+                        'time'      => (($forgingIndex++) * Network::blockTime() * 1000),
                         'order'     => $index,
                     ];
                 }
