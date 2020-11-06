@@ -17,4 +17,3 @@ it('should calculate the round number belonging to a given height', function () 
     expect(Monitor::roundNumberFromHeight(51))->toBe(1);
     expect(Monitor::roundNumberFromHeight(52))->toBe(2);
 });
-
