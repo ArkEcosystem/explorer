@@ -13,7 +13,7 @@
         'search-advanced': showAdvanced,
         'search-focused': isFocused,
     }"
-    @search-type-changed.window="searchType = $event.detail;"
+    @search-type-changed.window="searchType = $event.detail"
 >
     <div
         class="fixed inset-0 z-30 overflow-y-auto opacity-75 bg-theme-secondary-900 md:hidden"
@@ -94,23 +94,17 @@
             @endunless
             x-cloak
         >
-            <template x-if="searchType === 'block'">
-                <div class="search-advanced-options">
-                    <x-search.block />
-                </div>
-            </template>
+            <div class="search-advanced-options" x-show="searchType === 'block'">
+                <x-search.block />
+            </div>
 
-            <template x-if="searchType === 'transaction'">
-                <div class="search-advanced-options">
-                    <x-search.transaction :transaction-options="$transactionOptions" />
-                </div>
-            </template>
+            <div class="search-advanced-options" x-show="searchType === 'transaction'">
+                <x-search.transaction :transaction-options="$transactionOptions" />
+            </div>
 
-            <template x-if="searchType === 'wallet'">
-                <div class="search-advanced-options">
-                    <x-search.wallet />
-                </div>
-            </template>
+            <div class="search-advanced-options" x-show="searchType === 'wallet'">
+                <x-search.wallet />
+            </div>
         </div>
 
         <div
