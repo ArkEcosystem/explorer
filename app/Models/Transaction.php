@@ -28,6 +28,12 @@ final class Transaction extends Model
 {
     use HasFactory;
 
+    /**
+     * A list of transaction scopes used for filtering based on type.
+     *
+     * Exposed through the model to keep its usage consistent across
+     * all places that need to filter transactions by their type.
+     */
     const TYPE_SCOPES = [
         'businessEntityRegistration'    => Scopes\BusinessEntityRegistrationScope::class,
         'businessEntityResignation'     => Scopes\BusinessEntityResignationScope::class,
