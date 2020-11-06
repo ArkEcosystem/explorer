@@ -7,8 +7,8 @@
             <div class="py-16 content-container md:px-8">
                 <div x-data="{
                     dropdownOpen: false,
-                    transactionTypeFilter: 'all',
-                    transactionTypeFilterLabel: 'All',
+                    transactionTypeFilter: '{{ $transactionTypeFilter }}',
+                    transactionTypeFilterLabel: '@lang('forms.search.transaction_types.' . $transactionTypeFilter)',
                 }" x-cloak class="w-full">
                     <div class="w-full mb-8">
                         <div class="relative flex flex-col justify-between md:items-end md:flex-row md:justify-start">

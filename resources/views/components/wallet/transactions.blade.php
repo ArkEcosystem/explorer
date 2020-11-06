@@ -3,8 +3,8 @@
         <div x-data="{
             dropdownOpen: false,
             direction: 'all',
-            transactionTypeFilter: 'all',
-            transactionTypeFilterLabel: 'All',
+            transactionTypeFilter: '{{ $state["type"] }}',
+            transactionTypeFilterLabel: "@lang('forms.search.transaction_types.' . $state['type'])",
         }" x-cloak class="w-full">
             <div class="w-full md:mb-8">
                 <div class="relative flex flex-col justify-between md:items-end md:flex-row md:justify-start">
