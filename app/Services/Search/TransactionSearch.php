@@ -6,6 +6,7 @@ namespace App\Services\Search;
 
 use App\Contracts\Search;
 use App\Facades\Wallets;
+use App\Models\Composers\MultiPaymentAmountValueRangeComposer;
 use App\Models\Composers\TimestampRangeComposer;
 use App\Models\Composers\ValueRangeComposer;
 use App\Models\Scopes\BusinessEntityRegistrationScope;
@@ -44,14 +45,11 @@ use App\Models\Scopes\TimelockScope;
 use App\Models\Scopes\TransferScope;
 use App\Models\Scopes\VoteScope;
 use App\Models\Transaction;
-use App\Services\Search\Concerns\FiltersMultiPaymentValueRange;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
 
 final class TransactionSearch implements Search
 {
-    use FiltersMultiPaymentValueRange;
-
     private array $scopes = [
         'businessEntityRegistration'    => BusinessEntityRegistrationScope::class,
         'businessEntityResignation'     => BusinessEntityResignationScope::class,
@@ -128,7 +126,7 @@ final class TransactionSearch implements Search
         $query->where(function ($query) use ($parameters): void {
             ValueRangeComposer::compose($query, $parameters, 'amount');
             $query->orWhere(function ($query) use ($parameters): void {
-                $this->queryMultiPaymentAmountValueRange($query, Arr::get($parameters, 'amountFrom'), Arr::get($parameters, 'amountTo'));
+                MultiPaymentAmountValueRangeComposer::compose($query, $parameters);
             });
         });
 

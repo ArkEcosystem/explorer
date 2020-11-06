@@ -2,22 +2,18 @@
 
 declare(strict_types=1);
 
-namespace App\Services\Search\Concerns;
+namespace App\Models\Composers;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Arr;
 
-trait FiltersMultiPaymentValueRange
+final class MultiPaymentAmountValueRangeComposer
 {
-    /**
-     * @param Builder         $query
-     * @param string|int|null $from
-     * @param string|int|null $to
-     * @param bool            $useSatoshi
-     *
-     * @return Builder
-     */
-    private function queryMultiPaymentAmountValueRange(Builder $query, $from, $to, bool $useSatoshi = true): Builder
+    public static function compose(Builder $query, array $parameters, bool $useSatoshi = true): Builder
     {
+        $from = Arr::get($parameters, 'amountFrom');
+        $to   = Arr::get($parameters, 'amountTo');
+
         if (is_null($from) && is_null($to)) {
             return $query;
         }
