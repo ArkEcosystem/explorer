@@ -14,6 +14,7 @@ final class WalletFactory extends Factory
     public function definition()
     {
         $wallet = $this->faker->randomElement(json_decode(file_get_contents(base_path('tests/fixtures/wallets.json')), true));
+
         return [
             'id'                => $this->faker->uuid,
             'address'           => $wallet['address'],
