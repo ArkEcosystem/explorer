@@ -11,7 +11,7 @@ it('should render the page without any errors', function () {
 
 it('should render the page with given transaction type', function () {
     $this
-        ->get(route('transactions', ['type'=>'multiPayment']))
+        ->get(route('transactions', ['state[type]' => 'multiPayment']))
         ->assertOk()
         ->assertViewHas('transactionTypeFilter', 'multiPayment');
 });
