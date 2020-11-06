@@ -9,10 +9,10 @@ use Illuminate\Database\Eloquent\Builder;
 trait FiltersMultiPaymentValueRange
 {
     /**
-     * @param Builder  $query
+     * @param Builder         $query
      * @param string|int|null $from
      * @param string|int|null $to
-     * @param bool     $useSatoshi
+     * @param bool            $useSatoshi
      *
      * @return Builder
      */
