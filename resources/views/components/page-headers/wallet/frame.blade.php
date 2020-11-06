@@ -14,29 +14,29 @@
                     @endif
                 @endif
 
-                <div class="ml-2 divide-x divide-gray-400 wallet-icon-grid">
-                    @if (!$wallet->isKnown())
-                    <span>
-                        <x-icon name="app-verified" size="sm" />
-                    </span>
+                <div class="ml-2 divide-x divide-gray-400 wallet-icons-row">
+                    @if ($wallet->isKnown())
+                        <span>
+                            <x-icon name="app-verified" size="sm" />
+                        </span>
                     @endif
 
-                    @if (!$wallet->hasMultiSignature())
-                    <span>
-                        <x-icon name="app.transactions-multi-signature" size="sm" />
-                    </span>
+                    @if ($wallet->hasMultiSignature())
+                        <span>
+                            <x-icon name="app.transactions-multi-signature" size="sm" />
+                        </span>
                     @endif
 
-                    @if (!$wallet->isOwnedByExchange())
-                    <span>
-                        <x-icon name="app-exchange" size="sm" />
-                    </span>
+                    @if ($wallet->isOwnedByExchange())
+                        <span>
+                            <x-icon name="app-exchange" size="sm" />
+                        </span>
                     @endif
 
-                    @if (!$wallet->hasSecondSignature())
-                    <span>
-                        <x-icon name="app.transactions-second-signature" size="sm" />
-                    </span>
+                    @if ($wallet->hasSecondSignature())
+                        <span>
+                            <x-icon name="app.transactions-second-signature" size="sm" />
+                        </span>
                     @endif
                 </div>
             </x-slot>
