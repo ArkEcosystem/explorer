@@ -12,16 +12,33 @@
                     @else
                         @lang('pages.wallet.address')
                     @endif
-
-                    @if ($wallet->isKnown())
-                        <x-icon name="app-verified" size="sm" />
-                    @endif
-                        <x-icon name="app.transactions-multi-signature" size="sm" />
-                    @if ($wallet->isOwnedByExchange())
-                        <x-icon name="app-exchange" size="sm" />
-                    @endif
-                    <x-icon name="app.transactions-second-signature" size="sm" />
                 @endif
+
+                <div class="ml-2 grid grid-cols-4 divide-x divide-gray-400">
+                    @if (!$wallet->isKnown())
+                    <span class="">
+                        <x-icon name="app-verified" size="sm" />
+                    </span>
+                    @endif
+
+                    @if (!$wallet->hasMultiSignature())
+                    <span class="">
+                        <x-icon name="app.transactions-multi-signature" size="sm" />
+                    </span>
+                    @endif
+
+                    @if (!$wallet->isOwnedByExchange())
+                    <span class="">
+                        <x-icon name="app-exchange" size="sm" />
+                    </span>
+                    @endif
+
+                    @if (!$wallet->hasSecondSignature())
+                    <span class="">
+                        <x-icon name="app.transactions-second-signature" size="sm" />
+                    </span>
+                    @endif
+                </div>
             </x-slot>
 
             <x-slot name="logo">
