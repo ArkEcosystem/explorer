@@ -1,6 +1,6 @@
 @if($model->justMissed())
     <span>@lang('generic.not-available')</span>
-@elseif($model->isPending())
+@elseif(! $model->isDone())
     <span>@lang('generic.to-be-done')</span>
 @else
     <a href="{{ route('block', $model->lastBlock()['id']) }}" class="font-semibold link">
