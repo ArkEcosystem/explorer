@@ -111,10 +111,10 @@ final class TransactionSearch implements Search
             $query->where('id', $parameters['term']);
         }
 
-        if (! $isMultiPayment) {
-            $this->queryValueRange($query, 'amount', Arr::get($parameters, 'amountFrom'), Arr::get($parameters, 'amountTo'));
+        if ( $isMultiPayment ) {
+            $this->queryMultiPaymentValueRange( $query, Arr::get( $parameters, 'amountFrom' ), Arr::get( $parameters, 'amountTo' ) );
         } else {
-            $this->queryMultiPaymentValueRange($query, Arr::get($parameters, 'amountFrom'), Arr::get($parameters, 'amountTo'));
+            $this->queryValueRange( $query, 'amount', Arr::get( $parameters, 'amountFrom' ), Arr::get( $parameters, 'amountTo' ) );
         }
 
         $this->queryValueRange($query, 'fee', Arr::get($parameters, 'feeFrom'), Arr::get($parameters, 'feeTo'));

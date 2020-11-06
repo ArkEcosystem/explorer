@@ -10,13 +10,13 @@ trait FiltersMultiPaymentValueRange
 {
     /**
      * @param Builder  $query
-     * @param int|null $from
-     * @param int|null $to
+     * @param string|int|null $from
+     * @param string|int|null $to
      * @param bool     $useSatoshi
      *
      * @return Builder
      */
-    private function queryMultiPaymentValueRange(Builder $query, ?int $from, ?int $to, bool $useSatoshi = true): Builder
+    private function queryMultiPaymentValueRange(Builder $query, $from, $to, bool $useSatoshi = true): Builder
     {
         if (is_null($from) && is_null($to)) {
             return $query;
