@@ -1,13 +1,13 @@
 @component('layouts.app', ['isLanding' => true, 'fullWidth' => true])
 
     @section('content')
-        <div class="dark:bg-theme-secondary-900">
+        {{-- <div class="dark:bg-theme-secondary-900">
             <div class="flex-col pt-16 mb-16 space-y-6 content-container">
                 <x-general.search.header-slim :title="trans('pages.delegates.title')" />
 
                 <livewire:delegate-statistics />
             </div>
-        </div>
+        </div> --}}
 
         {{-- @TODO: MSQ Banner --}}
 
@@ -15,18 +15,18 @@
             <div class="py-16 content-container md:px-8">
                 <div x-data="{
                     dropdownOpen: false,
-                    component: 'table',
+                    component: 'monitor',
                     status: 'active',
                 }" x-cloak class="w-full">
-                    <livewire:delegate-tabs />
+                    {{-- <livewire:delegate-tabs /> --}}
 
                     <div x-show="component === 'monitor'">
                         <livewire:delegate-monitor />
                     </div>
 
-                    <div x-show="component === 'table'">
+                    {{-- <div x-show="component === 'table'">
                         <livewire:delegate-table />
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>

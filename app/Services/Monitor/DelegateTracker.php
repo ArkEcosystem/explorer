@@ -371,65 +371,39 @@ final class DelegateTracker
         //     'OUTPUT_DIFFS' => array_diff($activeDelegates, static::EXPECTED['output']),
         // ]);
 
-        // Arrange Constants
-        $maxDelegates = Network::delegateCount();
-        $blockTime    = Network::blockTime();
-
         // Act
         $forgingInfo = ForgingInfoCalculator::calculate($timestamp, $height);
 
-        // Determine Next Forgers...
-        $nextForgers = [];
-        for ($i = 0; $i < $maxDelegates; $i++) {
-            $delegate = $activeDelegates[($forgingInfo['currentForger'] + $i) % $maxDelegates];
-
-            if ($delegate) {
-                $nextForgers[] = $delegate;
-            }
-        }
-
         // Map Next Forgers...
-        $result = [
-            // 'delegates'     => [],
-            // 'nextRoundTime' => ($maxDelegates - $forgingInfo['currentForger'] - 1) * $blockTime,
-        ];
-
-        foreach ($delegates as $delegate) {
-            $indexInNextForgers = 0;
-
-            for ($i = 0; $i < count($nextForgers); $i++) {
-                if ($nextForgers[$i] === $delegate->public_key) {
-                    $indexInNextForgers = $i;
-
-                    break;
+        return collect($activeDelegates)
+            ->map(function ($publicKey, $index) use ($forgingInfo) {
+                if ($index === $forgingInfo['nextForger']) {
+                    return [
+                        'publicKey' => $publicKey,
+                        'status'    => 'next',
+                        'time'      => 0,
+                        'order'     => $index,
+                    ];
                 }
-            }
 
-            if ($indexInNextForgers === 0) {
-                $result[$indexInNextForgers] = [
-                    'publicKey' => $delegate->public_key,
-                    'status'    => 'next',
-                    'time'      => 0,
-                    'order'     => $indexInNextForgers,
-                ];
-            } elseif ($indexInNextForgers <= $maxDelegates - $forgingInfo['nextForger']) {
-                $result[$indexInNextForgers] = [
-                    'publicKey' => $delegate->public_key,
-                    'status'    => 'pending',
-                    'time'      => $indexInNextForgers * $blockTime * 1000,
-                    'order'     => $indexInNextForgers,
-                ];
-            } else {
-                $result[$indexInNextForgers] = [
-                    'publicKey' => $delegate->public_key,
+                if ($index > $forgingInfo['nextForger']) {
+                    return [
+                        'publicKey' => $publicKey,
+                        'status'    => 'pending',
+                        'time'      => $index * Network::blockTime() * 1000,
+                        'order'     => $index,
+                    ];
+                }
+
+                return [
+                    'publicKey' => $publicKey,
                     'status'    => 'done',
                     'time'      => 0,
-                    'order'     => $indexInNextForgers,
+                    'order'     => $index,
                 ];
-            }
-        }
-
-        return collect($result)->sortBy('order')->toArray();
+            })
+            ->sortBy('order')
+            ->toArray();
     }
 
     private static function getActiveDelegates(array $delegates, int $height): array
