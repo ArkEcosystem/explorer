@@ -16,7 +16,7 @@ trait FiltersMultiPaymentValueRange
      *
      * @return Builder
      */
-    private function queryMultiPaymentValueRange(Builder $query, $from, $to, bool $useSatoshi = true): Builder
+    private function queryMultiPaymentAmountValueRange(Builder $query, $from, $to, bool $useSatoshi = true): Builder
     {
         if (is_null($from) && is_null($to)) {
             return $query;

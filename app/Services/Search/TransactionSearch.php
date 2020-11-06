@@ -94,16 +94,12 @@ final class TransactionSearch implements Search
     public function search(array $parameters): Builder
     {
         $query          = Transaction::query();
-        $isMultiPayment = false;
 
         if (Arr::has($parameters, 'transactionType')) {
             if (Arr::get($parameters, 'transactionType') !== 'all') {
                 $scopeClass = $this->scopes[$parameters['transactionType']];
 
-                /* @var \Illuminate\Database\Eloquent\Model */
                 $query = $query->withScope($scopeClass);
-
-                $isMultiPayment = $scopeClass === MultiPaymentScope::class;
             }
         }
 
@@ -111,11 +107,14 @@ final class TransactionSearch implements Search
             $query->where('id', $parameters['term']);
         }
 
-        if ($isMultiPayment) {
-            $this->queryMultiPaymentValueRange($query, Arr::get($parameters, 'amountFrom'), Arr::get($parameters, 'amountTo'));
-        } else {
-            $this->queryValueRange($query, 'amount', Arr::get($parameters, 'amountFrom'), Arr::get($parameters, 'amountTo'));
-        }
+        $query->where(function ($query) use ($parameters): void {
+            $from = Arr::get($parameters, 'amountFrom');
+            $to = Arr::get($parameters, 'amountTo');
+            $this->queryValueRange($query, 'amount', $from, $to);
+            $query->orWhere(function ($query) use ($to, $from): void {
+                $this->queryMultiPaymentAmountValueRange($query, $from, $to);
+            });
+        });
 
         $this->queryValueRange($query, 'fee', Arr::get($parameters, 'feeFrom'), Arr::get($parameters, 'feeTo'));
 
@@ -125,7 +124,6 @@ final class TransactionSearch implements Search
             $query->where('vendor_field', $parameters['smartBridge']);
         }
 
-//        $query->dump();
         return $query;
     }
 }
