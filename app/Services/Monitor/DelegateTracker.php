@@ -395,7 +395,7 @@ final class DelegateTracker
         // }
 
         // Map Next Forgers...
-        $forgingIndex = 2;
+        $forgingIndex = 2; // We start at 2 to skip 0 which results in 0 as time and 1 which would be the next forger.
 
         return collect($activeDelegates)
             ->map(function ($publicKey, $index) use (&$forgingIndex, $forgingInfo) {
