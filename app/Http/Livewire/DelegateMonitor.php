@@ -31,6 +31,7 @@ final class DelegateMonitor extends Component
         return view('livewire.delegate-monitor', [
             'delegates'  => $this->delegates,
             'statistics' => $this->statistics,
+            'round'      => Rounds::currentRound()->round,
         ]);
     }
 
