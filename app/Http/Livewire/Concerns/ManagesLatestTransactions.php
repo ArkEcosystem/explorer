@@ -8,7 +8,7 @@ use App\Models\Scopes\OrderByTimestampScope;
 use App\Models\Transaction;
 use App\Services\Cache\TableCache;
 
-trait ManagesLatestTransactions
+trait WalletTransactionTable
 {
     use ManagesTransactionTypeScopes;
 
@@ -17,6 +17,8 @@ trait ManagesLatestTransactions
         $this->state['type'] = $value;
 
         $this->pollTransactions();
+
+        $this->gotoPage(1);
     }
 
     public function pollTransactions(): void
