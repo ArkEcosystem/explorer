@@ -23,7 +23,7 @@ final class BlockRepository implements Contract
     {
         return Block::query()
             ->where('id', $identifier)
-            ->orWhere('height', $identifier)
+            ->orWhere('height', (int) $identifier)
             ->firstOrFail();
     }
 }
