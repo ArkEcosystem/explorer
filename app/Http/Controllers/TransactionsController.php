@@ -12,7 +12,7 @@ final class TransactionsController
 {
     public function __invoke(Request $request, Transaction $transaction): View
     {
-        $type = $request->input('state.type', 'all');
+        $type = $request->input('type', 'all');
 
         return view('transactions', [
             'transactionTypeFilter' => $type,
