@@ -52,7 +52,6 @@ final class DelegateMonitor extends Component
                 'publicKey'  => $delegate['publicKey'],
                 'order'      => $i + 1,
                 'wallet'     => ViewModelFactory::make((new WalletCache())->getDelegate($delegate['publicKey'])),
-                // @TODO: instead of now we need to use the time at which the round starts
                 'forging_at' => Carbon::now()->addMilliseconds($delegate['time']),
                 'last_block' => (new WalletCache())->getLastBlock($delegate['publicKey']),
                 'status'     => $delegate['status'],
