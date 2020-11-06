@@ -100,8 +100,8 @@ final class Slot
         return Block::query()
             ->where('generator_public_key', $this->publicKey)
             ->whereBetween('height', [
-                Monitor::heightRangeByRound($this->roundNumber - 2)[0], // Start height from 2 rounds ago
-                Monitor::heightRangeByRound($this->roundNumber - 1)[1], // End height from 1 round ago
+                Monitor::heightRangeByRound($this->roundNumber - 1)[0], // Start height previous round
+                Monitor::heightRangeByRound($this->roundNumber)[1], // End height from current round
             ])
             ->count() < 2;
     }
