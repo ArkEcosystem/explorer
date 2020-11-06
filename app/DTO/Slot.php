@@ -6,6 +6,7 @@ namespace App\DTO;
 
 use App\Facades\Network;
 use App\Services\Cache\NetworkCache;
+use App\Services\Monitor\Monitor;
 use App\ViewModels\WalletViewModel;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
@@ -27,7 +28,9 @@ final class Slot
 
     private int $currentRoundBlocks;
 
-    public function __construct(array $data, Collection $roundBlocks)
+    private int $roundNumber;
+
+    public function __construct(array $data, Collection $roundBlocks, int $roundNumber)
     {
         foreach ($data as $key => $value) {
             /* @phpstan-ignore-next-line */
@@ -40,6 +43,8 @@ final class Slot
         $this->currentRoundBlocks = $roundBlocks
             ->where('generator_public_key', $data['publicKey'])
             ->count();
+
+        $this->roundNumber = $roundNumber;
     }
 
     public function publicKey(): string
@@ -91,8 +96,8 @@ final class Slot
             return false;
         }
 
-        // @TODO: check if the delegate forged any blocks in the last 2 rounds
-        return $this->missedCount() > (Network::delegateCount() * 3);
+        // Since we're not waiting in current round, more than 1 round between current and last forged block means we're missing 2+ consecutive rounds
+        return ($this->roundNumber - Monitor::roundNumberFromHeight($this->lastBlock['height'])) > 1;
     }
 
     public function missedCount(): int
