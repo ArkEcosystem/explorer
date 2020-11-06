@@ -17,6 +17,7 @@
     <div class="flex items-center space-x-2">
         <input
             type="number"
+            min="0"
             placeholder="0.00"
             class="w-full dark:text-theme-secondary-200 dark:bg-theme-secondary-900"
             wire:model.defer="state.balanceFrom"
@@ -28,6 +29,7 @@
 
         <input
             type="number"
+            min="0"
             placeholder="0.00"
             class="w-full dark:text-theme-secondary-200 dark:bg-theme-secondary-900"
             wire:model.defer="state.balanceTo"
