@@ -5,8 +5,9 @@ declare(strict_types=1);
 use App\Enums\CoreTransactionTypeEnum;
 use App\Enums\TransactionTypeGroupEnum;
 use App\Models\Transaction;
-use App\Services\Search\TransactionSearch;
 
+use App\Models\Wallet;
+use App\Services\Search\TransactionSearch;
 use App\Services\Timestamp;
 use Carbon\Carbon;
 use function Tests\configureExplorerDatabase;
@@ -175,4 +176,128 @@ it('should search for transactions by fee range', function () {
     ]);
 
     expect($result->get())->toHaveCount(10);
+});
+
+it('should search for transactions by wallet with an address', function () {
+    Transaction::factory(10)->create();
+
+    $wallet = Wallet::factory()->create([
+        'address'    => 'someaddress',
+        'public_key' => 'somepubkey',
+    ]);
+
+    Transaction::factory()->create([
+        'sender_public_key' => $wallet->public_key,
+    ]);
+
+    Transaction::factory()->create([
+        'recipient_id' => $wallet->address,
+    ]);
+
+    Transaction::factory()->create([
+        'asset' => [
+            'payments' => [
+                ['amount' => 10, 'recipientId' => $wallet->address],
+            ],
+        ],
+    ]);
+
+    $result = (new TransactionSearch())->search([
+        'term' => $wallet->address,
+    ]);
+
+    expect($result->get())->toHaveCount(3);
+});
+
+it('should search for transactions by wallet with a public key', function () {
+    Transaction::factory(10)->create();
+
+    $wallet = Wallet::factory()->create([
+        'public_key' => 'somepublickey',
+    ]);
+
+    Transaction::factory()->create([
+        'sender_public_key' => $wallet->public_key,
+    ]);
+
+    Transaction::factory()->create([
+        'recipient_id' => $wallet->address,
+    ]);
+
+    Transaction::factory()->create([
+        'asset' => [
+            'payments' => [
+                ['amount' => 10, 'recipientId' => $wallet->address],
+            ],
+        ],
+    ]);
+
+    $result = (new TransactionSearch())->search([
+        'term' => $wallet->public_key,
+    ]);
+
+    expect($result->get())->toHaveCount(3);
+});
+
+it('should search for transactions by wallet with a username', function () {
+    Transaction::factory(10)->create();
+
+    $wallet = Wallet::factory()->create([
+        'public_key' => 'somepubkey',
+        'attributes' => [
+            'delegate' => [
+                'username' => 'johndoe',
+            ],
+        ],
+    ]);
+
+    Transaction::factory()->create([
+        'sender_public_key' => $wallet->public_key,
+    ]);
+
+    Transaction::factory()->create([
+        'recipient_id' => $wallet->address,
+    ]);
+
+    Transaction::factory()->create([
+        'asset' => [
+            'payments' => [
+                ['amount' => 10, 'recipientId' => $wallet->address],
+            ],
+        ],
+    ]);
+
+    $result = (new TransactionSearch())->search([
+        'term' => 'johndoe',
+    ]);
+
+    expect($result->get())->toHaveCount(3);
+});
+
+it('should search for transactions by block with an ID', function () {
+    Transaction::factory(10)->create();
+
+    Transaction::factory()->create([
+        'block_id' => 'blockid',
+    ]);
+
+    $result = (new TransactionSearch())->search([
+        'term' => 'blockid',
+    ]);
+
+    expect($result->get())->toHaveCount(1);
+});
+
+it('should search for transactions by block with a height', function () {
+    Transaction::factory(10)->create();
+
+    Transaction::factory()->create([
+        'block_height' => 123456789,
+    ]);
+
+    $result = (new TransactionSearch())->search([
+        'term' => 123456789,
+    ]);
+
+    expect($result->get())->toHaveCount(1);
 });
