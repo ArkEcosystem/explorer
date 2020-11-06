@@ -27,11 +27,11 @@ final class MultiPaymentAmountValueRangeComposer
                 ->groupBy('i.id');
 
             if (! is_null($from) && $from > 0) {
-                $query->havingRaw('sum(am) >= ?', [(int) ($from * 1e8)]);
+                $query->havingRaw('sum(am) >= ?', [ $from * 1e8]);
             }
 
             if (! is_null($to) && $to > 0) {
-                $query->havingRaw('sum(am) <= ?', [(int) ($to * 1e8)]);
+                $query->havingRaw('sum(am) <= ?', [ $to * 1e8]);
             }
         });
 
