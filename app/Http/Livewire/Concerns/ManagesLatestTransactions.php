@@ -8,7 +8,7 @@ use App\Models\Scopes\OrderByTimestampScope;
 use App\Models\Transaction;
 use App\Services\Cache\TableCache;
 
-trait WalletTransactionTable
+trait ManagesLatestTransactions
 {
     use ManagesTransactionTypeScopes;
 
