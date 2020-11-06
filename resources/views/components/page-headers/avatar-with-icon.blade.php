@@ -4,13 +4,13 @@
     </div>
 </div>
 
-<div class="hidden lg:flex -mt-1 border-4 border-black rounded-full dark:border-theme-secondary-900">
+<div class="hidden -mt-1 border-4 border-black rounded-full lg:flex dark:border-theme-secondary-900">
     <div class="bg-black circled-icon text-theme-secondary-400 border-theme-secondary-700 dark:bg-theme-secondary-900">
         <x-general.avatar-small :identifier="$model->address()" />
     </div>
 </div>
 
 <div
-    class="flex lg:hidden bg-black circled-icon text-theme-secondary-400 border-theme-secondary-700 dark:bg-theme-secondary-900">
+    class="flex bg-black lg:hidden circled-icon text-theme-secondary-400 border-theme-secondary-700 dark:bg-theme-secondary-900">
     <x-general.avatar-small :identifier="$model->address()" />
 </div>

@@ -25,7 +25,7 @@
                 </div>
 
                 @if ($extraLogo ?? false)
-                    <div class="items-center flex">
+                    <div class="flex items-center">
                         {{ $extraLogo }}
                     </div>
                 @endif
