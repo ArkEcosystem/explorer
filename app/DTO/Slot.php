@@ -96,6 +96,7 @@ final class Slot
             return false;
         }
 
+        // @TODO: consider performance of live execution instead of caching
         return Block::query()
             ->where('generator_public_key', $this->publicKey)
             ->whereBetween('height', [
