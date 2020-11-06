@@ -26,7 +26,7 @@ final class SearchModule extends Component
 
     protected array $transactionOptionsValues = [
         '' => [
-            'all'
+            'all',
         ],
         'core' => [
             'transfer',
@@ -70,7 +70,6 @@ final class SearchModule extends Component
         ],
     ];
 
-
     public function mount(bool $isSlim = false): void
     {
         $this->isSlim = $isSlim;
@@ -79,14 +78,14 @@ final class SearchModule extends Component
     public function render(): View
     {
         return view('components.search', [
-            'isAdvanced'        => false,
-            'type'              => Arr::get($this->state, 'type', 'block'),
+            'isAdvanced'          => false,
+            'type'                => Arr::get($this->state, 'type', 'block'),
             'transactionOptions'  => $this->getTransactionOptions(),
         ]);
     }
 
     /**
-     * Map the transaction options as the rich select component expects
+     * Map the transaction options as the rich select component expects.
      */
     protected function getTransactionOptions(): array
     {
@@ -95,11 +94,11 @@ final class SearchModule extends Component
                 $key = strtoupper($group);
                 $value = collect($options)
                     ->mapWithKeys(function ($option) {
-                        return [$option => __('forms.search.transaction_types.' . $option)];
+                        return [$option => __('forms.search.transaction_types.'.$option)];
                     })->toArray();
 
                 return [
-                    $key => $value
+                    $key => $value,
                 ];
             })->toArray();
     }
