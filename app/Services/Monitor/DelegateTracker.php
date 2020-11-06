@@ -409,10 +409,14 @@ final class DelegateTracker
                 }
 
                 if ($index > $forgingInfo['nextForger']) {
+                    $nextTime = (($forgingIndex) * Network::blockTime() * 1000);
+
+                    $forgingIndex++;
+
                     return [
                         'publicKey' => $publicKey,
                         'status'    => 'pending',
-                        'time'      => (($forgingIndex++) * Network::blockTime() * 1000),
+                        'time'      => $nextTime,
                         'order'     => $index,
                     ];
                 }
