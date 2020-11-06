@@ -1,5 +1,5 @@
 <x-general.search.advanced-option :title="trans('forms.search.type')">
-    <x-rich-select
+    <x-ark-rich-select
         wrapper-class=""
         button-class="block font-medium text-left bg-transparent text-theme-secondary-900 dark:text-theme-secondary-200"
         initial-value="wallet"
