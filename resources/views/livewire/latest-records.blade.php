@@ -9,7 +9,7 @@
             <h2 class="mb-8 text-3xl md:mb-0 sm:text-4xl">@lang('pages.home.transactions_and_blocks')</h2>
 
             <div x-show="selected === 'transactions'">
-                <x-transaction-table-filter />
+                <x-transaction-table-filter :type="$state['type']"/>
             </div>
         </div>
     </div>
