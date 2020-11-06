@@ -22,8 +22,7 @@
                         <x-tables.rows.mobile.slot-id :model="$delegate" />
                     </td>
 
-                    {{-- Have to suffix it with a -2 to avoid issues with the other same wire:key for the desktop component --}}
-                    <td wire:key="{{ $delegate->publicKey() }}-username-2">
+                    <td wire:key="{{ $delegate->publicKey() }}-username-mobile">
                         <x-tables.rows.mobile.username-with-avatar :model="$delegate->wallet()" />
                     </td>
 
@@ -31,8 +30,7 @@
                         <x-tables.rows.mobile.slot-time :model="$delegate" />
                     </td>
 
-                    {{-- Have to suffix it with a -2 to avoid issues with the other same wire:key for the desktop component --}}
-                    <td wire:key="{{ $delegate->publicKey() }}-round-status-{{ $delegate->status() }}-2">
+                    <td wire:key="{{ $delegate->publicKey() }}-round-status-{{ $delegate->status() }}-mobile">
                         <x-tables.rows.mobile.round-status :model="$delegate" />
                     </td>
                 </tr>
