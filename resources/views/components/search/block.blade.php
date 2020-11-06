@@ -1,9 +1,8 @@
 <x-general.search.advanced-option :title="trans('forms.search.type')">
     <x-ark-rich-select
-        wrapper-class=""
-        button-class="block font-medium text-left bg-transparent text-theme-secondary-900 dark:text-theme-secondary-200"
+        button-class="block w-full font-medium text-left bg-transparent text-theme-secondary-900 dark:text-theme-secondary-200"
         initial-value="block"
-        :dispatch-event="'search-type-changed'"
+        dispatch-event="search-type-changed"
         wire:model.defer="state.type"
         :options="[
             'block' => __('forms.search.block'),
@@ -14,7 +13,7 @@
 </x-general.search.advanced-option>
 
 <x-general.search.advanced-option :title="trans('forms.search.height_range')">
-    <div @custom-event.window="console.log($event.detail)" class="flex items-center space-x-2">
+    <div class="flex items-center space-x-2">
         <input
             type="number"
             min="0"

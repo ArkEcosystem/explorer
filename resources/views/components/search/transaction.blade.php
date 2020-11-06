@@ -1,9 +1,10 @@
+@props(['transactionOptions'])
+
 <x-general.search.advanced-option :title="trans('forms.search.type')">
     <x-ark-rich-select
-        wrapper-class=""
-        button-class="block font-medium text-left bg-transparent text-theme-secondary-900 dark:text-theme-secondary-200"
+        button-class="block w-full font-medium text-left bg-transparent text-theme-secondary-900 dark:text-theme-secondary-200"
         initial-value="transaction"
-        :dispatch-event="'search-type-changed'"
+        dispatch-event="search-type-changed"
         wire:model.defer="state.type"
         :options="[
             'block' => __('forms.search.block'),
@@ -15,13 +16,11 @@
 
 <x-general.search.advanced-option :title="trans('forms.search.transaction_type')">
     <x-ark-rich-select
-        wrapper-class=""
-        button-class="block font-medium text-left bg-transparent text-theme-secondary-900 dark:text-theme-secondary-200"
+        button-class="block w-full font-medium text-left bg-transparent text-theme-secondary-900 dark:text-theme-secondary-200"
         initial-value="all"
         wire:model.defer="state.transactionType"
-        :options="collect(trans('forms.search.transaction_types'))->mapWithKeys(function ($value, $key) {
-            return [$key => $value];
-        })->toArray()"
+        :options="$transactionOptions"
+        :grouped="true"
     />
 </x-general.search.advanced-option>
 

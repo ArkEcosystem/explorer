@@ -24,6 +24,53 @@ final class SearchModule extends Component
         'state' => ['except' => []],
     ];
 
+    protected array $transactionOptionsValues = [
+        '' => [
+            'all'
+        ],
+        'core' => [
+            'transfer',
+            'secondSignature',
+            'delegateRegistration',
+            'vote',
+            'voteCombination',
+            'multiSignature',
+            'ipfs',
+            'multiPayment',
+            'timelock',
+            'timelockClaim',
+            'timelockRefund',
+        ],
+        'magistrate' => [
+            'businessEntityRegistration',
+            'businessEntityResignation',
+            'businessEntityUpdate',
+            'delegateEntityRegistration',
+            'delegateEntityResignation',
+            'delegateEntityUpdate',
+            'delegateResignation',
+            'entityRegistration',
+            'entityResignation',
+            'entityUpdate',
+            'legacyBridgechainRegistration',
+            'legacyBridgechainResignation',
+            'legacyBridgechainUpdate',
+            'legacyBusinessRegistration',
+            'legacyBusinessResignation',
+            'legacyBusinessUpdate',
+            'moduleEntityRegistration',
+            'moduleEntityResignation',
+            'moduleEntityUpdate',
+            'pluginEntityRegistration',
+            'pluginEntityResignation',
+            'pluginEntityUpdate',
+            'productEntityRegistration',
+            'productEntityResignation',
+            'productEntityUpdate',
+        ],
+    ];
+
+
     public function mount(bool $isSlim = false): void
     {
         $this->isSlim = $isSlim;
@@ -32,9 +79,29 @@ final class SearchModule extends Component
     public function render(): View
     {
         return view('components.search', [
-            'isAdvanced' => false,
-            'type'       => Arr::get($this->state, 'type', 'block'),
+            'isAdvanced'        => false,
+            'type'              => Arr::get($this->state, 'type', 'block'),
+            'transactionOptions'  => $this->getTransactionOptions(),
         ]);
+    }
+
+    /**
+     * Map the transaction options as the rich select component expects
+     */
+    protected function getTransactionOptions(): array
+    {
+        return collect($this->transactionOptionsValues)
+            ->mapWithKeys(function ($options, $group) {
+                $key = strtoupper($group);
+                $value = collect($options)
+                    ->mapWithKeys(function ($option) {
+                        return [$option => __('forms.search.transaction_types.' . $option)];
+                    })->toArray();
+
+                return [
+                    $key => $value
+                ];
+            })->toArray();
     }
 
     public function performSearch(): void

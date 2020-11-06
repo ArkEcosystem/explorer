@@ -94,17 +94,23 @@
             @endunless
             x-cloak
         >
-            <div class="search-advanced-options" x-show="searchType === 'block'">
-                <x-search.block />
-            </div>
+            <template x-if="searchType === 'block'">
+                <div class="search-advanced-options">
+                    <x-search.block />
+                </div>
+            </template>
 
-            <div class="search-advanced-options" x-show="searchType === 'transaction'">
-                <x-search.transaction />
-            </div>
+            <template x-if="searchType === 'transaction'">
+                <div class="search-advanced-options">
+                    <x-search.transaction :transaction-options="$transactionOptions" />
+                </div>
+            </template>
 
-            <div class="search-advanced-options" x-show="searchType === 'wallet'">
-                <x-search.wallet />
-            </div>
+            <template x-if="searchType === 'wallet'">
+                <div class="search-advanced-options">
+                    <x-search.wallet />
+                </div>
+            </template>
         </div>
 
         <div
