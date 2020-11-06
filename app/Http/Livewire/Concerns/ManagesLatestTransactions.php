@@ -17,8 +17,6 @@ trait ManagesLatestTransactions
         $this->state['type'] = $value;
 
         $this->pollTransactions();
-
-        $this->gotoPage(1);
     }
 
     public function pollTransactions(): void
