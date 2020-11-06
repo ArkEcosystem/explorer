@@ -9,7 +9,7 @@ use Illuminate\Support\Arr;
 
 final class MultiPaymentAmountValueRangeComposer
 {
-    public static function compose(Builder $query, array $parameters, bool $useSatoshi = true): Builder
+    public static function compose(Builder $query, array $parameters): Builder
     {
         $from = Arr::get($parameters, 'amountFrom');
         $to   = Arr::get($parameters, 'amountTo');
@@ -20,7 +20,7 @@ final class MultiPaymentAmountValueRangeComposer
 
         $query->where('amount', '=', 0);
 
-        $query->whereExists(function (\Illuminate\Database\Query\Builder $query) use ($useSatoshi, $to, $from): void {
+        $query->whereExists(function (\Illuminate\Database\Query\Builder $query) use ($to, $from): void {
             $query->selectRaw('i.id')
                 ->fromRaw("( SELECT id, (jsonb_array_elements(asset -> 'payments') ->> 'amount')::bigint am FROM transactions t WHERE t.id = id ) i")
                 ->whereRaw('i.id = transactions.id')
