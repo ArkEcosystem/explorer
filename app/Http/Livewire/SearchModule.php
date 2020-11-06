@@ -18,6 +18,8 @@ final class SearchModule extends Component
     use ManagesSearch;
 
     public bool $isSlim = false;
+    public bool $isAdvanced = false;
+    public string $type = 'block';
 
     /** @phpstan-ignore-next-line */
     protected $queryString = [
@@ -70,17 +72,17 @@ final class SearchModule extends Component
         ],
     ];
 
-    public function mount(bool $isSlim = false): void
+    public function mount(bool $isSlim = false, bool $isAdvanced = false, string $type = 'block'): void
     {
+        $this->isAdvanced = $isAdvanced;
         $this->isSlim = $isSlim;
+        $this->type = $type;
     }
 
     public function render(): View
     {
         return view('components.search', [
-            'isAdvanced'          => false,
-            'type'                => Arr::get($this->state, 'type', 'block'),
-            'transactionOptions'  => $this->getTransactionOptions(),
+            'transactionOptions' => $this->getTransactionOptions(),
         ]);
     }
 
