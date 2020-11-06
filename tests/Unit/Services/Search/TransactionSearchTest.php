@@ -144,6 +144,29 @@ it('should search for multipayment transactions by amount range', function () {
     expect($result->get())->toHaveCount(1);
 });
 
+it('should search for multipayment transactions by amount range with decimals', function () {
+    Transaction::factory()->create([
+        'type_group' => TransactionTypeGroupEnum::CORE,
+        'type'       => CoreTransactionTypeEnum::MULTI_PAYMENT,
+        'amount'     => 0,
+        'asset'      => [
+            'payments' => [
+                ['amount' => 0.45 * 1e8, 'recipientId' => 'D61mfSggzbvQgTUe6JhYKH2doHaqJ3Dyib'],
+                ['amount' => 0.50 * 1e8, 'recipientId' => 'DFJ5Z51F1euNNdRUQJKQVdG4h495LZkc6T'],
+            ],
+        ],
+    ]);
+    Transaction::factory()->create(['amount' => 2000 * 1e8]);
+
+    $result = (new TransactionSearch())->search([
+        'transactionType' => 'multiPayment',
+        'amountFrom'      => 0.900,
+        'amountTo'        => 1.100,
+    ]);
+
+    expect($result->get())->toHaveCount(1);
+});
+
 it('should search for transactions by fee minimum', function () {
     Transaction::factory(10)->create(['fee' => 1000 * 1e8]);
     Transaction::factory(10)->create(['fee' => 2000 * 1e8]);
