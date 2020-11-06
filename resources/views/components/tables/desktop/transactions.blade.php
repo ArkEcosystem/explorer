@@ -4,7 +4,11 @@
             <tr>
                 <x-tables.headers.desktop.text name="general.transaction.id" />
                 <x-tables.headers.desktop.text name="general.transaction.timestamp" responsive />
-                <x-tables.headers.desktop.address name="general.transaction.sender" icon />
+                @isset($useDirection)
+                    <x-tables.headers.desktop.address name="general.transaction.sender" icon use-direction />
+                @else
+                    <x-tables.headers.desktop.address name="general.transaction.sender" icon />
+                @endif
                 <x-tables.headers.desktop.address name="general.transaction.recipient" />
                 <x-tables.headers.desktop.number name="general.transaction.amount" />
                 <x-tables.headers.desktop.number name="general.transaction.fee" responsive breakpoint="xl" />
