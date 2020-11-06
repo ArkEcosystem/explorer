@@ -1,7 +1,7 @@
 @if($model->justMissed())
-    <span>@lang('generic.n-a')</span>
-@elseif(! $model->isDone())
-    <span>@lang('generic.tbd')</span>
+    <span>@lang('generic.not-available')</span>
+@elseif($model->isPending())
+    <span>@lang('generic.to-be-done')</span>
 @elseif($model->lastBlock())
     <a href="{{ route('block', $model->lastBlock()['id']) }}" class="font-semibold link">
         <x-truncate-middle :value="$model->lastBlock()['id']" />
