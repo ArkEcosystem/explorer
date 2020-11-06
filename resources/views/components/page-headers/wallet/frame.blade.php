@@ -16,27 +16,27 @@
 
                 <div class="ml-2 divide-x divide-gray-400 wallet-icons-row">
                     @if ($wallet->isKnown())
-                        <span>
+                        <div data-tippy-content="@lang('labels.verified_address')">
                             <x-icon name="app-verified" size="sm" />
-                        </span>
+                        </div>
                     @endif
 
                     @if ($wallet->hasMultiSignature())
-                        <span>
+                        <div data-tippy-content="@lang('labels.multi_signature')">
                             <x-icon name="app.transactions-multi-signature" size="sm" />
-                        </span>
+                        </div>
                     @endif
 
                     @if ($wallet->isOwnedByExchange())
-                        <span>
+                        <div data-tippy-content="@lang('labels.exchange')">
                             <x-icon name="app-exchange" size="sm" />
-                        </span>
+                        </div>
                     @endif
 
                     @if ($wallet->hasSecondSignature())
-                        <span>
+                        <div data-tippy-content="@lang('labels.second_signature')">
                             <x-icon name="app.transactions-second-signature" size="sm" />
-                        </span>
+                        </div>
                     @endif
                 </div>
             </x-slot>
