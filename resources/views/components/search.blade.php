@@ -94,12 +94,13 @@
             @endunless
             x-cloak
         >
+
             <div class="search-advanced-options" x-show="searchType === 'block'">
                 <x-search.block />
             </div>
 
             <div class="search-advanced-options" x-show="searchType === 'transaction'">
-                <x-search.transaction :transaction-options="$transactionOptions" />
+                <x-search.transaction :transaction-options="$transactionOptions" :transaction-type="Arr::get($state, 'transactionType', 'all')" />
             </div>
 
             <div class="search-advanced-options" x-show="searchType === 'wallet'">

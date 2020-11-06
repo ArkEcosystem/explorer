@@ -1,4 +1,4 @@
-@props(['transactionOptions'])
+@props(['transactionOptions', 'transactionType' => 'all'])
 
 <x-general.search.advanced-option :title="trans('forms.search.type')">
     <x-ark-rich-select
@@ -16,9 +16,10 @@
 </x-general.search.advanced-option>
 
 <x-general.search.advanced-option :title="trans('forms.search.transaction_type')">
+
     <x-ark-rich-select
         button-class="block w-full font-medium text-left bg-transparent text-theme-secondary-900 dark:text-theme-secondary-200"
-        initial-value="all"
+        :initial-value="$transactionType"
         wire:model.defer="state.transactionType"
         :options="$transactionOptions"
         :grouped="true"
