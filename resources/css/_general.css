@@ -532,10 +532,10 @@ body {
 }
 
 /* Wallet status icons */
-.wallet-icon-grid {
+.wallet-icons-row {
     @apply flex items-center;
 }
 
-.wallet-icon-grid > *:not(:first-child) {
+.wallet-icons-row  > *:not(:first-child) {
     @apply pl-2 ml-2;
 }
