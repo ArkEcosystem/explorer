@@ -256,28 +256,6 @@
                 })->toArray()"
                 dispatch-event="chart-period-selected"
             />
-
-            {{-- <x-ark-dropdown dropdown-classes="left-0 w-32 mt-3" button-class="w-32 h-10 dropdown-button" :init-alpine="false">
-                @slot('button')
-                <div
-                    class="flex items-center justify-end w-full space-x-2 font-semibold flex-inline text-theme-secondary-700">
-                    <span x-text="period"></span>
-                    <span :class="{ 'rotate-180': open }" class="transition duration-150 ease-in-out">
-                        <x-icon name="chevron-up" size="xs" />
-                    </span>
-                </div>
-                @endslot
-                <div class="py-3">
-                    @foreach (array_keys(trans('pages.home.charts.periods')) as $period)
-                    <div class="cursor-pointer dropdown-entry"
-                        :class="{ 'dropdown-entry-selected': isActivePeriod('{{ ucfirst($period) }}') === true}"
-                        dispatch-event="search-type-changed"
-                        @click="setPeriod('{{ $period }}')">
-                        @lang("pages.home.charts.periods." . $period)
-                    </div>
-                    @endforeach
-                </div>
-            </x-ark-dropdown> --}}
         </div>
         <div class="flex justify-between w-full mt-5 mb-5">
             <div
