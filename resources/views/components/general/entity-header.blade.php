@@ -23,6 +23,12 @@
                         </span>
                     </div>
                 </div>
+
+                @if ($extraLogo ?? false)
+                    <div class="items-center flex">
+                        {{ $extraLogo }}
+                    </div>
+                @endif
             </div>
 
             @if ($extension ?? false)
