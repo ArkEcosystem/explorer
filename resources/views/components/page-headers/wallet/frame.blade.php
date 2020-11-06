@@ -14,7 +14,7 @@
                     @endif
                 @endif
 
-                <div class="ml-2 grid grid-cols-4 divide-x divide-gray-400">
+                <div class="grid grid-cols-4 ml-2 divide-x divide-gray-400">
                     @if (!$wallet->isKnown())
                     <span class="">
                         <x-icon name="app-verified" size="sm" />
