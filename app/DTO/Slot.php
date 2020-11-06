@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\DTO;
 
-use App\Facades\Network;
 use App\Services\Cache\NetworkCache;
 use App\Services\Monitor\Monitor;
 use App\ViewModels\WalletViewModel;
