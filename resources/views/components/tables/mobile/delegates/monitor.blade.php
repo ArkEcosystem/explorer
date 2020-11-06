@@ -4,7 +4,7 @@
             <tr>
                 <x-tables.headers.mobile.number name="pages.delegates.order" alignment="text-left" />
                 <x-tables.headers.mobile.address name="pages.delegates.name" />
-                <x-tables.headers.mobile.text name="pages.delegates.forging_at" alignment="text-center" responsive/>
+                <x-tables.headers.mobile.text name="pages.delegates.forging_at" alignment="text-left" responsive/>
                 <x-tables.headers.mobile.status name="pages.delegates.status" alignment="text-left" />
             </tr>
         </thead>
