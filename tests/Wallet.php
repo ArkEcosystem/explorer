@@ -11,6 +11,7 @@ use Illuminate\Support\Collection;
 final class Wallet extends Base
 {
     private static $wallets;
+
     private Collection $availableWallets;
 
     public function __construct(Generator $generator)
