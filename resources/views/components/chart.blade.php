@@ -242,7 +242,7 @@
     class="flex flex-col w-full bg-white border-theme-secondary-100 dark:border-black dark:bg-theme-secondary-900">
     <div class="flex flex-col w-full">
         <div class="relative flex items-center justify-between w-full">
-            <h2>@lang("pages.home.charts.{$identifier}")</h2>
+            <h3>@lang("pages.home.charts.{$identifier}")</h3>
 
             <x-ark-dropdown dropdown-classes="left-0 w-32 mt-3" button-class="w-32 h-10 dropdown-button" :init-alpine="false">
                 @slot('button')
