@@ -1428,4 +1428,3 @@ it('should fail to get the vendor field if it is empty after reading it', functi
 
     expect($this->subject->vendorField())->toBeNull();
 });
-*/
