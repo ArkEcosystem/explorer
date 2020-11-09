@@ -18,6 +18,15 @@ beforeEach(function () {
     (new NetworkCache())->setSupply(strval(10e8));
 });
 
+it('should search for blocks in simple search', function () {
+    $block = Block::factory()->create();
+
+    Livewire::test(SearchPage::class)
+        ->set('state.term', $block->id)
+        ->call('performSearch')
+        ->assertSee($block->id);
+});
+
 it('should search for blocks', function () {
     $block = Block::factory()->create();
 
@@ -26,6 +35,18 @@ it('should search for blocks', function () {
         ->set('state.term', $block->id)
         ->call('performSearch')
         ->assertSee($block->id);
+});
+
+it('should search for transactions in simple search', function () {
+    $transaction = Transaction::factory()->create([
+        'type'       => CoreTransactionTypeEnum::TRANSFER,
+        'type_group' => TransactionTypeGroupEnum::CORE,
+    ]);
+
+    Livewire::test(SearchPage::class)
+        ->set('state.term', $transaction->id)
+        ->call('performSearch')
+        ->assertSee($transaction->id);
 });
 
 it('should search for transactions', function () {
