@@ -55,7 +55,7 @@
 
             @if($wallet->isDelegate())
                 <x-slot name="extraLogo">
-                    <div class="-mr-2 lg:hidden circled-icon text-theme-secondary-400 border-theme-danger-400">
+                    <div class="lg:hidden circled-icon text-theme-secondary-400 border-theme-danger-400">
                         <x-icon name="app-delegate" />
                     </div>
                 </x-slot>
