@@ -49,12 +49,15 @@ final class WalletQrCode extends Component
     public function getWalletUriProperty(): string
     {
         $data = [
-            'recipient'   => $this->address,
             'amount'      => $this->amount ?: null,
             'vendorField' => $this->smartbridge ?: null,
         ];
 
-        return 'ark:transfer?'.http_build_query($data);
+        return sprintf(
+            'ark:%s?',
+            $this->address,
+            http_build_query($data)
+        );
     }
 
     public function getCodeProperty(): string
