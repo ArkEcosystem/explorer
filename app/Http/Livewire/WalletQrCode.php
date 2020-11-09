@@ -46,7 +46,7 @@ final class WalletQrCode extends Component
         $this->isOpen = ! $this->isOpen;
 
         if ($this->isOpen) {
-            $this->amount = null;
+            $this->amount      = null;
             $this->smartbridge = null;
         }
     }
