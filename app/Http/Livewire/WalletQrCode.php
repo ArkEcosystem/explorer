@@ -34,7 +34,7 @@ final class WalletQrCode extends Component
     public function updated(string $propertyName): void
     {
         $this->validateOnly($propertyName, [
-            'amount'      => ['numeric'],
+            'amount'      => ['numeric', 'min:0.00000001'],
             'smartbridge' => ['string', 'max:255'],
         ]);
     }
