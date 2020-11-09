@@ -31,10 +31,10 @@ trait ManagesSearch
             'state.generatorPublicKey' => ['nullable', 'string', 'max:255'],
             // Transactions
             'state.transactionType' => ['nullable', Rule::in(array_keys(trans('forms.search.transaction_types')))],
-            'state.amountFrom'      => ['nullable', 'numeric', 'min:0', 'max:100'],
-            'state.amountTo'        => ['nullable', 'numeric', 'min:0', 'max:100'],
-            'state.feeFrom'         => ['nullable', 'numeric', 'min:0', 'max:100'],
-            'state.feeTo'           => ['nullable', 'numeric', 'min:0', 'max:100'],
+            'state.amountFrom'      => ['nullable', 'numeric', 'min:0'],
+            'state.amountTo'        => ['nullable', 'numeric', 'min:0'],
+            'state.feeFrom'         => ['nullable', 'numeric', 'min:0'],
+            'state.feeTo'           => ['nullable', 'numeric', 'min:0'],
             'state.smartBridge'     => ['nullable', 'string', 'max:255'],
             // Wallets
             'state.username'    => ['nullable', 'string', 'max:255'],

@@ -313,3 +313,332 @@ it('should search for blocks by generator with a username', function () {
         ->call('performSearch')
         ->assertSee($block->id);
 });
+
+it('should search for a transaction by id', function () {
+    $transaction = Transaction::factory(10)->create()[0];
+
+    Livewire::test(SearchPage::class)
+        ->set('state.type', 'transaction')
+        ->set('state.transactionType', 'all')
+        ->set('state.term', $transaction->id)
+        ->call('performSearch')
+        ->assertSee($transaction->id);
+});
+
+it('should search for a transaction by vendor field', function () {
+    $transaction = Transaction::factory(10)->create()[0];
+    $transaction->update(['vendor_field' => 'Hello World']);
+
+    Livewire::test(SearchPage::class)
+        ->set('state.type', 'transaction')
+        ->set('state.transactionType', 'all')
+        ->set('state.smartBridge', $transaction->vendor_field)
+        ->call('performSearch')
+        ->assertSee($transaction->id);
+});
+
+it('should search for transactions by timestamp minimum', function () {
+    $today = Carbon::now();
+    $todayGenesis = Timestamp::fromUnix($today->unix())->unix();
+
+    $yesterday = Carbon::now()->subDay();
+    $yesterdayGenesis = Timestamp::fromUnix($yesterday->unix())->unix();
+
+    $transactions = Transaction::factory(10)->create(['timestamp' => $todayGenesis]);
+    Transaction::factory(10)->create(['timestamp' => $yesterdayGenesis]);
+
+    Livewire::test(SearchPage::class)
+        ->set('state.type', 'transaction')
+        ->set('state.transactionType', 'all')
+        ->set('state.dateFrom', $today->toString())
+        ->call('performSearch')
+        ->assertSeeInOrder($transactions->pluck('id')->toArray());
+});
+
+it('should search for transactions by timestamp maximum', function () {
+    $today = Carbon::now();
+    $todayGenesis = Timestamp::fromUnix($today->unix())->unix();
+
+    $yesterday = Carbon::now()->subDay();
+    $yesterdayGenesis = Timestamp::fromUnix($yesterday->unix())->unix();
+
+    Transaction::factory(10)->create(['timestamp' => $todayGenesis]);
+    $transactions = Transaction::factory(10)->create(['timestamp' => $yesterdayGenesis]);
+
+    Livewire::test(SearchPage::class)
+        ->set('state.type', 'transaction')
+        ->set('state.transactionType', 'all')
+        ->set('state.dateTo', $yesterday->toString())
+        ->call('performSearch')
+        ->assertSeeInOrder($transactions->pluck('id')->toArray());
+});
+
+it('should search for transactions by timestamp range', function () {
+    $today = Carbon::now();
+    $todayGenesis = Timestamp::fromUnix($today->unix())->unix();
+
+    $yesterday = Carbon::now()->subDay();
+    $yesterdayGenesis = Timestamp::fromUnix($yesterday->unix())->unix();
+
+    Transaction::factory(10)->create(['timestamp' => $todayGenesis]);
+    $transactions = Transaction::factory(10)->create(['timestamp' => $yesterdayGenesis]);
+
+    Livewire::test(SearchPage::class)
+        ->set('state.type', 'transaction')
+        ->set('state.transactionType', 'all')
+        ->set('state.dateFrom', $yesterday->toString())
+        ->set('state.dateTo', $yesterday->toString())
+        ->call('performSearch')
+        ->assertSeeInOrder($transactions->pluck('id')->toArray());
+});
+
+it('should search for transactions by amount minimum', function () {
+    Transaction::factory(10)->create(['amount' => 1000 * 1e8]);
+    $transactions = Transaction::factory(10)->create(['amount' => 2000 * 1e8]);
+
+    Livewire::test(SearchPage::class)
+        ->set('state.type', 'transaction')
+        ->set('state.transactionType', 'all')
+        ->set('state.amountFrom', 2000)
+        ->call('performSearch')
+        ->assertSeeInOrder($transactions->pluck('id')->toArray());
+});
+
+it('should search for transactions by amount maximum', function () {
+    $transactions = Transaction::factory(10)->create(['amount' => 1000 * 1e8]);
+    Transaction::factory(10)->create(['amount' => 2000 * 1e8]);
+
+    Livewire::test(SearchPage::class)
+        ->set('state.type', 'transaction')
+        ->set('state.transactionType', 'all')
+        ->set('state.amountTo', 1000)
+        ->call('performSearch')
+        ->assertSeeInOrder($transactions->pluck('id')->toArray());
+});
+
+it('should search for transactions by amount range', function () {
+    $transactions = Transaction::factory(10)->create(['amount' => 1000 * 1e8]);
+    Transaction::factory(10)->create(['amount' => 2000 * 1e8]);
+
+    Livewire::test(SearchPage::class)
+        ->set('state.type', 'transaction')
+        ->set('state.transactionType', 'all')
+        ->set('state.amountFrom', 500)
+        ->set('state.amountTo', 1500)
+        ->call('performSearch')
+        ->assertSeeInOrder($transactions->pluck('id')->toArray());
+});
+
+it('should search for multipayment transactions by amount range', function () {
+    $transaction = Transaction::factory()->create([
+        'type_group' => TransactionTypeGroupEnum::CORE,
+        'type'       => CoreTransactionTypeEnum::MULTI_PAYMENT,
+        'amount'     => 0,
+        'asset'      => [
+            'payments' => [
+                ['amount' => 750 * 1e8, 'recipientId' => 'D61mfSggzbvQgTUe6JhYKH2doHaqJ3Dyib'],
+                ['amount' => 251 * 1e8, 'recipientId' => 'DFJ5Z51F1euNNdRUQJKQVdG4h495LZkc6T'],
+            ],
+        ],
+    ]);
+    $transaction2 = Transaction::factory()->create(['amount' => 2000 * 1e8]);
+
+    Livewire::test(SearchPage::class)
+        ->set('state.type', 'transaction')
+        ->set('state.transactionType', 'multiPayment')
+        ->set('state.amountFrom', 900)
+        ->set('state.amountTo', 1100)
+        ->call('performSearch')
+        ->assertSee($transaction->id)
+        ->assertDontSee($transaction2->id);
+});
+
+it('should search for multipayment transactions by amount range with decimals', function () {
+    $transaction = Transaction::factory()->create([
+        'type_group' => TransactionTypeGroupEnum::CORE,
+        'type'       => CoreTransactionTypeEnum::MULTI_PAYMENT,
+        'amount'     => 0,
+        'asset'      => [
+            'payments' => [
+                ['amount' => 0.45 * 1e8, 'recipientId' => 'D61mfSggzbvQgTUe6JhYKH2doHaqJ3Dyib'],
+                ['amount' => 0.50 * 1e8, 'recipientId' => 'DFJ5Z51F1euNNdRUQJKQVdG4h495LZkc6T'],
+            ],
+        ],
+    ]);
+    $transaction2 = Transaction::factory()->create(['amount' => 2000 * 1e8]);
+
+    Livewire::test(SearchPage::class)
+        ->set('state.type', 'transaction')
+        ->set('state.transactionType', 'multiPayment')
+        ->set('state.amountFrom', 0.9)
+        ->set('state.amountTo', 1.1)
+        ->call('performSearch')
+        ->assertSee($transaction->id)
+        ->assertDontSee($transaction2->id);
+});
+
+it('should search for transactions by fee minimum', function () {
+    Transaction::factory(10)->create(['fee' => 1000 * 1e8]);
+    $transactions = Transaction::factory(10)->create(['fee' => 2000 * 1e8]);
+
+    Livewire::test(SearchPage::class)
+        ->set('state.type', 'transaction')
+        ->set('state.transactionType', 'all')
+        ->set('state.feeFrom', 2000)
+        ->call('performSearch')
+        ->assertSeeInOrder($transactions->pluck('id')->toArray());
+});
+
+it('should search for transactions by fee maximum', function () {
+    $transactions = Transaction::factory(10)->create(['fee' => 1000 * 1e8]);
+    Transaction::factory(10)->create(['fee' => 2000 * 1e8]);
+
+    Livewire::test(SearchPage::class)
+        ->set('state.type', 'transaction')
+        ->set('state.transactionType', 'all')
+        ->set('state.feeTo', 1000)
+        ->call('performSearch')
+        ->assertSeeInOrder($transactions->pluck('id')->toArray());
+});
+
+it('should search for transactions by fee range', function () {
+    $transactions = Transaction::factory(10)->create(['fee' => 1000 * 1e8]);
+    Transaction::factory(10)->create(['fee' => 2000 * 1e8]);
+
+    Livewire::test(SearchPage::class)
+        ->set('state.type', 'transaction')
+        ->set('state.transactionType', 'all')
+        ->set('state.feeFrom', 500)
+        ->set('state.feeTo', 1500)
+        ->call('performSearch')
+        ->assertSeeInOrder($transactions->pluck('id')->toArray());
+});
+
+it('should search for transactions by wallet with an address', function () {
+    Transaction::factory(10)->create();
+
+    $wallet = Wallet::factory()->create();
+
+    $tx1 = Transaction::factory()->create([
+        'sender_public_key' => $wallet->public_key,
+    ]);
+
+    $tx2 = Transaction::factory()->create([
+        'recipient_id' => $wallet->address,
+    ]);
+
+    $tx3 = Transaction::factory()->create([
+        'asset' => [
+            'payments' => [
+                ['amount' => 10, 'recipientId' => $wallet->address],
+            ],
+        ],
+    ]);
+
+    Livewire::test(SearchPage::class)
+        ->set('state.type', 'transaction')
+        ->set('state.transactionType', 'all')
+        ->set('state.term', $wallet->address)
+        ->call('performSearch')
+        ->assertSee($tx1->id)
+        ->assertSee($tx2->id)
+        ->assertSee($tx3->id);
+});
+
+it('should search for transactions by wallet with a public key', function () {
+    Transaction::factory(10)->create();
+
+    $wallet = Wallet::factory()->create();
+
+    $tx1 = Transaction::factory()->create([
+        'sender_public_key' => $wallet->public_key,
+    ]);
+
+    $tx2 = Transaction::factory()->create([
+        'recipient_id' => $wallet->address,
+    ]);
+
+    $tx3 = Transaction::factory()->create([
+        'asset' => [
+            'payments' => [
+                ['amount' => 10, 'recipientId' => $wallet->address],
+            ],
+        ],
+    ]);
+
+    Livewire::test(SearchPage::class)
+        ->set('state.type', 'transaction')
+        ->set('state.transactionType', 'all')
+        ->set('state.term', $wallet->public_key)
+        ->call('performSearch')
+        ->assertSee($tx1->id)
+        ->assertSee($tx2->id)
+        ->assertSee($tx3->id);
+});
+
+it('should search for transactions by wallet with a username', function () {
+    Transaction::factory(10)->create();
+
+    $wallet = Wallet::factory()->create([
+        'attributes' => [
+            'delegate' => [
+                'username' => 'johndoe',
+            ],
+        ],
+    ]);
+
+    $tx1 = Transaction::factory()->create([
+        'sender_public_key' => $wallet->public_key,
+    ]);
+
+    $tx2 = Transaction::factory()->create([
+        'recipient_id' => $wallet->address,
+    ]);
+
+    $tx3 = Transaction::factory()->create([
+        'asset' => [
+            'payments' => [
+                ['amount' => 10, 'recipientId' => $wallet->address],
+            ],
+        ],
+    ]);
+
+    Livewire::test(SearchPage::class)
+        ->set('state.type', 'transaction')
+        ->set('state.transactionType', 'all')
+        ->set('state.term', 'johndoe')
+        ->call('performSearch')
+        ->assertSee($tx1->id)
+        ->assertSee($tx2->id)
+        ->assertSee($tx3->id);
+});
+
+it('should search for transactions by block with an ID', function () {
+    Transaction::factory(10)->create();
+
+    $tx = Transaction::factory()->create([
+        'block_id' => 'blockid',
+    ]);
+
+    Livewire::test(SearchPage::class)
+        ->set('state.type', 'transaction')
+        ->set('state.transactionType', 'all')
+        ->set('state.term', 'blockid')
+        ->call('performSearch')
+        ->assertSee($tx->id);
+});
+
+it('should search for transactions by block with a height', function () {
+    Transaction::factory(10)->create();
+
+    $tx = Transaction::factory()->create([
+        'block_height' => 123456789,
+    ]);
+
+    Livewire::test(SearchPage::class)
+        ->set('state.type', 'transaction')
+        ->set('state.transactionType', 'all')
+        ->set('state.term', '123456789')
+        ->call('performSearch')
+        ->assertSee($tx->id);
+});
