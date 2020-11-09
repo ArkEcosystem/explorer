@@ -44,6 +44,11 @@ final class WalletQrCode extends Component
     public function toggleQrCode(): void
     {
         $this->isOpen = ! $this->isOpen;
+
+        if ($this->isOpen) {
+            $this->amount = null;
+            $this->smartbridge = null;
+        }
     }
 
     public function getWalletUriProperty(): string
