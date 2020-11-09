@@ -545,3 +545,6 @@ body {
     @apply flex mx-auto border border-theme-secondary-300;
     width: 250px;
 }
+.theme-dark .modal-qr-code {
+    @apply border-0;
+}
