@@ -54,17 +54,17 @@
                             <div class="text-center">
                                 @lang('pages.wallet.qrcode.automatic_notice')
                             </div>
-
-                            <div class="flex items-center mt-6 space-x-3">
-                                <div class="flex-1 border-t h-1px border-theme-secondary-300"></div>
-                                <div class="text-sm font-semibold">@lang('general.or')</div>
-                                <div class="flex-1 border-t h-1px border-theme-secondary-300"></div>
-                            </div>
-
-                            <a href="{{ $this->walletUri }}" class="w-full mt-2 button-secondary">
-                                @lang('pages.wallet.qrcode.send_from_wallet')
-                            </a>
                         </div>
+
+                        <div class="flex items-center mt-6 space-x-3">
+                            <div class="flex-1 border-t h-1px border-theme-secondary-300 dark:border-theme-secondary-800"></div>
+                            <div class="text-sm font-semibold text-theme-secondary-700">@lang('general.or')</div>
+                            <div class="flex-1 border-t h-1px border-theme-secondary-300 dark:border-theme-secondary-800"></div>
+                        </div>
+
+                        <a href="{{ $this->walletUri }}" class="w-full mt-2 button-secondary">
+                            @lang('pages.wallet.qrcode.send_from_wallet')
+                        </a>
                     </div>
                 </div>
             @endslot
