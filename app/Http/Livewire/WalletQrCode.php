@@ -16,7 +16,7 @@ final class WalletQrCode extends Component
 
     public string $address;
 
-    public ?int $amount = null;
+    public ?string $amount = null;
 
     public ?string $smartbridge = null;
 
@@ -34,8 +34,8 @@ final class WalletQrCode extends Component
     public function updated(string $propertyName): void
     {
         $this->validateOnly($propertyName, [
-            'amount'      => ['required', 'numeric'],
-            'smartbridge' => ['required', 'string', 'max:255'],
+            'amount'      => ['numeric'],
+            'smartbridge' => ['string', 'max:255'],
         ]);
     }
 
@@ -50,8 +50,8 @@ final class WalletQrCode extends Component
     {
         $data = [
             'recipient'   => $this->address,
-            'amount'      => $this->amount,
-            'vendorField' => $this->smartbridge,
+            'amount'      => $this->amount ?: null,
+            'vendorField' => $this->smartbridge ?: null,
         ];
 
         return 'ark:transfer?'.http_build_query($data);
