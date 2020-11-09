@@ -121,7 +121,7 @@ return [
         'vote_rank'             => '#:0',
         'no_results'            => 'We could not find anything matching!',
         'qrcode'                => [
-            'title'            => 'QR Code',
+            'title'            => 'Send Funds',
             'description'      => 'Enter the amount you wish to transfer to this address and confirm.',
             'automatic_notice' => 'The QR-code is updated automatically, you do not need to press anything.',
             'specify_amount'   => 'Specify Amount',
