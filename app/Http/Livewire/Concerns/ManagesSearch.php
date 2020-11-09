@@ -26,6 +26,8 @@ trait ManagesSearch
             'state.totalAmountTo'      => ['nullable', 'numeric', 'min:0'],
             'state.totalFeeFrom'       => ['nullable', 'numeric', 'min:0'],
             'state.totalFeeTo'         => ['nullable', 'numeric', 'min:0'],
+            'state.rewardFrom'         => ['nullable', 'numeric', 'min:0'],
+            'state.rewardTo'           => ['nullable', 'numeric', 'min:0'],
             'state.generatorPublicKey' => ['nullable', 'string', 'max:255'],
             // Transactions
             'state.transactionType' => ['nullable', Rule::in(array_keys(trans('forms.search.transaction_types')))],
