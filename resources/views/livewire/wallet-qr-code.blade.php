@@ -13,7 +13,9 @@
                         @lang('pages.wallet.qrcode.specify_amount')
                     </button>
 
-                    <x-wallet.qr-address :model="$wallet" />
+                    <div class="pb-6 border-b border-dashed border-theme-secondary-300 dark:border-theme-secondary-800">
+                        <x-wallet.qr-address :model="$wallet" />
+                    </div>
 
                     <div x-show="options" class="space-y-8">
                         <x-ark-input

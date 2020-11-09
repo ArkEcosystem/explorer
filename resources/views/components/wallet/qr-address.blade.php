@@ -9,11 +9,11 @@
 
             <div class="flex items-center justify-between sm:justify-start">
                 <div>
-                    <div class="hidden font-semibold text-theme-secondary-900 sm:flex">
+                    <div class="hidden font-semibold text-theme-secondary-900 dark:text-theme-secondary-200 sm:flex">
                         <x-truncate-middle :value="$model->address()" :length="19" />
                     </div>
 
-                    <div class="font-semibold text-theme-secondary-900 sm:hidden">
+                    <div class="font-semibold text-theme-secondary-900 dark:text-theme-secondary-200 sm:hidden">
                         <x-truncate-middle :value="$model->address()" :length="15" />
                     </div>
                 </div>
