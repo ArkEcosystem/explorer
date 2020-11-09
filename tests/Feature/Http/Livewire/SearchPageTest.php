@@ -642,3 +642,99 @@ it('should search for transactions by block with a height', function () {
         ->call('performSearch')
         ->assertSee($tx->id);
 });
+
+it('should search for a wallet by address', function () {
+    $wallet = Wallet::factory(10)->create()[0];
+
+    Livewire::test(SearchPage::class)
+        ->set('state.type', 'wallet')
+        ->set('state.term', $wallet->address)
+        ->call('performSearch')
+        ->assertSee($wallet->address);
+});
+
+it('should search for a wallet by public key', function () {
+    Wallet::factory(10)->create(['public_key' => '123']);
+
+    $wallet = Wallet::factory()->create();
+
+    Livewire::test(SearchPage::class)
+        ->set('state.type', 'wallet')
+        ->set('state.term', $wallet->public_key)
+        ->call('performSearch')
+        ->assertSee($wallet->address);
+});
+
+it('should search for a wallet by delegate username in terms', function () {
+    $wallet = Wallet::factory(10)->create()[0];
+
+    Livewire::test(SearchPage::class)
+        ->set('state.type', 'wallet')
+        ->set('state.term', $wallet->attributes['delegate']['username'])
+        ->call('performSearch')
+        ->assertSee($wallet->address);
+});
+
+it('should search for a wallet by username', function () {
+    $wallet = Wallet::factory(10)->create()[0];
+
+    Livewire::test(SearchPage::class)
+        ->set('state.type', 'wallet')
+        ->set('state.username', $wallet->attributes['delegate']['username'])
+        ->call('performSearch')
+        ->assertSee($wallet->address);
+});
+
+it('should search for a wallet by vote', function () {
+    Wallet::factory(10)->create();
+
+    $wallet = Wallet::factory()->create([
+        'attributes' => [
+            'vote' => 'public_key',
+        ],
+    ]);
+
+    Livewire::test(SearchPage::class)
+        ->set('state.type', 'wallet')
+        ->set('state.vote', $wallet->attributes['vote'])
+        ->call('performSearch')
+        ->assertSee($wallet->address);
+});
+
+it('should search for a wallet by balance minimum', function () {
+    $wallet = Wallet::factory(10)->create(['balance' => 100 * 1e8])[0];
+    $wallet->update(['balance' => 1000 * 1e8]);
+
+    Livewire::test(SearchPage::class)
+        ->set('state.type', 'wallet')
+        ->set('state.balanceFrom', 101)
+        ->call('performSearch')
+        ->assertSee($wallet->address);
+});
+
+it('should search for a wallet by balance maximum', function () {
+    $wallets = Wallet::factory(10)->create(['balance' => 100 * 1e8]);
+    $wallet = Wallet::factory()->create(['balance' => 100 * 1e8]);
+    $wallet->update(['balance' => 1000 * 1e8]);
+
+    Livewire::test(SearchPage::class)
+        ->set('state.type', 'wallet')
+        ->set('state.balanceTo', 999)
+        ->call('performSearch')
+        ->assertDontSee($wallet->id)
+        ->assertSeeInOrder($wallets->pluck('address')->toArray());
+});
+
+it('should search for a wallet by balance range', function () {
+    $wallets = Wallet::factory(10)->create(['balance' => 10 * 1e8]);
+    $wallet = Wallet::factory(10)->create(['balance' => 100 * 1e8])[0];
+    $wallet->update(['balance' => 1000 * 1e8]);
+
+    Livewire::test(SearchPage::class)
+        ->set('state.type', 'wallet')
+        ->set('state.balanceTo', 50)
+        ->set('state.balanceTo', 100)
+        ->call('performSearch')
+        ->assertDontSee($wallet->id)
+        ->assertSeeInOrder($wallets->pluck('address')->toArray());
+});

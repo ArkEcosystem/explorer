@@ -39,8 +39,8 @@ trait ManagesSearch
             // Wallets
             'state.username'    => ['nullable', 'string', 'max:255'],
             'state.vote'        => ['nullable', 'string', 'max:255'],
-            'state.balanceFrom' => ['nullable', 'numeric', 'min:0', 'max:100'],
-            'state.balanceTo'   => ['nullable', 'numeric', 'min:0', 'max:100'],
+            'state.balanceFrom' => ['nullable', 'numeric', 'min:0'],
+            'state.balanceTo'   => ['nullable', 'numeric', 'min:0'],
         ])['state'];
     }
 }
