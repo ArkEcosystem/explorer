@@ -7,22 +7,28 @@
                 </div>
 
                 <div class="flex flex-col justify-between flex-1 space-y-4 font-semibold lg:ml-4 md:space-y-0">
-                    <div class="text-sm leading-tight text-theme-secondary-600 dark:text-theme-secondary-700">{{ $title }}</div>
+                    <div class="flex text-sm leading-tight text-theme-secondary-600 dark:text-theme-secondary-700">{{ $title }}</div>
 
                     <div class="flex items-center space-x-2 leading-tight">
                         <span class="flex text-theme-secondary-400 dark:text-theme-secondary-200">
-                            <span class="hidden lg:inline-block">
+                            <span class="hidden sm:inline-block">
                                 {{ $value }}
                             </span>
 
-                            <span class="lg:hidden">
-                                <x-truncate-middle :value="$value" :length="16" />
+                            <span class="inline-block sm:hidden">
+                                <x-truncate-middle :value="$value" :length="8" />
                             </span>
 
                             <x-clipboard :value="$value" />
                         </span>
                     </div>
                 </div>
+
+                @if ($extraLogo ?? false)
+                    <div class="flex items-center">
+                        {{ $extraLogo }}
+                    </div>
+                @endif
             </div>
 
             @if ($extension ?? false)
