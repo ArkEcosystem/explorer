@@ -13,9 +13,9 @@ final class WalletQrCode extends Component
 
     public string $address;
 
-    public int $amount = 10;
+    public ?int $amount = null;
 
-    public string $smartbridge = 'Hello';
+    public ?string $smartbridge = null;
 
     /** @phpstan-ignore-next-line */
     protected $listeners = ['toggleQrCode'];
@@ -36,13 +36,20 @@ final class WalletQrCode extends Component
         $this->isOpen = ! $this->isOpen;
     }
 
+    public function getWalletUriProperty(): string
+    {
+        $data = [
+            'recipient'   => $this->address,
+            'amount'      => $this->amount,
+            'vendorField' => $this->smartbridge,
+        ];
+
+        return 'ark:transfer?'.http_build_query($data);
+    }
+
     public function getCodeProperty(): string
     {
-        return QRCode::generate(sprintf(
-            'ark:transfer?recipient=%s&amount=%s&vendorField=%s',
-            $this->address,
-            $this->amount,
-            $this->smartbridge,
-        ));
+
+        return QRCode::generate($this->walletUri);
     }
 }
