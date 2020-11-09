@@ -48,18 +48,18 @@
                             {!! $this->code !!}
                         </div>
 
-                        <div x-show="options" class="text-theme-secondary-700 mt-4">
+                        <div x-show="options" class="mt-4 text-theme-secondary-700">
                             <div class="text-center">
                                 @lang('pages.wallet.qrcode.automatic_notice')
                             </div>
 
-                            <div class="flex items-center space-x-3 mt-6">
-                                <div class="flex-1 h-1px border-t border-theme-secondary-300"></div>
+                            <div class="flex items-center mt-6 space-x-3">
+                                <div class="flex-1 border-t h-1px border-theme-secondary-300"></div>
                                 <div class="text-sm font-semibold">@lang('general.or')</div>
-                                <div class="flex-1 h-1px border-t border-theme-secondary-300"></div>
+                                <div class="flex-1 border-t h-1px border-theme-secondary-300"></div>
                             </div>
 
-                            <a href="{{ $this->walletUri }}" class="w-full button-secondary mt-2">
+                            <a href="{{ $this->walletUri }}" class="w-full mt-2 button-secondary">
                                 @lang('pages.wallet.qrcode.send_from_wallet')
                             </a>
                         </div>

@@ -4,8 +4,8 @@
             <x-general.avatar :identifier="$model->address()" no-shrink />
         </div>
 
-        <div class="flex flex-col flex-1 justify-center mr-4 sm:mr-0">
-            <div class="font-semibold text-theme-secondary-500 text-sm">@lang('general.address')</div>
+        <div class="flex flex-col justify-center flex-1 mr-4 sm:mr-0">
+            <div class="text-sm font-semibold text-theme-secondary-500">@lang('general.address')</div>
 
             <div class="flex items-center justify-between sm:justify-start">
                 <div>

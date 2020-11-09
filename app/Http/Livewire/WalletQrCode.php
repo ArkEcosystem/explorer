@@ -59,7 +59,6 @@ final class WalletQrCode extends Component
 
     public function getCodeProperty(): string
     {
-
         return QRCode::generate($this->walletUri);
     }
 }
