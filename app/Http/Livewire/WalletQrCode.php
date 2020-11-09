@@ -53,7 +53,7 @@ final class WalletQrCode extends Component
             'vendorField' => $this->smartbridge ?: null,
         ];
 
-        return 'ark:'.$this->address.http_build_query($data);
+        return 'ark:'.$this->address.'?'.http_build_query($data);
     }
 
     public function getCodeProperty(): string
