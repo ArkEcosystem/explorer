@@ -23,7 +23,7 @@
 
         <div class="flex-row items-center hidden lg:flex">
             <div class="relative inline-block text-white">
-                <x-ark-icon name="app-marketsquare" class="h-6 ml-2 md:h-8 lg:h-12 lg:ml-0 text-white" />
+                <x-ark-icon name="app-marketsquare" class="h-6 ml-2 text-white md:h-8 lg:h-12 lg:ml-0" />
             </div>
             <span class="ml-4 text-3xl">
                 <span class="font-bold text-white">Market</span><span class="text-white">Square</span>
