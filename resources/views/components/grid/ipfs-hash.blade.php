@@ -8,7 +8,7 @@
             <x-truncate-middle :value="$model->ipfsHash()" :length="30" />
         </a>
 
-        <a href="https://cloudflare-ipfs.com/ipfs/{{ $model->ipfsHash() }}" class="link ml-2">
+        <a href="https://cloudflare-ipfs.com/ipfs/{{ $model->ipfsHash() }}" class="ml-2 link">
             @svg('link', 'h-4 w-4 link')
         </a>
     </span>
