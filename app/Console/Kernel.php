@@ -16,7 +16,6 @@ use App\Console\Commands\CacheFees;
 use App\Console\Commands\CacheMarketSquareProfiles;
 use App\Console\Commands\CacheMultiSignatureAddresses;
 use App\Console\Commands\CachePrices;
-use App\Jobs\CacheMarketSquareProfileByAddress;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
