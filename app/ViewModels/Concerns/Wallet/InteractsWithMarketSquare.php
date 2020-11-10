@@ -56,7 +56,6 @@ trait InteractsWithMarketSquare
         return trans_choice('generic.'.$type, $value);
     }
 
-    // @TODO: ?????
     public function payoutMinimum(): ?int
     {
         if (! Network::usesMarketsquare()) {
@@ -65,7 +64,7 @@ trait InteractsWithMarketSquare
 
         return Arr::get(
             (new MarketSquareCache())->getProfile($this->wallet->address),
-            'ipfs.data.meta.delegate.percentage.min'
+            'ipfs.data.meta.delegate.distribution.min'
         );
     }
 }

@@ -160,6 +160,10 @@
                         "frequency": {
                             "type": "day",
                             "value": 24
+                        },
+                        "distribution": {
+                            "min": 500,
+                            "max": 2500
                         }
                     }
                 }
