@@ -57,6 +57,7 @@ final class WalletQrCode extends Component
     /**
      * @TODO: use http_build_query once v3 wallet is done
      */
+    // @codeCoverageIgnoreStart
     public function getWalletUriProperty(): string
     {
         $uri  = 'ark:'.$this->address;
@@ -78,6 +79,8 @@ final class WalletQrCode extends Component
 
         return $uri.'?'.$data;
     }
+
+    // @codeCoverageIgnoreEnd
 
     public function getCodeProperty(): string
     {
