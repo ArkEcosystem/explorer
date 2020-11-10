@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace App\Services\Transactions;
 
+use App\Actions\CacheNetworkHeight;
 use App\Facades\Network;
 use App\Models\Transaction;
-use App\Actions\CacheNetworkHeight;
-use App\Services\Cache\NetworkCache;
 
 final class TransactionState
 {
