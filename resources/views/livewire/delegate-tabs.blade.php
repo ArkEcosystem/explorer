@@ -43,7 +43,7 @@
             @click="component === 'monitor' ? component = 'table' : component = 'monitor'"
         >
             <div class="flex justify-center space-x-2">
-                <span>@svg('app-monitor', 'w-5 h-5 text-theme-secondary-700')</span>
+                <x-ark-icon name="app-monitor" class="text-theme-secondary-700"/>
                 <span>@lang('pages.delegates.monitor')</span>
             </div>
         </div>
@@ -59,7 +59,7 @@
     >
         <x-slot name="button">
             <div class="flex items-center space-x-4">
-                <x-icon name="menu-open" size="sm" />
+                <x-ark-icon name="menu-open" size="sm" />
 
                 <div x-show="status === 'active' && component !== 'monitor'">
                     @lang('pages.delegates.active')

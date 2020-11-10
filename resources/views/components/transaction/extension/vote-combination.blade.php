@@ -3,7 +3,7 @@
         {{-- Vote --}}
         <div class="w-full sm:w-1/2">
             <div class="relative flex items-end justify-between mb-6">
-                <h2 class="text-xl sm:text-2xl">@lang('pages.transaction.vote')</h2>
+                <h4>@lang('pages.transaction.vote')</h4>
             </div>
 
             <x-details.vote
@@ -12,7 +12,7 @@
                 :model="$transaction->voted()">
                 <x-slot name="icon">
                     <div class="circled-icon text-theme-success-500 border-theme-success-100 dark:text-theme-success-600 dark:border-theme-success-600">
-                        <x-icon name="app-transactions.vote" style="success" />
+                        <x-ark-icon name="app-transactions.vote" style="success" />
                     </div>
                 </x-slot>
             </x-details.vote>
@@ -21,7 +21,7 @@
         {{-- Unvote --}}
         <div class="w-full sm:w-1/2">
             <div class="relative flex items-end justify-between mb-6">
-                <h2 class="text-xl sm:text-2xl">@lang('pages.transaction.unvote')</h2>
+                <h4>@lang('pages.transaction.unvote')</h4>
             </div>
 
             <x-details.vote
@@ -30,7 +30,7 @@
                 :model="$transaction->unvoted()">
                 <x-slot name="icon">
                     <div class="circled-icon text-theme-danger-500 border-theme-danger-100 dark:text-theme-danger-600 dark:border-theme-danger-600">
-                        <x-icon name="app-transactions.unvote" style="danger" />
+                        <x-ark-icon name="app-transactions.unvote" style="danger" />
                     </div>
                 </x-slot>
             </x-details.vote>

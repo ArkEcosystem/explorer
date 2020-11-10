@@ -16,10 +16,9 @@ beforeEach(fn () => configureExplorerDatabase());
 
 it('should search for a transaction by id', function () {
     $transaction = Transaction::factory(10)->create()[0];
-    $transaction->update(['vendor_field' => 'Hello World']);
 
     $result = (new TransactionSearch())->search([
-        'smartBridge' => $transaction->vendor_field,
+        'term' => $transaction->id,
     ]);
 
     expect($result->get())->toHaveCount(1);
@@ -27,9 +26,10 @@ it('should search for a transaction by id', function () {
 
 it('should search for a transaction by vendor field', function () {
     $transaction = Transaction::factory(10)->create()[0];
+    $transaction->update(['vendor_field' => 'Hello World']);
 
     $result = (new TransactionSearch())->search([
-        'term' => $transaction->id,
+        'smartBridge' => $transaction->vendor_field,
     ]);
 
     expect($result->get())->toHaveCount(1);
@@ -204,10 +204,7 @@ it('should search for transactions by fee range', function () {
 it('should search for transactions by wallet with an address', function () {
     Transaction::factory(10)->create();
 
-    $wallet = Wallet::factory()->create([
-        'address'    => 'someaddress',
-        'public_key' => 'somepubkey',
-    ]);
+    $wallet = Wallet::factory()->create();
 
     Transaction::factory()->create([
         'sender_public_key' => $wallet->public_key,
@@ -235,9 +232,7 @@ it('should search for transactions by wallet with an address', function () {
 it('should search for transactions by wallet with a public key', function () {
     Transaction::factory(10)->create();
 
-    $wallet = Wallet::factory()->create([
-        'public_key' => 'somepublickey',
-    ]);
+    $wallet = Wallet::factory()->create();
 
     Transaction::factory()->create([
         'sender_public_key' => $wallet->public_key,
@@ -266,7 +261,6 @@ it('should search for transactions by wallet with a username', function () {
     Transaction::factory(10)->create();
 
     $wallet = Wallet::factory()->create([
-        'public_key' => 'somepubkey',
         'attributes' => [
             'delegate' => [
                 'username' => 'johndoe',
