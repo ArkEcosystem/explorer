@@ -10,6 +10,9 @@ use App\ViewModels\ViewModelFactory;
 use Illuminate\View\View;
 use Livewire\Component;
 
+/**
+ * @property string $walletUri
+ */
 final class WalletQrCode extends Component
 {
     public bool $isOpen = false;
@@ -56,17 +59,17 @@ final class WalletQrCode extends Component
         $uri  = 'ark:'.$this->address;
         $data = '';
 
-        if ($this->amount) {
+        if ($this->amount !== null && $this->amount !== '') {
             $data = 'amount='.$this->amount.'&';
         }
 
-        if ($this->smartbridge) {
+        if ($this->smartbridge !== null && $this->smartbridge !== '') {
             $data .= 'vendorField='.rawurlencode($this->smartbridge);
         }
 
         $data = trim($data, '&');
 
-        if (! $data) {
+        if ($data === '') {
             return $uri;
         }
 
