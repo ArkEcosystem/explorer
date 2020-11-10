@@ -141,12 +141,18 @@ final class DelegateMonitor extends Component
             foreach ($delegates as $delegate) {
                 $block = $blocks->firstWhere('generator_public_key', $delegate);
 
+                // The delegate hasn't forged in some rounds.
                 if (is_null($block)) {
                     $block = Block::query()
                         ->where('generator_public_key', $delegate)
                         ->orderBy('height', 'desc')
                         ->limit(1)
-                        ->get();
+                        ->first();
+                }
+
+                // The delegate has never forged.
+                if (is_null($block)) {
+                    continue;
                 }
 
                 (new WalletCache())->setLastBlock($delegate, [
