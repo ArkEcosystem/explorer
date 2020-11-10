@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\DTO;
 
-use App\Services\Cache\NetworkCache;
+use App\Actions\CacheNetworkHeight;
 use App\Services\Monitor\Monitor;
 use App\ViewModels\WalletViewModel;
 use Carbon\Carbon;
@@ -101,7 +101,7 @@ final class Slot
 
     public function missedCount(): int
     {
-        return (int) abs((new NetworkCache())->getHeight() - $this->lastBlock['height']);
+        return (int) abs(CacheNetworkHeight::execute() - $this->lastBlock['height']);
     }
 
     public function isDone(): bool
