@@ -97,7 +97,7 @@ final class Slot
         }
 
         if ($this->getLastHeight() === 0) {
-            return true;
+            return false;
         }
 
         // Since we're not waiting in current round, more than 1 round between current and last forged block means we're missing 2+ consecutive rounds
