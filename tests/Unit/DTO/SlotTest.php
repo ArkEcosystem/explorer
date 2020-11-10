@@ -50,7 +50,7 @@ it('should not be marked as missing if it never had a block', function () {
     $subject = new Slot([
         'publicKey'    => $wallet->public_key,
         'last_block'   => [],
-        'status'       => 'pending',
+        'status'       => 'done',
     ], Block::whereBetween('height', [1, 5])->get(), 1);
 
     expect($subject->keepsMissing())->toBeFalse();
