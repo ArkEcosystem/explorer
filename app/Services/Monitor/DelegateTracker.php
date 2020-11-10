@@ -8,6 +8,7 @@ use App\Facades\Network;
 use App\Models\Block;
 use App\Models\Scopes\OrderByHeightScope;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Log;
 
 /**
  * @NOTE
@@ -363,6 +364,7 @@ final class DelegateTracker
     {
         // Arrange Block
         $lastBlock = Block::withScope(OrderByHeightScope::class)->firstOrFail();
+        $height    = $lastBlock->height->toNumber(); // 5720529;
         $timestamp = $lastBlock->timestamp; // 113620904;
 
         // Arrange Delegates
@@ -381,7 +383,7 @@ final class DelegateTracker
         // ]);
 
         // Act
-        $forgingInfo = ForgingInfoCalculator::calculate($timestamp, $startHeight);
+        $forgingInfo = ForgingInfoCalculator::calculate($timestamp, $height);
 
         // // Determine Next Forgers...
         // $nextForgers = [];
@@ -398,6 +400,8 @@ final class DelegateTracker
 
         return collect($activeDelegates)
             ->map(function ($publicKey, $index) use (&$forgingIndex, $forgingInfo) {
+
+                //$index = ($index + 21) % 51; // Shifting by 21 here will show the correct time to forge for delegates 31 and higher the first 30 (51-21) are wrongly indicated as forging at a later time
                 if ($index === $forgingInfo['nextForger']) {
                     return [
                         'publicKey' => $publicKey,
@@ -427,7 +431,6 @@ final class DelegateTracker
                     'order'     => $index,
                 ];
             })
-            ->sortBy('order')
             ->toArray();
     }
 
@@ -437,9 +440,9 @@ final class DelegateTracker
         $currentSeed = hex2bin(hash('sha256', $seedSource));
         $delCount    = count($delegates);
 
-        $seeds = [];
+        // $seeds = [];
         for ($i = 0; $i < $delCount; $i++) {
-            $elements = [];
+            // $elements = [];
 
             for ($x = 0; $x < 4 && $i < $delCount; $i++, $x++) {
                 $newIndex             = intval(unpack('C*', $currentSeed)[$x + 1]) % $delCount;
@@ -447,16 +450,22 @@ final class DelegateTracker
                 $delegates[$newIndex] = $delegates[$i];
                 $delegates[$i]        = $b;
 
-                $elements[] = [
-                    'i'        => $i,
-                    'x'        => $x,
-                    'newIndex' => $newIndex,
-                ];
+                // $elements[] = [
+                //     'i'        => $i,
+                //     'x'        => $x,
+                //     'newIndex' => $newIndex,
+                // ];
             }
 
-            $seeds[bin2hex($currentSeed)] = $elements;
+            // $seeds[bin2hex($currentSeed)] = $elements;
 
             $currentSeed = hex2bin(hash('sha256', $currentSeed));
+        }
+
+        // Move all entries by 21 places to get them in the right round order, but time to forge will be wrong
+        $delegatesOrdered = [];
+        for($i = 21; $i < $delCount + 21; $i++) {
+            $delegatesOrdered[] = $delegates[$i % $delCount];
         }
 
         // dump([
@@ -478,6 +487,6 @@ final class DelegateTracker
         //     }
         // }
 
-        return $delegates;
+        return $delegatesOrdered;
     }
 }
