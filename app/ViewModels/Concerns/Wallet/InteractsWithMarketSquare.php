@@ -31,7 +31,6 @@ trait InteractsWithMarketSquare
         return 'https://marketsquare.io/delegates/'.Str::slug($username);
     }
 
-    // @TODO: ?????
     public function commission(): ?int
     {
         if (! Network::usesMarketsquare()) {
@@ -57,6 +56,7 @@ trait InteractsWithMarketSquare
         return trans_choice('generic.'.$type, $value);
     }
 
+    // @TODO: ?????
     public function payoutMinimum(): ?int
     {
         if (! Network::usesMarketsquare()) {
