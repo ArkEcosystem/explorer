@@ -54,6 +54,9 @@ final class WalletQrCode extends Component
         }
     }
 
+    /**
+     * @TODO: use http_build_query once v3 wallet is done
+     */
     public function getWalletUriProperty(): string
     {
         $uri  = 'ark:'.$this->address;
