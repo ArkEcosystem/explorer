@@ -141,7 +141,7 @@
                             @endforeach
                         </div>
                     @else
-                        <x-ark-sidebar-link :route="$navItem['route']" :name="$navItem['label']" :params="$navItem['params'] ?? []" />
+                        <x-ark-navbar-link-mobile :route="$navItem['route']" :name="$navItem['label']" :params="$navItem['params'] ?? []" />
                     @endif
                 @endforeach
             </div>
