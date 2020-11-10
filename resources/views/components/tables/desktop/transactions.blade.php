@@ -1,68 +1,8 @@
-<div
-    x-data="{
-        addOverlayToRow(row, overlay) {
-            const width = row.offsetWidth + 20;
-            const height = row.offsetHeight - 4;
-            const viewportOffset = row.getBoundingClientRect();
-            const top = viewportOffset.top + window.scrollY + 2;
-            const left = viewportOffset.left + window.scrollX - 10;
-            overlay.style.width  = `${width}px`;
-            overlay.style.height  = `${height}px`;
-            overlay.style.left  = `${left}px`;
-            overlay.style.top  = `${top}px`;
-            overlay.style.display = 'block';
-        },
-        hoverin(e) {
-            const overlay = this.$refs.hoverOverlay;
-            const row = e.target;
-
-            this.addOverlayToRow(row, overlay);
-        },
-        hoverout(e) {
-            const hoveredAnotherRow = !! e.relatedTarget.closest('tbody')
-            if (!hoveredAnotherRow) {
-                const overlay = this.$refs.hoverOverlay;
-                overlay.style.display = 'none';
-            }
-        },
-        initTable() {
-            const { table } = this.$refs;
-
-            this.$nextTick(() => {
-                const warningRows = table.querySelectorAll('tr[data-warning]');
-                const errorRows = table.querySelectorAll('tr[data-error]');
-                warningRows.forEach(row => {
-                    const overlay = document.createElement('span');
-                    overlay.className = 'absolute rounded-md pointer-events-none bg-theme-warning-50';
-                    const firstChild = this.$refs.tableContainer.firstChild
-                    this.$refs.tableContainer.insertBefore(overlay, firstChild)
-                    this.addOverlayToRow(row, overlay);
-                })
-                errorRows.forEach(row => {
-                    const overlay = document.createElement('span');
-                    overlay.className = 'absolute rounded-md pointer-events-none bg-theme-danger-50';
-                    const firstChild = this.$refs.tableContainer.firstChild
-                    this.$refs.tableContainer.insertBefore(overlay, firstChild)
-                    this.addOverlayToRow(row, overlay);
-                })
-            })
-        },
-    }"
-    x-init="initTable()"
-    class="hidden table-container md:block"
-    x-ref="tableContainer"
->
-    <span
-        x-ref="hoverOverlay"
-        wire:ignore
-        class="absolute rounded-md pointer-events-none bg-theme-secondary-100"
-        style="display: none"
-    ></span>
-
-    <table x-ref="table" class="relative">
+<div class="hidden table-container md:block">
+    <table>
         <thead>
             <tr>
-                <x-tables.headers.desktop.text name="general.transaction.id" />
+                <x-tables.headers.desktop.id name="general.transaction.id" />
                 <x-tables.headers.desktop.text name="general.transaction.timestamp" responsive />
                 @isset($useDirection)
                     <x-tables.headers.desktop.address name="general.transaction.sender" icon use-direction />
@@ -79,16 +19,7 @@
         </thead>
         <tbody>
             @foreach($transactions as $transaction)
-                <tr
-                    @mouseenter="hoverin($event)"
-                    @mouseout="hoverout($event)"
-                    @if($loop->index === 2 || $loop->index === 6)
-                    data-warning
-                    @endif
-                    @if($loop->index === 5)
-                    data-error
-                    @endif
-                >
+                <tr>
                     <td wire:key="{{ $transaction->id() }}-id">
                         <x-tables.rows.desktop.transaction-id :model="$transaction" />
                     </td>
@@ -128,6 +59,4 @@
             @endforeach
         </tbody>
     </table>
-
-
 </div>
