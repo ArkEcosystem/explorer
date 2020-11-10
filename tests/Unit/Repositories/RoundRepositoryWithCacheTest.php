@@ -23,5 +23,5 @@ it('should get all delegates for the given round', function () {
 });
 
 it('should get the current round', function () {
-    expect($this->subject->currentRoundNumber())->toBe(Round::max('round'));
+    expect($this->subject->current())->toBe(Round::max('round'));
 });

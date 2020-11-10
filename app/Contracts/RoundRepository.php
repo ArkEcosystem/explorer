@@ -10,5 +10,5 @@ interface RoundRepository
 {
     public function allByRound(int $round): Collection;
 
-    public function currentRoundNumber(): int;
+    public function current(): int;
 }

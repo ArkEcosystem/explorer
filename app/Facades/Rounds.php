@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Facade;
 
 /**
  * @method static Collection allByRound(int $round)
- * @method static int currentRoundNumber()
+ * @method static int current()
  */
 final class Rounds extends Facade
 {

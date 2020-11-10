@@ -25,9 +25,9 @@ final class RoundRepositoryWithCache implements RoundRepository
         return $this->remember(fn () => $this->rounds->allByRound($round));
     }
 
-    public function currentRoundNumber(): int
+    public function current(): int
     {
-        return $this->rounds->currentRoundNumber();
+        return $this->rounds->current();
     }
 
     private function getCache(): TaggedCache
