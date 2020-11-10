@@ -10,6 +10,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Http;
 
 final class CacheMarketSquareProfileByAddress implements ShouldQueue
@@ -26,10 +27,15 @@ final class CacheMarketSquareProfileByAddress implements ShouldQueue
     public function handle(MarketSquareCache $cache): void
     {
         $response = Http::baseUrl(config('explorer.marketsquare_host'))
-            ->get(sprintf('api/delegates/%s', $this->wallet['address']));
+            ->get(sprintf('api/delegates/%s', $this->wallet['address']))
+            ->json();
 
-        $response->throw();
+        if (is_null($response)) {
+            return;
+        }
 
-        $cache->setProfile($this->wallet['address'], $response->json()['data']);
+        if (Arr::has($response, 'data')) {
+            $cache->setProfile($this->wallet['address'], $response['data']);
+        }
     }
 }
