@@ -13,6 +13,7 @@
         'search-advanced': showAdvanced,
         'search-focused': isFocused,
     }"
+    @search-type-changed.window="searchType = $event.detail"
 >
     <div
         class="fixed inset-0 z-30 overflow-y-auto opacity-75 bg-theme-secondary-900 md:hidden"
@@ -27,7 +28,7 @@
                     class="mr-4 cursor-pointer text-theme-primary-600 hover:text-theme-primary-700"
                     @click="showAdvanced = false; isFocused = false; $dispatch('search-slim-close')"
                 >
-                    <x-icon name="close" size="md" />
+                    <x-ark-icon name="close" size="md" />
                 </div>
             @endif
 
@@ -51,7 +52,7 @@
             </div>
 
             <span class="md:hidden text-theme-primary-300 dark:text-theme-secondary-600">
-               <x-icon name="search" />
+               <x-ark-icon name="search" />
             </span>
 
             <button
@@ -76,7 +77,7 @@
                     class="cursor-pointer text-theme-primary-300 hover:text-theme-primary-400 dark:text-theme-secondary-500 dark:hover:text-theme-secondary-400 @unless($isSlim ?? false) md:hidden @endif"
                     wire:click="performSearch"
                 >
-                    <x-icon name="search" />
+                    <x-ark-icon name="search" />
                 </div>
             @endunless
         </div>
@@ -93,12 +94,13 @@
             @endunless
             x-cloak
         >
+
             <div class="search-advanced-options" x-show="searchType === 'block'">
                 <x-search.block />
             </div>
 
             <div class="search-advanced-options" x-show="searchType === 'transaction'">
-                <x-search.transaction />
+                <x-search.transaction :transaction-options="$transactionOptions" :transaction-type="Arr::get($state, 'transactionType', 'all')" />
             </div>
 
             <div class="search-advanced-options" x-show="searchType === 'wallet'">

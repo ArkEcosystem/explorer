@@ -6,7 +6,7 @@
 }" x-cloak class="w-full">
     <div class="w-full md:mb-8">
         <div class="relative flex flex-col justify-between md:items-end md:flex-row md:justify-start">
-            <h2 class="mb-8 text-3xl md:mb-0 sm:text-4xl">@lang('pages.home.transactions_and_blocks')</h2>
+            <h2 class="mb-8 md:mb-0">@lang('pages.home.transactions_and_blocks')</h2>
 
             <div x-show="selected === 'transactions'">
                 <x-transaction-table-filter :type="$state['type']"/>
@@ -44,7 +44,7 @@
         >
             <x-slot name="button">
                 <div class="flex items-center space-x-4">
-                    <x-icon name="menu-open" size="sm" />
+                    <x-ark-icon name="menu-open" size="sm" />
 
                     <div x-show="selected === 'transactions'">@lang('pages.home.latest_transactions')</div>
                     <div x-show="selected === 'blocks'">@lang('pages.home.latest_blocks')</div>
