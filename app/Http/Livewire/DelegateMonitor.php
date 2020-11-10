@@ -130,7 +130,9 @@ final class DelegateMonitor extends Component
 
     private function cacheLastBlocks(array $delegates): void
     {
-        Cache::remember('monitor:last-blocks', Network::blockTime() / 2, function () use ($delegates) {
+        $ttl = (int) ceil(Network::blockTime() / 2);
+
+        Cache::remember('monitor:last-blocks', $ttl, function () use ($delegates): void {
             $blocks = Block::query()
                 ->orderBy('height', 'desc')
                 ->limit(Network::delegateCount() * 2)
