@@ -34,7 +34,7 @@ module.exports = {
     variants: {
         ...defaultConfig.variants,
         textColor: ['dark', 'dark-hover', 'responsive', 'hover', 'focus'],
-        backgroundColor: ['dark', 'dark-hover', 'responsive', 'hover', 'focus'],
+        backgroundColor: ['dark', 'dark-hover', 'responsive', 'hover', 'focus', 'group-hover'],
         borderColor: ['dark', 'dark-hover', 'responsive', 'hover', 'focus'],
         boxShadow: ['dark', 'dark-hover', 'responsive', 'hover', 'focus'],
         divideColor: ['dark', 'dark-hover', 'responsive', 'hover', 'focus'],

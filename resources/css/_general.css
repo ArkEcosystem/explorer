@@ -546,3 +546,28 @@ body {
 .theme-dark .modal-qr-code {
     @apply border-0;
 }
+
+.table-container table tbody tr > td:after {
+    content: "";
+    @apply absolute top-0 bottom-0 left-0 right-0 w-full h-full border-t-2 border-b-2 border-transparent pointer-events-none;
+}
+
+.table-container table tbody tr > td:first-child::before{
+    content: "";
+    @apply absolute top-0 left-0 block w-2 h-full -ml-2 rounded-l-md;
+}
+
+.table-container table tbody tr > td:last-child::before{
+    content: "";
+    @apply absolute top-0 right-0 block w-2 h-full -mr-2 rounded-r-md;
+}
+
+.table-container table tbody tr:hover > td:first-child::before,
+.table-container table tbody tr:hover > td:last-child::before{
+    @apply bg-theme-secondary-100;
+}
+
+.table-container table tbody tr:hover > td:after {
+    @apply border-white;
+}
+
