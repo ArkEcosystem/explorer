@@ -17,6 +17,7 @@ use App\ViewModels\ViewModelFactory;
 use App\ViewModels\WalletViewModel;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\View\View;
 use Livewire\Component;
 
@@ -129,28 +130,38 @@ final class DelegateMonitor extends Component
 
     private function cacheLastBlocks(array $delegates): void
     {
-        $blocks = Block::query()
-            ->orderBy('height', 'desc')
-            ->limit(Network::delegateCount() * 2)
-            ->get();
+        $ttl = (int) ceil(Network::blockTime() / 2);
 
-        foreach ($delegates as $delegate) {
-            $block = $blocks->firstWhere('generator_public_key', $delegate);
+        Cache::remember('monitor:last-blocks', $ttl, function () use ($delegates): void {
+            $blocks = Block::query()
+                ->orderBy('height', 'desc')
+                ->limit(Network::delegateCount() * 2)
+                ->get();
 
-            if (is_null($block)) {
-                $block = Block::query()
-                    ->where('generator_public_key', $delegate)
-                    ->orderBy('height', 'desc')
-                    ->limit(1)
-                    ->get();
+            foreach ($delegates as $delegate) {
+                $block = $blocks->firstWhere('generator_public_key', $delegate);
+
+                // The delegate hasn't forged in some rounds.
+                if (is_null($block)) {
+                    $block = Block::query()
+                        ->where('generator_public_key', $delegate)
+                        ->orderBy('height', 'desc')
+                        ->limit(1)
+                        ->first();
+                }
+
+                // The delegate has never forged.
+                if (is_null($block)) {
+                    continue;
+                }
+
+                (new WalletCache())->setLastBlock($delegate, [
+                    'id'                   => $block->id,
+                    'height'               => $block->height->toNumber(),
+                    'timestamp'            => Timestamp::fromGenesis($block->timestamp)->unix(),
+                    'generator_public_key' => $block->generator_public_key,
+                ]);
             }
-
-            (new WalletCache())->setLastBlock($delegate, [
-                'id'                   => $block->id,
-                'height'               => $block->height->toNumber(),
-                'timestamp'            => Timestamp::fromGenesis($block->timestamp)->unix(),
-                'generator_public_key' => $block->generator_public_key,
-            ]);
-        }
+        });
     }
 }
