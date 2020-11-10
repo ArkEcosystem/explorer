@@ -12,7 +12,7 @@ final class MarketSquareCache implements Contract
 {
     use Concerns\ManagesCache;
 
-    public function getProfile(string $address): string
+    public function getProfile(string $address): array
     {
         return $this->get(sprintf('profile/%s', $address));
     }

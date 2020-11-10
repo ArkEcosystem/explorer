@@ -43,7 +43,7 @@ trait InteractsWithMarketSquare
         );
     }
 
-    public function payoutFrequency(): ?int
+    public function payoutFrequency(): ?string
     {
         if (! Network::usesMarketsquare()) {
             return null;
