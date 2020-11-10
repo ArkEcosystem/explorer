@@ -13,6 +13,7 @@ use App\Console\Commands\CacheDelegateUsernames;
 use App\Console\Commands\CacheDelegateVoterCounts;
 use App\Console\Commands\CacheDelegateWallets;
 use App\Console\Commands\CacheFees;
+use App\Console\Commands\CacheMarketSquareProfiles;
 use App\Console\Commands\CacheMultiSignatureAddresses;
 use App\Console\Commands\CachePrices;
 use App\Jobs\CacheMarketSquareProfileByAddress;
@@ -61,7 +62,7 @@ final class Kernel extends ConsoleKernel
 
         $schedule->command(CacheDelegateResignationIds::class)->everyMinute();
 
-        $schedule->command(CacheMarketSquareProfileByAddress::class)->everyMinute();
+        $schedule->command(CacheMarketSquareProfiles::class)->everyMinute();
     }
 
     /**
