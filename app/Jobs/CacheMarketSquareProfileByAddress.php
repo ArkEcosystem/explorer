@@ -26,7 +26,7 @@ final class CacheMarketSquareProfileByAddress implements ShouldQueue
     public function handle(MarketSquareCache $cache): void
     {
         $response = Http::baseUrl(config('explorer.marketsquare_host'))
-            ->get(sprintf('api/delegates/%s', $this->wallet['attributes']['delegate']['username']));
+            ->get(sprintf('api/delegates/%s', $this->wallet['address']));
 
         $response->throw();
 
