@@ -1,3 +1,3 @@
 <div class="transaction-icon">
-    @svg('app-transactions.'.$iconType, 'w-6 h-6 md:w-5 md:h-5')
+    <x-ark-icon :name="'app-transactions.'. $iconType" size="md" class="md:w-5 md:h-5" />
 </div>
