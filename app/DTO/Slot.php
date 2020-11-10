@@ -146,7 +146,7 @@ final class Slot
         return false;
     }
 
-    private function getLastHeight(): ?int
+    private function getLastHeight(): int
     {
         return Arr::get($this->lastBlock, 'height', 0);
     }
