@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\ViewModels\Concerns\Wallet;
 
 use App\Facades\Network;
+use App\Services\Cache\MarketSquareCache;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 
 trait InteractsWithMarketSquare
@@ -16,7 +18,7 @@ trait InteractsWithMarketSquare
      */
     public function profileUrl(): ?string
     {
-        if (! Network::usesMarketsquare()) {
+        if (! Network::usesMarketSquare()) {
             return null;
         }
 
@@ -29,45 +31,40 @@ trait InteractsWithMarketSquare
         return 'https://marketsquare.io/delegates/'.Str::slug($username);
     }
 
-    /**
-     * @TODO: needs marketsquare
-     *
-     * @codeCoverageIgnore
-     */
     public function commission(): ?int
     {
-        if (! Network::usesMarketsquare()) {
+        if (! Network::usesMarketSquare()) {
             return null;
         }
 
-        return 0;
+        return Arr::get(
+            (new MarketSquareCache())->getProfile($this->wallet->address),
+            'ipfs.data.meta.delegate.percentage.min'
+        );
     }
 
-    /**
-     * @TODO: needs marketsquare
-     *
-     * @codeCoverageIgnore
-     */
-    public function payoutFrequency(): ?int
+    public function payoutFrequency(): ?string
     {
-        if (! Network::usesMarketsquare()) {
+        if (! Network::usesMarketSquare()) {
             return null;
         }
 
-        return 0;
+        $profile = (new MarketSquareCache())->getProfile($this->wallet->address);
+        $type    = Arr::get($profile, 'ipfs.data.meta.delegate.frequency.type');
+        $value   = Arr::get($profile, 'ipfs.data.meta.delegate.frequency.value');
+
+        return trans_choice('generic.'.$type, $value);
     }
 
-    /**
-     * @TODO: needs marketsquare
-     *
-     * @codeCoverageIgnore
-     */
     public function payoutMinimum(): ?int
     {
-        if (! Network::usesMarketsquare()) {
+        if (! Network::usesMarketSquare()) {
             return null;
         }
 
-        return 0;
+        return Arr::get(
+            (new MarketSquareCache())->getProfile($this->wallet->address),
+            'ipfs.data.meta.delegate.distribution.min'
+        );
     }
 }
