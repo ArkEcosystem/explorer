@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire;
 
-use App\Models\Wallet;
+use App\Facades\Wallets;
 use App\Services\QRCode;
 use App\ViewModels\ViewModelFactory;
-use Illuminate\View\View;
+use Illuminate\Contracts\View\View;
 use Livewire\Component;
 
 /**
@@ -29,7 +29,7 @@ final class WalletQrCode extends Component
     public function render(): View
     {
         return view('livewire.wallet-qr-code', [
-            'wallet' => ViewModelFactory::make(Wallet::whereAddress($this->address)->firstOrFail()),
+            'wallet' => ViewModelFactory::make(Wallets::findByAddress($this->address)),
         ]);
     }
 
