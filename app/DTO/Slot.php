@@ -110,7 +110,7 @@ final class Slot
             return 0;
         }
 
-        return (int) abs((new NetworkCache())->getHeight() - $this->getLastHeight());
+        return abs((new NetworkCache())->getHeight() - $this->getLastHeight());
     }
 
     public function isDone(): bool
