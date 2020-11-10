@@ -13,9 +13,7 @@ use App\Console\Commands\CacheDelegateUsernames;
 use App\Console\Commands\CacheDelegateVoterCounts;
 use App\Console\Commands\CacheDelegateWallets;
 use App\Console\Commands\CacheFees;
-use App\Console\Commands\CacheLastBlocks;
 use App\Console\Commands\CacheMultiSignatureAddresses;
-use App\Console\Commands\CacheNetworkStatus;
 use App\Console\Commands\CachePrices;
 use App\Jobs\CacheMarketSquareProfileByAddress;
 use Illuminate\Console\Scheduling\Schedule;
@@ -49,15 +47,11 @@ final class Kernel extends ConsoleKernel
 
         $schedule->command(CacheDelegateAggregates::class)->everyFiveMinutes();
 
-        $schedule->command(CacheNetworkStatus::class)->everyMinute();
-
         $schedule->command(CacheFees::class)->everyMinute();
 
         $schedule->command(CacheDelegateUsernames::class)->everyMinute();
 
         $schedule->command(CacheMultiSignatureAddresses::class)->everyMinute();
-
-        $schedule->command(CacheLastBlocks::class)->everyMinute();
 
         $schedule->command(CacheDelegatesWithVoters::class)->everyMinute();
 
