@@ -68,10 +68,12 @@ final class DelegateMonitor extends Component
                 'currentDelegate' => $this->getCurrentDelegate(),
                 'nextDelegate'    => $this->getNextDelegate(),
             ];
+            // @codeCoverageIgnoreStart
         } catch (\Throwable $th) {
             // @README: If any errors occur we want to keep polling until we have a list of delegates
             $this->pollDelegates();
         }
+        // @codeCoverageIgnoreEnd
     }
 
     private function getBlockCount(): string
