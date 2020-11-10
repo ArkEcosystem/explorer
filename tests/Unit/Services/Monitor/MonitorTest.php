@@ -10,6 +10,7 @@ it('should calculate the forging information', function () {
 
 it('should calculate the height range for the given round', function () {
     expect(Monitor::heightRangeByRound(1))->toBe([1, 51]);
+    expect(Monitor::heightRangeByRound(2))->toBe([52, 102]);
     expect(Monitor::heightRangeByRound(50))->toBe([2500, 2550]);
 });
 

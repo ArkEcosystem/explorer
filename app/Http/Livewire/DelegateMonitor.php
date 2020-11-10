@@ -42,7 +42,7 @@ final class DelegateMonitor extends Component
         try {
             $roundNumber = Rounds::current();
             $heightRange = Monitor::heightRangeByRound($roundNumber);
-            $tracking    = DelegateTracker::execute(Rounds::allByRound($roundNumber));
+            $tracking    = DelegateTracker::execute(Rounds::allByRound($roundNumber), $heightRange[0]);
             $roundBlocks = $this->getBlocksByRange(Arr::pluck($tracking, 'publicKey'), $heightRange);
 
             $delegates = [];

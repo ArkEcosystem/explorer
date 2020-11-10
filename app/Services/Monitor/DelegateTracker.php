@@ -359,11 +359,10 @@ final class DelegateTracker
     //     ],
     // ];
 
-    public static function execute(Collection $delegates): array
+    public static function execute(Collection $delegates, int $startHeight): array
     {
         // Arrange Block
         $lastBlock = Block::withScope(OrderByHeightScope::class)->firstOrFail();
-        $height    = $lastBlock->height->toNumber(); // 5720529;
         $timestamp = $lastBlock->timestamp; // 113620904;
 
         // Arrange Delegates
@@ -374,7 +373,7 @@ final class DelegateTracker
         //     'INPUT_DIFFS' => array_diff($activeDelegates->toArray(), static::EXPECTED['input']),
         // ]);
 
-        $activeDelegates = static::getActiveDelegates($activeDelegates->toArray(), $height);
+        $activeDelegates = static::getActiveDelegates($activeDelegates->toArray(), $startHeight);
 
         // dd([
         //     'OUTPUT_EQUAL' => $activeDelegates === static::EXPECTED['output'],
@@ -382,7 +381,7 @@ final class DelegateTracker
         // ]);
 
         // Act
-        $forgingInfo = ForgingInfoCalculator::calculate($timestamp, $height);
+        $forgingInfo = ForgingInfoCalculator::calculate($timestamp, $startHeight);
 
         // // Determine Next Forgers...
         // $nextForgers = [];
