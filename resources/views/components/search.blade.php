@@ -25,7 +25,7 @@
 >
     <div
         :class="{
-            'fixed inset-0 z-30 overflow-y-auto bg-opacity-25 bg-theme-secondary-900 md:hidden pb-20': isMobileOpen
+            'fixed inset-0 z-30 overflow-y-auto bg-black bg-opacity-75 md:hidden pb-20': isMobileOpen
         }"
         @click="isMobileOpen = false"
     >
