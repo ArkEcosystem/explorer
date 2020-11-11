@@ -66,7 +66,7 @@ it('should get the nonce', function () {
 });
 
 it('should get the balance as percentage from supply', function () {
-    (new NetworkCache())->setSupply('1000000000000');
+    (new NetworkCache())->setSupply(fn () => '1000000000000');
 
     expect($this->subject->balancePercentage())->toBeFloat();
     expect($this->subject->balancePercentage())->toBe(10.0);
@@ -79,7 +79,7 @@ it('should get the votes', function () {
 });
 
 it('should get the votes as percentage from supply', function () {
-    (new NetworkCache())->setSupply('1000000000000');
+    (new NetworkCache())->setSupply(fn () => '1000000000000');
 
     expect($this->subject->votesPercentage())->toBeFloat();
     expect($this->subject->votesPercentage())->toBe(10.0);
@@ -521,4 +521,24 @@ it('should determine the payout minimum', function () {
     ]);
 
     expect($this->subject->payoutMinimum())->toBe(500);
+});
+
+it('should build the MarketSquare profile URL', function () {
+    $this->subject = new WalletViewModel(Wallet::factory()->create([
+        'attributes'   => [
+            'delegate' => [
+                'username' => 'John',
+            ],
+        ],
+    ]));
+
+    expect($this->subject->profileUrl())->toBe('https://marketsquare.io/delegates/john');
+});
+
+it('should fail to build the MarketSquare profile URL if there is no username', function () {
+    $this->subject = new WalletViewModel(Wallet::factory()->create([
+        'attributes' => [],
+    ]));
+
+    expect($this->subject->profileUrl())->toBeNull();
 });
