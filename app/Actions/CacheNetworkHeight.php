@@ -12,7 +12,7 @@ final class CacheNetworkHeight
 {
     public static function execute(): int
     {
-        return (new NetworkCache())->setHeight(function () {
+        return (new NetworkCache())->setHeight(function (): float {
             $block = Block::withScope(OrderByHeightScope::class)->first();
 
             if (is_null($block)) {
