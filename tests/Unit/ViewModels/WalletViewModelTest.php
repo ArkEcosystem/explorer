@@ -534,3 +534,11 @@ it('should build the MarketSquare profile URL', function () {
 
     expect($this->subject->profileUrl())->toBe('https://marketsquare.io/delegates/john');
 });
+
+it('should fail to build the MarketSquare profile URL if there is no username', function () {
+    $this->subject = new WalletViewModel(Wallet::factory()->create([
+        'attributes' => [],
+    ]));
+
+    expect($this->subject->profileUrl())->toBeNull();
+});

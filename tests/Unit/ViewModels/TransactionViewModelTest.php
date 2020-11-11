@@ -1610,3 +1610,12 @@ it('should determine if the transaction is any kind of registration', function (
         ],
     ],
 ]);
+
+it('should determine that the transaction is not any kind of registration', function () {
+    $subject = new TransactionViewModel(Transaction::factory()->create([
+        'type'       => 0,
+        'type_group' => 0,
+    ]));
+
+    expect($subject->isRegistration())->toBeFalse();
+});
