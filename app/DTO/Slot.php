@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace App\DTO;
 
-use App\Services\Cache\NetworkCache;
+use App\Actions\CacheNetworkHeight;
 use App\Services\Monitor\Monitor;
 use App\ViewModels\WalletViewModel;
 use Carbon\Carbon;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
@@ -95,13 +96,21 @@ final class Slot
             return false;
         }
 
+        if ($this->getLastHeight() === 0) {
+            return false;
+        }
+
         // Since we're not waiting in current round, more than 1 round between current and last forged block means we're missing 2+ consecutive rounds
-        return ($this->roundNumber - Monitor::roundNumberFromHeight($this->lastBlock['height'])) > 1;
+        return ($this->roundNumber - Monitor::roundNumberFromHeight($this->getLastHeight())) > 1;
     }
 
     public function missedCount(): int
     {
-        return (int) abs((new NetworkCache())->getHeight() - $this->lastBlock['height']);
+        if ($this->getLastHeight() === 0) {
+            return 0;
+        }
+
+        return abs(CacheNetworkHeight::execute() - $this->getLastHeight());
     }
 
     public function isDone(): bool
@@ -135,5 +144,10 @@ final class Slot
         }
 
         return false;
+    }
+
+    private function getLastHeight(): int
+    {
+        return Arr::get($this->lastBlock, 'height', 0);
     }
 }
