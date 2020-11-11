@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\ViewModels;
 
+use App\Actions\CacheNetworkHeight;
 use App\Contracts\ViewModel;
 use App\Facades\Wallets;
 use App\Models\Transaction;
-use App\Services\Cache\NetworkCache;
 use App\Services\ExchangeRate;
 use App\Services\Timestamp;
 use App\Services\Transactions\TransactionDirection;
@@ -23,6 +23,7 @@ final class TransactionViewModel implements ViewModel
     use Concerns\Transaction\HasType;
     use Concerns\Transaction\InteractsWithDelegateRegistration;
     use Concerns\Transaction\InteractsWithEntities;
+    use Concerns\Transaction\InteractsWithMarketSquare;
     use Concerns\Transaction\InteractsWithMultiPayment;
     use Concerns\Transaction\InteractsWithMultiSignature;
     use Concerns\Transaction\InteractsWithTypeData;
@@ -99,7 +100,7 @@ final class TransactionViewModel implements ViewModel
 
     public function confirmations(): int
     {
-        return abs((new NetworkCache())->getHeight() - $this->transaction->block_height);
+        return abs(CacheNetworkHeight::execute() - $this->transaction->block_height);
     }
 
     public function ipfsHash(): ?string
