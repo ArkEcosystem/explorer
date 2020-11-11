@@ -202,7 +202,10 @@ it('should search for transactions by fee range', function () {
 });
 
 it('should search for transactions by wallet with an address', function () {
-    Transaction::factory(10)->create();
+    Transaction::factory(10)->create([
+        'sender_public_key' => 'somethingsomething',
+        'recipient_id'      => 'somethingsomething',
+    ]);
 
     $wallet = Wallet::factory()->create();
 
@@ -227,7 +230,7 @@ it('should search for transactions by wallet with an address', function () {
     ]);
 
     expect($result->get())->toHaveCount(3);
-});
+})->only();
 
 it('should search for transactions by wallet with a public key', function () {
     Transaction::factory(10)->create();
