@@ -19,7 +19,7 @@
         </thead>
         <tbody>
             @foreach($transactions as $transaction)
-                <tr class="group">
+                <tr>
                     <x-tables.cell wire:key="{{ $transaction->id() }}-id">
                         <x-tables.rows.desktop.transaction-id :model="$transaction" />
                     </x-tables.cell>
@@ -36,7 +36,7 @@
                     <x-tables.cell wire:key="{{ $transaction->id() }}-recipient">
                         <x-tables.rows.desktop.recipient :model="$transaction" />
                     </x-tables.cell>
-                    <x-tables.cell class="text-right">
+                    <x-tables.cell class="text-right" last="xl">
                         @isset($useDirection)
                             @if($transaction->isSent($wallet->address()))
                                 <x-tables.rows.desktop.amount-sent :model="$transaction" />
@@ -47,11 +47,20 @@
                             <x-tables.rows.desktop.amount :model="$transaction" />
                         @endisset
                     </x-tables.cell>
-                    <x-tables.cell class="hidden text-right xl:table-cell">
+                    <x-tables.cell
+                        class="text-right"
+                        breakpoint="xl"
+                        :last="$useConfirmations ?? null"
+                    >
                         <x-tables.rows.desktop.fee :model="$transaction" />
                     </x-tables.cell>
                     @isset($useConfirmations)
-                    <x-tables.cell class="hidden text-right xl:table-cell" wire:key="{{ $transaction->id() }}-confirmations">
+                    <x-tables.cell
+                        class="text-right"
+                        breakpoint="xl"
+                        last
+                        wire:key="{{ $transaction->id() }}-confirmations"
+                    >
                         <x-tables.rows.desktop.confirmations :model="$transaction" />
                     </x-tables.cell>
                     @endisset

@@ -1,3 +1,7 @@
-<td {{ $attributes->merge(['class' => 'group-hover:bg-theme-secondary-100 relative'. (isset($attributes['class']) ? $attributes['class'] : '') ]) }}>
+<td {{ $attributes->merge([
+    'class' => (isset($breakpoint) ? $breakpoint.':table-cell hidden' : '')
+        . (isset($last) && $last ? (' last-cell' . (is_string($last) ? ' last-cell-' . $last : '')) : '')
+        . (isset($attributes['class']) ? ' ' . $attributes['class'] : '')
+]) }}>
     {{ $slot }}
 </td>
