@@ -230,7 +230,7 @@ it('should search for transactions by wallet with an address', function () {
     ]);
 
     expect($result->get())->toHaveCount(3);
-})->only();
+});
 
 it('should search for transactions by wallet with a public key', function () {
     Transaction::factory(10)->create();
