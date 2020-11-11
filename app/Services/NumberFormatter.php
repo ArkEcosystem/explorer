@@ -48,7 +48,7 @@ final class NumberFormatter
         if (Str::contains((string) $value, '.')) {
             $value = (float) ResolveScientificNotation::execute((float) $value);
 
-            return rtrim(number_format($value, $decimals ?: 8), '0').' '.strtoupper($currency);
+            return rtrim(number_format($value, $decimals ?? 8), '0').' '.strtoupper($currency);
         }
 
         return static::number($value).' '.strtoupper($currency);

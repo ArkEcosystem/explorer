@@ -17,7 +17,7 @@ final class Currency extends Component
             return NumberFormatter::currency(
                 trim((string) $data['slot']),
                 Network::currency(),
-                isset($data['attributes']['decimals']) ? (int) $data['attributes']['decimals'] : null
+                $data['attributes']['decimals'] ? (int) $data['attributes']['decimals'] : null
             );
         };
     }
