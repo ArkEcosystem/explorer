@@ -12,16 +12,14 @@ final class CacheNetworkHeight
 {
     public static function execute(): int
     {
-        $block = Block::withScope(OrderByHeightScope::class)->first();
+        return (new NetworkCache())->setHeight(function () {
+            $block = Block::withScope(OrderByHeightScope::class)->first();
 
-        if (is_null($block)) {
-            $height = 0;
-        } else {
-            $height = $block->height->toNumber();
-        }
+            if (is_null($block)) {
+                return 0;
+            }
 
-        (new NetworkCache())->setHeight($height);
-
-        return $height;
+            return $block->height->toNumber();
+        });
     }
 }

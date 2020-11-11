@@ -11,10 +11,8 @@ final class CacheNetworkSupply
 {
     public static function execute(): float
     {
-        $supply = Wallet::where('balance', '>', 0)->sum('balance');
-
-        (new NetworkCache())->setSupply((string) $supply);
-
-        return (float) $supply;
+        return (new NetworkCache())->setSupply(function () {
+            return (float) Wallet::where('balance', '>', 0)->sum('balance');
+        });
     }
 }
