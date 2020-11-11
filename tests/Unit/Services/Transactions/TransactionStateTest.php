@@ -24,6 +24,8 @@ it('should determine if the transaction is confirmed', function () {
 });
 
 it('should determine if the transaction is not confirmed', function () {
+    (new NetworkCache())->setHeight(fn () => 1000);
+
     $transaction = Transaction::factory()->create([
         'sender_public_key' => Wallet::factory()->create(['address' => 'sender'])->public_key,
         'recipient_id'      => Wallet::factory()->create(['address' => 'recipient'])->address,
