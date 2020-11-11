@@ -8,7 +8,6 @@ use App\Facades\Network;
 use App\Models\Block;
 use App\Models\Scopes\OrderByHeightScope;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Log;
 
 /**
  * @NOTE
@@ -464,7 +463,7 @@ final class DelegateTracker
 
         // Move all entries by 21 places to get them in the right round order, but time to forge will be wrong
         $delegatesOrdered = [];
-        for($i = 21; $i < $delCount + 21; $i++) {
+        for ($i = 21; $i < $delCount + 21; $i++) {
             $delegatesOrdered[] = $delegates[$i % $delCount];
         }
 
