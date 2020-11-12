@@ -39,7 +39,7 @@ final class NumberFormatter
     /**
      * @param string|int|float $value
      */
-    public static function currency($value, string $currency): string
+    public static function currency($value, string $currency, ?int $decimals = null): string
     {
         if (Str::contains((string) $value, ',')) {
             return $value.' '.strtoupper($currency);
@@ -48,9 +48,24 @@ final class NumberFormatter
         if (Str::contains((string) $value, '.')) {
             $value = (float) ResolveScientificNotation::execute((float) $value);
 
-            return rtrim(number_format($value, 8), '0').' '.strtoupper($currency);
+            return rtrim(number_format($value, $decimals ?? 8), '0').' '.strtoupper($currency);
         }
 
         return static::number($value).' '.strtoupper($currency);
+    }
+
+    /**
+     * @param string|int|float $value
+     */
+    public static function currencyShort($value, string $currency): string
+    {
+        $i     = 0;
+        $units = ['', 'K', 'M', 'B', 'T'];
+
+        for ($i = 0; $value >= 1000; $i++) {
+            $value /= 1000;
+        }
+
+        return round((float) $value, 1).$units[$i].' '.strtoupper($currency);
     }
 }

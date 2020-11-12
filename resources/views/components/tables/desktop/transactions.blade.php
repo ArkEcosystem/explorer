@@ -24,10 +24,9 @@
                         <x-tables.rows.desktop.transaction-id :model="$transaction" />
                     </x-tables.cell>
                     <x-tables.cell class="hidden lg:table-cell">
-                        <x-tables.rows.desktop.timestamp :model="$transaction" />
+                        <x-tables.rows.desktop.timestamp :model="$transaction" shortened />
                     </x-tables.cell>
-                    <x-tables.cell wire:key="{{ $transaction->id() }}-sender">
-                        @isset($useDirection)
+                    <x-tables.cell wire:key="{{ $transaction->id() }}-sender">                        @isset($useDirection)
                             <x-tables.rows.desktop.sender-with-direction :model="$transaction" :wallet="$wallet" />
                         @else
                             <x-tables.rows.desktop.sender :model="$transaction" />
