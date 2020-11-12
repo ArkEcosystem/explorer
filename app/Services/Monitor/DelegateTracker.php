@@ -400,7 +400,6 @@ final class DelegateTracker
 
         return collect($activeDelegates)
             ->map(function ($publicKey, $index) use (&$forgingIndex, $forgingInfo) {
-
                 if ($index === $forgingInfo['nextForger']) {
                     return [
                         'publicKey' => $publicKey,
