@@ -658,3 +658,39 @@ body {
         content: none;
     }
 }
+
+
+.table-container table > tbody > tr[data-warning] > td:first-child::before,
+.table-container table > tbody > tr[data-warning] > td.first-cell::before,
+.table-container table > tbody > tr[data-warning] > td:last-child:before,
+.table-container table > tbody > tr[data-warning] > td.last-cell::before,
+.table-container table > tbody > tr[data-warning] > td:after {
+    @apply border-theme-warning-500;
+}
+
+
+
+.table-container table > tbody > tr[data-warning] > td:first-child::before,
+.table-container table > tbody > tr[data-warning] > td.first-cell::before,
+.table-container table > tbody > tr[data-warning] > td:last-child:before,
+.table-container table > tbody > tr[data-warning] > td.last-cell::before,
+.table-container table > tbody > tr[data-warning] > td:after {
+    content: '';
+    @apply border-t border-b;
+}
+
+.table-container table > tbody > tr[data-warning] > td:first-child::before,
+.table-container table > tbody > tr[data-warning] > td.first-cell::before {
+    @apply border-l;
+}
+
+.table-container table > tbody > tr[data-warning] > td:last-child::before,
+.table-container table > tbody > tr[data-warning] > td.last-cell::before {
+    @apply border-r;
+}
+
+
+
+/* .theme-dark .table-container table > tbody > tr:hover > td:after {
+    @apply border-theme-secondary-900;
+} */

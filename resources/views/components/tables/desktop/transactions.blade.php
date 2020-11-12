@@ -19,7 +19,7 @@
         </thead>
         <tbody>
             @foreach($transactions as $transaction)
-                <tr>
+                <tr @if($loop->index === 3 || $loop->index === 1) data-warning @endif>
                     <x-tables.cell wire:key="{{ $transaction->id() }}-id">
                         <x-tables.rows.desktop.transaction-id :model="$transaction" />
                     </x-tables.cell>
@@ -35,7 +35,7 @@
                     <x-tables.cell wire:key="{{ $transaction->id() }}-recipient">
                         <x-tables.rows.desktop.recipient :model="$transaction" />
                     </x-tables.cell>
-                    <x-tables.cell class="text-right" last="xl">
+                    <x-tables.cell class="text-right">
                         @isset($useDirection)
                             @if($transaction->isSent($wallet->address()))
                                 <x-tables.rows.desktop.amount-sent :model="$transaction" />
@@ -48,16 +48,14 @@
                     </x-tables.cell>
                     <x-tables.cell
                         class="text-right"
-                        breakpoint="xl"
-                        :last="$useConfirmations ?? null"
+                        hide-on="xl"
                     >
                         <x-tables.rows.desktop.fee :model="$transaction" />
                     </x-tables.cell>
                     @isset($useConfirmations)
                     <x-tables.cell
                         class="text-right"
-                        breakpoint="xl"
-                        last
+                        hide-on="xl"
                         wire:key="{{ $transaction->id() }}-confirmations"
                     >
                         <x-tables.rows.desktop.confirmations :model="$transaction" />
