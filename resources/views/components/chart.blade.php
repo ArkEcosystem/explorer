@@ -52,9 +52,11 @@
 
                 return this.isDarkTheme ? themeColours.dark : themeColours.light;
             },
-            updateChartColors() {
+            toggleDarkMode() {
                 this.isDarkTheme = ! this.isDarkTheme;
-
+                this.updateChartColors();
+            },
+            updateChartColors() {
                 const themeColours = this.getThemeColors();
 
                 this.chart.data.datasets.forEach((dataset) => {
@@ -256,7 +258,7 @@
 <div
     x-data="makeChart('{{ $identifier }}', '{{ $coloursScheme }}')"
     x-init="renderChart()"
-    x-on:toggle-dark-mode.window="updateChartColors()"
+    x-on:toggle-dark-mode.window="toggleDarkMode()"
     x-on:chart-period-selected.window="setPeriod($event.detail)"
     x-on:{{ $alpineShow }}.window="toggleChart()"
     x-show="isVisible"
