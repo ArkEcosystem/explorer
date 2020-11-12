@@ -12,7 +12,8 @@
             @foreach($delegates as $delegate)
                 <x-ark-tables.row
                     wire:key="$delegate->publicKey()"
-                    :class="$delegate->keepsMissing() ? 'bg-theme-danger-50' : ($delegate->justMissed() ? 'bg-theme-warning-50' : '')"
+                    :danger="$delegate->keepsMissing()"
+                    :warning="$delegate->justMissed()"
                 >
                     <x-ark-tables.cell>
                         <x-tables.rows.mobile.slot-id :model="$delegate" />
