@@ -13,11 +13,7 @@
             @foreach($delegates as $delegate)
                 <x-ark-tables.row
                     wire:key="{{ $delegate->publicKey() }}-{{ $round }}"
-                    @if ($delegate->keepsMissing())
-                        class="bg-theme-danger-50"
-                    @elseif ($delegate->justMissed())
-                        class="bg-theme-warning-50"
-                    @endif
+                    :class="$delegate->keepsMissing() ? 'bg-theme-danger-50' : ($delegate->justMissed() ? 'bg-theme-warning-50' : '')"
                 >
                     <x-ark-tables.cell>
                         <x-tables.rows.desktop.slot-id :model="$delegate" />
