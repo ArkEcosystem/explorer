@@ -9,16 +9,12 @@ use App\Services\NumberFormatter;
 use Closure;
 use Illuminate\View\Component;
 
-final class Currency extends Component
+final class CurrencyShort extends Component
 {
     public function render(): Closure
     {
         return function (array $data): string {
-            return NumberFormatter::currency(
-                trim((string) $data['slot']),
-                Network::currency(),
-                $data['attributes']['decimals'] ? (int) $data['attributes']['decimals'] : null
-            );
+            return NumberFormatter::currencyShort(trim((string) $data['slot']), Network::currency());
         };
     }
 }
