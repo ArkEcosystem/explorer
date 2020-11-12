@@ -47,7 +47,7 @@ final class DelegateMonitor extends Component
 
             $this->cacheLastBlocks($delegates->pluck('public_key')->toArray());
 
-            $tracking    = DelegateTracker::execute(Rounds::allByRound($roundNumber), $heightRange[0]);
+            $tracking    = DelegateTracker::execute($delegates, $heightRange[0]);
             $roundBlocks = $this->getBlocksByRange(Arr::pluck($tracking, 'publicKey'), $heightRange);
 
             $delegates = [];
