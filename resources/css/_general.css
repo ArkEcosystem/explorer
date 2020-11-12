@@ -579,7 +579,7 @@ body {
 .table-container table > tbody > tr > td.first-cell::before,
 .table-container table > tbody > tr > td:last-child:before,
 .table-container table > tbody > tr > td.last-cell::before {
-    content: '';
+    content: "";
     @apply absolute top-0 block w-2 h-full border-t-2 border-b-2 border-transparent;
 }
 
@@ -594,7 +594,7 @@ body {
 }
 
 .table-container table > tbody > tr > td:after {
-    content: '';
+    content: "";
     @apply absolute top-0 bottom-0 left-0 right-0 w-full h-full border-t-2 border-b-2 border-transparent pointer-events-none;
 }
 
@@ -609,7 +609,6 @@ body {
 .table-container table > tbody > tr:hover > td {
     @apply border-white bg-theme-secondary-100;
 }
-
 
 .theme-dark .table-container table > tbody > tr:hover > td:first-child::before,
 .theme-dark .table-container table > tbody > tr:hover > td.first-cell::before,
@@ -645,7 +644,7 @@ body {
     .table-container table > tbody > tr > td.last-cell-lg::before {
         content: none;
     }
-   .table-container table > tbody > tr > td.first-cell-lg::before {
+    .table-container table > tbody > tr > td.first-cell-lg::before {
         content: none;
     }
 }
@@ -659,7 +658,6 @@ body {
     }
 }
 
-
 .table-container table > tbody > tr[data-warning] > td:first-child::before,
 .table-container table > tbody > tr[data-warning] > td.first-cell::before,
 .table-container table > tbody > tr[data-warning] > td:last-child:before,
@@ -668,14 +666,12 @@ body {
     @apply border-theme-warning-500;
 }
 
-
-
 .table-container table > tbody > tr[data-warning] > td:first-child::before,
 .table-container table > tbody > tr[data-warning] > td.first-cell::before,
 .table-container table > tbody > tr[data-warning] > td:last-child:before,
 .table-container table > tbody > tr[data-warning] > td.last-cell::before,
 .table-container table > tbody > tr[data-warning] > td:after {
-    content: '';
+    content: "";
     @apply border-t border-b;
 }
 
@@ -688,8 +684,6 @@ body {
 .table-container table > tbody > tr[data-warning] > td.last-cell::before {
     @apply border-r;
 }
-
-
 
 /* .theme-dark .table-container table > tbody > tr:hover > td:after {
     @apply border-theme-secondary-900;
