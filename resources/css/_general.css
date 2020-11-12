@@ -233,6 +233,9 @@ body {
 .table-container table thead th {
     @apply text-center;
 }
+.theme-dark .table-container table thead th {
+    @apply text-theme-secondary-700;
+}
 
 /* Table List */
 .table-list-mobile-row {
