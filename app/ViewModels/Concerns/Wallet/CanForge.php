@@ -79,4 +79,31 @@ trait CanForge
             ->filter(fn ($performance) => $performance === false)
             ->count() > 1;
     }
+
+    /**
+     * If last one is `true` => forged
+     */
+    public function isForged(): bool
+    {
+        return collect($this->performance())->last() === true;
+    }
+
+    /**
+     * If last one is `false` but previous one `true` => missed block
+     */
+    public function isMissedBlock(): bool
+    {
+        $performance = collect($this->performance());
+        $missedLast =  $performance->last() === false;
+        $previousToLastForged = $performance->get($performance->count() - 2) === true;
+        return $missedLast && $previousToLastForged;
+    }
+
+    /**
+     * Is missed if is not forged or missed block
+     */
+    public function isMissed(): bool
+    {
+        return !$this->isForged() && !$this->isMissedBlock();
+    }
 }

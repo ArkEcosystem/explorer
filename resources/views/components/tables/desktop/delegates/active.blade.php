@@ -15,7 +15,10 @@
         </thead>
         <tbody>
             @foreach($delegates as $delegate)
-                <x-ark-tables.row>
+                <x-ark-tables.row
+                    :danger="$delegate->isMissed()"
+                    :warning="$delegate->isMissedBlock()"
+                >
                     <x-ark-tables.cell>
                         <x-tables.rows.desktop.rank :model="$delegate" />
                     </x-ark-tables.cell>
