@@ -55,12 +55,6 @@ final class ShuffleDelegates
         //     }
         // }
 
-        // Move all entries by 21 places to get them in the right round order, but time to forge will be wrong
-        $delegatesOrdered = [];
-        for ($i = 21; $i < $delCount + 21; $i++) {
-            $delegatesOrdered[] = $delegates[$i % $delCount];
-        }
-
-        return $delegatesOrdered;
+        return $delegates;
     }
 }
