@@ -9,7 +9,6 @@ use App\Models\Block;
 use App\Models\Scopes\OrderByHeightScope;
 use App\Services\Monitor\Actions\ShuffleDelegates;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Log;
 
 /**
  * @NOTE
@@ -437,11 +436,12 @@ final class DelegateTracker
         $originalOrder = ForgingInfoCalculator::calculate(Block::where('height', $startHeight)->firstOrFail()->timestamp, $startHeight);
 
         // Note: static order will be found by shifting the index based on the forging data from above
-        $delCount = count($activeDelegates); // TODO: fetch this from somewhere as it almost never changes
+        $delCount         = count($activeDelegates); // TODO: fetch this from somewhere as it almost never changes
         $delegatesOrdered = [];
         for ($i = $originalOrder['nextForger']; $i < $delCount + $originalOrder['nextForger']; $i++) {
             $delegatesOrdered[] = $temp[$i % $delCount];
         }
+
         return $delegatesOrdered;
     }
 }
