@@ -10,7 +10,7 @@
         </thead>
         <tbody>
             @foreach($delegates as $delegate)
-                <tr
+                <x-ark-tables.row
                     wire:key="$delegate->publicKey()"
                     @if ($delegate->keepsMissing())
                         class="bg-theme-danger-50"
@@ -18,22 +18,22 @@
                         class="bg-theme-warning-50"
                     @endif
                 >
-                    <td>
+                    <x-ark-tables.cell>
                         <x-tables.rows.mobile.slot-id :model="$delegate" />
-                    </td>
+                    </x-ark-tables.cell>
 
-                    <td wire:key="{{ $delegate->publicKey() }}-username-mobile">
+                    <x-ark-tables.cell wire:key="{{ $delegate->publicKey() }}-username-mobile">
                         <x-tables.rows.mobile.username-with-avatar :model="$delegate->wallet()" />
-                    </td>
+                    </x-ark-tables.cell>
 
-                    <td class="hidden sm:table-cell">
+                    <x-ark-tables.cell responsive breakpoint="sm">
                         <x-tables.rows.mobile.slot-time :model="$delegate" />
-                    </td>
+                    </x-ark-tables.cell>
 
-                    <td wire:key="{{ $delegate->publicKey() }}-round-status-{{ $delegate->status() }}-mobile">
+                    <x-ark-tables.cell wire:key="{{ $delegate->publicKey() }}-round-status-{{ $delegate->status() }}-mobile">
                         <x-tables.rows.mobile.round-status :model="$delegate" />
-                    </td>
-                </tr>
+                    </x-ark-tables.cell>
+                </x-ark-tables.row>
             @endforeach
         </tbody>
     </table>

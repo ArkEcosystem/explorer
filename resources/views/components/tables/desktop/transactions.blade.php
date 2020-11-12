@@ -19,14 +19,11 @@
         </thead>
         <tbody>
             @foreach($transactions as $transaction)
-                <x-ark-tables.row
-                    :warning="$loop->index === 3 || $loop->index === 1"
-                    :danger="$loop->index === 5"
-                >
+                <x-ark-tables.row>
                     <x-ark-tables.cell wire:key="{{ $transaction->id() }}-id">
                         <x-tables.rows.desktop.transaction-id :model="$transaction" />
                     </x-ark-tables.cell>
-                    <x-ark-tables.cell class="hidden lg:table-cell">
+                    <x-ark-tables.cell responsive>
                         <x-tables.rows.desktop.timestamp :model="$transaction" shortened />
                     </x-ark-tables.cell>
                     <x-ark-tables.cell wire:key="{{ $transaction->id() }}-sender">                        @isset($useDirection)
@@ -53,7 +50,6 @@
                         @endisset
                     </x-ark-tables.cell>
                     <x-ark-tables.cell
-                        :last="$useConfirmations ?? null"
                         class="text-right"
                         responsive
                         breakpoint="xl"
