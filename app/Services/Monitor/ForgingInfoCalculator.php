@@ -19,6 +19,7 @@ final class ForgingInfoCalculator
             'nextForger'     => $nextForger,
             'blockTimestamp' => $slotInfo['startTime'],
             'canForge'       => $slotInfo['forgingStatus'],
+            'slotNumber'     => $slotInfo['slotNumber'],
         ];
     }
 

@@ -9,6 +9,7 @@ use App\Models\Block;
 use App\Models\Scopes\OrderByHeightScope;
 use App\Services\Monitor\Actions\ShuffleDelegates;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Log;
 
 /**
  * @NOTE
@@ -375,6 +376,7 @@ final class DelegateTracker
         //     'INPUT_DIFFS' => array_diff($activeDelegates->toArray(), static::EXPECTED['input']),
         // ]);
 
+        // TODO: calculate this once for a given round, then cache it as it won't change until next round
         $activeDelegates = ShuffleDelegates::execute($activeDelegates->toArray(), $startHeight);
 
         // dd([
@@ -398,7 +400,7 @@ final class DelegateTracker
         // Map Next Forgers...
         $forgingIndex = 2; // We start at 2 to skip 0 which results in 0 as time and 1 which would be the next forger.
 
-        return collect($activeDelegates)
+        $temp =  collect($activeDelegates)
             ->map(function ($publicKey, $index) use (&$forgingIndex, $forgingInfo) {
                 if ($index === $forgingInfo['nextForger']) {
                     return [
@@ -430,5 +432,16 @@ final class DelegateTracker
                 ];
             })
             ->toArray();
+
+        // TODO: static order will be based on start height only, all other times we will need to only update the forging time and nothing else
+        $originalOrder = ForgingInfoCalculator::calculate(Block::where('height', $startHeight)->firstOrFail()->timestamp, $startHeight);
+
+        // Note: static order will be found by shifting the index based on the forging data from above
+        $delCount = count($activeDelegates); // TODO: fetch this from somewhere as it almost never changes
+        $delegatesOrdered = [];
+        for ($i = $originalOrder['nextForger']; $i < $delCount + $originalOrder['nextForger']; $i++) {
+            $delegatesOrdered[] = $temp[$i % $delCount];
+        }
+        return $delegatesOrdered;
     }
 }
