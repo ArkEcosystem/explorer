@@ -88,7 +88,7 @@ trait CanForge
     public function isMissedBlock(): bool
     {
         $performance          = collect($this->performance());
-        $missedLast           =  $performance->last() === false;
+        $missedLast           = $performance->last() === false;
         $previousToLastForged = $performance->get($performance->count() - 2) === true;
 
         return $missedLast && $previousToLastForged;
