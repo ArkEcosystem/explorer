@@ -80,12 +80,12 @@ trait CanForge
             ->count() > 1;
     }
 
-    public function isForged(): bool
+    public function hasForged(): bool
     {
         return collect($this->performance())->last() === true;
     }
 
-    public function isMissedBlock(): bool
+    public function keepsMissing(): bool
     {
         $performance          = collect($this->performance());
         $missedLast           = $performance->last() === false;
@@ -94,7 +94,7 @@ trait CanForge
         return $missedLast && $previousToLastForged;
     }
 
-    public function isMissed(): bool
+    public function justMissed(): bool
     {
         return ! $this->isForged() && ! $this->isMissedBlock();
     }

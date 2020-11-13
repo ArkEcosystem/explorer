@@ -10,8 +10,8 @@
         <tbody>
             @foreach ($delegates as $delegate)
                 <x-ark-tables.row
-                    :danger="$delegate->isMissed()"
-                    :warning="$delegate->isMissedBlock()"
+                    :danger="$delegate->keepsMissing()"
+                    :warning="$delegate->justMissed()"
                 >
                     <x-ark-tables.cell>
                         <x-tables.rows.mobile.rank :model="$delegate" />
