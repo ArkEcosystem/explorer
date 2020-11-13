@@ -145,16 +145,16 @@
         },
         {
             "name": "arkecosystem/ui",
-            "version": "1.0.51",
+            "version": "1.0.57",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ArkEcosystem/laravel-ui.git",
-                "reference": "cd56a58bfe36b1a4a5188c40d7e792e98e57e604"
+                "reference": "159c4b6b58bb06b5dcbafb0876e23601ea0a9016"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ArkEcosystem/laravel-ui/zipball/cd56a58bfe36b1a4a5188c40d7e792e98e57e604",
-                "reference": "cd56a58bfe36b1a4a5188c40d7e792e98e57e604",
+                "url": "https://api.github.com/repos/ArkEcosystem/laravel-ui/zipball/159c4b6b58bb06b5dcbafb0876e23601ea0a9016",
+                "reference": "159c4b6b58bb06b5dcbafb0876e23601ea0a9016",
                 "shasum": ""
             },
             "require": {
@@ -213,9 +213,9 @@
             "description": "User-Interface Scaffolding for Laravel. Powered by TailwindCSS.",
             "support": {
                 "issues": "https://github.com/ArkEcosystem/laravel-ui/issues",
-                "source": "https://github.com/ArkEcosystem/laravel-ui/tree/1.0.51"
+                "source": "https://github.com/ArkEcosystem/laravel-ui/tree/1.0.57"
             },
-            "time": "2020-11-12T20:54:54+00:00"
+            "time": "2020-11-13T14:56:23+00:00"
         },
         {
             "name": "asm89/stack-cors",
