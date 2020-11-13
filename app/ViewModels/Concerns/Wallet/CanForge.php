@@ -67,7 +67,9 @@ trait CanForge
 
     public function hasForged(): bool
     {
-        return end($this->performance()) === true;
+        $performance = $this->performance();
+
+        return $performance[array_key_last($performance)] === true;
     }
 
     public function justMissed(): bool
