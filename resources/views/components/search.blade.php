@@ -25,12 +25,12 @@
 >
     <div
         :class="{
-            'fixed inset-0 z-30 overflow-y-auto bg-black bg-opacity-75 md:hidden pb-20': isMobileOpen
+            'fixed inset-0 z-30 bg-black opacity-75 dark:opacity-50 dark:bg-theme-secondary-800 md:hidden': isMobileOpen
         }"
-        @click="isMobileOpen = false"
-    >
+    ></div>
 
-        <div @click.prevent.stop class="search-container ">
+    <div :class="{ 'fixed inset-0 z-30 overflow-y-auto md:hidden pb-20': isMobileOpen }">
+        <div class="search-container" @click.away="isMobileOpen = false">
             <div class="search-simple">
                 @if ($isSlim ?? false)
                     <div
@@ -46,7 +46,7 @@
                     <input
                         type="text"
                         placeholder="@lang('forms.search.term_placeholder')"
-                        class="hidden w-full dark:text-theme-secondary-700 dark:bg-theme-secondary-900 {{ ($isSlim ?? false) ? 'xl:block' : 'sm:block' }}"
+                        class="hidden searchbar-input {{ ($isSlim ?? false) ? 'xl:block' : 'sm:block' }}"
                         wire:model.defer="state.term"
                         wire:keydown.enter="performSearch"
                         @if ($isSlim ?? false) x-on:focus="isFocused = true; $dispatch('search-slim-expand')" @endif
@@ -55,7 +55,7 @@
                     <input
                         type="text"
                         placeholder="@lang('forms.search.term_placeholder_mobile')"
-                        class="w-full dark:text-theme-secondary-700 dark:bg-theme-secondary-900 {{ ($isSlim ?? false) ? 'xl:hidden' : 'sm:hidden' }}"
+                        class="searchbar-input {{ ($isSlim ?? false) ? 'xl:hidden' : 'sm:hidden' }}"
                         wire:model.defer="state.term"
                         wire:keydown.enter="performSearch"
                     />
@@ -63,7 +63,7 @@
 
                 <button
                     type="button"
-                    class="hidden text-theme-secondary-900 mr-8 rounded text-center transition-default font-normal hover:bg-theme-primary-100 dark:hover:bg-theme-secondary-800 dark:text-theme-secondary-600 md:block {{ ($isSlim ?? false) ? 'px-2 py-1 -my-2' : 'px-4 py-2' }}"
+                    class="hidden text-theme-secondary-900 mr-8 rounded  text-center transition-default font-normal hover:bg-theme-primary-100 dark:hover:bg-theme-secondary-800 dark:text-theme-secondary-600 md:block {{ ($isSlim ?? false) ? 'px-2 py-1 -my-2' : 'px-4 py-2' }}"
                     @click="showAdvanced = !showAdvanced; isFocused = true; $dispatch('search-slim-expand')"
                 >
                     <span x-show="!showAdvanced">@lang('actions.advanced_search')</span>
@@ -115,7 +115,7 @@
             </div>
 
             <div
-                class="py-4 font-semibold text-center bg-theme-primary-100 text-theme-primary-600 dark:bg-theme-secondary-800 dark:text-theme-secondary-200 md:hidden"
+                 class="py-4 font-semibold text-center rounded-b-lg bg-theme-primary-100 text-theme-primary-600 dark:bg-theme-secondary-800 dark:text-theme-secondary-200 md:hidden"
                 @click="showAdvanced = !showAdvanced"
             >
                 <span x-show="!showAdvanced">@lang('actions.advanced_search')</span>

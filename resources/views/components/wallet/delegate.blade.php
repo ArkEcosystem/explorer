@@ -1,6 +1,6 @@
 <div class="bg-white border-t-20 border-theme-secondary-100 dark:border-black dark:bg-theme-secondary-900">
     <div class="flex-wrap py-16 content-container md:px-8">
-        <div class="flex items-center w-full mb-8 space-x-4">
+        <div class="flex items-center w-full space-x-4">
             <h4>
                 @lang('pages.wallet.delegate.title', [$wallet->username()])
             </h4>
@@ -15,7 +15,10 @@
                     @if ($wallet->rank() > Network::delegateCount())
                         <x-number>{{ $wallet->rank() }}</x-number>
                     @else
-                        <x-number>{{ $wallet->rank() }}</x-number> <span class="text-theme-secondary-500 dark:text-theme-secondary-200">/{{ Network::delegateCount() }}</span>
+                        <div class="flex">
+                            <span><x-number>{{ $wallet->rank() }}</x-number></span>
+                            <span class="text-theme-secondary-500 dark:text-theme-secondary-200">/{{ Network::delegateCount() }}</span>
+                        </div>
                     @endif
                 </x-details-box>
 
@@ -47,7 +50,9 @@
 
             <div class="grid w-full grid-flow-row grid-cols-1 gap-6 pb-8 border-b border-dashed gap-y-10 sm:pb-0 md:pb-8 sm:border-b-0 md:border-b md:grid-cols-2 lg:grid-cols-4 border-theme-secondary-300 dark:border-theme-secondary-800 delegate-details sm:pl-8 md:pl-0">
                 <x-details-box :title="trans('pages.wallet.delegate.forged_total')" icon="app-forged" shallow>
-                    <x-currency>{{ $wallet->totalForged() }}</x-currency>
+                    <x-general.currency-with-tooltip>
+                        {{ $wallet->totalForged() }}
+                    </x-general.currency-with-tooltip>
                 </x-details-box>
 
                 <x-details-box icon="app-transactions.unvote" shallow>
@@ -55,7 +60,10 @@
                         @lang('pages.wallet.delegate.votes', [App\Services\NumberFormatter::percentage($wallet->votesPercentage())])
                     </x-slot>
 
-                    <x-currency>{{ $wallet->votes() }}</x-currency>
+                    <x-general.currency-with-tooltip>
+                        {{ $wallet->votes() }}
+                    </x-general.currency-with-tooltip>
+
                     <a href="{{ route('wallet.voters', $wallet->address()) }}" class="link">@lang('general.see_all')</a>
                 </x-details-box>
 
