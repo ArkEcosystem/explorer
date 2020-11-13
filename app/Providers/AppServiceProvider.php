@@ -25,7 +25,7 @@ final class AppServiceProvider extends ServiceProvider
     {
         Model::unguard();
 
-        if (App::environment(['local', 'testing'])) {
+        if (App::environment(['local', 'testing']) === true) {
             $faker = Factory::create();
             $faker->addProvider(new Wallet($faker));
 
