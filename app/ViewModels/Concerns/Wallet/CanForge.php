@@ -80,17 +80,11 @@ trait CanForge
             ->count() > 1;
     }
 
-    /**
-     * If last one is `true` => forged.
-     */
     public function isForged(): bool
     {
         return collect($this->performance())->last() === true;
     }
 
-    /**
-     * If last one is `false` but previous one `true` => missed block.
-     */
     public function isMissedBlock(): bool
     {
         $performance          = collect($this->performance());
@@ -100,9 +94,6 @@ trait CanForge
         return $missedLast && $previousToLastForged;
     }
 
-    /**
-     * Is missed if is not forged or missed block.
-     */
     public function isMissed(): bool
     {
         return ! $this->isForged() && ! $this->isMissedBlock();
