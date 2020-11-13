@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Providers;
 
 use Faker\Factory;
@@ -8,7 +10,7 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
 use Tests\Wallet;
 
-class DevelopmentServiceProvider extends ServiceProvider
+final class DevelopmentServiceProvider extends ServiceProvider
 {
     /**
      * Register services.
