@@ -67,29 +67,18 @@ trait CanForge
 
     public function hasForged(): bool
     {
-        $performance = $this->performance();
-
-        return $performance[array_key_last($performance)] === true;
+        return collect($this->performance())->last();
     }
 
     public function justMissed(): bool
     {
-        if ($this->hasForged()) {
-            return false;
-        }
+        // @TODO: check if we are past our slot
 
-        $missedOne  = count(array_filter($this->performance(), fn ($performance) => $performance === false)) === 1;
-        $missedLast = ! $this->hasForged();
-
-        return $missedOne && $missedLast;
+        return ! $this->hasForged();
     }
 
     public function keepsMissing(): bool
     {
-        $performance          = $this->performance();
-        $missedLast           = end($performance) === false;
-        $previousToLastForged = $performance[count($performance) - 2] === true;
-
-        return $missedLast && $previousToLastForged;
+        return ! collect($this->performance())->reverse()->take(2)->contains(true);
     }
 }
