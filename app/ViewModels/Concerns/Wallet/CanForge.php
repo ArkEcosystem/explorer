@@ -65,37 +65,29 @@ trait CanForge
         return (new WalletCache())->getPerformance($publicKey);
     }
 
+    public function hasForged(): bool
+    {
+        return end($this->performance()) === true;
+    }
+
     public function justMissed(): bool
     {
-        $missedOne  = collect($this->performance())->filter(fn ($performance) => $performance === false)->count() === 1;
-        $missedLast = collect($this->performance())->last() === false;
+        if ($this->hasForged()) {
+            return false;
+        }
+
+        $missedOne  = count(array_filter($this->performance(), fn ($performance) => $performance === false)) === 1;
+        $missedLast = ! $this->hasForged();
 
         return $missedOne && $missedLast;
     }
 
-    public function isMissing(): bool
-    {
-        return collect($this->performance())
-            ->filter(fn ($performance) => $performance === false)
-            ->count() > 1;
-    }
-
-    public function hasForged(): bool
-    {
-        return collect($this->performance())->last() === true;
-    }
-
     public function keepsMissing(): bool
     {
-        $performance          = collect($this->performance());
-        $missedLast           = $performance->last() === false;
-        $previousToLastForged = $performance->get($performance->count() - 2) === true;
+        $performance          = $this->performance();
+        $missedLast           = end($performance) === false;
+        $previousToLastForged = $performance[count($performance) - 2] === true;
 
         return $missedLast && $previousToLastForged;
-    }
-
-    public function justMissed(): bool
-    {
-        return ! $this->isForged() && ! $this->isMissedBlock();
     }
 }
