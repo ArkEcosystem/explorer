@@ -79,6 +79,6 @@ trait CanForge
 
     public function keepsMissing(): bool
     {
-        return ! collect($this->performance())->reverse()->take(2)->contains(true);
+        return array_slice(array_reverse($this->performance()), 0, 2) === [false, false];
     }
 }
