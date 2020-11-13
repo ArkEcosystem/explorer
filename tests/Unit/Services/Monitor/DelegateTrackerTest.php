@@ -21,9 +21,15 @@ it('should calculate the forging order', function () {
         Cache::put('lastBlock:'.$wallet->public_key, []);
     });
 
+    // Start height for round 112168
     Block::factory()->create([
         'height'    => 5720517,
         'timestamp' => 113620816,
+    ]);
+
+    Block::factory()->create([
+        'height'    => 5720529,
+        'timestamp' => 113620904,
     ]);
 
     $activeDelegates = collect([
