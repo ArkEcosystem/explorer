@@ -17,14 +17,14 @@
                     <x-ark-tables.cell>
                         <x-tables.rows.desktop.rank :model="$delegate" />
                     </x-ark-tables.cell>
-                    <x-ark-tables.cell :last-on="!Network::usesMarketSquare() ? 'lg' : 'xl'">
+                    <x-ark-tables.cell :last-on="!Network::usesMarketSquare() ? 'lg' : false">
                         <x-tables.rows.desktop.username :model="$delegate" />
                     </x-ark-tables.cell>
                     <x-ark-tables.cell class="text-right" responsive>
                         <x-tables.rows.desktop.votes :model="$delegate" />
                     </x-ark-tables.cell>
                     @if (Network::usesMarketSquare())
-                        <x-ark-tables.cell>
+                        <x-ark-tables.cell :last-on="xl">
                             <x-tables.rows.desktop.marketsquare-profile :model="$delegate" />
                         </x-ark-tables.cell>
                         <x-ark-tables.cell responsive breakpoint="xl">
