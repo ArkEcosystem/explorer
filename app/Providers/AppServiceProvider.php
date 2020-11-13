@@ -9,6 +9,7 @@ use Faker\Factory;
 use Faker\Generator;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
 use Konceiver\DataBags\DataBag;
 use Tests\Wallet;
@@ -24,11 +25,12 @@ final class AppServiceProvider extends ServiceProvider
     {
         Model::unguard();
 
+        if (App::environment(['local', 'testing'])) {
+            $faker = Factory::create();
+            $faker->addProvider(new Wallet($faker));
 
-        $faker = Factory::create();
-        $faker->addProvider(new Wallet($faker));
-
-        $this->app->instance(Generator::class, $faker);
+            $this->app->instance(Generator::class, $faker);
+        }
     }
 
     /**
