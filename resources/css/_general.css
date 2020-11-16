@@ -537,6 +537,9 @@ body {
 /* Delegate name truncation */
 .delegate-name-truncate {
     @apply w-full truncate;
+}
+.delegate-name-truncate-listing {
+    @apply delegate-name-truncate;
     max-width: 7rem;
 }
 .delegate-name-truncate-prefix {
