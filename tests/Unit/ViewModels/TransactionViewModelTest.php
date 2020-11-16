@@ -1363,9 +1363,9 @@ it('should get the entity name for entity update types', function () {
         'type'       => MagistrateTransactionTypeEnum::ENTITY,
         'type_group' => TransactionTypeGroupEnum::MAGISTRATE,
         'asset'      => [
-            'type'    => MagistrateTransactionEntityTypeEnum::PRODUCT,
-            'subType' => MagistrateTransactionEntitySubTypeEnum::NONE,
-            'action'  => MagistrateTransactionEntityActionEnum::UPDATE,
+            'type'           => MagistrateTransactionEntityTypeEnum::PRODUCT,
+            'subType'        => MagistrateTransactionEntitySubTypeEnum::NONE,
+            'action'         => MagistrateTransactionEntityActionEnum::UPDATE,
             'registrationId' => $registrationId,
         ],
     ]));
