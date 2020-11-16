@@ -33,7 +33,7 @@ final class TransactionRepository implements Contract
             ->get();
     }
 
-    public function findById($id): Transaction
+    public function findById(string $id): Transaction
     {
         return Transaction::findOrFail($id);
     }
