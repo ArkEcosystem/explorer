@@ -27,7 +27,7 @@ it('should find all transactions by recipient', function () {
 });
 
 it('should find a transaction by id', function () {
-    $transactionId = Transaction::factory(1)->create()[0]->id;
+    $transactionId = Transaction::factory()->create()->id;
 
     expect($this->subject->findById($transactionId))->toBeInstanceOf(Transaction::class);
 });
