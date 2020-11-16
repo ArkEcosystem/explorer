@@ -1,5 +1,5 @@
 <div
-    class="border-b-20 border-theme-secondary-100 dark:border-black hidden sm:block"
+    class="hidden border-b-20 border-theme-secondary-100 dark:border-black sm:block"
     x-data="{
         usesPriceChart: {{ Settings::usesPriceChart() ? 'true' : 'false' }},
         usesFeeChart: {{ Settings::usesFeeChart() ? 'true' : 'false' }},
