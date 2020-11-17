@@ -17,14 +17,7 @@ trait InteractsWithEntities
 
     public function entityName(): ?string
     {
-        $transaction = $this->transaction;
-
-        if ($this->isEntityUpdate() || $this->isEntityResignation()) {
-            $transactionId = Arr::get($this->transaction, 'asset.registrationId');
-            $transaction   = Transactions::findById($transactionId);
-        }
-
-        return Arr::get($transaction, 'asset.data.name');
+        return $this->entityProperty('asset.data.name');
     }
 
     public function entityCategory(): ?string
@@ -34,6 +27,11 @@ trait InteractsWithEntities
 
     public function entityHash(): ?string
     {
+        return $this->entityProperty('asset.data.ipfsData');
+    }
+
+    private function entityProperty(string $property): ?string
+    {
         $transaction = $this->transaction;
 
         if ($this->isEntityResignation()) {
@@ -41,6 +39,6 @@ trait InteractsWithEntities
             $transaction   = Transactions::findById($transactionId);
         }
 
-        return Arr::get($transaction, 'asset.data.ipfsData');
+        return Arr::get($transaction, $property);
     }
 }
