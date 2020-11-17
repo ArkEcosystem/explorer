@@ -19,7 +19,7 @@ trait InteractsWithEntities
     {
         $transaction = $this->transaction;
 
-        if ($this->isEntityUpdate()) {
+        if ($this->isEntityUpdate() || $this->isEntityResignation()) {
             $transactionId = Arr::get($this->transaction, 'asset.registrationId');
             $transaction   = Transactions::findById($transactionId);
         }
