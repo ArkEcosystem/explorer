@@ -34,6 +34,13 @@ trait InteractsWithEntities
 
     public function entityHash(): ?string
     {
-        return Arr::get($this->transaction, 'asset.data.ipfsData');
+        $transaction = $this->transaction;
+
+        if ($this->isEntityResignation()) {
+            $transactionId = Arr::get($this->transaction, 'asset.registrationId');
+            $transaction   = Transactions::findById($transactionId);
+        }
+
+        return Arr::get($transaction, 'asset.data.ipfsData');
     }
 }
