@@ -18,7 +18,7 @@ final class WeekAggregate
     {
         return $this->mergeWithPlaceholders(
             (new RangeAggregate())->aggregate(Carbon::now()->subDays(7)->startOfDay(), Carbon::now()->endOfDay(), 'd.m'),
-            $this->placeholders(Carbon::now()->startOfYear()->diffInDays() * 86400, 7 * 86400, 86400, 'd.m')->take(7)
+            $this->placeholders(Carbon::now()->subWeek()->timestamp + 86400, Carbon::now()->timestamp + 86400, 86400, 'd.m')->take(7)
         );
     }
 }
