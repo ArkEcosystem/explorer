@@ -16,7 +16,7 @@ it('should determine the average fee for the given date range', function () {
 
     $start = Transaction::factory(10)->create([
         'fee'       => '100000000',
-        'timestamp' => Timestamp::now()->subDay()->unix(),
+        'timestamp' => Timestamp::now()->subHours(23)->unix(),
     ])->sortByDesc('timestamp');
 
     $end = Transaction::factory(10)->create([
