@@ -18,7 +18,7 @@ final class YearAggregate
     {
         return $this->mergeWithPlaceholders(
             (new RangeAggregate())->aggregate(Carbon::now()->subDays(365)->addMonth(), Carbon::now()->addMonth(), 'M'),
-            $this->placeholders(Carbon::now()->subDays(365)->addMonth()->timestamp, Carbon::now()->addMonth()->timestamp, 86400, 'M')->take(365)
+            $this->placeholders((int) Carbon::now()->subDays(365)->addMonth()->timestamp, (int) Carbon::now()->addMonth()->timestamp, 86400, 'M')->take(365)
         );
     }
 }

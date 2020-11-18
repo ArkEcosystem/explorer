@@ -18,7 +18,7 @@ final class QuarterAggregate
     {
         return $this->mergeWithPlaceholders(
             (new RangeAggregate())->aggregate(Carbon::now()->subDays(89), Carbon::now()->addDay(), 'M'),
-            $this->placeholders(Carbon::now()->subDays(89)->timestamp, Carbon::now()->addDay()->timestamp, 86400, 'M')->reverse()->take(3)->reverse()
+            $this->placeholders((int) Carbon::now()->subDays(89)->timestamp, (int) Carbon::now()->addDay()->timestamp, 86400, 'M')->reverse()->take(3)->reverse()
         );
     }
 }
