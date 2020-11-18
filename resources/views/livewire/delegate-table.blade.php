@@ -19,7 +19,7 @@
     </span>
 
     @if($this->state['status'] === 'active')
-        <div wire:poll.{{ Network::blockTime() }}s="$refresh" wire:key="poll_active_delegates_skeleton">
+        <div wire:poll.{{ Network::blockTime() }}s wire:key="poll_active_delegates_skeleton">
             @if (count($delegates) && $state['status'] === 'active')
                 <x-tables.desktop.delegates.active :delegates="$delegates" />
                 <x-tables.mobile.delegates.active :delegates="$delegates" />
