@@ -18,7 +18,7 @@ final class MonthAggregate
     {
         return $this->mergeWithPlaceholders(
             (new RangeAggregate())->aggregate(Carbon::now()->subDays(30)->startOfDay(), Carbon::now()->endOfDay(), 'd.m'),
-            $this->placeholders(Carbon::now()->subMonth()->timestamp + 86400, Carbon::now()->timestamp + 86400, 86400, 'd.m')->take(30)
+            $this->placeholders((int) Carbon::now()->subMonth()->timestamp + 86400, (int) Carbon::now()->timestamp + 86400, 86400, 'd.m')->take(30)
         );
     }
 }
