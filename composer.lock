@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "arkecosystem/crypto",
-            "version": "1.4.0",
+            "version": "1.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ArkEcosystem/php-crypto.git",
-                "reference": "8fe4b626fa04418e8c4202b85d95e8d26ea40c8a"
+                "reference": "0d260702a2c58df8ef37f2cba61fd18f7b704b95"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ArkEcosystem/php-crypto/zipball/8fe4b626fa04418e8c4202b85d95e8d26ea40c8a",
-                "reference": "8fe4b626fa04418e8c4202b85d95e8d26ea40c8a",
+                "url": "https://api.github.com/repos/ArkEcosystem/php-crypto/zipball/0d260702a2c58df8ef37f2cba61fd18f7b704b95",
+                "reference": "0d260702a2c58df8ef37f2cba61fd18f7b704b95",
                 "shasum": ""
             },
             "require": {
@@ -69,9 +69,9 @@
             ],
             "support": {
                 "issues": "https://github.com/ArkEcosystem/php-crypto/issues",
-                "source": "https://github.com/ArkEcosystem/php-crypto/tree/1.4.0"
+                "source": "https://github.com/ArkEcosystem/php-crypto/tree/1.4.1"
             },
-            "time": "2020-11-19T08:59:11+00:00"
+            "time": "2020-11-19T09:07:42+00:00"
         },
         {
             "name": "arkecosystem/fortify",
