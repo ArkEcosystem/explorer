@@ -11,7 +11,7 @@
 
                     <div class="flex items-center space-x-2 leading-tight">
                         <span class="flex max-w-full text-theme-secondary-400 dark:text-theme-secondary-200">
-                            <x-truncate>{{ $value}}</x-truncate>
+                            <x-truncate-dynamic>{{ $value}}</x-truncate-dynamic>
 
                             <x-clipboard :value="$value" colors="text-theme-secondary-600 hover:text-theme-secondary-400" />
                         </span>

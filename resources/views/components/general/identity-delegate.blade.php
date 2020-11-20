@@ -4,7 +4,7 @@
             {{ $model->username() }}
         </a>
         <span class="hidden min-w-0 sm:inline md:hidden lg:inline text-theme-secondary-400">
-            <x-truncate>{{ $model->address() }}</x-truncate>
+            <x-truncate-dynamic>{{ $model->address() }}</x-truncate-dynamic>
         </span>
     </div>
 </div>
