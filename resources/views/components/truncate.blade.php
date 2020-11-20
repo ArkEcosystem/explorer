@@ -1,7 +1,6 @@
 <span
     x-data="{
         value: '{{ $slot }}',
-        truncated: '{{ $slot }}',
         truncate() {
             const el = this.$el;
 
@@ -32,5 +31,4 @@
     x-init="truncate"
     x-on:resize.window="truncate"
     class="inline-block w-full max-w-full overflow-hidden whitespace-no-wrap"
-    x-text="truncated"
 >{{ $slot }}</span>
