@@ -6,11 +6,11 @@ namespace App\Providers;
 
 use Faker\Factory;
 use Faker\Generator;
-use Tests\FakerProviders\Wallet;
 use Illuminate\Support\Facades\App;
-use Tests\FakerProviders\Transaction;
 use Illuminate\Support\ServiceProvider;
 use Tests\FakerProviders\Block;
+use Tests\FakerProviders\Transaction;
+use Tests\FakerProviders\Wallet;
 
 final class DevelopmentServiceProvider extends ServiceProvider
 {
