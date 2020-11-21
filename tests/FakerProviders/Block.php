@@ -21,6 +21,9 @@ final class Block extends Base
 
     public function blockSignature(): string
     {
-        return Str::limit(hash('sha512', Str::random(8)), 140);
+        $a = hash('sha512', Str::random(8));
+        $b = hash('sha512', Str::random(8));
+
+        return Str::limit($a.$b, 140);
     }
 }
