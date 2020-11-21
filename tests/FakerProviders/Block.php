@@ -13,4 +13,14 @@ final class Block extends Base
     {
         return hash('sha256', Str::random(8));
     }
+
+    public function payloadHash(): string
+    {
+        return hash('sha256', Str::random(8));
+    }
+
+    public function blockSignature(): string
+    {
+        return Str::limit(hash('sha512', Str::random(8)), 140);
+    }
 }
