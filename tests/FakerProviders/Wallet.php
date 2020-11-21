@@ -7,6 +7,7 @@ namespace Tests\FakerProviders;
 use Faker\Generator;
 use Faker\Provider\Base;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 
 final class Wallet extends Base
 {
@@ -21,6 +22,7 @@ final class Wallet extends Base
         if (self::$wallets === null) {
             self::$wallets = json_decode(file_get_contents(base_path('tests/fixtures/wallets.json')), true);
         }
+
         $this->availableWallets = collect(self::$wallets)->shuffle();
     }
 
@@ -29,15 +31,8 @@ final class Wallet extends Base
         return $this->availableWallets->shift();
     }
 
-    public function publicKey($length = 34): string
+    public function publicKey(): string
     {
-        $characters       = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $charactersLength = strlen($characters);
-        $randomString     = '';
-        for ($i = 0; $i < $length; $i++) {
-            $randomString .= $characters[rand(0, $charactersLength - 1)];
-        }
-
-        return $randomString;
+        return Str::limit(hash('sha512', Str::random(8)), 66);
     }
 }
