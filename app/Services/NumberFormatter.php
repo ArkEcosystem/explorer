@@ -13,7 +13,7 @@ final class NumberFormatter
      */
     public static function number($value): string
     {
-        return BetterNumberFormatter::new()->formatWithDecimal($value);
+        return BetterNumberFormatter::new()->formatWithDecimal((float) $value);
     }
 
     /**
@@ -21,7 +21,7 @@ final class NumberFormatter
      */
     public static function percentage($value): string
     {
-        return BetterNumberFormatter::new()->formatWithPercent($value);
+        return BetterNumberFormatter::new()->formatWithPercent((float) $value, 2);
     }
 
     /**

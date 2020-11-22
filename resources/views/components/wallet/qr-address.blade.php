@@ -10,13 +10,13 @@
             <div class="flex items-center justify-between sm:justify-start">
                 <div>
                     <div class="hidden font-semibold text-theme-secondary-900 dark:text-theme-secondary-200 sm:flex">
-                        <x-truncate-middle :length="19" />
+                        <x-truncate-middle :length="19">
                             {{ $model->address() }}
                         </x-truncate-middle>
                     </div>
 
                     <div class="font-semibold text-theme-secondary-900 dark:text-theme-secondary-200 sm:hidden">
-                        <x-truncate-middle :length="15" />
+                        <x-truncate-middle :length="15">
                             {{ $model->address() }}
                         </x-truncate-middle>
                     </div>
