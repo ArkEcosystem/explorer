@@ -4,7 +4,9 @@
             {{ $model->username() }}
         </a>
         <span class="hidden ml-2 sm:inline md:hidden lg:inline text-theme-secondary-400">
-            <x-truncate-middle :value="$model->address()" :length="16" />
+            <x-truncate-middle :length="16">
+                {{ $model->address() }}
+            </x-truncate-middle>
         </span>
     </div>
 </div>

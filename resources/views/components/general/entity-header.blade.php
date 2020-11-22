@@ -16,11 +16,15 @@
                             </span>
 
                             <span class="hidden lg:inline-block xl:hidden">
-                                <x-truncate-middle :value="$value" :length="20" />
+                                <x-truncate-middle :length="20">
+                                    {{ $value }}
+                                </x-truncate-middle>
                             </span>
 
                             <span class="inline-block lg:hidden">
-                                <x-truncate-middle :value="$value" :length="8" />
+                                <x-truncate-middle :length="8">
+                                    {{ $value }}
+                                </x-truncate-middle>
                             </span>
 
                             <x-clipboard :value="$value" colors="text-theme-secondary-600 hover:text-theme-secondary-400" />
