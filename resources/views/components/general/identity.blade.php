@@ -26,9 +26,13 @@
                     @isset($withoutTruncate)
                         {{ $model->address() }}
                     @else
-                        <x-truncate-middle>
-                            {{ $model->address() }}
-                        </x-truncate-middle>
+                        @isset($dynamicTruncate)
+                          <x-truncate-dynamic>{{ $model->address() }}</x-truncate-dynamic>
+                        @else
+                          <x-truncate-middle>
+                              {{ $model->address() }}
+                          </x-truncate-middle>
+                        @endif
                     @endisset
                 @endif
             </a>
