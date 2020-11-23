@@ -15,7 +15,7 @@
                             <h2 class="mb-8 md:mb-0">@lang('pages.transactions.title')</h2>
 
                             <div>
-                                <x-transaction-table-filter :type="$transactionTypeFilter" />
+                                <x-transaction-table-filter :type="$transactionTypeFilter"/>
                             </div>
                         </div>
                     </div>
