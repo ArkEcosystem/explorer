@@ -10,7 +10,7 @@
                 <div class="relative flex flex-col justify-between md:items-end md:flex-row md:justify-start">
                     <h4 class="mb-8 md:mb-0">@lang('pages.wallet.transaction_history')</h4>
 
-                    <x-transaction-table-filter :type="'all'" dropdown-list-height-class="h-64 md:h-72" />
+                    <x-transaction-table-filter :type="'all'" />
                 </div>
             </div>
 
