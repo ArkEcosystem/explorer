@@ -19,17 +19,17 @@ final class WalletSearch implements Search
         ValueRangeComposer::compose($query, $parameters, 'balance');
 
         if (! is_null(Arr::get($parameters, 'term'))) {
-            $query->where('address', $parameters['term']);
-            $query->orWhere('public_key', $parameters['term']);
-            $query->orWhere('attributes->delegate->username', $parameters['term']);
+            $query->where('address', 'ilike', '%'.$parameters['term'].'%');
+            $query->orWhere('public_key', 'ilike', '%'.$parameters['term'].'%');
+            $query->orWhere('attributes->delegate->username', 'ilike', '%'.$parameters['term'].'%');
         }
 
         if (! is_null(Arr::get($parameters, 'username'))) {
-            $query->where('attributes->delegate->username', $parameters['username']);
+            $query->where('attributes->delegate->username', 'ilike', '%'.$parameters['username'].'%');
         }
 
         if (! is_null(Arr::get($parameters, 'vote'))) {
-            $query->where('attributes->vote', $parameters['vote']);
+            $query->where('attributes->vote', 'ilike', '%'.$parameters['vote'].'%');
         }
 
         return $query;

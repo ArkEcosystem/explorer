@@ -54,9 +54,9 @@ final class WalletRepository implements Contract
     public function findByIdentifier(string $identifier): Wallet
     {
         return Wallet::query()
-            ->where('address', $identifier)
-            ->orWhere('public_key', $identifier)
-            ->orWhere('attributes->delegate->username', $identifier)
+            ->where('address', 'ilike', '%'.$identifier.'%')
+            ->orWhere('public_key', 'ilike', '%'.$identifier.'%')
+            ->orWhere('attributes->delegate->username', 'ilike', '%'.$identifier.'%')
             ->firstOrFail();
     }
 }
