@@ -35,5 +35,5 @@ it('should not execute the command if not using MarketSquare', function () {
 
     (new CacheMarketSquareProfiles())->handle();
 
-    Queue::assertPushed(CacheMarketSquareProfileByAddress::class, 0);
+    Queue::assertNotPushed(CacheMarketSquareProfileByAddress::class);
 });
