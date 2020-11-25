@@ -67,7 +67,11 @@ trait CanForge
 
     public function hasForged(): bool
     {
-        if (count($this->performance()) > 0) {
+        $performance = collect($this->performance());
+
+        if ($performance->isNotEmpty()) {
+            return $performance->last();
+        }
             return collect($this->performance())->last();
         }
 
