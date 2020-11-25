@@ -72,8 +72,6 @@ trait CanForge
         if ($performance->isNotEmpty()) {
             return $performance->last();
         }
-            return collect($this->performance())->last();
-        }
 
         return false;
     }
