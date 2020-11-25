@@ -56,7 +56,6 @@ final class BlockSearch implements Search
      */
     private function getNumericTerm($term)
     {
-        // The following line
         return filter_var($term, FILTER_VALIDATE_FLOAT, FILTER_FLAG_ALLOW_THOUSAND);
     }
 
