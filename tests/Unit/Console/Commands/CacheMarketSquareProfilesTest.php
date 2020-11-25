@@ -6,6 +6,7 @@ use App\Console\Commands\CacheMarketSquareProfiles;
 use App\Facades\Network;
 use App\Jobs\CacheMarketSquareProfileByAddress;
 use App\Models\Wallet;
+use App\Services\Blockchain\Network as Blockchain;
 use Illuminate\Support\Facades\Queue;
 use function Tests\configureExplorerDatabase;
 
