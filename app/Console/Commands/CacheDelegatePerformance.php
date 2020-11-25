@@ -9,7 +9,7 @@ use App\Jobs\CachePastRoundPerformanceByPublicKey;
 use App\Services\Monitor\Monitor;
 use Illuminate\Console\Command;
 
-final class CacheDelegatePerformance extends Command
+final class horizon extends Command
 {
     /**
      * The name and signature of the console command.
@@ -33,6 +33,6 @@ final class CacheDelegatePerformance extends Command
     public function handle()
     {
         Rounds::allByRound(Monitor::roundNumber())
-            ->each(fn ($round) => CachePastRoundPerformanceByPublicKey::dispatch($round->round, $round->public_key));
+            ->each(fn ($round) => CachePastRoundPerformanceByPublicKey::dispatch($round->round, $round->public_key)->onQueue('performance'));
     }
 }
