@@ -13,6 +13,8 @@ it('should execute the command', function () {
 
     configureExplorerDatabase();
 
+    $this->app->singleton(Network::class, fn () => new Blockchain(config('explorer.networks.production')));
+
     Wallet::factory()->create();
 
     (new CacheMarketSquareProfiles())->handle();
