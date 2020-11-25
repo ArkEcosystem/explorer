@@ -9,7 +9,7 @@ use App\Jobs\CachePastRoundPerformanceByPublicKey;
 use App\Services\Monitor\Monitor;
 use Illuminate\Console\Command;
 
-final class horizon extends Command
+final class CacheDelegatePerformance extends Command
 {
     /**
      * The name and signature of the console command.
