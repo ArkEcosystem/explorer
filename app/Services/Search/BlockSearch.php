@@ -51,7 +51,8 @@ final class BlockSearch implements Search
      * `"1,224,223"` or as number like `1224223`. If is not a valid numeric
      * value it return `false`.
      *
-     * @param  mixed $term search term
+     * @param mixed $term search term
+     *
      * @return mixed the filtered data, or FALSE if the filter fails.
      */
     private function getNumericTerm($term)
