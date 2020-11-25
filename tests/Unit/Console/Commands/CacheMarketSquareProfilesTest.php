@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Console\Commands\CacheMarketSquareProfiles;
+use App\Facades\Network;
 use App\Jobs\CacheMarketSquareProfileByAddress;
 use App\Models\Wallet;
 use Illuminate\Support\Facades\Queue;
