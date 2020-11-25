@@ -20,13 +20,19 @@ final class BlockSearch implements Search
 
         $this->applyScopes($query, $parameters);
 
-        if (! is_null(Arr::get($parameters, 'term'))) {
-            $query = $query->whereLower('id', $parameters['term']);
+        $term = Arr::get($parameters, 'term');
+
+        if (! is_null($term)) {
+            $query = $query->whereLower('id', $term);
+
+            if (is_numeric($term)) {
+                $query->orWhere('height', $term);
+            }
 
             try {
                 // If there is a term we also want to check if the term is a valid wallet.
-                $query->orWhere(function ($query) use ($parameters): void {
-                    $wallet = Wallets::findByIdentifier($parameters['term']);
+                $query->orWhere(function ($query) use ($parameters, $term): void {
+                    $wallet = Wallets::findByIdentifier($term);
 
                     $query->whereLower('generator_public_key', $wallet->public_key);
 
