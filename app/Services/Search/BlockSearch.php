@@ -25,7 +25,9 @@ final class BlockSearch implements Search
         if (! is_null($term)) {
             $query = $query->whereLower('id', $term);
 
-            if ($numericTerm = $this->getNumericTerm($term)) {
+            $numericTerm = $this->getNumericTerm($term);
+
+            if (is_numeric($numericTerm)) {
                 $query->orWhere('height', $numericTerm);
             }
 
