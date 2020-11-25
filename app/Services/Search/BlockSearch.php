@@ -25,8 +25,8 @@ final class BlockSearch implements Search
         if (! is_null($term)) {
             $query = $query->whereLower('id', $term);
 
-            if (is_numeric($term)) {
-                $query->orWhere('height', $term);
+            if ($numericTerm = $this->getNumericTerm($term)) {
+                $query->orWhere('height', $numericTerm);
             }
 
             try {
@@ -44,6 +44,20 @@ final class BlockSearch implements Search
         }
 
         return $query;
+    }
+
+    /**
+     * Validate and normalize the term that may come as a string like
+     * `"1,224,223"` or as number like `1224223`. If is not a valid numeric
+     * value it return `false`.
+     *
+     * @param  mixed $term search term
+     * @return mixed the filtered data, or FALSE if the filter fails.
+     */
+    private function getNumericTerm($term)
+    {
+        // The following line
+        return filter_var($term, FILTER_VALIDATE_FLOAT, FILTER_FLAG_ALLOW_THOUSAND);
     }
 
     private function applyScopes(Builder $query, array $parameters): void
