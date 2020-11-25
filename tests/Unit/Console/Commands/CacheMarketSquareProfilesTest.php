@@ -23,3 +23,17 @@ it('should execute the command', function () {
 
     Queue::assertPushed(CacheMarketSquareProfileByAddress::class, 1);
 });
+
+it('should not execute the command if not using MarketSquare', function () {
+    Queue::fake();
+
+    configureExplorerDatabase();
+
+    $this->app->singleton(Network::class, fn () => new Blockchain(config('explorer.networks.development')));
+
+    Wallet::factory()->create();
+
+    (new CacheMarketSquareProfiles())->handle();
+
+    Queue::assertPushed(CacheMarketSquareProfileByAddress::class, 0);
+});
