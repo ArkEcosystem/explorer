@@ -56,3 +56,10 @@ it('should not be marked as missing if it never had a block', function () {
     expect($subject->keepsMissing())->toBeFalse();
     expect($subject->missedCount())->toBe(0);
 });
+
+
+it('should show the correct missed blocks amount when spanning multiple rounds', function () {
+    $this->markTestIncomplete(
+        'TODO'
+    );
+});
