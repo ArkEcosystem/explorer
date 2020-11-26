@@ -15,8 +15,8 @@
             class="items-center button-secondary pagination-button-mobile" @if($paginator->onFirstPage()) disabled @endif
         >
             <div class="flex items-center">
-                <x-ark-icon name="chevron-left" size="xs" />
-                <span class="hidden lg:flex lg:ml-2">Previous</span>
+                <x-ark-icon class="inline-block lg:hidden" name="chevron-left" size="xs" />
+                <span class="hidden lg:flex">Previous</span>
             </div>
         </button>
 
@@ -50,8 +50,8 @@
             class="items-center button-secondary pagination-button-mobile" @if($paginator->currentPage() === $paginator->lastPage()) disabled @endif
         >
             <div class="flex items-center">
-                <span class="hidden lg:flex lg:mr-2">Next</span>
-                <x-ark-icon name="chevron-right" size="xs" />
+                <span class="hidden lg:flex">Next</span>
+                <x-ark-icon class="inline-block lg:hidden" name="chevron-right" size="xs" />
             </div>
         </button>
         <button
