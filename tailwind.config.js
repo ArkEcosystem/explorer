@@ -70,7 +70,6 @@ module.exports = {
         ...defaultConfig.purge,
         options: {
             whitelistPatterns: [
-                ...defaultConfig.purge.options.whitelistPatterns || [],
                 /^pika-/,
             ],
         },
