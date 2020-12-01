@@ -35,10 +35,10 @@ module.exports = {
     purge: {
         ...defaultConfig.purge,
         options: {
-            whitelistPatterns: [
-                ...defaultConfig.purge.options.whitelistPatterns,
-                /^pika-/,
-            ],
+            safelist: {
+                ...defaultConfig.purge.options.safelist,
+                deep: [/^pika-/],
+            },
         },
     },
 }
