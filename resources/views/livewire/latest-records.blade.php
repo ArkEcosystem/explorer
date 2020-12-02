@@ -75,15 +75,15 @@
         <div id="block-list" class="w-full">
             @if($blocks->isEmpty())
                 <div wire:poll="pollBlocks" wire:key="poll_blocks_skeleton">
-                    <x-tables.desktop.skeleton.blocks />
+                    <x-tables.desktop.skeleton.blocks :compact="Settings::usesCompactTables()" />
 
-                    <x-tables.mobile.skeleton.blocks />
+                    <x-tables.mobile.skeleton.blocks :compact="Settings::usesCompactTables()" /> --}}
                 </div>
             @else
                 <div wire:poll.{{ Network::blockTime() }}s="pollBlocks" wire:key="poll_blocks_real">
-                    <x-tables.desktop.blocks :blocks="$blocks" />
+                    <x-tables.desktop.blocks :blocks="$blocks" :compact="Settings::usesCompactTables()" />
 
-                    <x-tables.mobile.blocks :blocks="$blocks" />
+                    <x-tables.mobile.blocks :blocks="$blocks" :compact="Settings::usesCompactTables()" />
 
                     @if(count($blocks) === 15)
                         <div class="pt-4 mt-8 border-t border-theme-secondary-300 dark:border-theme-secondary-800 md:mt-0 md:border-dashed">
@@ -102,16 +102,16 @@
                     </div>
                 @else
                     <div wire:poll="pollTransactions" wire:key="poll_transactions_skeleton">
-                        <x-tables.desktop.skeleton.transactions />
+                        <x-tables.desktop.skeleton.transactions :compact="Settings::usesCompactTables()" />
 
-                        <x-tables.mobile.skeleton.transactions />
+                        {{--<x-tables.mobile.skeleton.transactions :compact="{{ false }}" />--}}
                     </div>
                 @endif
             @else
                 <div wire:poll.{{ Network::blockTime() }}s="pollTransactions" wire:key="poll_transactions_real">
-                    <x-tables.desktop.transactions :transactions="$transactions" />
+                    <x-tables.desktop.transactions :transactions="$transactions" :compact="Settings::usesCompactTables()" />
 
-                    <x-tables.mobile.transactions :transactions="$transactions" />
+                    {{--<x-tables.mobile.transactions :transactions="$transactions" :compact="{{ false }}" />--}}
 
                     @if(count($transactions) === 15)
                         <div class="pt-4 mt-8 border-t border-theme-secondary-300 dark:border-theme-secondary-800 md:mt-0 md:border-dashed">
