@@ -319,6 +319,10 @@ body {
     }
 }
 
+.borderless-transaction-icon {
+    @apply transaction-icon border-none;
+}
+
 @screen sm {
     .chart-details > .detail-box:nth-child(2n + 1) {
         @apply pr-6 border-r border-theme-secondary-300;
@@ -607,4 +611,12 @@ tr:hover td.hoverable-cell .table-avatar {
 
 .theme-dark tr:hover td.hoverable-cell .table-avatar {
     @apply border-theme-secondary-800;
+}
+
+.table-compact table > tbody > tr > td.hoverable-cell > div {
+    @apply py-3 !important;
+}
+
+.table-compact table > tbody > tr > td.hoverable-cell > div > div{
+    @apply -my-6 !important;
 }
