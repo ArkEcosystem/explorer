@@ -64,6 +64,15 @@
                     alpine-click="$dispatch('toggle-dark-mode')"
                 />
             </x-navbar.setting-option>
+
+            <x-navbar.setting-option :title="trans('forms.settings.table-view.title')" :subtitle="trans('forms.settings.table-view.description')">
+                <x-ark-toggle
+                    name="state.compactTables"
+                    hide-label
+                    :default="$this->state['compactTables'] ? 'true' : 'false'"
+                    alpine-click="$dispatch('toggle-compact-tables')"
+                />
+            </x-navbar.setting-option>
         </div>
     </div>
 </div>

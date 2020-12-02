@@ -16,10 +16,11 @@ final class Settings
         }
 
         return [
-            'currency'   => 'USD',
-            'priceChart' => true,
-            'feeChart'   => true,
-            'darkTheme'  => false,
+            'currency'      => 'USD',
+            'priceChart'    => true,
+            'feeChart'      => true,
+            'darkTheme'     => false,
+            'compactTables' => false,
         ];
     }
 
@@ -41,6 +42,11 @@ final class Settings
     public static function darkTheme(): bool
     {
         return Arr::get(static::all(), 'darkTheme', true);
+    }
+
+    public static function compactTables(): bool
+    {
+        return Arr::get(static::all(), 'compactTables', true);
     }
 
     public static function theme(): string
@@ -74,5 +80,10 @@ final class Settings
     public static function usesDarkTheme(): bool
     {
         return static::darkTheme() === true;
+    }
+
+    public static function usesCompactTables(): bool
+    {
+        return static::compactTables() === true;
     }
 }
