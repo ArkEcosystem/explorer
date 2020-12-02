@@ -1,7 +1,7 @@
 <x-loading.visible>
-    <x-tables.desktop.skeleton.transactions />
+    <x-tables.desktop.skeleton.transactions :compact="Settings::usesCompactTables()" />
 
-    <x-tables.mobile.skeleton.transactions />
+    <x-tables.mobile.skeleton.transactions compact="false" />
 </x-loading.visible>
 
 <x-loading.hidden>

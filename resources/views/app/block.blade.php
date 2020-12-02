@@ -35,9 +35,9 @@
                         </div>
 
                         <x-skeletons.transactions>
-                            <x-tables.desktop.transactions :transactions="$transactions" />
+                            <x-tables.desktop.transactions :transactions="$transactions" :compact="Settings::usesCompactTables()"/>
 
-                            <x-tables.mobile.transactions :transactions="$transactions" />
+                            <x-tables.mobile.transactions :transactions="$transactions" compact="false"/>
                         </x-skeletons.transactions>
                     </div>
                 </div>

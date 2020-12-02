@@ -1,1 +1,1 @@
-<x-general.amount-fiat-tooltip :amount="$model->amount()" :fiat="$model->amountFiat()" is-received />
+<x-general.amount-fiat-tooltip :amount="$model->amount()" :fiat="$model->amountFiat()" :compact="$compact" is-received />

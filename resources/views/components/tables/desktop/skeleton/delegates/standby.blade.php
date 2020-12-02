@@ -8,6 +8,7 @@
             'general.delegates.profile'    => 'text',
             'general.delegates.commission' => 'text'
         ]"
+        :compact="$compact"
     />
 @else
     <x-table-skeleton
@@ -17,5 +18,6 @@
             'general.delegates.name'  => 'address',
             'general.delegates.votes' => 'number'
         ]"
+        :compact="$compact"
     />
 @endif

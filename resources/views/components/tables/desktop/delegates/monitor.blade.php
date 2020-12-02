@@ -1,4 +1,4 @@
-<div class="hidden w-full table-container md:block">
+<div class="hidden w-full table-container @if($compact)table-compact @endif md:block">
     <table>
         <thead>
             <tr>
@@ -20,13 +20,21 @@
                         <x-tables.rows.desktop.slot-id :model="$delegate" />
                     </x-ark-tables.cell>
                     <x-ark-tables.cell wire:key="{{ $delegate->publicKey() }}-username-desktop">
-                        <x-tables.rows.desktop.username-with-avatar :model="$delegate->wallet()" />
+                        @if ($compact)
+                            <x-tables.rows.desktop.username-with-avatar :model="$delegate->wallet()" :compact="$compact" />
+                        @else
+                            <x-tables.rows.desktop.username-with-avatar :model="$delegate->wallet()" compact="false" />
+                        @endif
                     </x-ark-tables.cell>
                     <x-ark-tables.cell>
                         <x-tables.rows.desktop.slot-time :model="$delegate" />
                     </x-ark-tables.cell>
                     <x-ark-tables.cell wire:key="{{ $delegate->publicKey() }}-round-status-{{ $delegate->status() }}-desktop">
-                        <x-tables.rows.desktop.round-status :model="$delegate" />
+                        @if ($compact)
+                            <x-tables.rows.desktop.round-status :model="$delegate" :compact="$compact" />
+                        @else
+                            <x-tables.rows.desktop.round-status :model="$delegate" />
+                        @endif
                     </x-ark-tables.cell>
                     <x-ark-tables.cell class="text-right">
                         <x-tables.rows.desktop.wallet-last-block :model="$delegate" />

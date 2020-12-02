@@ -7,4 +7,5 @@
         'pages.delegates.status'     => 'text',
         'pages.delegates.block_id'   => 'text',
     ]"
+    :compact="$compact"
 />

@@ -5,4 +5,5 @@
         'general.delegates.name'  => 'address',
         'general.delegates.votes' => 'number',
     ]"
+    :compact="$compact"
 />

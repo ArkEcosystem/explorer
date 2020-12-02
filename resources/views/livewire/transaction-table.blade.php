@@ -1,8 +1,8 @@
 <div id="transaction-list" class="w-full">
-    <x-skeletons.transactions>
-        <x-tables.desktop.transactions :transactions="$transactions" />
+    <x-skeletons.transactions :compact="Settings::usesCompactTables()">
+        <x-tables.desktop.transactions :transactions="$transactions" :compact="Settings::usesCompactTables()"/>
 
-        <x-tables.mobile.transactions :transactions="$transactions" />
+        <x-tables.mobile.transactions :transactions="$transactions" compact="false" />
 
         <x-general.pagination :results="$transactions" class="mt-8" />
 

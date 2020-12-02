@@ -1,8 +1,8 @@
 @if(isset($isSent))
-    <span class="px-2 py-1 font-bold border rounded whitespace-nowrap text-theme-danger-400 border-theme-danger-100 dark:border-theme-danger-400">
+    <span class="{{ ($compact ?? false) ? '' : 'px-2 py-1 border rounded border-theme-danger-100 dark:border-theme-danger-400' }} font-bold whitespace-nowrap text-theme-danger-400">
         -
 @elseif(isset($isReceived))
-    <span class="px-2 py-1 font-bold border rounded whitespace-nowrap text-theme-success-600 border-theme-success-200 dark:border-theme-success-600">
+    <span class="{{ ($compact ?? false) ? '' : 'px-2 py-1 border rounded border-theme-success-200 dark:border-theme-success-600' }} font-bold whitespace-nowrap text-theme-success-600">
         +
 @else
     <span>
