@@ -12,12 +12,15 @@ final class TableSkeleton extends Component
 {
     private string $device;
 
+    private bool $compact;
+
     private Collection $items;
 
-    public function __construct(string $device, array $items)
+    public function __construct(string $device, array $items, bool $compact = true)
     {
         $this->device  = $device;
         $this->items   = collect($items);
+        $this->compact = $compact;
     }
 
     public function render(): View
@@ -34,6 +37,7 @@ final class TableSkeleton extends Component
         return view("components.tables.skeletons.{$this->device}", [
             'headers' => $headers->toArray(),
             'rows'    => $rows->toArray(),
+            'compact' => $this->compact,
         ]);
     }
 }

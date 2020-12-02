@@ -9,6 +9,7 @@
             'general.block.amount'       => 'number',
             'general.block.fee'          => 'number',
         ]"
+        :compact="$compact"
     />
 @else
     <x-table-skeleton
@@ -22,5 +23,6 @@
             'general.block.amount'       => 'number',
             'general.block.fee'          => 'number',
         ]"
+        :compact="$compact"
     />
 @endif
