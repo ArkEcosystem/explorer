@@ -15,7 +15,7 @@ trait ManagesSearch
         return $this->validate([
             // Generic
             'state'             => 'array',
-            'state.term'        => ['nullable', 'string', 'max:255'],
+            'state.term'        => ['nullable', 'string', 'max:66'],
             'state.type'        => ['nullable', Rule::in(['block', 'transaction', 'wallet'])],
             'state.dateFrom'    => ['nullable', 'date'],
             'state.dateTo'      => ['nullable', 'date'],
