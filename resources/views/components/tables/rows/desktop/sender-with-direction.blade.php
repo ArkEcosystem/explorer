@@ -11,7 +11,7 @@
 
             <div class="table-avatar">
                 <div class="bg-white border-white circled-icon dark:text-theme-secondary-600 dark:border-theme-secondary-600">
-                    <x-general.avatar :identifier="$model->sender()->address()" />
+                    <x-general.avatar :identifier="$model->sender()->address()" :compact="$compact" />
                 </div>
             </div>
         </div>

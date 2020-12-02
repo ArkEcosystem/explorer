@@ -45,7 +45,6 @@
                     <x-ark-tables.cell wire:key="{{ $transaction->id() }}-id">
                         <x-tables.rows.desktop.transaction-id :model="$transaction" />
                     </x-ark-tables.cell>
-
                     @if ($compact)
                         <x-ark-tables.cell>
                             <x-tables.rows.desktop.timestamp :model="$transaction" shortened />
@@ -53,9 +52,9 @@
 
                         <x-ark-tables.cell wire:key="{{ $transaction->id() }}-sender">
                             @isset($useDirection)
-                                <x-tables.rows.desktop.sender-with-direction :model="$transaction" :wallet="$wallet" />
+                                <x-tables.rows.desktop.sender-with-direction :model="$transaction" :wallet="$wallet" :compact="$compact" />
                             @else
-                                <x-tables.rows.desktop.sender :model="$transaction" />
+                                <x-tables.rows.desktop.sender :model="$transaction" :compact="$compact" />
                             @endif
                         </x-ark-tables.cell>
 

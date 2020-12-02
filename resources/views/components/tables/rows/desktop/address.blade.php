@@ -1,1 +1,1 @@
-<x-general.identity :model="$model" :without-truncate="$withoutTruncate ?? false" />
+<x-general.identity :model="$model" :without-truncate="$withoutTruncate ?? false" :compact="$compact" />

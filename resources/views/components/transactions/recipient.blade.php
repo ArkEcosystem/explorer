@@ -2,7 +2,7 @@
 <div wire:key="{{ $transaction->id() }}">
     <div>
         @if ($transaction->isTransfer() || $transaction->isUnknown())
-            <x-general.identity :model="$transaction->recipient()" />
+            <x-general.identity :model="$transaction->recipient()" :compact="$compact" />
         @elseif ($transaction->isVoteCombination())
             <x-general.identity :model="$transaction->voted()">
                 <x-slot name="icon">

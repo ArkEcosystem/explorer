@@ -1,4 +1,4 @@
-<div class="hidden w-full table-container @if(isset($compact))table-compact @endif md:block">
+<div class="hidden w-full table-container @if($compact)table-compact @endif md:block">
     <table>
         <thead>
             <tr>
@@ -11,7 +11,7 @@
             <x-skeleton>
                 <x-ark-tables.row>
                     @foreach($rows as $row)
-                        <x-dynamic-component :component="$row" compact="{{ isset($compact) }}" />
+                        <x-dynamic-component :component="$row" :compact="$compact" />
                     @endforeach
                 </x-ark-tables.row>
             </x-skeleton>

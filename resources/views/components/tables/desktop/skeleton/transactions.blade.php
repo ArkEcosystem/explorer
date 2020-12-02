@@ -10,7 +10,7 @@
             'general.transaction.fee'           => 'number',
             'general.transaction.confirmations' => 'number'
         ]"
-        compact="{{ isset($compact) }}"
+        :compact="$compact"
     />
 @else
 <x-table-skeleton
@@ -23,6 +23,6 @@
             'general.transaction.amount'        => 'number',
             'general.transaction.fee'           => 'number'
         ]"
-        compact="{{ isset($compact) }}"
+        :compact="$compact"
     />
 @endif

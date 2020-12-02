@@ -1,19 +1,30 @@
-<div class="hidden w-full table-container md:block">
+<div class="hidden w-full table-container @if($compact)table-compact @endif md:block">
     <table>
         <thead>
             <tr>
                 <x-tables.headers.desktop.address name="general.wallet.address" />
                 <x-tables.headers.desktop.icon name="general.wallet.info" />
                 <x-tables.headers.desktop.number name="general.wallet.balance" />
-                <x-tables.headers.desktop.number name="general.wallet.supply" responsive />
+                @if ($compact)
+                    <x-tables.headers.desktop.number name="general.wallet.supply" />
+                @else
+                    <x-tables.headers.desktop.number name="general.wallet.supply" responsive />
+                @endif
             </tr>
         </thead>
         <tbody>
+
             @foreach($wallets as $wallet)
                 <x-ark-tables.row>
-                    <x-ark-tables.cell wire:key="{{ $wallet->address() }}-address">
-                        <x-tables.rows.desktop.address :model="$wallet" :without-truncate="$withoutTruncate ?? false" />
-                    </x-ark-tables.cell>
+                    @if ($compact)
+                        <x-ark-tables.cell wire:key="{{ $wallet->address() }}-address">
+                            <x-tables.rows.desktop.address :model="$wallet" :without-truncate="$withoutTruncate ?? false" :compact="$compact" />
+                        </x-ark-tables.cell>
+                    @else
+                        <x-ark-tables.cell wire:key="{{ $wallet->address() }}-address">
+                            <x-tables.rows.desktop.address :model="$wallet" :without-truncate="$withoutTruncate ?? false" />
+                        </x-ark-tables.cell>
+                    @endif
                     <x-ark-tables.cell class="text-center" wire:key="{{ $wallet->address() }}-type">
                         <x-tables.rows.desktop.wallet-type :model="$wallet" />
                     </x-ark-tables.cell>

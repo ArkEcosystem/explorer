@@ -1,1 +1,1 @@
-<x-general.identity :model="$model->sender()" />
+<x-general.identity :model="$model->sender()" :compact="$compact" />
