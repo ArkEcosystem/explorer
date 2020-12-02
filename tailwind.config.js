@@ -36,9 +36,11 @@ module.exports = {
         ...defaultConfig.purge,
         options: {
             safelist: {
-                ...defaultConfig.purge.options.safelist,
-                deep: [/^pika-/],
+                standard: [
+                    ...defaultConfig.purge.options.safelist.standard,
+                    /^pika-/,
+                ],
             },
         },
-    },
+    }
 }
