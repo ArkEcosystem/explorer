@@ -83,6 +83,10 @@ return [
             'title'       => 'Dark Theme',
             'description' => 'Enable/Disable dark theme',
         ],
+        'table-view' => [
+            'title'       => 'Compact Tables',
+            'description' => 'Reduce the size of tables',
+        ],
     ],
 
 ];
