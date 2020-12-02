@@ -92,6 +92,10 @@ final class SearchModule extends Component
     {
         $data = $this->validateSearchQuery();
 
+        if (array_key_exists('term', $data)) {
+            $data['term'] = preg_replace('/(0x[0-9A-Z]+)/', '', $data['term']);
+        }
+
         if ($this->searchWallet($data)) {
             return;
         }
