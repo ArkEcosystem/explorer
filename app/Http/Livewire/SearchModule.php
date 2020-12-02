@@ -92,7 +92,7 @@ final class SearchModule extends Component
     {
         $data = $this->validateSearchQuery();
 
-        if (array_key_exists('term', $data)) {
+        if (array_key_exists('term', $data) && ! is_null($data['term'])) {
             $data['term'] = preg_replace('/(0x[0-9A-Z]+)/', '', $data['term']);
         }
 
