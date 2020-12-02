@@ -1,5 +1,5 @@
 <div>
     @lang('labels.recipient')
 
-    <x-transactions.recipient :transaction="$model" />
+    <x-transactions.recipient :transaction="$model" compact="false" />
 </div>
