@@ -1,5 +1,4 @@
 @php($iconType = $transaction->iconType())
-
 <div wire:key="{{ $transaction->id() }}">
     <div>
         @if ($transaction->isTransfer() || $transaction->isUnknown())
@@ -7,7 +6,7 @@
         @elseif ($transaction->isVoteCombination())
             <x-general.identity :model="$transaction->voted()">
                 <x-slot name="icon">
-                    <x-transactions.icon :icon-type="$iconType" />
+                    <x-transactions.icon :icon-type="$iconType" :compact="$compact" />
                 </x-slot>
 
                 <x-slot name="prefix">
@@ -19,7 +18,7 @@
         @elseif ($transaction->isVote())
             <x-general.identity :model="$transaction->voted()">
                 <x-slot name="icon">
-                    <x-transactions.icon :icon-type="$iconType" />
+                    <x-transactions.icon :icon-type="$iconType" :compact="$compact" />
                 </x-slot>
 
                 <x-slot name="prefix">
@@ -31,7 +30,7 @@
         @elseif ($transaction->isUnvote())
             <x-general.identity :model="$transaction->unvoted()">
                 <x-slot name="icon">
-                    <x-transactions.icon :icon-type="$iconType" />
+                    <x-transactions.icon :icon-type="$iconType" :compact="$compact" />
                 </x-slot>
 
                 <x-slot name="prefix">
@@ -42,7 +41,7 @@
             </x-general.identity>
         @else
             <div class="flex flex-row-reverse items-center md:flex-row">
-                <x-transactions.icon :icon-type="$iconType" />
+                <x-transactions.icon :icon-type="$iconType" :compact="$compact" />
 
                 <div class="mr-4 font-semibold text-theme-secondary-900 dark:text-theme-secondary-200 md:mr-0 md:ml-3">
                     @lang('general.transaction.'.$iconType)

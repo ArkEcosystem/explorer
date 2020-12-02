@@ -1,1 +1,1 @@
-<x-transactions.recipient :transaction="$model" />
+<x-transactions.recipient :transaction="$model" :compact="$compact"/>
