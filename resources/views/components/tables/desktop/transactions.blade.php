@@ -90,14 +90,14 @@
 
                         <x-ark-tables.cell wire:key="{{ $transaction->id() }}-sender">
                             @isset($useDirection)
-                                <x-tables.rows.desktop.sender-with-direction :model="$transaction" :wallet="$wallet" />
+                                <x-tables.rows.desktop.sender-with-direction :model="$transaction" :wallet="$wallet" compact="false"/>
                             @else
-                                <x-tables.rows.desktop.sender :model="$transaction" />
+                                <x-tables.rows.desktop.sender :model="$transaction" compact="false" />
                             @endif
                         </x-ark-tables.cell>
 
                         <x-ark-tables.cell wire:key="{{ $transaction->id() }}-recipient">
-                            <x-tables.rows.desktop.recipient :model="$transaction" :compact="$compact" />
+                            <x-tables.rows.desktop.recipient :model="$transaction" compact="false" />
                         </x-ark-tables.cell>
 
                         <x-ark-tables.cell class="text-right" last-on="xl">
