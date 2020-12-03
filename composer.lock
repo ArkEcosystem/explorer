@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d78d7d0772bbfc2acbba85b41457fcc6",
+    "content-hash": "24c8b1f839fc94a4fd89f509ef2022ab",
     "packages": [
         {
             "name": "arkecosystem/crypto",
@@ -147,16 +147,16 @@
         },
         {
             "name": "arkecosystem/ui",
-            "version": "1.2.3",
+            "version": "1.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ArkEcosystem/laravel-ui.git",
-                "reference": "90dd363e82b39af6758ad930e589127c0a059e99"
+                "reference": "6edabd52a6215942dcb5a43b2f89c2aba8af0b1d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ArkEcosystem/laravel-ui/zipball/90dd363e82b39af6758ad930e589127c0a059e99",
-                "reference": "90dd363e82b39af6758ad930e589127c0a059e99",
+                "url": "https://api.github.com/repos/ArkEcosystem/laravel-ui/zipball/6edabd52a6215942dcb5a43b2f89c2aba8af0b1d",
+                "reference": "6edabd52a6215942dcb5a43b2f89c2aba8af0b1d",
                 "shasum": ""
             },
             "require": {
@@ -214,7 +214,7 @@
                 }
             ],
             "description": "User-Interface Scaffolding for Laravel. Powered by TailwindCSS.",
-            "time": "2020-12-03T13:37:14+00:00"
+            "time": "2020-12-03T17:19:11+00:00"
         },
         {
             "name": "asm89/stack-cors",
@@ -9703,6 +9703,7 @@
                 "issues": "https://github.com/migrify/migrify-kernel/issues",
                 "source": "https://github.com/migrify/migrify-kernel/tree/0.4.2"
             },
+            "abandoned": "symplify/symplify-kernel",
             "time": "2020-11-14T20:12:17+00:00"
         },
         {
@@ -9745,6 +9746,7 @@
                 "issues": "https://github.com/migrify/php-config-printer/issues",
                 "source": "https://github.com/migrify/php-config-printer/tree/0.4.2"
             },
+            "abandoned": "symplify/php-config-printer",
             "time": "2020-11-17T12:04:46+00:00"
         },
         {
