@@ -1,5 +1,5 @@
 <div class="flex items-center" wire:key="sender:{{ $model->id() }}">
-    <div class="sender-direction-wrapper flex items-center justify-center p-2">
+    <div class="flex items-center justify-center p-2 sender-direction-wrapper">
         <div class="flex">
             <div class="arrow-direction text-theme-secondary-900 border-theme-secondary-900 dark:text-theme-secondary-600 dark:border-theme-secondary-600">
                 @if($model->isSent($wallet->address()))
