@@ -8,20 +8,20 @@ use Illuminate\Support\Facades\Session;
 
 it('should have all settings with defaults', function () {
     expect(Settings::all())->toBe([
-        'currency'   => 'USD',
-        'priceChart' => true,
-        'feeChart'   => true,
-        'darkTheme'  => false,
+        'currency'     => 'USD',
+        'priceChart'   => true,
+        'feeChart'     => true,
+        'darkTheme'    => false,
         'compactTable' => false,
     ]);
 });
 
 it('should have all settings with values from a session', function () {
     $settings = [
-        'currency'   => 'CHF',
-        'priceChart' => true,
-        'feeChart'   => true,
-        'darkTheme'  => false,
+        'currency'     => 'CHF',
+        'priceChart'   => true,
+        'feeChart'     => true,
+        'darkTheme'    => false,
         'compactTable' => false,
     ];
 
