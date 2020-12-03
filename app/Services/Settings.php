@@ -73,21 +73,21 @@ final class Settings
             return false;
         }
 
-        return static::priceChart() === true;
+        return static::priceChart();
     }
 
     public static function usesFeeChart(): bool
     {
-        return static::feeChart() === true;
+        return static::feeChart();
     }
 
     public static function usesDarkTheme(): bool
     {
-        return static::darkTheme() === true;
+        return static::darkTheme();
     }
 
     public static function usesCompactTables(): bool
     {
-        return static::compactTables() === true;
+        return static::compactTables();
     }
 }
