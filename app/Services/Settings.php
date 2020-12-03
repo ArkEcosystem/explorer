@@ -17,10 +17,10 @@ final class Settings
         }
 
         return [
-            'currency'   => 'USD',
-            'priceChart' => true,
-            'feeChart'   => true,
-            'darkTheme'  => false,
+            'currency'     => 'USD',
+            'priceChart'   => true,
+            'feeChart'     => true,
+            'darkTheme'    => false,
             'compactTable' => false,
         ];
     }
@@ -55,9 +55,9 @@ final class Settings
     }
 
     public static function compactTable(): bool
-     {
-         return Arr::get(static::all(), 'compactTable', true);
-     }
+    {
+        return Arr::get(static::all(), 'compactTable', true);
+    }
 
     public static function usesCharts(): bool
     {
