@@ -615,21 +615,23 @@ tr:hover td.hoverable-cell .table-avatar {
     @apply py-3;
 }
 
-.table-compact .transaction-icon {
-    @apply border-0 w-4 h-4;
+.table-compact .table-container table > tbody .transaction-icon {
+    @apply border-0 w-5 h-5;
 }
 
-.table-compact .avatar-wrapper {
-    @apply w-4 h-4;
+.table-compact .table-container table > tbody .avatar-wrapper,
+.table-compact .table-container table > tbody .arrow-direction svg,
+.table-compact .table-container table > tbody .round-status svg {
+    @apply w-5 h-5;
 }
 
 @screen md {
-    .table-compact .transaction-icon {
-        @apply border-0 w-4 h-4;
+    .table-compact .table-container table > tbody .transaction-icon {
+        @apply border-0 w-5 h-5;
     }
 
-    .table-compact .avatar-wrapper {
-        @apply w-4 h-4;
+    .table-compact .table-container table > tbody .avatar-wrapper {
+        @apply w-5 h-5;
     }
 }
 
@@ -637,15 +639,11 @@ tr:hover td.hoverable-cell .table-avatar {
     @apply space-x-2;
 }
 
-.table-compact .arrow-direction svg,
-.table-compact .round-status svg {
-    @apply w-4 h-4;
+.table-compact .sender-direction-wrapper {
+    @apply p-0 pr-2;
 }
 
-.table-compact .fiat-tooltip-sent {
-    @apply p-0 border-0;
-}
-
+.table-compact .fiat-tooltip-sent,
 .table-compact .fiat-tooltip-received {
     @apply p-0 border-0;
 }
