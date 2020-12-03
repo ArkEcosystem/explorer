@@ -11,18 +11,21 @@ final class Settings
 {
     public static function all(): array
     {
-        // TODO: needs a migration to work with `compactTables`
-        if (Session::has('settings')) {
-            return json_decode(Session::get('settings'), true);
-        }
-
-        return [
+        $defaultSettings = [
             'currency'      => 'USD',
             'priceChart'    => true,
             'feeChart'      => true,
             'darkTheme'     => false,
             'compactTables' => false,
         ];
+
+        if (Session::has('settings')) {
+            $sessionSettings = json_decode(Session::get('settings'), true);
+
+            return $sessionSettings + $defaultSettings;
+        }
+
+        return $defaultSettings;
     }
 
     public static function currency(): string
