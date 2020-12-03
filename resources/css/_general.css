@@ -608,3 +608,27 @@ tr:hover td.hoverable-cell .table-avatar {
 .dark tr:hover td.hoverable-cell .table-avatar {
     @apply border-theme-secondary-800;
 }
+
+/** Compact Table Styling **/
+.table-compact .table-container table > tbody > tr > td.hoverable-cell > div,
+.table-compact .table-container table > tbody > tr > td:not(.hoverable-cell) {
+    @apply py-3;
+}
+
+.table-compact .transaction-icon {
+    @apply border-0 w-4 h-4;
+}
+
+.table-compact .avatar-wrapper {
+    @apply w-4 h-4;
+}
+
+@screen md {
+    .table-compact .transaction-icon {
+        @apply border-0 w-4 h-4;
+    }
+
+    .table-compact .avatar-wrapper {
+        @apply w-4 h-4;
+    }
+}
