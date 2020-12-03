@@ -617,11 +617,11 @@ tr:hover td.hoverable-cell .table-avatar {
     @apply py-3 !important;
 }
 
-.table-compact table > tbody > tr > td.hoverable-cell > div > div{
+.table-compact table > tbody > tr > td.hoverable-cell > div > div {
     @apply -my-6 !important;
 }
 
 /** Compact Circled Icon **/
 .compact-circled-icon {
-  @apply circled-icon h-5 w-5 !important;
+    @apply circled-icon h-5 w-5 !important;
 }
