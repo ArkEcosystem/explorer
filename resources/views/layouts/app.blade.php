@@ -40,7 +40,7 @@
         @if(Settings::usesDarkTheme())
             class="dark"
         @endif
-        x-data="{ 'theme': '{{ Settings::theme() }}', 'compact': '{{ Settings::usesCompactTable() }}' }"
+        x-data="{ 'theme': '{{ Settings::theme() }}', 'compact': '{{ Settings::usesCompactTables() }}' }"
         :class="{ 'dark': theme === 'dark', 'table-compact': compact }"
         @toggle-dark-mode.window="theme === 'dark' ? theme = 'light' : theme = 'dark'"
         @toggle-compact-table="compact = !compact"

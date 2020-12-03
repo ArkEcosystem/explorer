@@ -11,17 +11,17 @@ final class Settings
 {
     public static function all(): array
     {
-        // TODO: needs a migration to work with `compactTable`
+        // TODO: needs a migration to work with `compactTables`
         if (Session::has('settings')) {
             return json_decode(Session::get('settings'), true);
         }
 
         return [
-            'currency'     => 'USD',
-            'priceChart'   => true,
-            'feeChart'     => true,
-            'darkTheme'    => false,
-            'compactTable' => false,
+            'currency'      => 'USD',
+            'priceChart'    => true,
+            'feeChart'      => true,
+            'darkTheme'     => false,
+            'compactTables' => false,
         ];
     }
 
@@ -54,9 +54,9 @@ final class Settings
         return 'light';
     }
 
-    public static function compactTable(): bool
+    public static function compactTables(): bool
     {
-        return Arr::get(static::all(), 'compactTable', true);
+        return Arr::get(static::all(), 'compactTables', true);
     }
 
     public static function usesCharts(): bool
@@ -83,8 +83,8 @@ final class Settings
         return static::darkTheme() === true;
     }
 
-    public static function usesCompactTable(): bool
+    public static function usesCompactTables(): bool
     {
-        return static::compactTable() === true;
+        return static::compactTables() === true;
     }
 }

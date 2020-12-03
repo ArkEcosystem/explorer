@@ -67,9 +67,9 @@
 
             <x-navbar.setting-option :title="trans('forms.settings.table.title')" :subtitle="trans('forms.settings.table.description')">
                 <x-ark-toggle
-                    name="state.compactTable"
+                    name="state.compactTables"
                     hide-label
-                    :default="$this->state['compactTable'] ? 'true' : 'false'"
+                    :default="$this->state['compactTables'] ? 'true' : 'false'"
                     alpine-click="$dispatch('toggle-compact-table')"
                 />
             </x-navbar.setting-option>

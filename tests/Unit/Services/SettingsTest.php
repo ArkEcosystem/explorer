@@ -8,21 +8,21 @@ use Illuminate\Support\Facades\Session;
 
 it('should have all settings with defaults', function () {
     expect(Settings::all())->toBe([
-        'currency'   => 'USD',
-        'priceChart' => true,
-        'feeChart'   => true,
-        'darkTheme'  => false,
-        'compactTable' => false,
+        'currency'      => 'USD',
+        'priceChart'    => true,
+        'feeChart'      => true,
+        'darkTheme'     => false,
+        'compactTables' => false,
     ]);
 });
 
 it('should have all settings with values from a session', function () {
     $settings = [
-        'currency'   => 'CHF',
-        'priceChart' => true,
-        'feeChart'   => true,
-        'darkTheme'  => false,
-        'compactTable' => false,
+        'currency'      => 'CHF',
+        'priceChart'    => true,
+        'feeChart'      => true,
+        'darkTheme'     => false,
+        'compactTables' => false,
     ];
 
     Session::shouldReceive('has')
@@ -55,7 +55,7 @@ it('should have a dark theme setting', function () {
 });
 
 it('should have a compact mode setting', function () {
-    expect(Settings::compactTable())->toBeFalse();
+    expect(Settings::compactTables())->toBeFalse();
 });
 
 it('should determine the name of the theme', function () {
@@ -144,15 +144,15 @@ it('should determine if visitor uses dark theme', function () {
 });
 
 it('should determine if visitor uses compact mode', function () {
-    Session::put('settings', json_encode(['compactTable' => true]));
+    Session::put('settings', json_encode(['compactTables' => true]));
 
-    expect(Settings::usesCompactTable())->toBeTrue();
+    expect(Settings::usesCompactTables())->toBeTrue();
 
-    Session::put('settings', json_encode(['compactTable' => false]));
+    Session::put('settings', json_encode(['compactTables' => false]));
 
-    expect(Settings::usesCompactTable())->toBeFalse();
+    expect(Settings::usesCompactTables())->toBeFalse();
 
-    Session::put('settings', json_encode(['compactTable' => true]));
+    Session::put('settings', json_encode(['compactTables' => true]));
 
-    expect(Settings::usesCompactTable())->toBeTrue();
+    expect(Settings::usesCompactTables())->toBeTrue();
 });
