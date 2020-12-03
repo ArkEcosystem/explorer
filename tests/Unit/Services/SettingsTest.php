@@ -12,6 +12,7 @@ it('should have all settings with defaults', function () {
         'priceChart' => true,
         'feeChart'   => true,
         'darkTheme'  => false,
+        'compactTable' => false,
     ]);
 });
 
@@ -21,6 +22,7 @@ it('should have all settings with values from a session', function () {
         'priceChart' => true,
         'feeChart'   => true,
         'darkTheme'  => false,
+        'compactTable' => false,
     ];
 
     Session::shouldReceive('has')
@@ -50,6 +52,10 @@ it('should have a fee chart setting', function () {
 
 it('should have a dark theme setting', function () {
     expect(Settings::darkTheme())->toBeFalse();
+});
+
+it('should have a compact mode setting', function () {
+    expect(Settings::compactTable())->toBeFalse();
 });
 
 it('should determine the name of the theme', function () {
@@ -135,4 +141,18 @@ it('should determine if visitor uses dark theme', function () {
     Session::put('settings', json_encode(['darkTheme' => true]));
 
     expect(Settings::usesDarkTheme())->toBeTrue();
+});
+
+it('should determine if visitor uses compact mode', function () {
+    Session::put('settings', json_encode(['compactTable' => true]));
+
+    expect(Settings::usesCompactTable())->toBeTrue();
+
+    Session::put('settings', json_encode(['compactTable' => false]));
+
+    expect(Settings::usesCompactTable())->toBeFalse();
+
+    Session::put('settings', json_encode(['compactTable' => true]));
+
+    expect(Settings::usesCompactTable())->toBeTrue();
 });
