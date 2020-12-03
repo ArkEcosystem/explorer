@@ -632,3 +632,28 @@ tr:hover td.hoverable-cell .table-avatar {
         @apply w-4 h-4;
     }
 }
+
+.table-compact .round-status-history {
+    @apply space-x-2;
+}
+
+.table-compact .arrow-direction svg,
+.table-compact .round-status svg {
+    @apply w-4 h-4;
+}
+
+.table-compact .fiat-tooltip-sent {
+    @apply p-0 border-0;
+}
+
+.table-compact .fiat-tooltip-received {
+    @apply p-0 border-0;
+}
+
+body:not(.table-compact) .table-avatar > div {
+    @apply bg-white border-white circled-icon;
+}
+
+body:not(.table-compact) .arrow-direction {
+    @apply -mr-2 circled-icon;
+}
