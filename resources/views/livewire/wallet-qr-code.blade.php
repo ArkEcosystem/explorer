@@ -1,4 +1,4 @@
-<div>
+<div class="flex-1">
     @if($isOpen)
     <x-ark-modal width-class="max-w-md" wire-close="toggleQrCode" title-class="header-2" x-data="{ options: false }">
         @slot('title')
@@ -76,7 +76,7 @@
     <button
         wire:click="toggleQrCode"
         type="button"
-        class="flex items-center justify-center flex-1 w-16 rounded cursor-pointer bg-theme-primary-600 hover:bg-theme-primary-700 transition-default h-11 lg:flex-none lg:px-3"
+        class="flex items-center justify-center w-full flex-1 lg:w-16 rounded cursor-pointer bg-theme-primary-600 hover:bg-theme-primary-700 transition-default h-11 lg:flex-none lg:px-3"
     >
         <x-ark-icon name="app-qr-code" size="md" />
     </button>
