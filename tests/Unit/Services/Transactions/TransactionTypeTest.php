@@ -117,7 +117,7 @@ it('should determine the the type', function (string $method, int $type, int $ty
             'subType' => MagistrateTransactionEntitySubTypeEnum::NONE,
             'action'  => MagistrateTransactionEntityActionEnum::REGISTER,
         ],
-        'business-entity-registration',
+        'business-registration',
     ], [
         'isBusinessEntityResignation',
         MagistrateTransactionTypeEnum::ENTITY,
@@ -127,7 +127,7 @@ it('should determine the the type', function (string $method, int $type, int $ty
             'subType' => MagistrateTransactionEntitySubTypeEnum::NONE,
             'action'  => MagistrateTransactionEntityActionEnum::RESIGN,
         ],
-        'business-entity-resignation',
+        'business-resignation',
     ], [
         'isBusinessEntityUpdate',
         MagistrateTransactionTypeEnum::ENTITY,
@@ -137,7 +137,7 @@ it('should determine the the type', function (string $method, int $type, int $ty
             'subType' => MagistrateTransactionEntitySubTypeEnum::NONE,
             'action'  => MagistrateTransactionEntityActionEnum::UPDATE,
         ],
-        'business-entity-update',
+        'business-update',
     ], [
         'isProductEntityRegistration',
         MagistrateTransactionTypeEnum::ENTITY,
@@ -263,19 +263,19 @@ it('should determine the the type', function (string $method, int $type, int $ty
         MagistrateTransactionTypeEnum::BUSINESS_REGISTRATION,
         TransactionTypeGroupEnum::MAGISTRATE,
         [],
-        'business-registration',
+        'legacy-business-registration',
     ], [
         'isLegacyBusinessResignation',
         MagistrateTransactionTypeEnum::BUSINESS_RESIGNATION,
         TransactionTypeGroupEnum::MAGISTRATE,
         [],
-        'business-resignation',
+        'legacy-business-resignation',
     ], [
         'isLegacyBusinessUpdate',
         MagistrateTransactionTypeEnum::BUSINESS_UPDATE,
         TransactionTypeGroupEnum::MAGISTRATE,
         [],
-        'business-update',
+        'legacy-business-update',
     ], [
         'isLegacyBridgechainRegistration',
         MagistrateTransactionTypeEnum::BRIDGECHAIN_REGISTRATION,
