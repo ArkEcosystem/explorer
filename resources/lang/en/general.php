@@ -93,7 +93,7 @@ return [
 
             // TODO: remove once legacy magistrate shows proper type texts
             'business'    => 'Business',
-            'bridgechain' => 'Bridgechain'
+            'bridgechain' => 'Bridgechain',
         ],
     ],
 
