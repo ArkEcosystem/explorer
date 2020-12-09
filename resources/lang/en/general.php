@@ -90,6 +90,10 @@ return [
             'unvote'                              => 'Unvote',
             'vote'                                => 'Vote',
             'unknown'                             => 'Unknown',
+
+            // TODO: remove once legacy magistrate shows proper type texts
+            'business'    => 'Business',
+            'bridgechain' => 'Bridgechain'
         ],
     ],
 
