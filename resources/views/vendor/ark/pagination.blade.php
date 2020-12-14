@@ -1,6 +1,5 @@
 @php
-['path' => $path, 'pageName' => $pageName] = $paginator->getOptions();
-$urlParams = Arr::except(request()->all(), [$pageName]);
+['path' => $path, 'pageName' => $pageName] =    $paginator->getOptions();
 @endphp
 <div
     x-data="Pagination('{{ $pageName }}', {{ $paginator->lastPage() }})"
@@ -19,9 +18,6 @@ $urlParams = Arr::except(request()->all(), [$pageName]);
                 class="py-2 px-3 w-full bg-transparent dark:text-theme-secondary-200"
                 x-on:blur="blurHandler"
             />
-            @foreach($urlParams as $key => $value)
-            <input type="hidden" name="{{ $key }}" value="{{ $value }}" />
-            @endforeach
             <button type="submit" class="p-2 text-theme-secondary-500 hover:text-theme-primary-500 transition-default dark:text-theme-secondary-200" :disabled="!page">
                 <x-ark-icon name="search" size="sm" />
             </button>
@@ -69,9 +65,6 @@ $urlParams = Arr::except(request()->all(), [$pageName]);
                     class="py-2 px-3 w-full bg-transparent dark:text-theme-secondary-200"
                     x-on:blur="blurHandler"
                 />
-                @foreach($urlParams as $key => $value)
-                <input type="hidden" name="{{ $key }}" value="{{ $value }}" />
-                @endforeach
                 <button type="submit" class="p-2 text-theme-secondary-500 hover:text-theme-primary-500 transition-default dark:text-theme-secondary-200" :disabled="!page">
                     <x-ark-icon name="search" size="sm" />
                 </button>
