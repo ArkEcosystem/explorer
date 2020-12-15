@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "afa00027a1f03a36b5e9a17f426fc3c4",
+    "content-hash": "6214602b8d7cb737b5085ef46b75f8b2",
     "packages": [
         {
             "name": "arkecosystem/crypto",
@@ -2135,21 +2135,21 @@
         },
         {
             "name": "konceiver/better-number-formatter",
-            "version": "1.2.0",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/konceiver/better-number-formatter.git",
-                "reference": "9bf62f22f30328a52833f5a4a62970680e7fe04b"
+                "reference": "c0080e95551a482af1044147d84934f698a48a64"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/konceiver/better-number-formatter/zipball/9bf62f22f30328a52833f5a4a62970680e7fe04b",
-                "reference": "9bf62f22f30328a52833f5a4a62970680e7fe04b",
+                "url": "https://api.github.com/repos/konceiver/better-number-formatter/zipball/c0080e95551a482af1044147d84934f698a48a64",
+                "reference": "c0080e95551a482af1044147d84934f698a48a64",
                 "shasum": ""
             },
             "require": {
                 "illuminate/support": "^8.0",
-                "php": "^7.4|^8.0"
+                "php": "^8.0"
             },
             "require-dev": {
                 "konceiver/stan": "^1.0"
@@ -2180,7 +2180,7 @@
             ],
             "support": {
                 "issues": "https://github.com/konceiver/better-number-formatter/issues",
-                "source": "https://github.com/konceiver/better-number-formatter/tree/1.2.0"
+                "source": "https://github.com/konceiver/better-number-formatter/tree/2.0.0"
             },
             "funding": [
                 {
@@ -2192,7 +2192,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-11-27T12:58:31+00:00"
+            "time": "2020-11-27T13:12:48+00:00"
         },
         {
             "name": "konceiver/binary",
@@ -2320,23 +2320,23 @@
         },
         {
             "name": "konceiver/laravel-blade-components",
-            "version": "1.1.0",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/konceiver/laravel-blade-components.git",
-                "reference": "4ac94aa1e3793c9e055f46efb273042fce583434"
+                "reference": "01e23f1d6570db4c7d75b2c708a07c649828b7f5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/konceiver/laravel-blade-components/zipball/4ac94aa1e3793c9e055f46efb273042fce583434",
-                "reference": "4ac94aa1e3793c9e055f46efb273042fce583434",
+                "url": "https://api.github.com/repos/konceiver/laravel-blade-components/zipball/01e23f1d6570db4c7d75b2c708a07c649828b7f5",
+                "reference": "01e23f1d6570db4c7d75b2c708a07c649828b7f5",
                 "shasum": ""
             },
             "require": {
-                "illuminate/contracts": "^7.0|^8.0",
-                "illuminate/support": "^7.0|^8.0",
-                "konceiver/better-number-formatter": "^1.1",
-                "php": "^7.4|^8.0"
+                "illuminate/contracts": "^8.0",
+                "illuminate/support": "^8.0",
+                "konceiver/better-number-formatter": "^2.0",
+                "php": "^8.0"
             },
             "require-dev": {
                 "konceiver/laravel-stan": "^1.1",
@@ -2375,7 +2375,7 @@
             ],
             "support": {
                 "issues": "https://github.com/konceiver/laravel-blade-components/issues",
-                "source": "https://github.com/konceiver/laravel-blade-components/tree/1.1.0"
+                "source": "https://github.com/konceiver/laravel-blade-components/tree/2.0.0"
             },
             "funding": [
                 {
@@ -2387,7 +2387,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-11-27T12:58:33+00:00"
+            "time": "2020-12-15T04:33:46+00:00"
         },
         {
             "name": "konceiver/laravel-data-bags",
@@ -17033,7 +17033,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.4",
+        "php": "^8.0",
         "ext-gmp": "*"
     },
     "platform-dev": [],

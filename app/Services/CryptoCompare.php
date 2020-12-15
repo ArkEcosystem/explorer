@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace App\Services;
 
-use App\Facades\Network;
-use App\Services\Cache\CryptoCompareCache;
 use Carbon\Carbon;
+use App\Facades\Network;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
+use App\Services\Cache\CryptoCompareCache;
+use Konceiver\BetterNumberFormatter\ResolveScientificNotation;
 
 final class CryptoCompare
 {
