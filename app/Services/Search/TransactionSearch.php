@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Services\Search;
 
-use Throwable;
 use App\Contracts\Search;
 use App\Facades\Wallets;
 use App\Models\Composers\MultiPaymentAmountValueRangeComposer;
@@ -13,6 +12,7 @@ use App\Models\Composers\ValueRangeComposer;
 use App\Models\Transaction;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
+use Throwable;
 
 final class TransactionSearch implements Search
 {

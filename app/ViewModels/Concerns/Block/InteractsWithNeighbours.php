@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\ViewModels\Concerns\Block;
 
-use Throwable;
 use App\Facades\Blocks;
+use Throwable;
 
 trait InteractsWithNeighbours
 {

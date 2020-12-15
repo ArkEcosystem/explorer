@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Services\Search;
 
-use Throwable;
 use App\Contracts\Search;
 use App\Facades\Wallets;
 use App\Models\Block;
@@ -12,6 +11,7 @@ use App\Models\Composers\TimestampRangeComposer;
 use App\Models\Composers\ValueRangeComposer;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
+use Throwable;
 
 final class BlockSearch implements Search
 {

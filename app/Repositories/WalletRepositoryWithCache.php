@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Repositories;
 
-use App\Repositories\Concerns\ManagesCache;
 use App\Contracts\WalletRepository;
 use App\Models\Wallet;
+use App\Repositories\Concerns\ManagesCache;
 use Illuminate\Cache\TaggedCache;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;

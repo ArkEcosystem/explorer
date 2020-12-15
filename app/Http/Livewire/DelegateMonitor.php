@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire;
 
-use Throwable;
 use App\DTO\Slot;
 use App\Facades\Network;
 use App\Facades\Rounds;
@@ -21,6 +20,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\View\View;
 use Livewire\Component;
+use Throwable;
 
 final class DelegateMonitor extends Component
 {

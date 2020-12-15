@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Models\Casts\BigInteger;
+use App\Models\Concerns\SearchesCaseInsensitive;
 use App\Models\Scopes\BusinessEntityRegistrationScope;
 use App\Models\Scopes\BusinessEntityResignationScope;
 use App\Models\Scopes\BusinessEntityUpdateScope;
@@ -38,10 +40,8 @@ use App\Models\Scopes\TimelockClaimScope;
 use App\Models\Scopes\TimelockRefundScope;
 use App\Models\Scopes\TimelockScope;
 use App\Models\Scopes\TransferScope;
-use App\Models\Scopes\VoteScope;
 use App\Models\Scopes\VoteCombinationScope;
-use App\Models\Casts\BigInteger;
-use App\Models\Concerns\SearchesCaseInsensitive;
+use App\Models\Scopes\VoteScope;
 use App\Services\BigNumber;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

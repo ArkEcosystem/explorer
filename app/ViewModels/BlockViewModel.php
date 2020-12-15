@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace App\ViewModels;
 
-use App\ViewModels\Concerns\Block\HasDelegate;
-use App\ViewModels\Concerns\Block\HasTransactions;
-use App\ViewModels\Concerns\Block\InteractsWithNeighbours;
 use App\Actions\CacheNetworkHeight;
 use App\Contracts\ViewModel;
 use App\Models\Block;
 use App\Services\ExchangeRate;
 use App\Services\Timestamp;
+use App\ViewModels\Concerns\Block\HasDelegate;
+use App\ViewModels\Concerns\Block\HasTransactions;
+use App\ViewModels\Concerns\Block\InteractsWithNeighbours;
 
 final class BlockViewModel implements ViewModel
 {

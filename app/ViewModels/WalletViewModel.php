@@ -4,19 +4,19 @@ declare(strict_types=1);
 
 namespace App\ViewModels;
 
-use App\ViewModels\Concerns\Wallet\CanBeCold;
-use App\ViewModels\Concerns\Wallet\CanBeEntity;
-use App\ViewModels\Concerns\Wallet\CanBeDelegate;
-use App\ViewModels\Concerns\Wallet\CanForge;
-use App\ViewModels\Concerns\Wallet\CanVote;
-use App\ViewModels\Concerns\Wallet\HasType;
-use App\ViewModels\Concerns\Wallet\HasVoters;
-use App\ViewModels\Concerns\Wallet\InteractsWithMarketSquare;
 use App\Actions\CacheNetworkSupply;
 use App\Contracts\ViewModel;
 use App\Models\Wallet;
 use App\Services\ExchangeRate;
 use App\Services\Timestamp;
+use App\ViewModels\Concerns\Wallet\CanBeCold;
+use App\ViewModels\Concerns\Wallet\CanBeDelegate;
+use App\ViewModels\Concerns\Wallet\CanBeEntity;
+use App\ViewModels\Concerns\Wallet\CanForge;
+use App\ViewModels\Concerns\Wallet\CanVote;
+use App\ViewModels\Concerns\Wallet\HasType;
+use App\ViewModels\Concerns\Wallet\HasVoters;
+use App\ViewModels\Concerns\Wallet\InteractsWithMarketSquare;
 use Mattiasgeniar\Percentage\Percentage;
 
 final class WalletViewModel implements ViewModel
