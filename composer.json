@@ -8,7 +8,7 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^7.4",
+        "php": "^8.0",
         "ext-gmp": "*",
         "arkecosystem/crypto": "^1.4",
         "arkecosystem/fortify": "^1.0",
