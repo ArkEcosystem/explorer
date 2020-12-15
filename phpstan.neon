@@ -20,6 +20,7 @@ parameters:
         - '#InvalidArgumentException constructor expects string#'
         - '#withScope#'
         # FIXME
+        - '#getPdo#'
         - '#AbstractNetwork#'
         - '#PendingDispatch given#'
         - '#with a nullable type declaration#'
