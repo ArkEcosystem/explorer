@@ -15,8 +15,6 @@ use Illuminate\Support\Str;
 
 final class TransactionType
 {
-    private Transaction $transaction;
-
     private array $types = [
         'isTransfer'                      => 'transfer',
         'isSecondSignature'               => 'second-signature',
@@ -53,12 +51,9 @@ final class TransactionType
         'isLegacyBridgechainResignation'  => 'bridgechain-entity-resignation',
         'isLegacyBridgechainUpdate'       => 'bridgechain-entity-update',
     ];
-
-    public function __construct(Transaction $transaction)
+    public function __construct(private Transaction $transaction)
     {
-        $this->transaction = $transaction;
     }
-
     public function name(): string
     {
         foreach ($this->types as $method => $name) {
@@ -69,194 +64,156 @@ final class TransactionType
 
         return 'unknown';
     }
-
     public function isTransfer(): bool
     {
         return $this->isCoreType(CoreTransactionTypeEnum::TRANSFER);
     }
-
     public function isSecondSignature(): bool
     {
         return $this->isCoreType(CoreTransactionTypeEnum::SECOND_SIGNATURE);
     }
-
     public function isDelegateRegistration(): bool
     {
         return $this->isCoreType(CoreTransactionTypeEnum::DELEGATE_REGISTRATION);
     }
-
     public function isVote(): bool
     {
         return $this->determineVoteTypes()[0] === true;
     }
-
     public function isUnvote(): bool
     {
         return $this->determineVoteTypes()[1] === true;
     }
-
     public function isVoteCombination(): bool
     {
         [$containsVote, $containsUnvote] = $this->determineVoteTypes();
 
         return $containsVote && $containsUnvote;
     }
-
     public function isMultiSignature(): bool
     {
         return $this->isCoreType(CoreTransactionTypeEnum::MULTI_SIGNATURE);
     }
-
     public function isIpfs(): bool
     {
         return $this->isCoreType(CoreTransactionTypeEnum::IPFS);
     }
-
     public function isDelegateResignation(): bool
     {
         return $this->isCoreType(CoreTransactionTypeEnum::DELEGATE_RESIGNATION);
     }
-
     public function isMultiPayment(): bool
     {
         return $this->isCoreType(CoreTransactionTypeEnum::MULTI_PAYMENT);
     }
-
     public function isTimelock(): bool
     {
         return $this->isCoreType(CoreTransactionTypeEnum::TIMELOCK);
     }
-
     public function isTimelockClaim(): bool
     {
         return $this->isCoreType(CoreTransactionTypeEnum::TIMELOCK_CLAIM);
     }
-
     public function isTimelockRefund(): bool
     {
         return $this->isCoreType(CoreTransactionTypeEnum::TIMELOCK_REFUND);
     }
-
     public function isEntityRegistration(): bool
     {
         return $this->isEntityAction(MagistrateTransactionEntityActionEnum::REGISTER);
     }
-
     public function isEntityResignation(): bool
     {
         return $this->isEntityAction(MagistrateTransactionEntityActionEnum::RESIGN);
     }
-
     public function isEntityUpdate(): bool
     {
         return $this->isEntityAction(MagistrateTransactionEntityActionEnum::UPDATE);
     }
-
     public function isBusinessEntityRegistration(): bool
     {
         return $this->isEntityWithRegistration(MagistrateTransactionEntityTypeEnum::BUSINESS);
     }
-
     public function isBusinessEntityResignation(): bool
     {
         return $this->isEntityWithResignation(MagistrateTransactionEntityTypeEnum::BUSINESS);
     }
-
     public function isBusinessEntityUpdate(): bool
     {
         return $this->isEntityWithUpdate(MagistrateTransactionEntityTypeEnum::BUSINESS);
     }
-
     public function isProductEntityRegistration(): bool
     {
         return $this->isEntityWithRegistration(MagistrateTransactionEntityTypeEnum::PRODUCT);
     }
-
     public function isProductEntityResignation(): bool
     {
         return $this->isEntityWithResignation(MagistrateTransactionEntityTypeEnum::PRODUCT);
     }
-
     public function isProductEntityUpdate(): bool
     {
         return $this->isEntityWithUpdate(MagistrateTransactionEntityTypeEnum::PRODUCT);
     }
-
     public function isPluginEntityRegistration(): bool
     {
         return $this->isEntityWithRegistration(MagistrateTransactionEntityTypeEnum::PLUGIN);
     }
-
     public function isPluginEntityResignation(): bool
     {
         return $this->isEntityWithResignation(MagistrateTransactionEntityTypeEnum::PLUGIN);
     }
-
     public function isPluginEntityUpdate(): bool
     {
         return $this->isEntityWithUpdate(MagistrateTransactionEntityTypeEnum::PLUGIN);
     }
-
     public function isModuleEntityRegistration(): bool
     {
         return $this->isEntityWithRegistration(MagistrateTransactionEntityTypeEnum::MODULE);
     }
-
     public function isModuleEntityResignation(): bool
     {
         return $this->isEntityWithResignation(MagistrateTransactionEntityTypeEnum::MODULE);
     }
-
     public function isModuleEntityUpdate(): bool
     {
         return $this->isEntityWithUpdate(MagistrateTransactionEntityTypeEnum::MODULE);
     }
-
     public function isDelegateEntityRegistration(): bool
     {
         return $this->isEntityWithRegistration(MagistrateTransactionEntityTypeEnum::DELEGATE);
     }
-
     public function isDelegateEntityResignation(): bool
     {
         return $this->isEntityWithResignation(MagistrateTransactionEntityTypeEnum::DELEGATE);
     }
-
     public function isDelegateEntityUpdate(): bool
     {
         return $this->isEntityWithUpdate(MagistrateTransactionEntityTypeEnum::DELEGATE);
     }
-
     public function isLegacyBusinessRegistration(): bool
     {
         return $this->isMagistrateType(MagistrateTransactionTypeEnum::BUSINESS_REGISTRATION);
     }
-
     public function isLegacyBusinessResignation(): bool
     {
         return $this->isMagistrateType(MagistrateTransactionTypeEnum::BUSINESS_RESIGNATION);
     }
-
     public function isLegacyBusinessUpdate(): bool
     {
         return $this->isMagistrateType(MagistrateTransactionTypeEnum::BUSINESS_UPDATE);
     }
-
     public function isLegacyBridgechainRegistration(): bool
     {
         return $this->isMagistrateType(MagistrateTransactionTypeEnum::BRIDGECHAIN_REGISTRATION);
     }
-
     public function isLegacyBridgechainResignation(): bool
     {
         return $this->isMagistrateType(MagistrateTransactionTypeEnum::BRIDGECHAIN_RESIGNATION);
     }
-
     public function isLegacyBridgechainUpdate(): bool
     {
         return $this->isMagistrateType(MagistrateTransactionTypeEnum::BRIDGECHAIN_UPDATE);
     }
-
     public function isUnknown(): bool
     {
         if ($this->isTransfer()) {
@@ -397,7 +354,6 @@ final class TransactionType
 
         return true;
     }
-
     private function isCoreType(int $type): bool
     {
         $matchesType      = $this->transaction->type === $type;
@@ -405,7 +361,6 @@ final class TransactionType
 
         return $matchesType && $matchesTypeGroup;
     }
-
     private function isMagistrateType(int $type): bool
     {
         $matchesType      = $this->transaction->type === $type;
@@ -413,7 +368,6 @@ final class TransactionType
 
         return $matchesType && $matchesTypeGroup;
     }
-
     private function isEntityWithRegistration(int $type): bool
     {
         if (! $this->isEntityRegistration()) {
@@ -422,7 +376,6 @@ final class TransactionType
 
         return $this->isEntityType($type);
     }
-
     private function isEntityWithResignation(int $type): bool
     {
         if (! $this->isEntityResignation()) {
@@ -431,7 +384,6 @@ final class TransactionType
 
         return $this->isEntityType($type);
     }
-
     private function isEntityWithUpdate(int $type): bool
     {
         if (! $this->isEntityUpdate()) {
@@ -440,12 +392,10 @@ final class TransactionType
 
         return $this->isEntityType($type);
     }
-
     private function isEntityType(int $type): bool
     {
         return Arr::get($this->transaction->asset ?? [], 'type') === $type;
     }
-
     private function isEntityAction(int $action): bool
     {
         if (! $this->isMagistrateTypeGroup()) {
@@ -457,12 +407,10 @@ final class TransactionType
 
         return $matchesType && $matchesAction;
     }
-
     private function isMagistrateTypeGroup(): bool
     {
         return $this->transaction->type_group === TransactionTypeGroupEnum::MAGISTRATE;
     }
-
     private function determineVoteTypes(): array
     {
         $containsVote   = false;

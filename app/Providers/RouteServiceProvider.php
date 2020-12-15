@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use Throwable;
 use App\Facades\Network;
 use App\Facades\Wallets;
 use App\Models\Wallet;
@@ -48,7 +49,7 @@ final class RouteServiceProvider extends ServiceProvider
 
             try {
                 return Wallets::findByAddress($value);
-            } catch (\Throwable $th) {
+            } catch (Throwable) {
                 UI::useErrorMessage(404, trans('general.wallet_not_found', [$value]));
 
                 abort(404);

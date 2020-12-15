@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire;
 
+use Closure;
 use App\Contracts\Search;
 use App\Http\Livewire\Concerns\ManagesSearch;
 use App\Services\Search\BlockSearch;
@@ -126,7 +127,7 @@ final class SearchModule extends Component
         return $this->searchWithService(new BlockSearch(), $data, fn ($model) => $this->redirectRoute('block', $model->id));
     }
 
-    private function searchWithService(Search $service, array $data, \Closure $callback): bool
+    private function searchWithService(Search $service, array $data, Closure $callback): bool
     {
         $term = Arr::get($data, 'term');
 

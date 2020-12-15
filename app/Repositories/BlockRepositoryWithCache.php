@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Repositories;
 
+use App\Repositories\Concerns\ManagesCache;
 use App\Contracts\BlockRepository;
 use App\Models\Block;
 use Illuminate\Cache\TaggedCache;
@@ -11,13 +12,10 @@ use Illuminate\Support\Facades\Cache;
 
 final class BlockRepositoryWithCache implements BlockRepository
 {
-    use Concerns\ManagesCache;
+    use ManagesCache;
 
-    private BlockRepository $blocks;
-
-    public function __construct(BlockRepository $blocks)
+    public function __construct(private BlockRepository $blocks)
     {
-        $this->blocks = $blocks;
     }
 
     public function findById($id): Block

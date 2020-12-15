@@ -4,6 +4,14 @@ declare(strict_types=1);
 
 namespace App\ViewModels;
 
+use App\ViewModels\Concerns\Wallet\CanBeCold;
+use App\ViewModels\Concerns\Wallet\CanBeEntity;
+use App\ViewModels\Concerns\Wallet\CanBeDelegate;
+use App\ViewModels\Concerns\Wallet\CanForge;
+use App\ViewModels\Concerns\Wallet\CanVote;
+use App\ViewModels\Concerns\Wallet\HasType;
+use App\ViewModels\Concerns\Wallet\HasVoters;
+use App\ViewModels\Concerns\Wallet\InteractsWithMarketSquare;
 use App\Actions\CacheNetworkSupply;
 use App\Contracts\ViewModel;
 use App\Models\Wallet;
@@ -13,20 +21,17 @@ use Mattiasgeniar\Percentage\Percentage;
 
 final class WalletViewModel implements ViewModel
 {
-    use Concerns\Wallet\CanBeCold;
-    use Concerns\Wallet\CanBeEntity;
-    use Concerns\Wallet\CanBeDelegate;
-    use Concerns\Wallet\CanForge;
-    use Concerns\Wallet\CanVote;
-    use Concerns\Wallet\HasType;
-    use Concerns\Wallet\HasVoters;
-    use Concerns\Wallet\InteractsWithMarketSquare;
+    use CanBeCold;
+    use CanBeEntity;
+    use CanBeDelegate;
+    use CanForge;
+    use CanVote;
+    use HasType;
+    use HasVoters;
+    use InteractsWithMarketSquare;
 
-    private Wallet $wallet;
-
-    public function __construct(Wallet $wallet)
+    public function __construct(private Wallet $wallet)
     {
-        $this->wallet = $wallet;
     }
 
     public function url(): string

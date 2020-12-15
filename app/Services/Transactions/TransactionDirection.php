@@ -9,18 +9,13 @@ use App\Services\Identity;
 
 final class TransactionDirection
 {
-    private Transaction $transaction;
-
-    public function __construct(Transaction $transaction)
+    public function __construct(private Transaction $transaction)
     {
-        $this->transaction = $transaction;
     }
-
     public function isSent(string $address): bool
     {
         return Identity::address($this->transaction->sender_public_key) === $address;
     }
-
     public function isReceived(string $address): bool
     {
         return $this->transaction->recipient_id === $address;

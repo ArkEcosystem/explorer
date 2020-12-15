@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Services\Cache;
 
+use App\Services\Cache\Concerns\ManagesCache;
+use Closure;
 use App\Contracts\Cache as Contract;
 use App\Facades\Network;
 use Illuminate\Cache\TaggedCache;
@@ -12,14 +14,14 @@ use Illuminate\Support\Facades\Cache;
 
 final class TableCache implements Contract
 {
-    use Concerns\ManagesCache;
+    use ManagesCache;
 
-    public function setLatestBlocks(\Closure $callback): Collection
+    public function setLatestBlocks(Closure $callback): Collection
     {
         return $this->remember('latest_blocks', Network::blockTime(), $callback);
     }
 
-    public function setLatestTransactions(string $type, \Closure $callback): Collection
+    public function setLatestTransactions(string $type, Closure $callback): Collection
     {
         return $this->remember("latest_transactions/$type", Network::blockTime(), $callback);
     }

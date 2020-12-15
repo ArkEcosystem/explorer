@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\ViewModels\Concerns\Block;
 
+use Throwable;
 use App\Facades\Blocks;
 
 trait InteractsWithNeighbours
@@ -22,7 +23,7 @@ trait InteractsWithNeighbours
     {
         try {
             return route('block', Blocks::findByHeight($height));
-        } catch (\Throwable $th) {
+        } catch (Throwable) {
             return null;
         }
     }

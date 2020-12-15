@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire;
 
+use Throwable;
 use App\DTO\Slot;
 use App\Facades\Network;
 use App\Facades\Rounds;
@@ -74,7 +75,7 @@ final class DelegateMonitor extends Component
                 'nextDelegate'    => $this->getNextDelegate(),
             ];
             // @codeCoverageIgnoreStart
-        } catch (\Throwable $th) {
+        } catch (Throwable) {
             // @README: If any errors occur we want to keep polling until we have a list of delegates
             $this->pollDelegates();
         }

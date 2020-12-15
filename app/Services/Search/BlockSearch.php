@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Search;
 
+use Throwable;
 use App\Contracts\Search;
 use App\Facades\Wallets;
 use App\Models\Block;
@@ -40,7 +41,7 @@ final class BlockSearch implements Search
 
                     $this->applyScopes($query, $parameters);
                 });
-            } catch (\Throwable $th) {
+            } catch (Throwable) {
                 // If this throws then the term was not a valid address, public key or username.
             }
         }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Repositories;
 
+use App\Repositories\Concerns\ManagesCache;
 use App\Contracts\WalletRepository;
 use App\Models\Wallet;
 use Illuminate\Cache\TaggedCache;
@@ -13,13 +14,10 @@ use Illuminate\Support\Facades\Cache;
 
 final class WalletRepositoryWithCache implements WalletRepository
 {
-    use Concerns\ManagesCache;
+    use ManagesCache;
 
-    private WalletRepository $wallets;
-
-    public function __construct(WalletRepository $wallets)
+    public function __construct(private WalletRepository $wallets)
     {
-        $this->wallets = $wallets;
     }
 
     public function allWithUsername(): Builder

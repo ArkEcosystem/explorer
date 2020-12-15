@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Services\Cache;
 
+use App\Services\Cache\Concerns\ManagesCache;
+use Closure;
 use App\Contracts\Cache as Contract;
 use App\Models\Wallet;
 use Illuminate\Cache\TaggedCache;
@@ -11,14 +13,14 @@ use Illuminate\Support\Facades\Cache;
 
 final class WalletCache implements Contract
 {
-    use Concerns\ManagesCache;
+    use ManagesCache;
 
     public function getKnown(): array
     {
         return $this->get('known', []);
     }
 
-    public function setKnown(\Closure $callback): array
+    public function setKnown(Closure $callback): array
     {
         return $this->remember('known', now()->addDay(), $callback);
     }
@@ -78,7 +80,7 @@ final class WalletCache implements Contract
         return $this->get(sprintf('multi_signature/%s/%s', $min, serialize($publicKeys)));
     }
 
-    public function setMultiSignatureAddress(int $min, array $publicKeys, \Closure $callback): void
+    public function setMultiSignatureAddress(int $min, array $publicKeys, Closure $callback): void
     {
         $this->remember(sprintf('multi_signature/%s/%s', $min, serialize($publicKeys)), now()->addHour(), $callback);
     }

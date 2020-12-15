@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace App\ViewModels;
 
+use App\ViewModels\Concerns\Block\HasDelegate;
+use App\ViewModels\Concerns\Block\HasTransactions;
+use App\ViewModels\Concerns\Block\InteractsWithNeighbours;
 use App\Actions\CacheNetworkHeight;
 use App\Contracts\ViewModel;
 use App\Models\Block;
@@ -12,15 +15,12 @@ use App\Services\Timestamp;
 
 final class BlockViewModel implements ViewModel
 {
-    use Concerns\Block\HasDelegate;
-    use Concerns\Block\HasTransactions;
-    use Concerns\Block\InteractsWithNeighbours;
+    use HasDelegate;
+    use HasTransactions;
+    use InteractsWithNeighbours;
 
-    private Block $block;
-
-    public function __construct(Block $block)
+    public function __construct(private Block $block)
     {
-        $this->block = $block;
     }
 
     public function url(): string

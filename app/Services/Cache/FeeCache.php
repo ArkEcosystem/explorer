@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Services\Cache;
 
+use App\Services\Cache\Concerns\ManagesCache;
+use App\Services\Cache\Concerns\ManagesChart;
 use App\Contracts\Cache as Contract;
 use Illuminate\Cache\TaggedCache;
 use Illuminate\Support\Collection;
@@ -11,8 +13,8 @@ use Illuminate\Support\Facades\Cache;
 
 final class FeeCache implements Contract
 {
-    use Concerns\ManagesCache;
-    use Concerns\ManagesChart;
+    use ManagesCache;
+    use ManagesChart;
 
     public function all(string $period): array
     {
