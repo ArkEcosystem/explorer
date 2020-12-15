@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 use App\Models\Block;
 use App\Models\Round;
-use App\Models\Wallet;
-use Tests\InvalidModel;
 use App\Models\Transaction;
+use App\Models\Wallet;
 use App\ViewModels\BlockViewModel;
 use App\ViewModels\RoundViewModel;
-use Illuminate\Support\Collection;
+use App\ViewModels\TransactionViewModel;
+use App\ViewModels\ViewModelFactory;
 use App\ViewModels\WalletViewModel;
 
-use App\ViewModels\ViewModelFactory;
-use App\ViewModels\TransactionViewModel;
+use Illuminate\Support\Collection;
 use function Tests\configureExplorerDatabase;
+use Tests\InvalidModel;
 
 it('should make a view model', function ($modelClass, $viewModel) {
     configureExplorerDatabase();
