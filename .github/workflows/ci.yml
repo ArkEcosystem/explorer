@@ -73,7 +73,7 @@ jobs:
               run: composer install --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist --optimize-autoloader
 
             - name: Run php-cs-fixer
-              run: composer format
+              run: PHP_CS_FIXER_IGNORE_ENV=true composer format
 
             - uses: stefanzweifel/git-auto-commit-action@v4
               with:
@@ -140,3 +140,37 @@ jobs:
                   DB_USERNAME: explorer
                   DB_PASSWORD: password
                   PDO_ATTR_PERSISTENT: false
+
+    rector:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v2
+
+            - name: Setup PHP
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: "7.4"
+                  extensions: mbstring, dom, fileinfo, intl, gd, imagick, bcmath, soap, zip, sqlite, pcov
+                  coverage: pcov
+
+            - name: Cache dependencies
+              uses: actions/cache@v1
+              with:
+                  path: ~/.composer/cache/files
+                  key: dependencies-composer-${{ hashFiles('composer.json') }}
+
+            - name: Authenticate Nova
+              run: composer config http-basic.nova.laravel.com ${{ secrets.NOVA_USERNAME }} ${{ secrets.NOVA_PASSWORD }}
+
+            - name: Install Composer dependencies
+              run: composer install --no-ansi --no-interaction --no-suggest --no-progress --prefer-dist --optimize-autoloader
+
+            - name: Run Rector
+              run: ./vendor/bin/rector process app
+
+            - uses: stefanzweifel/git-auto-commit-action@v4
+              with:
+                  commit_message: "style: resolve style guide violations"
+                  branch: ${{ github.head_ref }}

@@ -3,10 +3,10 @@ name: UI
 on:
     pull_request:
         paths:
-            - '**.css'
-            - '**.js'
-            - '**.php'
-            - '**.svg'
+            - "**.css"
+            - "**.js"
+            - "**.php"
+            - "**.svg"
 
 jobs:
     prettier:
@@ -26,7 +26,7 @@ jobs:
 
             - uses: stefanzweifel/git-auto-commit-action@v4
               with:
-                  commit_message: 'style: resolve style guide violations'
+                  commit_message: "style: resolve style guide violations"
                   branch: ${{ github.head_ref }}
 
     rustywind:
@@ -46,7 +46,7 @@ jobs:
 
             - uses: stefanzweifel/git-auto-commit-action@v4
               with:
-                  commit_message: 'style: resolve style guide violations'
+                  commit_message: "style: resolve style guide violations"
                   branch: ${{ github.head_ref }}
 
     svg:
@@ -95,5 +95,5 @@ jobs:
 
             - uses: stefanzweifel/git-auto-commit-action@v4
               with:
-                  commit_message: 'chore: rebuild assets'
+                  commit_message: "chore: rebuild assets"
                   branch: ${{ github.head_ref }}
