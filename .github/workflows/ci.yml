@@ -42,7 +42,7 @@ jobs:
                   key: dependencies-composer-${{ hashFiles('composer.json') }}
 
             - name: Install Composer dependencies
-              run: composer install --no-ansi --no-interaction --no-suggest --no-progress --prefer-dist --optimize-autoloader
+              run: composer install --no-ansi --no-interaction --no-suggest --no-progress --prefer-dist --optimize-autoloader --ignore-platform-reqs
 
             - name: Prepare the database
               run: touch database/database.sqlite
@@ -70,7 +70,7 @@ jobs:
                   coverage: pcov
 
             - name: Install
-              run: composer install --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist --optimize-autoloader
+              run: composer install --no-ansi --no-interaction --no-suggest --no-progress --prefer-dist --optimize-autoloader --ignore-platform-reqs
 
             - name: Run php-cs-fixer
               run: PHP_CS_FIXER_IGNORE_ENV=true composer format
@@ -116,7 +116,7 @@ jobs:
                   key: dependencies-composer-${{ hashFiles('composer.json') }}
 
             - name: Install Composer dependencies
-              run: composer install --no-ansi --no-interaction --no-suggest --no-progress --prefer-dist --optimize-autoloader
+              run: composer install --no-ansi --no-interaction --no-suggest --no-progress --prefer-dist --optimize-autoloader --ignore-platform-reqs
 
             - name: Install Yarn dependencies
               run: yarn --frozen-lockfile
@@ -165,7 +165,7 @@ jobs:
               run: composer config http-basic.nova.laravel.com ${{ secrets.NOVA_USERNAME }} ${{ secrets.NOVA_PASSWORD }}
 
             - name: Install Composer dependencies
-              run: composer install --no-ansi --no-interaction --no-suggest --no-progress --prefer-dist --optimize-autoloader
+              run: composer install --no-ansi --no-interaction --no-suggest --no-progress --prefer-dist --optimize-autoloader --ignore-platform-reqs
 
             - name: Run Rector
               run: ./vendor/bin/rector process app
