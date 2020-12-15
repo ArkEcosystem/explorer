@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire;
 
-use Closure;
 use App\Contracts\Search;
 use App\Http\Livewire\Concerns\ManagesSearch;
 use App\Services\Search\BlockSearch;
 use App\Services\Search\TransactionSearch;
 use App\Services\Search\WalletSearch;
+use Closure;
 use Illuminate\Support\Arr;
 use Illuminate\View\View;
 use Livewire\Component;

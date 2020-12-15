@@ -50,6 +50,9 @@ it('cannot make an invalid view model', function () {
     ViewModelFactory::make(new InvalidModel());
 })->throws(InvalidArgumentException::class);
 
-final class InvalidModel extends Model
+/**
+ * @coversNothing
+ */
+final class lFactoryTest extends Model
 {
 }

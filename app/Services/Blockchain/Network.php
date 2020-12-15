@@ -15,26 +15,32 @@ final class Network implements Contract
     public function __construct(private array $config)
     {
     }
+
     public function name(): string
     {
         return $this->config['name'];
     }
+
     public function alias(): string
     {
         return $this->config['alias'];
     }
+
     public function currency(): string
     {
         return $this->config['currency'];
     }
+
     public function currencySymbol(): string
     {
         return $this->config['currencySymbol'];
     }
+
     public function confirmations(): int
     {
         return $this->config['confirmations'];
     }
+
     public function knownWallets(): array
     {
         if (is_null(Arr::get($this->config, 'knownWallets'))) {
@@ -43,30 +49,37 @@ final class Network implements Contract
 
         return (new WalletCache())->setKnown(fn () => Http::get($this->config['knownWallets'])->json());
     }
+
     public function canBeExchanged(): bool
     {
         return $this->config['canBeExchanged'];
     }
+
     public function usesMarketSquare(): bool
     {
         return $this->config['usesMarketSquare'];
     }
+
     public function epoch(): Carbon
     {
         return Carbon::parse($this->config['epoch']);
     }
+
     public function delegateCount(): int
     {
         return $this->config['delegateCount'];
     }
+
     public function blockTime(): int
     {
         return $this->config['blockTime'];
     }
+
     public function blockReward(): int
     {
         return $this->config['blockReward'];
     }
+
     public function config(): \BitWasp\Bitcoin\Network\Network
     {
         return new CustomNetwork($this->config);

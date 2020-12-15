@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
-use Throwable;
 use App\Facades\Network;
 use App\Facades\Wallets;
 use App\Models\Wallet;
@@ -14,6 +13,7 @@ use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
+use Throwable;
 
 final class RouteServiceProvider extends ServiceProvider
 {

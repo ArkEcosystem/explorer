@@ -13,6 +13,7 @@ final class TransactionState
     public function __construct(private Transaction $transaction)
     {
     }
+
     public function isConfirmed(): bool
     {
         $confirmations = CacheNetworkHeight::execute() - $this->transaction->block_height;

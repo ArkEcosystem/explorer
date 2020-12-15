@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Services\Cache;
 
-use App\Services\Cache\Concerns\ManagesCache;
 use App\Contracts\Cache as Contract;
+use App\Services\Cache\Concerns\ManagesCache;
 use Illuminate\Cache\TaggedCache;
 use Illuminate\Support\Facades\Cache;
 

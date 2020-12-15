@@ -4,6 +4,15 @@ declare(strict_types=1);
 
 namespace App\ViewModels;
 
+use App\Actions\CacheNetworkHeight;
+use App\Contracts\ViewModel;
+use App\Facades\Wallets;
+use App\Models\Transaction;
+use App\Services\ExchangeRate;
+use App\Services\Timestamp;
+use App\Services\Transactions\TransactionDirection;
+use App\Services\Transactions\TransactionState;
+use App\Services\Transactions\TransactionType;
 use App\ViewModels\Concerns\Transaction\HasDirection;
 use App\ViewModels\Concerns\Transaction\HasIcons;
 use App\ViewModels\Concerns\Transaction\HasState;
@@ -17,15 +26,6 @@ use App\ViewModels\Concerns\Transaction\InteractsWithTypeData;
 use App\ViewModels\Concerns\Transaction\InteractsWithVendorField;
 use App\ViewModels\Concerns\Transaction\InteractsWithVotes;
 use App\ViewModels\Concerns\Transaction\InteractsWithWallets;
-use App\Actions\CacheNetworkHeight;
-use App\Contracts\ViewModel;
-use App\Facades\Wallets;
-use App\Models\Transaction;
-use App\Services\ExchangeRate;
-use App\Services\Timestamp;
-use App\Services\Transactions\TransactionDirection;
-use App\Services\Transactions\TransactionState;
-use App\Services\Transactions\TransactionType;
 use Illuminate\Support\Arr;
 
 final class TransactionViewModel implements ViewModel
