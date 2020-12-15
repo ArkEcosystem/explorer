@@ -625,7 +625,7 @@ it('should determine the type label', function (int $type, int $typeGroup) {
         'asset'      => [],
     ]));
 
-    expect($this->subject->typeLabel())->toBeString();
+    expect($subject->typeLabel())->toBeString();
 })->with([
     [
         CoreTransactionTypeEnum::SECOND_SIGNATURE,
