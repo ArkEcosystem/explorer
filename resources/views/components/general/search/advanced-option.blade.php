@@ -1,4 +1,4 @@
-<div class="search-advanced-option-wrapper">
+<div class="search-advanced-option-wrapper"@isset($type) x-show="searchType === '{{ $type }}'"@endisset>
     <div class="search-advanced-option">
         <div class="text-sm font-semibold">{{ $title }}</div>
         <div class="flex items-center">

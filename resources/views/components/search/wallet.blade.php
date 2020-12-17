@@ -1,18 +1,4 @@
-<x-general.search.advanced-option :title="trans('forms.search.type')">
-    <x-ark-rich-select
-        button-class="block w-full font-medium text-left bg-transparent text-theme-secondary-900 dark:text-theme-secondary-200"
-        initial-value="wallet"
-        dispatch-event="search-type-changed"
-        wire:model.defer="state.type"
-        :options="[
-            'block' => __('forms.search.block'),
-            'transaction' => __('forms.search.transaction'),
-            'wallet' => __('forms.search.wallet'),
-        ]"
-    />
-</x-general.search.advanced-option>
-
-<x-general.search.advanced-option :title="trans('forms.search.balance_range')">
+<x-general.search.advanced-option :title="trans('forms.search.balance_range')" type="wallet">
     <div class="flex items-center space-x-2">
         <input
             type="number"
@@ -38,7 +24,7 @@
     </div>
 </x-general.search.advanced-option>
 
-<x-general.search.advanced-option :title="trans('forms.search.username')">
+<x-general.search.advanced-option :title="trans('forms.search.username')" type="wallet">
     <input
         type="text"
         placeholder="@lang('forms.search.username')"
@@ -49,7 +35,7 @@
     />
 </x-general.search.advanced-option>
 
-<x-general.search.advanced-option :title="trans('forms.search.vote')">
+<x-general.search.advanced-option :title="trans('forms.search.vote')" type="wallet">
     <input
         type="text"
         placeholder="@lang('forms.search.vote')"
