@@ -88,7 +88,7 @@
     </div>
 </x-general.search.advanced-option>
 
-<x-general.search.advanced-option :title="trans('forms.search.reward_range')" type="block">>
+<x-general.search.advanced-option :title="trans('forms.search.reward_range')" type="block">
     <div class="flex items-center space-x-2">
         <div class="flex-1">
             <input
