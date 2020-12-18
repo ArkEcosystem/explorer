@@ -1,4 +1,4 @@
-<x-general.search.advanced-option :title="trans('forms.search.balance_range')" type="wallet">
+<x-general.search.advanced-option :title="trans('forms.search.balance_range')" option-class="xl:border-r" type="wallet">
     <div class="flex items-center space-x-2">
         <input
             type="number"
@@ -24,7 +24,7 @@
     </div>
 </x-general.search.advanced-option>
 
-<x-general.search.advanced-option :title="trans('forms.search.username')" type="wallet">
+<x-general.search.advanced-option :title="trans('forms.search.username')" option-class="border-r xl:border-r-0" type="wallet">
     <input
         type="text"
         placeholder="@lang('forms.search.username')"
@@ -35,7 +35,7 @@
     />
 </x-general.search.advanced-option>
 
-<x-general.search.advanced-option :title="trans('forms.search.vote')" type="wallet">
+<x-general.search.advanced-option :title="trans('forms.search.vote')" option-class="lg:border-r-0 xl:border-r" type="wallet">
     <input
         type="text"
         placeholder="@lang('forms.search.vote')"

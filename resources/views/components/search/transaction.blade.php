@@ -1,6 +1,6 @@
 @props(['transactionOptions', 'transactionType' => 'all'])
 
-<x-general.search.advanced-option :title="trans('forms.search.transaction_type')" type="transaction">
+<x-general.search.advanced-option :title="trans('forms.search.transaction_type')" option-class="xl:border-r" type="transaction">
     <x-ark-rich-select
         button-class="block w-full font-medium text-left bg-transparent text-theme-secondary-900 dark:text-theme-secondary-200"
         :initial-value="$transactionType"
@@ -10,7 +10,7 @@
     />
 </x-general.search.advanced-option>
 
-<x-general.search.advanced-option :title="trans('forms.search.amount_range')" type="transaction">
+<x-general.search.advanced-option :title="trans('forms.search.amount_range')" option-class="border-r xl:border-r-0" type="transaction">
     <div class="flex items-center space-x-2">
         <input
             type="number"
@@ -36,7 +36,7 @@
     </div>
 </x-general.search.advanced-option>
 
-<x-general.search.advanced-option :title="trans('forms.search.fee_range')" type="transaction">
+<x-general.search.advanced-option :title="trans('forms.search.fee_range')" option-class="lg:border-r-0 xl:border-r" type="transaction">
     <div class="flex items-center space-x-2">
         <input
             type="number"
@@ -62,7 +62,7 @@
     </div>
 </x-general.search.advanced-option>
 
-<x-general.search.advanced-option :title="trans('forms.search.date_range')" type="transaction">
+<x-general.search.advanced-option :title="trans('forms.search.date_range')" option-class="border-r" type="transaction">
     <div class="flex items-center space-x-2">
         <x-date-picker
             placeholder="DD.MM.YYYY"
