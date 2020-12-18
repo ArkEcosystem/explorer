@@ -1,4 +1,4 @@
-<x-general.search.advanced-option :title="trans('forms.search.height_range')" option-class="xl:border-r" type="block">
+<x-general.search.advanced-option :title="trans('forms.search.height_range')" class="md:border-b" option-class="xl:border-r" type="block">
     <div class="flex items-center space-x-2">
         <div class="flex-1">
             <input
@@ -28,7 +28,7 @@
     </div>
 </x-general.search.advanced-option>
 
-<x-general.search.advanced-option :title="trans('forms.search.total_amount_range')" option-class="border-r xl:border-r-0" type="block">
+<x-general.search.advanced-option :title="trans('forms.search.total_amount_range')" class="md:border-b" option-class="md:border-r xl:border-r-0" type="block">
     <div class="flex items-center space-x-2">
         <div class="flex-1">
             <input
@@ -58,7 +58,7 @@
     </div>
 </x-general.search.advanced-option>
 
-<x-general.search.advanced-option :title="trans('forms.search.total_fee_range')" option-class="lg:border-r-0 xl:border-r" type="block">
+<x-general.search.advanced-option :title="trans('forms.search.total_fee_range')" class="md:border-b xl:border-b-0" option-class="lg:border-r-0 xl:border-r" type="block">
     <div class="flex items-center space-x-2">
         <div class="flex-1">
             <input
@@ -88,7 +88,7 @@
     </div>
 </x-general.search.advanced-option>
 
-<x-general.search.advanced-option :title="trans('forms.search.reward_range')" option-class="border-r" type="block">
+<x-general.search.advanced-option :title="trans('forms.search.reward_range')" option-class="md:border-r" type="block">
     <div class="flex items-center space-x-2">
         <div class="flex-1">
             <input
