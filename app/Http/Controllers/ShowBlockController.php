@@ -14,7 +14,7 @@ final class ShowBlockController
     {
         return view('app.block', [
             'block'        => ViewModelFactory::make($block),
-            'transactions' => ViewModelFactory::collection($block->transactions),
+            'hasTransactions' => $block->transactions()->exists(),
         ]);
     }
 }
