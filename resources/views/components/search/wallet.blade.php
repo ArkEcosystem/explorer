@@ -24,7 +24,7 @@
     </div>
 </x-general.search.advanced-option>
 
-<x-general.search.advanced-option :title="trans('forms.search.username')" class="md:border-b" option-class="md:border-r xl:border-r-0" type="wallet">
+<x-general.search.advanced-option :title="trans('forms.search.username')" class="xl:border-b" option-class="md:border-r xl:border-r-0" type="wallet">
     <input
         type="text"
         placeholder="@lang('forms.search.username')"
@@ -35,7 +35,7 @@
     />
 </x-general.search.advanced-option>
 
-<x-general.search.advanced-option :title="trans('forms.search.vote')" class="md:border-b xl:border-b-0" option-class="lg:border-r-0 xl:border-r" type="wallet">
+<x-general.search.advanced-option :title="trans('forms.search.vote')" class="xl:border-b-0" option-class="lg:border-r-0 xl:border-r" type="wallet">
     <input
         type="text"
         placeholder="@lang('forms.search.vote')"
