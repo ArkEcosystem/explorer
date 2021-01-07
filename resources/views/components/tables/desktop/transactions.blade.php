@@ -2,18 +2,18 @@
     <table>
         <thead>
             <tr>
-                <x-tables.headers.desktop.id name="general.transaction.id" />
-                <x-tables.headers.desktop.text name="general.transaction.timestamp" responsive />
+                <x-tables.headers.desktop.id name="general.transaction.id" on-click="$emit('orderTransactionsBy', 'id')"/>
+                <x-tables.headers.desktop.text name="general.transaction.timestamp" on-click="$emit('orderTransactionsBy', 'timestamp')" responsive />
                 @isset($useDirection)
-                    <x-tables.headers.desktop.address name="general.transaction.sender" icon use-direction />
+                    <x-tables.headers.desktop.address name="general.transaction.sender" on-click="$emit('orderTransactionsBy', 'sender')" icon use-direction />
                 @else
-                    <x-tables.headers.desktop.address name="general.transaction.sender" icon />
+                    <x-tables.headers.desktop.address name="general.transaction.sender" on-click="$emit('orderTransactionsBy', 'sender')" icon />
                 @endif
-                <x-tables.headers.desktop.address name="general.transaction.recipient" />
-                <x-tables.headers.desktop.number name="general.transaction.amount" />
-                <x-tables.headers.desktop.number name="general.transaction.fee" responsive breakpoint="xl" />
+                <x-tables.headers.desktop.address name="general.transaction.recipient" on-click="$emit('orderTransactionsBy', 'recipient')" />
+                <x-tables.headers.desktop.number name="general.transaction.amount" on-click="$emit('orderTransactionsBy', 'amount')" />
+                <x-tables.headers.desktop.number name="general.transaction.fee" on-click="$emit('orderTransactionsBy', 'fee')" responsive breakpoint="xl" />
                 @isset($useConfirmations)
-                    <x-tables.headers.desktop.number name="general.transaction.confirmations" responsive breakpoint="xl" />
+                    <x-tables.headers.desktop.number name="general.transaction.confirmations" on-click="$emit('orderTransactionsBy', 'confirmations')" responsive breakpoint="xl" />
                 @endisset
             </tr>
         </thead>
