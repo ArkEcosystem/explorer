@@ -22,8 +22,8 @@ final class TransactionTable extends Component
 
     public array $state = [
         'type'                         => 'all',
-        'transactionOrdering'          => 'timestamp',
-        'transactionOrderingDirection' => 'desc',
+        'transactionsOrdering'          => 'timestamp',
+        'transactionsOrderingDirection' => 'desc',
     ];
 
     /** @phpstan-ignore-next-line */
@@ -34,9 +34,9 @@ final class TransactionTable extends Component
 
     public function orderTransactionsBy(string $value): void
     {
-        $this->state['transactionOrdering'] = $value;
+        $this->state['transactionsOrdering'] = $value;
 
-        $this->state['transactionOrderingDirection'] = $this->state['transactionOrderingDirection'] === 'desc' ? 'asc' : 'desc';
+        $this->state['transactionsOrderingDirection'] = $this->state['transactionsOrderingDirection'] === 'desc' ? 'asc' : 'desc';
 
         $this->gotoPage(1);
     }
@@ -52,15 +52,15 @@ final class TransactionTable extends Component
     {
         $this->state = array_merge([
             'type'                         => 'all',
-            'transactionOrdering'          => 'timestamp',
-            'transactionOrderingDirection' => 'desc',
+            'transactionsOrdering'          => 'timestamp',
+            'transactionsOrderingDirection' => 'desc',
         ], request('state', []));
     }
 
     public function render(): View
     {
         /** @phpstan-ignore-next-line */
-        $query = Transaction::scoped($this->getOrderingScope(), $this->state['transactionOrderingDirection']);
+        $query = Transaction::scoped($this->getOrderingScope(), $this->state['transactionsOrderingDirection']);
 
         if ($this->state['type'] !== 'all') {
             $scopeClass = Transaction::TYPE_SCOPES[$this->state['type']];
@@ -84,6 +84,6 @@ final class TransactionTable extends Component
             'fee'       => OrderByFeeScope::class,
         ];
 
-        return $scopes[$this->state['transactionOrdering']];
+        return $scopes[$this->state['transactionsOrdering']];
     }
 }
