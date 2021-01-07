@@ -36,11 +36,7 @@ final class TransactionTable extends Component
     {
         $this->state['transactionOrdering'] = $value;
 
-        if ($this->state['transactionOrderingDirection'] === 'desc') {
-            $this->state['transactionOrderingDirection'] = 'asc';
-        } else {
-            $this->state['transactionOrderingDirection'] = 'desc';
-        }
+        $this->state['transactionOrderingDirection'] = $this->state['transactionOrderingDirection'] === 'desc' ? 'asc' : 'desc';
 
         $this->gotoPage(1);
     }

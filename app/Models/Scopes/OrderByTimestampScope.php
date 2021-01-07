@@ -10,9 +10,9 @@ use Illuminate\Database\Eloquent\Scope;
 
 final class OrderByTimestampScope implements Scope
 {
-    protected array $parameters;
+    protected string|array $parameters;
 
-    public function __construct(array ...$parameters)
+    public function __construct(string|array ...$parameters)
     {
         $this->parameters = $parameters;
     }
