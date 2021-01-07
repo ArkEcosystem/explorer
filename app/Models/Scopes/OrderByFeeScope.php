@@ -10,9 +10,9 @@ use Illuminate\Database\Eloquent\Scope;
 
 final class OrderByFeeScope implements Scope
 {
-    protected $parameters;
+    protected array $parameters;
 
-    public function __construct(...$parameters)
+    public function __construct(array ...$parameters)
     {
         $this->parameters = $parameters;
     }

@@ -12,6 +12,6 @@ final class OrderByHeightScope implements Scope
 {
     public function apply(Builder $builder, Model $model)
     {
-        $builder->orderBy('height', ...$this->parameters);
+        $builder->orderBy('height', 'desc');
     }
 }
