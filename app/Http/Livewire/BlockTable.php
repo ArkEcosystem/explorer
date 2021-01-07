@@ -22,7 +22,7 @@ final class BlockTable extends Component
     use HasPagination;
 
     public array $state = [
-        'blocksOrdering'          => 'timestamp',
+        'blocksOrdering'          => 'height',
         'blocksOrderingDirection' => 'desc',
     ];
 
@@ -43,7 +43,7 @@ final class BlockTable extends Component
     public function mount(): void
     {
         $this->state = array_merge([
-            'blocksOrdering'          => 'timestamp',
+            'blocksOrdering'          => 'height',
             'blocksOrderingDirection' => 'desc',
         ], request('state', []));
     }
