@@ -63,6 +63,7 @@ final class TransactionTable extends Component
 
     public function render(): View
     {
+        /** @phpstan-ignore-next-line */
         $query = Transaction::scoped($this->getOrderingScope(), $this->state['transactionOrderingDirection']);
 
         if ($this->state['type'] !== 'all') {
@@ -76,7 +77,7 @@ final class TransactionTable extends Component
         ]);
     }
 
-    private function getOrderingScope()
+    private function getOrderingScope(): string
     {
         $scopes = [
             'id'        => OrderByIdScope::class,
