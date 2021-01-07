@@ -51,7 +51,7 @@ final class TransactionTable extends Component
     public function mount(): void
     {
         $this->state = array_merge([
-            'type'                         => 'all',
+            'type'                          => 'all',
             'transactionsOrdering'          => 'timestamp',
             'transactionsOrderingDirection' => 'desc',
         ], request('state', []));
