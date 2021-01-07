@@ -2,10 +2,10 @@
     <table>
         <thead>
             <tr>
-                <x-tables.headers.desktop.address name="general.wallet.address" />
+                <x-tables.headers.desktop.address name="general.wallet.address" on-click="$emit('orderWalletsBy', 'address')" />
                 <x-tables.headers.desktop.icon name="general.wallet.info" />
-                <x-tables.headers.desktop.number name="general.wallet.balance" />
-                <x-tables.headers.desktop.number name="general.wallet.supply" responsive />
+                <x-tables.headers.desktop.number name="general.wallet.balance" on-click="$emit('orderWalletsBy', 'balance')" />
+                <x-tables.headers.desktop.number name="general.wallet.supply" responsive on-click="$emit('orderWalletsBy', 'supply')" />
             </tr>
         </thead>
         <tbody>
