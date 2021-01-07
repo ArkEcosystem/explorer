@@ -8,10 +8,17 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Scope;
 
-final class OrderByHeightScope implements Scope
+final class OrderByFeeScope implements Scope
 {
+    protected $parameters;
+
+    public function __construct(...$parameters)
+    {
+        $this->parameters = $parameters;
+    }
+
     public function apply(Builder $builder, Model $model)
     {
-        $builder->orderBy('height', ...$this->parameters);
+        $builder->orderBy('fee', ...$this->parameters);
     }
 }

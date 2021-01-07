@@ -10,8 +10,15 @@ use Illuminate\Database\Eloquent\Scope;
 
 final class OrderByTimestampScope implements Scope
 {
+    protected $parameters;
+
+    public function __construct(...$parameters)
+    {
+        $this->parameters = $parameters;
+    }
+
     public function apply(Builder $builder, Model $model)
     {
-        $builder->orderBy('timestamp', 'desc');
+        $builder->orderBy('timestamp', ...$this->parameters);
     }
 }
