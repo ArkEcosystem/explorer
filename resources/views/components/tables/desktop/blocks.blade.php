@@ -2,15 +2,15 @@
     <table>
         <thead>
             <tr>
-                <x-tables.headers.desktop.id name="general.block.id" />
-                <x-tables.headers.desktop.text name="general.block.timestamp" responsive />
+                <x-tables.headers.desktop.id name="general.block.id" on-click="$emit('orderBlocksBy', 'id')" />
+                <x-tables.headers.desktop.text name="general.block.timestamp" responsive on-click="$emit('orderBlocksBy', 'timestamp')" />
                 @if(!isset($withoutGenerator))
-                    <x-tables.headers.desktop.address name="general.block.generated_by" />
+                    <x-tables.headers.desktop.address name="general.block.generated_by" on-click="$emit('orderBlocksBy', 'generated_by')" />
                 @endif
-                <x-tables.headers.desktop.number name="general.block.height" />
-                <x-tables.headers.desktop.number name="general.block.transactions" />
-                <x-tables.headers.desktop.number name="general.block.amount" />
-                <x-tables.headers.desktop.number name="general.block.fee" responsive />
+                <x-tables.headers.desktop.number name="general.block.height" on-click="$emit('orderBlocksBy', 'height')" />
+                <x-tables.headers.desktop.number name="general.block.transactions" on-click="$emit('orderBlocksBy', 'transactions')" />
+                <x-tables.headers.desktop.number name="general.block.amount" on-click="$emit('orderBlocksBy', 'amount')" />
+                <x-tables.headers.desktop.number name="general.block.fee" responsive on-click="$emit('orderBlocksBy', 'fee')" />
             </tr>
         </thead>
         <tbody>
