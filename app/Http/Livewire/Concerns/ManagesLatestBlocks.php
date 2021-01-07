@@ -12,6 +12,6 @@ trait ManagesLatestBlocks
 {
     public function pollBlocks(): void
     {
-        $this->blocks = (new TableCache())->setLatestBlocks(fn () => Block::withScope(OrderByHeightScope::class)->take(15)->get());
+        $this->blocks = (new TableCache())->setLatestBlocks(fn () => Block::scoped(OrderByHeightScope::class, 'desc')->take(15)->get());
     }
 }

@@ -20,13 +20,14 @@ trait ManagesLatestTransactions
     public function pollTransactions(): void
     {
         $this->transactions = (new TableCache())->setLatestTransactions($this->state['type'], function () {
-            $query = Transaction::withScope(OrderByTimestampScope::class);
+            $query = Transaction::scoped(OrderByTimestampScope::class, 'desc');
+
 
             if ($this->state['type'] !== 'all') {
                 $scopeClass = Transaction::TYPE_SCOPES[$this->state['type']];
 
                 /* @var \Illuminate\Database\Eloquent\Model */
-                $query = $query->withScope($scopeClass);
+                $query = $query->scoped($scopeClass);
             }
 
             return $query->take(15)->get();
