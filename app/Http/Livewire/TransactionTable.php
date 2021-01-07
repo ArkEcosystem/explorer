@@ -29,7 +29,7 @@ final class TransactionTable extends Component
     /** @phpstan-ignore-next-line */
     protected $listeners = [
         'filterTransactionsByType',
-        'orderTransactionsBy'
+        'orderTransactionsBy',
     ];
 
     public function orderTransactionsBy(string $value): void
@@ -57,7 +57,7 @@ final class TransactionTable extends Component
         $this->state = array_merge([
             'type'                         => 'all',
             'transactionOrdering'          => 'timestamp',
-            'transactionOrderingDirection' => 'desc'
+            'transactionOrderingDirection' => 'desc',
         ], request('state', []));
     }
 
@@ -76,14 +76,15 @@ final class TransactionTable extends Component
         ]);
     }
 
-    private function getOrderingScope() {
+    private function getOrderingScope()
+    {
         $scopes = [
             'id'        => OrderByIdScope::class,
             'timestamp' => OrderByTimestampScope::class,
             'sender'    => OrderBySenderScope::class,
             'recipient' => OrderByRecipientScope::class,
             'amount'    => OrderByAmountScope::class,
-            'fee'       => OrderByFeeScope::class
+            'fee'       => OrderByFeeScope::class,
         ];
 
         return $scopes[$this->state['transactionOrdering']];
