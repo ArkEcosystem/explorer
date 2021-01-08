@@ -15,7 +15,6 @@ use App\Models\Scopes\OrderByTransactionsAmountScope;
 trait BlocksOrdering
 {
     public string $blocksOrdering          = 'height';
-
     public string $blocksOrderingDirection = 'desc';
 
     public function orderBlocksBy(string $value): void
@@ -23,8 +22,6 @@ trait BlocksOrdering
         $this->blocksOrdering = $value;
 
         $this->blocksOrderingDirection = $this->blocksOrderingDirection === 'desc' ? 'asc' : 'desc';
-
-        $this->gotoPage(1);
     }
 
     private function getOrderingScope(): string

@@ -35,7 +35,6 @@ final class BlockTransactionsTable extends Component
 
     public function render(): View
     {
-        /** @phpstan-ignore-next-line */
         $query = $this->getBlock()->transactions()->scoped($this->getOrderingScope(), $this->transactionsOrderingDirection);
 
         return view('livewire.transaction-table', [

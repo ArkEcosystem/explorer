@@ -41,7 +41,6 @@ final class TransactionTable extends Component
 
     public function render(): View
     {
-        /** @phpstan-ignore-next-line */
         $query = Transaction::scoped($this->getOrderingScope(), $this->transactionsOrderingDirection);
 
         if ($this->state['type'] !== 'all') {

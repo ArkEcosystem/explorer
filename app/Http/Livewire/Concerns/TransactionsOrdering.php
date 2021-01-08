@@ -14,7 +14,6 @@ use App\Models\Scopes\OrderByTimestampScope;
 trait TransactionsOrdering
 {
     public string $transactionsOrdering          = 'timestamp';
-
     public string $transactionsOrderingDirection = 'desc';
 
     public function orderTransactionsBy(string $value): void
@@ -22,9 +21,6 @@ trait TransactionsOrdering
         $this->transactionsOrdering = $value;
 
         $this->transactionsOrderingDirection = $this->transactionsOrderingDirection === 'desc' ? 'asc' : 'desc';
-
-        // TODO: Remove ?
-        $this->gotoPage(1);
     }
 
     private function getOrderingScope(): string

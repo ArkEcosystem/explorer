@@ -10,7 +10,6 @@ use App\Models\Scopes\OrderByBalanceScope;
 trait WalletsOrdering
 {
     public string $walletsOrdering          = 'balance';
-
     public string $walletsOrderingDirection = 'desc';
 
     public function orderWalletsBy(string $value): void
@@ -18,8 +17,6 @@ trait WalletsOrdering
         $this->walletsOrdering = $value;
 
         $this->walletsOrderingDirection = $this->walletsOrderingDirection === 'desc' ? 'asc' : 'desc';
-
-        $this->gotoPage(1);
     }
 
     private function getOrderingScope(): string
