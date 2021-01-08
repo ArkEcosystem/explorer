@@ -17,6 +17,7 @@ final class WalletVoterTable extends Component
     use WalletsOrdering;
 
     public string $publicKey;
+
     public string $username;
 
     /** @phpstan-ignore-next-line */

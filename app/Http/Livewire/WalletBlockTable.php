@@ -17,6 +17,7 @@ final class WalletBlockTable extends Component
     use BlocksOrdering;
 
     public string $publicKey;
+
     public string $username;
 
     /** @phpstan-ignore-next-line */
