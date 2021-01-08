@@ -5,12 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Livewire;
 
 use App\Facades\Wallets;
-use App\Models\Scopes\OrderByAmountScope;
-use App\Models\Scopes\OrderByFeeScope;
-use App\Models\Scopes\OrderByIdScope;
-use App\Models\Scopes\OrderByRecipientScope;
-use App\Models\Scopes\OrderBySenderScope;
-use App\Models\Scopes\OrderByTimestampScope;
+use App\Http\Livewire\Concerns\TransactionsOrdering;
 use App\Models\Transaction;
 use App\ViewModels\ViewModelFactory;
 use ARKEcosystem\UserInterface\Http\Livewire\Concerns\HasPagination;
@@ -21,6 +16,7 @@ use Livewire\Component;
 final class WalletTransactionTable extends Component
 {
     use HasPagination;
+    use TransactionsOrdering;
 
     public array $state = [
         'address'                       => null,
@@ -28,8 +24,6 @@ final class WalletTransactionTable extends Component
         'isCold'                        => null,
         'type'                          => 'all',
         'direction'                     => 'all',
-        'transactionsOrdering'          => 'timestamp',
-        'transactionsOrderingDirection' => 'desc',
     ];
 
     /** @phpstan-ignore-next-line */
@@ -38,15 +32,6 @@ final class WalletTransactionTable extends Component
         'filterTransactionsByType',
         'orderTransactionsBy',
     ];
-
-    public function orderTransactionsBy(string $value): void
-    {
-        $this->state['transactionsOrdering'] = $value;
-
-        $this->state['transactionsOrderingDirection'] = $this->state['transactionsOrderingDirection'] === 'desc' ? 'asc' : 'desc';
-
-        $this->gotoPage(1);
-    }
 
     public function mount(string $address, bool $isCold, ?string $publicKey): void
     {
@@ -71,17 +56,17 @@ final class WalletTransactionTable extends Component
     {
         if ($this->state['direction'] === 'received') {
             /** @phpstan-ignore-next-line */
-            $items         = $this->getReceivedQuery()->scoped($this->getOrderingScope(), $this->state['transactionsOrderingDirection'])->paginate();
+            $items         = $this->getReceivedQuery()->scoped($this->getOrderingScope(), $this->transactionsOrderingDirection)->paginate();
             $receivedCount = $items->total();
             $sentCount     = $this->getSentQuery()->count();
         } elseif ($this->state['direction'] === 'sent') {
             /** @phpstan-ignore-next-line */
-            $items         = $this->getSentQuery()->scoped($this->getOrderingScope(), $this->state['transactionsOrderingDirection'])->paginate();
+            $items         = $this->getSentQuery()->scoped($this->getOrderingScope(), $this->transactionsOrderingDirection)->paginate();
             $receivedCount = $this->getReceivedQuery()->count();
             $sentCount     = $items->total();
         } else {
             /** @phpstan-ignore-next-line */
-            $items         = $this->getAllQuery()->scoped($this->getOrderingScope(), $this->state['transactionsOrderingDirection'])->paginate();
+            $items         = $this->getAllQuery()->scoped($this->getOrderingScope(), $this->transactionsOrderingDirection)->paginate();
             $receivedCount = $this->getReceivedQuery()->count();
             $sentCount     = $this->getSentQuery()->count();
         }
@@ -150,19 +135,5 @@ final class WalletTransactionTable extends Component
         }
 
         return $query;
-    }
-
-    private function getOrderingScope(): string
-    {
-        $scopes = [
-            'id'        => OrderByIdScope::class,
-            'timestamp' => OrderByTimestampScope::class,
-            'sender'    => OrderBySenderScope::class,
-            'recipient' => OrderByRecipientScope::class,
-            'amount'    => OrderByAmountScope::class,
-            'fee'       => OrderByFeeScope::class,
-        ];
-
-        return $scopes[$this->state['transactionsOrdering']];
     }
 }
