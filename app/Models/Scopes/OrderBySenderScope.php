@@ -12,7 +12,7 @@ final class OrderBySenderScope implements Scope
 {
     protected string $direction;
 
-    public function __construct(string $direction)
+    public function __construct(string $direction = 'desc')
     {
         $this->direction = $direction;
     }

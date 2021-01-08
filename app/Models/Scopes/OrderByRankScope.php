@@ -12,7 +12,7 @@ final class OrderByRankScope implements Scope
 {
     protected string $direction;
 
-    public function __construct(string $direction)
+    public function __construct(string $direction = 'asc')
     {
         $this->direction = $direction;
     }
