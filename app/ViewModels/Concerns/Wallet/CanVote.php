@@ -56,7 +56,7 @@ trait CanVote
 
         $voteBalance = (float) $delegate->attributes['delegate']['voteBalance'];
 
-        if ($voteBalance === (float) 0.00) {
+        if ($voteBalance === 0.00) {
             return null;
         }
 

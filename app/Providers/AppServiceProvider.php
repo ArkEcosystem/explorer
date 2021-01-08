@@ -60,6 +60,7 @@ final class AppServiceProvider extends ServiceProvider
 
     private function registerBuilderMacros(): void
     {
+        /* @phpstan-ignore-next-line */
         Builder::macro('scoped', function (...$args) {
             /** @var Builder $query */
             $query = $this;
