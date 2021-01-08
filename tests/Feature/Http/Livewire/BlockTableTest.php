@@ -18,7 +18,7 @@ it('should list the first page of records', function () {
 
     $component = Livewire::test(BlockTable::class);
 
-    foreach (ViewModelFactory::paginate(Block::withScope(OrderByHeightScope::class)->paginate())->items() as $block) {
+    foreach (ViewModelFactory::paginate(Block::scoped(OrderByHeightScope::class)->paginate())->items() as $block) {
         $component->assertSee($block->id());
         $component->assertSee($block->timestamp());
         $component->assertSee($block->username());

@@ -560,3 +560,28 @@ it('should fail to build the MarketSquare profile URL if there is no username', 
 
     expect($this->subject->profileUrl())->toBeNull();
 });
+
+it('should return null if the voteBalance is equal to 0', function () {
+    $vote = Wallet::factory()->create([
+        'balance' => 0,
+        'attributes' => [
+            'delegate' => [
+                'voteBalance' => 0
+            ]
+        ]
+    ]);
+
+    $this->subject = new WalletViewModel(Wallet::factory()->create([
+        'balance' => 0,
+        'attributes' => [
+            'vote' => $vote->public_key,
+            'delegate' => [
+                'voteBalance' => 0,
+            ],
+        ],
+    ]));
+
+    (new WalletCache())->setVote($vote->public_key, $vote);
+
+    expect($this->subject->votePercentage())->toBeNull();
+});
