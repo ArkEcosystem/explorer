@@ -10,6 +10,7 @@ use App\ViewModels\ViewModelFactory;
 use ARKEcosystem\UserInterface\Http\Livewire\Concerns\HasPagination;
 use Illuminate\View\View;
 use Livewire\Component;
+
 final class WalletVoterTable extends Component
 {
     use HasPagination;
