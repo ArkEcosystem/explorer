@@ -9,24 +9,14 @@ use App\Models\Scopes\OrderByBalanceScope;
 
 trait WalletsOrdering
 {
-    public array $state = [
-        'walletsOrdering'          => 'balance',
-        'walletsOrderingDirection' => 'desc',
-    ];
-
-    public function mountWithWalletsOrdering(): void
-    {
-        $this->state = array_merge([
-            'walletsOrdering'          => 'balance',
-            'walletsOrderingDirection' => 'desc',
-        ], request('state', []));
-    }
+    public string $walletsOrdering          = 'balance';
+    public string $walletsOrderingDirection = 'desc';
 
     public function orderWalletsBy(string $value): void
     {
-        $this->state['walletsOrdering'] = $value;
+        $this->walletsOrdering = $value;
 
-        $this->state['walletsOrderingDirection'] = $this->state['walletsOrderingDirection'] === 'desc' ? 'asc' : 'desc';
+        $this->walletsOrderingDirection = $this->walletsOrderingDirection === 'desc' ? 'asc' : 'desc';
 
         $this->gotoPage(1);
     }
@@ -39,6 +29,6 @@ trait WalletsOrdering
             'supply'  => OrderByBalanceScope::class,
         ];
 
-        return $scopes[$this->state['walletsOrdering']];
+        return $scopes[$this->walletsOrdering];
     }
 }

@@ -24,7 +24,7 @@ final class BlockTable extends Component
     public function render(): View
     {
         /** @phpstan-ignore-next-line */
-        $query = Block::scoped($this->getOrderingScope(), $this->state['blocksOrderingDirection']);
+        $query = Block::scoped($this->getOrderingScope(), $this->blocksOrderingDirection);
 
         return view('livewire.block-table', [
             'blocks' => ViewModelFactory::paginate($query->paginate()),

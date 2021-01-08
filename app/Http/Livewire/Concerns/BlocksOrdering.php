@@ -14,24 +14,14 @@ use App\Models\Scopes\OrderByTransactionsAmountScope;
 
 trait BlocksOrdering
 {
-    public array $state = [
-        'blocksOrdering'          => 'height',
-        'blocksOrderingDirection' => 'desc',
-    ];
-
-    public function mountWithBlocksOrdering(): void
-    {
-        $this->state = array_merge([
-            'blocksOrdering'          => 'height',
-            'blocksOrderingDirection' => 'desc',
-        ], request('state', []));
-    }
+    public string $blocksOrdering          = 'height';
+    public string $blocksOrderingDirection = 'desc';
 
     public function orderBlocksBy(string $value): void
     {
-        $this->state['blocksOrdering'] = $value;
+        $this->blocksOrdering = $value;
 
-        $this->state['blocksOrderingDirection'] = $this->state['blocksOrderingDirection'] === 'desc' ? 'asc' : 'desc';
+        $this->blocksOrderingDirection = $this->blocksOrderingDirection === 'desc' ? 'asc' : 'desc';
 
         $this->gotoPage(1);
     }
@@ -48,6 +38,6 @@ trait BlocksOrdering
             'fee'          => OrderByBlockFeeScope::class,
         ];
 
-        return $scopes[$this->state['blocksOrdering']];
+        return $scopes[$this->blocksOrdering];
     }
 }

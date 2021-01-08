@@ -17,7 +17,6 @@ final class WalletVoterTable extends Component
     use WalletsOrdering;
 
     public string $publicKey;
-
     public string $username;
 
     /** @phpstan-ignore-next-line */
@@ -34,7 +33,7 @@ final class WalletVoterTable extends Component
     public function render(): View
     {
         /** @phpstan-ignore-next-line */
-        $query = Wallet::where('attributes->vote', $this->publicKey)->scoped($this->getOrderingScope(), $this->state['walletsOrderingDirection']);
+        $query = Wallet::where('attributes->vote', $this->publicKey)->scoped($this->getOrderingScope(), $this->walletsOrderingDirection);
 
         return view('livewire.wallet-table', [
             'wallets' => ViewModelFactory::paginate($query->paginate()),

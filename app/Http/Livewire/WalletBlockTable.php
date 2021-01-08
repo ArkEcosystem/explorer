@@ -17,7 +17,6 @@ final class WalletBlockTable extends Component
     use BlocksOrdering;
 
     public string $publicKey;
-
     public string $username;
 
     /** @phpstan-ignore-next-line */
@@ -34,7 +33,7 @@ final class WalletBlockTable extends Component
     public function render(): View
     {
         /** @phpstan-ignore-next-line */
-        $query = Block::where('generator_public_key', $this->publicKey)->scoped($this->getOrderingScope(), $this->state['blocksOrderingDirection']);
+        $query = Block::where('generator_public_key', $this->publicKey)->scoped($this->getOrderingScope(), $this->blocksOrderingDirection);
 
         return view('livewire.block-table', [
             'blocks' => ViewModelFactory::paginate($query->paginate()),
