@@ -12,6 +12,7 @@ use App\Models\Scopes\OrderByVoteScope;
 trait DelegatesOrdering
 {
     public string $delegatesOrdering          = 'rank';
+
     public string $delegatesOrderingDirection = 'asc';
 
     public function orderDelegatesBy(string $value): void
