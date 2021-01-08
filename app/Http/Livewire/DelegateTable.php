@@ -26,7 +26,7 @@ final class DelegateTable extends Component
     /** @phpstan-ignore-next-line */
     protected $listeners = [
         'filterByDelegateStatus',
-        'orderDelegatesBy'
+        'orderDelegatesBy',
     ];
 
     public function orderDelegatesBy(string $value): void

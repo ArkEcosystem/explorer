@@ -19,6 +19,6 @@ final class OrderByRankScope implements Scope
 
     public function apply(Builder $builder, Model $model)
     {
-        $builder->orderByRaw("(\"attributes\"->'delegate'->>'rank')::numeric " . strtoupper($this->direction));
+        $builder->orderByRaw("(\"attributes\"->'delegate'->>'rank')::numeric ".strtoupper($this->direction));
     }
 }
