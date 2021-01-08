@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace App\Http\Livewire;
 
 use App\Http\Livewire\Concerns\WalletsOrdering;
-use App\Models\Scopes\OrderByAddressScope;
-use App\Models\Scopes\OrderByBalanceScope;
 use App\Models\Wallet;
 use App\ViewModels\ViewModelFactory;
 use ARKEcosystem\UserInterface\Http\Livewire\Concerns\HasPagination;
