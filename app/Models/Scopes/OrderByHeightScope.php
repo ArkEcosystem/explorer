@@ -10,8 +10,15 @@ use Illuminate\Database\Eloquent\Scope;
 
 final class OrderByHeightScope implements Scope
 {
+    protected string $direction;
+
+    public function __construct(string $direction)
+    {
+        $this->direction = $direction;
+    }
+
     public function apply(Builder $builder, Model $model)
     {
-        $builder->orderBy('height', 'desc');
+        $builder->orderBy('height', $this->direction);
     }
 }
