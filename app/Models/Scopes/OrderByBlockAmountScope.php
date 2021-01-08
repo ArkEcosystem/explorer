@@ -10,12 +10,9 @@ use Illuminate\Database\Eloquent\Scope;
 
 final class OrderByBlockAmountScope implements Scope
 {
-    protected string $direction;
-
-    public function __construct(string $direction = 'desc')
-    {
-        $this->direction = $direction;
-    }
+    public function __construct(
+        protected string $direction = 'desc',
+    ) {}
 
     public function apply(Builder $builder, Model $model)
     {
