@@ -12,7 +12,8 @@ final class OrderByTransactionsAmountScope implements Scope
 {
     public function __construct(
         protected string $direction = 'desc',
-    ) {}
+    ) {
+    }
 
     public function apply(Builder $builder, Model $model)
     {
