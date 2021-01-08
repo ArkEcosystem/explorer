@@ -66,7 +66,6 @@ final class AppServiceProvider extends ServiceProvider
 
             return (new ScopedMacro($query))(...$args);
         });
-
     }
 
     private function registerDataBags(): void
