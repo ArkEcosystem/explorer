@@ -70,14 +70,17 @@ final class WalletTransactionTable extends Component
     public function render(): View
     {
         if ($this->state['direction'] === 'received') {
+            /** @phpstan-ignore-next-line */
             $items         = $this->getReceivedQuery()->scoped($this->getOrderingScope(), $this->state['transactionsOrderingDirection'])->paginate();
             $receivedCount = $items->total();
             $sentCount     = $this->getSentQuery()->count();
         } elseif ($this->state['direction'] === 'sent') {
+            /** @phpstan-ignore-next-line */
             $items         = $this->getSentQuery()->scoped($this->getOrderingScope(), $this->state['transactionsOrderingDirection'])->paginate();
             $receivedCount = $this->getReceivedQuery()->count();
             $sentCount     = $items->total();
         } else {
+            /** @phpstan-ignore-next-line */
             $items         = $this->getAllQuery()->scoped($this->getOrderingScope(), $this->state['transactionsOrderingDirection'])->paginate();
             $receivedCount = $this->getReceivedQuery()->count();
             $sentCount     = $this->getSentQuery()->count();

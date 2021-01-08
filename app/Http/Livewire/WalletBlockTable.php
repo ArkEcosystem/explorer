@@ -52,6 +52,7 @@ final class WalletBlockTable extends Component
 
     public function render(): View
     {
+        /** @phpstan-ignore-next-line */
         $query = Block::where('generator_public_key', $this->publicKey)->scoped($this->getOrderingScope(), $this->state['blocksOrderingDirection']);
 
         return view('livewire.block-table', [

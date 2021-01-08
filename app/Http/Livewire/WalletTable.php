@@ -46,6 +46,7 @@ final class WalletTable extends Component
 
     public function render(): View
     {
+        /** @phpstan-ignore-next-line */
         $query = Wallet::scoped($this->getOrderingScope(), $this->state['walletsOrderingDirection']);
 
         return view('livewire.wallet-table', [
