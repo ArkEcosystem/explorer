@@ -563,18 +563,18 @@ it('should fail to build the MarketSquare profile URL if there is no username', 
 
 it('should return null if the voteBalance is equal to 0', function () {
     $vote = Wallet::factory()->create([
-        'balance' => 0,
+        'balance'    => 0,
         'attributes' => [
             'delegate' => [
-                'voteBalance' => 0
-            ]
-        ]
+                'voteBalance' => 0,
+            ],
+        ],
     ]);
 
     $this->subject = new WalletViewModel(Wallet::factory()->create([
-        'balance' => 0,
+        'balance'    => 0,
         'attributes' => [
-            'vote' => $vote->public_key,
+            'vote'     => $vote->public_key,
             'delegate' => [
                 'voteBalance' => 0,
             ],
