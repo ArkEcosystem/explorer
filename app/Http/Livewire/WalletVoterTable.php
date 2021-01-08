@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire;
 
+use App\Http\Livewire\Concerns\WalletsOrdering;
 use App\Models\Scopes\OrderByAddressScope;
 use App\Models\Scopes\OrderByBalanceScope;
 use App\Models\Wallet;
@@ -15,6 +16,7 @@ use Livewire\Component;
 final class WalletVoterTable extends Component
 {
     use HasPagination;
+    use WalletsOrdering;
 
     /** @phpstan-ignore-next-line */
     protected $listeners = [
@@ -24,20 +26,6 @@ final class WalletVoterTable extends Component
     public string $publicKey;
 
     public string $username;
-
-    public array $state = [
-        'walletsOrdering'          => 'balance',
-        'walletsOrderingDirection' => 'desc',
-    ];
-
-    public function orderWalletsBy(string $value): void
-    {
-        $this->state['walletsOrdering'] = $value;
-
-        $this->state['walletsOrderingDirection'] = $this->state['walletsOrderingDirection'] === 'desc' ? 'asc' : 'desc';
-
-        $this->gotoPage(1);
-    }
 
     public function mount(string $publicKey, string $username): void
     {
@@ -53,16 +41,5 @@ final class WalletVoterTable extends Component
         return view('livewire.wallet-table', [
             'wallets' => ViewModelFactory::paginate($query->paginate()),
         ]);
-    }
-
-    private function getOrderingScope(): string
-    {
-        $scopes = [
-            'address' => OrderByAddressScope::class,
-            'balance' => OrderByBalanceScope::class,
-            'supply'  => OrderByBalanceScope::class,
-        ];
-
-        return $scopes[$this->state['walletsOrdering']];
     }
 }

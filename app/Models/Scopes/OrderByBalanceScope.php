@@ -10,8 +10,15 @@ use Illuminate\Database\Eloquent\Scope;
 
 final class OrderByBalanceScope implements Scope
 {
+    protected string $direction;
+
+    public function __construct(string $direction)
+    {
+        $this->direction = $direction;
+    }
+
     public function apply(Builder $builder, Model $model)
     {
-        $builder->orderBy('balance', 'desc');
+        $builder->orderBy('balance', $this->direction);
     }
 }

@@ -54,6 +54,12 @@ trait CanVote
             return null;
         }
 
-        return Percentage::calculate($this->wallet->balance->toNumber(), (float) $delegate->attributes['delegate']['voteBalance']);
+        $voteBalance = (float) $delegate->attributes['delegate']['voteBalance'];
+
+        if ($voteBalance === (float) 0.00) {
+            return null;
+        }
+
+        return Percentage::calculate($this->wallet->balance->toNumber(), $voteBalance);
     }
 }
