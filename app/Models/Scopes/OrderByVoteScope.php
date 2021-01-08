@@ -8,12 +8,8 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Scope;
 
-final class OrderByVoteScope implements Scope
+final class OrderByVoteScope extends BaseOrderByScope implements Scope
 {
-    public function __construct(
-        protected string $direction = 'desc',
-    ) {}
-
     public function apply(Builder $builder, Model $model)
     {
         // TODO: Ordering not fully functional, e.g, these 3 numbers would be outputted in that sequence ; 570, 4, 47.461, which is incorrect
