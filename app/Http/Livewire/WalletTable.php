@@ -6,7 +6,6 @@ namespace App\Http\Livewire;
 
 use App\Models\Scopes\OrderByAddressScope;
 use App\Models\Scopes\OrderByBalanceScope;
-use App\Models\Scopes\OrderByInfoScope;
 use App\Models\Wallet;
 use App\ViewModels\ViewModelFactory;
 use ARKEcosystem\UserInterface\Http\Livewire\Concerns\HasPagination;

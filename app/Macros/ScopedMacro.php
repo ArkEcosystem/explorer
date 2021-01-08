@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Macros;
 
 use Illuminate\Database\Eloquent\Builder;
@@ -7,9 +9,9 @@ use Illuminate\Database\Eloquent\Scope;
 use InvalidArgumentException;
 
 /**
- * Class ScopedMacro
+ * Class ScopedMacro.
  */
-class ScopedMacro
+final class ScopedMacro
 {
     /**
      * @var \Illuminate\Database\Eloquent\Builder
@@ -29,8 +31,9 @@ class ScopedMacro
     /**
      * Apply Scope to Eloquent\Builder.
      *
-     * @param  \Illuminate\Database\Eloquent\Scope|string $scope
-     * @param  mixed                                      ...$parameters
+     * @param \Illuminate\Database\Eloquent\Scope|string $scope
+     * @param mixed                                      ...$parameters
+     *
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function __invoke($scope, ...$parameters): Builder
@@ -38,7 +41,7 @@ class ScopedMacro
         if (is_string($scope) && class_exists($scope)) {
             $scope = new $scope(...$parameters);
         }
-        if (!$scope instanceof Scope) {
+        if (! $scope instanceof Scope) {
             throw new InvalidArgumentException('$scope must be an instance of Scope');
         }
 

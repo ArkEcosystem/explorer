@@ -21,7 +21,7 @@ final class TransactionTable extends Component
     use HasPagination;
 
     public array $state = [
-        'type'                         => 'all',
+        'type'                          => 'all',
         'transactionsOrdering'          => 'timestamp',
         'transactionsOrderingDirection' => 'desc',
     ];
