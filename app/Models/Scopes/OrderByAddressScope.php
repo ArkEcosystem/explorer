@@ -10,15 +10,15 @@ use Illuminate\Database\Eloquent\Scope;
 
 final class OrderByAddressScope implements Scope
 {
-    protected string|array $parameters;
+    protected string $direction;
 
-    public function __construct(string|array ...$parameters)
+    public function __construct(string $direction)
     {
-        $this->parameters = $parameters;
+        $this->direction = $direction;
     }
 
     public function apply(Builder $builder, Model $model)
     {
-        $builder->orderBy('address', ...$this->parameters);
+        $builder->orderBy('address', $this->direction);
     }
 }
