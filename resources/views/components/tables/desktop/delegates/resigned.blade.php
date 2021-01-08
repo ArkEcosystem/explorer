@@ -2,9 +2,9 @@
     <table>
         <thead>
             <tr>
-                <x-tables.headers.desktop.id name="general.delegates.id" />
-                <x-tables.headers.desktop.address name="general.delegates.name" />
-                <x-tables.headers.desktop.number name="general.delegates.votes" responsive/>
+                <x-tables.headers.desktop.id name="general.delegates.id" on-click="$emit('orderDelegatesBy', 'id')" />
+                <x-tables.headers.desktop.address name="general.delegates.name" on-click="$emit('orderDelegatesBy', 'address')" />
+                <x-tables.headers.desktop.number name="general.delegates.votes" responsive on-click="$emit('orderDelegatesBy', 'votes')"/>
             </tr>
         </thead>
         <tbody>

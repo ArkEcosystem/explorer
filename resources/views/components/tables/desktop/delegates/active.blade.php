@@ -2,12 +2,12 @@
     <table>
         <thead>
             <tr>
-                <x-tables.headers.desktop.text name="general.delegates.rank" />
-                <x-tables.headers.desktop.address name="general.delegates.name" />
+                <x-tables.headers.desktop.text name="general.delegates.rank" on-click="$emit('orderDelegatesBy', 'rank')" />
+                <x-tables.headers.desktop.address name="general.delegates.name" on-click="$emit('orderDelegatesBy', 'address')" />
                 <x-tables.headers.desktop.status name="general.delegates.status">
                     <x-ark-info :tooltip="trans('pages.delegates.info.status')" />
                 </x-tables.headers.desktop.status>
-                <x-tables.headers.desktop.number name="general.delegates.votes" responsive breakpoint="lg"/>
+                <x-tables.headers.desktop.number name="general.delegates.votes" responsive breakpoint="lg" on-click="$emit('orderDelegatesBy', 'votes')" />
                 @if (Network::usesMarketSquare())
                     <x-tables.headers.desktop.icon name="general.delegates.profile" />
                     <x-tables.headers.desktop.number name="general.delegates.commission" responsive />
