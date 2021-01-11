@@ -7,7 +7,7 @@ use App\Enums\TransactionTypeGroupEnum;
 use App\Facades\Network;
 use App\Http\Livewire\LatestRecords;
 use App\Models\Block;
-use App\Models\Scopes\OrderByHeightScope;
+use App\Models\Scopes\OrderByHeightDescScope;
 use App\Models\Scopes\OrderByTimestampDescScope;
 use App\Models\Transaction;
 use App\Models\Wallet;
@@ -26,7 +26,7 @@ it('should list the first page of blocks', function () {
         ->set('state.selected', 'blocks')
         ->call('pollBlocks');
 
-    foreach (ViewModelFactory::collection(Block::scoped(OrderByHeightScope::class)->take(15)->get()) as $block) {
+    foreach (ViewModelFactory::collection(Block::scoped(OrderByHeightDescScope::class)->take(15)->get()) as $block) {
         $component->assertSee($block->id());
         $component->assertSee($block->timestamp());
         $component->assertSee($block->username());

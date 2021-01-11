@@ -6,7 +6,7 @@ namespace App\Services\Monitor;
 
 use App\Facades\Network;
 use App\Models\Block;
-use App\Models\Scopes\OrderByHeightScope;
+use App\Models\Scopes\OrderByHeightDescScope;
 use App\Services\Monitor\Actions\ShuffleDelegates;
 use Illuminate\Support\Collection;
 
@@ -363,7 +363,7 @@ final class DelegateTracker
     public static function execute(Collection $delegates, int $startHeight): array
     {
         // Arrange Block
-        $lastBlock = Block::withScope(OrderByHeightScope::class)->firstOrFail();
+        $lastBlock = Block::withScope(OrderByHeightDescScope::class)->firstOrFail();
         $height    = $lastBlock->height->toNumber(); // 5720529;
         $timestamp = $lastBlock->timestamp; // 113620904;
 

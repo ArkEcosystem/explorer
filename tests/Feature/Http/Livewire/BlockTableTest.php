@@ -5,7 +5,7 @@ declare(strict_types=1);
 use App\Facades\Network;
 use App\Http\Livewire\BlockTable;
 use App\Models\Block;
-use App\Models\Scopes\OrderByHeightScope;
+use App\Models\Scopes\OrderByHeightDescScope;
 use App\Services\NumberFormatter;
 use App\ViewModels\ViewModelFactory;
 use Livewire\Livewire;
@@ -18,7 +18,7 @@ it('should list the first page of records', function () {
 
     $component = Livewire::test(BlockTable::class);
 
-    foreach (ViewModelFactory::paginate(Block::scoped(OrderByHeightScope::class)->paginate())->items() as $block) {
+    foreach (ViewModelFactory::paginate(Block::scoped(OrderByHeightDescScope::class)->paginate())->items() as $block) {
         $component->assertSee($block->id());
         $component->assertSee($block->timestamp());
         $component->assertSee($block->username());
