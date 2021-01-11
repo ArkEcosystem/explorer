@@ -11,6 +11,7 @@ final class OrderingTypeEnum
     const BALANCE              = 'balance';
     const BLOCK_AMOUNT         = 'amount';
     const BLOCK_FEE            = 'fee';
+    const CONFIRMATIONS        = 'confirmations';
     const FEE                  = 'fee';
     const GENERATOR_PUBLIC_KEY = 'generated_by';
     const HEIGHT               = 'height';

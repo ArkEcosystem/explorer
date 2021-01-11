@@ -4,33 +4,39 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire\Concerns;
 
-use App\Models\Scopes\OrderByAddressScope;
-use App\Models\Scopes\OrderByIdScope;
-use App\Models\Scopes\OrderByRankScope;
-use App\Models\Scopes\OrderByVoteScope;
+use App\Enums\OrderingDirectionEnum;
+use App\Enums\OrderingTypeEnum;
+use App\Models\Scopes\OrderByAddressAscScope;
+use App\Models\Scopes\OrderByAddressDescScope;
+use App\Models\Scopes\OrderByIdAscScope;
+use App\Models\Scopes\OrderByIdDescScope;
+use App\Models\Scopes\OrderByRankAscScope;
+use App\Models\Scopes\OrderByRankDescScope;
+use App\Models\Scopes\OrderByVoteAscScope;
+use App\Models\Scopes\OrderByVoteDescScope;
 
 trait DelegatesOrdering
 {
-    public string $delegatesOrdering          = 'rank';
+    public string $delegatesOrdering          = OrderingTypeEnum::RANK;
 
-    public string $delegatesOrderingDirection = 'asc';
+    public string $delegatesOrderingDirection = OrderingDirectionEnum::ASC;
 
     public function orderDelegatesBy(string $value): void
     {
         $this->delegatesOrdering = $value;
 
-        $this->delegatesOrderingDirection = $this->delegatesOrderingDirection === 'desc' ? 'asc' : 'desc';
+        $this->delegatesOrderingDirection = $this->delegatesOrderingDirection === OrderingDirectionEnum::DESC ? OrderingDirectionEnum::ASC : OrderingDirectionEnum::DESC;
     }
 
     private function getOrderingScope(): string
     {
         $scopes = [
-            'id'      => OrderByIdScope::class,
-            'rank'    => OrderByRankScope::class,
-            'address' => OrderByAddressScope::class,
-            'votes'   => OrderByVoteScope::class,
+            'id'      => ['asc' => OrderByIdAscScope::class, 'desc' => OrderByIdDescScope::class],
+            'rank'    => ['asc' => OrderByRankAscScope::class, 'desc' => OrderByRankDescScope::class],
+            'address' => ['asc' => OrderByAddressAscScope::class, 'desc' => OrderByAddressDescScope::class],
+            'votes'   => ['asc' => OrderByVoteAscScope::class, 'desc' => OrderByVoteDescScope::class],
         ];
 
-        return $scopes[$this->delegatesOrdering];
+        return $scopes[$this->delegatesOrdering][$this->delegatesOrderingDirection];
     }
 }

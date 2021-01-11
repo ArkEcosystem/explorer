@@ -4,37 +4,45 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire\Concerns;
 
-use App\Models\Scopes\OrderByAmountScope;
-use App\Models\Scopes\OrderByFeeScope;
-use App\Models\Scopes\OrderByIdScope;
-use App\Models\Scopes\OrderByRecipientScope;
-use App\Models\Scopes\OrderBySenderScope;
-use App\Models\Scopes\OrderByTimestampScope;
+use App\Enums\OrderingDirectionEnum;
+use App\Enums\OrderingTypeEnum;
+use App\Models\Scopes\OrderByAmountAscScope;
+use App\Models\Scopes\OrderByAmountDescScope;
+use App\Models\Scopes\OrderByFeeAscScope;
+use App\Models\Scopes\OrderByFeeDescScope;
+use App\Models\Scopes\OrderByIdAscScope;
+use App\Models\Scopes\OrderByIdDescScope;
+use App\Models\Scopes\OrderByRecipientAscScope;
+use App\Models\Scopes\OrderByRecipientDescScope;
+use App\Models\Scopes\OrderBySenderAscScope;
+use App\Models\Scopes\OrderBySenderDescScope;
+use App\Models\Scopes\OrderByTimestampAscScope;
+use App\Models\Scopes\OrderByTimestampDescScope;
 
 trait TransactionsOrdering
 {
-    public string $transactionsOrdering          = 'timestamp';
+    public string $transactionsOrdering          = OrderingTypeEnum::TIMESTAMP;
 
-    public string $transactionsOrderingDirection = 'desc';
+    public string $transactionsOrderingDirection = OrderingDirectionEnum::DESC;
 
     public function orderTransactionsBy(string $value): void
     {
         $this->transactionsOrdering = $value;
 
-        $this->transactionsOrderingDirection = $this->transactionsOrderingDirection === 'desc' ? 'asc' : 'desc';
+        $this->transactionsOrderingDirection = $this->transactionsOrderingDirection === OrderingDirectionEnum::DESC ? OrderingDirectionEnum::ASC : OrderingDirectionEnum::DESC;
     }
 
     private function getOrderingScope(): string
     {
         $scopes = [
-            'id'        => OrderByIdScope::class,
-            'timestamp' => OrderByTimestampScope::class,
-            'sender'    => OrderBySenderScope::class,
-            'recipient' => OrderByRecipientScope::class,
-            'amount'    => OrderByAmountScope::class,
-            'fee'       => OrderByFeeScope::class,
+            'id'        => ['asc' => OrderByIdAscScope::class, 'desc' => OrderByIdDescScope::class],
+            'timestamp' => ['asc' => OrderByTimestampAscScope::class, 'desc' => OrderByTimestampDescScope::class],
+            'sender'    => ['asc' => OrderBySenderAscScope::class, 'desc' => OrderBySenderDescScope::class],
+            'recipient' => ['asc' => OrderByRecipientAscScope::class, 'desc' => OrderByRecipientDescScope::class],
+            'amount'    => ['asc' => OrderByAmountAscScope::class, 'desc' => OrderByAmountDescScope::class],
+            'fee'       => ['asc' => OrderByFeeAscScope::class, 'desc' => OrderByFeeDescScope::class],
         ];
 
-        return $scopes[$this->transactionsOrdering];
+        return $scopes[$this->transactionsOrdering][$this->transactionsOrderingDirection];
     }
 }

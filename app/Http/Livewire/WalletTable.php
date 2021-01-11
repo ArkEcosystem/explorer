@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire;
 
+use App\Enums\OrderingTypeEnum;
 use App\Http\Livewire\Concerns\WalletsOrdering;
 use App\Models\Wallet;
 use App\ViewModels\ViewModelFactory;
@@ -27,6 +28,7 @@ final class WalletTable extends Component
 
         return view('livewire.wallet-table', [
             'wallets' => ViewModelFactory::paginate($query->paginate()),
+            'type'    => OrderingTypeEnum::ADDRESS,
         ]);
     }
 }

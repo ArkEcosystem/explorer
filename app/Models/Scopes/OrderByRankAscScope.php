@@ -12,6 +12,6 @@ final class OrderByRankAscScope implements Scope
 {
     public function apply(Builder $builder, Model $model)
     {
-        $builder->orderBy('rank', 'asc');
+        $builder->orderByRaw("(\"attributes\"->'delegate'->>'rank')::numeric ASC");
     }
 }
