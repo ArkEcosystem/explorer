@@ -7,5 +7,6 @@ namespace App\Enums;
 final class OrderingDirectionEnum
 {
     const ASC  = 'asc';
+
     const DESC = 'desc';
 }
