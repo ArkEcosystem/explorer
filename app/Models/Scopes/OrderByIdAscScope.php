@@ -8,10 +8,10 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Scope;
 
-final class OrderByGeneratorPublicKeyScope extends BaseOrderByScope implements Scope
+final class OrderByIdAscScope implements Scope
 {
     public function apply(Builder $builder, Model $model)
     {
-        $builder->orderBy('generator_public_key', $this->direction);
+        $builder->orderBy('id', 'asc');
     }
 }

@@ -8,10 +8,10 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Scope;
 
-final class OrderByRecipientScope extends BaseOrderByScope implements Scope
+final class OrderByBlockFeeAscScope implements Scope
 {
     public function apply(Builder $builder, Model $model)
     {
-        $builder->orderBy('recipient_id', $this->direction);
+        $builder->orderBy('total_fee', 'asc');
     }
 }

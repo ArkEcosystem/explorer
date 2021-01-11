@@ -8,10 +8,10 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Scope;
 
-final class OrderByAddressScope extends BaseOrderByScope implements Scope
+final class OrderByRankDescScope implements Scope
 {
     public function apply(Builder $builder, Model $model)
     {
-        $builder->orderBy('address', $this->direction);
+        $builder->orderBy('rank', 'desc');
     }
 }

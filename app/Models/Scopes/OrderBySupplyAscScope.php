@@ -8,10 +8,10 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Scope;
 
-final class OrderByBlockAmountScope extends BaseOrderByScope implements Scope
+final class OrderBySupplyAscScope implements Scope
 {
     public function apply(Builder $builder, Model $model)
     {
-        $builder->orderBy('total_amount', $this->direction);
+        $builder->orderBy('balance', 'asc');
     }
 }

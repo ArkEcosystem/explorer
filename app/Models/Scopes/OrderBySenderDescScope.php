@@ -8,10 +8,10 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Scope;
 
-final class OrderByIdScope extends BaseOrderByScope implements Scope
+final class OrderBySenderDescScope implements Scope
 {
     public function apply(Builder $builder, Model $model)
     {
-        $builder->orderBy('id', $this->direction);
+        $builder->orderBy('sender_public_key', 'desc');
     }
 }
