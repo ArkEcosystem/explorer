@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use App\Enums\OrderingDirectionEnum;
+use App\Enums\OrderingTypeEnum;
 use App\Http\Livewire\DelegateTable;
 use Livewire\Livewire;
 
@@ -25,4 +27,21 @@ it('should render with standby delegates', function () {
 it('should render with resigned delegates', function () {
     $component = Livewire::test(DelegateTable::class);
     $component->emit('filterByDelegateStatus', 'resigned');
+});
+
+it('should apply ordering through an event', function () {
+    $component = Livewire::test(DelegateTable::class);
+
+    $component->assertSet('delegatesOrdering', OrderingTypeEnum::RANK);
+    $component->assertSet('delegatesOrderingDirection', OrderingDirectionEnum::ASC);
+
+    $component->emit('orderDelegatesBy', OrderingTypeEnum::RANK);
+
+    $component->assertSet('delegatesOrdering', OrderingTypeEnum::RANK);
+    $component->assertSet('delegatesOrderingDirection', OrderingDirectionEnum::DESC);
+
+    $component->emit('orderDelegatesBy', OrderingTypeEnum::ADDRESS);
+
+    $component->assertSet('delegatesOrdering', OrderingTypeEnum::ADDRESS);
+    $component->assertSet('delegatesOrderingDirection', OrderingDirectionEnum::ASC);
 });

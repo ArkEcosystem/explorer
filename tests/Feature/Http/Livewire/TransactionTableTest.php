@@ -3,6 +3,8 @@
 declare(strict_types=1);
 
 use App\Enums\CoreTransactionTypeEnum;
+use App\Enums\OrderingDirectionEnum;
+use App\Enums\OrderingTypeEnum;
 use App\Enums\TransactionTypeGroupEnum;
 
 use App\Facades\Network;
@@ -121,4 +123,21 @@ it('should apply filters through an event', function () {
         $component->assertSee(NumberFormatter::currency($transaction->fee(), Network::currency()));
         $component->assertSee(NumberFormatter::currency($transaction->amount(), Network::currency()));
     }
+});
+
+it('should apply ordering through an event', function () {
+    $component = Livewire::test(TransactionTable::class);
+
+    $component->assertSet('transactionsOrdering', OrderingTypeEnum::TIMESTAMP);
+    $component->assertSet('transactionsOrderingDirection', OrderingDirectionEnum::DESC);
+
+    $component->emit('orderTransactionsBy', OrderingTypeEnum::TIMESTAMP);
+
+    $component->assertSet('transactionsOrdering', OrderingTypeEnum::TIMESTAMP);
+    $component->assertSet('transactionsOrderingDirection', OrderingDirectionEnum::ASC);
+
+    $component->emit('orderTransactionsBy', OrderingTypeEnum::AMOUNT);
+
+    $component->assertSet('transactionsOrdering', OrderingTypeEnum::AMOUNT);
+    $component->assertSet('transactionsOrderingDirection', OrderingDirectionEnum::DESC);
 });
