@@ -233,6 +233,7 @@ return [
         'Network'         => App\Facades\Network::class,
         'NumberFormatter' => App\Services\NumberFormatter::class,
         'Settings'        => App\Services\Settings::class,
+        'OrderingTypeEnum' => App\Enums\OrderingTypeEnum::class,
     ],
 
 ];
