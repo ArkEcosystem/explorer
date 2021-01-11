@@ -8,7 +8,7 @@ use App\Enums\TransactionTypeGroupEnum;
 use App\Facades\Network;
 use App\Http\Livewire\TransactionTable;
 use App\Models\Block;
-use App\Models\Scopes\OrderByTimestampScope;
+use App\Models\Scopes\OrderByTimestampDescScope;
 use App\Models\Transaction;
 use App\Models\Wallet;
 use App\Services\NumberFormatter;
@@ -25,7 +25,7 @@ it('should list the first page of records', function () {
 
     $component = Livewire::test(TransactionTable::class);
 
-    foreach (ViewModelFactory::paginate(Transaction::scoped(OrderByTimestampScope::class)->paginate())->items() as $transaction) {
+    foreach (ViewModelFactory::paginate(Transaction::scoped(OrderByTimestampDescScope::class)->paginate())->items() as $transaction) {
         $component->assertSee($transaction->id());
         $component->assertSee($transaction->timestamp());
         $component->assertSee($transaction->sender()->address());

@@ -8,7 +8,7 @@ use App\Facades\Network;
 use App\Http\Livewire\LatestRecords;
 use App\Models\Block;
 use App\Models\Scopes\OrderByHeightScope;
-use App\Models\Scopes\OrderByTimestampScope;
+use App\Models\Scopes\OrderByTimestampDescScope;
 use App\Models\Transaction;
 use App\Models\Wallet;
 use App\Services\NumberFormatter;
@@ -43,7 +43,7 @@ it('should list the first page of transactions', function () {
     $component = Livewire::test(LatestRecords::class)
         ->call('pollTransactions');
 
-    foreach (ViewModelFactory::collection(Transaction::scoped(OrderByTimestampScope::class)->take(15)->get()) as $transaction) {
+    foreach (ViewModelFactory::collection(Transaction::scoped(OrderByTimestampDescScope::class)->take(15)->get()) as $transaction) {
         $component->assertSee($transaction->id());
         $component->assertSee($transaction->timestamp());
         $component->assertSee($transaction->sender()->address());
