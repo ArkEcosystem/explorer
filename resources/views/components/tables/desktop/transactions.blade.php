@@ -2,18 +2,18 @@
     <table>
         <thead>
             <tr>
-                <x-tables.headers.desktop.id name="general.transaction.id" on-click="$emit('orderTransactionsBy', '{{ OrderingTypeEnum::ID }}')"/>
-                <x-tables.headers.desktop.text name="general.transaction.timestamp" on-click="$emit('orderTransactionsBy', '{{ OrderingTypeEnum::TIMESTAMP }}')" responsive />
+                <x-tables.headers.desktop.id name="general.transaction.id" on-click="$emit('orderTransactionsBy', '{{ OrderingTypeEnum::ID }}')" :sorting-direction="$this->transactionsOrderingDirection" />
+                <x-tables.headers.desktop.text name="general.transaction.timestamp" on-click="$emit('orderTransactionsBy', '{{ OrderingTypeEnum::TIMESTAMP }}')" responsive :sorting-direction="$this->transactionsOrderingDirection" />
                 @isset($useDirection)
-                    <x-tables.headers.desktop.address name="general.transaction.sender" on-click="$emit('orderTransactionsBy', '{{ OrderingTypeEnum::SENDER }}')" icon use-direction />
+                    <x-tables.headers.desktop.address name="general.transaction.sender" on-click="$emit('orderTransactionsBy', '{{ OrderingTypeEnum::SENDER }}')" icon use-direction :sorting-direction="$this->transactionsOrderingDirection" />
                 @else
-                    <x-tables.headers.desktop.address name="general.transaction.sender" on-click="$emit('orderTransactionsBy', '{{ OrderingTypeEnum::SENDER }}')" icon />
+                    <x-tables.headers.desktop.address name="general.transaction.sender" on-click="$emit('orderTransactionsBy', '{{ OrderingTypeEnum::SENDER }}')" icon :sorting-direction="$this->transactionsOrderingDirection" />
                 @endif
-                <x-tables.headers.desktop.address name="general.transaction.recipient" on-click="$emit('orderTransactionsBy', '{{ OrderingTypeEnum::RECIPIENT }}')" />
-                <x-tables.headers.desktop.number name="general.transaction.amount" on-click="$emit('orderTransactionsBy', '{{ OrderingTypeEnum::AMOUNT }}')" />
-                <x-tables.headers.desktop.number name="general.transaction.fee" on-click="$emit('orderTransactionsBy', '{{ OrderingTypeEnum::FEE }}')" responsive breakpoint="xl" />
+                <x-tables.headers.desktop.address name="general.transaction.recipient" on-click="$emit('orderTransactionsBy', '{{ OrderingTypeEnum::RECIPIENT }}')" :sorting-direction="$this->transactionsOrderingDirection" />
+                <x-tables.headers.desktop.number name="general.transaction.amount" on-click="$emit('orderTransactionsBy', '{{ OrderingTypeEnum::AMOUNT }}')" :sorting-direction="$this->transactionsOrderingDirection" />
+                <x-tables.headers.desktop.number name="general.transaction.fee" on-click="$emit('orderTransactionsBy', '{{ OrderingTypeEnum::FEE }}')" responsive breakpoint="xl" :sorting-direction="$this->transactionsOrderingDirection" />
                 @isset($useConfirmations)
-                    <x-tables.headers.desktop.number name="general.transaction.confirmations" on-click="$emit('orderTransactionsBy', '{{ OrderingTypeEnum::CONFIRMATIONS }}')" responsive breakpoint="xl" />
+                    <x-tables.headers.desktop.number name="general.transaction.confirmations" on-click="$emit('orderTransactionsBy', '{{ OrderingTypeEnum::CONFIRMATIONS }}')" responsive breakpoint="xl" :sorting-direction="$this->transactionsOrderingDirection" />
                 @endisset
             </tr>
         </thead>

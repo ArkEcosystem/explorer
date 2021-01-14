@@ -2,9 +2,9 @@
     <table>
         <thead>
             <tr>
-                <x-tables.headers.desktop.id name="general.delegates.id" on-click="$emit('orderDelegatesBy', '{{ OrderingTypeEnum::ID }}')" />
-                <x-tables.headers.desktop.address name="general.delegates.name" on-click="$emit('orderDelegatesBy', '{{ OrderingTypeEnum::ADDRESS }}')" />
-                <x-tables.headers.desktop.number name="general.delegates.votes" responsive on-click="$emit('orderDelegatesBy', '{{ OrderingTypeEnum::VOTE }}')"/>
+                <x-tables.headers.desktop.id name="general.delegates.id" on-click="$emit('orderDelegatesBy', '{{ OrderingTypeEnum::ID }}')" :sorting-direction="$this->delegatesOrderingDirection" />
+                <x-tables.headers.desktop.address name="general.delegates.name" on-click="$emit('orderDelegatesBy', '{{ OrderingTypeEnum::ADDRESS }}')" :sorting-direction="$this->delegatesOrderingDirection" />
+                <x-tables.headers.desktop.number name="general.delegates.votes" responsive on-click="$emit('orderDelegatesBy', '{{ OrderingTypeEnum::VOTE }}')" :sorting-direction="$this->delegatesOrderingDirection" />
             </tr>
         </thead>
         <tbody>

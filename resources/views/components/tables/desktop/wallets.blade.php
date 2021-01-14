@@ -2,10 +2,10 @@
     <table>
         <thead>
             <tr>
-                <x-tables.headers.desktop.address name="general.wallet.address" on-click="$emit('orderWalletsBy', '{{ OrderingTypeEnum::ADDRESS }}')" />
+                <x-tables.headers.desktop.address name="general.wallet.address" on-click="$emit('orderWalletsBy', '{{ OrderingTypeEnum::ADDRESS }}')" :sorting-direction="$this->walletsOrderingDirection" />
                 <x-tables.headers.desktop.icon name="general.wallet.info" />
-                <x-tables.headers.desktop.number name="general.wallet.balance" on-click="$emit('orderWalletsBy', '{{ OrderingTypeEnum::BALANCE }}')" />
-                <x-tables.headers.desktop.number name="general.wallet.supply" responsive on-click="$emit('orderWalletsBy', '{{ OrderingTypeEnum::SUPPLY }}')" />
+                <x-tables.headers.desktop.number name="general.wallet.balance" on-click="$emit('orderWalletsBy', '{{ OrderingTypeEnum::BALANCE }}')" :sorting-direction="$this->walletsOrderingDirection" />
+                <x-tables.headers.desktop.number name="general.wallet.supply" responsive on-click="$emit('orderWalletsBy', '{{ OrderingTypeEnum::SUPPLY }}')" :sorting-direction="$this->walletsOrderingDirection" />
             </tr>
         </thead>
         <tbody>
