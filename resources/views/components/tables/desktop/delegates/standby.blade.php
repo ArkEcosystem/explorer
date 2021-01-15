@@ -2,9 +2,9 @@
     <table>
         <thead>
             <tr>
-                <x-tables.headers.desktop.text name="general.delegates.rank" alignment="text-left" on-click="$emit('orderDelegatesBy', '{{ OrderingTypeEnum::RANK }}')" />
-                <x-tables.headers.desktop.address name="general.delegates.name" on-click="$emit('orderDelegatesBy', '{{ OrderingTypeEnum::ADDRESS }}')" />
-                <x-tables.headers.desktop.number name="general.delegates.votes" responsive breakpoint="lg" on-click="$emit('orderDelegatesBy', '{{ OrderingTypeEnum::VOTE }}')" />
+                <x-tables.headers.desktop.text name="general.delegates.rank" alignment="text-left" wire:click="$emit('orderDelegatesBy', '{{ OrderingTypeEnum::RANK }}')" />
+                <x-tables.headers.desktop.address name="general.delegates.name" wire:click="$emit('orderDelegatesBy', '{{ OrderingTypeEnum::ADDRESS }}')" />
+                <x-tables.headers.desktop.number name="general.delegates.votes" responsive breakpoint="lg" wire:click="$emit('orderDelegatesBy', '{{ OrderingTypeEnum::VOTE }}')" />
                 @if (Network::usesMarketSquare())
                     <x-tables.headers.desktop.icon name="general.delegates.profile" />
                     <x-tables.headers.desktop.number name="general.delegates.commission" responsive />

@@ -1,18 +1,14 @@
 @isset($responsive)
     <th
         class="hidden {{ $breakpoint ?? 'lg'}}:table-cell text-right cursor-pointer"
-        @isset($onClick)
-            wire:click="{{ $onClick }}"
-        @endisset
+        {{ $attributes->except(['class', 'breakpoint', 'responsive']) }}
     >
         @lang($name)
     </th>
 @else
     <th
         class="text-right cursor-pointer"
-        @isset($onClick)
-            wire:click="{{ $onClick }}"
-        @endisset
+        {{ $attributes->except(['class', 'breakpoint', 'responsive']) }}
     >
         @isset ($slot)
             <div class="inline-flex items-center space-x-2">
