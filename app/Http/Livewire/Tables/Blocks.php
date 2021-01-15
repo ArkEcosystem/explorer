@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire\Tables;
 
+use App\Http\Livewire\Concerns\BlocksOrdering;
 use App\ViewModels\ViewModelFactory;
 use ARKEcosystem\UserInterface\Http\Livewire\Concerns\HasPagination;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
@@ -14,6 +15,7 @@ use Livewire\Component;
 final class Blocks extends Component
 {
     use HasPagination;
+    use BlocksOrdering;
 
     protected LengthAwarePaginator $blocks;
 

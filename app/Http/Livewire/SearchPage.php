@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire;
 
+use App\Http\Livewire\Concerns\BlocksOrdering;
 use App\Http\Livewire\Concerns\ManagesSearch;
 use App\Services\Search\BlockSearch;
 use App\Services\Search\TransactionSearch;
@@ -18,6 +19,7 @@ final class SearchPage extends Component
 {
     use ManagesSearch;
     use WithPagination;
+    use BlocksOrdering;
 
     /** @phpstan-ignore-next-line */
     protected $listeners = ['pageChanged' => 'performSearch'];

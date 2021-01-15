@@ -24,7 +24,7 @@
             @if($results && $results->count())
                 <div>
                     @if ($state['type'] === 'block')
-                        <x-tables.blocks :blocks="$results" />
+                        <x-tables.blocks :blocks="$results" :sorting="$this->blocksOrderingDirection"/>
                     @endif
 
                     @if ($state['type'] === 'transaction')

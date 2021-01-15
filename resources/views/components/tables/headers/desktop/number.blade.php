@@ -5,13 +5,7 @@
             wire:click="{{ $onClick }}"
         @endisset
     >
-        <div class="flex items-center">
-            @lang($name)
-
-            @isset($sortingDirection)
-                <x-general.sorting-icon :sorting-direction="$sortingDirection" />
-            @endisset
-        </div>
+        @lang($name)
     </th>
 @else
     <th
@@ -25,18 +19,10 @@
                 <div>@lang($name)</div>
 
                 {{ $slot }}
-
-                @isset($sortingDirection)
-                    <x-general.sorting-icon :sorting-direction="$sortingDirection" />
-                @endisset
             </div>
         @else
             <div class="flex items-center">
                 @lang($name)
-
-                @isset($sortingDirection)
-                    <x-general.sorting-icon :sorting-direction="$sortingDirection" />
-                @endisset
             </div>
         @endisset
     </th>
