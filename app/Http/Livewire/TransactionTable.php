@@ -41,12 +41,12 @@ final class TransactionTable extends Component
 
     public function render(): View
     {
-        $query = Transaction::scoped($this->getOrderingScope(), $this->transactionsOrderingDirection);
+        $query = Transaction::withScope($this->getOrderingScope(), $this->transactionsOrderingDirection);
 
         if ($this->state['type'] !== 'all') {
             $scopeClass = Transaction::TYPE_SCOPES[$this->state['type']];
 
-            $query = $query->scoped($scopeClass);
+            $query = $query->withScope($scopeClass);
         }
 
         return view('livewire.transaction-table', [

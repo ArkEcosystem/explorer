@@ -27,7 +27,7 @@ it('should list the first page of records', function () {
 
     $component = Livewire::test(TransactionTable::class);
 
-    foreach (ViewModelFactory::paginate(Transaction::scoped(OrderByTimestampDescScope::class)->paginate())->items() as $transaction) {
+    foreach (ViewModelFactory::paginate(Transaction::withScope(OrderByTimestampDescScope::class)->paginate())->items() as $transaction) {
         $component->assertSee($transaction->id());
         $component->assertSee($transaction->timestamp());
         $component->assertSee($transaction->sender()->address());

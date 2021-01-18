@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
-use App\Macros\ScopedMacro;
 use App\Services\BigNumber;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -33,8 +32,6 @@ final class AppServiceProvider extends ServiceProvider
     {
         $this->registerCollectionMacros();
 
-        $this->registerBuilderMacros();
-
         $this->registerDataBags();
     }
 
@@ -55,17 +52,6 @@ final class AppServiceProvider extends ServiceProvider
 
             /* @phpstan-ignore-next-line */
             return collect($this->items);
-        });
-    }
-
-    private function registerBuilderMacros(): void
-    {
-        /* @phpstan-ignore-next-line */
-        Builder::macro('scoped', function (...$args) {
-            /** @var Builder $query */
-            $query = $this;
-
-            return (new ScopedMacro($query))(...$args);
         });
     }
 

@@ -58,7 +58,7 @@ final class DelegateTable extends Component
         return Wallet::query()
             ->whereNotNull('attributes->delegate->username')
             ->whereRaw("(\"attributes\"->'delegate'->>'rank')::numeric <= ?", [Network::delegateCount()])
-            ->scoped($this->getOrderingScope(), $this->delegatesOrderingDirection);
+            ->withScope($this->getOrderingScope(), $this->delegatesOrderingDirection);
     }
 
     public function standbyQuery(): Builder
@@ -67,7 +67,7 @@ final class DelegateTable extends Component
             ->whereNotNull('attributes->delegate->username')
             ->whereRaw("(\"attributes\"->'delegate'->>'rank')::numeric > ?", [Network::delegateCount()])
             ->limit(Network::delegateCount())
-            ->scoped($this->getOrderingScope(), $this->delegatesOrderingDirection);
+            ->withScope($this->getOrderingScope(), $this->delegatesOrderingDirection);
     }
 
     public function resignedQuery(): Builder
@@ -76,6 +76,6 @@ final class DelegateTable extends Component
             ->whereNotNull('attributes->delegate->username')
             ->where('attributes->delegate->resigned', true)
             ->limit(Network::delegateCount())
-            ->scoped($this->getOrderingScope(), $this->delegatesOrderingDirection);
+            ->withScope($this->getOrderingScope(), $this->delegatesOrderingDirection);
     }
 }

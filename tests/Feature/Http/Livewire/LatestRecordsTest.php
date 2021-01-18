@@ -26,7 +26,7 @@ it('should list the first page of blocks', function () {
         ->set('state.selected', 'blocks')
         ->call('pollBlocks');
 
-    foreach (ViewModelFactory::collection(Block::scoped(OrderByHeightDescScope::class)->take(15)->get()) as $block) {
+    foreach (ViewModelFactory::collection(Block::withScope(OrderByHeightDescScope::class)->take(15)->get()) as $block) {
         $component->assertSee($block->id());
         $component->assertSee($block->timestamp());
         $component->assertSee($block->username());
@@ -43,7 +43,7 @@ it('should list the first page of transactions', function () {
     $component = Livewire::test(LatestRecords::class)
         ->call('pollTransactions');
 
-    foreach (ViewModelFactory::collection(Transaction::scoped(OrderByTimestampDescScope::class)->take(15)->get()) as $transaction) {
+    foreach (ViewModelFactory::collection(Transaction::withScope(OrderByTimestampDescScope::class)->take(15)->get()) as $transaction) {
         $component->assertSee($transaction->id());
         $component->assertSee($transaction->timestamp());
         $component->assertSee($transaction->sender()->address());
