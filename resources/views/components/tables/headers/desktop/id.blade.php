@@ -7,9 +7,9 @@
         @lang($name)
 
         @if($attributes->get('with-ordering'))
-            <x-ark-icon name="{{ $this->renderDirectionIcon($name) }}" size="xs" class="h-2 w-2 ml-2" />
+            <x-ark-icon name="{{ $this->renderDirectionIcon($name) }}" size="xs" class="ml-2 w-2 h-2" />
         @else
-            <x-ark-icon name="chevron-down" size="xs" class="h-2 w-2 ml-2" />
+            <x-ark-icon name="chevron-down" size="xs" class="ml-2 w-2 h-2" />
         @endif
     </div>
 </th>
