@@ -27,9 +27,27 @@ trait TransactionsOrdering
 
     public function orderTransactionsBy(string $value): void
     {
-        $this->transactionsOrdering = $value;
+        if ($value === $this->transactionsOrdering) {
+            $this->transactionsOrderingDirection =
+                $this->transactionsOrderingDirection === OrderingDirectionEnum::DESC ? OrderingDirectionEnum::ASC : OrderingDirectionEnum::DESC;
+        }
 
-        $this->transactionsOrderingDirection = $this->transactionsOrderingDirection === OrderingDirectionEnum::DESC ? OrderingDirectionEnum::ASC : OrderingDirectionEnum::DESC;
+        $this->transactionsOrdering = $value;
+    }
+
+    public function renderDirectionIcon(string $value)
+    {
+        $value = substr($value, strrpos($value, '.') + 1);
+
+        if ($value === $this->transactionsOrdering) {
+            if ($this->transactionsOrderingDirection === OrderingDirectionEnum::DESC) {
+                return 'chevron-down';
+            }
+
+            return 'chevron-up';
+        }
+
+        return 'chevron-down';
     }
 
     private function getOrderingScope(): string

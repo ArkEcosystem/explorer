@@ -1,6 +1,6 @@
 <div id="transaction-list" class="w-full">
     <x-skeletons.transactions>
-        <x-tables.desktop.transactions :transactions="$transactions" />
+        <x-tables.desktop.transactions :transactions="$transactions" with-ordering />
 
         <x-tables.mobile.transactions :transactions="$transactions" />
 

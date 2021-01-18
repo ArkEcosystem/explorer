@@ -2,8 +2,8 @@
     <table>
         <thead>
             <tr>
-                <x-tables.headers.desktop.id name="general.transaction.id" wire:click="$emit('orderTransactionsBy', '{{ OrderingTypeEnum::ID }}')" />
-                <x-tables.headers.desktop.text name="general.transaction.timestamp" wire:click="$emit('orderTransactionsBy', '{{ OrderingTypeEnum::TIMESTAMP }}')" responsive />
+                <x-tables.headers.desktop.id name="general.transaction.id" wire:click="$emit('orderTransactionsBy', '{{ OrderingTypeEnum::ID }}')" :with-ordering="$withOrdering ?? false" />
+                <x-tables.headers.desktop.text name="general.transaction.timestamp" wire:click="$emit('orderTransactionsBy', '{{ OrderingTypeEnum::TIMESTAMP }}')" :with-ordering="$withOrdering ?? false" responsive />
                 @isset($useDirection)
                     <x-tables.headers.desktop.address name="general.transaction.sender" wire:click="$emit('orderTransactionsBy', '{{ OrderingTypeEnum::SENDER }}')" icon use-direction />
                 @else
