@@ -19,7 +19,6 @@ parameters:
         - '#but return statement is missing#'
         - '#InvalidArgumentException constructor expects string#'
         - '#withScope#'
-        - '#scoped#'
         # FIXME
         - '#function substr expects string, string\|false given#'
         - '#AbstractNetwork#'
