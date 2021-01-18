@@ -4,7 +4,7 @@
             <tr>
                 <x-tables.headers.desktop.text name="general.delegates.rank" wire:click="$emit('orderDelegatesBy', '{{ OrderingTypeEnum::RANK }}')" />
                 <x-tables.headers.desktop.address name="general.delegates.name" wire:click="$emit('orderDelegatesBy', '{{ OrderingTypeEnum::ADDRESS }}')" />
-                <x-tables.headers.desktop.status name="general.delegates.status">
+                <x-tables.headers.desktop.status name="general.delegates.status" wire:click="$emit('orderDelegatesBy', '{{ OrderingTypeEnum::STATUS }}')">
                     <x-ark-info :tooltip="trans('pages.delegates.info.status')" />
                 </x-tables.headers.desktop.status>
                 <x-tables.headers.desktop.number name="general.delegates.votes" responsive breakpoint="lg" wire:click="$emit('orderDelegatesBy', '{{ OrderingTypeEnum::VOTE }}')" />
@@ -12,7 +12,7 @@
                     <x-tables.headers.desktop.icon name="general.delegates.profile" />
                     <x-tables.headers.desktop.number name="general.delegates.commission" responsive />
                 @endif
-                <x-tables.headers.desktop.number name="general.delegates.productivity">
+                <x-tables.headers.desktop.number name="general.delegates.productivity" wire:click="$emit('orderDelegatesBy', '{{ OrderingTypeEnum::PRODUCTIVITY }}')">
                     <x-ark-info :tooltip="trans('pages.delegates.info.productivity')" />
                 </x-tables.headers.desktop.number>
             </tr>

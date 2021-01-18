@@ -26,11 +26,15 @@ final class OrderingTypeEnum
 
     const ID                   = 'id';
 
+    const PRODUCTIVITY         = 'productivity';
+
     const RANK                 = 'rank';
 
     const RECIPIENT            = 'recipient';
 
     const SENDER               = 'sender';
+
+    const STATUS               = 'status';
 
     const SUPPLY               = 'supply';
 

@@ -10,8 +10,12 @@ use App\Models\Scopes\OrderByAddressAscScope;
 use App\Models\Scopes\OrderByAddressDescScope;
 use App\Models\Scopes\OrderByIdAscScope;
 use App\Models\Scopes\OrderByIdDescScope;
+use App\Models\Scopes\OrderByProductivityAscScope;
+use App\Models\Scopes\OrderByProductivityDescScope;
 use App\Models\Scopes\OrderByRankAscScope;
 use App\Models\Scopes\OrderByRankDescScope;
+use App\Models\Scopes\OrderByStatusAscScope;
+use App\Models\Scopes\OrderByStatusDescScope;
 use App\Models\Scopes\OrderByVoteAscScope;
 use App\Models\Scopes\OrderByVoteDescScope;
 
@@ -31,10 +35,12 @@ trait DelegatesOrdering
     private function getOrderingScope(): string
     {
         $scopes = [
-            'id'      => ['asc' => OrderByIdAscScope::class, 'desc' => OrderByIdDescScope::class],
-            'rank'    => ['asc' => OrderByRankAscScope::class, 'desc' => OrderByRankDescScope::class],
-            'address' => ['asc' => OrderByAddressAscScope::class, 'desc' => OrderByAddressDescScope::class],
-            'votes'   => ['asc' => OrderByVoteAscScope::class, 'desc' => OrderByVoteDescScope::class],
+            'id'           => ['asc' => OrderByIdAscScope::class, 'desc' => OrderByIdDescScope::class],
+            'rank'         => ['asc' => OrderByRankAscScope::class, 'desc' => OrderByRankDescScope::class],
+            'address'      => ['asc' => OrderByAddressAscScope::class, 'desc' => OrderByAddressDescScope::class],
+            'votes'        => ['asc' => OrderByVoteAscScope::class, 'desc' => OrderByVoteDescScope::class],
+            'status'       => ['asc' => OrderByStatusAscScope::class, 'desc' => OrderByStatusDescScope::class],
+            'productivity' => ['asc' => OrderByProductivityAscScope::class, 'desc' => OrderByProductivityDescScope::class],
         ];
 
         return $scopes[$this->delegatesOrdering][$this->delegatesOrderingDirection];
