@@ -14,7 +14,7 @@ final class OrderByAmountAscScope implements Scope
     public function apply(Builder $builder, Model $model)
     {
         $builder->fromRaw('transactions t');
-        $builder->selectRaw(DB::raw("t.*, d.list, COALESCE(d.list, t.amount) AS calc_amount"));
+        $builder->selectRaw(DB::raw('t.*, d.list, COALESCE(d.list, t.amount) AS calc_amount'));
         $builder->crossJoin(DB::raw("LATERAL (
     SELECT sum((d->>'amount')::bigint) AS list
     FROM jsonb_array_elements(t.asset -> 'payments') AS d(elem)) d"));
