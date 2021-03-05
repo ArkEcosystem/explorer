@@ -24,8 +24,8 @@ final class RoundCalculator
         $currentRound       = (int) floor($heightFromLastSpan / $activeDelegates) + 1;
         $nextRound          = $currentRound + 1;
 
-        $result['round'] = $currentRound;
-        $result['roundHeight'] = static::getRoundHeight($currentRound, $activeDelegates);
+        $result['round']           = $currentRound;
+        $result['roundHeight']     = static::getRoundHeight($currentRound, $activeDelegates);
         $result['nextRound']       = $nextRound;
         $result['nextRoundHeight'] = static::getRoundHeight($nextRound, $activeDelegates);
         $result['maxDelegates']    = $activeDelegates;
