@@ -32,6 +32,8 @@ final class Round extends Model
      */
     protected $casts = [
         'balance' => BigInteger::class,
+        'public_key' => 'string',
+        'round' => 'int'
     ];
 
     /**
