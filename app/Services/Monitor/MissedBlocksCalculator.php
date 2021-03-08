@@ -16,7 +16,7 @@ final class MissedBlocksCalculator
     public static function calculate(int $height): array
     {
         $activeDelegates              = Network::delegateCount();
-        $lastRoundInfo = RoundCalculator::calculate($height - $activeDelegates);
+        $lastRoundInfo                = RoundCalculator::calculate($height - $activeDelegates);
 
         $currentRound                 = $lastRoundInfo['nextRound'];
         $tempDelegateOrderForTheRound = Round::where('round', $currentRound)->orderByRaw('balance DESC, public_key ASC')->pluck('public_key')->toArray();
@@ -38,7 +38,7 @@ final class MissedBlocksCalculator
         );
 
         $theoricalBlocksByTimestamp = [];
-        $lastActualTimestamp = count($actualBlocksTimestamps) > 0 ? $actualBlocksTimestamps[count($actualBlocksTimestamps) - 1] : 0;
+        $lastActualTimestamp        = count($actualBlocksTimestamps) > 0 ? $actualBlocksTimestamps[count($actualBlocksTimestamps) - 1] : 0;
         for (
             $ts = $firstBlockInRoundTheoricalTimestamp, $i = 0;
             $ts <= $lastActualTimestamp;
@@ -49,7 +49,7 @@ final class MissedBlocksCalculator
 
         $forgeInfoByDelegates = [];
         foreach ($theoricalBlocksByTimestamp as $ts => $delegate) {
-            $forgeInfoByDelegates[$delegate] = isset($forgeInfoByDelegates[$delegate]) ? $forgeInfoByDelegates[$delegate] : array('forged' => 0, 'missed' => 0);
+            $forgeInfoByDelegates[$delegate] = isset($forgeInfoByDelegates[$delegate]) ? $forgeInfoByDelegates[$delegate] : ['forged' => 0, 'missed' => 0];
             if (in_array($ts, $actualBlocksTimestamps, true)) {
                 $forgeInfoByDelegates[$delegate]['forged']++;
             } else {
