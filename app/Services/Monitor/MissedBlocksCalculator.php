@@ -12,8 +12,22 @@ use App\Services\Monitor\Actions\ShuffleDelegates;
 
 final class MissedBlocksCalculator
 {
-    //currently calculating stats only for the current round TODO last 30 days, or last x days/rounds
-    public static function calculate(int $height): array
+    public static function calculateForLastXDays(int $height, int $numberOfDays): array {
+        $heightTimestamp     = Block::where('height', $height)->firstOrFail()->timestamp;
+
+        $timeRangeInSeconds = $numberOfDays * 24 * 60 * 60;
+        $startHeight = Block::where('timestamp', '>', $heightTimestamp - $timeRangeInSeconds)
+            ->orderBy('height')
+            ->firstOrFail()->height;
+        $forgingStats = [];
+        for ($h = $startHeight; $h <= $height; $height += Network::delegateCount()) {
+            $forgingStats = self::calculateForRound($h, $forgingStats);
+        }
+
+        return $forgingStats;
+    }
+
+    public static function calculateForRound(int $height, array $currentStats): array
     {
         $activeDelegates              = Network::delegateCount();
         $lastRoundInfo                = RoundCalculator::calculate($height - $activeDelegates);
@@ -47,7 +61,7 @@ final class MissedBlocksCalculator
             $theoricalBlocksByTimestamp[strval($ts)] = $finalDelegateOrderForRound[$i % $activeDelegates];
         }
 
-        $forgeInfoByDelegates = [];
+        $forgeInfoByDelegates = $currentStats;
         foreach ($theoricalBlocksByTimestamp as $ts => $delegate) {
             $forgeInfoByDelegates[$delegate] = isset($forgeInfoByDelegates[$delegate]) ? $forgeInfoByDelegates[$delegate] : ['forged' => 0, 'missed' => 0];
             if (in_array($ts, $actualBlocksTimestamps, true)) {
