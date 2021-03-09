@@ -163,6 +163,6 @@ it('should calculate the missed blocks', function () {
         'timestamp' => 124595288,
     ]);
 
-    $missedBlocks = MissedBlocksCalculator::calculate(6970364); // any height in the round [6970324, 6970374]
+    $missedBlocks = MissedBlocksCalculator::calculateForRound(6970364, []); // any height in the round [6970324, 6970374]
     $this->assertEquals($missedBlocks, $expectedStats);
 });
