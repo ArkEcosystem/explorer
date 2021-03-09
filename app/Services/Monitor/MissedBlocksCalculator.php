@@ -12,11 +12,12 @@ use App\Services\Monitor\Actions\ShuffleDelegates;
 
 final class MissedBlocksCalculator
 {
-    public static function calculateForLastXDays(int $height, int $numberOfDays): array {
+    public static function calculateForLastXDays(int $height, int $numberOfDays): array
+    {
         $heightTimestamp     = Block::where('height', $height)->firstOrFail()->timestamp;
 
         $timeRangeInSeconds = $numberOfDays * 24 * 60 * 60;
-        $startHeight = Block::where('timestamp', '>', $heightTimestamp - $timeRangeInSeconds)
+        $startHeight        = Block::where('timestamp', '>', $heightTimestamp - $timeRangeInSeconds)
             ->orderBy('height')
             ->firstOrFail()->height;
         $forgingStats = [];
