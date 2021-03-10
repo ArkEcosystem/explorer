@@ -25,7 +25,7 @@ final class BuildForgingStats implements ShouldQueue
         $forgingStats = MissedBlocksCalculator::calculateForLastXDays($this->height, $this->numberOfDays);
         foreach ($forgingStats as $publicKey => $statsForPublicKey) {
             ForgingStats::factory(1)->createOne([
-                'public_key' => $publicKey,
+                'public_key'    => $publicKey,
                 'missed_blocks' => $statsForPublicKey['missedBlocks'],
                 'forged_blocks' => $statsForPublicKey['forgedBlocks'],
             ]);
