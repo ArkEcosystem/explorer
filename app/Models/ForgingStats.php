@@ -5,18 +5,15 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Models\Concerns\SearchesCaseInsensitive;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @property string $id
  * @property string $public_key
  * @property int $missed_blocks
  * @property int $forged_blocks
  */
 final class ForgingStats extends Model
 {
-    use HasFactory;
     use SearchesCaseInsensitive;
 
     /**
@@ -43,14 +40,4 @@ final class ForgingStats extends Model
         'missed_blocks' => 'int',
         'forged_blocks' => 'int',
     ];
-
-    /**
-     * Get the current connection name for the model.
-     *
-     * @return string
-     */
-    public function getConnectionName()
-    {
-        return 'explorer';
-    }
 }

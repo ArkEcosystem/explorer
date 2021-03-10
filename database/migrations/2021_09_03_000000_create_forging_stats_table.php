@@ -11,10 +11,11 @@ final class CreateForgingStatsTable extends Migration
     public function up()
     {
         Schema::create('forging_stats', function (Blueprint $table) {
-            $table->string('id')->primary();
-            $table->string('public_key');
+            $table->string('public_key')->primary();
             $table->integer('missed_blocks');
             $table->integer('forged_blocks');
+            $table->timestamp('created_at')->nullable();
+            $table->timestamp('updated_at')->nullable();
         });
     }
 

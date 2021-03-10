@@ -19,9 +19,9 @@ final class MissedBlocksCalculator
         $timeRangeInSeconds = $numberOfDays * 24 * 60 * 60;
         $startHeight        = Block::where('timestamp', '>', $heightTimestamp - $timeRangeInSeconds)
             ->orderBy('height')
-            ->firstOrFail()->height;
+            ->firstOrFail()->height->toNumber();
         $forgingStats = [];
-        for ($h = $startHeight; $h <= $height; $height += Network::delegateCount()) {
+        for ($h = $startHeight; $h <= $height; $h += Network::delegateCount()) {
             $forgingStats = self::calculateForRound($h, $forgingStats);
         }
 
