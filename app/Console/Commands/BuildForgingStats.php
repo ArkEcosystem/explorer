@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
-use App\Jobs\BuildForgingStats;
+use App\Jobs\BuildForgingStats as Job;
 use Illuminate\Console\Command;
 
-final class BuildForgingStats extends Command
+class BuildForgingStats extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'forging-stats:build {--height=} {--days=}';
+    protected $signature = 'explorer:forging-stats:build {--height=} {--days=}';
 
     /**
      * The console command description.
@@ -31,7 +31,7 @@ final class BuildForgingStats extends Command
     public function handle()
     {
         $height = (int) $this->argument('height');
-        $days   = (int) $this->argument('days');
-        (new BuildForgingStats($height, $days))->handle();
+        $days = (int) $this->argument('days');
+        (new Job($height, $days))->handle();
     }
 }
