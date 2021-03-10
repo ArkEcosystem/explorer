@@ -30,8 +30,8 @@ final class BuildForgingStats extends Command
      */
     public function handle()
     {
-        $height = (int) $this->option('height');
-        $days   = (int) $this->option('days');
+        $height = intval($this->option('height'));
+        $days   = intval($this->option('days'));
         (new Job($height, $days))->handle();
     }
 }
