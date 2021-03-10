@@ -7,7 +7,7 @@ namespace App\Console\Commands;
 use App\Jobs\BuildForgingStats as Job;
 use Illuminate\Console\Command;
 
-class BuildForgingStats extends Command
+final class BuildForgingStats extends Command
 {
     /**
      * The name and signature of the console command.
@@ -31,7 +31,7 @@ class BuildForgingStats extends Command
     public function handle()
     {
         $height = (int) $this->argument('height');
-        $days = (int) $this->argument('days');
+        $days   = (int) $this->argument('days');
         (new Job($height, $days))->handle();
     }
 }
