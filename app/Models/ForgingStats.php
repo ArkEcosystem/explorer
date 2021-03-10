@@ -36,8 +36,8 @@ final class ForgingStats extends Model
      * @var array
      */
     protected $casts = [
-        'timestamp'    => 'string',
+        'timestamp'     => 'string',
         'public_key'    => 'string',
-        'forged' => 'bool',
+        'forged'        => 'bool',
     ];
 }

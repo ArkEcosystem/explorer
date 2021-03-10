@@ -66,7 +66,7 @@ final class MissedBlocksCalculator
         foreach ($theoricalBlocksByTimestamp as $ts => $delegate) {
             $forgeInfoByTimestamp[$ts] = [
                 'publicKey' => $delegate,
-                'forged' => in_array($ts, $actualBlocksTimestamps, true),
+                'forged'    => in_array($ts, $actualBlocksTimestamps, true),
             ];
         }
 

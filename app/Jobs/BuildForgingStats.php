@@ -26,11 +26,11 @@ final class BuildForgingStats implements ShouldQueue
         foreach ($forgingStats as $timestamp => $statsForTimestamp) {
             ForgingStats::updateOrCreate(
                 [
-                    'timestamp' => $timestamp
+                    'timestamp' => $timestamp,
                 ],
                 [
                     'public_key' => $statsForTimestamp['publicKey'],
-                    'forged' => $statsForTimestamp['forged'],
+                    'forged'     => $statsForTimestamp['forged'],
                 ],
             );
         }
