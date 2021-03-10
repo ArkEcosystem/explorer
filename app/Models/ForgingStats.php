@@ -8,9 +8,9 @@ use App\Models\Concerns\SearchesCaseInsensitive;
 use Illuminate\Database\Eloquent\Model;
 
 /**
+ * @property string $timestamp
  * @property string $public_key
- * @property int $missed_blocks
- * @property int $forged_blocks
+ * @property bool $forged
  */
 final class ForgingStats extends Model
 {
@@ -36,8 +36,8 @@ final class ForgingStats extends Model
      * @var array
      */
     protected $casts = [
+        'timestamp'    => 'string',
         'public_key'    => 'string',
-        'missed_blocks' => 'int',
-        'forged_blocks' => 'int',
+        'forged' => 'bool',
     ];
 }

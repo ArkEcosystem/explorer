@@ -22,13 +22,13 @@ final class MissedBlocksCalculator
             ->firstOrFail()->height->toNumber();
         $forgingStats = [];
         for ($h = $startHeight; $h <= $height; $h += Network::delegateCount()) {
-            $forgingStats = self::calculateForRound($h, $forgingStats);
+            $forgingStats = $forgingStats + self::calculateForRound($h);
         }
 
         return $forgingStats;
     }
 
-    public static function calculateForRound(int $height, array $currentStats): array
+    public static function calculateForRound(int $height): array
     {
         $activeDelegates              = Network::delegateCount();
         $lastRoundInfo                = RoundCalculator::calculate($height - $activeDelegates);
@@ -62,16 +62,14 @@ final class MissedBlocksCalculator
             $theoricalBlocksByTimestamp[strval($ts)] = $finalDelegateOrderForRound[$i % $activeDelegates];
         }
 
-        $forgeInfoByDelegates = $currentStats;
+        $forgeInfoByTimestamp = [];
         foreach ($theoricalBlocksByTimestamp as $ts => $delegate) {
-            $forgeInfoByDelegates[$delegate] = isset($forgeInfoByDelegates[$delegate]) ? $forgeInfoByDelegates[$delegate] : ['forged' => 0, 'missed' => 0];
-            if (in_array($ts, $actualBlocksTimestamps, true)) {
-                $forgeInfoByDelegates[$delegate]['forged']++;
-            } else {
-                $forgeInfoByDelegates[$delegate]['missed']++;
-            }
+            $forgeInfoByTimestamp[$ts] = [
+                'publicKey' => $delegate,
+                'forged' => in_array($ts, $actualBlocksTimestamps, true),
+            ];
         }
 
-        return $forgeInfoByDelegates;
+        return $forgeInfoByTimestamp;
     }
 }
