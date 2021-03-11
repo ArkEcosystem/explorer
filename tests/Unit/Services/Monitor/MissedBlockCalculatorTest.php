@@ -163,6 +163,20 @@ it('should calculate the missed blocks', function () {
         'timestamp' => 124595288,
     ]);
 
-    $missedBlocks = MissedBlocksCalculator::calculateForRound(6970364, []); // any height in the round [6970324, 6970374]
-    $this->assertEquals($missedBlocks, $expectedStats);
+    $blocksInfo = MissedBlocksCalculator::calculateForRound(6970364, []); // any height in the round [6970324, 6970374]
+    $delegateStats = [];
+    foreach ($blocksInfo as $blockInfo) {
+        $delegateStats[$blockInfo['publicKey']] = isset($delegateStats[$blockInfo['publicKey']]) ?
+            $delegateStats[$blockInfo['publicKey']] :
+            [
+                'forged' => 0,
+                'missed' => 0,
+            ];
+        if ($blockInfo['forged']) {
+            $delegateStats[$blockInfo['publicKey']]['forged']++;
+        } else {
+            $delegateStats[$blockInfo['publicKey']]['missed']++;
+        }
+    }
+    $this->assertEquals($delegateStats, $expectedStats);
 });
