@@ -16,7 +16,7 @@ final class BuildForgingStats implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    public function __construct(public int $height, public int $numberOfDays)
+    public function __construct(public int $height, public float $numberOfDays)
     {
     }
 

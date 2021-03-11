@@ -12,15 +12,17 @@ use App\Services\Monitor\Actions\ShuffleDelegates;
 
 final class MissedBlocksCalculator
 {
-    public static function calculateForLastXDays(int $height, int $numberOfDays): array
+    public static function calculateForLastXDays(int $height, float $numberOfDays): array
     {
         $heightTimestamp     = Block::where('height', $height)->firstOrFail()->timestamp;
-
+        echo 'height ts : '.$heightTimestamp;
         $timeRangeInSeconds = $numberOfDays * 24 * 60 * 60;
+        echo 'time range : '.$timeRangeInSeconds;
         $startHeight        = Block::where('timestamp', '>', $heightTimestamp - $timeRangeInSeconds)
             ->orderBy('height')
             ->firstOrFail()->height->toNumber();
         $forgingStats = [];
+        echo 'start height: '.$startHeight.' ; end height : '.$height;
         for ($h = $startHeight; $h <= $height; $h += Network::delegateCount()) {
             $forgingStats = $forgingStats + self::calculateForRound($h);
         }
