@@ -163,7 +163,7 @@ it('should calculate the missed blocks', function () {
         'timestamp' => 124595288,
     ]);
 
-    $blocksInfo = MissedBlocksCalculator::calculateForRound(6970364, []); // any height in the round [6970324, 6970374]
+    $blocksInfo = MissedBlocksCalculator::calculateForRound(6970364); // any height in the round [6970324, 6970374]
     $delegateStats = [];
     foreach ($blocksInfo as $blockInfo) {
         if (! isset($delegateStats[$blockInfo['publicKey']])) {
