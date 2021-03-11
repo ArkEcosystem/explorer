@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-use Illuminate\Support\Facades\Artisan;
-
 use App\Models\Block;
-use App\Models\Round;
+
 use App\Models\ForgingStats;
+use App\Models\Round;
+use Illuminate\Support\Facades\Artisan;
 
 use function Tests\configureExplorerDatabase;
 
@@ -83,7 +83,7 @@ it('should execute the command', function () {
     }
 
     Artisan::call('explorer:forging-stats:build', [
-        '--height' => 6970364, '--days' => 0.01
+        '--height' => 6970364, '--days' => 0.01,
     ]);
 
     $this->assertEquals(ForgingStats::all()->count(), 153);
