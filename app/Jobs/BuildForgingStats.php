@@ -48,8 +48,8 @@ final class BuildForgingStats implements ShouldQueue
     private function getHeight(): int
     {
         $height = $this->height;
-        
-        if ($height == 0) {
+
+        if ($height === 0) {
             $lastBlock = Block::orderBy('height', 'DESC')->limit(1)->firstOrFail();
             $height    = $lastBlock->height->toNumber();
         }
@@ -60,7 +60,7 @@ final class BuildForgingStats implements ShouldQueue
     private function getTimeRange(int $height): int
     {
         $timeRange = intval($this->numberOfDays * 24 * 60 * 60);
-        if ($timeRange == 0) {
+        if ($timeRange === 0) {
             $lastForgingInfoTs = (int) ForgingStats::orderBy('timestamp', 'DESC')
                 ->limit(1)
                 ->firstOr(function (): ForgingStats {
@@ -72,7 +72,7 @@ final class BuildForgingStats implements ShouldQueue
                     return $forgingStats1HourAgo;
                 })
                 ->timestamp;
-            
+
             $timestampForHeight = $this->getTimestampForHeight($height);
             // use a one-round margin to be sure we don't skip blocks from last forging info
             $timeRange = ($timestampForHeight - $lastForgingInfoTs) + (Network::delegateCount() * Network::blockTime());
