@@ -8,7 +8,7 @@ use App\Models\Concerns\SearchesCaseInsensitive;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @property string $timestamp
+ * @property int $timestamp
  * @property string $public_key
  * @property bool $forged
  */
@@ -36,7 +36,7 @@ final class ForgingStats extends Model
      * @var array
      */
     protected $casts = [
-        'timestamp'     => 'string',
+        'timestamp'     => 'int',
         'public_key'    => 'string',
         'forged'        => 'bool',
     ];

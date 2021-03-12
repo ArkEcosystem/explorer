@@ -11,7 +11,7 @@ final class CreateForgingStatsTestTable extends Migration
     public function up()
     {
         Schema::create('forging_stats', function (Blueprint $table) {
-            $table->string('timestamp')->primary();
+            $table->integer('timestamp')->primary();
             $table->string('public_key');
             $table->boolean('forged');
             $table->timestamp('created_at')->nullable();

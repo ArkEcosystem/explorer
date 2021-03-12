@@ -4,8 +4,11 @@ declare(strict_types=1);
 
 namespace App\Jobs;
 
+use App\Facades\Network;
 use App\Models\ForgingStats;
+use App\Models\Block;
 use App\Services\Monitor\MissedBlocksCalculator;
+use App\Services\Timestamp;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -22,7 +25,10 @@ final class BuildForgingStats implements ShouldQueue
 
     public function handle(): void
     {
-        $forgingStats = MissedBlocksCalculator::calculateForLastXDays($this->height, $this->numberOfDays);
+        $height = $this->getHeight();
+        $timeRange = $this->getTimeRange($height);
+        
+        $forgingStats = MissedBlocksCalculator::calculateFromHeightGoingBack($height, $timeRange);
         foreach ($forgingStats as $timestamp => $statsForTimestamp) {
             ForgingStats::updateOrCreate(
                 [
@@ -34,5 +40,53 @@ final class BuildForgingStats implements ShouldQueue
                 ],
             );
         }
+
+        // clean up old stats entries
+        $this->deleteMoreThan30DaysOldStats($timestamp);
+    }
+
+    private function getHeight(): int
+    {
+        $height = $this->height;
+        
+        if (!$height) {
+            $lastBlock = Block::orderBy('height', 'DESC')->limit(1)->firstOrFail();
+            $height = $lastBlock->height->toNumber();
+        }
+
+        return $height;
+    }
+
+    private function getTimeRange(int $height): int
+    {
+        $timeRange = intval($this->numberOfDays * 24 * 60 * 60);
+        if (!$timeRange) {
+            $lastForgingInfoTs = ForgingStats::orderBy('timestamp', 'DESC')
+                ->limit(1)
+                ->firstOr(function () {
+                    // by default if forging_stats table is not initialized we just build stats for last hour
+                    // (building stats is expensive, if we want data from last X days we need to ask for it explicitly)
+                    $forgingStats1HourAgo = new ForgingStats;
+                    $forgingStats1HourAgo->timestamp = Timestamp::now()->getTimestamp() - 60 * 60;
+                    return $forgingStats1HourAgo;
+                })
+                ->timestamp;
+            
+            $timestampForHeight = Block::where('height', $height)->limit(1)->firstOrFail()->timestamp;
+            // use a one-round margin to be sure we don't skip blocks from last forging info
+            $timeRange = ($timestampForHeight - $lastForgingInfoTs) + (Network::delegateCount() * Network::blockTime());
+            
+            if ($timeRange < 0 || $timeRange > 24 * 60 * 60) {
+                return 0;   // when time range is not specified, go back maximum 1 day (because 
+                            // it is then supposed to be an incremental stats build)
+            }
+        }
+
+        return $timeRange;
+    }
+
+    private function deleteMoreThan30DaysOldStats(int $refTimestamp): void
+    {
+        ForgingStats::where('timestamp', '<', $refTimestamp - 30 * 24 * 60 * 60)->delete();
     }
 }
