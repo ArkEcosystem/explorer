@@ -15,7 +15,7 @@ final class MissedBlocksCalculator
     public static function calculateFromHeightGoingBack(int $height, int $timeRangeInSeconds): array
     {
         $heightTimestamp     = Block::where('height', $height)->firstOrFail()->timestamp;
-        $startHeight        = Block::where('timestamp', '>', $heightTimestamp - $timeRangeInSeconds)
+        $startHeight         = Block::where('timestamp', '>', $heightTimestamp - $timeRangeInSeconds)
             ->orderBy('height')
             ->firstOrFail()->height->toNumber();
 
@@ -29,11 +29,11 @@ final class MissedBlocksCalculator
 
     public static function calculateForRound(int $height): array
     {
-        $activeDelegates              = Network::delegateCount();
-        $lastRoundInfo                = RoundCalculator::calculate($height - $activeDelegates);
-        $round                 = $lastRoundInfo['nextRound'];
-        $lastRoundLastBlockHeight = $lastRoundInfo['nextRoundHeight'] - 1;
-        $lastRoundLastBlockTs     = Block::where('height', $lastRoundLastBlockHeight)->firstOrFail()->timestamp;
+        $activeDelegates                       = Network::delegateCount();
+        $lastRoundInfo                         = RoundCalculator::calculate($height - $activeDelegates);
+        $round                                 = $lastRoundInfo['nextRound'];
+        $lastRoundLastBlockHeight              = $lastRoundInfo['nextRoundHeight'] - 1;
+        $lastRoundLastBlockTs                  = Block::where('height', $lastRoundLastBlockHeight)->firstOrFail()->timestamp;
         $firstBlockInRoundTheoreticalTimestamp = $lastRoundLastBlockTs + Network::blockTime();
         $slotNumberForFirstTheoreticalBlock    = (new Slots())->getSlotInfo($firstBlockInRoundTheoreticalTimestamp)['slotNumber'];
 
@@ -69,10 +69,9 @@ final class MissedBlocksCalculator
         int $height,
         int $slotNumberForFirstTheoreticalBlock,
         int $activeDelegates,
-    ): array
-    {
-        $tempDelegateOrderForTheRound = Round::where('round', $round)->orderByRaw('balance DESC, public_key ASC')->pluck('public_key')->toArray();
-        $tempDelegateOrderForTheRound = ShuffleDelegates::execute($tempDelegateOrderForTheRound, $height);
+    ): array {
+        $tempDelegateOrderForTheRound        = Round::where('round', $round)->orderByRaw('balance DESC, public_key ASC')->pluck('public_key')->toArray();
+        $tempDelegateOrderForTheRound        = ShuffleDelegates::execute($tempDelegateOrderForTheRound, $height);
         $finalDelegateOrderForRound          = array_merge(
             array_slice($tempDelegateOrderForTheRound, $slotNumberForFirstTheoreticalBlock % $activeDelegates),
             array_slice($tempDelegateOrderForTheRound, 0, $slotNumberForFirstTheoreticalBlock % $activeDelegates)
@@ -94,10 +93,9 @@ final class MissedBlocksCalculator
         int $firstBlockInRoundTheoreticalTimestamp,
         array $delegateOrderForRound,
         int $activeDelegates,
-    ): array
-    {
+    ): array {
         $theoreticalBlocksByTimestamp = [];
-        $lastActualTimestamp        = count($actualBlocksTimestamps) > 0 ? $actualBlocksTimestamps[count($actualBlocksTimestamps) - 1] : 0;
+        $lastActualTimestamp          = count($actualBlocksTimestamps) > 0 ? $actualBlocksTimestamps[count($actualBlocksTimestamps) - 1] : 0;
         for (
             $ts = $firstBlockInRoundTheoreticalTimestamp, $i = 0;
             $ts <= $lastActualTimestamp;
