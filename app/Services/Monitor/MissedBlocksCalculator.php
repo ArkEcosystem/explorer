@@ -15,7 +15,7 @@ final class MissedBlocksCalculator
     public static function calculateFromHeightGoingBack(int $height, int $timeRangeInSeconds): array
     {
         $heightTimestamp     = Block::where('height', $height)->firstOrFail()->timestamp;
-        $startHeight         = Block::where('timestamp', '>', $heightTimestamp - $timeRangeInSeconds)
+        $startHeight         = Block::where('timestamp', '>=', $heightTimestamp - $timeRangeInSeconds)
             ->orderBy('height')
             ->firstOrFail()->height->toNumber();
 
