@@ -42,14 +42,14 @@ final class BuildForgingStats implements ShouldQueue
         }
 
         // clean up old stats entries
-        $this->deleteMoreThan30DaysOldStats($timestamp);
+        $this->deleteMoreThan30DaysOldStats($this->getTimestampForHeight($height));
     }
 
     private function getHeight(): int
     {
         $height = $this->height;
-
-        if (! $height) {
+        
+        if ($height == 0) {
             $lastBlock = Block::orderBy('height', 'DESC')->limit(1)->firstOrFail();
             $height    = $lastBlock->height->toNumber();
         }
@@ -60,10 +60,10 @@ final class BuildForgingStats implements ShouldQueue
     private function getTimeRange(int $height): int
     {
         $timeRange = intval($this->numberOfDays * 24 * 60 * 60);
-        if (! $timeRange) {
-            $lastForgingInfoTs = ForgingStats::orderBy('timestamp', 'DESC')
+        if ($timeRange == 0) {
+            $lastForgingInfoTs = (int) ForgingStats::orderBy('timestamp', 'DESC')
                 ->limit(1)
-                ->firstOr(function () {
+                ->firstOr(function (): ForgingStats {
                     // by default if forging_stats table is not initialized we just build stats for last hour
                     // (building stats is expensive, if we want data from last X days we need to ask for it explicitly)
                     $forgingStats1HourAgo = new ForgingStats();
@@ -72,8 +72,8 @@ final class BuildForgingStats implements ShouldQueue
                     return $forgingStats1HourAgo;
                 })
                 ->timestamp;
-
-            $timestampForHeight = Block::where('height', $height)->limit(1)->firstOrFail()->timestamp;
+            
+            $timestampForHeight = $this->getTimestampForHeight($height);
             // use a one-round margin to be sure we don't skip blocks from last forging info
             $timeRange = ($timestampForHeight - $lastForgingInfoTs) + (Network::delegateCount() * Network::blockTime());
 
@@ -89,5 +89,10 @@ final class BuildForgingStats implements ShouldQueue
     private function deleteMoreThan30DaysOldStats(int $refTimestamp): void
     {
         ForgingStats::where('timestamp', '<', $refTimestamp - 30 * 24 * 60 * 60)->delete();
+    }
+
+    private function getTimestampForHeight(int $height): int
+    {
+        return Block::where('height', $height)->limit(1)->firstOrFail()->timestamp;
     }
 }
