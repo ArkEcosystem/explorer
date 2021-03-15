@@ -66,7 +66,7 @@ final class Kernel extends ConsoleKernel
         $schedule->command(CacheMarketSquareProfiles::class)->everyMinute();
 
         $schedule->command(CacheNetworkAggregates::class)->everyMinute();
-        
+
         $schedule->command(BuildForgingStats::class)->everyTenMinutes();
     }
 

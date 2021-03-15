@@ -80,7 +80,7 @@ final class BuildForgingStats implements ShouldQueue
             if ($timeRange < 0) {
                 return 0;
             }
-            
+
             $oneDayInSeconds = 24 * 60 * 60;
             if ($timeRange > $oneDayInSeconds) {
                 return $oneDayInSeconds;
