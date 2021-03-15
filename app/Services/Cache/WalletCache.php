@@ -47,7 +47,7 @@ final class WalletCache implements Contract
 
     public function getProductivity(string $publicKey): float
     {
-        return (float) $this->get(sprintf('productivity/%s', $publicKey), 0);
+        return (float) $this->get(sprintf('productivity/%s', $publicKey), -1);
     }
 
     public function setProductivity(string $publicKey, float $value): void

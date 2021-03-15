@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Console;
 
+use App\Console\Commands\BuildForgingStats;
 use App\Console\Commands\CacheDelegateAggregates;
 use App\Console\Commands\CacheDelegatePerformance;
 use App\Console\Commands\CacheDelegateProductivity;
@@ -65,6 +66,8 @@ final class Kernel extends ConsoleKernel
         $schedule->command(CacheMarketSquareProfiles::class)->everyMinute();
 
         $schedule->command(CacheNetworkAggregates::class)->everyMinute();
+        
+        $schedule->command(BuildForgingStats::class)->everyTenMinutes();
     }
 
     /**

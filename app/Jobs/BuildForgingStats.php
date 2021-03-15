@@ -77,9 +77,15 @@ final class BuildForgingStats implements ShouldQueue
             // use a one-round margin to be sure we don't skip blocks from last forging info
             $timeRange = ($timestampForHeight - $lastForgingInfoTs) + (Network::delegateCount() * Network::blockTime());
 
-            if ($timeRange < 0 || $timeRange > 24 * 60 * 60) {
-                return 0;   // when time range is not specified, go back maximum 1 day (because
-                            // it is then supposed to be an incremental stats build)
+            if ($timeRange < 0) {
+                return 0;
+            }
+            
+            $oneDayInSeconds = 24 * 60 * 60;
+            if ($timeRange > $oneDayInSeconds) {
+                return $oneDayInSeconds;
+                // when time range is not specified, go back maximum 1 day (because
+                // it is then supposed to be an incremental stats build)
             }
         }
 
