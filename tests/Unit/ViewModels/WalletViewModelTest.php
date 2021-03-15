@@ -398,7 +398,7 @@ it('should fail to get the productivity if the wallet is a delegate', function (
     ]));
 
     expect($this->subject->productivity())->toBeFloat();
-    expect($this->subject->productivity())->toBe(0.0);
+    expect($this->subject->productivity())->toBe(-1);
 
     (new WalletCache())->setProductivity($this->subject->publicKey(), 10);
 
