@@ -33,7 +33,7 @@ it('should get and set the performance', function () {
 });
 
 it('should get and set the productivity', function () {
-    expect($this->subject->getProductivity('publicKey'))->toBe(0.0);
+    expect($this->subject->getProductivity('publicKey'))->toBe(-1.0);
 
     $this->subject->setProductivity('publicKey', 10);
 
