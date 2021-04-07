@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 
 trait QueryWithCalculatedAmount
 {
-    public function baseCalculatedAmountQuery(Builder $builder, $direction = 'asc'): void
+    public function baseCalculatedAmountQuery(Builder $builder, string $direction = 'asc'): void
     {
         $builder->fromRaw('transactions t');
         $builder->selectRaw(DB::raw('t.*, d.list, COALESCE(d.list, t.amount) AS calc_amount'));

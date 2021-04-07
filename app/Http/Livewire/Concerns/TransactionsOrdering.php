@@ -35,9 +35,9 @@ trait TransactionsOrdering
         $this->transactionsOrdering = $value;
     }
 
-    public function renderDirectionIcon(string $value)
+    public function renderDirectionIcon(string $value): string
     {
-        $value = substr($value, strrpos($value, '.') + 1);
+        $value = substr($value, ((int) strrpos($value, '.')) + 1);
 
         if ($value === $this->transactionsOrdering) {
             if ($this->transactionsOrderingDirection === OrderingDirectionEnum::DESC) {

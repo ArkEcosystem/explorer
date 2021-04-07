@@ -19,6 +19,7 @@ parameters:
         - '#but return statement is missing#'
         - '#InvalidArgumentException constructor expects string#'
         - '#withScope#'
+        - '#Illuminate\\Database\\Query\\Expression given#'
         # FIXME
         - '#AbstractNetwork#'
         - '#PendingDispatch given#'
