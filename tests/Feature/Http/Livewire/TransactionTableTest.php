@@ -141,4 +141,4 @@ it('should apply ordering through an event', function () {
 
     $component->assertSet('transactionsOrdering', OrderingTypeEnum::AMOUNT);
     $component->assertSet('transactionsOrderingDirection', OrderingDirectionEnum::DESC);
-})->only();
+});
