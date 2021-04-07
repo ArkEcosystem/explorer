@@ -28,8 +28,11 @@ trait TransactionsOrdering
     public function orderTransactionsBy(string $value): void
     {
         if ($value === $this->transactionsOrdering) {
-            $this->transactionsOrderingDirection =
-                $this->transactionsOrderingDirection === OrderingDirectionEnum::DESC ? OrderingDirectionEnum::ASC : OrderingDirectionEnum::DESC;
+            if ($this->transactionsOrderingDirection === OrderingDirectionEnum::DESC) {
+                $this->transactionsOrderingDirection = OrderingDirectionEnum::ASC;
+            } else {
+                $this->transactionsOrderingDirection = OrderingDirectionEnum::DESC;
+            }
         }
 
         $this->transactionsOrdering = $value;
