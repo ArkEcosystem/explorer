@@ -1,5 +1,5 @@
 <div class="hidden table-container md:block">
-    <table>
+    <table class="sticky-headers">
         <thead>
             <tr>
                 <x-tables.headers.desktop.id name="general.transaction.id" />

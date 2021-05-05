@@ -1,5 +1,5 @@
 <div class="hidden w-full table-container md:block">
-    <table>
+    <table class="sticky-headers">
         <thead>
             <tr>
                 <x-tables.headers.desktop.address name="general.transaction.recipient" />

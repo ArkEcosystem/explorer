@@ -1,0 +1,27 @@
+.table-container table.sticky-headers th {
+    @apply sticky z-10 bg-white;
+    top: 80px;
+}
+
+.table-container table.sticky-headers th:before {
+    @apply absolute bottom-0 left-0 w-full border-b border-theme-secondary-300;
+    content: '';
+}
+
+@screen lg {
+    .table-container table.sticky-headers th {
+        top: 96px;
+    }
+}
+
+.dark .table-container table.sticky-headers th {
+    @apply bg-theme-secondary-900;
+}
+
+.dark .table-container table.sticky-headers th:before {
+    @apply border-theme-secondary-800;
+}
+
+.table-container table.sticky-headers thead tr {
+    @apply border-none;
+}
