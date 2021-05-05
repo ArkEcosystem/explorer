@@ -5,7 +5,7 @@
 
 .table-container table.sticky-headers th:before {
     @apply absolute bottom-0 left-0 w-full border-b border-theme-secondary-300;
-    content: '';
+    content: "";
 }
 
 @screen lg {
