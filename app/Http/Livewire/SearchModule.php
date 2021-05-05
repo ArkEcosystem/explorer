@@ -42,7 +42,7 @@ final class SearchModule extends Component
         'timelock',
         'timelockClaim',
         'timelockRefund',
-        'magistrate'
+        'magistrate',
     ];
 
     public function mount(bool $isSlim = false, bool $isAdvanced = false, string $type = 'block'): void
@@ -128,7 +128,7 @@ final class SearchModule extends Component
     private function getTransactionOptions(): array
     {
         return collect($this->transactionOptionsValues)
-            ->mapWithKeys(fn($option) =>  [$option =>__('forms.search.transaction_types.'.$option)])
+            ->mapWithKeys(fn ($option) => [$option =>__('forms.search.transaction_types.'.$option)])
             ->toArray();
     }
 }
