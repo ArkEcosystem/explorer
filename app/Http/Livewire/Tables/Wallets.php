@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire\Tables;
 
+use App\Http\Livewire\Concerns\WalletsOrdering;
 use App\ViewModels\ViewModelFactory;
 use ARKEcosystem\UserInterface\Http\Livewire\Concerns\HasPagination;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
@@ -13,6 +14,7 @@ use Livewire\Component;
 
 final class Wallets extends Component
 {
+    use WalletsOrdering;
     use HasPagination;
 
     public bool $viewMore = false;
