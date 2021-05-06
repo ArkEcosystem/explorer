@@ -1,6 +1,6 @@
 <div id="wallet-list" class="w-full">
     <x-skeletons.wallets>
-        <x-tables.desktop.wallets :wallets="$wallets" />
+        <x-tables.desktop.wallets :wallets="$wallets" with-ordering />
 
         <x-tables.mobile.wallets :wallets="$wallets" />
 
