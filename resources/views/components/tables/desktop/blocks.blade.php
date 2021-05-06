@@ -2,7 +2,7 @@
     <table>
         <thead>
             <tr>
-                <x-tables.headers.desktop.id name="general.block.id" wire:click="$emit('orderBlocksBy', '{{ OrderingTypeEnum::ID }}')" />
+                <x-tables.headers.desktop.id name="general.block.id" />
                 <x-tables.headers.desktop.text name="general.block.timestamp" responsive wire:click="$emit('orderBlocksBy', '{{ OrderingTypeEnum::TIMESTAMP }}')" />
                 @if(!isset($withoutGenerator))
                     <x-tables.headers.desktop.address name="general.block.generated_by" wire:click="$emit('orderBlocksBy', '{{ OrderingTypeEnum::GENERATOR_PUBLIC_KEY }}')" />

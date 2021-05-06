@@ -8,8 +8,6 @@ use App\Enums\OrderingDirectionEnum;
 use App\Enums\OrderingTypeEnum;
 use App\Models\Scopes\OrderByAddressAscScope;
 use App\Models\Scopes\OrderByAddressDescScope;
-use App\Models\Scopes\OrderByIdAscScope;
-use App\Models\Scopes\OrderByIdDescScope;
 use App\Models\Scopes\OrderByProductivityAscScope;
 use App\Models\Scopes\OrderByProductivityDescScope;
 use App\Models\Scopes\OrderByRankAscScope;
@@ -35,7 +33,6 @@ trait DelegatesOrdering
     private function getOrderingScope(): string
     {
         $scopes = [
-            'id'           => ['asc' => OrderByIdAscScope::class, 'desc' => OrderByIdDescScope::class],
             'rank'         => ['asc' => OrderByRankAscScope::class, 'desc' => OrderByRankDescScope::class],
             'address'      => ['asc' => OrderByAddressAscScope::class, 'desc' => OrderByAddressDescScope::class],
             'votes'        => ['asc' => OrderByVoteAscScope::class, 'desc' => OrderByVoteDescScope::class],

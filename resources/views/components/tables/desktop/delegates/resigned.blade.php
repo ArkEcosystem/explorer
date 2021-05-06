@@ -2,7 +2,7 @@
     <table>
         <thead>
             <tr>
-                <x-tables.headers.desktop.id name="general.delegates.id" wire:click="$emit('orderDelegatesBy', '{{ OrderingTypeEnum::ID }}')" />
+                <x-tables.headers.desktop.id name="general.delegates.id" />
                 <x-tables.headers.desktop.address name="general.delegates.name" wire:click="$emit('orderDelegatesBy', '{{ OrderingTypeEnum::ADDRESS }}')" />
                 <x-tables.headers.desktop.number name="general.delegates.votes" responsive wire:click="$emit('orderDelegatesBy', '{{ OrderingTypeEnum::VOTE }}')" />
             </tr>

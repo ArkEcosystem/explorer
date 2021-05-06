@@ -14,8 +14,6 @@ use App\Models\Scopes\OrderByGeneratorPublicKeyAscScope;
 use App\Models\Scopes\OrderByGeneratorPublicKeyDescScope;
 use App\Models\Scopes\OrderByHeightAscScope;
 use App\Models\Scopes\OrderByHeightDescScope;
-use App\Models\Scopes\OrderByIdAscScope;
-use App\Models\Scopes\OrderByIdDescScope;
 use App\Models\Scopes\OrderByTimestampAscScope;
 use App\Models\Scopes\OrderByTimestampDescScope;
 use App\Models\Scopes\OrderByTransactionAmountAscScope;
@@ -37,7 +35,6 @@ trait BlocksOrdering
     private function getOrderingScope(): string
     {
         $scopes = [
-            'id'           => ['asc' => OrderByIdAscScope::class, 'desc' => OrderByIdDescScope::class],
             'timestamp'    => ['asc' => OrderByTimestampAscScope::class, 'desc' => OrderByTimestampDescScope::class],
             'generated_by' => ['asc' => OrderByGeneratorPublicKeyAscScope::class, 'desc' => OrderByGeneratorPublicKeyDescScope::class],
             'height'       => ['asc' => OrderByHeightAscScope::class, 'desc' => OrderByHeightDescScope::class],

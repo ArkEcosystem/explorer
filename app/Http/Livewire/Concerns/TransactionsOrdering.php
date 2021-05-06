@@ -10,8 +10,6 @@ use App\Models\Scopes\OrderByAmountAscScope;
 use App\Models\Scopes\OrderByAmountDescScope;
 use App\Models\Scopes\OrderByFeeAscScope;
 use App\Models\Scopes\OrderByFeeDescScope;
-use App\Models\Scopes\OrderByIdAscScope;
-use App\Models\Scopes\OrderByIdDescScope;
 use App\Models\Scopes\OrderByRecipientAscScope;
 use App\Models\Scopes\OrderByRecipientDescScope;
 use App\Models\Scopes\OrderBySenderAscScope;
@@ -56,7 +54,6 @@ trait TransactionsOrdering
     private function getOrderingScope(): string
     {
         $scopes = [
-            'id'        => ['asc' => OrderByIdAscScope::class, 'desc' => OrderByIdDescScope::class],
             'timestamp' => ['asc' => OrderByTimestampAscScope::class, 'desc' => OrderByTimestampDescScope::class],
             'sender'    => ['asc' => OrderBySenderAscScope::class, 'desc' => OrderBySenderDescScope::class],
             'recipient' => ['asc' => OrderByRecipientAscScope::class, 'desc' => OrderByRecipientDescScope::class],
