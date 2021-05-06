@@ -32,6 +32,21 @@ trait BlocksOrdering
         $this->blocksOrderingDirection = $this->blocksOrderingDirection === OrderingDirectionEnum::DESC ? OrderingDirectionEnum::ASC : OrderingDirectionEnum::DESC;
     }
 
+    public function renderDirectionIcon(string $value): string
+    {
+        $value = substr($value, ((int) strrpos($value, '.')) + 1);
+
+        if ($value === $this->blocksOrdering) {
+            if ($this->blocksOrderingDirection === OrderingDirectionEnum::DESC) {
+                return 'chevron-down';
+            }
+
+            return 'chevron-up';
+        }
+
+        return 'chevron-down';
+    }
+
     private function getOrderingScope(): string
     {
         $scopes = [

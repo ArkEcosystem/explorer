@@ -1,6 +1,6 @@
 <div id="block-list" class="w-full">
     <x-skeletons.blocks>
-        <x-tables.desktop.blocks :blocks="$blocks" />
+        <x-tables.desktop.blocks :blocks="$blocks" with-ordering />
 
         <x-tables.mobile.blocks :blocks="$blocks" />
 

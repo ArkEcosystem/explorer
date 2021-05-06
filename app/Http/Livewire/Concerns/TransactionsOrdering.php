@@ -8,6 +8,8 @@ use App\Enums\OrderingDirectionEnum;
 use App\Enums\OrderingTypeEnum;
 use App\Models\Scopes\OrderByAmountAscScope;
 use App\Models\Scopes\OrderByAmountDescScope;
+use App\Models\Scopes\OrderByConfirmationAscScope;
+use App\Models\Scopes\OrderByConfirmationDescScope;
 use App\Models\Scopes\OrderByFeeAscScope;
 use App\Models\Scopes\OrderByFeeDescScope;
 use App\Models\Scopes\OrderByRecipientAscScope;
@@ -54,11 +56,12 @@ trait TransactionsOrdering
     private function getOrderingScope(): string
     {
         $scopes = [
-            'timestamp' => ['asc' => OrderByTimestampAscScope::class, 'desc' => OrderByTimestampDescScope::class],
-            'sender'    => ['asc' => OrderBySenderAscScope::class, 'desc' => OrderBySenderDescScope::class],
-            'recipient' => ['asc' => OrderByRecipientAscScope::class, 'desc' => OrderByRecipientDescScope::class],
-            'amount'    => ['asc' => OrderByAmountAscScope::class, 'desc' => OrderByAmountDescScope::class],
-            'fee'       => ['asc' => OrderByFeeAscScope::class, 'desc' => OrderByFeeDescScope::class],
+            'timestamp'     => ['asc' => OrderByTimestampAscScope::class, 'desc' => OrderByTimestampDescScope::class],
+            'sender'        => ['asc' => OrderBySenderAscScope::class, 'desc' => OrderBySenderDescScope::class],
+            'recipient'     => ['asc' => OrderByRecipientAscScope::class, 'desc' => OrderByRecipientDescScope::class],
+            'amount'        => ['asc' => OrderByAmountAscScope::class, 'desc' => OrderByAmountDescScope::class],
+            'fee'           => ['asc' => OrderByFeeAscScope::class, 'desc' => OrderByFeeDescScope::class],
+            'confirmations' => ['asc' => OrderByConfirmationAscScope::class, 'desc' => OrderByConfirmationDescScope::class],
         ];
 
         return $scopes[$this->transactionsOrdering][$this->transactionsOrderingDirection];

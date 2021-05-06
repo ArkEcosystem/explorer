@@ -3,14 +3,14 @@
         <thead>
             <tr>
                 <x-tables.headers.desktop.id name="general.block.id" />
-                <x-tables.headers.desktop.text name="general.block.timestamp" responsive wire:click="$emit('orderBlocksBy', '{{ OrderingTypeEnum::TIMESTAMP }}')" />
+                <x-tables.headers.desktop.text name="general.block.timestamp" responsive wire:click="$emit('orderBlocksBy', '{{ OrderingTypeEnum::TIMESTAMP }}')" :with-ordering="$withOrdering ?? false" />
                 @if(!isset($withoutGenerator))
-                    <x-tables.headers.desktop.address name="general.block.generated_by" wire:click="$emit('orderBlocksBy', '{{ OrderingTypeEnum::GENERATOR_PUBLIC_KEY }}')" />
+                    <x-tables.headers.desktop.address name="general.block.generated_by" wire:click="$emit('orderBlocksBy', '{{ OrderingTypeEnum::GENERATOR_PUBLIC_KEY }}')" :with-ordering="$withOrdering ?? false" />
                 @endif
-                <x-tables.headers.desktop.number name="general.block.height" wire:click="$emit('orderBlocksBy', '{{ OrderingTypeEnum::HEIGHT }}')" />
-                <x-tables.headers.desktop.number name="general.block.transactions" wire:click="$emit('orderBlocksBy', '{{ OrderingTypeEnum::TRANSACTIONS_AMOUNT }}')" />
-                <x-tables.headers.desktop.number name="general.block.amount" wire:click="$emit('orderBlocksBy', '{{ OrderingTypeEnum::AMOUNT }}')" />
-                <x-tables.headers.desktop.number name="general.block.fee" responsive wire:click="$emit('orderBlocksBy', '{{ OrderingTypeEnum::BLOCK_FEE }}')" />
+                <x-tables.headers.desktop.number name="general.block.height" wire:click="$emit('orderBlocksBy', '{{ OrderingTypeEnum::HEIGHT }}')" :with-ordering="$withOrdering ?? false" />
+                <x-tables.headers.desktop.number name="general.block.transactions" wire:click="$emit('orderBlocksBy', '{{ OrderingTypeEnum::TRANSACTIONS_AMOUNT }}')" :with-ordering="$withOrdering ?? false" />
+                <x-tables.headers.desktop.number name="general.block.amount" wire:click="$emit('orderBlocksBy', '{{ OrderingTypeEnum::AMOUNT }}')" :with-ordering="$withOrdering ?? false" />
+                <x-tables.headers.desktop.number name="general.block.fee" responsive wire:click="$emit('orderBlocksBy', '{{ OrderingTypeEnum::BLOCK_FEE }}')" :with-ordering="$withOrdering ?? false" />
             </tr>
         </thead>
         <tbody>

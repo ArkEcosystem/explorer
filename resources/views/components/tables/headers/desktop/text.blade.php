@@ -25,7 +25,7 @@
             @lang($name)
 
             @if($withOrdering)
-                <x-ark-icon name="{{ $this->renderDirectionIcon() }}" size="xs" class="ml-2 w-2 h-2" />
+                <x-ark-icon name="{{ $this->renderDirectionIcon($name) }}" size="xs" class="ml-2 w-2 h-2" />
             {{--@else
                 <x-ark-icon name="chevron-down" size="xs" class="ml-2 w-2 h-2" />
             --}}

@@ -3,8 +3,8 @@
         <thead>
             <tr>
                 <x-tables.headers.desktop.id name="general.delegates.id" />
-                <x-tables.headers.desktop.address name="general.delegates.name" wire:click="$emit('orderDelegatesBy', '{{ OrderingTypeEnum::ADDRESS }}')" />
-                <x-tables.headers.desktop.number name="general.delegates.votes" responsive wire:click="$emit('orderDelegatesBy', '{{ OrderingTypeEnum::VOTE }}')" />
+                <x-tables.headers.desktop.address name="general.delegates.name" wire:click="$emit('orderDelegatesBy', '{{ OrderingTypeEnum::ADDRESS }}')" with-ordering />
+                <x-tables.headers.desktop.number name="general.delegates.votes" responsive wire:click="$emit('orderDelegatesBy', '{{ OrderingTypeEnum::VOTE }}')" with-ordering />
             </tr>
         </thead>
         <tbody>

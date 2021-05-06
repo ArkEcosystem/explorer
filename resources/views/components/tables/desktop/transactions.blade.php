@@ -9,11 +9,11 @@
                 @else
                     <x-tables.headers.desktop.address name="general.transaction.sender" wire:click="$emit('orderTransactionsBy', '{{ OrderingTypeEnum::SENDER }}')" icon />
                 @endif
-                <x-tables.headers.desktop.address name="general.transaction.recipient" wire:click="$emit('orderTransactionsBy', '{{ OrderingTypeEnum::RECIPIENT }}')" />
-                <x-tables.headers.desktop.number name="general.transaction.amount" wire:click="$emit('orderTransactionsBy', '{{ OrderingTypeEnum::AMOUNT }}')" />
-                <x-tables.headers.desktop.number name="general.transaction.fee" wire:click="$emit('orderTransactionsBy', '{{ OrderingTypeEnum::FEE }}')" responsive breakpoint="xl" />
+                <x-tables.headers.desktop.address name="general.transaction.recipient" wire:click="$emit('orderTransactionsBy', '{{ OrderingTypeEnum::RECIPIENT }}')" :with-ordering="$withOrdering ?? false" />
+                <x-tables.headers.desktop.number name="general.transaction.amount" wire:click="$emit('orderTransactionsBy', '{{ OrderingTypeEnum::AMOUNT }}')" :with-ordering="$withOrdering ?? false" />
+                <x-tables.headers.desktop.number name="general.transaction.fee" wire:click="$emit('orderTransactionsBy', '{{ OrderingTypeEnum::FEE }}')" responsive breakpoint="xl" :with-ordering="$withOrdering ?? false" />
                 @isset($useConfirmations)
-                    <x-tables.headers.desktop.number name="general.transaction.confirmations" wire:click="$emit('orderTransactionsBy', '{{ OrderingTypeEnum::CONFIRMATIONS }}')" responsive breakpoint="xl" />
+                    <x-tables.headers.desktop.number name="general.transaction.confirmations" wire:click="$emit('orderTransactionsBy', '{{ OrderingTypeEnum::CONFIRMATIONS }}')" responsive breakpoint="xl" :with-ordering="$withOrdering ?? false" />
                 @endisset
             </tr>
         </thead>

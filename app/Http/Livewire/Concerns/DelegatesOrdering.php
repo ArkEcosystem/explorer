@@ -30,6 +30,21 @@ trait DelegatesOrdering
         $this->delegatesOrderingDirection = $this->delegatesOrderingDirection === OrderingDirectionEnum::DESC ? OrderingDirectionEnum::ASC : OrderingDirectionEnum::DESC;
     }
 
+    public function renderDirectionIcon(string $value): string
+    {
+        $value = substr($value, ((int) strrpos($value, '.')) + 1);
+
+        if ($value === $this->delegatesOrdering) {
+            if ($this->delegatesOrderingDirection === OrderingDirectionEnum::DESC) {
+                return 'chevron-down';
+            }
+
+            return 'chevron-up';
+        }
+
+        return 'chevron-down';
+    }
+
     private function getOrderingScope(): string
     {
         $scopes = [
