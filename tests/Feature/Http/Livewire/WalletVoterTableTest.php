@@ -57,4 +57,3 @@ it('should apply ordering through an event', function () {
     $component->assertSet('ordering', OrderingTypeEnum::SUPPLY);
     $component->assertSet('orderingDirection', OrderingDirectionEnum::DESC);
 });
-
