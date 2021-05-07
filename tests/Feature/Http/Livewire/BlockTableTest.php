@@ -34,16 +34,16 @@ it('should list the first page of records', function () {
 it('should apply ordering through an event', function () {
     $component = Livewire::test(BlockTable::class);
 
-    $component->assertSet('blocksOrdering', OrderingTypeEnum::HEIGHT);
-    $component->assertSet('blocksOrderingDirection', OrderingDirectionEnum::DESC);
+    $component->assertSet('ordering', OrderingTypeEnum::HEIGHT);
+    $component->assertSet('orderingDirection', OrderingDirectionEnum::DESC);
 
     $component->emit('orderBlocksBy', OrderingTypeEnum::HEIGHT);
 
-    $component->assertSet('blocksOrdering', OrderingTypeEnum::HEIGHT);
-    $component->assertSet('blocksOrderingDirection', OrderingDirectionEnum::ASC);
+    $component->assertSet('ordering', OrderingTypeEnum::HEIGHT);
+    $component->assertSet('orderingDirection', OrderingDirectionEnum::ASC);
 
     $component->emit('orderBlocksBy', OrderingTypeEnum::TRANSACTIONS_AMOUNT);
 
-    $component->assertSet('blocksOrdering', OrderingTypeEnum::TRANSACTIONS_AMOUNT);
-    $component->assertSet('blocksOrderingDirection', OrderingDirectionEnum::DESC);
+    $component->assertSet('ordering', OrderingTypeEnum::TRANSACTIONS_AMOUNT);
+    $component->assertSet('orderingDirection', OrderingDirectionEnum::DESC);
 });

@@ -24,7 +24,7 @@ final class WalletTable extends Component
 
     public function render(): View
     {
-        $query = Wallet::withScope($this->getOrderingScope(), $this->walletsOrderingDirection);
+        $query = Wallet::withScope($this->getOrderingScope(), $this->orderingDirection);
 
         return view('livewire.wallet-table', [
             'wallets' => ViewModelFactory::paginate($query->paginate()),

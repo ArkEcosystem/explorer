@@ -128,17 +128,17 @@ it('should apply filters through an event', function () {
 it('should apply ordering through an event', function () {
     $component = Livewire::test(TransactionTable::class);
 
-    $component->assertSet('transactionsOrdering', OrderingTypeEnum::TIMESTAMP);
-    $component->assertSet('transactionsOrderingDirection', OrderingDirectionEnum::DESC);
+    $component->assertSet('ordering', OrderingTypeEnum::TIMESTAMP);
+    $component->assertSet('orderingDirection', OrderingDirectionEnum::DESC);
 
     $component->emit('orderTransactionsBy', OrderingTypeEnum::TIMESTAMP);
 
-    $component->assertSet('transactionsOrdering', OrderingTypeEnum::TIMESTAMP);
-    $component->assertSet('transactionsOrderingDirection', OrderingDirectionEnum::ASC);
+    $component->assertSet('ordering', OrderingTypeEnum::TIMESTAMP);
+    $component->assertSet('orderingDirection', OrderingDirectionEnum::ASC);
 
     $component->emit('orderTransactionsBy', OrderingTypeEnum::AMOUNT);
     $component->emit('orderTransactionsBy', OrderingTypeEnum::AMOUNT);
 
-    $component->assertSet('transactionsOrdering', OrderingTypeEnum::AMOUNT);
-    $component->assertSet('transactionsOrderingDirection', OrderingDirectionEnum::DESC);
+    $component->assertSet('ordering', OrderingTypeEnum::AMOUNT);
+    $component->assertSet('orderingDirection', OrderingDirectionEnum::DESC);
 });

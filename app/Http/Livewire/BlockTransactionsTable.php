@@ -35,7 +35,7 @@ final class BlockTransactionsTable extends Component
 
     public function render(): View
     {
-        $query = $this->getBlock()->transactions()->withScope($this->getOrderingScope(), $this->transactionsOrderingDirection);
+        $query = $this->getBlock()->transactions()->withScope($this->getOrderingScope(), $this->orderingDirection);
 
         return view('livewire.transaction-table', [
             'transactions' => ViewModelFactory::paginate($query->paginate(25)),

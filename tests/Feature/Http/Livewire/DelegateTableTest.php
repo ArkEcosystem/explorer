@@ -32,16 +32,16 @@ it('should render with resigned delegates', function () {
 it('should apply ordering through an event', function () {
     $component = Livewire::test(DelegateTable::class);
 
-    $component->assertSet('delegatesOrdering', OrderingTypeEnum::RANK);
-    $component->assertSet('delegatesOrderingDirection', OrderingDirectionEnum::ASC);
+    $component->assertSet('ordering', OrderingTypeEnum::RANK);
+    $component->assertSet('orderingDirection', OrderingDirectionEnum::ASC);
 
     $component->emit('orderDelegatesBy', OrderingTypeEnum::RANK);
 
-    $component->assertSet('delegatesOrdering', OrderingTypeEnum::RANK);
-    $component->assertSet('delegatesOrderingDirection', OrderingDirectionEnum::DESC);
+    $component->assertSet('ordering', OrderingTypeEnum::RANK);
+    $component->assertSet('orderingDirection', OrderingDirectionEnum::DESC);
 
     $component->emit('orderDelegatesBy', OrderingTypeEnum::ADDRESS);
 
-    $component->assertSet('delegatesOrdering', OrderingTypeEnum::ADDRESS);
-    $component->assertSet('delegatesOrderingDirection', OrderingDirectionEnum::ASC);
+    $component->assertSet('ordering', OrderingTypeEnum::ADDRESS);
+    $component->assertSet('orderingDirection', OrderingDirectionEnum::ASC);
 });

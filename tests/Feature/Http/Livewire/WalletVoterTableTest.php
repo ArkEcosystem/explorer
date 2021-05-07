@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use App\Enums\OrderingDirectionEnum;
+use App\Enums\OrderingTypeEnum;
 use App\Facades\Network;
 use App\Http\Livewire\WalletVoterTable;
 use App\Models\Wallet;
@@ -38,3 +40,21 @@ it('should list all blocks for the given public key', function () {
         $component->assertSee(NumberFormatter::percentage($voter->votePercentage()));
     }
 });
+
+it('should apply ordering through an event', function () {
+    $component = Livewire::test(WalletVoterTable::class, [$this->subject->public_key, 'username']);
+
+    $component->assertSet('ordering', OrderingTypeEnum::BALANCE);
+    $component->assertSet('orderingDirection', OrderingDirectionEnum::DESC);
+
+    $component->emit('orderWalletsBy', OrderingTypeEnum::ADDRESS);
+
+    $component->assertSet('ordering', OrderingTypeEnum::ADDRESS);
+    $component->assertSet('orderingDirection', OrderingDirectionEnum::ASC);
+
+    $component->emit('orderWalletsBy', OrderingTypeEnum::SUPPLY);
+
+    $component->assertSet('ordering', OrderingTypeEnum::SUPPLY);
+    $component->assertSet('orderingDirection', OrderingDirectionEnum::DESC);
+});
+

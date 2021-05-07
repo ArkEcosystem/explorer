@@ -21,36 +21,23 @@ use App\Models\Scopes\OrderByTimestampDescScope;
 
 trait TransactionsOrdering
 {
-    public string $transactionsOrdering          = OrderingTypeEnum::TIMESTAMP;
+    use Ordering;
 
-    public string $transactionsOrderingDirection = OrderingDirectionEnum::DESC;
+    public string $ordering          = OrderingTypeEnum::TIMESTAMP;
+
+    public string $orderingDirection = OrderingDirectionEnum::DESC;
 
     public function orderTransactionsBy(string $value): void
     {
-        if ($value === $this->transactionsOrdering) {
-            if ($this->transactionsOrderingDirection === OrderingDirectionEnum::DESC) {
-                $this->transactionsOrderingDirection = OrderingDirectionEnum::ASC;
+        if ($value === $this->ordering) {
+            if ($this->orderingDirection === OrderingDirectionEnum::DESC) {
+                $this->orderingDirection = OrderingDirectionEnum::ASC;
             } else {
-                $this->transactionsOrderingDirection = OrderingDirectionEnum::DESC;
+                $this->orderingDirection = OrderingDirectionEnum::DESC;
             }
         }
 
-        $this->transactionsOrdering = $value;
-    }
-
-    public function renderDirectionIcon(string $value): string
-    {
-        $value = substr($value, ((int) strrpos($value, '.')) + 1);
-
-        if ($value === $this->transactionsOrdering) {
-            if ($this->transactionsOrderingDirection === OrderingDirectionEnum::DESC) {
-                return 'chevron-down';
-            }
-
-            return 'chevron-up';
-        }
-
-        return 'chevron-down';
+        $this->ordering = $value;
     }
 
     private function getOrderingScope(): string
@@ -64,6 +51,6 @@ trait TransactionsOrdering
             'confirmations' => ['asc' => OrderByConfirmationAscScope::class, 'desc' => OrderByConfirmationDescScope::class],
         ];
 
-        return $scopes[$this->transactionsOrdering][$this->transactionsOrderingDirection];
+        return $scopes[$this->ordering][$this->orderingDirection];
     }
 }

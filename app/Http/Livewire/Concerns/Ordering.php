@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Http\Livewire\Concerns;
 
 use App\Enums\OrderingDirectionEnum;
-use App\Enums\OrderingTypeEnum;
 use App\Models\Scopes\OrderByAddressAscScope;
 use App\Models\Scopes\OrderByAddressDescScope;
 use App\Models\Scopes\OrderByBalanceAscScope;
@@ -13,22 +12,24 @@ use App\Models\Scopes\OrderByBalanceDescScope;
 use App\Models\Scopes\OrderBySupplyAscScope;
 use App\Models\Scopes\OrderBySupplyDescScope;
 
-trait WalletsOrdering
+trait Ordering
 {
-    use Ordering;
-
-    public string $ordering          = OrderingTypeEnum::BALANCE;
-
-    public string $orderingDirection = OrderingDirectionEnum::DESC;
-
-    public function orderWalletsBy(string $value): void
+    public function renderDirectionIcon(string $value): string
     {
-        $this->ordering = $value;
+        $value = substr($value, ((int) strrpos($value, '.')) + 1);
 
-        $this->orderingDirection = $this->orderingDirection === OrderingDirectionEnum::DESC ? OrderingDirectionEnum::ASC : OrderingDirectionEnum::DESC;
+        if ($value === $this->ordering) {
+            if ($this->orderingDirection === OrderingDirectionEnum::DESC) {
+                return 'chevron-down';
+            }
+
+            return 'chevron-up';
+        }
+
+        return 'chevron-down';
     }
 
-    private function getOrderingScope(): string
+    /*private function getOrderingScope(): string
     {
         $scopes = [
             'address' => ['asc' => OrderByAddressAscScope::class, 'desc' => OrderByAddressDescScope::class],
@@ -36,6 +37,6 @@ trait WalletsOrdering
             'supply'  => ['asc' => OrderBySupplyAscScope::class, 'desc' => OrderBySupplyDescScope::class],
         ];
 
-        return $scopes[$this->ordering][$this->orderingDirection];
-    }
+        return $scopes[$this->walletsOrdering][$this->walletsOrderingDirection];
+    }*/
 }

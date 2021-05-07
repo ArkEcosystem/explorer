@@ -21,30 +21,17 @@ use App\Models\Scopes\OrderByTransactionAmountDescScope;
 
 trait BlocksOrdering
 {
-    public string $blocksOrdering          = OrderingTypeEnum::HEIGHT;
+    use Ordering;
 
-    public string $blocksOrderingDirection = OrderingDirectionEnum::DESC;
+    public string $ordering          = OrderingTypeEnum::HEIGHT;
+
+    public string $orderingDirection = OrderingDirectionEnum::DESC;
 
     public function orderBlocksBy(string $value): void
     {
-        $this->blocksOrdering = $value;
+        $this->ordering = $value;
 
-        $this->blocksOrderingDirection = $this->blocksOrderingDirection === OrderingDirectionEnum::DESC ? OrderingDirectionEnum::ASC : OrderingDirectionEnum::DESC;
-    }
-
-    public function renderDirectionIcon(string $value): string
-    {
-        $value = substr($value, ((int) strrpos($value, '.')) + 1);
-
-        if ($value === $this->blocksOrdering) {
-            if ($this->blocksOrderingDirection === OrderingDirectionEnum::DESC) {
-                return 'chevron-down';
-            }
-
-            return 'chevron-up';
-        }
-
-        return 'chevron-down';
+        $this->orderingDirection = $this->orderingDirection === OrderingDirectionEnum::DESC ? OrderingDirectionEnum::ASC : OrderingDirectionEnum::DESC;
     }
 
     private function getOrderingScope(): string
@@ -58,6 +45,6 @@ trait BlocksOrdering
             'fee'          => ['asc' => OrderByBlockFeeAscScope::class, 'desc' => OrderByBlockFeeDescScope::class],
         ];
 
-        return $scopes[$this->blocksOrdering][$this->blocksOrderingDirection];
+        return $scopes[$this->ordering][$this->orderingDirection];
     }
 }

@@ -33,7 +33,7 @@ final class WalletBlockTable extends Component
 
     public function render(): View
     {
-        $query = Block::where('generator_public_key', $this->publicKey)->withScope($this->getOrderingScope(), $this->blocksOrderingDirection);
+        $query = Block::where('generator_public_key', $this->publicKey)->withScope($this->getOrderingScope(), $this->orderingDirection);
 
         return view('livewire.block-table', [
             'blocks' => ViewModelFactory::paginate($query->paginate()),

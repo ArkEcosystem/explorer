@@ -3,6 +3,8 @@
 declare(strict_types=1);
 
 use App\Enums\CoreTransactionTypeEnum;
+use App\Enums\OrderingDirectionEnum;
+use App\Enums\OrderingTypeEnum;
 use App\Enums\TransactionTypeGroupEnum;
 use App\Facades\Network;
 use App\Http\Livewire\WalletTransactionTable;
@@ -273,4 +275,21 @@ it('should apply directions through an event', function () {
 
     $component->assertSee($received->id);
     $component->assertSee($sent->id);
+});
+
+it('should apply ordering through an event', function () {
+    $component = Livewire::test(WalletTransactionTable::class, [$this->subject->address, false, $this->subject->public_key]);
+
+    $component->assertSet('ordering', OrderingTypeEnum::TIMESTAMP);
+    $component->assertSet('orderingDirection', OrderingDirectionEnum::DESC);
+
+    $component->emit('orderTransactionsBy', OrderingTypeEnum::AMOUNT);
+
+    $component->assertSet('ordering', OrderingTypeEnum::AMOUNT);
+    $component->assertSet('orderingDirection', OrderingDirectionEnum::DESC);
+
+    $component->emit('orderTransactionsBy', OrderingTypeEnum::FEE);
+
+    $component->assertSet('ordering', OrderingTypeEnum::FEE);
+    $component->assertSet('orderingDirection', OrderingDirectionEnum::DESC);
 });

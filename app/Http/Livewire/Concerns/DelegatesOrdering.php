@@ -19,30 +19,17 @@ use App\Models\Scopes\OrderByVoteDescScope;
 
 trait DelegatesOrdering
 {
-    public string $delegatesOrdering          = OrderingTypeEnum::RANK;
+    use Ordering;
 
-    public string $delegatesOrderingDirection = OrderingDirectionEnum::ASC;
+    public string $ordering          = OrderingTypeEnum::RANK;
+
+    public string $orderingDirection = OrderingDirectionEnum::ASC;
 
     public function orderDelegatesBy(string $value): void
     {
-        $this->delegatesOrdering = $value;
+        $this->ordering = $value;
 
-        $this->delegatesOrderingDirection = $this->delegatesOrderingDirection === OrderingDirectionEnum::DESC ? OrderingDirectionEnum::ASC : OrderingDirectionEnum::DESC;
-    }
-
-    public function renderDirectionIcon(string $value): string
-    {
-        $value = substr($value, ((int) strrpos($value, '.')) + 1);
-
-        if ($value === $this->delegatesOrdering) {
-            if ($this->delegatesOrderingDirection === OrderingDirectionEnum::DESC) {
-                return 'chevron-down';
-            }
-
-            return 'chevron-up';
-        }
-
-        return 'chevron-down';
+        $this->orderingDirection = $this->orderingDirection === OrderingDirectionEnum::DESC ? OrderingDirectionEnum::ASC : OrderingDirectionEnum::DESC;
     }
 
     private function getOrderingScope(): string
@@ -55,6 +42,6 @@ trait DelegatesOrdering
             'productivity' => ['asc' => OrderByProductivityAscScope::class, 'desc' => OrderByProductivityDescScope::class],
         ];
 
-        return $scopes[$this->delegatesOrdering][$this->delegatesOrderingDirection];
+        return $scopes[$this->ordering][$this->orderingDirection];
     }
 }

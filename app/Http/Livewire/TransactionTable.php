@@ -41,7 +41,7 @@ final class TransactionTable extends Component
 
     public function render(): View
     {
-        $query = Transaction::withScope($this->getOrderingScope(), $this->transactionsOrderingDirection);
+        $query = Transaction::withScope($this->getOrderingScope(), $this->orderingDirection);
 
         if ($this->state['type'] !== 'all') {
             $scopeClass = Transaction::TYPE_SCOPES[$this->state['type']];

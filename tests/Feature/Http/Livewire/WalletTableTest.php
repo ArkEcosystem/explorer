@@ -32,16 +32,16 @@ it('should list the first page of records', function () {
 it('should apply ordering through an event', function () {
     $component = Livewire::test(WalletTable::class);
 
-    $component->assertSet('walletsOrdering', OrderingTypeEnum::BALANCE);
-    $component->assertSet('walletsOrderingDirection', OrderingDirectionEnum::DESC);
+    $component->assertSet('ordering', OrderingTypeEnum::BALANCE);
+    $component->assertSet('orderingDirection', OrderingDirectionEnum::DESC);
 
     $component->emit('orderWalletsBy', OrderingTypeEnum::BALANCE);
 
-    $component->assertSet('walletsOrdering', OrderingTypeEnum::BALANCE);
-    $component->assertSet('walletsOrderingDirection', OrderingDirectionEnum::ASC);
+    $component->assertSet('ordering', OrderingTypeEnum::BALANCE);
+    $component->assertSet('orderingDirection', OrderingDirectionEnum::ASC);
 
     $component->emit('orderWalletsBy', OrderingTypeEnum::SUPPLY);
 
-    $component->assertSet('walletsOrdering', OrderingTypeEnum::SUPPLY);
-    $component->assertSet('walletsOrderingDirection', OrderingDirectionEnum::DESC);
+    $component->assertSet('ordering', OrderingTypeEnum::SUPPLY);
+    $component->assertSet('orderingDirection', OrderingDirectionEnum::DESC);
 });
