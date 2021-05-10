@@ -364,7 +364,7 @@ body {
 }
 
 .transaction-filter-button {
-    @apply w-full font-semibold text-left text-theme-secondary-900;
+    @apply w-full font-semibold text-left p-3 text-theme-secondary-900;
 }
 .dark .transaction-filter-button {
     @apply text-theme-secondary-200;
