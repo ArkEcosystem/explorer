@@ -35,7 +35,4 @@ return [
             'base58Prefix'     => intval(env('EXPLORER_NETWORK_BASE58_PREFIX', 30)),
         ],
     ],
-
-    'marketsquare_host' => env('EXPLORER_MARKETSQUARE_HOST', 'https://marketsquare.io/'),
-
 ];
