@@ -10,7 +10,7 @@
                     <x-tables.headers.desktop.address name="general.transaction.sender" icon />
                 @endif
                 <x-tables.headers.desktop.address name="general.transaction.recipient" />
-                <x-tables.headers.desktop.number name="general.transaction.amount" />
+                <x-tables.headers.desktop.number name="general.transaction.amount" last-until="lg" />
                 <x-tables.headers.desktop.number name="general.transaction.fee" responsive breakpoint="xl" />
                 @isset($useConfirmations)
                     <x-tables.headers.desktop.number name="general.transaction.confirmations" responsive breakpoint="xl" />
