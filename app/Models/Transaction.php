@@ -7,6 +7,7 @@ namespace App\Models;
 use App\Models\Casts\BigInteger;
 use App\Models\Concerns\SearchesCaseInsensitive;
 use App\Models\Scopes\DelegateRegistrationScope;
+use App\Models\Scopes\DelegateResignationScope;
 use App\Models\Scopes\IpfsScope;
 use App\Models\Scopes\MagistrateScope;
 use App\Models\Scopes\MultiPaymentScope;
@@ -50,6 +51,7 @@ final class Transaction extends Model
      */
     const TYPE_SCOPES = [
         'delegateRegistration'          => DelegateRegistrationScope::class,
+        'delegateResignation'           => DelegateResignationScope::class,
         'ipfs'                          => IpfsScope::class,
         'multiPayment'                  => MultiPaymentScope::class,
         'multiSignature'                => MultiSignatureScope::class,

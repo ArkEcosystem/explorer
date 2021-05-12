@@ -27,6 +27,7 @@ return [
         'transaction_types'              => [
             'all'                           => 'All',
             'delegateRegistration'          => 'Delegate Registration',
+            'delegateResignation'           => 'Delegate Resignation',
             'ipfs'                          => 'IPFS',
             'multiPayment'                  => 'Multipayment',
             'multiSignature'                => 'Multisignature',
