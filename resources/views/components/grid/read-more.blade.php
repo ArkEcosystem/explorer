@@ -4,34 +4,14 @@
     'content',
 ])
 
+@php
+$content=$content.' a adsd as das maimi mi m in in ininoon aonp asnpd ';
+@endphp
+
 <x-grid.generic
     :title="$title"
     :icon="$icon"
     class="transition-none"
 >
-    <div
-        x-data="{ showMore: false }"
-        :class="{ 'flex': ! showMore }"
-        x-cloak
-    >
-        <div :class="{ truncate: ! showMore }">
-            {{ $content }}
-        </div>
-
-        <div @click="showMore = ! showMore" class="link inline-block whitespace-nowrap">
-            <div
-                x-show="showMore"
-                class="mt-2"
-            >
-                Show Less
-            </div>
-
-            <div
-                x-show="! showMore"
-                class="ml-2"
-            >
-                Read More
-            </div>
-        </div>
-    </div>
+    <x-ark-read-more :content="$content" />
 </x-grid.generic>
