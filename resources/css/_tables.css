@@ -22,8 +22,15 @@
     @apply right-0 -mr-2;
 }
 
-@media (max-width: 1279px) {
+@media (max-width: 1023px) {
     .table-container table.sticky-headers th.last-until-lg:after {
+        content: "";
+        @apply absolute top-0 right-0 w-2 h-full -mr-2 bg-white border-b border-l-0 border-theme-secondary-300;
+    }
+}
+
+@media (max-width: 1279px) {
+    .table-container table.sticky-headers th.last-until-xl:after {
         content: "";
         @apply absolute top-0 right-0 w-2 h-full -mr-2 bg-white border-b border-l-0 border-theme-secondary-300;
     }

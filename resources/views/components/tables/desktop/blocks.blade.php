@@ -9,7 +9,7 @@
                 @endif
                 <x-tables.headers.desktop.number name="general.block.height" />
                 <x-tables.headers.desktop.number name="general.block.transactions" />
-                <x-tables.headers.desktop.number name="general.block.amount" />
+                <x-tables.headers.desktop.number name="general.block.amount" last-until="lg" />
                 <x-tables.headers.desktop.number name="general.block.fee" responsive />
             </tr>
         </thead>
