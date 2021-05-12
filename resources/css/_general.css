@@ -12,28 +12,6 @@ body {
     /* 100vh - footer height */
 }
 
-/* Custom content container - TODO remove when ui is updated */
-.content-container {
-    @apply flex px-8 mx-auto;
-}
-
-.content-container-full-width {
-    @apply flex mx-auto;
-}
-
-@screen sm {
-    .content-container {
-        @apply px-10;
-    }
-}
-
-@screen lg {
-    .content-container-full-width,
-    .content-container {
-        @apply max-w-7xl;
-    }
-}
-
 /* Network Status Block */
 .network-status-block {
     @apply inline-block w-full text-center border border-transparent bg-theme-secondary-200;
