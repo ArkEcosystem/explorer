@@ -3,10 +3,10 @@
         <thead>
             <tr>
                 <x-tables.headers.desktop.text name="general.delegates.rank" alignment="text-left" />
-                <x-tables.headers.desktop.address name="general.delegates.name" />
-                <x-tables.headers.desktop.number name="general.delegates.votes" responsive breakpoint="lg" />
+                <x-tables.headers.desktop.address name="general.delegates.name" :last-until="!Network::usesMarketSquare() ? 'lg' : null" />
+                <x-tables.headers.desktop.number name="general.delegates.votes" responsive />
                 @if (Network::usesMarketSquare())
-                    <x-tables.headers.desktop.icon name="general.delegates.profile" />
+                    <x-tables.headers.desktop.icon name="general.delegates.profile" last-until="lg" />
                     <x-tables.headers.desktop.number name="general.delegates.commission" responsive />
                 @endif
             </tr>

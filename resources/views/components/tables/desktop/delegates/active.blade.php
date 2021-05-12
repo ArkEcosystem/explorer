@@ -7,7 +7,7 @@
                 <x-tables.headers.desktop.status name="general.delegates.status">
                     <x-ark-info :tooltip="trans('pages.delegates.info.status')" />
                 </x-tables.headers.desktop.status>
-                <x-tables.headers.desktop.number name="general.delegates.votes" responsive breakpoint="lg"/>
+                <x-tables.headers.desktop.number name="general.delegates.votes" responsive />
                 @if (Network::usesMarketSquare())
                     <x-tables.headers.desktop.icon name="general.delegates.profile" />
                     <x-tables.headers.desktop.number name="general.delegates.commission" responsive />
