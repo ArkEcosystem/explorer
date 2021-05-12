@@ -1,10 +1,17 @@
+@props([
+    'title',
+    'icon',
+    'class' => null,
+    'slot'  => null
+])
+
 <div {{ $attributes->merge(['class' => 'flex justify-between pb-4 space-x-4'])->only('class') }}>
     <div class="flex flex-col flex-1 space-y-2 min-w-0 min-h-0">
         <span class="text-sm font-semibold text-theme-secondary-500 dark:text-theme-secondary-700">
             {{ $title }}
         </span>
 
-        @if((string) $slot === "")
+        @empty($slot)
             <span class="font-semibold break-words text-theme-secondary-500 dark:text-theme-secondary-200">
                 @lang('generic.not_specified')
             </span>
