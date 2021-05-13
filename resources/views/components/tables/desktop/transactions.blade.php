@@ -19,7 +19,7 @@
         </thead>
         <tbody>
             @foreach($transactions as $transaction)
-                <x-ark-tables.row :danger="$loop->index === 1">
+                <x-ark-tables.row>
                     <x-ark-tables.cell wire:key="{{ $transaction->id() }}-id">
                         <x-tables.rows.desktop.transaction-id :model="$transaction" />
                     </x-ark-tables.cell>

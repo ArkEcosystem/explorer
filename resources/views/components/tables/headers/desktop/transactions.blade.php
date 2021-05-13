@@ -12,7 +12,7 @@
     :breakpoint="$breakpoint"
     :first-on="$firstOn"
     :last-on="$lastOn"
-    :class="$class . ' text-left'"
+    :class="$class"
 >
     <div class="inline-block text-left">
         <span>@lang($name)</span>

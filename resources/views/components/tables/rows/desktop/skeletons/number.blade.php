@@ -3,6 +3,7 @@
     'breakpoint' => 'lg',
     'firstOn' => null,
     'lastOn' => null,
+    'class' => '',
 ])
 
 <x-ark-tables.cell
@@ -10,6 +11,7 @@
     :breakpoint="$breakpoint"
     :first-on="$firstOn"
     :last-on="$lastOn"
+    :class="'text-right ' . $class"
 >
     <x-loading.text />
 </x-ark-tables.cell>
