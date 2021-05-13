@@ -21,13 +21,13 @@ final class TableSkeleton extends Component
     public function render(): View
     {
         if ($this->device === 'desktop') {
-            $headers = $this->items->map(function ($item) {
+            $headers = $this->items->map(function ($item): array {
                 return array_merge(
                     ['component' => "tables.headers.{$this->device}.".$this->getName($item)],
                     $this->getOptions($item)
                 );
             });
-            $rows    = $this->items->values()->map(function ($item) {
+            $rows    = $this->items->values()->map(function ($item): array {
                 return array_merge(
                     ['component' => "tables.rows.{$this->device}.skeletons.".$this->getName($item)],
                     $this->getOptions($item)
@@ -35,7 +35,7 @@ final class TableSkeleton extends Component
             });
         } else {
             $headers = collect([]); // Mobile has no separate headers
-            $rows    = $this->items->map(function ($item) {
+            $rows    = $this->items->map(function ($item): array {
                 return array_merge(
                     ['component' => "tables.rows.{$this->device}.skeletons.".$this->getName($item)],
                     $this->getOptions($item)
@@ -43,6 +43,7 @@ final class TableSkeleton extends Component
             });
         }
 
+        /* @phpstan-ignore-next-line */
         return view("components.tables.skeletons.{$this->device}", [
             'headers' => $headers->toArray(),
             'rows'    => $rows->toArray(),
