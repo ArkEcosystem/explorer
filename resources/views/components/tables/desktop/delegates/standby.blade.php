@@ -3,11 +3,11 @@
         <thead>
             <tr>
                 <x-tables.headers.desktop.text name="general.delegates.rank" alignment="text-left" />
-                <x-tables.headers.desktop.address name="general.delegates.name" :last-until="!Network::usesMarketSquare() ? 'lg' : null" />
+                <x-tables.headers.desktop.address name="general.delegates.name" :last-on="!Network::usesMarketSquare() ? 'lg' : false" />
                 <x-tables.headers.desktop.number name="general.delegates.votes" responsive />
                 @if (Network::usesMarketSquare())
-                    <x-tables.headers.desktop.icon name="general.delegates.profile" last-until="lg" />
-                    <x-tables.headers.desktop.number name="general.delegates.commission" responsive />
+                    <x-tables.headers.desktop.icon name="general.delegates.profile" last-on="xl" />
+                    <x-tables.headers.desktop.number name="general.delegates.commission" responsive breakpoint="xl" />
                 @endif
             </tr>
         </thead>
@@ -24,7 +24,7 @@
                         <x-tables.rows.desktop.votes :model="$delegate" />
                     </x-ark-tables.cell>
                     @if (Network::usesMarketSquare())
-                        <x-ark-tables.cell :last-on="xl">
+                        <x-ark-tables.cell last-on="xl">
                             <x-tables.rows.desktop.marketsquare-profile :model="$delegate" />
                         </x-ark-tables.cell>
                         <x-ark-tables.cell responsive breakpoint="xl">

@@ -2,8 +2,15 @@
     <table class="sticky-headers">
         <thead>
             <tr>
-                <x-tables.headers.desktop.address name="general.transaction.recipient" />
-                <x-tables.headers.desktop.number name="general.transaction.amount" />
+                <x-tables.headers.desktop.address
+                    name="general.transaction.recipient"
+                    last-on="md"
+                />
+                <x-tables.headers.desktop.number
+                    name="general.transaction.amount"
+                    responsive
+                    breakpoint="md"
+                />
             </tr>
         </thead>
         <tbody>

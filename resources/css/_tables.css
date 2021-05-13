@@ -1,51 +1,6 @@
+/* purgecss start ignore */
 .table-container table.sticky-headers th {
-    @apply sticky z-10 bg-white;
     top: 80px;
-}
-
-.table-container table.sticky-headers th:before {
-    @apply absolute bottom-0 left-0 w-full border-b border-theme-secondary-300;
-    content: "";
-}
-
-.table-container table.sticky-headers th:first-child:after,
-.table-container table.sticky-headers th:last-child:after {
-    content: "";
-    @apply absolute top-0 w-2 h-full bg-white border-b border-l-0 border-theme-secondary-300;
-}
-.dark .table-container table.sticky-headers th:first-child:after,
-.dark .table-container table.sticky-headers th:last-child:after {
-    @apply bg-theme-secondary-900 border-theme-secondary-800;
-}
-
-.table-container table.sticky-headers th:first-child:after {
-    @apply left-0 -ml-2;
-}
-
-.table-container table.sticky-headers th:last-child:after {
-    @apply right-0 -mr-2;
-}
-
-@media (max-width: 1023px) {
-    .table-container table.sticky-headers th.last-until-lg:after {
-        content: "";
-        @apply absolute top-0 right-0 w-2 h-full -mr-2 bg-white border-b border-l-0 border-theme-secondary-300;
-    }
-
-    .dark .table-container table.sticky-headers th.last-until-lg:after {
-        @apply bg-theme-secondary-900 border-theme-secondary-800;
-    }
-}
-
-@media (max-width: 1279px) {
-    .table-container table.sticky-headers th.last-until-xl:after {
-        content: "";
-        @apply absolute top-0 right-0 w-2 h-full -mr-2 bg-white border-b border-l-0 border-theme-secondary-300;
-    }
-
-    .dark .table-container table.sticky-headers th.last-until-xl:after {
-        @apply bg-theme-secondary-900 border-theme-secondary-800;
-    }
 }
 
 @screen lg {
@@ -53,15 +8,4 @@
         top: 96px;
     }
 }
-
-.dark .table-container table.sticky-headers th {
-    @apply bg-theme-secondary-900;
-}
-
-.dark .table-container table.sticky-headers th:before {
-    @apply border-theme-secondary-800;
-}
-
-.table-container table.sticky-headers thead tr {
-    @apply border-none;
-}
+/* purgecss end ignore */
