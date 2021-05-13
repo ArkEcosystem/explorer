@@ -59,7 +59,7 @@ final class Settings
 
     public static function compactTables(): bool
     {
-        return Arr::get(static::all(), 'compactTables', true);
+        return Arr::get(static::all(), 'compactTables', false);
     }
 
     public static function usesCharts(): bool
