@@ -23,13 +23,13 @@ final class TableSkeleton extends Component
         if ($this->device === 'desktop') {
             $headers = $this->items->map(function ($item) {
                 return array_merge(
-                    ['component' => "tables.headers.{$this->device}." . $this->getName($item)],
+                    ['component' => "tables.headers.{$this->device}.".$this->getName($item)],
                     $this->getOptions($item)
                 );
             });
             $rows    = $this->items->values()->map(function ($item) {
                 return array_merge(
-                    ['component' => "tables.rows.{$this->device}.skeletons." . $this->getName($item)],
+                    ['component' => "tables.rows.{$this->device}.skeletons.".$this->getName($item)],
                     $this->getOptions($item)
                 );
             });
@@ -37,12 +37,11 @@ final class TableSkeleton extends Component
             $headers = collect([]); // Mobile has no separate headers
             $rows    = $this->items->map(function ($item) {
                 return array_merge(
-                    ['component' => "tables.rows.{$this->device}.skeletons." . $this->getName($item)],
+                    ['component' => "tables.rows.{$this->device}.skeletons.".$this->getName($item)],
                     $this->getOptions($item)
                 );
             });
         }
-
 
         return view("components.tables.skeletons.{$this->device}", [
             'headers' => $headers->toArray(),
@@ -50,7 +49,7 @@ final class TableSkeleton extends Component
         ]);
     }
 
-    private function getName(array|string $item): string
+    private function getName(array | string $item): string
     {
         if (is_string($item)) {
             return $item;
@@ -59,7 +58,7 @@ final class TableSkeleton extends Component
         return Arr::get($item, 'name', '');
     }
 
-    private function getOptions(array|string $item): array
+    private function getOptions(array | string $item): array
     {
         if (is_string($item)) {
             return [];
