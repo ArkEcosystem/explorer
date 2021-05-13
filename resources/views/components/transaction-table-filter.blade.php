@@ -30,17 +30,9 @@
             </div>
         @endslot
 
-        <div class="block overflow-y-scroll justify-center items-center py-3 h-64 dropdown-scrolling md:h-72">
-            <div
-                class="cursor-pointer dropdown-entry text-theme-secondary-900 dark:text-theme-secondary-200"
-                @click="window.livewire.emit('filterTransactionsByType', 'all'); transactionTypeFilter = 'all'; transactionTypeFilterLabel = '@lang('forms.search.transaction_types.all')'"
-            >
-                @lang('forms.search.transaction_types.all')
-            </div>
-
-            <hr class="mx-8 mt-4 border-b border-dashed border-theme-secondary-300">
-
+        <div class="items-center justify-center block h-64 py-3 overflow-y-scroll dropdown-scrolling md:h-72">
             @foreach([
+                'all',
                 'transfer',
                 'secondSignature',
                 'delegateRegistration',
