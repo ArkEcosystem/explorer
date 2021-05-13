@@ -4,9 +4,19 @@
         :items="[
             'general.delegates.rank'       => 'text',
             'general.delegates.name'       => 'adress',
-            'general.delegates.votes'      => 'number',
-            'general.delegates.profile'    => 'text',
-            'general.delegates.commission' => 'text'
+            'general.delegates.votes' => [
+                'name' => 'number',
+                'responsive' => true,
+            ],
+            'general.delegates.profile' => [
+                'name' => 'text',
+                'lastOn' => 'xl',
+            ],
+            'general.delegates.commission'  => [
+                'name' => 'text',
+                'responsive' => true,
+                'breakpoint' => 'xl',
+            ],
         ]"
     />
 @else
@@ -14,8 +24,14 @@
         device="desktop"
         :items="[
             'general.delegates.rank'  => 'text',
-            'general.delegates.name'  => 'address',
-            'general.delegates.votes' => 'number'
+            'general.delegates.name' => [
+                'name' => 'address',
+                'lastOn' => 'lg',
+            ],
+            'general.delegates.votes' => [
+                'name' => 'number',
+                'responsive' => true,
+            ],
         ]"
     />
 @endif

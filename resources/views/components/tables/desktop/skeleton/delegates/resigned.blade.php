@@ -2,7 +2,13 @@
     device="desktop"
     :items="[
         'general.delegates.id'    => 'text',
-        'general.delegates.name'  => 'address',
-        'general.delegates.votes' => 'number',
+        'general.delegates.name' => [
+            'name' => 'address',
+            'lastOn' => 'lg',
+        ],
+        'general.delegates.votes'  => [
+            'name' => 'number',
+            'responsive' => true,
+        ],
     ]"
 />

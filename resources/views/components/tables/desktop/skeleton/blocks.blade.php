@@ -8,6 +8,14 @@
             'general.block.transactions' => 'number',
             'general.block.amount'       => 'number',
             'general.block.fee'          => 'number',
+            'general.block.amount' => [
+                'name' => 'number',
+                'lastOn' => 'lg',
+            ],
+            'general.block.fee'  => [
+                'name' => 'number',
+                'responsive' => true,
+            ],
         ]"
     />
 @else
@@ -19,8 +27,14 @@
             'general.block.generated_by' => 'address',
             'general.block.height'       => 'number',
             'general.block.transactions' => 'number',
-            'general.block.amount'       => 'number',
-            'general.block.fee'          => 'number',
+            'general.block.amount' => [
+                'name' => 'number',
+                'lastOn' => 'lg',
+            ],
+            'general.block.fee'  => [
+                'name' => 'number',
+                'responsive' => true,
+            ],
         ]"
     />
 @endif
