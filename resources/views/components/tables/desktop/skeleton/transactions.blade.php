@@ -7,8 +7,20 @@
             'general.transaction.sender'        => 'address',
             'general.transaction.recipient'     => 'address',
             'general.transaction.amount'        => 'number',
-            'general.transaction.fee'           => 'number',
-            'general.transaction.confirmations' => 'number'
+            'general.transaction.amount'        => [
+                'name' => 'number',
+                'lastOn' => 'xl',
+            ],
+            'general.transaction.fee' => [
+                'name' => 'number',
+                'responsive' => true,
+                'breakpoint' => 'xl',
+            ],
+            'general.transaction.confirmations' => [
+                'name' => 'number',
+                'responsive' => true,
+                'breakpoint' => 'xl',
+            ]
         ]"
     />
 @else
