@@ -178,10 +178,13 @@ body {
 }
 
 .navbar-settings-option {
-    @apply items-center justify-between py-8 border-b border-dashed border-theme-secondary-300;
+    @apply items-center justify-between pt-8 border-theme-secondary-300;
 }
 .navbar-settings-option:last-child {
-    @apply border-0;
+    @apply border-0 pb-8;
+}
+.navbar-settings-option-with-border {
+    @apply navbar-settings-option border-b border-dashed;
 }
 .dark .navbar-settings-option {
     @apply border-theme-secondary-800;

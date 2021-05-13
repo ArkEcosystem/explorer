@@ -17,7 +17,11 @@
     >
         <div class="flex flex-col">
             @if(Network::canBeExchanged())
-                <x-navbar.setting-option :title="trans('forms.settings.currency.title')" :subtitle="trans('forms.settings.currency.description')">
+                <x-navbar.setting-option
+                    :title="trans('forms.settings.currency.title')"
+                    :subtitle="trans('forms.settings.currency.description')"
+                    border
+                >
                     <select wire:model="state.currency" class="font-medium bg-transparent text-theme-secondary-900 dark:text-theme-secondary-700">
                         <option value="AUD">AUD</option>
                         <option value="BRL">BRL</option>
@@ -56,7 +60,10 @@
                 />
             </x-navbar.setting-option>
 
-            <x-navbar.setting-option :title="trans('forms.settings.theme.title')" :subtitle="trans('forms.settings.theme.description')">
+            <x-navbar.setting-option
+                :title="trans('forms.settings.theme.title')"
+                :subtitle="trans('forms.settings.theme.description')"
+            >
                 <x-ark-toggle
                     name="state.darkTheme"
                     hide-label
@@ -65,7 +72,10 @@
                 />
             </x-navbar.setting-option>
 
-            <x-navbar.setting-option :title="trans('forms.settings.table.title')" :subtitle="trans('forms.settings.table.description')">
+            <x-navbar.setting-option
+                :title="trans('forms.settings.table.title')"
+                :subtitle="trans('forms.settings.table.description')"
+            >
                 <x-ark-toggle
                     name="state.compactTables"
                     hide-label
