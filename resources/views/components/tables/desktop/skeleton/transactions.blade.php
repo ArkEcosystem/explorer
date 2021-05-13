@@ -6,7 +6,6 @@
             'general.transaction.timestamp'     => 'text',
             'general.transaction.sender'        => 'address',
             'general.transaction.recipient'     => 'address',
-            'general.transaction.amount'        => 'number',
             'general.transaction.amount'        => [
                 'name' => 'number',
                 'lastOn' => 'xl',
