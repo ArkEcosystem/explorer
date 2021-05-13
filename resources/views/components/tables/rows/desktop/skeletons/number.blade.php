@@ -1,9 +1,15 @@
-@isset($responsive)
-    <td class="hidden text-right lg:table-cell">
-        <x-loading.text />
-    </td>
-@else
-    <td class="text-right">
-        <x-loading.text />
-    </td>
-@endisset
+@props([
+    'responsive' => false,
+    'breakpoint' => 'lg',
+    'firstOn' => null,
+    'lastOn' => null,
+])
+
+<x-ark-tables.cell
+    :responsive="$responsive"
+    :breakpoint="$breakpoint"
+    :first-on="$firstOn"
+    :last-on="$lastOn"
+>
+    <x-loading.text />
+</x-ark-tables.cell>
