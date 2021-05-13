@@ -30,7 +30,7 @@
             </div>
         @endslot
 
-        <div class="items-center justify-center block h-64 py-3 overflow-y-scroll dropdown-scrolling md:h-72">
+        <div class="block overflow-y-scroll justify-center items-center py-3 h-64 dropdown-scrolling md:h-72">
             @foreach([
                 'all',
                 'transfer',
