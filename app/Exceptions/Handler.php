@@ -9,8 +9,8 @@ use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Throwable;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
+use Throwable;
 
 final class Handler extends ExceptionHandler
 {
@@ -65,13 +65,14 @@ final class Handler extends ExceptionHandler
     /**
      * Get the view used to render HTTP exceptions.
      *
-     * @param  HttpExceptionInterface  $e
+     * @param HttpExceptionInterface $e
+     *
      * @return string
      */
     protected function getHttpExceptionView(HttpExceptionInterface $e)
     {
         if (is_a($e->getPrevious(), EntityNotFoundInterface::class)) {
-            return "errors::404_entity";
+            return 'errors::404_entity';
         }
 
         return "errors::{$e->getStatusCode()}";

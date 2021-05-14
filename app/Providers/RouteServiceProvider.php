@@ -13,7 +13,6 @@ use App\Models\Block;
 use App\Models\Transaction;
 use App\Models\Wallet;
 use ArkEcosystem\Crypto\Identities\Address;
-use ARKEcosystem\UserInterface\UI;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\RateLimiter;
@@ -78,7 +77,6 @@ final class RouteServiceProvider extends ServiceProvider
 
             return $block;
         });
-
     }
 
     /**

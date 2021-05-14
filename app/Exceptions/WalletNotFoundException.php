@@ -1,13 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Exceptions;
 
 use App\Exceptions\Contracts\EntityNotFoundInterface;
-use Illuminate\Support\HtmlString;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\HtmlString;
 use Konceiver\BladeComponents\View\Components\TruncateMiddle;
 
-class WalletNotFoundException extends ModelNotFoundException implements EntityNotFoundInterface
+final class WalletNotFoundException extends ModelNotFoundException implements EntityNotFoundInterface
 {
     public function getCustomMessage(): HtmlString
     {
@@ -16,13 +18,13 @@ class WalletNotFoundException extends ModelNotFoundException implements EntityNo
         [$walletID] = $this->getIds();
 
         $truncatedWalletID = $truncateMiddle->render()([
-            'slot' => $walletID,
-            'attributes' => ['length' => 17]
+            'slot'       => $walletID,
+            'attributes' => ['length' => 17],
         ]);
 
         $message = trans('errors.wallet_not_found', [
             'truncatedWalletID' => $truncatedWalletID,
-            'walletID' => $walletID,
+            'walletID'          => $walletID,
         ]);
 
         return new HtmlString($message);
