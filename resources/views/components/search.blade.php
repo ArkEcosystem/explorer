@@ -7,7 +7,7 @@
         searchType: '{{ $type ?? 'block' }}',
     }"
     @mobile-search.window="isMobileOpen = true"
-    class="searchbar shadow-search-subtle rounded-b-lg"
+    class="rounded-b-lg searchbar shadow-search-subtle"
     x-bind:class="{
         'search-mobile': isMobileOpen,
         'search-advanced': showAdvanced,
@@ -52,7 +52,7 @@
 
                 <button
                     type="button"
-                    class="hidden text-theme-secondary-900 mr-8 rounded  text-center transition-default font-normal hover:bg-theme-primary-100 dark:hover:bg-theme-secondary-800 dark:text-theme-secondary-600 md:block px-4 py-2"
+                    class="hidden py-2 px-4 mr-8 font-normal text-center rounded text-theme-secondary-900  transition-default hover:bg-theme-primary-100 dark:hover:bg-theme-secondary-800 dark:text-theme-secondary-600 md:block"
                     @click="showAdvanced = !showAdvanced; isFocused = true"
                 >
                     <span x-show="!showAdvanced">@lang('actions.advanced_search')</span>
