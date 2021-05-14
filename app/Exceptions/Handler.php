@@ -8,6 +8,7 @@ use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
 final class Handler extends ExceptionHandler
@@ -57,6 +58,19 @@ final class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
+        if ($this->shouldShow404Page($request, $exception)) {
+            return redirect()->route('error.404');
+        }
+
         return parent::render($request, $exception);
+    }
+
+    private function shouldShow404Page(Request $request, Throwable $exception): bool
+    {
+        $expectedException = $this->prepareException($this->mapException($exception));
+
+        return $request->method() === 'GET'
+            && $expectedException instanceof NotFoundHttpException
+            && ! $request->expectsJson();
     }
 }

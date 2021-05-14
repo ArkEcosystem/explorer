@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::view('404', 'errors.404', [], 404)->name('error.404');
 Route::get('/', HomeController::class)->name('home');
 Route::view('/search', 'app.search-results')->name('search');
 Route::view('/delegates', 'app.delegates')->name('delegates');
