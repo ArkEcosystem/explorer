@@ -9,6 +9,7 @@ use App\Http\Livewire\Concerns\ManagesSearch;
 use App\Services\Search\BlockSearch;
 use App\Services\Search\TransactionSearch;
 use App\Services\Search\WalletSearch;
+use ARKEcosystem\UserInterface\Http\Livewire\Concerns\HasModal;
 use Closure;
 use Illuminate\Support\Arr;
 use Illuminate\View\View;
@@ -17,6 +18,7 @@ use Livewire\Component;
 final class SearchModule extends Component
 {
     use ManagesSearch;
+    use HasModal;
 
     public bool $isSlim = false;
 
@@ -27,6 +29,11 @@ final class SearchModule extends Component
     /** @phpstan-ignore-next-line */
     protected $queryString = [
         'state' => ['except' => []],
+    ];
+
+    /* @phpstan-ignore-next-line */
+    protected $listeners = [
+        'openSearchModal' => 'openModal',
     ];
 
     protected array $transactionOptionsValues = [
