@@ -7,7 +7,7 @@
         searchType: '{{ $type ?? 'block' }}',
     }"
     @mobile-search.window="isMobileOpen = true"
-    class="searchbar @if ($isSlim ?? false) searchbar-slim @else shadow-search-subtle rounded-b-lg @endif"
+    class="searchbar shadow-search-subtle rounded-b-lg"
     x-bind:class="{
         'search-mobile': isMobileOpen,
         'search-advanced': showAdvanced,
@@ -32,30 +32,19 @@
     <div :class="{ 'fixed inset-0 z-30 overflow-y-auto md:hidden pb-20': isMobileOpen }">
         <div class="search-container" @click.away="isMobileOpen = false">
             <div class="search-simple">
-                @if ($isSlim ?? false)
-                    <div
-                        x-show="isFocused"
-                        class="mr-4 cursor-pointer text-theme-primary-600 hover:text-theme-primary-700"
-                        @click="showAdvanced = false; isFocused = false; $dispatch('search-slim-close')"
-                    >
-                        <x-ark-icon name="close" size="md" />
-                    </div>
-                @endif
-
                 <div class="flex-1 mr-8">
                     <input
                         type="text"
                         placeholder="@lang('forms.search.term_placeholder')"
-                        class="hidden searchbar-input {{ ($isSlim ?? false) ? 'xl:block' : 'sm:block' }}"
+                        class="hidden searchbar-input sm:block"
                         wire:model.defer="state.term"
                         wire:keydown.enter="performSearch"
-                        @if ($isSlim ?? false) x-on:focus="isFocused = true; $dispatch('search-slim-expand')" @endif
                     />
 
                     <input
                         type="text"
                         placeholder="@lang('forms.search.term_placeholder_mobile')"
-                        class="searchbar-input {{ ($isSlim ?? false) ? 'xl:hidden' : 'sm:hidden' }}"
+                        class="searchbar-input sm:hidden"
                         wire:model.defer="state.term"
                         wire:keydown.enter="performSearch"
                     />
@@ -63,25 +52,23 @@
 
                 <button
                     type="button"
-                    class="hidden text-theme-secondary-900 mr-8 rounded  text-center transition-default font-normal hover:bg-theme-primary-100 dark:hover:bg-theme-secondary-800 dark:text-theme-secondary-600 md:block {{ ($isSlim ?? false) ? 'px-2 py-1 -my-2' : 'px-4 py-2' }}"
-                    @click="showAdvanced = !showAdvanced; isFocused = true; $dispatch('search-slim-expand')"
+                    class="hidden text-theme-secondary-900 mr-8 rounded  text-center transition-default font-normal hover:bg-theme-primary-100 dark:hover:bg-theme-secondary-800 dark:text-theme-secondary-600 md:block px-4 py-2"
+                    @click="showAdvanced = !showAdvanced; isFocused = true"
                 >
                     <span x-show="!showAdvanced">@lang('actions.advanced_search')</span>
                     <span x-show="showAdvanced" x-cloak>@lang('actions.hide_search')</span>
                 </button>
 
-                @unless($isSlim ?? false)
-                    <button
-                        type="button"
-                        class="hidden button-primary md:block"
-                        wire:click="performSearch"
-                    >
-                        @lang('actions.find_it')
-                    </button>
-                @endunless
+                <button
+                    type="button"
+                    class="hidden button-primary md:block"
+                    wire:click="performSearch"
+                >
+                    @lang('actions.find_it')
+                </button>
 
                 <div
-                    class="cursor-pointer text-theme-primary-300 hover:text-theme-primary-400 dark:text-theme-secondary-500 dark:hover:text-theme-secondary-400 @unless($isSlim ?? false) md:hidden @endif"
+                    class="cursor-pointer text-theme-primary-300 hover:text-theme-primary-400 dark:text-theme-secondary-500 dark:hover:text-theme-secondary-400 md:hidden"
                     wire:click="performSearch"
                 >
                     <x-ark-icon name="search" />
@@ -90,14 +77,12 @@
 
             <div
                 x-show="showAdvanced"
-                @unless($isSlim ?? false)
-                    x-transition:enter="transition ease-out duration-100"
-                    x-transition:enter-start="opacity-0 transform"
-                    x-transition:enter-end="opacity-100 transform"
-                    x-transition:leave="transition ease-in duration-100"
-                    x-transition:leave-start="opacity-100 transform"
-                    x-transition:leave-end="opacity-0 transform"
-                @endunless
+                x-transition:enter="transition ease-out duration-100"
+                x-transition:enter-start="opacity-0 transform"
+                x-transition:enter-end="opacity-100 transform"
+                x-transition:leave="transition ease-in duration-100"
+                x-transition:leave-start="opacity-100 transform"
+                x-transition:leave-end="opacity-0 transform"
                 x-cloak
             >
                 <div class="search-advanced-options">
