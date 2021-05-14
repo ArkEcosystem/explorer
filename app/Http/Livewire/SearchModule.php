@@ -20,9 +20,7 @@ final class SearchModule extends Component
     use ManagesSearch;
     use HasModal;
 
-    public bool $isSlim = false;
-
-    public bool $isAdvanced = false;
+    public bool $isModal = false;
 
     public string $type = 'block';
 
@@ -52,16 +50,22 @@ final class SearchModule extends Component
         'magistrate',
     ];
 
-    public function mount(bool $isSlim = false, bool $isAdvanced = false, string $type = 'block'): void
+    public function mount(bool $isModal = false, string $type = 'block'): void
     {
-        $this->isAdvanced = $isAdvanced;
-        $this->isSlim     = $isSlim;
+        $this->isModal = $isModal;
         $this->type       = $type;
     }
 
     public function render(): View
     {
-        return view('components.search', [
+        if ($this->isModal) {
+            return view('components.general.search.search-modal', [
+                'transactionOptions' => $this->getTransactionOptions(),
+            ]);
+
+        }
+
+        return view('components.general.search.search', [
             'transactionOptions' => $this->getTransactionOptions(),
         ]);
     }
