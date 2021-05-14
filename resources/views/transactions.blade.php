@@ -4,7 +4,7 @@
         <x-general.search.header />
 
         <div class="bg-white border-t-20 border-theme-secondary-100 dark:border-black dark:bg-theme-secondary-900">
-            <div class="py-16 content-container">
+            <x-ark-container>
                 <div x-data="{
                     dropdownOpen: false,
                     transactionTypeFilter: '{{ $transactionTypeFilter }}',
@@ -22,7 +22,7 @@
 
                     <livewire:transaction-table />
                 </div>
-            </div>
+            </x-ark-container>
         </div>
     @endsection
 

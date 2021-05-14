@@ -15,11 +15,11 @@
         <x-page-headers.wallet.voters :wallet="$wallet" />
 
         <div class="bg-white border-t-20 border-theme-secondary-100 dark:border-black dark:bg-theme-secondary-900">
-            <div class="py-16 content-container">
+            <x-ark-container>
                 <div x-cloak class="w-full">
                     <livewire:wallet-voter-table :public-key="$wallet->publicKey()" :username="$wallet->username()" />
                 </div>
-            </div>
+            </x-ark-container>
         </div>
     @endsection
 
