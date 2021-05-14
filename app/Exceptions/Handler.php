@@ -75,6 +75,7 @@ final class Handler extends ExceptionHandler
         $mainNotFoundException = $expectedException->getPrevious();
 
         return $this->isARegularGetRequest($request)
+            && $mainNotFoundException !== null
             && is_a($mainNotFoundException, EntityNotFoundInterface::class);
     }
 
@@ -94,6 +95,7 @@ final class Handler extends ExceptionHandler
 
         return $this->isARegularGetRequest($request)
             && $expectedException instanceof NotFoundHttpException
+            && $mainNotFoundException !== null
             && ! is_a($mainNotFoundException, EntityNotFoundInterface::class);
     }
 
