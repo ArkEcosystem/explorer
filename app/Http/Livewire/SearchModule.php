@@ -52,7 +52,7 @@ final class SearchModule extends Component
 
     public function mount(bool $isModal = false, string $type = 'block'): void
     {
-        $this->isModal = $isModal;
+        $this->isModal    = $isModal;
         $this->type       = $type;
     }
 
@@ -62,7 +62,6 @@ final class SearchModule extends Component
             return view('components.general.search.search-modal', [
                 'transactionOptions' => $this->getTransactionOptions(),
             ]);
-
         }
 
         return view('components.general.search.search', [
