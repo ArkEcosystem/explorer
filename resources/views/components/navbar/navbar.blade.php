@@ -28,8 +28,8 @@
                     </a>
                 </div>
 
-                <div class="flex items-center mr-auto">
-                    <span class="h-5 mr-2 border-r ml-9 border-theme-secondary-300 dark:border-theme-secondary-800" aria-hidden="true"></span>
+                <div class="items-center hidden mr-auto md:flex">
+                    <span class="h-5 border-r ml-9 border-theme-secondary-300 dark:border-theme-secondary-800" aria-hidden="true"></span>
 
                     {{-- search modal trigger (tablet/desktop) --}}
                     <button
@@ -120,7 +120,8 @@
                     <div class="flex items-center ml-6 md:hidden">
                         <div class="pl-8 border-l border-theme-primary-100 text-theme-secondary-900 dark:text-theme-secondary-600 dark:border-theme-secondary-800">
                             <button
-                                @click="$dispatch('mobile-search')"
+                                type="button"
+                                @click="Livewire.emit('openSearchModal')"
                                 class="inline-flex items-center justify-center py-2 transition duration-150 ease-in-out rounded-md text-theme-primary-300 dark:text-theme-secondary-600"
                             >
                                 <span class="inline-flex"><x-ark-icon name="search" size="sm" /></span>
