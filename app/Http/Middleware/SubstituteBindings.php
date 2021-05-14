@@ -8,5 +8,4 @@ use Illuminate\Routing\Middleware\SubstituteBindings as Middleware;
 
 final class SubstituteBindings extends Middleware
 {
-
 }

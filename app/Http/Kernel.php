@@ -8,6 +8,7 @@ use App\Http\Middleware\Authenticate;
 use App\Http\Middleware\EncryptCookies;
 use App\Http\Middleware\PreventRequestsDuringMaintenance;
 use App\Http\Middleware\RedirectIfAuthenticated;
+use App\Http\Middleware\SubstituteBindings;
 use App\Http\Middleware\TrimStrings;
 use App\Http\Middleware\TrustProxies;
 use App\Http\Middleware\VerifyCsrfToken;
@@ -28,7 +29,6 @@ use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Spatie\ResponseCache\Middlewares\CacheResponse;
 use Spatie\ResponseCache\Middlewares\DoNotCacheResponse;
-use App\Http\Middleware\SubstituteBindings;
 
 final class Kernel extends HttpKernel
 {
@@ -92,5 +92,4 @@ final class Kernel extends HttpKernel
         'verified'           => EnsureEmailIsVerified::class,
         'doNotCacheResponse' => DoNotCacheResponse::class,
     ];
-
 }
