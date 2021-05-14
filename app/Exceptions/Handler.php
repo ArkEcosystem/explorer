@@ -62,7 +62,7 @@ final class Handler extends ExceptionHandler
     {
         if ($this->shouldShowEntity404Page($request, $exception)) {
             return $this->getNotFoundEntityResponse($exception);
-        } else if ($this->shouldShow404Page($request, $exception)) {
+        } elseif ($this->shouldShow404Page($request, $exception)) {
             return redirect()->route('error.404', ['url' => url()->current()]);
         }
 
