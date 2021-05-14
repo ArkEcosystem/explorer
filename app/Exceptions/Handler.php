@@ -71,7 +71,9 @@ final class Handler extends ExceptionHandler
      */
     protected function getHttpExceptionView(HttpExceptionInterface $e)
     {
-        if ($e->getPrevious() && is_a($e->getPrevious(), EntityNotFoundInterface::class)) {
+        $mainNotFoundException = $e->getPrevious();
+
+        if ($mainNotFoundException !== null && is_a($mainNotFoundException, EntityNotFoundInterface::class)) {
             return 'errors::404_entity';
         }
 
