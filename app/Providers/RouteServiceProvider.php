@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\Exceptions\BlockNotFoundException;
 use App\Exceptions\TransactionNotFoundException;
 use App\Facades\Network;
 use App\Facades\Wallets;
+use App\Models\Block;
 use App\Models\Transaction;
 use App\Models\Wallet;
 use ArkEcosystem\Crypto\Identities\Address;
@@ -68,6 +70,18 @@ final class RouteServiceProvider extends ServiceProvider
             }
 
             return $transaction;
+        });
+
+        Route::bind('block', function (string $blockID): Block {
+            $block = Block::find($blockID);
+
+            if ($block === null) {
+                $e = new BlockNotFoundException();
+                $e->setModel(Block::class, [$blockID]);
+                throw $e;
+            }
+
+            return $block;
         });
     }
 

@@ -70,11 +70,11 @@ final class Handler extends ExceptionHandler
      */
     protected function getHttpExceptionView(HttpExceptionInterface $e)
     {
-        if ($e->getPrevious() instanceof TransactionNotFoundException) {
+        if ($e->getPrevious() instanceof TransactionNotFoundException
+            || $e->getPrevious() instanceof BlockNotFoundException) {
             return "errors::404_entity";
         }
 
         return "errors::{$e->getStatusCode()}";
     }
-
 }
