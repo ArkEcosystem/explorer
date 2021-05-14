@@ -6,8 +6,6 @@
             'general.block.timestamp'    => 'text',
             'general.block.height'       => 'number',
             'general.block.transactions' => 'number',
-            'general.block.amount'       => 'number',
-            'general.block.fee'          => 'number',
             'general.block.amount' => [
                 'name' => 'number',
                 'lastOn' => 'lg',
