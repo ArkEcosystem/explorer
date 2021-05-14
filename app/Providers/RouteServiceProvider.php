@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\Exceptions\TransactionNotFoundException;
 use App\Facades\Network;
 use App\Facades\Wallets;
+use App\Models\Transaction;
 use App\Models\Wallet;
 use ArkEcosystem\Crypto\Identities\Address;
 use ARKEcosystem\UserInterface\UI;
@@ -54,6 +56,18 @@ final class RouteServiceProvider extends ServiceProvider
 
                 abort(404);
             }
+        });
+
+        Route::bind('transaction', function (string $transactionID): Transaction {
+            $transaction = Transaction::find($transactionID);
+
+            if ($transaction === null) {
+                $e = new TransactionNotFoundException();
+                $e->setModel(Transaction::class, [$transactionID]);
+                throw $e;
+            }
+
+            return $transaction;
         });
     }
 

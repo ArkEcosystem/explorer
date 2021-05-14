@@ -9,6 +9,8 @@ use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Throwable;
+use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
+use App\Exceptions\TransactionNotFoundException;
 
 final class Handler extends ExceptionHandler
 {
@@ -59,4 +61,20 @@ final class Handler extends ExceptionHandler
     {
         return parent::render($request, $exception);
     }
+
+    /**
+     * Get the view used to render HTTP exceptions.
+     *
+     * @param  HttpExceptionInterface  $e
+     * @return string
+     */
+    protected function getHttpExceptionView(HttpExceptionInterface $e)
+    {
+        if ($e->getPrevious() instanceof TransactionNotFoundException) {
+            return "errors::404_entity";
+        }
+
+        return "errors::{$e->getStatusCode()}";
+    }
+
 }
