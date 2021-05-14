@@ -1,19 +1,7 @@
 <div>
     <div class="bg-theme-secondary-100 dark:bg-black">
-        <div class="content-container-full-width md:py-8 md:px-10">
-            <div class="flex flex-col w-full space-y-5">
-                <div class="flex items-center justify-between">
-                    <div class="hidden text-2xl font-bold whitespace-nowrap text-theme-secondary-900 lg:block dark:text-theme-secondary-200">
-                        @lang('general.search_explorer')
-                    </div>
-
-                    <livewire:network-status-block />
-                </div>
-
-                <div class="px-8 md:px-0">
-                    <livewire:search-module :type="$state['type']" />
-                </div>
-            </div>
+        <div class="w-full p-8 content-container-full-width">
+            <livewire:search-module :type="$state['type']" />
         </div>
     </div>
 

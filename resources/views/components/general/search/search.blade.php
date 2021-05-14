@@ -5,6 +5,7 @@
         searchType: '{{ $type ?? 'block' }}',
     }"
     @search-type-changed.window="searchType = $event.detail"
+    class="w-full"
 >
     <div class="flex flex-col bg-white rounded-lg dark:bg-theme-secondary-900">
         <x-general.search.search-input />
