@@ -1,12 +1,5 @@
 @component('layouts.app', ['isLanding' => true, 'fullWidth' => true])
 
-    @section('breadcrumbs')
-        <x-ark-breadcrumbs :crumbs="[
-            ['route' => 'home', 'label' => trans('menus.home')],
-            ['label' => trans('menus.delegate_monitor')],
-        ]" />
-    @endsection
-
     @section('content')
         <div class="dark:bg-theme-secondary-900">
             <x-ark-container container-class="flex flex-col space-y-5">

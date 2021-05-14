@@ -4,13 +4,6 @@
         <script src="{{ mix('js/clipboard.js')}}"></script>
     @endpush
 
-    @section('breadcrumbs')
-        <x-ark-breadcrumbs :crumbs="[
-            ['route' => 'home', 'label' => trans('menus.home')],
-            ['label' => trans('menus.block')],
-        ]" />
-    @endsection
-
     @section('content')
         <x-page-headers.block :block="$block" />
 

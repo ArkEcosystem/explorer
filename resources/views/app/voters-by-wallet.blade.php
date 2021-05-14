@@ -4,13 +4,6 @@
         <script src="{{ mix('js/clipboard.js')}}"></script>
     @endpush
 
-    @section('breadcrumbs')
-        <x-ark-breadcrumbs :crumbs="[
-            ['route' => 'wallet', 'params' => $wallet->address(), 'label' => trans('menus.address_details')],
-            ['label' => trans('menus.voters')],
-        ]" />
-    @endsection
-
     @section('content')
         <x-page-headers.wallet.voters :wallet="$wallet" />
 
