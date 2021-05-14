@@ -3,7 +3,7 @@
     @section('content')
         <x-ark-container>
             <div x-cloak class="w-full">
-                <div class="relative flex items-center justify-between">
+                <div class="flex relative justify-between items-center">
                     <h2>@lang('pages.blocks.title')</h2>
                 </div>
 
