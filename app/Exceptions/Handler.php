@@ -9,8 +9,9 @@ use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
+use Illuminate\Http\Response as HttpResponse;
 
 final class Handler extends ExceptionHandler
 {
@@ -59,24 +60,45 @@ final class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
+        if ($this->shouldShowEntity404Page($request, $exception)) {
+            return $this->getNotFoundEntityResponse($exception);
+        } else if ($this->shouldShow404Page($request, $exception)) {
+            return redirect()->route('error.404');
+        }
+
         return parent::render($request, $exception);
     }
 
-    /**
-     * Get the view used to render HTTP exceptions.
-     *
-     * @param HttpExceptionInterface $e
-     *
-     * @return string
-     */
-    protected function getHttpExceptionView(HttpExceptionInterface $e)
+    private function shouldShowEntity404Page(Request $request, Throwable $exception): bool
     {
-        $mainNotFoundException = $e->getPrevious();
+        $expectedException = $this->prepareException($this->mapException($exception));
+        $mainNotFoundException = $expectedException->getPrevious();
 
-        if ($mainNotFoundException !== null && is_a($mainNotFoundException, EntityNotFoundInterface::class)) {
-            return 'errors::404_entity';
-        }
+        return $this->isARegularGetRequest($request)
+            && is_a($mainNotFoundException, EntityNotFoundInterface::class);
+    }
 
-        return "errors::{$e->getStatusCode()}";
+    private function getNotFoundEntityResponse(Throwable $exception): HttpResponse
+    {
+        $expectedException = $this->prepareException($this->mapException($exception));
+
+        return response()->view('errors.404_entity', [
+            'exception' => $expectedException
+        ], 404);
+    }
+
+    private function shouldShow404Page(Request $request, Throwable $exception): bool
+    {
+        $expectedException = $this->prepareException($this->mapException($exception));
+        $mainNotFoundException = $expectedException->getPrevious();
+
+        return $this->isARegularGetRequest($request)
+            && $expectedException instanceof NotFoundHttpException
+            && ! is_a($mainNotFoundException, EntityNotFoundInterface::class);
+    }
+
+    private function isARegularGetRequest(Request $request): bool
+    {
+        return $request->method() === 'GET' && ! $request->expectsJson();
     }
 }
