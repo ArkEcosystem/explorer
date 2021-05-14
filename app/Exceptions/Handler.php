@@ -8,10 +8,10 @@ use App\Exceptions\Contracts\EntityNotFoundInterface;
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response as HttpResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
-use Illuminate\Http\Response as HttpResponse;
 
 final class Handler extends ExceptionHandler
 {
@@ -71,7 +71,7 @@ final class Handler extends ExceptionHandler
 
     private function shouldShowEntity404Page(Request $request, Throwable $exception): bool
     {
-        $expectedException = $this->prepareException($this->mapException($exception));
+        $expectedException     = $this->prepareException($this->mapException($exception));
         $mainNotFoundException = $expectedException->getPrevious();
 
         return $this->isARegularGetRequest($request)
@@ -83,13 +83,13 @@ final class Handler extends ExceptionHandler
         $expectedException = $this->prepareException($this->mapException($exception));
 
         return response()->view('errors.404_entity', [
-            'exception' => $expectedException
+            'exception' => $expectedException,
         ], 404);
     }
 
     private function shouldShow404Page(Request $request, Throwable $exception): bool
     {
-        $expectedException = $this->prepareException($this->mapException($exception));
+        $expectedException     = $this->prepareException($this->mapException($exception));
         $mainNotFoundException = $expectedException->getPrevious();
 
         return $this->isARegularGetRequest($request)
