@@ -6,6 +6,7 @@ namespace App\Providers;
 
 use App\Exceptions\BlockNotFoundException;
 use App\Exceptions\TransactionNotFoundException;
+use App\Exceptions\WalletNotFoundException;
 use App\Facades\Network;
 use App\Facades\Wallets;
 use App\Models\Block;
@@ -48,15 +49,13 @@ final class RouteServiceProvider extends ServiceProvider
                 ->group(base_path('routes/web.php'));
         });
 
-        Route::bind('wallet', function (string $value): Wallet {
-            abort_unless(Address::validate($value, Network::config()), 404);
+        Route::bind('wallet', function (string $walletID): Wallet {
+            abort_unless(Address::validate($walletID, Network::config()), 404);
 
             try {
-                return Wallets::findByAddress($value);
+                return Wallets::findByAddress($walletID);
             } catch (Throwable) {
-                UI::useErrorMessage(404, trans('general.wallet_not_found', [$value]));
-
-                abort(404);
+                throw (new WalletNotFoundException())->setModel(Wallet::class, [$walletID]);
             }
         });
 
@@ -64,9 +63,7 @@ final class RouteServiceProvider extends ServiceProvider
             $transaction = Transaction::find($transactionID);
 
             if ($transaction === null) {
-                $e = new TransactionNotFoundException();
-                $e->setModel(Transaction::class, [$transactionID]);
-                throw $e;
+                throw (new TransactionNotFoundException())->setModel(Transaction::class, [$transactionID]);
             }
 
             return $transaction;
@@ -76,13 +73,12 @@ final class RouteServiceProvider extends ServiceProvider
             $block = Block::find($blockID);
 
             if ($block === null) {
-                $e = new BlockNotFoundException();
-                $e->setModel(Block::class, [$blockID]);
-                throw $e;
+                throw (new BlockNotFoundException())->setModel(Block::class, [$blockID]);
             }
 
             return $block;
         });
+
     }
 
     /**

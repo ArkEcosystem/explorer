@@ -7,20 +7,23 @@ use Illuminate\Support\HtmlString;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Konceiver\BladeComponents\View\Components\TruncateMiddle;
 
-class TransactionNotFoundException extends ModelNotFoundException implements EntityNotFoundInterface
+class WalletNotFoundException extends ModelNotFoundException implements EntityNotFoundInterface
 {
     public function getCustomMessage(): HtmlString
     {
         $truncateMiddle = new TruncateMiddle();
 
-        [$transactionID] = $this->getIds();
+        [$walletID] = $this->getIds();
 
-        $truncatedTransactionID = $truncateMiddle->render()([
-            'slot' => $transactionID,
+        $truncatedWalletID = $truncateMiddle->render()([
+            'slot' => $walletID,
             'attributes' => ['length' => 17]
         ]);
 
-        $message = trans('errors.transaction_not_found', ['transactionID' => $truncatedTransactionID]);
+        $message = trans('errors.wallet_not_found', [
+            'truncatedWalletID' => $truncatedWalletID,
+            'walletID' => $walletID,
+        ]);
 
         return new HtmlString($message);
     }

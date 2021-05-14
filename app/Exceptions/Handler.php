@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace App\Exceptions;
 
+use App\Exceptions\Contracts\EntityNotFoundInterface;
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Throwable;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
-use App\Exceptions\TransactionNotFoundException;
 
 final class Handler extends ExceptionHandler
 {
@@ -70,8 +70,7 @@ final class Handler extends ExceptionHandler
      */
     protected function getHttpExceptionView(HttpExceptionInterface $e)
     {
-        if ($e->getPrevious() instanceof TransactionNotFoundException
-            || $e->getPrevious() instanceof BlockNotFoundException) {
+        if (is_a($e->getPrevious(), EntityNotFoundInterface::class)) {
             return "errors::404_entity";
         }
 
