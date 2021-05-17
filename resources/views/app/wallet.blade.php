@@ -7,9 +7,13 @@
     @section('content')
         <x-page-headers.wallet :wallet="$wallet" />
 
-        @if($wallet->isDelegate())
+        {{--@if($wallet->isDelegate())
             <x-wallet.delegate :wallet="$wallet" />
         @endif
+
+        @if($wallet->isVoting())
+            <x-wallet.vote-for :vote="$wallet->vote()" :wallet="$wallet" />
+        @endif--}}
 
         @if($wallet->hasRegistrations())
             <x-wallet.registrations :wallet="$wallet" />
