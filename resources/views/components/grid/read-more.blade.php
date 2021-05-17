@@ -4,10 +4,6 @@
     'content',
 ])
 
-@php
-$content=$content.' a adsd as das maimi mi m in in ininoon aonp asnpd ';
-@endphp
-
 <x-grid.generic
     :title="$title"
     :icon="$icon"
