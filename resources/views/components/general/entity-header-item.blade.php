@@ -1,4 +1,4 @@
-<div class="entity-header-item w-full">
+<div class="entity-header-item w-full {{ $wrapperClass ?? false }}">
     @unless($withoutIcon ?? false)
         <div class="{{ $iconBreakpoint ?? 'flex' }} items-center">
             <div class="circled-icon {{ $iconColors ?? 'text-theme-secondary-900 border-theme-secondary-900 dark:text-theme-secondary-600 dark:border-theme-secondary-600' }}">

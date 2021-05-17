@@ -119,6 +119,7 @@ return [
         'amount'                => 'Amount',
         'smartbridge'           => 'Smartbridge',
         'vote_rank'             => '#:0',
+        'status'                => 'Status',
         'productivity'          => 'Productivity',
         'productivity_tooltip'  => 'Success rate of validating blocks over the last 30 days.',
         'no_results'            => 'No :0 transactions could be found.',
