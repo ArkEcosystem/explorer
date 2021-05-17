@@ -300,11 +300,12 @@ body {
 .entity-header > div > div {
     @apply h-11 h-full;
 }
+
 .entity-header > div:last-child > div {
     @apply border-r-0 border-none;
 }
 
-@screen md {
+@screen sm {
     .entity-header > div:nth-child(3) > div {
         @apply border-r-0 border-none;
     }

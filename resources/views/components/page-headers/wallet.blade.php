@@ -11,7 +11,7 @@
         @php($vote = $wallet->vote())
         <x-slot name="extension">
             <div class="flex flex-col space-y-4 sm:space-y-0 sm:grid sm:grid-cols-auto sm:gap-4 entity-header">
-                <div class="sm:col-start-1 flex">
+                <div class="sm:col-start-1 flex h-11">
                     <x-general.entity-header-item
                         title="{{ trans('pages.wallet.delegate.rank') }} / {{ trans('pages.wallet.delegate.status') }}"
                         icon="checkmark-smooth"
@@ -31,7 +31,7 @@
                     </x-general.entity-header-item>
                 </div>
 
-                <div class="sm:col-start-2">
+                <div class="sm:col-start-2 h-11">
                     <x-general.entity-header-item
                         :title="trans('pages.wallet.productivity')"
                         :tooltip="trans('pages.wallet.productivity_tooltip')"
@@ -43,7 +43,7 @@
                     </x-general.entity-header-item>
                 </div>
 
-                <div class="sm:col-start-3">
+                <div class="sm:col-start-3 h-11">
                     <x-general.entity-header-item
                         :title="trans('pages.wallet.delegate.forged_total')"
                         without-icon
@@ -55,16 +55,19 @@
                     </x-general.entity-header-item>
                 </div>
 
-                <div class="sm:col-start-1 lg:col-start-5">
-                    <x-general.entity-header-item :title="trans('pages.wallet.delegate.forged_blocks')"
-                        :text="trans('general.see_all')" :url="route('wallet.blocks', $wallet->address())"
+                <div class="sm:col-start-1 lg:col-start-5 h-11">
+                    <x-general.entity-header-item
+                        :title="trans('pages.wallet.delegate.forged_blocks')"
+                        :text="trans('general.see_all')"
+                        :url="route('wallet.blocks', $wallet->address())"
                         without-icon
                     />
                 </div>
-                <div class="sm:col-start-2 lg:col-start-6">
+                <div class="sm:col-start-2 lg:col-start-6 h-11">
                     <x-general.entity-header-item
                         :title="trans('pages.wallet.delegate.votes', [App\Services\NumberFormatter::format_number_in_k_notation($wallet->votes())])"
-                        :text="trans('general.see_all')" :url="route('wallet.voters', $wallet->address())"
+                        :text="trans('general.see_all')"
+                        :url="route('wallet.voters', $wallet->address())"
                         without-icon
                     />
                 </div>
