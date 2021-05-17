@@ -1,4 +1,4 @@
-<div class="flex items-center py-6 px-8">
+<div class="flex items-center px-8 py-6">
     <div class="flex-1 mr-8">
         <input
             x-ref="input"
@@ -20,11 +20,11 @@
 
     <button
         type="button"
-        class="hidden py-2 px-4 mr-8 font-normal text-center rounded text-theme-primary-500 transition-default hover:bg-theme-primary-100 dark:hover:bg-theme-secondary-800 dark:text-theme-secondary-600 md:block"
+        class="hidden px-4 py-2 mr-8 font-normal text-center rounded text-theme-primary-500 transition-default hover:bg-theme-primary-100 dark:hover:bg-theme-secondary-800 dark:text-theme-secondary-600 md:block"
         @click="showAdvanced = !showAdvanced;"
     >
         <span x-show="!showAdvanced">@lang('actions.advanced_search')</span>
-        <span x-show="showAdvanced" x-cloak>@lang('actions.hide_search')</span>
+        <span x-show="showAdvanced" x-cloak>@lang('actions.hide_advanced')</span>
     </button>
 
     <button

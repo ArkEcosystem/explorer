@@ -34,7 +34,7 @@
             x-cloak
         >
             <span x-show="!showAdvancedMobile">@lang('actions.advanced_search')</span>
-            <span x-show="showAdvancedMobile">@lang('actions.hide_search')</span>
+            <span x-show="showAdvancedMobile">@lang('actions.hide_advanced')</span>
         </div>
     </div>
 </div>
