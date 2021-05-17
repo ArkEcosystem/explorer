@@ -47,4 +47,22 @@ final class NumberFormatter
     {
         return BetterNumberFormatter::new()->formatWithCurrencyShort($value, $currency);
     }
+
+    // TODO: Replace with the proper method once implemented in bribri's package
+    public static function format_number_in_k_notation(int $number): string
+    {
+        $suffixByNumber = function () use ($number) {
+            if ($number < 1000) {
+                return sprintf('%d', $number);
+            }
+
+            if ($number < 1000000) {
+                return sprintf('%d%s', floor($number / 1000), 'K');
+            }
+
+            return sprintf('%0.2f%s', round($number / 1000000, 2), 'M');
+        };
+
+        return $suffixByNumber();
+    }
 }
