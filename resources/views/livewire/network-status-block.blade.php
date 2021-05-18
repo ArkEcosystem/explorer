@@ -1,14 +1,22 @@
-<div class="network-status-block">
-    <div class="space-x-5 network-status-block-entries" wire:poll.{{ Network::blockTime() }}s>
-        <div>@lang('general.height'): <x-number>{{ $height }}</x-number></div>
-        <div class="hidden md:block">@lang('general.network'): {{ $network }}</div>
-        <div class="hidden md:block">@lang('general.supply'): <x-currency :currency="Network::currency()">{{ $supply }}</x-currency></div>
-        @if(Network::canBeExchanged())
-            <div class="hidden sm:block">@lang('general.market_cap'): <x-currency :currency="Network::currency()">{{ $marketCap }}</x-currency></div>
+<div class="flex space-x-5"  wire:poll.{{ Network::blockTime() }}s>
+    <x-stats.stat :label="trans('general.height')" icon="app-block_height">
+        <x-number>{{ $height }}</x-number>
+    </x-stats.stat>
 
-            <div class="md:hidden">
-                <livewire:price-ticker />
-            </div>
-        @endif
-    </div>
+    <x-stats.stat :label="trans('general.total_supply')" icon="app-block_height">
+        <x-currency :currency="Network::currency()">{{ $supply }}</x-currency>
+    </x-stats.stat>
+
+    <x-stats.stat :label="trans('general.market_cap')" icon="app-block_height">
+        <x-currency :currency="Network::currency()">{{ $marketCap }}</x-currency>
+    </x-stats.stat>
+
+    <x-stats.stat :label="trans('general.price')" icon="app-block_height" :disabled="! Network::canBeExchanged()">
+        <livewire:price-ticker />
+
+        <x-slot name="side">
+            <livewire:price-stats />
+        </x-slot>
+    </x-stats.stat>
+
 </div>
