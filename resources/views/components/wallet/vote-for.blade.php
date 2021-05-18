@@ -1,7 +1,7 @@
 <div class="bg-white">
     <x-ark-container container-class="flex flex-wrap">
-        <div class="flex w-full border border-theme-secondary-300 py-4 px-8 rounded-lg">
-            <div class="flex flex-col sm:flex-row justify-between w-full space-y-4 sm:space-y-0">
+        <div class="flex py-4 px-8 w-full rounded-lg border border-theme-secondary-300">
+            <div class="flex flex-col justify-between space-y-4 w-full sm:flex-row sm:space-y-0">
                 <div class="flex justify-start">
                     <x-general.entity-header-item
                         :title="trans('pages.wallet.voting_for')"
