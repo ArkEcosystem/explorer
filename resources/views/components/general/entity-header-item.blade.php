@@ -19,7 +19,7 @@
     'secondIconColors'    => null,
 ])
 
-<div class="entity-header-item w-full {{ $wrapperClass }}">
+<div class="entity-header-item w-full h-full {{ $wrapperClass }}">
     @unless($withoutSingleIcon)
         <div class="{{ $iconBreakpoint }} items-center">
             <div class="circled-icon {{ $iconColors }}">
