@@ -18,8 +18,8 @@
             $vote = $wallet->vote()
         @endphp
         <x-slot name="extension">
-            <div class="grid grid-flow-row lg:grid-flow-col justify-between space-y-2 sm:space-y-6 lg:space-y-0">
-                <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0">
+            <div class="grid grid-flow-row justify-between space-y-2 lg:grid-flow-col sm:space-y-6 lg:space-y-0">
+                <div class="flex flex-col space-y-2 sm:flex-row sm:space-y-0">
                     <div class="h-11">
                         <x-general.entity-header-item
                             title="{{ trans('pages.wallet.delegate.rank') }} / {{ trans('pages.wallet.delegate.status') }}"
@@ -77,7 +77,7 @@
                     </div>
                 </div>
 
-                <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0">
+                <div class="flex flex-col space-y-2 sm:flex-row sm:space-y-0">
                     <div class="h-11">
                         <x-general.entity-header-item
                             :title="trans('pages.wallet.delegate.forged_blocks')"
