@@ -386,6 +386,22 @@ it('should fail to get the vote weight as percentage if the wallet has no public
     expect($this->subject->votePercentage())->toBeNull();
 });
 
+it('should fail to get the vote weight as percentage if the wallet has no vote balance', function () {
+    $vote = Wallet::factory()->create([
+        'attributes' => [
+            'delegate' => ['voteBalance' => 0.00],
+        ],
+    ]);
+
+    $this->subject = new WalletViewModel(Wallet::factory()->create([
+        'attributes' => ['vote' => $vote->public_key],
+    ]));
+
+    (new WalletCache())->setVote($vote->public_key, $vote);
+
+    expect($this->subject->votePercentage())->toBeNull();
+});
+
 it('should fail to get the productivity if the wallet is a delegate', function () {
     $this->subject = new WalletViewModel(Wallet::factory()->create([
         'balance'    => 1e8,
