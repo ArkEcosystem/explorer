@@ -4,8 +4,9 @@
     @endpush
 
     @section('content')
-        <div class="flex flex-col justify-center items-center space-y-8">
-            <img src="/images/errors/404.svg" class="max-w-4xl"/>
+        <div class="flex flex-col items-center justify-center space-y-8">
+            <img src="/images/errors/404.svg" class="block max-w-4xl dark:hidden"/>
+            <img src="/images/errors/404_dark.svg" class="hidden max-w-4xl dark:block"/>
             <div class="text-lg font-semibold text-center text-theme-secondary-900">
                 {!! ARKEcosystem\UserInterface\UI::getErrorMessage(404) !!}
             </div>
