@@ -71,6 +71,12 @@ return [
             'class'  => 'fill-current',
         ],
 
+        'stats' => [
+            'path'   => 'resources/icons/stats',
+            'prefix' => 'app.stats',
+            'class'  => 'fill-current',
+        ],
+
     ],
 
     /*

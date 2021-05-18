@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44">
+  <g fill="none" stroke="currentColor" stroke-width="2">
+    <g>
+      <circle vector-effect="non-scaling-stroke" cx="22" cy="22" r="22" stroke="none"/>
+      <circle vector-effect="non-scaling-stroke" cx="22" cy="22" r="21"/>
+    </g>
+    <g stroke-linecap="round">
+      <path vector-effect="non-scaling-stroke" d="M29.314 12.448L18.283 31.553"/>
+      <path vector-effect="non-scaling-stroke" stroke-linejoin="round" d="M18.612 18.717a2.837 2.837 0 10-2.837-2.837 2.837 2.837 0 002.837 2.837z"/>
+      <path vector-effect="non-scaling-stroke" stroke-linejoin="round" d="M20.681 21.797a4.588 4.588 0 00-2.069-.489 4.642 4.642 0 00-4.643 4.642"/>
+      <path vector-effect="non-scaling-stroke" stroke-linejoin="round" d="M27.193 30.419a2.837 2.837 0 10-2.837-2.837 2.837 2.837 0 002.837 2.837z"/>
+    </g>
+  </g>
+</svg>
