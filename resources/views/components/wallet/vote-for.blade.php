@@ -1,4 +1,4 @@
-<div class="bg-white">
+<div class="bg-white dark:bg-theme-secondary-900">
     <x-ark-container container-class="flex flex-wrap">
         <div class="flex py-4 px-8 w-full rounded-lg border border-theme-secondary-300">
             <div class="flex flex-col justify-between space-y-4 w-full sm:flex-row sm:space-y-0">
@@ -14,31 +14,33 @@
                 </div>
 
                 <div class="flex justify-end">
-                    <x-general.entity-header-item
-                        :title="trans('pages.wallet.rank')"
-                        wrapper-class="border-r border-theme-secondary-300 sm:pr-4"
-                        without-icon
-                    >
-                        <x-slot name="text">
-                            @if ($wallet->isResigned())
-                                <x-details.resigned />
-                            @else
-                                @lang('pages.wallet.vote_rank', [$vote->rank()])
-                            @endif
-                        </x-slot>
-                    </x-general.entity-header-item>
+                    @if(! $vote->isResigned())
+                        <x-general.entity-header-item
+                            :title="trans('pages.wallet.rank')"
+                            wrapper-class="border-r border-theme-secondary-300 sm:pr-4"
+                            without-single-icon
+                        >
+                            <x-slot name="text">
+                                @if ($vote->isResigned())
+                                    <x-details.resigned />
+                                @else
+                                    @lang('pages.wallet.vote_rank', [$vote->rank()])
+                                @endif
+                            </x-slot>
+                        </x-general.entity-header-item>
+                    @endif
 
                     <x-general.entity-header-item
                         :title="trans('pages.wallet.status')"
-                        without-icon
+                        without-single-icon
                     >
                         <x-slot name="text">
-                            @if($wallet->isResigned())
+                            @if($vote->isResigned())
                                 <span class="text-theme-danger-400">@lang('pages.delegates.resigned')</span>
-                            @elseif($wallet->isDelegate())
-                                <span class="text-theme-success-600">@lang('pages.delegates.active')</span>
-                            @else
+                            @elseif($vote->rank() > 51)
                                 <span class="text-theme-secondary-500">@lang('pages.delegates.standby')</span>
+                            @else
+                                <span class="text-theme-success-600">@lang('pages.delegates.active')</span>
                             @endif
                         </x-slot>
                     </x-general.entity-header-item>

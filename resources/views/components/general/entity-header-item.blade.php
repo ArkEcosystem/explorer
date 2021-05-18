@@ -1,6 +1,6 @@
 @props([
     'wrapperClass'        => null,
-    'withoutIcon'         => false,
+    'withoutSingleIcon'   => false,
     'iconBreakpoint'      => 'flex',
     'iconColors'          => 'text-theme-secondary-900 border-theme-secondary-900 dark:text-theme-secondary-600 dark:border-theme-secondary-600',
     'icon'                => null,
@@ -13,10 +13,14 @@
     'tooltip'             => null,
     'url'                 => null,
     'text'                => null,
+    'firstIcon'           => null,
+    'firstIconColors'     => null,
+    'secondIcon'          => null,
+    'secondIconColors'    => null,
 ])
 
 <div class="entity-header-item w-full {{ $wrapperClass }}">
-    @unless($withoutIcon)
+    @unless($withoutSingleIcon)
         <div class="{{ $iconBreakpoint }} items-center">
             <div class="circled-icon {{ $iconColors }}">
                 @if ($icon)
@@ -34,13 +38,18 @@
 
     @if($withMultipleIcons)
         <div class="{{ $iconBreakpoint }} items-center">
-            <x-page-headers.icon-with-icon first-icon="app-rank" second-icon="checkmark-smooth" />
+            <x-page-headers.icon-with-icon
+                :first-icon="$firstIcon"
+                :first-icon-colors="$firstIconColors"
+                :second-icon="$secondIcon"
+                :second-icon-colors="$secondIconColors"
+            />
         </div>
     @endif
 
-    <div class="flex flex-col flex-1 justify-between ml-4 font-semibold truncate md:pr-4 @if($withoutIcon && ! $withMultipleIcons) md:pl-11 lg:pl-0 @endif">
+    <div class="flex flex-col flex-1 justify-between ml-4 font-semibold truncate md:pr-4 @if($withoutSingleIcon && ! $withMultipleIcons) md:pl-11 lg:pl-0 @endif">
         <div class="flex items-center">
-            <div class="text-sm leading-tight text-theme-secondary-600 dark:text-theme-secondary-700">{{ $title }}</div>
+            <div class="text-sm leading-tight text-theme-secondary-500 dark:text-theme-secondary-700">{{ $title }}</div>
 
             @if($tooltip)
                 <x-ark-info :tooltip="$tooltip" class="ml-2 p-1.5" type="info" />
