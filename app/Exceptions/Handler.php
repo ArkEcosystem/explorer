@@ -95,7 +95,7 @@ final class Handler extends ExceptionHandler
 
         return $this->isARegularGetRequest($request)
             && $expectedException instanceof NotFoundHttpException
-            && ! is_a($mainNotFoundException, EntityNotFoundInterface::class);
+            && ($mainNotFoundException === null || ! is_a($mainNotFoundException, EntityNotFoundInterface::class));
     }
 
     private function isARegularGetRequest(Request $request): bool
