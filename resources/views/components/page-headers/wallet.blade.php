@@ -14,9 +14,14 @@
                 <div class="sm:col-start-1 flex h-11">
                     <x-general.entity-header-item
                         title="{{ trans('pages.wallet.delegate.rank') }} / {{ trans('pages.wallet.delegate.status') }}"
+                        without-icon
+                        with-multiple-icons
+                        :identifier="$vote"
+                        {{--
                         icon="checkmark-smooth"
                         icon-colors="@if($wallet->isDelegate) text-theme-success-600 border-theme-success-600 @endif"
                         icon-breakpoint="hidden md:flex"
+                        --}}
                     >
                         <x-slot name="text">
                             # {{ $wallet->rank() }} /

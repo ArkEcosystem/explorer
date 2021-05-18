@@ -16,7 +16,7 @@
                 <div class="flex justify-end">
                     <x-general.entity-header-item
                         :title="trans('pages.wallet.rank')"
-                        wrapper-class="border-r border-theme-secondary-300"
+                        wrapper-class="border-r border-theme-secondary-300 sm:pr-4"
                         without-icon
                     >
                         <x-slot name="text">

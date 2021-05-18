@@ -1,30 +1,53 @@
-<div class="entity-header-item w-full {{ $wrapperClass ?? false }}">
-    @unless($withoutIcon ?? false)
-        <div class="{{ $iconBreakpoint ?? 'flex' }} items-center">
-            <div class="circled-icon {{ $iconColors ?? 'text-theme-secondary-900 border-theme-secondary-900 dark:text-theme-secondary-600 dark:border-theme-secondary-600' }}">
-                @if ($icon ?? false)
-                    @if ($iconSize ?? false)
+@props([
+    'wrapperClass'        => null,
+    'withoutIcon'         => false,
+    'iconBreakpoint'      => 'flex',
+    'iconColors'          => 'text-theme-secondary-900 border-theme-secondary-900 dark:text-theme-secondary-600 dark:border-theme-secondary-600',
+    'icon'                => null,
+    'iconSize'            => null,
+    'avatar'              => null,
+    'withMultipleIcons'   => false,
+    'multipleIconsFirst'  => null,
+    'multipleIconsSecond' => null,
+    'title'               => null,
+    'tooltip'             => null,
+    'url'                 => null,
+    'text'                => null,
+])
+
+<div class="entity-header-item w-full {{ $wrapperClass }}">
+    @unless($withoutIcon)
+        <div class="{{ $iconBreakpoint }} items-center">
+            <div class="circled-icon {{ $iconColors }}">
+                @if ($icon)
+                    @if ($iconSize)
                         <x-ark-icon :name="$icon" :size="$iconSize" />
                     @else
                         <x-ark-icon :name="$icon" />
                     @endif
-                @elseif ($avatar ?? false)
+                @elseif ($avatar)
                     <x-general.avatar-small :identifier="$avatar" />
                 @endif
             </div>
         </div>
     @endunless
 
-    <div class="flex flex-col flex-1 justify-between ml-4 font-semibold truncate md:pr-4 @if($withoutIcon ?? false) md:pl-11 lg:pl-0 @endif">
+    @if($withMultipleIcons)
+        <div class="{{ $iconBreakpoint }} items-center">
+            <x-page-headers.icon-with-icon first-icon="app-rank" second-icon="checkmark-smooth" />
+        </div>
+    @endif
+
+    <div class="flex flex-col flex-1 justify-between ml-4 font-semibold truncate md:pr-4 @if($withoutIcon && ! $withMultipleIcons) md:pl-11 lg:pl-0 @endif">
         <div class="flex items-center">
             <div class="text-sm leading-tight text-theme-secondary-600 dark:text-theme-secondary-700">{{ $title }}</div>
 
-            @if($tooltip ?? false)
+            @if($tooltip)
                 <x-ark-info :tooltip="$tooltip" class="ml-2 p-1.5" type="info" />
             @endif
         </div>
 
-        @if ($url ?? false)
+        @if ($url)
             <a href="{{ $url }}" class="flex leading-tight link">
                 <span class="truncate">{{ $text }}</span>
             </a>
