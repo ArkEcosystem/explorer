@@ -29,13 +29,18 @@
         <script src="{{ mix('js/vendor.js') }}" defer></script>
         <script src="{{ mix('js/app.js') }}" defer></script>
     </head>
-    <body class="antialiased">
-        <div id="app" class="flex flex-col antialiased bg-white theme-light">
+    <body
+        class="min-h-screen bg-white dark "
+        x-data="{ 'theme': '{{ Settings::theme() }}' }"
+        :class="{ 'dark bg-theme-secondary-900': theme === 'dark', 'bg-white': theme !== 'dark' }"
+    >
+        <div id="app" class="flex flex-col h-full antialiased ">
             <main class="container flex items-center flex-1 w-full px-4 mx-auto sm:max-w-full sm:px-8 lg:max-w-7xl">
-                <div class="w-full bg-white rounded-lg">
+                <div class="w-full rounded-lg">
                     <div class="flex flex-col items-center justify-center space-y-8">
-                        <img src="/images/errors/{{ $errorType }}.svg" class="block max-w-4xl dark:hidden"/>
-                        <img src="/images/errors/{{ $errorType }}_dark.svg" class="hidden max-w-4xl dakr:block"/>
+                        <img src="/images/errors/{{ $errorType }}.svg" class="inline w-full max-w-4xl dark:hidden"/>
+                        <img src="/images/errors/{{ $errorType }}_dark.svg" class="hidden w-full max-w-4xl dark:inline"/>
+
                         <div class="text-lg font-semibold text-center text-theme-secondary-900">
                             {{ ARKEcosystem\UserInterface\UI::getErrorMessage($errorType) }}
                         </div>
