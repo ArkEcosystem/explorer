@@ -17,6 +17,7 @@
     'firstIconColors'     => null,
     'secondIcon'          => null,
     'secondIconColors'    => null,
+    'textClass'           => null,
 ])
 
 <div class="entity-header-item w-full h-full {{ $wrapperClass }}">
@@ -58,7 +59,7 @@
 
         @if ($url)
             <a href="{{ $url }}" class="flex leading-tight link">
-                <span class="truncate">{{ $text }}</span>
+                <span class="truncate {{ $textClass }}">{{ $text }}</span>
             </a>
         @else
             <span class="leading-tight truncate text-theme-secondary-900 dark:text-theme-secondary-200">{{ $text }}</span>
