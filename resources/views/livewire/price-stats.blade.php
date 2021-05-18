@@ -1,30 +1,36 @@
 <div
     class="flex flex-row justify-between h-full"
-    wire:poll.1m
+    @unless ($placeholder)
+        wire:poll.1m
+    @endunless
 >
-    <div class="flex flex-col justify-between h-full">
-        <a class="pl-3 text-sm font-semibold leading-none border-l link border-theme-secondary-300 whitespace-nowrap" href="#">View Stadistics</a>
+    @unless ($placeholder)
+        <div class="flex flex-col justify-between h-full">
+            <a class="pl-3 text-sm font-semibold leading-none border-l link border-theme-secondary-300 whitespace-nowrap" href="#">
+                @lang('actions.view_statistics')
+            </a>
 
-        @if ($priceChange < 0)
-            <span class="flex items-center pl-3 space-x-1 text-sm font-semibold text-theme-danger-400">
-                <span>
-                    <x-ark-icon name="triangle-down" size="2xs" />
+            @if ($priceChange < 0)
+                <span class="flex items-center pl-3 space-x-1 text-sm font-semibold text-theme-danger-400">
+                    <span>
+                        <x-ark-icon name="triangle-down" size="2xs" />
+                    </span>
+                    <span>
+                        <x-percentage>{{ $priceChange * 100 * -1 }}</x-percentage>
+                    </span>
                 </span>
-                <span>
-                    <x-percentage>{{ $priceChange * 100 * -1 }}</x-percentage>
+            @else
+                <span class="flex items-center pl-3 space-x-1 text-sm font-semibold text-theme-success-600">
+                    <span>
+                        <x-ark-icon name="triangle-up" size="2xs" />
+                    </span>
+                    <span>
+                        <x-percentage>{{ $priceChange * 100 }}</x-percentage>
+                    </span>
                 </span>
-            </span>
-        @else
-            <span class="flex items-center pl-3 space-x-1 text-sm font-semibold text-theme-success-600">
-                <span>
-                    <x-ark-icon name="triangle-up" size="2xs" />
-                </span>
-                <span>
-                    <x-percentage>{{ $priceChange * 100 }}</x-percentage>
-                </span>
-            </span>
-        @endif
-    </div>
+            @endif
+        </div>
+    @endunless
 
 
     <span
@@ -39,22 +45,27 @@
                     this.init(chart);
                 });
 
-                const green = 'rgba(40, 149, 72, 1)';
-                const red = 'rgba(222, 88, 70, 1)';
+                const gradient = ctx.createLinearGradient(0, 0, 0, 40);
 
-                const greenGradient = ctx.createLinearGradient(0, 0, 0, 40);
-                greenGradient.addColorStop(0, green);
-                greenGradient.addColorStop(1, 'rgba(40, 149, 72, 0)');
-
-                const redGradient = ctx.createLinearGradient(0, 0, 0, 40);
-                redGradient.addColorStop(0, red);
-                redGradient.addColorStop(1, 'rgba(222, 88, 70, 0)');
+                @if($placeholder)
+                    const border = 'rgba(196, 200, 207, 1)';
+                    gradient.addColorStop(0, 'border');
+                    gradient.addColorStop(1, 'rgb(196, 200, 207, 0)');
+                @elseif ($priceChange < 0)
+                    const border = 'rgba(40, 149, 72, 1)';
+                    gradient.addColorStop(0, 'rgba(40, 149, 72, 0.5)');
+                    gradient.addColorStop(1, 'rgba(40, 149, 72, 0)');
+                @else
+                    const border = 'rgba(222, 88, 70, 1)';
+                    gradient.addColorStop(0, 'rgba(222, 88, 70, 0.5)');
+                    gradient.addColorStop(1, 'rgba(222, 88, 70, 0)');
+                @endif
 
                 const values = {{ $historical->values()->toJson() }};
 
                 const datasets = [{
-                    backgroundColor: {{ $priceChange >= 0 ? 'greenGradient' : 'redGradient' }},
-                    borderColor: {{ $priceChange >= 0 ? 'green' : 'red' }},
+                    backgroundColor: gradient,
+                    borderColor: border,
                     data: values,
                     pointRadius: 0,
                     borderWidth: '2',
@@ -77,8 +88,8 @@
                         chart.data.datasets[0].data.splice(index, 1, value);
                     });
 
-                    chart.data.datasets[0].backgroundColor = {{ $priceChange >= 0 ? 'greenGradient' : 'redGradient' }};
-                    chart.data.datasets[0].borderColor = {{ $priceChange >= 0 ? 'green' : 'red' }};
+                    chart.data.datasets[0].backgroundColor = gradient;
+                    chart.data.datasets[0].borderColor = border;
 
                     chart.options.scales.yAxes[0].ticks.max = {{ $historical->values()->max() }};
 

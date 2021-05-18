@@ -1,4 +1,7 @@
-<div class="flex space-x-5"  wire:poll.{{ Network::blockTime() }}s>
+<div
+    class="flex w-full space-x-5"
+    wire:poll.{{ Network::blockTime() }}s
+>
     <x-stats.stat :label="trans('general.height')" icon="app-block_height">
         <x-number>{{ $height }}</x-number>
     </x-stats.stat>
@@ -11,11 +14,11 @@
         <x-currency :currency="Network::currency()">{{ $marketCap }}</x-currency>
     </x-stats.stat>
 
-    <x-stats.stat :label="trans('general.price')" icon="app-block_height" :disabled="! Network::canBeExchanged()">
+    <x-stats.stat class="justify-between flex-grow" :label="trans('general.price')" icon="app-block_height" :disabled="! Network::canBeExchanged()">
         <livewire:price-ticker />
 
         <x-slot name="side">
-            <livewire:price-stats />
+            <livewire:price-stats :placeholder=" ! Network::canBeExchanged()" />
         </x-slot>
     </x-stats.stat>
 

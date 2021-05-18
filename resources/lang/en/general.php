@@ -12,6 +12,7 @@ return [
     'height'           => 'Height',
     'network'          => 'Network',
     'total_supply'           => 'Total Supply',
+    'not_available'           => 'Not Available',
     'price'           => 'Price',
     'market_cap'       => 'Market Cap',
     'search_explorer'  => 'Search Explorer',
