@@ -64,7 +64,7 @@
             <x-slot name="extension">
                 {{ $slot }}
 
-                <div class="flex items-center mt-6 space-x-2 text-theme-secondary-200 lg:mt-0">
+                <div class="flex items-center mt-6 space-x-2 lg:ml-4 text-theme-secondary-200 lg:mt-0">
                     @unless($wallet->isCold())
                         <x-page-headers.wallet.actions.public-key :public-key="$wallet->publicKey()" />
                     @endunless
