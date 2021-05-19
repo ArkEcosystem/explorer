@@ -18,9 +18,9 @@
             $vote = $wallet->vote()
         @endphp
         <x-slot name="extension">
-            <div class="grid grid-flow-row lg:grid-flow-col justify-between space-y-2 sm:space-y-6 lg:space-y-0">
+            <div class="grid grid-flow-row justify-between space-y-2 lg:grid-flow-col sm:space-y-6 lg:space-y-0">
                 <div class="flex flex-col space-y-2 sm:flex-row sm:space-y-0 entity-header">
-                    <div class="h-11 w-48 md:w-64 lg:w-auto">
+                    <div class="w-48 h-11 md:w-64 lg:w-auto">
                         <x-general.entity-header-item
                             title="{{ trans('pages.wallet.delegate.rank') }} / {{ trans('pages.wallet.delegate.status') }}"
                             without-single-icon
@@ -47,7 +47,7 @@
                     </div>
 
                     @if (! $wallet->isResigned())
-                        <div class="h-11 w-48 md:w-64 lg:w-auto">
+                        <div class="w-48 h-11 md:w-64 lg:w-auto">
                             <x-general.entity-header-item
                                 :title="trans('pages.wallet.productivity')"
                                 :tooltip="trans('pages.wallet.productivity_tooltip')"
@@ -62,7 +62,7 @@
                         </div>
                     @endif
 
-                    <div class="h-11 w-48 md:w-64 lg:w-auto">
+                    <div class="w-48 h-11 md:w-64 lg:w-auto">
                         <x-general.entity-header-item
                             :title="trans('pages.wallet.delegate.forged_total')"
                             without-single-icon
@@ -78,7 +78,7 @@
                 </div>
 
                 <div class="flex flex-col space-y-2 sm:flex-row sm:space-y-0 entity-header">
-                    <div class="h-11 w-48 md:w-64 lg:w-auto">
+                    <div class="w-48 h-11 md:w-64 lg:w-auto">
                         <x-general.entity-header-item
                             :title="trans('pages.wallet.delegate.forged_blocks')"
                             :text="trans('general.see_all')"
@@ -87,7 +87,7 @@
                             without-single-icon
                         />
                     </div>
-                    <div class="h-11 w-48 md:w-64 lg:w-auto">
+                    <div class="w-48 h-11 md:w-64 lg:w-auto">
                         <x-general.entity-header-item
                             :title="trans('pages.wallet.delegate.votes', [App\Services\NumberFormatter::kNotationCurrency($wallet->votes())])"
                             :text="trans('general.see_all')"
