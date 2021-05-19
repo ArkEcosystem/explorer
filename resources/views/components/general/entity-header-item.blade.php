@@ -51,7 +51,7 @@
 
     <div class="flex flex-col flex-1 justify-between ml-4 font-semibold truncate md:pr-4 @if($withoutSingleIcon && ! $withMultipleIcons) md:pl-11 lg:pl-0 @endif {{ $titleWrapperClass }}">
         <div class="flex items-center">
-            <div class="text-sm leading-tight text-theme-secondary-500 dark:text-theme-secondary-700 items-end">{{ $title }}</div>
+            <div class="items-end text-sm leading-tight text-theme-secondary-500 dark:text-theme-secondary-700">{{ $title }}</div>
 
             @if($tooltip)
                 <x-ark-info :tooltip="$tooltip" class="ml-2 p-1.5" type="info" />
