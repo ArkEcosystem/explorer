@@ -33,25 +33,30 @@
     @endunless
 
 
-    <div class="flex justify-end flex-grow">
+    <div class="justify-end flex-grow hidden lg:flex" >
         <div
             class="h-10 ml-6"
             style="width: 120px;"
             x-data="{
                 time: {{ time() }},
+                values: {{ $historical->values()->toJson() }},
+                labels: {{ $historical->keys()->toJson() }},
+                maxValue: {{ $historical->values()->max() }},
                 init(chart = null) {
                     const ctx = this.$refs.chart.getContext('2d');
 
-                    this.$watch('time', () => {
-                        const chart = Object.values(Chart.instances).find(i => i.ctx === ctx);
-                        this.init(chart);
-                    });
+                    if (chart === null) {
+                        this.$watch('time', () => {
+                            const chart = Object.values(Chart.instances).find(i => i.ctx === ctx);
+                            this.init(chart);
+                        });
+                    }
 
                     const gradient = ctx.createLinearGradient(0, 0, 0, 40);
 
                     @if($placeholder)
                         const border = 'rgba(196, 200, 207, 1)';
-                        gradient.addColorStop(0, 'border');
+                        gradient.addColorStop(0, 'rgba(196, 200, 207, 1)');
                         gradient.addColorStop(1, 'rgb(196, 200, 207, 0)');
                     @elseif ($priceChange >= 0)
                         const border = 'rgba(40, 149, 72, 1)';
@@ -63,21 +68,17 @@
                         gradient.addColorStop(1, 'rgba(222, 88, 70, 0)');
                     @endif
 
-                    const values = {{ $historical->values()->toJson() }};
-
                     const datasets = [{
                         backgroundColor: gradient,
                         borderColor: border,
-                        data: values,
+                        data: this.values,
                         pointRadius: 0,
                         borderWidth: '2',
                         lineTension: 0.25,
                     }];
 
-                    const labels = {{ $historical->keys()->toJson() }};
-
                     const data = {
-                        labels,
+                        labels: this.labels,
                         datasets,
                     }
 
@@ -93,7 +94,7 @@
                         chart.data.datasets[0].backgroundColor = gradient;
                         chart.data.datasets[0].borderColor = border;
 
-                        chart.options.scales.yAxes[0].ticks.max = {{ $historical->values()->max() }};
+                        chart.options.scales.yAxes[0].ticks.max = this.maxValue;
 
                         chart.update();
 
@@ -125,7 +126,7 @@
                             yAxes: [{
                                 ticks: {
                                     display: false,
-                                    max: {{ $historical->values()->max() }}
+                                    max: this.maxValue,
                                 },
                                 gridLines: {
                                     display: false,
@@ -141,13 +142,14 @@
                         options,
                     }
 
-
                     new Chart(ctx, config);
                 }
             }"
             x-init="init"
         >
-            <canvas wire:ignore x-ref="chart" class="block" style="height: 40px; width: 120px;"></canvas>
+            <div class="block" wire:ignore style="height: 40px; width: 120px;">
+                <canvas x-ref="chart" class="w-full h-full" ></canvas>
+            </div>
         </div>
     </div>
 </div>
