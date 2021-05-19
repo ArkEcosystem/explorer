@@ -31,10 +31,10 @@ final class CryptoCompare
         return (new CryptoCompareCache())->setMarketCap($source, $target, function () use ($source, $target): float {
             $result = Http::get('https://min-api.cryptocompare.com/data/pricemultifull', [
                 'fsyms'  => $source,
-                'tsyms' => $target,
+                'tsyms'  => $target,
             ])->json();
 
-            return Arr::get($result, 'RAW.' . $source . '.' . $target .  '.MKTCAP', 0);
+            return Arr::get($result, 'RAW.'.$source.'.'.$target.'.MKTCAP', 0);
         });
     }
 

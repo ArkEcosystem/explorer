@@ -10,8 +10,8 @@ use App\Facades\Network;
 use App\Services\CryptoCompare;
 use App\Services\Settings;
 use Illuminate\View\View;
-use Livewire\Component;
 use Konceiver\BetterNumberFormatter\BetterNumberFormatter;
+use Livewire\Component;
 use NumberFormatter;
 
 final class NetworkStatusBlock extends Component
@@ -30,12 +30,14 @@ final class NetworkStatusBlock extends Component
     private function getPriceFormatted(): string
     {
         $price = CryptoCompare::price(Network::currency(), Settings::currency());
+
         return BetterNumberFormatter::new()->withLocale('en_US')->withStyle(NumberFormatter::CURRENCY)->formatWithCurrency($price);
     }
 
     private function getMarketCapFormatted(): string
     {
         $price = $this->getMarketCap();
+
         return BetterNumberFormatter::new()->withLocale('en_US')->withStyle(NumberFormatter::CURRENCY)->formatWithCurrency($price);
     }
 

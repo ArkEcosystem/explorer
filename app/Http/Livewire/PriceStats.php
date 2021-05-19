@@ -30,12 +30,11 @@ final class PriceStats extends Component
 
         // $priceFullRange = $priceFullRange->splice(-23);
 
-
         return view('livewire.price-stats', [
-            'from'  => Network::currency(),
-            'to'    => Settings::currency(),
+            'from'        => Network::currency(),
+            'to'          => Settings::currency(),
             'priceChange' => $this->getPriceChange(),
-            'historical' => $this->getHistorical(),
+            'historical'  => $this->getHistorical(),
         ]);
     }
 
