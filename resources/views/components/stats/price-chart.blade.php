@@ -4,7 +4,7 @@
     'disabled' => false,
 ])
 
-<div class="flex items-center py-4 space-x-4 bg-white rounded-lg px-7">
+<div class="flex items-center py-4 px-7 space-x-4 bg-white rounded-lg">
     <span class="flex items-center justify-center w-10 h-10 border-2 rounded-full  @if($disabled) border-theme-secondary-500 text-theme-secondary-500 @else border-theme-secondary-900 text-theme-secondary-900 @endif">
         <x-ark-icon :name="$icon" />
     </span>

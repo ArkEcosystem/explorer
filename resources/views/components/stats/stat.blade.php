@@ -16,7 +16,7 @@
             <x-ark-icon :name="$icon" />
         </span>
         <span class="flex flex-col justify-between h-full">
-            <span class="text-sm font-semibold leading-none text-theme-secondary-500 whitespace-nowrap">{{$label}}:</span>
+            <span class="text-sm font-semibold leading-none whitespace-nowrap text-theme-secondary-500">{{$label}}:</span>
             @if ($disabled)
                 <span class="font-semibold leading-none whitespace-nowrap text-theme-secondary-500">
                     @lang('general.not_available')
