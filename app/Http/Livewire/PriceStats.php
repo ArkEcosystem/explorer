@@ -15,7 +15,7 @@ final class PriceStats extends Component
 {
     public bool $placeholder = false;
 
-    public function mount(bool $placeholder = false)
+    public function mount(bool $placeholder = false) : void
     {
         $this->placeholder = $placeholder;
     }
