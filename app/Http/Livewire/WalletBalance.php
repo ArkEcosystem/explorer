@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Http\Livewire;
 
 use App\Models\Wallet;
-use App\ViewModels\ViewModelFactory;
 use App\ViewModels\WalletViewModel;
 use Illuminate\View\View;
 use Livewire\Component;
@@ -21,7 +20,7 @@ final class WalletBalance extends Component
 
     public function getWalletView(): WalletViewModel
     {
-        return ViewModelFactory::make($this->wallet);
+        return new WalletViewModel($this->wallet);
     }
 
     public function render(): View
