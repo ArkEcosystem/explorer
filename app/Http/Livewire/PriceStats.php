@@ -39,7 +39,7 @@ final class PriceStats extends Component
         $priceFullRange = CryptoCompare::historicalHourly(Network::currency(), Settings::currency(), 24);
 
         $initialPrice = $priceFullRange->first();
-        $finalPrice = $priceFullRange->last();
+        $finalPrice   = $priceFullRange->last();
 
         if ($initialPrice === 0 || $finalPrice === 0) {
             return  0;
