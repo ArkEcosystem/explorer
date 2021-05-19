@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Livewire;
 
 use App\Models\Wallet;
-use Livewire\Component;
 use App\ViewModels\ViewModelFactory;
+use Livewire\Component;
 
-class WalletBalance extends Component
+final class WalletBalance extends Component
 {
     public Wallet $wallet;
 
@@ -23,7 +25,7 @@ class WalletBalance extends Component
     public function render()
     {
         return view('livewire.wallet-balance', [
-            'balance' => $this->getWalletView()->balanceFiat()
+            'balance' => $this->getWalletView()->balanceFiat(),
         ]);
     }
 }
