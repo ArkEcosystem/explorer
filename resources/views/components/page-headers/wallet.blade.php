@@ -9,35 +9,38 @@
 
     @if($wallet->isDelegate())
         @php
-            $firstColor = ($wallet->isResigned() ? 'text-theme-secondary-500 border-theme-secondary-500' : ($wallet->rank() > 51 ?
+            $isResigned = $wallet->isResigned();
+            $isStandby = $wallet->rank() > 51;
+
+            $firstColor = ($isResigned ? 'text-theme-secondary-500 border-theme-secondary-500' : ($isStandby ?
             'text-theme-secondary-900 border-theme-secondary-900' : 'text-theme-secondary-900 border-theme-secondary-900'));
 
-            $secondColor = ($wallet->isResigned() ? 'text-theme-secondary-500 border-theme-secondary-500' : ($wallet->rank() > 51 ?
+            $secondColor = ($isResigned ? 'text-theme-secondary-500 border-theme-secondary-500' : ($isStandby ?
             'text-theme-secondary-500 border-theme-secondary-500' : 'text-theme-success-600 border-theme-success-600'));
 
             $vote = $wallet->vote()
         @endphp
         <x-slot name="extension">
-            <div class="grid grid-flow-row justify-between space-y-2 lg:grid-flow-col sm:space-y-6 lg:space-y-0">
-                <div class="flex flex-col space-y-2 sm:flex-row sm:space-y-0 entity-header">
-                    <div class="h-11 w-48 {{ $wallet->isResigned() ? 'md:w-96' : 'md:w-64' }} lg:w-auto">
+            <div class="grid grid-flow-row lg:justify-between lg:grid-flow-col gap-y-5">
+                <div class="grid grid-cols-1 {{ $isResigned ? 'sm:grid-cols-2' : 'sm:grid-cols-3' }} gap-y-5 entity-header">
+                    <div class="h-11">
                         <x-general.entity-header-item
                             title="{{ trans('pages.wallet.delegate.rank') }} / {{ trans('pages.wallet.delegate.status') }}"
                             without-single-icon
                             with-multiple-icons
                             first-icon="app-rank"
                             :first-icon-colors="$firstColor"
-                            second-icon="{{ $wallet->rank() > 51 ? 'clock' : 'checkmark-smooth' }}"
+                            second-icon="{{ $isStandby ? 'clock' : 'checkmark-smooth' }}"
                             :second-icon-colors="$secondColor"
                             :identifier="$vote"
                         >
                             <x-slot name="text">
-                                @if(! $wallet->isResigned())
+                                @if(! $isResigned)
                                     # {{ $wallet->rank() }} /
                                 @endif
-                                @if($wallet->isResigned())
+                                @if($isResigned)
                                     <span class="text-theme-danger-400">@lang('pages.delegates.resigned')</span>
-                                @elseif($wallet->rank() > 51)
+                                @elseif($isStandby)
                                     <span class="text-theme-secondary-500">@lang('pages.delegates.standby')</span>
                                 @else
                                     <span class="text-theme-success-600">@lang('pages.delegates.active')</span>
@@ -46,15 +49,15 @@
                         </x-general.entity-header-item>
                     </div>
 
-                    @if (! $wallet->isResigned())
-                        <div class="h-11 w-48 {{ $wallet->isResigned() ? 'md:w-96' : 'md:w-64' }} lg:w-auto">
+                    @if (! $isResigned)
+                        <div class="h-11">
                             <x-general.entity-header-item
                                 :title="trans('pages.wallet.productivity')"
                                 :tooltip="trans('pages.wallet.productivity_tooltip')"
                                 without-single-icon
                             >
                                 <x-slot name="text">
-                                    <span @if($wallet->rank() > 51)class="text-theme-secondary-500"@endif>
+                                    <span @if($isStandby)class="text-theme-secondary-500"@endif>
                                         <x-percentage>{{ $wallet->productivity() }}</x-percentage>
                                     </span>
                                 </x-slot>
@@ -62,13 +65,13 @@
                         </div>
                     @endif
 
-                    <div class="h-11 w-48 {{ $wallet->isResigned() ? 'md:w-96' : 'md:w-64' }} lg:w-auto">
+                    <div class="h-11">
                         <x-general.entity-header-item
                             :title="trans('pages.wallet.delegate.forged_total')"
                             without-single-icon
                         >
                             <x-slot name="text">
-                                <span @if($wallet->isResigned())class="text-theme-secondary-500"@endif>
+                                <span @if($isResigned)class="text-theme-secondary-500"@endif>
                                     <x-number>{{ $wallet->blocksForged() }}</x-number>
                                     {{ Network::currency() }}
                                 </span>
@@ -77,8 +80,8 @@
                     </div>
                 </div>
 
-                <div class="flex flex-col space-y-2 sm:flex-row sm:space-y-0 entity-header">
-                    <div class="h-11 w-48 {{ $wallet->isResigned() ? 'md:w-96' : 'md:w-64' }} lg:w-auto">
+                <div class="grid grid-cols-1 {{ $isResigned ? 'sm:grid-cols-2' : 'sm:grid-cols-3' }} lg:grid-cols-2 gap-y-5 entity-header">
+                    <div class="h-11">
                         <x-general.entity-header-item
                             :title="trans('pages.wallet.delegate.forged_blocks')"
                             :text="trans('general.see_all')"
@@ -87,12 +90,12 @@
                             without-single-icon
                         />
                     </div>
-                    <div class="h-11 w-48 {{ $wallet->isResigned() ? 'md:w-96' : 'md:w-64' }} lg:w-auto">
+                    <div class="h-11">
                         <x-general.entity-header-item
                             :title="trans('pages.wallet.delegate.votes', [App\Services\NumberFormatter::kNotationCurrency($wallet->votes())])"
                             :text="trans('general.see_all')"
                             :url="route('wallet.voters', $wallet->address())"
-                            text-class="w-full lg:text-right"
+                            text-class="{{$isResigned ? 'w-auto' : 'w-full' }} lg:text-right lg:pr-2"
                             without-single-icon
                         />
                     </div>
