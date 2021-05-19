@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-use Livewire\Livewire;
 use App\Http\Livewire\PriceStats;
 use Illuminate\Support\Facades\Http;
+use Livewire\Livewire;
 
 it('should render the change and the maxValue for the chart', function () {
     Http::fake([
@@ -15,7 +15,6 @@ it('should render the change and the maxValue for the chart', function () {
         ->assertSee('13.70%')
         ->assertSee('maxValue: 2.469');
 });
-
 
 it('should render the changes and the maxValue for the chart', function () {
     Http::fake([

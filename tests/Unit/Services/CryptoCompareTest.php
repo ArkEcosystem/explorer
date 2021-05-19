@@ -36,6 +36,5 @@ it('should fetch the marketCap for the given pair', function () {
         'cryptocompare.com/*' => Http::response(json_decode(file_get_contents(base_path('tests/fixtures/cryptocompare/pricemultifull.json')), true)),
     ]);
 
-
     expect(CryptoCompare::marketCap('ARK', 'USD'))->toBe(254260570.5975121);
 });
