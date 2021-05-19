@@ -1,1 +1,1 @@
-<span wire:poll.4s>{{ $balance }}</span>
+<span wire:poll.1m>{{ $balance }}</span>
