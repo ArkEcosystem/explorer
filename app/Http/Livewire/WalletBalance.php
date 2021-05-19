@@ -7,6 +7,7 @@ namespace App\Http\Livewire;
 use App\Models\Wallet;
 use App\ViewModels\ViewModelFactory;
 use App\ViewModels\WalletViewModel;
+use Illuminate\View\View;
 use Livewire\Component;
 
 final class WalletBalance extends Component
@@ -23,7 +24,7 @@ final class WalletBalance extends Component
         return ViewModelFactory::make($this->wallet);
     }
 
-    public function render(): void
+    public function render(): View
     {
         return view('livewire.wallet-balance', [
             'balance' => $this->getWalletView()->balanceFiat(),
