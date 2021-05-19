@@ -23,7 +23,7 @@
                 </span>
             @else
                 <span
-                    class="text-lg font-semibold leading-none whitespace-nowrap text-theme-secondary-900"
+                    class="font-semibold leading-none whitespace-nowrap text-theme-secondary-900"
                     wire:loading.class.remove="text-theme-secondary-900"
                     wire:loading.class="text-theme-secondary-500"
                 >

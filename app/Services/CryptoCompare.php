@@ -7,6 +7,7 @@ namespace App\Services;
 use App\Facades\Network;
 use App\Services\Cache\CryptoCompareCache;
 use Carbon\Carbon;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
 use Konceiver\BetterNumberFormatter\ResolveScientificNotation;
@@ -22,6 +23,18 @@ final class CryptoCompare
             ])->json()[strtoupper($target)];
 
             return ResolveScientificNotation::execute($result);
+        });
+    }
+
+    public static function marketCap(string $source, string $target): float
+    {
+        return (new CryptoCompareCache())->setMarketCap($source, $target, function () use ($source, $target): float {
+            $result = Http::get('https://min-api.cryptocompare.com/data/pricemultifull', [
+                'fsyms'  => $source,
+                'tsyms' => $target,
+            ])->json();
+
+            return Arr::get($result, 'RAW.' . $source . '.' . $target .  '.MKTCAP', 0);
         });
     }
 

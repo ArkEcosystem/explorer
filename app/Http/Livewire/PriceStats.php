@@ -34,7 +34,6 @@ final class PriceStats extends Component
         return view('livewire.price-stats', [
             'from'  => Network::currency(),
             'to'    => Settings::currency(),
-            'price' => CryptoCompare::price(Network::currency(), Settings::currency()),
             'priceChange' => $this->getPriceChange(),
             'historical' => $this->getHistorical(),
         ]);

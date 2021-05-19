@@ -30,6 +30,11 @@ final class CryptoCompareCache implements Contract
         return (float) $this->remember(sprintf('price/%s/%s', $source, $target), now()->addMinutes(10), $callback);
     }
 
+    public function setMarketCap(string $source, string $target, Closure $callback): float
+    {
+        return (float) $this->remember(sprintf('marketcap/%s/%s', $source, $target), now()->addMinutes(10), $callback);
+    }
+
     public function getPrices(string $currency): Collection
     {
         return $this->get(sprintf('prices/%s', $currency), collect([]));

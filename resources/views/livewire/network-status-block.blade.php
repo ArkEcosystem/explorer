@@ -6,16 +6,16 @@
         <x-number>{{ $height }}</x-number>
     </x-stats.stat>
 
-    <x-stats.stat :label="trans('general.total_supply')" icon="app-block_height">
+    <x-stats.stat :label="trans('general.total_supply')" icon="app-supply">
         <x-currency :currency="Network::currency()">{{ $supply }}</x-currency>
     </x-stats.stat>
 
-    <x-stats.stat :label="trans('general.market_cap')" icon="app-block_height">
-        <x-currency :currency="Network::currency()">{{ $marketCap }}</x-currency>
+    <x-stats.stat :label="trans('general.market_cap')" icon="app-market_cap">
+        {{ $marketCap }}
     </x-stats.stat>
 
-    <x-stats.stat class="justify-between flex-grow" :label="trans('general.price')" icon="app-block_height" :disabled="! Network::canBeExchanged()">
-        <livewire:price-ticker />
+    <x-stats.stat class="justify-between flex-grow" :label="trans('general.price')" icon="app-price" :disabled="! Network::canBeExchanged()">
+        {{ $price }}
 
         <x-slot name="side">
             <livewire:price-stats :placeholder=" ! Network::canBeExchanged()" />
