@@ -53,7 +53,7 @@ final class NumberFormatter
      */
     public static function kNotationCurrency($value): string
     {
-        $suffixByNumber = function () use ($value) {
+        $suffixByNumber = function () use ($value): string {
             if ($value < 1000) {
                 return sprintf('%d', $value);
             }
