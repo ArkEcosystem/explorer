@@ -1,5 +1,5 @@
 <x-page-headers.wallet.frame title="pages.wallet.title" :wallet="$wallet">
-    <x-page-headers.wallet.frame-item icon="wallet">
+    <x-page-headers.wallet.frame-item icon="wallet" title-class="whitespace-nowrap">
         <x-slot name="title">
             @lang('pages.wallet.balance')@if(Network::canBeExchanged()): {{ $wallet->balanceFiat() }}@endif
         </x-slot>
