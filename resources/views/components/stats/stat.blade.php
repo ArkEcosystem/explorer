@@ -4,28 +4,28 @@
     'disabled' => false,
 ])
 
-<div {{ $attributes->merge(['class' => 'flex py-4 bg-white rounded-lg px-7']) }}>
+<div {{ $attributes->merge(['class' => 'flex py-4 bg-white dark:bg-theme-secondary-900 rounded-lg px-7']) }}>
     <div class="flex items-center space-x-4">
         <span
-            class="flex items-center justify-center w-10 h-10 border-2 rounded-full @if($disabled) border-theme-secondary-500 text-theme-secondary-500 @else border-theme-secondary-900 text-theme-secondary-900 @endif"
+            class="flex items-center justify-center w-10 h-10 border-2 rounded-full @if($disabled) dark:border-theme-secondary-600 border-theme-secondary-500 dark:text-theme-secondary-600 text-theme-secondary-500 @else border-theme-secondary-900 text-theme-secondary-900 dark:text-theme-secondary-700 dark:border-theme-secondary-700 @endif"
             @unless($disabled)
-                wire:loading.class.remove="border-theme-secondary-900 text-theme-secondary-900"
+                wire:loading.class.remove="border-theme-secondary-900 text-theme-secondary-900 dark:text-theme-secondary-700 dark:border-theme-secondary-700"
             @endunless
-            wire:loading.class="border-theme-secondary-500 text-theme-secondary-500"
+            wire:loading.class="dark:border-theme-secondary-600 border-theme-secondary-500 dark:text-theme-secondary-600 text-theme-secondary-500"
         >
             <x-ark-icon :name="$icon" />
         </span>
         <span class="flex flex-col justify-between h-full">
-            <span class="text-sm font-semibold leading-none text-theme-secondary-500 whitespace-nowrap">{{$label}}:</span>
+            <span class="text-sm font-semibold leading-none dark:text-theme-secondary-600 text-theme-secondary-500 whitespace-nowrap">{{$label}}:</span>
             @if ($disabled)
-                <span class="font-semibold leading-none whitespace-nowrap text-theme-secondary-500">
+                <span class="font-semibold leading-none whitespace-nowrap dark:text-theme-secondary-600 text-theme-secondary-500">
                     @lang('general.not_available')
                 </span>
             @else
                 <span
-                    class="font-semibold leading-none whitespace-nowrap text-theme-secondary-900"
+                    class="font-semibold leading-none whitespace-nowrap text-theme-secondary-900 dark:text-white"
                     wire:loading.class.remove="text-theme-secondary-900"
-                    wire:loading.class="text-theme-secondary-500"
+                    wire:loading.class="dark:text-theme-secondary-600 text-theme-secondary-500"
                 >
                     {{ $slot }}
                 </span>

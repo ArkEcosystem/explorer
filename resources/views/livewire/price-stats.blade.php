@@ -6,7 +6,7 @@
 >
     @unless ($placeholder)
         <div class="flex flex-col justify-between h-full">
-            <a class="pl-3 text-sm font-semibold leading-none border-l link border-theme-secondary-300 whitespace-nowrap" href="#">
+            <a class="pl-3 text-sm font-semibold leading-none border-l link border-theme-secondary-300 dark:border-theme-secondary-800 whitespace-nowrap" href="#">
                 @lang('actions.view_statistics')
             </a>
 
@@ -37,27 +37,35 @@
         <div
             class="h-10 ml-6"
             style="width: 120px;"
+            @toggle-dark-mode.window="toggleDarkMode"
             x-data="{
                 time: {{ time() }},
                 values: {{ $historical->values()->toJson() }},
                 labels: {{ $historical->keys()->toJson() }},
                 maxValue: {{ $historical->values()->max() }},
+                darkMode: {{ Settings::usesDarkTheme() ? 'true' : 'false' }},
+                toggleDarkMode() {
+                    this.darkMode = !this.darkMode;
+                    this.updateChart();
+                },
+                updateChart() {
+                    const ctx = this.$refs.chart.getContext('2d');
+                    const chart = Object.values(Chart.instances).find(i => i.ctx === ctx);
+                    this.init(chart);
+                },
                 init(chart = null) {
                     const ctx = this.$refs.chart.getContext('2d');
 
                     if (chart === null) {
-                        this.$watch('time', () => {
-                            const chart = Object.values(Chart.instances).find(i => i.ctx === ctx);
-                            this.init(chart);
-                        });
+                        this.$watch('time', () => this.updateChart());
                     }
 
                     const gradient = ctx.createLinearGradient(0, 0, 0, 40);
 
                     @if($placeholder)
-                        const border = 'rgba(196, 200, 207, 1)';
-                        gradient.addColorStop(0, 'rgba(196, 200, 207, 1)');
-                        gradient.addColorStop(1, 'rgb(196, 200, 207, 0)');
+                        const border = this.darkMode ? 'rgba(126, 138, 156, 1)' : 'rgba(196, 200, 207, 1)';
+                        gradient.addColorStop(0, this.darkMode ? 'rgba(126, 138, 156, 1)' : 'rgba(196, 200, 207, 1)');
+                        gradient.addColorStop(1, this.darkMode ? 'rgba(126, 138, 156, 0)' : 'rgba(196, 200, 207, 0)');
                     @elseif ($priceChange >= 0)
                         const border = 'rgba(40, 149, 72, 1)';
                         gradient.addColorStop(0, 'rgba(40, 149, 72, 0.5)');
