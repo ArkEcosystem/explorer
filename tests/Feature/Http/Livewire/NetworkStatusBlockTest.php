@@ -25,6 +25,5 @@ it('should render with a height, supply and market cap', function () {
     Livewire::test(NetworkStatusBlock::class)
         ->assertSee('5,651,290')
         ->assertSee('136,280,982 DARK')
-        ->assertSee('Not Available')
-        ;
+        ->assertSee('Not Available');
 });
