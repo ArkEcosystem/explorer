@@ -18,7 +18,7 @@
             $vote = $wallet->vote()
         @endphp
         <x-slot name="extension">
-            <div class="grid grid-flow-row lg:grid-flow-col justify-between space-y-2 sm:space-y-6 lg:space-y-0">
+            <div class="grid grid-flow-row justify-between space-y-2 lg:grid-flow-col sm:space-y-6 lg:space-y-0">
                 <div class="flex flex-col space-y-2 sm:flex-row sm:space-y-0 entity-header">
                     <div class="h-11 w-48 {{ $wallet->isResigned() ? 'md:w-96' : 'md:w-64' }} lg:w-auto">
                         <x-general.entity-header-item
