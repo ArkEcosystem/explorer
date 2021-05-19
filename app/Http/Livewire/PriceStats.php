@@ -22,15 +22,6 @@ final class PriceStats extends Component
 
     public function render(): View
     {
-        // $priceFullRange = Cache::get('fsdfgds', collect());
-
-        // $priceFullRange->push(rand(10, 40));
-
-        // Cache::put('fsdfgds', $priceFullRange);
-
-        // $priceFullRange = $priceFullRange->splice(-23);
-
-
         return view('livewire.price-stats', [
             'from'  => Network::currency(),
             'to'    => Settings::currency(),
