@@ -38,10 +38,10 @@ final class PriceStats extends Component
 
         $priceFullRange = CryptoCompare::historicalHourly(Network::currency(), Settings::currency(), 24);
 
-        $initialPrice = $priceFullRange->first();
-        $finalPrice   = $priceFullRange->last();
+        $initialPrice = (float) $priceFullRange->first();
+        $finalPrice   = (float) $priceFullRange->last();
 
-        if ($initialPrice === 0 || $finalPrice === 0) {
+        if ($initialPrice === 0.0 || $finalPrice === 0.0) {
             return  0;
         }
 
@@ -51,32 +51,7 @@ final class PriceStats extends Component
     private function getHistorical(): Collection
     {
         if ($this->placeholder) {
-            return collect([
-                4,
-                5,
-                2,
-                2,
-                2,
-                3,
-                5,
-                1,
-                4,
-                5,
-                6,
-                5,
-                3,
-                3,
-                4,
-                5,
-                6,
-                4,
-                4,
-                4,
-                5,
-                8,
-                8,
-                10,
-            ]);
+            return collect([4, 5, 2, 2, 2, 3, 5, 1, 4, 5, 6, 5, 3, 3, 4, 5, 6, 4, 4, 4, 5, 8, 8, 10]);
         }
 
         return CryptoCompare::historicalHourly(Network::currency(), Settings::currency());

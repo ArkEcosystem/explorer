@@ -25,7 +25,7 @@ it('should fetch the historical prices for the given pair', function () {
 
 it('should fetch the historical prices per hour for the given pair', function () {
     Http::fake([
-        'cryptocompare.com/*' => Http::response(json_decode(file_get_contents(base_path('tests/fixtures/cryptocompare/historical.json')), true)),
+        'cryptocompare.com/*' => Http::response(json_decode(file_get_contents(base_path('tests/fixtures/cryptocompare/histohour.json')), true)),
     ]);
 
     assertMatchesSnapshot(CryptoCompare::historicalHourly('ARK', 'USD'));
