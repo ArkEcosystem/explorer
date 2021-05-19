@@ -1,12 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="17.954" height="18.215" viewBox="0 0 17.954 18.215">
-  <g id="Height" transform="translate(-204.75 -1825.075)">
-    <g id="Group_167" data-name="Group 167" transform="translate(205.75 1826.75)">
-      <g id="reorder-up">
-        <path id="Shape_819" data-name="Shape 819" d="M223.75,1829.75v11.4" transform="translate(-211.318 -1827.678)" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
-        <path id="Shape_820" data-name="Shape 820" d="M219.25,1832.858l2.742-2.956a.517.517,0,0,1,.732,0l2.742,2.956" transform="translate(-209.926 -1827.678)" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
-        <path id="Rectangle-path_103" data-name="Rectangle-path 103" d="M205.75,1840.941a.691.691,0,0,1,.691-.691h4.835a.691.691,0,0,1,.691.691v4.835a.691.691,0,0,1-.691.691h-4.835a.691.691,0,0,1-.691-.691Z" transform="translate(-205.75 -1830.926)" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
-        <path id="Rectangle-path_103-2" data-name="Rectangle-path 103" d="M205.75,1840.941a.691.691,0,0,1,.691-.691h4.835a.691.691,0,0,1,.691.691v4.835a.691.691,0,0,1-.691.691h-4.835a.691.691,0,0,1-.691-.691Z" transform="translate(-205.75 -1840.925)" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
-      </g>
-    </g>
-  </g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="17.954" height="18.215"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" data-name="Group 167"><path data-name="Shape 819" d="M13.432 3.747v11.4"/><path data-name="Shape 820" d="M10.324 6.855l2.742-2.956a.517.517 0 01.732 0l2.742 2.956"/><path data-name="Rectangle-path 103" d="M1 11.69a.691.691 0 01.691-.691h4.835a.691.691 0 01.691.691v4.835a.691.691 0 01-.691.691H1.691A.691.691 0 011 16.525zM1 1.691A.691.691 0 011.691 1h4.835a.691.691 0 01.691.691v4.835a.691.691 0 01-.691.691H1.691A.691.691 0 011 6.526z"/></g></svg>
