@@ -10,7 +10,7 @@ use App\Services\Cache\CryptoCompareCache;
 use Livewire\Livewire;
 use function Tests\configureExplorerDatabase;
 
-it('should render with a height, name, supply and market cap', function () {
+it('should render with a height, supply and market cap', function () {
     configureExplorerDatabase();
 
     Block::factory()->create([
@@ -24,9 +24,7 @@ it('should render with a height, name, supply and market cap', function () {
 
     Livewire::test(NetworkStatusBlock::class)
         ->assertSee('5,651,290')
-        ->assertSee('ARK Development Network')
-        ->assertSee('136,280,982 DARK');
-
-    // @TODO: add test for production which shows this
-    // ->assertSee('Market Cap: 39,616,881.467 USD');
+        ->assertSee('136,280,982 DARK')
+        ->assertSee('Not Available')
+        ;
 });
