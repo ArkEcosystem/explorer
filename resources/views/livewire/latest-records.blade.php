@@ -4,40 +4,32 @@
     transactionTypeFilter: '{{ $state["type"] }}',
     transactionTypeFilterLabel: '@lang('forms.search.transaction_types.' . $state['type'])',
 }" x-cloak class="w-full">
-    <div class="w-full md:mb-8">
-        <div class="flex relative flex-col justify-between md:items-end md:flex-row md:justify-start">
-            <h2 class="mb-8 md:mb-0">@lang('pages.home.transactions_and_blocks')</h2>
 
+    <x-tabs.wrapper
+        class="mb-4"
+        default-selected="transactions"
+        on-selected="(selected) => $wire.set('state.selected', 'transactions')"
+    >
+        <x-tabs.tab name="transactions">
+            @lang('pages.home.latest_transactions')
+        </x-tabs.tab>
+
+        <x-tabs.tab name="blocks">
+            @lang('pages.home.latest_blocks')
+        </x-tabs.tab>
+
+        <x-slot name="right">
             <div x-show="selected === 'transactions'">
                 <x-transaction-table-filter :type="$state['type']"/>
             </div>
-        </div>
-    </div>
+        </x-slot>
+    </x-tabs.wrapper>
 
-    <div class="hidden tabs md:flex">
-        <div
-            class="tab-item transition-default"
-            :class="{ 'tab-item-current': selected === 'transactions' }"
-            wire:click="$set('state.selected', 'transactions')"
-            @click="selected = 'transactions'"
-        >
-            @lang('pages.home.latest_transactions')
-        </div>
-
-        <div
-            class="tab-item transition-default"
-            :class="{ 'tab-item-current': selected === 'blocks' }"
-            wire:click="$set('state.selected', 'blocks')"
-            @click="selected = 'blocks'"
-        >
-            @lang('pages.home.latest_blocks')
-        </div>
-    </div>
 
     <div class="md:hidden">
         <x-ark-dropdown
-            wrapper-class="relative p-2 mb-8 w-full rounded-lg border border-theme-secondary-300 dark:border-theme-secondary-800"
-            button-class="p-3 w-full font-semibold text-left text-theme-secondary-900 dark:text-theme-secondary-200"
+            wrapper-class="relative w-full p-2 mb-8 border rounded-lg border-theme-secondary-300 dark:border-theme-secondary-800"
+            button-class="w-full p-3 font-semibold text-left text-theme-secondary-900 dark:text-theme-secondary-200"
             dropdown-classes="left-0 w-full z-20"
             :init-alpine="false"
             dropdown-property="tabsOpen"

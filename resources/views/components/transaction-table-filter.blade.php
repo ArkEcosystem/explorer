@@ -4,14 +4,14 @@
     transactionTypeFilterLabel: '@lang('forms.search.transaction_types.' . $type)',
 }" x-cloak>
     <x-ark-dropdown
-        wrapper-class="transaction-filter-wrapper"
-        dropdown-classes="transaction-filter-dropdown"
-        button-class="transaction-filter-button"
+        wrapper-class="block"
+        dropdown-classes="right-0 w-full mt-3 dark:bg-theme-secondary-900 md:w-84"
+        button-class="w-full px-8 font-semibold text-left text-theme-secondary-900 dark:text-theme-secondary-200 md:items-end"
         dropdown-property="filterOpen"
         :init-alpine="false"
     >
         @slot('button')
-            <div class="space-x-2 transaction-filter-button-container">
+            <div class="flex items-center justify-between w-full space-x-2 font-semibold text-theme-secondary-500 md:justify-end md:text-theme-secondary-700">
                 <div>
                     <span class="text-theme-secondary-500 dark:text-theme-secondary-600">@lang('general.transaction.type'):</span>
 
@@ -23,14 +23,14 @@
 
                 <span
                     :class="{ 'rotate-180 md:bg-theme-primary-600 md:text-theme-secondary-100': filterOpen }"
-                    class="transaction-filter-button-icon"
+                    class="flex items-center justify-center w-6 h-6 transition duration-150 ease-in-out rounded-full text-theme-secondary-400 dark:bg-theme-secondary-800 dark:text-theme-secondary-200 md:w-4 md:h-4 md:bg-theme-primary-100 md:text-theme-primary-600"
                 >
                     <x-ark-icon name="chevron-down" size="xs" class="md:h-3 md:w-2" />
                 </span>
             </div>
         @endslot
 
-        <div class="block overflow-y-scroll justify-center items-center py-3 h-64 dropdown-scrolling md:h-72">
+        <div class="items-center justify-center block h-64 py-3 overflow-y-scroll dropdown-scrolling md:h-72">
             @foreach([
                 'all',
                 'transfer',
