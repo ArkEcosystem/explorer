@@ -3,7 +3,7 @@
         <div class="px-8 md:w-full">
             <div
                 class="flex w-full grid-cols-2 gap-5 md:grid xl:space-x-5 xl:flex"
-                wire:poll.1m
+                wire:poll.60s
             >
                 <x-stats.stat :label="trans('general.height')" icon="app-block_height">
                     <x-number>{{ $height }}</x-number>

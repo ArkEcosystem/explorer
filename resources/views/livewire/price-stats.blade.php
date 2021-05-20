@@ -1,7 +1,7 @@
 <div
     class="flex justify-between flex-grow h-full ml-3"
     @unless ($placeholder)
-        wire:poll.1m
+        wire:poll.60s
     @endunless
 >
     @unless ($placeholder)
