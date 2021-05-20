@@ -154,7 +154,7 @@
                 @endforeach
 
                 @if(Network::canBeExchanged())
-                    <div class="flex px-8 py-3 mt-2 -mb-4 font-semibold bg-theme-secondary-100 text-theme-secondary-900 dark:text-theme-secondary-300 dark:bg-theme-secondary-800">
+                    <div class="flex py-3 px-8 mt-2 -mb-4 font-semibold bg-theme-secondary-100 text-theme-secondary-900 dark:text-theme-secondary-300 dark:bg-theme-secondary-800">
                         <livewire:price-ticker />
                     </div>
                 @endif
