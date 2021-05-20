@@ -4,7 +4,7 @@
 ])
 
 <div
-    {{ $attributes->merge(['class' => 'items-center justify-between hidden w-full md:flex bg-theme-secondary-100 rounded-xl dark:bg-black' ])}}
+    {{ $attributes->merge(['class' => 'items-center justify-between w-full flex bg-theme-secondary-100 rounded-xl dark:bg-black' ])}}
     x-data="{
         selected: '{{ $defaultSelected }}',
         select(name) {

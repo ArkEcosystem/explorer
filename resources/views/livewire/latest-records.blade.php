@@ -5,63 +5,7 @@
     transactionTypeFilterLabel: '@lang('forms.search.transaction_types.' . $state['type'])',
 }" x-cloak class="w-full">
 
-    <x-tabs.wrapper
-        class="mb-4"
-        default-selected="transactions"
-        on-selected="(selected) => $wire.set('state.selected', 'transactions')"
-    >
-        <x-tabs.tab name="transactions">
-            @lang('pages.home.latest_transactions')
-        </x-tabs.tab>
-
-        <x-tabs.tab name="blocks">
-            @lang('pages.home.latest_blocks')
-        </x-tabs.tab>
-
-        <x-slot name="right">
-            <div x-show="selected === 'transactions'">
-                <x-transaction-table-filter :type="$state['type']"/>
-            </div>
-        </x-slot>
-    </x-tabs.wrapper>
-
-
-    <div class="md:hidden">
-        <x-ark-dropdown
-            wrapper-class="relative w-full p-2 mb-8 border rounded-lg border-theme-secondary-300 dark:border-theme-secondary-800"
-            button-class="w-full p-3 font-semibold text-left text-theme-secondary-900 dark:text-theme-secondary-200"
-            dropdown-classes="left-0 w-full z-20"
-            :init-alpine="false"
-            dropdown-property="tabsOpen"
-        >
-            <x-slot name="button">
-                <div class="flex items-center space-x-4">
-                    <div>
-                        <div x-show="tabsOpen !== true">
-                            <x-ark-icon name="menu" size="sm" />
-                        </div>
-
-                        <div x-show="tabsOpen === true">
-                            <x-ark-icon name="menu-show" size="sm" />
-                        </div>
-                    </div>
-
-                    <div x-show="selected === 'transactions'">@lang('pages.home.latest_transactions')</div>
-                    <div x-show="selected === 'blocks'">@lang('pages.home.latest_blocks')</div>
-                </div>
-            </x-slot>
-
-            <div class="p-4">
-                <a wire:click="$set('state.selected', 'transactions')" @click="selected = 'transactions'" class="dropdown-entry">
-                    @lang('pages.home.latest_transactions')
-                </a>
-
-                <a wire:click="$set('state.selected', 'blocks')" @click="selected = 'blocks'" class="dropdown-entry">
-                    @lang('pages.home.latest_blocks')
-                </a>
-            </div>
-        </x-ark-dropdown>
-    </div>
+    <x-latest-records-tabs :transaction-type="$state['type']" :selected="$state['selected']" />
 
     @if($state['selected'] === 'blocks')
         <div id="block-list" class="w-full">
