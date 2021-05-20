@@ -171,6 +171,7 @@ return [
             'transactions'           => 'Round Transactions',
             'current_delegate'       => 'Current',
             'next_delegate'          => 'Next',
+            'next_slot'              => 'Next Slot',
             'blocks_generated'       => ':0/:1 Blocks',
         ],
         'info' => [
