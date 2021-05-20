@@ -4,7 +4,7 @@
     transactionTypeFilterLabel: '@lang('forms.search.transaction_types.' . $type)',
 }" x-cloak>
     <x-ark-dropdown
-        wrapper-class="block"
+        wrapper-class="relative"
         dropdown-classes="right-0 w-full mt-3 dark:bg-theme-secondary-900 md:w-84"
         button-class="w-full px-8 font-semibold text-left text-theme-secondary-900 dark:text-theme-secondary-200 md:items-end"
         dropdown-property="filterOpen"
