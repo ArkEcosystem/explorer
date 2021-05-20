@@ -86,7 +86,7 @@
                             :title="trans('pages.wallet.delegate.forged_blocks')"
                             :text="trans('general.see_all')"
                             :url="route('wallet.blocks', $wallet->address())"
-                            content-class="flex flex-col flex-1 justify-between font-semibold truncate lg:text-right ml-4 lg:ml-0 w-full sm:pr-4"
+                            content-class="flex flex-col flex-1 justify-between ml-4 w-full font-semibold truncate lg:text-right lg:ml-0 sm:pr-4"
                             title-wrapper-class="lg:justify-end"
                             without-single-icon
                             text-class="w-full lg:text-right"
@@ -97,7 +97,7 @@
                             :title="trans('pages.wallet.delegate.votes', [App\Services\NumberFormatter::kNotationCurrency($wallet->votes())])"
                             :text="trans('general.see_all')"
                             :url="route('wallet.voters', $wallet->address())"
-                            content-class="flex flex-col flex-1 justify-between font-semibold truncate lg:text-right ml-4 lg:ml-0 w-full"
+                            content-class="flex flex-col flex-1 justify-between ml-4 w-full font-semibold truncate lg:text-right lg:ml-0"
                             title-wrapper-class="lg:justify-end"
                             without-single-icon
                             text-class="w-full lg:text-right"
