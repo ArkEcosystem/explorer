@@ -180,15 +180,15 @@ return [
     ],
 
     'blocks_by_wallet' => [
-        'title'       => 'Forged Blocks',
+        'title'       => 'Generated Blocks',
         'table_title' => 'Block History',
-        'no_results'  => 'Delegate :0 has not yet forged. Once he becomes active his blocks will appear here.',
+        'no_results'  => 'This Delegate has not generated any blocks yet. Generated blocks will appear in a list here.',
     ],
 
     'voters_by_wallet' => [
-        'title'      => 'Voting for Delegate',
+        'title'      => 'Delegate Voters',
         'subtitle'   => 'Voters',
-        'no_results' => 'Delegate :0 has no voters yet. You can be the first!',
+        'no_results' => 'This Delegate does not have any voters yet. Voters will appear in a list here.',
     ],
 
     'blocks' => [
