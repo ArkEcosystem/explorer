@@ -19,6 +19,7 @@
     'secondIconColors'    => null,
     'textClass'           => null,
     'titleWrapperClass'   => null,
+    'contentClass'        => null,
 ])
 
 <div class="entity-header-item w-full h-full {{ $wrapperClass }}">
@@ -49,8 +50,8 @@
         </div>
     @endif
 
-    <div class="flex flex-col flex-1 justify-between ml-4 font-semibold truncate md:pr-4 @if($withoutSingleIcon && ! $withMultipleIcons) md:pl-11 lg:pl-0 @endif {{ $titleWrapperClass }}">
-        <div class="flex items-center">
+    <div class="{{ $contentClass ?? 'flex flex-col flex-1 justify-between ml-4 font-semibold truncate md:pr-4' }} @if($withoutSingleIcon && ! $withMultipleIcons && ! $contentClass) md:pl-11 lg:pl-0 @endif">
+        <div class="flex items-center {{ $titleWrapperClass }}">
             <div class="items-end text-sm leading-tight text-theme-secondary-500 dark:text-theme-secondary-700">{{ $title }}</div>
 
             @if($tooltip)

@@ -86,8 +86,10 @@
                             :title="trans('pages.wallet.delegate.forged_blocks')"
                             :text="trans('general.see_all')"
                             :url="route('wallet.blocks', $wallet->address())"
-                            text-class="w-full lg:text-right"
+                            content-class="flex flex-col flex-1 justify-between font-semibold truncate lg:text-right ml-4 lg:ml-0 w-full sm:pr-4"
+                            title-wrapper-class="lg:justify-end"
                             without-single-icon
+                            text-class="w-full lg:text-right"
                         />
                     </div>
                     <div class="h-11">
@@ -95,8 +97,10 @@
                             :title="trans('pages.wallet.delegate.votes', [App\Services\NumberFormatter::kNotationCurrency($wallet->votes())])"
                             :text="trans('general.see_all')"
                             :url="route('wallet.voters', $wallet->address())"
-                            text-class="{{$isResigned ? 'w-auto' : 'w-full' }} lg:text-right lg:pr-2"
+                            content-class="flex flex-col flex-1 justify-between font-semibold truncate lg:text-right ml-4 lg:ml-0 w-full"
+                            title-wrapper-class="lg:justify-end"
                             without-single-icon
+                            text-class="w-full lg:text-right"
                         />
                     </div>
                 </div>
