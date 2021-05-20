@@ -1,15 +1,19 @@
-<div x-data="{
-    filterOpen: false,
-    transactionTypeFilter: '{{ $type }}',
-    transactionTypeFilterLabel: '@lang('forms.search.transaction_types.' . $type)',
-}" x-cloak>
+<div
+    x-data="{
+        filterOpen: false,
+        transactionTypeFilter: '{{ $type }}',
+        transactionTypeFilterLabel: '@lang('forms.search.transaction_types.' . $type)',
+    }"
+    x-cloak
+>
     <x-ark-dropdown
-        wrapper-class="relative"
+        wrapper-class="relative w-full p-2 border rounded-lg border-theme-secondary-300 dark:border-theme-secondary-800 md:w-auto md:p-0 md:border-0"
         dropdown-classes="right-0 w-full mt-3 dark:bg-theme-secondary-900 md:w-84"
-        button-class="w-full px-8 font-semibold text-left text-theme-secondary-900 dark:text-theme-secondary-200 md:items-end"
+        button-class="flex items-center w-full p-3 font-semibold text-left focus:outline-none md:px-8 md:py-0 text-theme-secondary-900 dark:text-theme-secondary-200 md:items-end md:inline"
         dropdown-property="filterOpen"
         :init-alpine="false"
     >
+
         @slot('button')
             <div class="flex items-center justify-between w-full space-x-2 font-semibold text-theme-secondary-500 md:justify-end md:text-theme-secondary-700">
                 <div>

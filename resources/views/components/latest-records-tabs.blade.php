@@ -22,9 +22,9 @@
 </x-tabs.wrapper>
 
 
-<div class="md:hidden">
+<div class="mb-4 md:hidden">
     <x-ark-dropdown
-        wrapper-class="relative w-full p-2 mb-8 border rounded-lg border-theme-secondary-300 dark:border-theme-secondary-800"
+        wrapper-class="relative w-full p-2 border rounded-lg border-theme-secondary-300 dark:border-theme-secondary-800"
         button-class="w-full p-3 font-semibold text-left text-theme-secondary-900 dark:text-theme-secondary-200"
         dropdown-classes="left-0 w-full z-20"
         :init-alpine="false"
@@ -60,4 +60,8 @@
             @endif
         </div>
     </x-ark-dropdown>
+
+    <div x-show="selected === 'transactions'" class="mt-3">
+        <x-transaction-table-filter :type="$transactionType"/>
+    </div>
 </div>
