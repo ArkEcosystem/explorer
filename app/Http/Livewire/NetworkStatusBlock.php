@@ -31,14 +31,14 @@ final class NetworkStatusBlock extends Component
     {
         $price = CryptoCompare::price(Network::currency(), Settings::currency());
 
-        return BetterNumberFormatter::new()->withLocale('en_US')->withStyle(NumberFormatter::CURRENCY)->formatWithCurrency($price);
+        return BetterNumberFormatter::new()->withStyle(NumberFormatter::CURRENCY)->formatWithCurrency($price);
     }
 
     private function getMarketCapFormatted(): string
     {
         $price = $this->getMarketCap();
 
-        return BetterNumberFormatter::new()->withLocale('en_US')->withStyle(NumberFormatter::CURRENCY)->formatWithCurrency($price);
+        return BetterNumberFormatter::new()->withStyle(NumberFormatter::CURRENCY)->formatWithCurrency($price);
     }
 
     private function getMarketCap(): float
