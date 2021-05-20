@@ -1,17 +1,17 @@
 <div
-    class="flex flex-grow justify-between ml-3 h-full"
+    class="flex justify-between flex-grow h-full ml-3"
     @unless ($placeholder)
         wire:poll.1m
     @endunless
 >
     @unless ($placeholder)
         <div class="flex flex-col justify-between h-full">
-            <a class="pl-3 text-sm font-semibold leading-none whitespace-nowrap border-l link border-theme-secondary-300 dark:border-theme-secondary-800" href="#">
+            <a class="pl-3 text-sm font-semibold leading-none border-l whitespace-nowrap link border-theme-secondary-300 dark:border-theme-secondary-800" href="#">
                 @lang('actions.view_statistics')
             </a>
 
             @if ($priceChange < 0)
-                <span class="flex items-center pl-3 space-x-1 text-sm font-semibold text-theme-danger-400">
+                <span class="flex items-center pl-3 space-x-1 text-sm font-semibold leading-none text-theme-danger-400">
                     <span>
                         <x-ark-icon name="triangle-down" size="2xs" />
                     </span>
@@ -33,9 +33,9 @@
     @endunless
 
 
-    <div class="hidden flex-grow justify-end lg:flex" >
+    <div class="justify-end flex-grow hidden lg:flex" >
         <div
-            class="ml-6 h-10"
+            class="h-10 ml-6"
             style="width: 120px;"
             @toggle-dark-mode.window="toggleDarkMode"
             x-data="{
