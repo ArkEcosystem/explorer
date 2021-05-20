@@ -45,7 +45,9 @@ final class RouteServiceProvider extends ServiceProvider
         });
 
         Route::bind('wallet', function (string $value): Wallet {
-            abort_unless(Address::validate($value, Network::config()), 404);
+            if (config('explorer.validate_wallets') && ! Address::validate($value, Network::config())) {
+                abort(404);
+            }
 
             try {
                 return Wallets::findByAddress($value);
