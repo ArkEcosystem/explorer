@@ -8,9 +8,7 @@ use App\Facades\Network;
 use App\Services\CryptoCompare;
 use App\Services\Settings;
 use Illuminate\View\View;
-use Konceiver\BetterNumberFormatter\BetterNumberFormatter;
 use Livewire\Component;
-use NumberFormatter;
 
 final class PriceTicker extends Component
 {
