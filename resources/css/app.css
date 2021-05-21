@@ -5,6 +5,7 @@
 
 /** 3rd party **/
 @import "../../node_modules/pikaday/css/pikaday.css";
+@import "../../node_modules/swiper/swiper-bundle.min.css";
 
 /** UI Repo Styles **/
 @import "../../vendor/arkecosystem/ui/resources/assets/css/styles.css";

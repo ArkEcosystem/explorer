@@ -29,6 +29,7 @@
         "resolve-url-loader": "3.1.1",
         "sass": "^1.26.10",
         "sass-loader": "10.*",
+        "swiper": "^6.6.2",
         "tailwind": "^4.0.0",
         "tailwindcss": "^2.0.1",
         "tippy.js": "^6.2.7",

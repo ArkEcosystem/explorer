@@ -10,12 +10,6 @@
 $normalizedRadius = $radius - $stroke * 2;
 $circumference = $normalizedRadius * 2 * pi();
 $strokeDashoffset = $circumference - $progress / 100 * $circumference;
-/*
-if ($circleColor) {
-    $circleColorArray = explode('-', $circleColor);
-    $circleColor = sprintf("%s-%s", $circleColorArray[2], $circleColorArray[3]);
-}
-*/
 @endphp
 
 <span

@@ -1,4 +1,7 @@
 @component('layouts.app', ['isLanding' => true, 'fullWidth' => true])
+    @push('scripts')
+        <script src="{{ mix('js/swiper.js')}}"></script>
+    @endpush
 
     @section('content')
         <div class="dark:bg-theme-secondary-900">
@@ -9,7 +12,7 @@
             </x-ark-container>
         </div>
 
-        <x-ark-container class="bg-theme-secondary-100">
+        <x-ark-container class="bg-theme-secondary-100 dark:bg-theme-secondary-900">
             <livewire:delegate-data-boxes />
         </x-ark-container>
 
