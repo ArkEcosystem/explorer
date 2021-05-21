@@ -20,6 +20,7 @@ final class DelegateDataBoxes extends Component
     use DelegateData;
 
     private array $delegates = [];
+
     private array $statistics = [];
 
     public function render(): View
