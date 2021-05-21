@@ -1,29 +1,31 @@
 @props([
-    'wrapperClass'        => null,
-    'withoutSingleIcon'   => false,
-    'iconBreakpoint'      => 'flex',
-    'iconColors'          => 'text-theme-secondary-900 border-theme-secondary-900 dark:text-theme-secondary-600 dark:border-theme-secondary-600',
-    'icon'                => null,
-    'iconSize'            => null,
-    'avatar'              => null,
-    'withMultipleIcons'   => false,
-    'multipleIconsFirst'  => null,
-    'multipleIconsSecond' => null,
-    'title'               => null,
-    'tooltip'             => null,
-    'url'                 => null,
-    'text'                => null,
-    'firstIcon'           => null,
-    'firstIconColors'     => null,
-    'secondIcon'          => null,
-    'secondIconColors'    => null,
-    'textClass'           => null,
-    'titleWrapperClass'   => null,
-    'progressCircle'      => null,
-    'progress'            => 0,
-    'progressColor'       => null,
+    'wrapperClass'          => null,
+    'withoutSingleIcon'     => false,
+    'iconBreakpoint'        => 'flex',
+    'iconColors'            => 'text-theme-secondary-900 border-theme-secondary-900 dark:text-theme-secondary-600 dark:border-theme-secondary-600',
+    'icon'                  => null,
+    'iconSize'              => null,
+    'avatar'                => null,
+    'withMultipleIcons'     => false,
+    'multipleIconsFirst'    => null,
+    'multipleIconsSecond'   => null,
+    'title'                 => null,
+    'tooltip'               => null,
+    'url'                   => null,
+    'text'                  => null,
+    'firstIcon'             => null,
+    'firstIconColors'       => null,
+    'firstIconBreakpoints'  => null,
+    'secondIcon'            => null,
+    'secondIconColors'      => null,
+    'secondIconBreakpoints' => null,
+    'textClass'             => null,
+    'titleWrapperClass'     => null,
+    'progressCircle'        => null,
+    'progress'              => 0,
+    'progressColor'         => null,
     'progressCircleIconClass' => null,
-    'progressCircleIcon' => null,
+    'progressCircleIcon'    => null,
 ])
 
 <div class="entity-header-item w-full h-full {{ $wrapperClass }}">
@@ -58,8 +60,10 @@
             <x-page-headers.icon-with-icon
                 :first-icon="$firstIcon"
                 :first-icon-colors="$firstIconColors"
+                :first-icon-breakpoints="$firstIconBreakpoints"
                 :second-icon="$secondIcon"
                 :second-icon-colors="$secondIconColors"
+                :second-icon-breakpoints="$secondIconBreakpoints"
             />
         </div>
     @endif

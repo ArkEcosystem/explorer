@@ -65,8 +65,10 @@
                     with-multiple-icons
                     first-icon="app-forged"
                     first-icon-colors="text-theme-secondary-900"
+                    first-icon-breakpoints="flex"
                     second-icon="app-next-delegate"
                     second-icon-colors="text-theme-secondary-900"
+                    second-icon-breakpoints="flex"
                     wrapper-class="border-r-0 border-none"
                 />
             </div>
