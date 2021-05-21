@@ -15,5 +15,5 @@ it('should render with the source currency, target currency and exchange rate', 
     Livewire::test(PriceTicker::class)
         ->assertSee(Network::currency())
         ->assertSee(Settings::currency())
-        ->assertSee(0.2907);
+        ->assertSee(0.29);
 });
