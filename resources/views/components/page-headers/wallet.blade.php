@@ -20,6 +20,7 @@
 
             $vote = $wallet->vote()
         @endphp
+        {{--
         <x-slot name="extension">
             <div class="grid grid-flow-row gap-y-5 lg:justify-between lg:grid-flow-col">
                 <div class="grid grid-cols-1 {{ $isResigned ? 'sm:grid-cols-2' : 'sm:grid-cols-3' }} gap-y-5 entity-header">
@@ -106,5 +107,6 @@
                 </div>
             </div>
         </x-slot>
+        --}}
     @endif
 </x-page-headers.wallet.frame>
