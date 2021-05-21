@@ -1,3 +1,6 @@
+@php
+    $isResigned = $vote->isResigned();
+@endphp
 <div class="bg-white dark:bg-theme-secondary-900">
     <x-ark-container container-class="flex flex-wrap">
         <div class="flex py-4 px-8 w-full rounded-lg border border-theme-secondary-300">
@@ -15,7 +18,7 @@
 
                 <div class="flex w-full lg:justify-end sm:w-auto">
                     <div class="grid grid-cols-2 w-full sm:w-auto">
-                        @if(! $vote->isResigned())
+                        @if(! $isResigned)
                             <x-general.entity-header-item
                                 :title="trans('pages.wallet.rank')"
                                 title-wrapper-class="lg:justify-end"
@@ -23,7 +26,7 @@
                                 without-single-icon
                             >
                                 <x-slot name="text">
-                                    @if ($vote->isResigned())
+                                    @if ($isResigned)
                                         <x-details.resigned />
                                     @else
                                         @lang('pages.wallet.vote_rank', [$vote->rank()])
@@ -39,7 +42,7 @@
                         content-class="flex flex-col flex-1 justify-between ml-4 font-semibold truncate lg:text-right lg:ml-0"
                     >
                         <x-slot name="text">
-                            @if($vote->isResigned())
+                            @if($isResigned)
                                 <span class="text-theme-danger-400">@lang('pages.delegates.resigned')</span>
                             @elseif($vote->rank() > 51)
                                 <span class="text-theme-secondary-500">@lang('pages.delegates.standby')</span>

@@ -94,7 +94,7 @@
                     </div>
                     <div class="h-11">
                         <x-general.entity-header-item
-                            :title="trans('pages.wallet.delegate.votes', [App\Services\NumberFormatter::kNotationCurrency($wallet->votes())])"
+                            :title="trans('pages.wallet.delegate.votes', [App\Services\NumberFormatter::currencyShortNotation($wallet->votes())])"
                             :text="trans('general.see_all')"
                             :url="route('wallet.voters', $wallet->address())"
                             content-class="flex flex-col flex-1 justify-between ml-4 w-full font-semibold truncate lg:text-right lg:ml-0"

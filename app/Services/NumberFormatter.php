@@ -51,20 +51,16 @@ final class NumberFormatter
     /**
      * @param string|int|float $value
      */
-    public static function kNotationCurrency($value): string
+    public static function currencyShortNotation($value): string
     {
-        $suffixByNumber = function () use ($value): string {
-            if ($value < 1000) {
-                return sprintf('%d', $value);
-            }
+        if ($value < 1000) {
+            return sprintf('%d', $value);
+        }
 
-            if ($value < 1000000) {
-                return sprintf('%d%s', floor($value / 1000), 'K');
-            }
+        if ($value < 1000000) {
+            return sprintf('%d%s', floor($value / 1000), 'K');
+        }
 
-            return sprintf('%0.2f%s', round($value / 1000000, 2), 'M');
-        };
-
-        return $suffixByNumber();
+        return sprintf('%0.2f%s', round($value / 1000000, 2), 'M');
     }
 }
