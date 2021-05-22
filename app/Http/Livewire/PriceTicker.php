@@ -12,14 +12,30 @@ use Livewire\Component;
 
 final class PriceTicker extends Component
 {
+    protected $listeners = ['currencyChanged' => 'setValues'];
+
+    public string $price;
+    public string $from;
+    public string $to;
+
+    public function mount(): void
+    {
+        $this->setValues();
+    }
+
+    public function setValues()
+    {
+        $this->price = number_format(CryptoCompare::price(Network::currency(), Settings::currency()), 2);
+        $this->from = Network::currency();
+        $this->to = Settings::currency();
+    }
+
     public function render(): View
     {
-        $price = number_format(CryptoCompare::price(Network::currency(), Settings::currency()), 2);
-
         return view('livewire.price-ticker', [
-            'from'  => Network::currency(),
-            'to'    => Settings::currency(),
-            'price' => $price,
+            'from'  => $this->from,
+            'to'    => $this->to,
+            'price' => $this->price,
         ]);
     }
 }
