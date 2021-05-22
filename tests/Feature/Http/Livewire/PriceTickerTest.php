@@ -24,7 +24,6 @@ it('should update the price if currency change', function () {
         ->push(['USD' => 0.2907])
         ->push(['MXN' => 0.22907]);
 
-
     $component = Livewire::test(PriceTicker::class);
 
     $settings = Settings::all();

@@ -15,7 +15,9 @@ final class PriceTicker extends Component
     protected $listeners = ['currencyChanged' => 'setValues'];
 
     public string $price;
+
     public string $from;
+
     public string $to;
 
     public function mount(): void
@@ -26,8 +28,8 @@ final class PriceTicker extends Component
     public function setValues()
     {
         $this->price = number_format(CryptoCompare::price(Network::currency(), Settings::currency()), 2);
-        $this->from = Network::currency();
-        $this->to = Settings::currency();
+        $this->from  = Network::currency();
+        $this->to    = Settings::currency();
     }
 
     public function render(): View
