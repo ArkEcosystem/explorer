@@ -21,11 +21,11 @@ final class NavbarSettings extends Component
     public function updatedState(): void
     {
         $originalCurrency = Arr::get(Settings::all(), 'currency');
-        $newCurrency = Arr::get($this->state, 'currency');
+        $newCurrency      = Arr::get($this->state, 'currency');
 
         Session::put('settings', json_encode($this->state));
 
-        if ($originalCurrency != $newCurrency) {
+        if ($originalCurrency !== $newCurrency) {
             $this->emit('currencyChanged', $newCurrency);
         }
     }
