@@ -12,7 +12,7 @@ use Livewire\Component;
 
 final class PriceTicker extends Component
 {
-    protected $listeners = ['currencyChanged' => 'setValues'];
+    protected Array $listeners = ['currencyChanged' => 'setValues'];
 
     public string $price;
     public string $from;
@@ -23,7 +23,7 @@ final class PriceTicker extends Component
         $this->setValues();
     }
 
-    public function setValues()
+    public function setValues(): void
     {
         $this->price = number_format(CryptoCompare::price(Network::currency(), Settings::currency()), 2);
         $this->from = Network::currency();
