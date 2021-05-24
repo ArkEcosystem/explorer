@@ -1,12 +1,12 @@
 <div class="flex flex-col border-2 rounded-lg border-theme-secondary-300 dark:border-theme-secondary-800">
-    <div class="px-8 py-6 bg-black dark:bg-theme-secondary-900 @if (isset($bottom)) rounded-t-lg @else rounded-lg @endif">
-        <div class="flex flex-col {{ $isBlockPage ?? false ? 'md:flex-row' : 'space-y-8 lg:flex-row' }} lg:space-y-0 justify-between">
-            <div class="flex md:space-x-4">
+    <div class="px-8 py-6 bg-black dark:bg-theme-secondary-900 overflow-auto @if (isset($bottom)) rounded-t-lg @else rounded-lg @endif">
+        <div class="flex flex-col overflow-auto {{ $isBlockPage ?? false ? 'lg:flex-row' : 'space-y-8 lg:flex-row' }} lg:space-y-0 justify-between">
+            <div class="flex overflow-auto md:space-x-4">
                 <div class="items-center hidden md:flex">
                     {!! $logo !!}
                 </div>
 
-                <div class="flex flex-col justify-between flex-1 min-w-0 space-y-4 font-semibold lg:ml-4 md:space-y-0">
+                <div class="flex flex-col justify-between flex-1 min-w-0 space-y-4 overflow-auto font-semibold lg:ml-4 md:space-y-0">
                     <div class="flex text-sm leading-tight text-theme-secondary-600 dark:text-theme-secondary-700">{{ $title }}</div>
 
                     <div class="flex items-center space-x-2 leading-tight">

@@ -14,15 +14,15 @@
             </x-slot>
 
             <x-slot name="extension">
-                <div class="flex items-center mt-6 space-x-2 text-theme-secondary-400 md:mt-0">
+                <div class="flex items-center mt-6 space-x-2 text-theme-secondary-400 lg:mt-0 lg:ml-3">
                     @if ($block->previousBlockUrl())
-                        <a href="{{ $block->previousBlockUrl() }}" class="flex flex-1 justify-center items-center px-4 h-11 rounded cursor-pointer bg-theme-secondary-800 hover:bg-theme-secondary-700 transition-default md:flex-none">
+                        <a href="{{ $block->previousBlockUrl() }}" class="flex items-center justify-center flex-1 px-4 rounded cursor-pointer h-11 bg-theme-secondary-800 hover:bg-theme-secondary-700 transition-default lg:flex-none">
                             <x-ark-icon name="chevron-left" size="sm" />
                         </a>
                     @endif
 
                     @if ($block->nextBlockUrl())
-                        <a href="{{ $block->nextBlockUrl() }}" class="flex flex-1 justify-center items-center px-4 h-11 rounded cursor-pointer bg-theme-secondary-800 hover:bg-theme-secondary-700 transition-default md:flex-none">
+                        <a href="{{ $block->nextBlockUrl() }}" class="flex items-center justify-center flex-1 px-4 rounded cursor-pointer h-11 bg-theme-secondary-800 hover:bg-theme-secondary-700 transition-default lg:flex-none">
                             <x-ark-icon name="chevron-right" size="sm" />
                         </a>
                     @endif
@@ -30,16 +30,18 @@
             </x-slot>
 
             <x-slot name="bottom">
-                <div class="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-4">
+                <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 xl:grid-cols-4">
                     <x-general.entity-header-item
                         :title="trans('pages.block.generated_by')"
                         :avatar="$block->username()"
                         :text="$block->username()"
+                        icon-size="md"
                         :url="route('wallet', $block->delegate()->address)"
                     />
                     <x-general.entity-header-item
                         :title="trans('pages.block.transactions')"
-                        icon="exchange"
+                        icon="app-transactions"
+                        icon-size="md"
                         :text="$block->transactionCount()"
                     />
                     <x-general.entity-header-item
@@ -51,7 +53,7 @@
                         </x-slot>
                     </x-general.entity-header-item>
 
-                    <x-general.entity-header-item icon="app-reward">
+                    <x-general.entity-header-item icon="app-reward" icon-size="md">
                         <x-slot name="title">
                             <span data-tippy-content="@lang('pages.block.total_rewards_tooltip', [$block->reward()])">
                                 @lang('pages.block.total_rewards')

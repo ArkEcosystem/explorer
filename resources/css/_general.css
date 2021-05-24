@@ -165,7 +165,7 @@ body {
     @apply border-0;
 }
 .navbar-settings-option-with-border {
-    @apply navbar-settings-option border-b border-dashed pb-6;
+    @apply pb-6 border-b border-dashed navbar-settings-option;
 }
 .dark .navbar-settings-option {
     @apply border-theme-secondary-800;
@@ -307,7 +307,7 @@ body {
     @apply border-theme-secondary-800;
 }
 
-@screen md {
+@screen sm {
     .entity-header-item:nth-child(odd) {
         @apply border-r border-theme-secondary-300;
     }
@@ -370,7 +370,7 @@ body {
 }
 
 .transaction-filter-button {
-    @apply w-full font-semibold text-left p-3 text-theme-secondary-900;
+    @apply w-full p-3 font-semibold text-left text-theme-secondary-900;
 }
 .dark .transaction-filter-button {
     @apply text-theme-secondary-200;
