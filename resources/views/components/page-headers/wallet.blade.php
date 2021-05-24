@@ -11,7 +11,7 @@
         <x-slot name="extension">
             @php($vote = $wallet->vote())
 
-            <div class="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-4">
+            <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 xl:grid-cols-4">
                 <x-general.entity-header-item
                     :title="trans('pages.wallet.voting_for')"
                     :avatar="$vote->address()"
