@@ -1,11 +1,5 @@
 /* purgecss start ignore */
 .table-container table.sticky-headers th {
-    top: 80px;
-}
-
-@screen lg {
-    .table-container table.sticky-headers th {
-        top: 96px;
-    }
+    top: 84px;
 }
 /* purgecss end ignore */
