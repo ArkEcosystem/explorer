@@ -1,10 +1,10 @@
-@component('layouts.app', ['containerClass' => 'flex items-center'])
+@component('layouts.app', ['containerChildClass' => 'w-full bg-white dark:bg-theme-secondary-900 flex-grow flex items-center justify-center'])
     @push('metatags')
         <meta property="og:title" content="404 - Error | ARK Documentation" />
     @endpush
 
     @section('content')
-        <div class="flex flex-col justify-center items-center">
+        <div class="flex flex-col items-center justify-center ">
             <img src="/images/errors/404_entity.svg" class="max-w-sm dark:hidden"/>
             <img src="/images/errors/404_entity_dark.svg" class="hidden max-w-sm dark:block"/>
             <div class="mt-8 text-lg font-semibold text-center text-theme-secondary-900 dark:text-theme-secondary-600">
@@ -17,7 +17,7 @@
                 </div>
             @endif
 
-            <div class="flex flex-col mt-8 space-y-3 w-full sm:w-auto sm:space-x-3 sm:block sm:space-y-0">
+            <div class="flex flex-col w-full mt-8 space-y-3 sm:w-auto sm:space-x-3 sm:block sm:space-y-0">
                 <a href="{{ route('home') }}" class="button-primary">@lang('menus.home')</a>
                 <a href="{{ url()->current() }}" class="button-secondary">@lang('general.reload')</a>
             </div>
