@@ -296,21 +296,6 @@ body {
     @apply items-center;
 }
 
-/* Entity Header */
-.entity-header > div > div {
-    @apply h-11 h-full;
-}
-
-.entity-header > div:last-child > div {
-    @apply border-r-0 border-none;
-}
-
-@screen sm {
-    .entity-header > div:nth-child(3) > div {
-        @apply border-r-0 border-none;
-    }
-}
-
 /* Entity Header Item */
 .entity-header-item {
     @apply flex;
@@ -322,7 +307,7 @@ body {
     @apply border-theme-secondary-800;
 }
 
-@screen sm {
+@screen md {
     .entity-header-item:nth-child(odd) {
         @apply border-r border-theme-secondary-300;
     }

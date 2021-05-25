@@ -54,7 +54,7 @@
                         <x-slot name="text">
                             @if($isResigned)
                                 <span class="text-theme-danger-400">@lang('pages.delegates.resigned')</span>
-                            @elseif($vote->rank() > 51)
+                            @elseif($vote->rank() > Network::delegateCount())
                                 <span class="text-theme-secondary-500">@lang('pages.delegates.standby')</span>
                             @else
                                 <span class="text-theme-success-600">@lang('pages.delegates.active')</span>
