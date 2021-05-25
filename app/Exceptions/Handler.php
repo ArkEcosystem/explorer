@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace App\Exceptions;
 
-use Exception;
-use Throwable;
-use Illuminate\Http\Request;
-use App\Http\Middleware\EncryptCookies;
-use Illuminate\Http\Response as HttpResponse;
-use Symfony\Component\HttpFoundation\Response;
-use Illuminate\Session\Middleware\StartSession;
 use App\Exceptions\Contracts\EntityNotFoundInterface;
+use App\Http\Middleware\EncryptCookies;
 use Closure;
+use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response as HttpResponse;
+use Illuminate\Session\Middleware\StartSession;
+use Symfony\Component\HttpFoundation\Response;
+use Throwable;
 
 final class Handler extends ExceptionHandler
 {
