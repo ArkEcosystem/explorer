@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire;
 
+use App\Actions\CacheNetworkSupply;
+use App\Models\Wallet;
+use App\Services\Cache\NetworkCache;
+use App\Services\NumberFormatter;
 use Illuminate\View\View;
 use Livewire\Component;
 
@@ -11,12 +15,10 @@ final class StatsHighlights extends Component
 {
     public function render(): View
     {
-        $voting = $this->getVoting();
-
         return view('livewire.stats-highlights', [
+            'votingPercent' => $this->getVotingPercent(),
+            'votingValue' => $this->getVotingValue(),
             'totalSupply' => $this->getTotalSupply(),
-            'votingPercent' => data_get($voting, 'percent'),
-            'votingValue' => data_get($voting, 'value'),
             'delegates' => $this->getDelegates(),
             'wallets' => $this->getWallets(),
         ]);
@@ -24,28 +26,36 @@ final class StatsHighlights extends Component
 
     private function getTotalSupply(): string
     {
-        // @TODO
-        return number_format(155558312).' ARK';
+        $supply = CacheNetworkSupply::execute() / 1e8;
+
+        return NumberFormatter::currency($supply, 'ARK');
     }
 
-    private function getVoting(): array
+    private function getVotingPercent(): string
     {
-        // @TODO
-        return [
-            'percent' => number_format(74.08, 2).'%',
-            'value' => number_format(84235364.45, 2).' ARK',
-        ];
+        $votesPercent = (new NetworkCache())->getVotesPercentage();
+
+        return NumberFormatter::percentage($votesPercent);
+    }
+
+    private function getVotingValue(): string
+    {
+        $votesValue = (new NetworkCache())->getVotesCount();
+
+        return NumberFormatter::currency($votesValue, 'ARK');
     }
 
     private function getDelegates(): string
     {
-        // @TODO
-        return number_format(1171);
+        $registeredDelegates = (new NetworkCache())->getDelegateRegistrationCount();
+
+        return NumberFormatter::number($registeredDelegates);
     }
 
     private function getWallets(): string
     {
-        // @TODO
-        return number_format(150235);
+        $wallets = Wallet::count();
+
+        return NumberFormatter::number($wallets);
     }
 }
