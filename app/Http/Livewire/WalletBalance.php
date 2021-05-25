@@ -8,19 +8,25 @@ use App\Models\Wallet;
 use App\ViewModels\WalletViewModel;
 use Illuminate\View\View;
 use Livewire\Component;
+use App\Facades\Wallets;
 
 final class WalletBalance extends Component
 {
-    public Wallet $wallet;
+    public string $walletAddress;
 
     public function mount(Wallet $wallet): void
     {
-        $this->wallet = $wallet;
+        $this->walletAddress = $wallet->address;
     }
 
-    public function getWalletView(): WalletViewModel
+    private function getWallet(): Wallet
     {
-        return new WalletViewModel($this->wallet);
+        return Wallets::findByAddress($this->walletAddress);
+    }
+
+    private function getWalletView(): WalletViewModel
+    {
+        return new WalletViewModel($this->getWallet());
     }
 
     public function render(): View
