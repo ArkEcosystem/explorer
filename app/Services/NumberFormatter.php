@@ -58,9 +58,9 @@ final class NumberFormatter
         }
 
         if ($value < 1000000) {
-            return sprintf('%d%s', floor($value / 1000), 'K');
+            return sprintf('%d%s', number_format($value / 1000, 3), 'K');
         }
 
-        return sprintf('%0.2f%s', round($value / 1000000, 2), 'M');
+        return sprintf('%0.2f%s', number_format($value / 1000000, 6), 'M');
     }
 }
