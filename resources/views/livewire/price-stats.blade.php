@@ -1,12 +1,12 @@
 <div
-    class="flex justify-between flex-grow h-full ml-3"
+    class="flex flex-grow justify-between ml-3 h-full"
     @unless ($placeholder)
         wire:poll.60s
     @endunless
 >
     @unless ($placeholder)
         <div class="flex flex-col justify-between h-full">
-            <a class="pl-3 text-sm font-semibold leading-none border-l whitespace-nowrap link border-theme-secondary-300 dark:border-theme-secondary-800" href="#">
+            <a class="pl-3 text-sm font-semibold leading-none whitespace-nowrap border-l link border-theme-secondary-300 dark:border-theme-secondary-800" href="#">
                 @lang('actions.view_statistics')
             </a>
 
@@ -33,7 +33,7 @@
     @endunless
 
 
-    <div class="justify-end flex-grow hidden lg:flex" >
+    <div class="hidden flex-grow justify-end lg:flex" >
         <div
             class="ml-6"
             style="width: 120px; height: 40px;"
