@@ -30,13 +30,6 @@
             "
             @search-type-changed.window="searchType = $event.detail"
         >
-        <span class="dark:bg-theme-secondary-300"></span>
-        <span class="dark:bg-theme-secondary-400"></span>
-        <span class="dark:bg-theme-secondary-500"></span>
-        <span class="dark:bg-theme-secondary-600"></span>
-        <span class="dark:bg-theme-secondary-700"></span>
-        <span class="dark:bg-theme-secondary-800"></span>
-        <span class="dark:bg-theme-secondary-900"></span>
             <div wire:click.self="closeModal" class="fixed inset-0 opacity-70 dark:opacity-80 bg-theme-secondary-900 dark:bg-theme-secondary-800"></div>
 
             <div class="relative flex flex-col w-full overflow-auto md:overflow-visible content-container-full-width md:px-8">
