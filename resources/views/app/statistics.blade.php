@@ -1,14 +1,14 @@
 @component('layouts.app', ['isLanding' => true, 'fullWidth' => true])
 
     @section('content')
-        {{--highlights--}}
+        <x-general.header>
+            <livewire:stats-highlights />
+        </x-general.header>
 
-        <div class="bg-white dark:bg-theme-secondary-900">
-            <x-ark-container>
-                {{--insights--}}
-                {{--chart--}}
-            </x-ark-container>
-        </div>
+        <x-ark-container class="bg-white dark:bg-theme-secondary-900">
+            {{--@TODO: <livewire:stats-insights />--}}
+            {{--@TODO: <livewire:stats-chart />--}}
+        </x-ark-container>
     @endsection
 
 @endcomponent
