@@ -4,14 +4,16 @@ declare(strict_types=1);
 
 namespace App\Exceptions;
 
-use App\Exceptions\Contracts\EntityNotFoundInterface;
 use Exception;
-use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Throwable;
 use Illuminate\Http\Request;
+use App\Http\Middleware\EncryptCookies;
 use Illuminate\Http\Response as HttpResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Throwable;
+use Illuminate\Session\Middleware\StartSession;
+use App\Exceptions\Contracts\EntityNotFoundInterface;
+use Closure;
+use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 final class Handler extends ExceptionHandler
 {
@@ -62,11 +64,16 @@ final class Handler extends ExceptionHandler
     {
         if ($this->shouldShowEntity404Page($request, $exception)) {
             return $this->getNotFoundEntityResponse($exception);
-        } elseif ($this->shouldShow404Page($request, $exception)) {
-            return redirect()->route('error.404', ['url' => url()->current()]);
         }
 
-        return parent::render($request, $exception);
+        return $this->withSession($request, fn ($request) => parent::render($request, $exception));
+    }
+
+    private function withSession(Request $request, Closure $next): Response
+    {
+        return app(EncryptCookies::class)->handle($request, function ($request) use ($next) {
+            return app(StartSession::class)->handle($request, fn ($request) => $next($request));
+        });
     }
 
     private function shouldShowEntity404Page(Request $request, Throwable $exception): bool
@@ -86,16 +93,6 @@ final class Handler extends ExceptionHandler
         return response()->view('errors.404_entity', [
             'exception' => $expectedException,
         ], 404);
-    }
-
-    private function shouldShow404Page(Request $request, Throwable $exception): bool
-    {
-        $expectedException     = $this->prepareException($this->mapException($exception));
-        $mainNotFoundException = $expectedException->getPrevious();
-
-        return $this->isARegularGetRequest($request)
-            && $expectedException instanceof NotFoundHttpException
-            && ($mainNotFoundException === null || ! is_a($mainNotFoundException, EntityNotFoundInterface::class));
     }
 
     private function isARegularGetRequest(Request $request): bool
