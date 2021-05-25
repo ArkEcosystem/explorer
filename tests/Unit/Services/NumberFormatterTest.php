@@ -48,9 +48,13 @@ it('should format a number with a currency short notation if it is too large', f
 });
 
 it('should format a number with a K notation', function () {
+    assertMatchesSnapshot(NumberFormatter::currencyShortNotation(999));
     assertMatchesSnapshot(NumberFormatter::currencyShortNotation(1000));
     assertMatchesSnapshot(NumberFormatter::currencyShortNotation(10000));
     assertMatchesSnapshot(NumberFormatter::currencyShortNotation(100000));
+    assertMatchesSnapshot(NumberFormatter::currencyShortNotation(105999));
     assertMatchesSnapshot(NumberFormatter::currencyShortNotation(1000000));
     assertMatchesSnapshot(NumberFormatter::currencyShortNotation(10000000));
+    assertMatchesSnapshot(NumberFormatter::currencyShortNotation(100000000));
+    assertMatchesSnapshot(NumberFormatter::currencyShortNotation(104910000));
 });
