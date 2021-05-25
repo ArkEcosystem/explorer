@@ -40,7 +40,7 @@
             x-data="PriceChart(
                 {{ $historical->values()->toJson() }},
                 {{ $historical->keys()->toJson() }},
-                {{ $priceChange }},
+                {{ $priceChange === null ? 0 : $priceChange }},
                 {{ $placeholder ? 'true' : 'false' }},
                 {{ Settings::usesDarkTheme() ? 'true' : 'false' }},
                 '{{ time() }}'
