@@ -5,7 +5,7 @@
 <div class="bg-white dark:bg-theme-secondary-900">
     <x-ark-container container-class="flex">
         <div class="flex py-4 px-8 w-full rounded-lg border border-theme-secondary-300">
-            <div class="flex flex-col sm:flex-row w-full justify-between space-y-4 sm:space-y-0">
+            <div class="flex flex-col justify-between space-y-4 w-full sm:flex-row sm:space-y-0">
                 <div class="flex justify-start h-11 sm:h-auto">
                     <div class="flex md:hidden">
                         <x-general.entity-header-item
@@ -29,12 +29,12 @@
                     </div>
                 </div>
 
-                <div class="flex space-x-8 sm:space-x-4 h-11 sm:h-auto">
+                <div class="flex space-x-8 h-11 sm:space-x-4 sm:h-auto">
                     @if(! $isResigned)
                         <x-general.entity-header-item
                             :title="trans('pages.wallet.rank')"
                             without-icon
-                            content-class="sm:text-right sm:mr-2 pr-4 border-r border-theme-secondary-300 sm:border-r-0"
+                            content-class="pr-4 border-r sm:text-right sm:mr-2 border-theme-secondary-300 sm:border-r-0"
                         >
                             <x-slot name="text">
                                 @if ($isResigned)
