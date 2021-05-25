@@ -22,11 +22,11 @@
         </div>
 
         @if ($url)
-            <a href="{{ $url }}" class="flex leading-tight link mt-2">
-                <span class="truncate w-full lg:text-right">{{ $text }}</span>
+            <a href="{{ $url }}" class="flex mt-2 leading-tight link">
+                <span class="w-full truncate lg:text-right">{{ $text }}</span>
             </a>
         @else
-            <span class="leading-tight truncate text-theme-secondary-900 dark:text-theme-secondary-200 mt-2">{{ $text }}</span>
+            <span class="mt-2 leading-tight truncate text-theme-secondary-900 dark:text-theme-secondary-200">{{ $text }}</span>
         @endif
     </div>
 </div>

@@ -22,8 +22,8 @@
         @endphp
 
         <x-slot name="extension">
-            <div class="grid sm:grid-rows-2 lg:flex lg:justify-between w-full space-y-4 sm:space-y-4 lg:space-y-0">
-                <div class="grid grid-cols-1 sm:grid-cols-3 lg:flex space-y-4 sm:space-y-0 lg:space-x-5">
+            <div class="grid space-y-4 w-full sm:grid-rows-2 lg:flex lg:justify-between sm:space-y-4 lg:space-y-0">
+                <div class="grid grid-cols-1 space-y-4 sm:grid-cols-3 lg:flex sm:space-y-0 lg:space-x-5">
                     <x-general.header-entry
                         title="{{ trans('pages.wallet.delegate.rank') }} / {{ trans('pages.wallet.delegate.status') }}"
                     >
@@ -78,14 +78,14 @@
                     </x-general.header-entry>
                 </div>
 
-                <div class="grid grid-cols-1 sm:grid-cols-3 lg:flex space-y-4 sm:space-y-0 lg:space-x-5">
+                <div class="grid grid-cols-1 space-y-4 sm:grid-cols-3 lg:flex sm:space-y-0 lg:space-x-5">
                     <x-general.header-entry
                         :title="trans('pages.wallet.delegate.forged_blocks')"
                         :text="trans('general.see_all')"
                         :url="route('wallet.blocks', $wallet->address())"
                     >
                         <x-slot name="icon">
-                            <div class="w-0 mr-0 md:w-11 md:mr-2 lg:w-0 lg:mr-0"></div>
+                            <div class="mr-0 w-0 md:w-11 md:mr-2 lg:w-0 lg:mr-0"></div>
                         </x-slot>
                     </x-general.header-entry>
 
