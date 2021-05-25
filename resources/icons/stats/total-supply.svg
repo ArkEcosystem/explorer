@@ -1,9 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44">
-    <g fill="none" stroke="currentColor" stroke-width="2">
-        <circle vector-effect="non-scaling-stroke" cx="22" cy="22" r="22" stroke="none"/>
-        <circle vector-effect="non-scaling-stroke" cx="22" cy="22" r="21"/>
-    </g>
-    <path vector-effect="non-scaling-stroke" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M15.149 30.178s4.22-13.56 4.806-15.693 3.073-2.194 3.873 0 4.45 15.693 4.45 15.693"/>
-    <path vector-effect="non-scaling-stroke" fill="none" stroke="currentColor" stroke-width="2" d="M17.534 24.336h9.055"/>
-    <path vector-effect="non-scaling-stroke" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M22 30.178V25.1"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44"><g fill="none" stroke="currentColor" stroke-width="2"><circle vector-effect="non-scaling-stroke" cx="22" cy="22" r="22" stroke="none"/><circle vector-effect="non-scaling-stroke" cx="22" cy="22" r="21"/></g><path vector-effect="non-scaling-stroke" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M15.149 30.178s4.22-13.56 4.806-15.693 3.073-2.194 3.873 0 4.45 15.693 4.45 15.693"/><path vector-effect="non-scaling-stroke" fill="none" stroke="currentColor" stroke-width="2" d="M17.534 24.336h9.055"/><path vector-effect="non-scaling-stroke" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M22 30.178V25.1"/></svg>
