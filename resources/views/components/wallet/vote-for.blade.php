@@ -4,7 +4,7 @@
 
 <div class="bg-white dark:bg-theme-secondary-900">
     <x-ark-container container-class="flex">
-        <div class="flex py-4 px-8 w-full rounded-lg border border-theme-secondary-300">
+        <div class="flex py-4 px-8 w-full rounded-lg border border-theme-secondary-300 dark:border-theme-secondary-800">
             <div class="flex flex-col justify-between space-y-4 w-full sm:flex-row sm:space-y-0">
                 <div class="flex justify-start h-11 sm:h-auto">
                     <div class="flex md:hidden">
