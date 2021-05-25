@@ -3,12 +3,10 @@
     @section('content')
         {{--highlights--}}
 
-        <div class="bg-white dark:bg-theme-secondary-900">
-            <x-ark-container>
-                {{--insights--}}
-                {{--chart--}}
-            </x-ark-container>
-        </div>
+        <x-ark-container class="bg-white dark:bg-theme-secondary-900">
+            {{--@TODO: <livewire:stats-insights />--}}
+            <livewire:stats-chart />
+        </x-ark-container>
     @endsection
 
 @endcomponent
