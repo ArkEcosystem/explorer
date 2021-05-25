@@ -6,8 +6,6 @@ return [
 
     'network' => env('EXPLORER_NETWORK', 'development'),
 
-    'validate_wallets' => env('EXPLORER_VALIDATE_WALLETS', true),
-
     'networks' => [
         'production' => [
             'name'             => env('EXPLORER_NETWORK_NAME', 'ARK Public Network'),
