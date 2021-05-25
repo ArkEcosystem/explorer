@@ -8,7 +8,6 @@ return [
     'optional'                => 'Optional',
     'or'                      => 'or',
     'explorer'                => 'Explorer',
-    'filler'                  => '',
     'height'                  => 'Height',
     'network'                 => 'Network',
     'total_supply'            => 'Total Supply',
