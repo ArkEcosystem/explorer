@@ -197,10 +197,10 @@ return [
 
     'statistics' => [
         'highlights' => [
-            'total-supply' => 'Total Supply',
-            'voting' => 'Voting (:percent)',
+            'total-supply'         => 'Total Supply',
+            'voting'               => 'Voting (:percent)',
             'registered-delegates' => 'Registered Delegates',
-            'wallets' => 'Wallets',
+            'wallets'              => 'Wallets',
         ],
     ],
 

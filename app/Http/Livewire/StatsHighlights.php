@@ -17,10 +17,10 @@ final class StatsHighlights extends Component
     {
         return view('livewire.stats-highlights', [
             'votingPercent' => $this->getVotingPercent(),
-            'votingValue' => $this->getVotingValue(),
-            'totalSupply' => $this->getTotalSupply(),
-            'delegates' => $this->getDelegates(),
-            'wallets' => $this->getWallets(),
+            'votingValue'   => $this->getVotingValue(),
+            'totalSupply'   => $this->getTotalSupply(),
+            'delegates'     => $this->getDelegates(),
+            'wallets'       => $this->getWallets(),
         ]);
     }
 
