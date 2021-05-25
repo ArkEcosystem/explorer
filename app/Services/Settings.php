@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Services;
 
 use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Str;
 
 final class Settings
 {
