@@ -34,7 +34,7 @@
                         <x-general.entity-header-item
                             :title="trans('pages.wallet.rank')"
                             without-icon
-                            content-class="pr-4 border-r sm:text-right sm:mr-2 border-theme-secondary-300 sm:border-r-0 space-y-2"
+                            content-class="pr-4 space-y-2 border-r sm:text-right sm:mr-2 border-theme-secondary-300 sm:border-r-0"
                         >
                             <x-slot name="text">
                                 @if ($isResigned)
@@ -49,7 +49,7 @@
                     <x-general.entity-header-item
                         :title="trans('pages.wallet.status')"
                         without-icon
-                        content-class="sm:text-right space-y-2"
+                        content-class="space-y-2 sm:text-right"
                     >
                         <x-slot name="text">
                             @if($isResigned)
