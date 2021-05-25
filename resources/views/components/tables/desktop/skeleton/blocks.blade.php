@@ -7,11 +7,11 @@
             'general.block.height'       => 'number',
             'general.block.transactions' => 'number',
             'general.block.amount' => [
-                'name' => 'number',
+                'type' => 'number',
                 'lastOn' => 'lg',
             ],
             'general.block.fee'  => [
-                'name' => 'number',
+                'type' => 'number',
                 'responsive' => true,
             ],
         ]"
@@ -26,11 +26,11 @@
             'general.block.height'       => 'number',
             'general.block.transactions' => 'number',
             'general.block.amount' => [
-                'name' => 'number',
+                'type' => 'number',
                 'lastOn' => 'lg',
             ],
             'general.block.fee'  => [
-                'name' => 'number',
+                'type' => 'number',
                 'responsive' => true,
             ],
         ]"

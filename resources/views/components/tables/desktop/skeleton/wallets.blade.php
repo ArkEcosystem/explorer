@@ -4,11 +4,11 @@
         'general.wallet.address' => 'address',
         'general.wallet.info'    => 'text',
         'general.wallet.balance' => [
-            'name' => 'number',
+            'type' => 'number',
             'lastOn' => 'lg',
         ],
         'general.wallet.supply'  => [
-            'name' => 'number',
+            'type' => 'number',
             'responsive' => true,
         ],
     ]"

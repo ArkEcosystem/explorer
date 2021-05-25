@@ -23,13 +23,13 @@ final class TableSkeleton extends Component
         if ($this->device === 'desktop') {
             $headers = $this->items->map(function ($item): array {
                 return array_merge(
-                    ['component' => "tables.headers.{$this->device}.".$this->getName($item)],
+                    ['component' => "tables.headers.{$this->device}.".$this->getType($item)],
                     $this->getOptions($item)
                 );
             });
             $rows    = $this->items->values()->map(function ($item): array {
                 return array_merge(
-                    ['component' => "tables.rows.{$this->device}.skeletons.".$this->getName($item)],
+                    ['component' => "tables.rows.{$this->device}.skeletons.".$this->getType($item)],
                     $this->getOptions($item)
                 );
             });
@@ -37,7 +37,7 @@ final class TableSkeleton extends Component
             $headers = collect([]); // Mobile has no separate headers
             $rows    = $this->items->map(function ($item): array {
                 return array_merge(
-                    ['component' => "tables.rows.{$this->device}.skeletons.".$this->getName($item)],
+                    ['component' => "tables.rows.{$this->device}.skeletons.".$this->getType($item)],
                     $this->getOptions($item)
                 );
             });
@@ -50,13 +50,13 @@ final class TableSkeleton extends Component
         ]);
     }
 
-    private function getName(array | string $item): string
+    private function getType(array | string $item): string
     {
         if (is_string($item)) {
             return $item;
         }
 
-        return Arr::get($item, 'name', '');
+        return Arr::get($item, 'type', '');
     }
 
     private function getOptions(array | string $item): array

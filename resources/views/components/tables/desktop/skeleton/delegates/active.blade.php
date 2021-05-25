@@ -5,7 +5,7 @@
         'general.delegates.name'         => 'address',
         'general.delegates.status'       => 'status',
         'general.delegates.votes'  => [
-            'name' => 'number',
+            'type' => 'number',
             'responsive' => true,
         ],
         'general.delegates.productivity' => 'number'

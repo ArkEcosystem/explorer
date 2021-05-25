@@ -7,16 +7,16 @@
             'general.transaction.sender'        => 'address',
             'general.transaction.recipient'     => 'address',
             'general.transaction.amount'        => [
-                'name' => 'number',
+                'type' => 'number',
                 'lastOn' => 'xl',
             ],
             'general.transaction.fee' => [
-                'name' => 'number',
+                'type' => 'number',
                 'responsive' => true,
                 'breakpoint' => 'xl',
             ],
             'general.transaction.confirmations' => [
-                'name' => 'number',
+                'type' => 'number',
                 'responsive' => true,
                 'breakpoint' => 'xl',
             ]
@@ -31,11 +31,11 @@
             'general.transaction.sender'        => 'address',
             'general.transaction.recipient'     => 'address',
             'general.transaction.amount'        => [
-                'name' => 'number',
+                'type' => 'number',
                 'lastOn' => 'xl',
             ],
             'general.transaction.fee' => [
-                'name' => 'number',
+                'type' => 'number',
                 'responsive' => true,
                 'breakpoint' => 'xl',
             ],

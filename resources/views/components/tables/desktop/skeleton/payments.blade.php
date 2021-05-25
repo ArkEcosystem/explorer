@@ -2,11 +2,11 @@
     device="desktop"
     :items="[
         'general.transaction.recipient' => [
-            'name' => 'address',
+            'type' => 'address',
             'lastOn' => 'md',
         ],
         'general.transaction.amount'  => [
-            'name' => 'number',
+            'type' => 'number',
             'responsive' => true,
             'breakpoint' => 'md',
         ],

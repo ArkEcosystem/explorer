@@ -3,11 +3,11 @@
     :items="[
         'general.delegates.id'    => 'text',
         'general.delegates.name' => [
-            'name' => 'address',
+            'type' => 'address',
             'lastOn' => 'lg',
         ],
         'general.delegates.votes'  => [
-            'name' => 'number',
+            'type' => 'number',
             'responsive' => true,
         ],
     ]"
