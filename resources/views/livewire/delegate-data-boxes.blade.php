@@ -4,16 +4,17 @@
     </div>
 @else
     <div id="statistics-list" class="w-full" wire:poll.{{ Network::blockTime() }}s="pollStatistics" wire:key="poll_statistics_real">
-        <div class="flex w-full md:flex-col xl:flex-row md:space-y-4 xl:space-y-0 xl:space-x-4">
+        <div class="flex w-full md:flex-col xl:flex-row space-x-4 md:space-y-4 xl:space-y-0 xl:space-x-4">
             {{--TODO: Replace the text and progress of the 3 boxes below with real data once implemented--}}
             <div class="flex flex-row py-3 px-6 bg-white rounded-xl dark:bg-theme-secondary-900">
-                <div class="flex lg:w-1/2 xl:w-full">
+                <div class="flex w-full lg:w-1/2 xl:w-full">
                     <x-general.header-entry
                         title="Forging"
                         text="49"
+                        wrapper-class="border-r border-theme-secondary-300 dark:border-theme-secondary-800 pr-5"
                     >
                         <x-slot name="icon">
-                            <div class="flex items-center md:mr-2">
+                            <div class="flex items-center mr-2">
                                 <x-delegates.progress-circle
                                     circle-color="success-600"
                                     stroke-color="secondary-300"
@@ -28,10 +29,10 @@
                     <x-general.header-entry
                         title="Missed"
                         text="1"
-                        wrapper-class="ml-5"
+                        wrapper-class="border-r border-theme-secondary-300 dark:border-theme-secondary-800 pr-5 ml-5"
                     >
                         <x-slot name="icon">
-                            <div class="flex items-center md:mr-2">
+                            <div class="flex items-center mr-2">
                                 <x-delegates.progress-circle
                                     circle-color="warning-500"
                                     stroke-color="secondary-300"
@@ -47,10 +48,9 @@
                         title="Not Forging"
                         text="1"
                         wrapper-class="ml-5"
-                        without-border
                     >
                         <x-slot name="icon">
-                            <div class="flex items-center md:mr-2">
+                            <div class="flex items-center mr-2">
                                 <x-delegates.progress-circle
                                     circle-color="danger-400"
                                     stroke-color="secondary-300"
@@ -69,10 +69,9 @@
                     <x-general.header-entry
                         :title="trans('pages.delegates.statistics.block_count')"
                         :text="$statistics['blockCount']"
-                        without-border
                     >
                         <x-slot name="icon">
-                            <div class="circled-icon flex items-center md:mr-2">
+                            <div class="circled-icon flex items-center mr-2">
                                 <x-ark-icon class="rotate-90 text-theme-danger-900 border-theme-danger-900" name="app-block-id" />
                             </div>
                         </x-slot>
@@ -84,10 +83,9 @@
                         :title="trans('pages.delegates.statistics.next_slot')"
                         :text="$statistics['nextDelegate']->username()"
                         :url="route('wallet', $statistics['nextDelegate']->address())"
-                        without-border
                     >
                         <x-slot name="icon">
-                            <div class="flex items-center md:mr-2">
+                            <div class="flex items-center mr-2">
                                 <x-page-headers.icon-with-icon
                                     first-icon="app-forged"
                                     first-icon-colors="text-theme-secondary-900"
