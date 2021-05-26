@@ -1,12 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23.381 18.192">
-  <g id="multiple-neutral-2" transform="translate(1.692 -1.75)">
-    <circle id="Эллипс_9" data-name="Эллипс 9" cx="3.676" cy="3.676" r="3.676" transform="translate(2.977 2.75)" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
-    <path id="Контур_345" data-name="Контур 345" d="M7.5,13.5a6.015,6.015,0,0,1,6.015,6.015" transform="translate(-0.847 -1.17)" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
-    <circle id="Эллипс_10" data-name="Эллипс 10" cx="3.008" cy="3.008" r="3.008" transform="translate(12.759 5.423)" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
-    <path id="Контур_346" data-name="Контур 346" d="M15.813,15.031a4.924,4.924,0,0,1,6.627,4.618" transform="translate(-1.752 -1.304)" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
-    <g id="arrow-up" transform="translate(-0.277 12.908)">
-      <line id="Линия_23" data-name="Линия 23" y1="6.033" transform="translate(2.816 0)" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
-      <path id="Контур_341" data-name="Контур 341" d="M7.131,3.566,4.316.75,1.5,3.566" transform="translate(-1.5 -0.75)" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" fill-rule="evenodd"/>
-    </g>
-  </g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23.381 18.192"><g transform="translate(1.692 -1.75)" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle data-name="Эллипс 9" cx="3.676" cy="3.676" r="3.676" transform="translate(2.977 2.75)"/><path data-name="Контур 345" d="M6.653 12.33a6.015 6.015 0 016.015 6.015"/><circle data-name="Эллипс 10" cx="3.008" cy="3.008" r="3.008" transform="translate(12.759 5.423)"/><path data-name="Контур 346" d="M14.061 13.727a4.924 4.924 0 016.627 4.618"/><path data-name="Линия 23" d="M2.539 18.941v-6.033"/><path data-name="Контур 341" d="M5.354 15.724l-2.815-2.816-2.816 2.816"/></g></svg>
