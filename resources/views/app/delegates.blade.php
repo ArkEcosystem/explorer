@@ -1,8 +1,4 @@
 @component('layouts.app', ['isLanding' => true, 'fullWidth' => true])
-    @push('scripts')
-        <script src="{{ mix('js/swiper.js')}}"></script>
-    @endpush
-
     @section('content')
         <div class="dark:bg-theme-secondary-900">
             <x-ark-container container-class="flex flex-col space-y-5">
