@@ -16,11 +16,11 @@
 
 <x-general.card with-border class="flex flex-col space-y-6 md:flex-row md:space-y-0 md:space-x-6">
     <div class="space-y-3 md:w-1/2">
-        <h2 class="mb-0 leading-none font-semibold text-sm text-theme-secondary-900">
+        <h2 class="mb-0 text-sm font-semibold leading-none text-theme-secondary-900">
             {{--@TODO: link data--}}
             All-Time Transactions
         </h2>
-        <p class="font-bold text-lg text-theme-secondary-900">
+        <p class="text-lg font-bold text-theme-secondary-900">
             {{--@TODO: link data--}}
             321,634,035
         </p>
@@ -30,7 +30,7 @@
 
         <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between">
             <div>
-                <select class="-ml-1 appearance-none font-semibold text-sm text-theme-secondary-700">
+                <select class="-ml-1 text-sm font-semibold appearance-none text-theme-secondary-700">
                     {{--@TODO: styling and link data--}}
                     <option value="day">Day</option>
                     <option value="week" selected="selected">Week</option>
@@ -38,11 +38,11 @@
                     <option value="year">Year</option>
                     <option value="all-time">All-Time</option>
                 </select>
-                <h3 class="mt-4 mb-0 leading-none font-semibold text-sm text-theme-secondary-500">
+                <h3 class="mt-4 mb-0 text-sm font-semibold leading-none text-theme-secondary-500">
                     {{--@TODO: link data--}}
                     Transactions
                 </h3>
-                <p class="mt-2 font-semibold text-base text-theme-secondary-700">
+                <p class="mt-2 text-base font-semibold text-theme-secondary-700">
                     {{--@TODO: link data--}}
                     1,108,987
                 </p>
