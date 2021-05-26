@@ -1,6 +1,4 @@
 @props([
-    //'withoutBorder'    => false,
-    //'borderBreakpoint' => 'sm:',
     'icon'             => null,
     'tooltip'          => null,
     'url'              => null,
@@ -10,7 +8,6 @@
     'text',
 ])
 
-{{--<div class="flex @if (! $withoutBorder) {{ $borderBreakpoint }}border-r border-theme-secondary-300 dark:border-theme-secondary-800 sm:mr-5 lg:mr-0 lg:pr-5 @endif h-11 {{ $wrapperClass }}">--}}
 <div class="flex h-11 {{ $wrapperClass }}">
     @if ($icon)
         {{ $icon }}
