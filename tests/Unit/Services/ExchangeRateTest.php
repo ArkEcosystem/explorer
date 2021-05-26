@@ -5,7 +5,6 @@ declare(strict_types=1);
 use App\Services\Cache\CryptoCompareCache;
 use App\Services\ExchangeRate;
 use Carbon\Carbon;
-use App\Facades\Network;
 
 it('should convert with a historical rate', function () {
     (new CryptoCompareCache())->setPrices('USD', collect([]));
