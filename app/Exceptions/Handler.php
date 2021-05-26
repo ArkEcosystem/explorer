@@ -16,7 +16,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Throwable;
 use App\Http\Middleware\SubstituteBindings;
 use Illuminate\Session\SessionManager;
-use Spatie\ResponseCache\Middlewares\CacheResponse;
 
 final class Handler extends ExceptionHandler
 {
@@ -80,7 +79,6 @@ final class Handler extends ExceptionHandler
     {
         $except = [
             SubstituteBindings::class,
-            CacheResponse::class,
         ];
 
         $middlewares = collect(app(Kernel::class)->getMiddlewareGroups()['web'])
