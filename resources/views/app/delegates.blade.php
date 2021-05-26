@@ -8,7 +8,7 @@
             </x-ark-container>
         </div>
 
-        <x-ark-container class="bg-theme-secondary-100 dark:bg-theme-secondary-900 overflow-auto">
+        <x-ark-container class="overflow-auto bg-theme-secondary-100 dark:bg-theme-secondary-900">
             <livewire:delegate-data-boxes />
         </x-ark-container>
 
