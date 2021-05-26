@@ -30,6 +30,5 @@ it('should render the component', function (): void {
         ->assertSee(trans('pages.statistics.highlights.registered-delegates'))
         ->assertSee('1,171')
         ->assertSee(trans('pages.statistics.highlights.wallets'))
-        ->assertSee('10')
-    ;
+        ->assertSee('10');
 });
