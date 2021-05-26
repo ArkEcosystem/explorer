@@ -15,6 +15,8 @@ use Illuminate\Support\Collection;
 use Symfony\Component\HttpFoundation\Response;
 use Throwable;
 use App\Http\Middleware\SubstituteBindings;
+use Illuminate\Session\SessionManager;
+use Spatie\ResponseCache\Middlewares\CacheResponse;
 
 final class Handler extends ExceptionHandler
 {
@@ -67,6 +69,10 @@ final class Handler extends ExceptionHandler
             return $this->getNotFoundEntityResponse($exception);
         }
 
+        if ($this->sessionAlreadyStarted()) {
+            return parent::render($request, $exception);
+        }
+
         return $this->applyWebMiddlewares($request, fn ($request) => parent::render($request, $exception));
     }
 
@@ -74,6 +80,7 @@ final class Handler extends ExceptionHandler
     {
         $except = [
             SubstituteBindings::class,
+            CacheResponse::class,
         ];
 
         $middlewares = collect(app(Kernel::class)->getMiddlewareGroups()['web'])
@@ -91,7 +98,7 @@ final class Handler extends ExceptionHandler
         $middleware = $middlewares->shift();
 
         return app($middleware)
-            ->handle($request, fn ($request) => $this->applyMiddlewares($middlewares, $request, $next));
+            ->handle($request, fn ($req) => $this->applyMiddlewares($middlewares, $req, $next));
     }
 
     private function shouldShowEntity404Page(Request $request, Throwable $exception): bool
@@ -116,5 +123,10 @@ final class Handler extends ExceptionHandler
     private function isARegularGetRequest(Request $request): bool
     {
         return $request->method() === 'GET' && ! $request->expectsJson();
+    }
+
+    private function sessionAlreadyStarted(): bool
+    {
+        return app(SessionManager::class)->driver()->isStarted();
     }
 }
