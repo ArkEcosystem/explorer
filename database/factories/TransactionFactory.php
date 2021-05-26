@@ -37,7 +37,7 @@ final class TransactionFactory extends Factory
     public function transfer(): Factory
     {
         return $this->state(fn () => [
-            'type' => CoreTransactionTypeEnum::TRANSFER,
+            'type'       => CoreTransactionTypeEnum::TRANSFER,
             'type_group' => TransactionTypeGroupEnum::CORE,
         ]);
     }
