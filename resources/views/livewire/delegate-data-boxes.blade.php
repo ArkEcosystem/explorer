@@ -68,7 +68,7 @@
                         :text="$statistics['blockCount']"
                     >
                         <x-slot name="icon">
-                            <div class="circled-icon flex items-center mr-2 border-theme-secondary-900 dark:border-theme-secondary-600">
+                            <div class="flex items-center mr-2 circled-icon border-theme-secondary-900 dark:border-theme-secondary-600">
                                 <x-ark-icon class="rotate-90 text-theme-secondary-900 dark:text-theme-secondary-600" name="app-block-id" />
                             </div>
                         </x-slot>
