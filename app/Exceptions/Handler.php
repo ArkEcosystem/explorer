@@ -6,16 +6,16 @@ namespace App\Exceptions;
 
 use App\Exceptions\Contracts\EntityNotFoundInterface;
 use App\Http\Kernel;
+use App\Http\Middleware\SubstituteBindings;
 use Closure;
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response as HttpResponse;
+use Illuminate\Session\SessionManager;
 use Illuminate\Support\Collection;
 use Symfony\Component\HttpFoundation\Response;
 use Throwable;
-use App\Http\Middleware\SubstituteBindings;
-use Illuminate\Session\SessionManager;
 
 final class Handler extends ExceptionHandler
 {
@@ -82,7 +82,7 @@ final class Handler extends ExceptionHandler
         ];
 
         $middlewares = collect(app(Kernel::class)->getMiddlewareGroups()['web'])
-            ->filter(fn($middleware) => ! in_array($middleware, $except));
+            ->filter(fn ($middleware) => ! in_array($middleware, $except, true));
 
         return $this->applyMiddlewares($middlewares, $request, $next);
     }
