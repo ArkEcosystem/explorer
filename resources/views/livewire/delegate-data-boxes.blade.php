@@ -4,7 +4,7 @@
     </div>
 @else
     <div id="statistics-list" class="w-full" wire:poll.{{ Network::blockTime() }}s="pollStatistics" wire:key="poll_statistics_real">
-        <div class="flex w-full md:flex-col xl:flex-row space-x-4 md:space-x-0 xl:space-x-4 md:space-y-4 xl:space-y-0">
+        <div class="flex space-x-4 w-full md:flex-col xl:flex-row md:space-x-0 xl:space-x-4 md:space-y-4 xl:space-y-0">
             {{--TODO: Replace the text and progress of the 3 boxes below with real data once implemented--}}
             <div class="flex flex-row py-3 px-6 bg-white rounded-xl dark:bg-theme-secondary-900">
                 <div class="flex w-full lg:w-1/2 xl:w-full">
