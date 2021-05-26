@@ -49,7 +49,7 @@
         </div>
     </div>
 @else
-    <div id="statistics-list" class="w-full overflow-auto" wire:poll.{{ Network::blockTime() }}s="pollStatistics" wire:key="poll_statistics_real">
+    <div id="statistics-list" class="overflow-auto w-full" wire:poll.{{ Network::blockTime() }}s="pollStatistics" wire:key="poll_statistics_real">
         <div class="flex w-full md:flex-col xl:flex-row md:space-y-4 xl:space-y-0 xl:space-x-4">
             {{--TODO: Replace the text and progress of the 3 boxes below with real data once implemented--}}
             <div class="flex flex-row py-3 px-6 bg-white rounded-xl dark:bg-theme-secondary-900">
