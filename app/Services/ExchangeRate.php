@@ -29,7 +29,7 @@ final class ExchangeRate
         );
     }
 
-    private static function decimalsFor(string $currency): int
+    public static function decimalsFor(string $currency): int
     {
         if (static::isFiat($currency)) {
             return 2;
