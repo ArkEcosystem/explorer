@@ -13,6 +13,8 @@ use Livewire\Component;
 
 final class StatsHighlights extends Component
 {
+    private const CURRENCY = 'ARK';
+
     public function render(): View
     {
         return view('livewire.stats-highlights', [
@@ -28,7 +30,7 @@ final class StatsHighlights extends Component
     {
         $supply = CacheNetworkSupply::execute() / 1e8;
 
-        return NumberFormatter::currency($supply, 'ARK');
+        return NumberFormatter::currency($supply, self::CURRENCY);
     }
 
     private function getVotingPercent(): string
@@ -42,7 +44,7 @@ final class StatsHighlights extends Component
     {
         $votesValue = (new NetworkCache())->getVotesCount();
 
-        return NumberFormatter::currency($votesValue, 'ARK');
+        return NumberFormatter::currency($votesValue, self::CURRENCY);
     }
 
     private function getDelegates(): string
