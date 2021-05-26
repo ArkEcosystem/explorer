@@ -13,7 +13,7 @@ it('should show the balance of the wallet', function () {
         Carbon::now()->format('Y-m-d') => 10,
     ]));
 
-    $wallet = Wallet::factory()->create(['balance' => 123456]);
+    $wallet = Wallet::factory()->create(['balance' => 125456]);
 
-    Livewire::test(WalletBalance::class, ['wallet' => $wallet])->assertSee('0.0123456 USD');
+    Livewire::test(WalletBalance::class, ['wallet' => $wallet])->assertSee('0.01 USD');
 });
