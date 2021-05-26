@@ -42,7 +42,7 @@ final class ExchangeRate
     {
         $cryptoCurrencies = (new ReflectionClass(CryptoCurrencies::class))->getConstants();
 
-        return ! in_array($currency, $cryptoCurrencies);
+        return ! in_array($currency, $cryptoCurrencies, true);
     }
 
     private static function timestamp(int $timestamp): Carbon
