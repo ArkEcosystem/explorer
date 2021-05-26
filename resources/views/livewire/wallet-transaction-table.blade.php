@@ -61,7 +61,7 @@
                 </div>
             </x-slot>
 
-            <div class="items-center justify-center block py-3 overflow-y-scroll dropdown-scrolling">
+            <div class="items-center justify-center block py-3 overflow-y-scroll">
                 <a
                     wire:click="$set('state.direction', 'all');"
                     @click="direction = 'all'"
