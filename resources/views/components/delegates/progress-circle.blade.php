@@ -2,7 +2,6 @@
     'radius' => '25',
     'stroke' => '2',
     'circleColor' => null,
-    'strokeColor' => 'secondary-200',
     'progress' => '25',
 ])
 
@@ -20,10 +19,9 @@ $strokeDashoffset = $circumference - $progress / 100 * $circumference;
     <svg
         height="{{ $radius * 2}}"
         width="{{ $radius * 2}}"
-        class="absolute"
+        class="absolute forging-status"
     >
         <circle
-            stroke="var(--theme-color-{{ $strokeColor }})"
             fill="transparent"
             stroke-dasharray="{{ $circumference }} {{ $circumference }}"
             stroke-width="{{ $stroke }}"

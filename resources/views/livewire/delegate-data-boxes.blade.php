@@ -17,7 +17,6 @@
                             <div class="flex items-center mr-2">
                                 <x-delegates.progress-circle
                                     circle-color="success-600"
-                                    stroke-color="secondary-300"
                                     progress="98"
                                 >
                                     <x-ark-icon class="rotate-90 text-theme-success-600 border-theme-success-600" name="checkmark-smooth" size="sm" />
@@ -35,7 +34,6 @@
                             <div class="flex items-center mr-2">
                                 <x-delegates.progress-circle
                                     circle-color="warning-500"
-                                    stroke-color="secondary-300"
                                     progress="1"
                                 >
                                     <x-ark-icon class="rotate-90 text-theme-warning-500 border-theme-warning-500" name="pause" size="xs" />
@@ -53,7 +51,6 @@
                             <div class="flex items-center mr-2">
                                 <x-delegates.progress-circle
                                     circle-color="danger-400"
-                                    stroke-color="secondary-300"
                                     progress="1"
                                 >
                                     <x-ark-icon class="rotate-90 text-theme-danger-400 border-theme-danger-400" name="cross" size="xs" />
@@ -71,8 +68,8 @@
                         :text="$statistics['blockCount']"
                     >
                         <x-slot name="icon">
-                            <div class="circled-icon flex items-center mr-2">
-                                <x-ark-icon class="rotate-90 text-theme-danger-900 border-theme-danger-900" name="app-block-id" />
+                            <div class="circled-icon flex items-center mr-2 border-theme-secondary-900 dark:border-theme-secondary-600">
+                                <x-ark-icon class="rotate-90 text-theme-secondary-900 dark:text-theme-secondary-600" name="app-block-id" />
                             </div>
                         </x-slot>
                     </x-general.header-entry>
