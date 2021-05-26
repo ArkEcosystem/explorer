@@ -23,7 +23,7 @@
             <div class="bg-white border-t border-theme-secondary-300 dark:border-theme-secondary-800 dark:bg-theme-secondary-900">
                 <x-ark-container>
                     <div id="transaction-list" class="w-full">
-                        <div class="relative flex items-end justify-between mb-8">
+                        <div class="flex relative justify-between items-end mb-8">
                             <h4>@lang('pages.block.transactions')</h4>
                         </div>
 
