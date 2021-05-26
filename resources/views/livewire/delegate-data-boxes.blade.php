@@ -72,7 +72,7 @@
                         without-border
                     >
                         <x-slot name="icon">
-                            <div class="circled-icon flex items-center md:mr-2">
+                            <div class="flex items-center circled-icon md:mr-2">
                                 <x-ark-icon class="rotate-90 text-theme-danger-900 border-theme-danger-900" name="app-block-id" />
                             </div>
                         </x-slot>
