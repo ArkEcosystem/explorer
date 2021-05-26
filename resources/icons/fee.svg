@@ -1,1 +1,10 @@
-<svg version="1.1" id="Слой_1" xmlns="http://www.w3.org/2000/svg" x="0" y="0" viewBox="0 0 20.7 20.7" xml:space="preserve"><style>.monitor-st0{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}</style><g id="monitor" transform="translate(-348.498 -1689.998)"><g id="Group_169" transform="translate(349.498 1690.998)"><g id="analytics-pie-1"><path id="Shape_1038" class="monitor-st0" d="M10.7 0v8h8c0-4.4-3.6-8-8-8z"/><path id="Shape_1039" class="monitor-st0" d="M8 2.7c-4.4 0-8 3.6-8 8s3.6 8 8 8 8-3.6 8-8H8v-8z"/></g></g></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21.275 21.275">
+  <g id="Business-Products_Analytics_analytics-pie-1" data-name="Business-Products / Analytics / analytics-pie-1" transform="translate(-348.498 -1689.998)">
+    <g id="Group_169" data-name="Group 169" transform="translate(349.498 1690.998)">
+      <g id="analytics-pie-1">
+        <path id="Shape_1038" data-name="Shape 1038" d="M361.5,1691v8.261h8.261A8.261,8.261,0,0,0,361.5,1691Z" transform="translate(-350.484 -1690.998)" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        <path id="Shape_1039" data-name="Shape 1039" d="M356.522,1694.09a8.261,8.261,0,0,0,1.237,16.429,8.339,8.339,0,0,0,8.2-7.266" transform="translate(-349.498 -1691.245)" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+      </g>
+    </g>
+  </g>
+</svg>

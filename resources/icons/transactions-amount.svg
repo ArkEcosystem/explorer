@@ -1,1 +1,13 @@
-<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0" y="0" viewBox="0 0 21.5 18.1" xml:space="preserve"><style>.votes-st0{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}</style><g id="votes" transform="translate(-636 -1027.25)"><g id="Group_123" transform="translate(636.75 1028)"><g id="crypto-currency-bitcoin-stack-coins"><path id="Oval_38" class="votes-st0" d="M15.4 15.3c2.5 0 4.6-2 4.6-4.6 0-2.5-2-4.6-4.6-4.6-2.5 0-4.6 2-4.6 4.6s2.1 4.6 4.6 4.6z"/><path id="Shape_843" class="votes-st0" d="M6.9 12.4H2.1c-.4 0-.7.3-.7.7v2.8c0 .4.3.7.7.7H9"/><path id="Shape_844" class="votes-st0" d="M7.6 8.3H3.5c-.4 0-.7.3-.7.7v2.8c0 .4.3.7.7.7H7"/><path id="Shape_845" class="votes-st0" d="M9.7 4.1h-9c-.4 0-.7.4-.7.7v2.8c0 .4.3.7.7.7h6.9"/><path id="Shape_846" class="votes-st0" d="M12.4 3.5V.7c0-.4-.3-.7-.7-.7H2.1c-.4 0-.7.3-.7.7v2.8c0 .4.3.7.7.7"/></g></g></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18.194 15.428">
+  <g id="Money-Payments-Finance_Crypto-Currencies_crypto-currency-bitcoin-stack-coins" data-name="Money-Payments-Finance / Crypto-Currencies / crypto-currency-bitcoin-stack-coins" transform="translate(-635.75 -1027)">
+    <g id="Group_123" data-name="Group 123" transform="translate(636.75 1028)">
+      <g id="crypto-currency-bitcoin-stack-coins">
+        <path id="Oval_38" data-name="Oval 38" d="M650.431,1040.361a3.181,3.181,0,1,0-3.181-3.181A3.181,3.181,0,0,0,650.431,1040.361Z" transform="translate(-637.417 -1027.933)" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        <path id="Shape_843" data-name="Shape 843" d="M642.726,1041.5H638.81a.56.56,0,0,0-.56.56v2.238a.56.56,0,0,0,.56.559h5.6" transform="translate(-637.131 -1031.429)" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        <path id="Shape_844" data-name="Shape 844" d="M643.667,1037H640.31a.56.56,0,0,0-.56.56v2.238a.56.56,0,0,0,.56.559h2.8" transform="translate(-637.512 -1030.286)" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        <path id="Shape_845" data-name="Shape 845" d="M644.583,1032.5H637.31a.56.56,0,0,0-.56.56v2.238a.56.56,0,0,0,.56.559h5.6" transform="translate(-636.75 -1029.143)" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        <path id="Shape_846" data-name="Shape 846" d="M647.2,1030.8v-2.238a.56.56,0,0,0-.56-.56H638.81a.56.56,0,0,0-.56.56v2.238a.56.56,0,0,0,.56.559" transform="translate(-637.131 -1028)" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+      </g>
+    </g>
+  </g>
+</svg>

@@ -1,1 +1,12 @@
-<svg version="1.1" id="Слой_1" xmlns="http://www.w3.org/2000/svg" x="0" y="0" viewBox="0 0 25.3 19.7" xml:space="preserve"><style>.multi-payment-st0{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}</style><g id="multiple-neutral-2" transform="translate(1.338 -2)"><circle id="Эллипс_9" class="multi-payment-st0" cx="7.5" cy="6.9" r="4.1"/><path id="Контур_345" class="multi-payment-st0" d="M7.5 13.5c3.7 0 6.8 3 6.8 6.8"/><circle id="Эллипс_10" class="multi-payment-st0" cx="17.7" cy="9.1" r="3.4"/><path id="Контур_346" class="multi-payment-st0" d="M15.8 15.1c2.9-1.1 6 .4 7.1 3.3.2.6.3 1.3.3 1.9"/><g id="arrow-up" transform="translate(-1.777 13.399)"><path id="Линия_23" class="multi-payment-st0" d="M4.7 7.5V.8"/><path id="Контур_341" class="multi-payment-st0" d="M7.8 3.9L4.7.8 1.5 3.9"/></g></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23.381 18.192">
+  <g id="multiple-neutral-2" transform="translate(1.692 -1.75)">
+    <circle id="Эллипс_9" data-name="Эллипс 9" cx="3.676" cy="3.676" r="3.676" transform="translate(2.977 2.75)" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <path id="Контур_345" data-name="Контур 345" d="M7.5,13.5a6.015,6.015,0,0,1,6.015,6.015" transform="translate(-0.847 -1.17)" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <circle id="Эллипс_10" data-name="Эллипс 10" cx="3.008" cy="3.008" r="3.008" transform="translate(12.759 5.423)" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <path id="Контур_346" data-name="Контур 346" d="M15.813,15.031a4.924,4.924,0,0,1,6.627,4.618" transform="translate(-1.752 -1.304)" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <g id="arrow-up" transform="translate(-0.277 12.908)">
+      <line id="Линия_23" data-name="Линия 23" y1="6.033" transform="translate(2.816 0)" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+      <path id="Контур_341" data-name="Контур 341" d="M7.131,3.566,4.316.75,1.5,3.566" transform="translate(-1.5 -0.75)" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" fill-rule="evenodd"/>
+    </g>
+  </g>
+</svg>

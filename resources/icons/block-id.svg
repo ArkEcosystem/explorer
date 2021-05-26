@@ -1,1 +1,18 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22.7 22.7"><path d="M5.75 6.45h-4.3c-.4 0-.7-.4-.7-.7v-4.3c0-.4.3-.7.7-.7h5.7c.4 0 .7.3.7.7v2.8m0 14.2v2.8c0 .4-.3.7-.7.7h-5.7c-.4 0-.7-.3-.7-.7v-4.2c0-.4.3-.7.7-.7h4.3m9.2-12.1v-2.8c0-.4.3-.7.7-.7h5.7c.4 0 .7.3.7.7v4.3c0 .4-.3.7-.7.7h-4.2m-.1 9.9h4.2c.4 0 .7.3.7.7v4.2c0 .4-.3.7-.7.7h-5.7c-.4 0-.7-.3-.7-.7v-2.8m-4.2-15.6h1.4m-1.4 17.7h1.4m-8.5-11.3v.7m0 2.8v.7m15.6-4.2v.7m0 2.8v.7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="2" stroke-linejoin="round"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.25 19.25">
+  <g id="Money-Payments-Finance_Crypto-Currencies_crypto-currency-bitcoin-monitor-mining" data-name="Money-Payments-Finance / Crypto-Currencies / crypto-currency-bitcoin-monitor-mining" transform="translate(-347.75 -1024.75)">
+    <g id="Group_117" data-name="Group 117" transform="translate(348.75 1025.75)">
+      <g id="crypto-currency-bitcoin-monitor-mining">
+        <path id="Shape_789" data-name="Shape 789" d="M352.775,1030.35h-3.45a.575.575,0,0,1-.575-.575v-3.45a.575.575,0,0,1,.575-.575h4.6a.575.575,0,0,1,.575.575v2.3" transform="translate(-348.75 -1025.75)" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        <path id="Shape_790" data-name="Shape 790" d="M354.5,1043.975v2.3a.575.575,0,0,1-.575.575h-4.6a.575.575,0,0,1-.575-.575v-3.45a.575.575,0,0,1,.575-.575h3.45" transform="translate(-348.75 -1029.6)" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        <path id="Shape_791" data-name="Shape 791" d="M363.75,1028.625v-2.3a.575.575,0,0,1,.575-.575h4.6a.575.575,0,0,1,.575.575v3.45a.575.575,0,0,1-.575.575h-3.45" transform="translate(-352.25 -1025.75)" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        <path id="Shape_792" data-name="Shape 792" d="M365.475,1042.25h3.45a.575.575,0,0,1,.575.575v3.45a.575.575,0,0,1-.575.575h-4.6a.575.575,0,0,1-.575-.575v-2.3" transform="translate(-352.25 -1029.6)" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        <path id="Shape_793" data-name="Shape 793" d="M359.25,1028h1.15" transform="translate(-351.2 -1026.275)" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        <path id="Shape_794" data-name="Shape 794" d="M359.25,1046.75h1.15" transform="translate(-351.2 -1030.65)" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        <path id="Shape_795" data-name="Shape 795" d="M351.75,1034.75v.575" transform="translate(-349.45 -1027.85)" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        <path id="Shape_796" data-name="Shape 796" d="M351.75,1038.5v.575" transform="translate(-349.45 -1028.725)" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        <path id="Shape_797" data-name="Shape 797" d="M368.25,1034.75v.575" transform="translate(-353.3 -1027.85)" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        <path id="Shape_798" data-name="Shape 798" d="M368.25,1038.5v.575" transform="translate(-353.3 -1028.725)" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+      </g>
+    </g>
+  </g>
+</svg>
