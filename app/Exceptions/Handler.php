@@ -14,6 +14,7 @@ use Illuminate\Http\Response as HttpResponse;
 use Illuminate\Support\Collection;
 use Symfony\Component\HttpFoundation\Response;
 use Throwable;
+use App\Http\Middleware\SubstituteBindings;
 
 final class Handler extends ExceptionHandler
 {
@@ -71,20 +72,26 @@ final class Handler extends ExceptionHandler
 
     private function applyWebMiddlewares(Request $request, Closure $next): Response
     {
-        $middlewares = collect(app(Kernel::class)->getMiddlewareGroups()['web']);
+        $except = [
+            SubstituteBindings::class,
+        ];
+
+        $middlewares = collect(app(Kernel::class)->getMiddlewareGroups()['web'])
+            ->filter(fn($middleware) => ! in_array($middleware, $except));
 
         return $this->applyMiddlewares($middlewares, $request, $next);
     }
 
     private function applyMiddlewares(Collection $middlewares, Request $request, Closure $next): Response
     {
-        $middleware = $middlewares->pop();
-
-        if ($middleware) {
-            return app($middleware)->handle($request, fn ($request) => $this->applyMiddlewares($middlewares, $request, $next));
+        if ($middlewares->count() === 0) {
+            return $next($request);
         }
 
-        return $next($request);
+        $middleware = $middlewares->shift();
+
+        return app($middleware)
+            ->handle($request, fn ($request) => $this->applyMiddlewares($middlewares, $request, $next));
     }
 
     private function shouldShowEntity404Page(Request $request, Throwable $exception): bool
