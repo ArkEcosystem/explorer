@@ -15,8 +15,8 @@
         @endphp
 
         <x-slot name="extension">
-            <div class="grid space-y-4 w-full sm:grid-rows-2 lg:flex lg:justify-between sm:space-y-4 lg:space-y-0">
-                <div class="grid grid-cols-1 space-y-4 sm:grid-cols-3 lg:flex sm:space-y-0 lg:space-x-5 sm:h-11 lg:h-auto">
+            <div class="flex flex-col lg:flex-row w-full lg:justify-between sm:space-y-4 lg:space-y-0">
+                <div class="grid grid-cols-1 space-y-4 sm:grid-cols-3 lg:flex sm:space-y-0 lg:space-x-5">
                     <x-general.header-entry
                         title="{{ trans('pages.wallet.delegate.rank') }} / {{ trans('pages.wallet.delegate.status') }}"
                     >
@@ -73,7 +73,7 @@
                     </x-general.header-entry>
                 </div>
 
-                <div class="grid grid-cols-1 space-y-4 sm:grid-cols-3 lg:flex sm:space-y-0 lg:space-x-5 sm:h-11 lg:h-auto">
+                <div class="grid grid-cols-1 space-y-4 sm:grid-cols-3 lg:flex sm:space-y-0 lg:space-x-5">
                     <x-general.header-entry
                         :title="trans('pages.wallet.delegate.forged_blocks')"
                         :text="trans('general.see_all')"
