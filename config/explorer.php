@@ -38,7 +38,7 @@ return [
 
     'statistics' => [
 
-        /**
+        /*
          * Number of seconds to wait before refreshing the page.
          */
         'refreshInterval' => env('EXPLORER_STATISTICS_REFRESH_INTERVAL', '60'),

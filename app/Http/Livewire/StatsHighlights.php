@@ -15,11 +15,12 @@ use Livewire\Component;
 final class StatsHighlights extends Component
 {
     private string $currency = '';
+
     private string $refreshInterval = '';
 
     public function mount(): void
     {
-        $this->currency = Network::currency();
+        $this->currency        = Network::currency();
         $this->refreshInterval = (string) config('explorer.statistics.refreshInterval', '60');
     }
 
