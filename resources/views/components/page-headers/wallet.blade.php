@@ -15,7 +15,7 @@
         @endphp
 
         <x-slot name="extension">
-            <div class="flex flex-col w-full lg:flex-row lg:justify-between space-y-4 lg:space-y-0">
+            <div class="flex flex-col space-y-4 w-full lg:flex-row lg:justify-between lg:space-y-0">
                 <div class="grid grid-cols-1 space-y-4 sm:grid-cols-3 lg:flex sm:space-y-0 lg:space-x-5">
                     <x-general.header-entry
                         title="{{ trans('pages.wallet.delegate.rank') }} / {{ trans('pages.wallet.delegate.status') }}"
