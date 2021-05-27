@@ -14,21 +14,24 @@ use Livewire\Component;
 
 final class StatsHighlights extends Component
 {
-    private ?string $currency;
+    private string $currency = '';
+    private string $refreshInterval = '';
 
     public function mount(): void
     {
         $this->currency = Network::currency();
+        $this->refreshInterval = (string) config('explorer.statistics.refreshInterval', '60');
     }
 
     public function render(): View
     {
         return view('livewire.stats-highlights', [
-            'votingPercent' => $this->getVotingPercent(),
-            'votingValue'   => $this->getVotingValue(),
-            'totalSupply'   => $this->getTotalSupply(),
-            'delegates'     => $this->getDelegates(),
-            'wallets'       => $this->getWallets(),
+            'votingPercent'   => $this->getVotingPercent(),
+            'votingValue'     => $this->getVotingValue(),
+            'totalSupply'     => $this->getTotalSupply(),
+            'delegates'       => $this->getDelegates(),
+            'wallets'         => $this->getWallets(),
+            'refreshInterval' => $this->refreshInterval,
         ]);
     }
 
