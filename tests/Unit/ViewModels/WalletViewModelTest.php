@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 use App\Contracts\Network as Contract;
 use App\Enums\CoreTransactionTypeEnum;
-use App\Enums\MagistrateTransactionEntityActionEnum;
-use App\Enums\MagistrateTransactionTypeEnum;
 use App\Enums\TransactionTypeGroupEnum;
 use App\Models\Block;
 use App\Models\Transaction;
@@ -15,7 +13,6 @@ use App\Services\Cache\DelegateCache;
 use App\Services\Cache\NetworkCache;
 use App\Services\Cache\WalletCache;
 use App\ViewModels\WalletViewModel;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use function Spatie\Snapshots\assertMatchesSnapshot;
 use function Tests\configureExplorerDatabase;
