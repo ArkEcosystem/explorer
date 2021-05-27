@@ -7,8 +7,8 @@
         </div>
 
         <div class="flex flex-col">
-            <h2 class="text-sm font-semibold text-theme-secondary-500 dark:text-theme-secondary-700 whitespace-nowrap">{{ $title }}</h2>
-            <p class="font-semibold text-theme-secondary-700 dark:text-theme-secondary-200 whitespace-nowrap">{{ $value }}</p>
+            <h2 class="text-sm font-semibold whitespace-nowrap text-theme-secondary-500 dark:text-theme-secondary-700">{{ $title }}</h2>
+            <p class="font-semibold whitespace-nowrap text-theme-secondary-700 dark:text-theme-secondary-200">{{ $value }}</p>
         </div>
     </div>
 </x-general.card>
