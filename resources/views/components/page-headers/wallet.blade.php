@@ -59,7 +59,7 @@
                                 <span @if($isStandby)class="text-theme-secondary-500 dark:text-theme-secondary-700" @endif>
                                     {{--TODO: Change once productivity is properly implemented }}
                                     {{--<x-percentage>{{ $wallet->productivity() }}</x-percentage>--}}
-                                    @lang('generic.not-available')
+                                    <span class="text-theme-secondary-500 dark:text-theme-secondary-700">@lang('generic.not-available')</span>
                                 </span>
                             </x-slot>
                         </x-general.header-entry>
