@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Livewire;
 
 use App\Actions\CacheNetworkSupply;
+use App\Facades\Network;
 use App\Models\Wallet;
 use App\Services\Cache\NetworkCache;
 use App\Services\NumberFormatter;
@@ -13,8 +14,6 @@ use Livewire\Component;
 
 final class StatsHighlights extends Component
 {
-    private const CURRENCY = 'ARK';
-
     public function render(): View
     {
         return view('livewire.stats-highlights', [
@@ -30,7 +29,7 @@ final class StatsHighlights extends Component
     {
         $supply = CacheNetworkSupply::execute() / 1e8;
 
-        return NumberFormatter::currency($supply, self::CURRENCY);
+        return NumberFormatter::currency($supply, Network::currency());
     }
 
     private function getVotingPercent(): string
@@ -44,7 +43,7 @@ final class StatsHighlights extends Component
     {
         $votesValue = (new NetworkCache())->getVotesCount();
 
-        return NumberFormatter::currency($votesValue, self::CURRENCY);
+        return NumberFormatter::currency($votesValue, Network::currency());
     }
 
     private function getDelegates(): string
