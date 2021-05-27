@@ -7,7 +7,6 @@ namespace App\ViewModels\Concerns\Wallet;
 use App\Facades\Network;
 use App\Services\Cache\WalletCache;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Collection;
 
 trait CanBeDelegate
 {
