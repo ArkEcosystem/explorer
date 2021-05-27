@@ -492,11 +492,9 @@ it('can determine the colors for icons based on the status of a delegate', funct
         ],
     ]));
 
-    expect($this->subject->delegateStatusColors())->toBeInstanceOf(Collection::class);
-
     // Resigned colors
-    expect($this->subject->delegateStatusColors()->first())->toBe('text-theme-secondary-500 border-theme-secondary-500 dark:text-theme-secondary-800 dark:border-theme-secondary-800');
-    expect($this->subject->delegateStatusColors()->last())->toBe('text-theme-secondary-500 border-theme-secondary-500 dark:text-theme-secondary-800 dark:border-theme-secondary-800');
+    expect($this->subject->delegateRankStyling())->toBe('text-theme-secondary-500 border-theme-secondary-500 dark:text-theme-secondary-800 dark:border-theme-secondary-800');
+    expect($this->subject->delegateStatusStyling())->toBe('text-theme-secondary-500 border-theme-secondary-500 dark:text-theme-secondary-800 dark:border-theme-secondary-800');
 
     // Standby colors
     $this->subject = new WalletViewModel(Wallet::factory()->create([
@@ -508,8 +506,8 @@ it('can determine the colors for icons based on the status of a delegate', funct
         ],
     ]));
 
-    expect($this->subject->delegateStatusColors()->first())->toBe('text-theme-secondary-900 border-theme-secondary-900');
-    expect($this->subject->delegateStatusColors()->last())->toBe('text-theme-secondary-500 border-theme-secondary-500 dark:text-theme-secondary-800 dark:border-theme-secondary-800');
+    expect($this->subject->delegateRankStyling())->toBe('text-theme-secondary-900 border-theme-secondary-900');
+    expect($this->subject->delegateStatusStyling())->toBe('text-theme-secondary-500 border-theme-secondary-500 dark:text-theme-secondary-800 dark:border-theme-secondary-800');
 
     // Active colors
     $this->subject = new WalletViewModel(Wallet::factory()->create([
@@ -520,6 +518,6 @@ it('can determine the colors for icons based on the status of a delegate', funct
         ],
     ]));
 
-    expect($this->subject->delegateStatusColors()->first())->toBe('text-theme-secondary-900 border-theme-secondary-900');
-    expect($this->subject->delegateStatusColors()->last())->toBe('text-theme-success-600 border-theme-success-600');
+    expect($this->subject->delegateRankStyling())->toBe('text-theme-secondary-900 border-theme-secondary-900');
+    expect($this->subject->delegateStatusStyling())->toBe('text-theme-success-600 border-theme-success-600');
 });
