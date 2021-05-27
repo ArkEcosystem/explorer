@@ -1,39 +1,152 @@
 <div class="bg-white border-t border-theme-secondary-300 dark:border-theme-secondary-800 dark:bg-theme-secondary-900">
-    <div class="flex-col py-8 space-y-6 sm:space-y-0 sm:space-x-6 content-container sm:flex-row">
-        {{-- Vote --}}
-        <div class="w-full sm:w-1/2">
-            <div class="relative flex items-end justify-between mb-6">
-                <h4 class="text-2xl">@lang('pages.transaction.vote')</h4>
+    <x-ark-container>
+        <div class="w-full">
+            <div class="relative flex items-end justify-between mb-3">
+                <h4 class="text-2xl">@lang('general.transaction.types.vote-combination')</h4>
             </div>
 
-            <x-details.vote
-                :title="trans('general.transaction.delegate')"
-                :transaction="$transaction"
-                :model="$transaction->voted()">
-                <x-slot name="icon">
-                    <div class="circled-icon text-theme-success-500 border-theme-success-100 dark:text-theme-success-600 dark:border-theme-success-600">
-                        <x-ark-icon name="app-transactions.vote" style="success" />
-                    </div>
-                </x-slot>
-            </x-details.vote>
-        </div>
+            <x-ark-tables.table sticky class="hidden md:block">
+                <thead>
+                    <tr>
+                        <x-tables.headers.desktop.text name="general.transaction.delegate" />
+                        <x-tables.headers.desktop.text class="text-center" name="general.delegates.rank" />
+                        <x-tables.headers.desktop.text class="text-right" name="general.transaction.type" />
+                    </tr>
+                </thead>
+                <tbody>
+                    <x-ark-tables.row>
+                        <x-ark-tables.cell>
+                            <div class="flex items-center space-x-4">
+                                <x-general.avatar :identifier="$transaction->voted()->address()" no-shrink />
 
-        {{-- Unvote --}}
-        <div class="w-full sm:w-1/2">
-            <div class="relative flex items-end justify-between mb-6">
-                <h4>@lang('pages.transaction.unvote')</h4>
+                                <div class="flex items-center max-w-full space-x-3">
+                                    <a href="{{ route('wallet', $transaction->voted()->address()) }}" class="font-semibold link">
+                                        {{ $transaction->voted()->username() }}
+                                    </a>
+                                    <span class="min-w-0 text-theme-secondary-400">
+                                        <x-truncate-dynamic>{{ $transaction->voted()->address() }}</x-truncate-dynamic>
+                                    </span>
+                                </div>
+
+                            </div>
+                        </x-ark-tables.cell>
+                        <x-ark-tables.cell>
+                            <span class="mx-auto">#<x-number>{{ $transaction->voted()->rank() }}</x-number></span>
+                        </x-ark-tables.cell>
+                        <x-ark-tables.cell width="130">
+                            <div class="flex items-center justify-end flex-grow space-x-4">
+                                <span>@lang('pages.transaction.vote')</span>
+
+                                <div class="hidden lg:block">
+                                    <div class="circled-icon text-theme-success-500 border-theme-success-500 dark:text-theme-success-600 dark:border-theme-success-600">
+                                        <x-ark-icon name="app-transactions.vote" style="success" />
+                                    </div>
+                                </div>
+
+                                <div class="lg:hidden">
+                                    <x-ark-icon name="app-transactions.vote" style="success" />
+                                </div>
+                            </div>
+                        </x-ark-tables.cell>
+                    </x-ark-tables.row>
+                    <x-ark-tables.row>
+                        <x-ark-tables.cell>
+                            <div class="flex items-center space-x-4">
+                                <x-general.avatar :identifier="$transaction->unvoted()->address()" no-shrink />
+
+                                <div class="flex items-center max-w-full space-x-3">
+                                    <a href="{{ route('wallet', $transaction->voted()->address()) }}" class="font-semibold link">
+                                        {{ $transaction->voted()->username() }}
+                                    </a>
+                                    <span class="min-w-0 text-theme-secondary-400">
+                                        <x-truncate-dynamic>{{ $transaction->voted()->address() }}</x-truncate-dynamic>
+                                    </span>
+                                </div>
+                            </div>
+                        </x-ark-tables.cell>
+                        <x-ark-tables.cell>
+                            <span class="mx-auto">#<x-number>{{ $transaction->unvoted()->rank() }}</x-number></span>
+                        </x-ark-tables.cell>
+                        <x-ark-tables.cell width="130">
+                            <div class="flex items-center justify-end flex-grow space-x-4">
+                                <span>@lang('pages.transaction.unvote')</span>
+
+                                <div class="hidden lg:block">
+                                    <div class="circled-icon text-theme-danger-500 border-theme-danger-500 dark:text-theme-danger-600 dark:border-theme-danger-600">
+                                        <x-ark-icon name="app-transactions.unvote" style="danger" />
+                                    </div>
+                                </div>
+
+                                <div class="lg:hidden">
+                                    <x-ark-icon name="app-transactions.unvote" style="danger" />
+                                </div>
+                            </div>
+                        </x-ark-tables.cell>
+                    </x-ark-tables.row>
+                </tbody>
+            </x-ark-tables.table>
+
+            <div class="divide-y md:hidden table-list-mobile">
+                <div class="space-y-3 table-list-mobile-row">
+                    <div>
+                        @lang('general.transaction.delegate')
+
+                        <div class="flex items-center space-x-3">
+                            <a href="{{ route('wallet', $transaction->voted()->address()) }}" class="font-semibold link">
+                                {{ $transaction->voted()->username() }}
+                            </a>
+
+                            <x-general.avatar :identifier="$transaction->voted()->address()" />
+                        </div>
+                    </div>
+
+                    <div>
+                        @lang('general.delegates.rank')
+
+                        <span>#<x-number>{{ $transaction->voted()->rank() }}</x-number></span>
+                    </div>
+
+                    <div>
+                        @lang('general.transaction.type')
+
+                        <div class="flex items-center space-x-3">
+                            <span>@lang('pages.transaction.vote')</span>
+                            <x-ark-icon name="app-transactions.vote" style="success" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-3 table-list-mobile-row">
+                    <div>
+                        @lang('general.transaction.delegate')
+
+                        <div class="flex items-center space-x-3">
+                            <a href="{{ route('wallet', $transaction->unvoted()->address()) }}" class="font-semibold link">
+                                {{ $transaction->unvoted()->username() }}
+                            </a>
+
+                            <x-general.avatar :identifier="$transaction->unvoted()->address()" />
+                        </div>
+                    </div>
+
+                    <div>
+                        @lang('general.delegates.rank')
+
+                        <span>#<x-number>{{ $transaction->unvoted()->rank() }}</x-number></span>
+                    </div>
+
+                    <div>
+                        @lang('general.transaction.type')
+
+                        <div class="flex items-center space-x-3">
+                            <span>@lang('pages.transaction.unvote')</span>
+                            <x-ark-icon name="app-transactions.unvote" style="danger" />
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
-            <x-details.vote
-                :title="trans('general.transaction.delegate')"
-                :transaction="$transaction"
-                :model="$transaction->unvoted()">
-                <x-slot name="icon">
-                    <div class="circled-icon text-theme-danger-500 border-theme-danger-100 dark:text-theme-danger-600 dark:border-theme-danger-600">
-                        <x-ark-icon name="app-transactions.unvote" style="danger" />
-                    </div>
-                </x-slot>
-            </x-details.vote>
         </div>
-    </div>
+    </x-ark-container>
 </div>
