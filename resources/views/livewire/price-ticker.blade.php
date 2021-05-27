@@ -1,6 +1,6 @@
 <div
     wire:poll.60s
-    class="relative uppercase"
+    class="uppercase"
     x-data="{ to: '{{ $to }}', busy: false }"
     x-init="livewire.on('currencyChanged', () => busy = true);"
 >
