@@ -33,12 +33,12 @@
 
                         <x-slot name="text">
                             @if(! $isResigned)
-                                # {{ $wallet->rank() }} /
+                                {{ trans('pages.wallet.vote_rank', [$wallet->rank()]) }} /
                             @endif
                             @if($isResigned)
                                 <span class="text-theme-danger-400">@lang('pages.delegates.resigned')</span>
                             @elseif($isStandby)
-                                <span class="text-theme-secondary-500">@lang('pages.delegates.standby')</span>
+                                <span class="text-theme-secondary-700">@lang('pages.delegates.standby')</span>
                             @else
                                 <span class="text-theme-success-600">@lang('pages.delegates.active')</span>
                             @endif
@@ -51,7 +51,7 @@
                             :tooltip="trans('pages.wallet.productivity_tooltip')"
                         >
                             <x-slot name="text">
-                                <span @if($isStandby)class="text-theme-secondary-500" @endif>
+                                <span @if($isStandby)class="text-theme-secondary-700" @endif>
                                     {{--TODO: Change once productivity is properly implemented }}
                                     {{--<x-percentage>{{ $wallet->productivity() }}</x-percentage>--}}
                                     @lang('generic.not-available')
@@ -65,7 +65,7 @@
                         without-border
                     >
                         <x-slot name="text">
-                            <span @if($isResigned)class="text-theme-secondary-500" @endif>
+                            <span @if($isResigned)class="text-theme-secondary-700" @endif>
                                 <x-number>{{ $wallet->totalForged() }}</x-number>
                                 {{ Network::currency() }}
                             </span>
