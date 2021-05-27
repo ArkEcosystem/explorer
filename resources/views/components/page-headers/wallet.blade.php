@@ -22,12 +22,17 @@
                     >
                         <x-slot name="icon">
                             <div class="flex items-center md:mr-2">
-                                <x-page-headers.icon-with-icon
-                                    first-icon="app-rank"
-                                    :first-icon-colors="$wallet->delegateStatusColors()->first()"
-                                    second-icon="{{ $isStandby ? 'clock' : 'checkmark-smooth' }}"
-                                    :second-icon-colors="$wallet->delegateStatusColors()->last()"
-                                />
+                                <div class="hidden lg:flex">
+                                    <div class="-mr-2 circled-icon  {{ $wallet->delegateStatusColors()->first() }} dark:text-theme-secondary-600 dark:border-theme-secondary-600">
+                                        <x-ark-icon name="app-rank" />
+                                    </div>
+                                </div>
+
+                                <div class="hidden rounded-full border-4 md:flex border-theme-secondary-100 dark:border-theme-secondary-900">
+                                    <div class="rounded-full circled-icon {{ $wallet->delegateStatusColors()->last() }} bg-theme-secondary-100 dark:bg-theme-secondary-900">
+                                        <x-ark-icon :name="$isStandby ? 'clock' : 'checkmark-smooth'" />
+                                    </div>
+                                </div>
                             </div>
                         </x-slot>
 
