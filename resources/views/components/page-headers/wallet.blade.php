@@ -11,19 +11,12 @@
         @php
             $isResigned = $wallet->isResigned();
             $isStandby = $wallet->rank() > Network::delegateCount();
-
-            $firstColor = ($isResigned ? 'text-theme-secondary-500 border-theme-secondary-500' : ($isStandby ?
-            'text-theme-secondary-900 border-theme-secondary-900' : 'text-theme-secondary-900 border-theme-secondary-900'));
-
-            $secondColor = ($isResigned ? 'text-theme-secondary-500 border-theme-secondary-500' : ($isStandby ?
-            'text-theme-secondary-500 border-theme-secondary-500' : 'text-theme-success-600 border-theme-success-600'));
-
             $vote = $wallet->vote()
         @endphp
 
         <x-slot name="extension">
             <div class="grid space-y-4 w-full sm:grid-rows-2 lg:flex lg:justify-between sm:space-y-4 lg:space-y-0">
-                <div class="grid grid-cols-1 space-y-4 sm:grid-cols-3 lg:flex sm:space-y-0 lg:space-x-5">
+                <div class="grid grid-cols-1 space-y-4 sm:grid-cols-3 lg:flex sm:space-y-0 lg:space-x-5 sm:h-11 lg:h-auto">
                     <x-general.header-entry
                         title="{{ trans('pages.wallet.delegate.rank') }} / {{ trans('pages.wallet.delegate.status') }}"
                     >
@@ -31,9 +24,9 @@
                             <div class="flex items-center md:mr-2">
                                 <x-page-headers.icon-with-icon
                                     first-icon="app-rank"
-                                    :first-icon-colors="$firstColor"
+                                    :first-icon-colors="$wallet->delegateStatusColors()->first()"
                                     second-icon="{{ $isStandby ? 'clock' : 'checkmark-smooth' }}"
-                                    :second-icon-colors="$secondColor"
+                                    :second-icon-colors="$wallet->delegateStatusColors()->last()"
                                 />
                             </div>
                         </x-slot>
@@ -59,7 +52,9 @@
                         >
                             <x-slot name="text">
                                 <span @if($isStandby)class="text-theme-secondary-500" @endif>
-                                    <x-percentage>{{ $wallet->productivity() }}</x-percentage>
+                                    {{--TODO: Change once productivity is properly implemented }}
+                                    {{--<x-percentage>{{ $wallet->productivity() }}</x-percentage>--}}
+                                    @lang('generic.not-available')
                                 </span>
                             </x-slot>
                         </x-general.header-entry>
@@ -71,21 +66,21 @@
                     >
                         <x-slot name="text">
                             <span @if($isResigned)class="text-theme-secondary-500" @endif>
-                                <x-number>{{ $wallet->blocksForged() }}</x-number>
+                                <x-number>{{ $wallet->totalForged() }}</x-number>
                                 {{ Network::currency() }}
                             </span>
                         </x-slot>
                     </x-general.header-entry>
                 </div>
 
-                <div class="grid grid-cols-1 space-y-4 sm:grid-cols-3 lg:flex sm:space-y-0 lg:space-x-5">
+                <div class="grid grid-cols-1 space-y-4 sm:grid-cols-3 lg:flex sm:space-y-0 lg:space-x-5 sm:h-11 lg:h-auto">
                     <x-general.header-entry
                         :title="trans('pages.wallet.delegate.forged_blocks')"
                         :text="trans('general.see_all')"
                         :url="route('wallet.blocks', $wallet->address())"
                     >
                         <x-slot name="icon">
-                            <div class="mr-0 w-0 md:w-11 md:mr-2 lg:w-0 lg:mr-0"></div>
+                            <div class="md:w-11 md:mr-4 lg:w-0 lg:mr-0"></div>
                         </x-slot>
                     </x-general.header-entry>
 

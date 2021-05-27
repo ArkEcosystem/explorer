@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace App\ViewModels\Concerns\Wallet;
 
+use App\Facades\Network;
 use App\Services\Cache\WalletCache;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 
 trait CanBeDelegate
 {
@@ -49,5 +51,18 @@ trait CanBeDelegate
     public function rank(): ?int
     {
         return Arr::get($this->wallet, 'attributes.delegate.rank', 0);
+    }
+
+    public function delegateStatusColors(): Collection
+    {
+        if ($this->isResigned()) {
+            return collect(["firstColor" => "text-theme-secondary-500 border-theme-secondary-500 dark:text-theme-secondary-800 dark:border-theme-secondary-800", "secondColor" => "text-theme-secondary-500 border-theme-secondary-500 dark:text-theme-secondary-800 dark:border-theme-secondary-800"]);
+        }
+
+        if ($this->rank() > Network::delegateCount()) {
+            return collect(["firstColor" => "text-theme-secondary-900 border-theme-secondary-900", "secondColor" => "text-theme-secondary-500 border-theme-secondary-500 dark:text-theme-secondary-800 dark:border-theme-secondary-800"]);
+        }
+
+        return collect(["firstColor" => "text-theme-secondary-900 border-theme-secondary-900", "secondColor" => "text-theme-success-600 border-theme-success-600"]);
     }
 }
