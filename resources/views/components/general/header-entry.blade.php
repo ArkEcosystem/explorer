@@ -12,7 +12,7 @@
         {{ $icon }}
     @endif
 
-    <div class="flex flex-col font-semibold truncate">
+    <div class="flex justify-center flex-col font-semibold truncate space-y-1">
         <div class="flex items-center">
             <div class="text-sm text-theme-secondary-500 dark:text-theme-secondary-700">{{ $title }}</div>
 
@@ -22,11 +22,11 @@
         </div>
 
         @if ($url)
-            <a href="{{ $url }}" class="flex mt-2 link">
+            <a href="{{ $url }}" class="flex link">
                 <span class="w-full truncate lg:text-right">{{ $text }}</span>
             </a>
         @else
-            <span class="mt-2 truncate text-theme-secondary-900 dark:text-theme-secondary-200">{{ $text }}</span>
+            <span class="truncate text-theme-secondary-900 dark:text-theme-secondary-200">{{ $text }}</span>
         @endif
     </div>
 </div>
