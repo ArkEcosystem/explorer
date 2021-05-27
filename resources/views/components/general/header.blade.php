@@ -1,3 +1,5 @@
-<div {{ $attributes->class('py-8 content-container-full-width bg-theme-secondary-100 dark:bg-black') }}>
-    {{ $slot }}
+<div {{ $attributes->class('py-8 bg-theme-secondary-100 dark:bg-black') }}>
+    <div class="content-container-full-width">
+        {{ $slot }}
+    </div>
 </div>
