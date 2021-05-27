@@ -53,16 +53,29 @@ trait CanBeDelegate
         return Arr::get($this->wallet, 'attributes.delegate.rank', 0);
     }
 
-    public function delegateStatusColors(): Collection
+    public function delegateRankStyling(): string
     {
         if ($this->isResigned()) {
-            return collect(['firstColor' => 'text-theme-secondary-500 border-theme-secondary-500 dark:text-theme-secondary-800 dark:border-theme-secondary-800', 'secondColor' => 'text-theme-secondary-500 border-theme-secondary-500 dark:text-theme-secondary-800 dark:border-theme-secondary-800']);
+            return 'text-theme-secondary-500 border-theme-secondary-500 dark:text-theme-secondary-800 dark:border-theme-secondary-800';
         }
 
         if ($this->rank() > Network::delegateCount()) {
-            return collect(['firstColor' => 'text-theme-secondary-900 border-theme-secondary-900', 'secondColor' => 'text-theme-secondary-500 border-theme-secondary-500 dark:text-theme-secondary-800 dark:border-theme-secondary-800']);
+            return 'text-theme-secondary-900 border-theme-secondary-900';
         }
 
-        return collect(['firstColor' => 'text-theme-secondary-900 border-theme-secondary-900', 'secondColor' => 'text-theme-success-600 border-theme-success-600']);
+        return 'text-theme-secondary-900 border-theme-secondary-900';
+    }
+
+    public function delegateStatusStyling(): string
+    {
+        if ($this->isResigned()) {
+            return 'text-theme-secondary-500 border-theme-secondary-500 dark:text-theme-secondary-800 dark:border-theme-secondary-800';
+        }
+
+        if ($this->rank() > Network::delegateCount()) {
+            return 'text-theme-secondary-500 border-theme-secondary-500 dark:text-theme-secondary-800 dark:border-theme-secondary-800';
+        }
+
+        return 'text-theme-success-600 border-theme-success-600';
     }
 }
