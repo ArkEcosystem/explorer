@@ -1,38 +1,33 @@
-<div>
-    <div wire:ignore class="hidden tabs md:flex">
-        <div
-            class="tab-item transition-default"
-            :class="{ 'tab-item-current': direction === 'all' }"
-            wire:click="$set('state.direction', 'all');"
-            @click="direction = 'all'"
-        >
-            @lang('pages.wallet.all_transactions')
-        </div>
+<div class="space-y-3 md:space-y-0">
+    <x-tabs.wrapper
+        class="hidden mb-4 md:flex"
+        default-selected="all"
+        on-selected="function (value) {
+            this.$wire.set('state.selected', value);
+        }"
+    >
+        <x-tabs.tab name="all">
+            <span>@lang('pages.wallet.all_transactions')</span>
+        </x-tabs.tab>
 
-        <div
-            class="tab-item transition-default"
-            :class="{ 'tab-item-current': direction === 'received' }"
-            wire:click="$set('state.direction', 'received');"
-            @click="direction = 'received'"
-        >
+        <x-tabs.tab name="received">
             <span>@lang('pages.wallet.received_transactions')</span>
 
             <span class="info-badge">{{ $countReceived }}</span>
-        </div>
+        </x-tabs.tab>
 
         @unless($state['isCold'])
-            <div
-                class="tab-item transition-default"
-                :class="{ 'tab-item-current': direction === 'sent' }"
-                wire:click="$set('state.direction', 'sent');"
-                @click="direction = 'sent'"
-            >
+            <x-tabs.tab name="sent">
                 <span>@lang('pages.wallet.sent_transactions', [$countSent])</span>
 
                 <span class="info-badge">{{ $countSent }}</span>
-            </div>
+            </x-tabs.tab>
         @endunless
-    </div>
+
+        <x-slot name="right">
+            <x-transaction-table-filter type="all" />
+        </x-slot>
+    </x-tabs.wrapper>
 
     <div class="md:hidden">
         <x-ark-dropdown
@@ -61,19 +56,31 @@
                 </div>
             </x-slot>
 
-            <div class="p-4">
-                <a wire:click="$set('state.direction', 'all');" @click="direction = 'all'" class="dropdown-entry">
+            <div class="block overflow-y-scroll justify-center items-center py-3">
+                <a
+                    wire:click="$set('state.direction', 'all');"
+                    @click="direction = 'all'"
+                    class="cursor-pointer dropdown-entry text-theme-secondary-900 dark:text-theme-secondary-200 @if($state['direction'] === 'all') dropdown-entry-selected @endif"
+                >
                     @lang('pages.wallet.all_transactions')
                 </a>
 
-                <a wire:click="$set('state.direction', 'received');" @click="direction = 'received'" class="dropdown-entry">
+                <a
+                    wire:click="$set('state.direction', 'received');"
+                    @click="direction = 'received'"
+                    class="cursor-pointer dropdown-entry text-theme-secondary-900 dark:text-theme-secondary-200 @if($state['direction'] === 'received') dropdown-entry-selected @endif"
+                >
                     <span>@lang('pages.wallet.received_transactions')</span>
 
                     <span class="info-badge">{{ $countReceived }}</span>
                 </a>
 
                 @unless($state['isCold'])
-                    <a wire:click="$set('state.direction', 'sent');" @click="direction = 'sent'" class="dropdown-entry">
+                    <a
+                        wire:click="$set('state.direction', 'sent');"
+                        @click="direction = 'sent'"
+                        class="cursor-pointer dropdown-entry text-theme-secondary-900 dark:text-theme-secondary-200 @if($state['direction'] === 'sent') dropdown-entry-selected @endif"
+                    >
                         <span>@lang('pages.wallet.sent_transactions')</span>
 
                         <span class="info-badge">{{ $countSent }}</span>
