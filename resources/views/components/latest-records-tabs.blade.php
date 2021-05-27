@@ -25,8 +25,8 @@
 
     <div class="mb-4 md:hidden">
         <x-ark-dropdown
-            wrapper-class="relative p-2 w-full rounded-lg border border-theme-secondary-300 dark:border-theme-secondary-800"
-            button-class="p-3 w-full font-semibold text-left text-theme-secondary-900 dark:text-theme-secondary-200"
+            wrapper-class="relative w-full p-2 border rounded-lg border-theme-secondary-300 dark:border-theme-secondary-800"
+            button-class="w-full p-3 font-semibold text-left text-theme-secondary-900 dark:text-theme-secondary-200"
             dropdown-classes="left-0 w-full z-20"
             :init-alpine="false"
             dropdown-property="tabsOpen"
@@ -47,18 +47,13 @@
                 </div>
             </x-slot>
 
-            <div class="p-4">
-                @if($selected !== 'transactions')
-                    <button wire:key="transactions" type="button" x-on:click="$wire.set('state.selected', 'transactions')" class="dropdown-entry dark:text-theme-secondary-200">
-                        @lang('pages.home.latest_transactions')
-                    </button>
-                @endif
-
-                @if($selected !== 'blocks')
-                    <button wire:key="blocks" type="button" x-on:click="$wire.set('state.selected', 'blocks')" class="dropdown-entry dark:text-theme-secondary-200">
-                        @lang('pages.home.latest_blocks')
-                    </button>
-                @endif
+            <div class="items-center justify-center block py-3 mt-1">
+                <button wire:key="transactions" type="button" x-on:click="$wire.set('state.selected', 'transactions')" class="dropdown-entry @if($selected === 'transactions') dropdown-entry-selected @endif">
+                    @lang('pages.home.latest_transactions')
+                </button>
+                <button wire:key="blocks" type="button" x-on:click="$wire.set('state.selected', 'blocks')" class="dropdown-entry @if($selected === 'blocks') dropdown-entry-selected @endif">
+                    @lang('pages.home.latest_blocks')
+                </button>
             </div>
         </x-ark-dropdown>
 
