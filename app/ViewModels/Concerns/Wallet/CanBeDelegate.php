@@ -56,13 +56,13 @@ trait CanBeDelegate
     public function delegateStatusColors(): Collection
     {
         if ($this->isResigned()) {
-            return collect(["firstColor" => "text-theme-secondary-500 border-theme-secondary-500 dark:text-theme-secondary-800 dark:border-theme-secondary-800", "secondColor" => "text-theme-secondary-500 border-theme-secondary-500 dark:text-theme-secondary-800 dark:border-theme-secondary-800"]);
+            return collect(['firstColor' => 'text-theme-secondary-500 border-theme-secondary-500 dark:text-theme-secondary-800 dark:border-theme-secondary-800', 'secondColor' => 'text-theme-secondary-500 border-theme-secondary-500 dark:text-theme-secondary-800 dark:border-theme-secondary-800']);
         }
 
         if ($this->rank() > Network::delegateCount()) {
-            return collect(["firstColor" => "text-theme-secondary-900 border-theme-secondary-900", "secondColor" => "text-theme-secondary-500 border-theme-secondary-500 dark:text-theme-secondary-800 dark:border-theme-secondary-800"]);
+            return collect(['firstColor' => 'text-theme-secondary-900 border-theme-secondary-900', 'secondColor' => 'text-theme-secondary-500 border-theme-secondary-500 dark:text-theme-secondary-800 dark:border-theme-secondary-800']);
         }
 
-        return collect(["firstColor" => "text-theme-secondary-900 border-theme-secondary-900", "secondColor" => "text-theme-success-600 border-theme-success-600"]);
+        return collect(['firstColor' => 'text-theme-secondary-900 border-theme-secondary-900', 'secondColor' => 'text-theme-success-600 border-theme-success-600']);
     }
 }
