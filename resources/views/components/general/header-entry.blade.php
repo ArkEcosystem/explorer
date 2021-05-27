@@ -12,7 +12,7 @@
         {{ $icon }}
     @endif
 
-    <div class="flex justify-center flex-col font-semibold truncate space-y-1">
+    <div class="flex flex-col justify-center space-y-1 font-semibold truncate">
         <div class="flex items-center">
             <div class="text-sm text-theme-secondary-500 dark:text-theme-secondary-700">{{ $title }}</div>
 
