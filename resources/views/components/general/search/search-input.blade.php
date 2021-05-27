@@ -1,4 +1,4 @@
-<div class="flex items-center py-6 px-8">
+<div class="flex items-center px-8 py-6">
     <div class="flex-1 mr-8">
         <input
             x-ref="input"
@@ -7,6 +7,7 @@
             class="hidden w-full text-theme-secondary-700 dark:text-theme-secondary-700 dark:bg-theme-secondary-900 dark:placeholder-text-theme-secondary-700 overflow-ellipsis sm:block"
             wire:model.defer="state.term"
             wire:keydown.enter="performSearch"
+            @keydown.enter="searching = true"
         />
         <input
             x-ref="inputMobile"
@@ -15,12 +16,13 @@
             class="w-full dark:text-theme-secondary-700 dark:bg-theme-secondary-900 dark:placeholder-text-theme-secondary-700 overflow-ellipsis sm:hidden"
             wire:model.defer="state.term"
             wire:keydown.enter="performSearch"
+            @keydown.enter="searching = true"
         />
     </div>
 
     <button
         type="button"
-        class="hidden py-2 px-4 mr-8 font-normal text-center rounded text-theme-primary-500 transition-default hover:bg-theme-primary-100 dark:hover:bg-theme-secondary-800 dark:text-theme-secondary-600 md:block"
+        class="hidden px-4 py-2 mr-8 font-normal text-center rounded text-theme-primary-500 transition-default hover:bg-theme-primary-100 dark:hover:bg-theme-secondary-800 dark:text-theme-secondary-600 md:block"
         @click="showAdvanced = !showAdvanced;"
     >
         <span x-show="!showAdvanced">@lang('actions.advanced_search')</span>
@@ -29,10 +31,15 @@
 
     <button
         type="button"
-        class="hidden button-primary md:block"
+        class="relative hidden button-primary md:block"
+        :class="{ 'pointer-events-none' : searching }"
         wire:click="performSearch"
+        @click="searching = true"
     >
-        @lang('actions.find_it')
+        <span :class="{ 'hidden': !searching }" x-show="searching" class="absolute left-0 right-0 flex items-center justify-center" x-cloak>
+            <x-ark-spinner-icon circle-color="primary-700" />
+        </span>
+        <span :class="{ 'invisible': searching }">@lang('actions.find_it')</span>
     </button>
 
     <div
