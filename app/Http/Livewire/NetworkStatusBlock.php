@@ -13,7 +13,6 @@ use App\Services\Settings;
 use Illuminate\View\View;
 use Konceiver\BetterNumberFormatter\BetterNumberFormatter;
 use Livewire\Component;
-use NumberFormatter;
 
 final class NetworkStatusBlock extends Component
 {
