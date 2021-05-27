@@ -169,25 +169,6 @@ it('should determine if the wallet is a delegate', function () {
     expect($this->subject->isDelegate())->toBeTrue();
 });
 
-it('should determine if the wallet has registrations', function () {
-    expect($this->subject->hasRegistrations())->toBeFalse();
-
-    Transaction::factory()->create([
-        'sender_public_key' => $this->subject->publicKey(),
-        'type'              => MagistrateTransactionTypeEnum::ENTITY,
-        'type_group'        => TransactionTypeGroupEnum::MAGISTRATE,
-        'asset'             => [
-            'action' => MagistrateTransactionEntityActionEnum::REGISTER,
-        ],
-    ]);
-
-    expect($this->subject->hasRegistrations())->toBeTrue();
-});
-
-it('should get the registrations', function () {
-    expect($this->subject->registrations())->toBeInstanceOf(Collection::class);
-});
-
 it('should determine if the wallet is voting', function () {
     expect($this->subject->isVoting())->toBeFalse();
 
