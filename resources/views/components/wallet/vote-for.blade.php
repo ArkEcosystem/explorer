@@ -1,7 +1,3 @@
-@php
-    $isResigned = $vote->isResigned();
-@endphp
-
 <div class="pb-8 w-full bg-white dark:bg-theme-secondary-900 content-container">
     <div class="flex py-4 px-8 w-full rounded-xl border border-theme-secondary-300 dark:border-theme-secondary-800">
         <div class="flex flex-col justify-between space-y-6 w-full sm:flex-row sm:space-y-0">
@@ -29,14 +25,14 @@
             </div>
 
             <div class="flex space-x-8 sm:space-x-4">
-                @if(! $isResigned)
+                @if(! $vote->isResigned())
                     <x-general.entity-header-item
                         :title="trans('pages.wallet.rank')"
                         without-icon
                         content-class="pr-8 space-y-2 border-r sm:text-right sm:mr-2 border-theme-secondary-300 dark:border-theme-secondary-800 md:border-r-0"
                     >
                         <x-slot name="text">
-                            @if ($isResigned)
+                            @if ($vote->isResigned())
                                 <x-details.resigned />
                             @else
                                 @lang('pages.wallet.vote_rank', [$vote->rank()])
@@ -51,7 +47,7 @@
                     content-class="space-y-2 sm:text-right"
                 >
                     <x-slot name="text">
-                        @if($isResigned)
+                        @if($vote->isResigned())
                             <span class="text-theme-danger-400">@lang('pages.delegates.resigned')</span>
                         @elseif($vote->rank() > Network::delegateCount())
                             <span class="text-theme-secondary-500 dark:text-theme-secondary-700">@lang('pages.delegates.standby')</span>
