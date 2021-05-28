@@ -67,10 +67,10 @@ return [
     ],
 
     'statistics' => [
-        'day' => 'Day',
-        'week' => 'Week',
-        'month' => 'Month',
-        'year' => 'Year',
+        'day'      => 'Day',
+        'week'     => 'Week',
+        'month'    => 'Month',
+        'year'     => 'Year',
         'all-time' => 'All-Time',
     ],
 

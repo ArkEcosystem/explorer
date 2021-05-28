@@ -10,20 +10,20 @@
     'options',
 ])
 
-<x-general.card with-border class="flex gap-6 flex-col md:flex-row xl:flex-col">
+<x-general.card with-border class="flex flex-col gap-6 md:flex-row xl:flex-col">
     <div class="md:w-1/2 xl:w-full">
-        <h2 class="mb-0 leading-none text-sm font-semibold text-theme-secondary-900 dark:text-theme-secondary-200">{{ $title }}</h2>
-        <select {{ $attributes->wire('model') }} class="hidden md:block xl:hidden -ml-1 mt-3 text-sm font-semibold appearance-none bg-transparent text-theme-secondary-700 dark:text-theme-secondary-200">
+        <h2 class="mb-0 text-sm font-semibold leading-none text-theme-secondary-900 dark:text-theme-secondary-200">{{ $title }}</h2>
+        <select {{ $attributes->wire('model') }} class="hidden mt-3 -ml-1 text-sm font-semibold bg-transparent appearance-none md:block xl:hidden text-theme-secondary-700 dark:text-theme-secondary-200">
             @foreach($options as $val => $label)
                 <option value="{{ $val }}">{{ $label }}</option>
             @endforeach
         </select>
-        <p class="mt-3 text-lg sm:text-2xl font-bold text-theme-secondary-900 dark:text-theme-secondary-200">{{ $value }}</p>
+        <p class="mt-3 text-lg font-bold sm:text-2xl text-theme-secondary-900 dark:text-theme-secondary-200">{{ $value }}</p>
     </div>
 
     <div class="border-t border-theme-secondary-300 dark:border-theme-secondary-800 pt-6 md:pt-0 md:border-t-0 xl:pt-6 xl:border-t row-span-2 sm:row-span-1 flex gap-5 flex-col sm:flex-row sm:items-end md:w-1/2 lg:justify-end xl:w-full">
         <div class="sm:w-2/5 md:w-1/2 lg:w-1/3 xl:w-1/2">
-            <select {{ $attributes->wire('model') }} class="md:hidden xl:block -ml-1 text-sm font-semibold appearance-none bg-transparent text-theme-secondary-700 dark:text-theme-secondary-200">
+            <select {{ $attributes->wire('model') }} class="-ml-1 text-sm font-semibold bg-transparent appearance-none md:hidden xl:block text-theme-secondary-700 dark:text-theme-secondary-200">
                 @foreach($options as $val => $label)
                     <option value="{{ $val }}">{{ $label }}</option>
                 @endforeach

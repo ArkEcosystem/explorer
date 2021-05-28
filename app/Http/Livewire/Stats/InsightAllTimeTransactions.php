@@ -34,12 +34,12 @@ final class InsightAllTimeTransactions extends Component
         return view('livewire.stats.insight-all-time-transactions', [
             'allTimeTransactionsTitle' => trans('pages.statistics.insights.all-time-transactions'),
             'allTimeTransactionsValue' => $this->allTimeTransactions(),
-            'transactionsTitle' => trans('pages.statistics.insights.transactions'),
-            'transactionsValue' => $this->countTransactionsPerPeriod($this->period),
-            'chartValues' => $this->chartValues($this->period),
-            'chartColor' => $this->chartColor,
-            'options' => $this->availablePeriods(),
-            'refreshInterval' => $this->refreshInterval,
+            'transactionsTitle'        => trans('pages.statistics.insights.transactions'),
+            'transactionsValue'        => $this->countTransactionsPerPeriod($this->period),
+            'chartValues'              => $this->chartValues($this->period),
+            'chartColor'               => $this->chartColor,
+            'options'                  => $this->availablePeriods(),
+            'refreshInterval'          => $this->refreshInterval,
         ]);
     }
 

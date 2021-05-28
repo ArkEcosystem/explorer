@@ -35,12 +35,12 @@ final class InsightAllTimeFeesCollected extends Component
         return view('livewire.stats.insight-all-time-fees-collected', [
             'allTimeFeesCollectedTitle' => trans('pages.statistics.insights.all-time-fees-collected'),
             'allTimeFeesCollectedValue' => $this->allTimeFeesCollected(),
-            'feesTitle' => trans('pages.statistics.insights.fees'),
-            'feesValue' => $this->fees($this->period),
-            'chartValues' => $this->chartValues($this->period),
-            'chartColor' => $this->chartColor,
-            'options' => $this->availablePeriods(),
-            'refreshInterval' => $this->refreshInterval,
+            'feesTitle'                 => trans('pages.statistics.insights.fees'),
+            'feesValue'                 => $this->fees($this->period),
+            'chartValues'               => $this->chartValues($this->period),
+            'chartColor'                => $this->chartColor,
+            'options'                   => $this->availablePeriods(),
+            'refreshInterval'           => $this->refreshInterval,
         ]);
     }
 
