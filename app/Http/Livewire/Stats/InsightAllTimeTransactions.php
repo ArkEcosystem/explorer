@@ -74,13 +74,12 @@ final class InsightAllTimeTransactions extends Component
             return Cache::remember($cacheKey, (int) $this->refreshInterval, fn () => (string) Transaction::count());
         }
 
-        [$from, $to] = $this->getRangeFromPeriod($period);
-        $cacheKey .= ".{$from }.{$to}";
+        $from = $this->getRangeFromPeriod($period);
+        $cacheKey .= ".{$from}";
 
         return Cache::remember($cacheKey, (int) $this->refreshInterval, fn () => Transaction::query()
                 ->select(DB::raw("to_char(to_timestamp(timestamp), 'yyyy-mm-dd') as period, COUNT('id') as transactions"))
                 ->whereRaw("to_char(to_timestamp(timestamp), 'yyyy-mm-dd') > ?", [$from])
-                ->whereRaw("to_char(to_timestamp(timestamp), 'yyyy-mm-dd') <= ?", [$to])
                 ->latest('period')
                 ->groupBy('period')
                 ->get()

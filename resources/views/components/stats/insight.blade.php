@@ -46,8 +46,8 @@
                         x-init="init"
                         @toggle-dark-mode.window="toggleDarkMode"
                     >
-                        <div class="relative">
-                            <canvas wire:ignore x-ref="chart" class="w-full h-full" ></canvas>
+                        <div wire:ignore>
+                            <canvas x-ref="chart" class="w-full h-full" width="120" height="40"></canvas>
                         </div>
                     </div>
                 </div>
