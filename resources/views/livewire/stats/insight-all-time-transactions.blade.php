@@ -1,9 +1,9 @@
 <div wire:poll.{{ $refreshInterval }}s>
     <x-stats.insight
-        :title="$allTimeTransactionsTitle"
-        :value="$allTimeTransactionsValue"
-        :title2="$transactionsTitle"
-        :value2="$transactionsValue"
+        :mainTitle="$allTimeTransactionsTitle"
+        :mainValue="$allTimeTransactionsValue"
+        :secondaryTitle="$transactionsTitle"
+        :secondaryValue="$transactionsValue"
         :chart="$chartValues"
         :chart-color="$chartColor"
         :options="$options"
