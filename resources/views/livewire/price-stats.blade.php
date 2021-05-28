@@ -1,4 +1,9 @@
-<div class="justify-between flex-grow" wire:poll.60s>
+<div
+    class="justify-between flex-grow"
+    @if (Network::canBeExchanged())
+        wire:poll.60s
+    @endif
+>
     <x-stats.stat
         icon="app-price"
         :disabled="! Network::canBeExchanged()"
