@@ -1,9 +1,9 @@
-<x-general.identity :model="$model" :without-truncate="$withoutTruncate ?? false">
-    <x-slot name="suffix">
-        @if ($model->username())
-            <span style="max-width: 125px" class="hidden max-w-xs ml-1 overflow-auto lg:flex">
-                <x-truncate-dynamic>{{ $model->address() }}</x-truncate-dynamic>
+<x-general.identity :model="$model" :without-truncate="$withoutTruncate ?? false" :dynamic-truncate="$dynamicTruncate ?? false">
+    @if ($model->username())
+        <x-slot name="suffix">
+            <span class="hidden ml-1 lg:flex">
+                <x-truncate-middle>{{ $model->address() }}</x-truncate-middle>
             </span>
-        @endif
-    </x-slot>
+        </x-slot>
+    @endif
 </x-general.identity>

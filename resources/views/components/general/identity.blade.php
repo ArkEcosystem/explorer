@@ -23,7 +23,7 @@
                         {{ $model->username() }}
                     </div>
                 @else
-                    @isset($withoutTruncate)
+                    @if($withoutTruncate ?? false)
                         {{ $model->address() }}
                     @else
                         @isset($dynamicTruncate)
