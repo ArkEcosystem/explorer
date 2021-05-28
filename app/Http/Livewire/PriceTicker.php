@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire;
 
-use Livewire\Component;
 use App\Facades\Network;
-use Illuminate\View\View;
-use App\Services\Settings;
 use App\Services\CryptoCompare;
 use App\Services\NumberFormatter;
+use App\Services\Settings;
+use Illuminate\View\View;
+use Livewire\Component;
 
 final class PriceTicker extends Component
 {
