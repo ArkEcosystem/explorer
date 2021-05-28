@@ -3,11 +3,12 @@
     'icon'          => null,
     'tooltip'       => null,
     'url'           => null,
+    'wrapperClass'  => null,
     'title',
     'text',
 ])
 
-<div class="flex @if (! $withoutBorder) sm:border-r sm:border-theme-secondary-300 dark:border-theme-secondary-800 sm:mr-5 lg:mr-0 lg:pr-5 @endif">
+<div class="flex @if (! $withoutBorder) sm:border-r sm:border-theme-secondary-300 dark:border-theme-secondary-800 sm:mr-5 lg:mr-0 lg:pr-5 @endif {{ $wrapperClass }}">
     @if ($icon)
         {{ $icon }}
     @endif

@@ -45,6 +45,7 @@
                         title="Not Forging"
                         text="{{ $this->keepMissingForging }}"
                         wrapper-class="ml-5"
+                        without-border
                     >
                         <x-slot name="icon">
                             <div class="flex items-center mr-2">
@@ -65,6 +66,7 @@
                     <x-general.header-entry
                         :title="trans('pages.delegates.statistics.block_count')"
                         :text="$statistics['blockCount']"
+                        without-border
                     >
                         <x-slot name="icon">
                             <div class="flex items-center mr-2 circled-icon border-theme-secondary-900 dark:border-theme-secondary-600">
@@ -79,6 +81,7 @@
                         :title="trans('pages.delegates.statistics.next_slot')"
                         :text="$statistics['nextDelegate']->username()"
                         :url="route('wallet', $statistics['nextDelegate']->address())"
+                        without-border
                     >
                         <x-slot name="icon">
                             <div class="flex items-center mr-2">
