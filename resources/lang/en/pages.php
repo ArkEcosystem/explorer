@@ -210,6 +210,15 @@ return [
             'registered-delegates' => 'Registered Delegates',
             'wallets'              => 'Wallets',
         ],
+        'insights' => [
+            'all-time-transactions' => 'All-Time Transactions',
+            'transactions' => 'Transactions',
+            'current-average-fee' => 'Current Average Fee (Transfer)',
+            'min-fee' => 'Min Fee',
+            'max-fee' => 'Max Fee',
+            'all-time-fees-collected' => 'All-Time Fees Collected',
+            'fees' => 'Fees',
+        ],
     ],
 
 ];

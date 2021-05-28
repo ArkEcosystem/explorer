@@ -66,4 +66,12 @@ return [
         ],
     ],
 
+    'statistics' => [
+        'day' => 'Day',
+        'week' => 'Week',
+        'month' => 'Month',
+        'year' => 'Year',
+        'all-time' => 'All-Time',
+    ],
+
 ];
