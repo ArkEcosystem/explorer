@@ -16,6 +16,9 @@ use Livewire\Component;
 
 final class NetworkStatusBlock extends Component
 {
+    /** @phpstan-ignore-next-line */
+    protected $listeners = ['refreshNetworkStatusBlock' => '$refresh'];
+
     public function render(): View
     {
         return view('livewire.network-status-block', [
