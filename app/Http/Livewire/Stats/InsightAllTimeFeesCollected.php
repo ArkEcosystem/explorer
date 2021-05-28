@@ -56,7 +56,7 @@ final class InsightAllTimeFeesCollected extends Component
         /** @var Transaction $value */
         $value = $this->transactionsPerPeriod($period);
 
-        return NumberFormatter::currency($value->pluck('fee')->sum(), Network::currency());
+        return NumberFormatter::currency($value->pluck('fees')->sum(), Network::currency());
     }
 
     private function chartValues(string $period): Collection
@@ -64,7 +64,7 @@ final class InsightAllTimeFeesCollected extends Component
         /** @var Transaction $value */
         $value = $this->transactionsPerPeriod($period);
 
-        return collect($value->pluck('fee'));
+        return collect($value->pluck('fees'));
     }
 
     private function transactionsPerPeriod(string $period): EloquentCollection | string
@@ -72,14 +72,14 @@ final class InsightAllTimeFeesCollected extends Component
         $cacheKey = __CLASS__.".transactions-per-period.{$period}";
 
         if ($period === 'all-time') {
-            return Cache::remember($cacheKey, (int) $this->refreshInterval, fn () => (string) Transaction::select(DB::raw('sum(fee / 1e8) as fee'))->first()?->fee);
+            return Cache::remember($cacheKey, (int) $this->refreshInterval, fn () => (string) Transaction::select(DB::raw('sum(fee / 1e8) as fees'))->first()?->fees);
         }
 
         [$from, $to] = $this->getRangeFromPeriod($period);
         $cacheKey .= ".{$from }.{$to}";
 
         return Cache::remember($cacheKey, (int) $this->refreshInterval, fn () => Transaction::query()
-                ->select(DB::raw("to_char(to_timestamp(timestamp), 'yyyy-mm-dd') as period, SUM(fee / 1e8) as fee"))
+                ->select(DB::raw("to_char(to_timestamp(timestamp), 'yyyy-mm-dd') as period, SUM(fee /1e8) as fees"))
                 ->when($period !== 'all-time', function ($query) use ($from, $to): void {
                     $query
                         ->whereRaw("to_char(to_timestamp(timestamp), 'yyyy-mm-dd') > ?", [$from])
