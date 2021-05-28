@@ -26,8 +26,7 @@ trait AvailablePeriods
         }
 
         $arkEpoch = 1490101200;
-        $epoch = (string) ((int) Carbon::now()->timestamp - $arkEpoch);
 
-        return Carbon::createFromTimestamp($epoch)->sub("1 $period")->toDateString();
+        return Carbon::createFromTimestamp((int) Carbon::now()->timestamp - $arkEpoch)->sub("1 $period")->toDateString();
     }
 }

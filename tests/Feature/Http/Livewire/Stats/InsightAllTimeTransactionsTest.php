@@ -11,8 +11,8 @@ use function Tests\configureExplorerDatabase;
 beforeEach(fn () => configureExplorerDatabase());
 
 it('should render the component', function () {
-    Transaction::factory(30)->create(['timestamp' => Carbon::parse(Carbon::now()->timestamp - 1490101200)->sub('2 years')->timestamp]);
-    Transaction::factory(30)->create(['timestamp' => Carbon::parse(Carbon::now()->timestamp - 1490101200)->timestamp]);
+    Transaction::factory(30)->create(['timestamp' => Carbon::createFromTimestamp((int) Carbon::now()->timestamp - 1490101200)->sub('2 years')->timestamp]);
+    Transaction::factory(30)->create(['timestamp' => Carbon::createFromTimestamp((int) Carbon::now()->timestamp - 1490101200)->timestamp]);
 
     Livewire::test(InsightAllTimeTransactions::class)
         ->set('period', 'day')
@@ -24,9 +24,9 @@ it('should render the component', function () {
 });
 
 it('it should filter by year', function () {
-    Transaction::factory(30)->create(['timestamp' => Carbon::parse(Carbon::now()->timestamp - 1490101200)->sub('2 years')->timestamp]);
-    Transaction::factory(40)->create(['timestamp' => Carbon::parse(Carbon::now()->timestamp - 1490101200)->sub('11 months')->timestamp]);
-    Transaction::factory(50)->create(['timestamp' => Carbon::parse(Carbon::now()->timestamp - 1490101200)->timestamp]);
+    Transaction::factory(30)->create(['timestamp' => Carbon::createFromTimestamp((int) Carbon::now()->timestamp - 1490101200)->sub('2 years')->timestamp]);
+    Transaction::factory(40)->create(['timestamp' => Carbon::createFromTimestamp((int) Carbon::now()->timestamp - 1490101200)->sub('11 months')->timestamp]);
+    Transaction::factory(50)->create(['timestamp' => Carbon::createFromTimestamp((int) Carbon::now()->timestamp - 1490101200)->timestamp]);
 
     Livewire::test(InsightAllTimeTransactions::class)
         ->set('period', 'year')

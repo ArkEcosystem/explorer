@@ -11,8 +11,8 @@ use function Tests\configureExplorerDatabase;
 beforeEach(fn () => configureExplorerDatabase());
 
 it('should render the component', function () {
-    Transaction::factory(30)->create(['fee' => 12345678910, 'timestamp' => Carbon::parse(Carbon::now()->timestamp - 1490101200)->sub('2 years')->timestamp]);
-    Transaction::factory(30)->create(['fee' => 9234567890, 'timestamp' => Carbon::parse(Carbon::now()->timestamp - 1490101200)->timestamp]);
+    Transaction::factory(30)->create(['fee' => 12345678910, 'timestamp' => Carbon::createFromTimestamp((int) Carbon::now()->timestamp - 1490101200)->sub('2 years')->timestamp]);
+    Transaction::factory(30)->create(['fee' => 9234567890, 'timestamp' => Carbon::createFromTimestamp((int) Carbon::now()->timestamp - 1490101200)->timestamp]);
 
     Livewire::test(InsightAllTimeFeesCollected::class)
         ->set('period', 'day')
@@ -24,9 +24,9 @@ it('should render the component', function () {
 });
 
 it('should filter by year', function () {
-    Transaction::factory(30)->create(['fee' => 234678910, 'timestamp' => Carbon::parse(Carbon::now()->timestamp - 1490101200)->sub('2 years')->timestamp]);
-    Transaction::factory(30)->create(['fee' => 12345678910, 'timestamp' => Carbon::parse(Carbon::now()->timestamp - 1490101200)->sub('11 months')->timestamp]);
-    Transaction::factory(30)->create(['fee' => 9234567890, 'timestamp' => Carbon::parse(Carbon::now()->timestamp - 1490101200)->timestamp]);
+    Transaction::factory(30)->create(['fee' => 234678910, 'timestamp' => Carbon::createFromTimestamp((int) Carbon::now()->timestamp - 1490101200)->sub('2 years')->timestamp]);
+    Transaction::factory(30)->create(['fee' => 12345678910, 'timestamp' => Carbon::createFromTimestamp((int) Carbon::now()->timestamp - 1490101200)->sub('11 months')->timestamp]);
+    Transaction::factory(30)->create(['fee' => 9234567890, 'timestamp' => Carbon::createFromTimestamp((int) Carbon::now()->timestamp - 1490101200)->timestamp]);
 
     Livewire::test(InsightAllTimeFeesCollected::class)
         ->set('period', 'year')
