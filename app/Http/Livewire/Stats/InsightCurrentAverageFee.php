@@ -33,12 +33,12 @@ final class InsightCurrentAverageFee extends Component
         return view('livewire.stats.insight-current-average-fee', [
             'currentAverageFeeTitle' => trans('pages.statistics.insights.current-average-fee'),
             'currentAverageFeeValue' => $this->currentAverageFee(),
-            'minFeeTitle' => trans('pages.statistics.insights.min-fee'),
-            'minFeeValue' => $this->minFee($this->period),
-            'maxFeeTitle' => trans('pages.statistics.insights.max-fee'),
-            'maxFeeValue' => $this->maxFee($this->period),
-            'options' => $this->availablePeriods(),
-            'refreshInterval' => $this->refreshInterval,
+            'minFeeTitle'            => trans('pages.statistics.insights.min-fee'),
+            'minFeeValue'            => $this->minFee($this->period),
+            'maxFeeTitle'            => trans('pages.statistics.insights.max-fee'),
+            'maxFeeValue'            => $this->maxFee($this->period),
+            'options'                => $this->availablePeriods(),
+            'refreshInterval'        => $this->refreshInterval,
         ]);
     }
 

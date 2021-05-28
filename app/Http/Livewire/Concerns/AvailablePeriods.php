@@ -12,10 +12,10 @@ trait AvailablePeriods
     private function availablePeriods(): array
     {
         return [
-            'day' => trans('forms.statistics.day'),
-            'week' => trans('forms.statistics.week'),
+            'day'   => trans('forms.statistics.day'),
+            'week'  => trans('forms.statistics.week'),
             'month' => trans('forms.statistics.month'),
-            'year' => trans('forms.statistics.year'),
+            'year'  => trans('forms.statistics.year'),
         ];
     }
 
@@ -26,7 +26,7 @@ trait AvailablePeriods
         }
 
         $from = Carbon::now()->sub("1 $period")->timestamp;
-        $to = Carbon::now()->timestamp;
+        $to   = Carbon::now()->timestamp;
 
         return [$from, $to];
     }
