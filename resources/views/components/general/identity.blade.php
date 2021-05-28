@@ -23,17 +23,21 @@
                         {{ $model->username() }}
                     </div>
                 @else
-                    @if($withoutTruncate ?? false)
-                        {{ $model->address() }}
+                    @if ($address ?? false)
+                        {{ $address }}
                     @else
-                        @isset($dynamicTruncate)
-                          <x-truncate-dynamic>{{ $model->address() }}</x-truncate-dynamic>
+                        @if($withoutTruncate ?? false)
+                            {{ $model->address() }}
                         @else
-                          <x-truncate-middle>
-                              {{ $model->address() }}
-                          </x-truncate-middle>
-                        @endif
-                    @endisset
+                            @isset($dynamicTruncate)
+                            <x-truncate-dynamic>{{ $model->address() }}</x-truncate-dynamic>
+                            @else
+                            <x-truncate-middle>
+                                {{ $model->address() }}
+                            </x-truncate-middle>
+                            @endif
+                        @endisset
+                    @endif
                 @endif
             </a>
 

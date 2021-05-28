@@ -11,7 +11,7 @@
         @foreach($wallets as $wallet)
             <x-ark-tables.row>
                 <x-ark-tables.cell wire:key="{{ $wallet->address() }}-address">
-                    <x-tables.rows.desktop.address :model="$wallet" :without-truncate="$withoutTruncate ?? false" :dynamic-truncate="$dynamicTruncate ?? false" />
+                    <x-tables.rows.desktop.address :model="$wallet" :without-truncate="$withoutTruncate ?? false"/>
                 </x-ark-tables.cell>
                 <x-ark-tables.cell class="text-center" wire:key="{{ $wallet->address() }}-type">
                     <x-tables.rows.desktop.wallet-type :model="$wallet" />
