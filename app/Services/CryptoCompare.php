@@ -67,14 +67,14 @@ final class CryptoCompare
             return collect($result)
                 ->groupBy(fn ($day) => Carbon::createFromTimestamp($day['time'])->format($format))
                 ->mapWithKeys(function ($transactions, $day) use ($target): array {
-                    if (ExchangeRate::isFiat($target)) {
+                    if (NumberFormatter::isFiat($target)) {
                         return [
                             $day => NumberFormatter::number($transactions->sum('close')),
                         ];
                     }
 
                     return [
-                        $day => NumberFormatter::currency($transactions->sum('close'), '', 8),
+                        $day => NumberFormatter::currency($transactions->sum('close'), ''),
                     ];
                 });
         });
