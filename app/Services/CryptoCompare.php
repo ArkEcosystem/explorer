@@ -6,7 +6,6 @@ namespace App\Services;
 
 use App\Facades\Network;
 use App\Services\Cache\CryptoCompareCache;
-use App\Services\ExchangeRate;
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
