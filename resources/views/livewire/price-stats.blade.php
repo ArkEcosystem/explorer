@@ -5,13 +5,9 @@
     @endunless
 >
     @unless ($placeholder)
-        <div class="flex flex-col justify-between h-full">
-            <a class="pl-3 text-sm font-semibold leading-none whitespace-nowrap border-l link border-theme-secondary-300 dark:border-theme-secondary-800" href="#">
-                @lang('actions.view_statistics')
-            </a>
-
+        <div class="flex flex-col justify-end h-full">
             @if ($priceChange < 0)
-                <span class="flex items-center pl-3 space-x-1 text-sm font-semibold leading-none text-theme-danger-400">
+                <span class="flex items-center space-x-1 text-sm font-semibold leading-none text-theme-danger-400">
                     <span>
                         <x-ark-icon name="triangle-down" size="2xs" />
                     </span>
@@ -20,7 +16,7 @@
                     </span>
                 </span>
             @else
-                <span class="flex items-center pl-3 space-x-1 text-sm font-semibold leading-none text-theme-success-600">
+                <span class="flex items-center space-x-1 text-sm font-semibold leading-none text-theme-success-600">
                     <span>
                         <x-ark-icon name="triangle-up" size="2xs" />
                     </span>
