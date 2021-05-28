@@ -1,4 +1,4 @@
-<div class="justify-between flex-grow" wire:poll.60s>
+<div class="flex-grow justify-between" wire:poll.60s>
     <x-stats.stat
         icon="app-price"
         :disabled="! Network::canBeExchanged()"
@@ -9,7 +9,7 @@
                     <div class="flex">
                         <span class="text-sm font-semibold leading-none whitespace-nowrap dark:text-theme-secondary-600 text-theme-secondary-500">@lang('general.price')</span>
                         @if (Network::canBeExchanged())
-                            <a class="pl-3 ml-3 text-sm font-semibold leading-none border-l whitespace-nowrap link border-theme-secondary-300 dark:border-theme-secondary-800" href="{{ route('statistics') }}">
+                            <a class="pl-3 ml-3 text-sm font-semibold leading-none whitespace-nowrap border-l link border-theme-secondary-300 dark:border-theme-secondary-800" href="{{ route('statistics') }}">
                                 @lang('actions.view_statistics')
                             </a>
                         @endif
@@ -48,7 +48,7 @@
                     @endif
                 </div>
 
-                <div class="justify-end flex-grow hidden lg:flex" >
+                <div class="hidden flex-grow justify-end lg:flex" >
                     <div
                         wire:key="{{ Settings::currency() }}"
                         class="ml-6"
