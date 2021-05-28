@@ -6,7 +6,7 @@ const PriceChart = (
     darkMode,
     time
 ) => {
-    const margin   = Math.max.apply(Math, values) * .01;
+    const margin = Math.max.apply(Math, values) * 0.01;
     const maxValue = Math.max.apply(Math, values) + margin;
     const minValue = Math.min.apply(Math, values) - margin;
 
