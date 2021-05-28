@@ -25,8 +25,8 @@ trait AvailablePeriods
             return [null, null];
         }
 
-        $from = Carbon::now()->sub("1 $period")->timestamp;
-        $to = Carbon::now()->timestamp;
+        $from = Carbon::now()->sub("1 $period")->toDateString();
+        $to = Carbon::now()->toDateString();
 
         return [$from, $to];
     }

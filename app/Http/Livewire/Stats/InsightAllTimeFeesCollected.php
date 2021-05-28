@@ -80,8 +80,8 @@ final class InsightAllTimeFeesCollected extends Component
                 ->select(DB::raw("to_char(to_timestamp(timestamp), 'yyyy-mm-dd') as period, SUM(fee / 1e8) as fee"))
                 ->when($period !== 'all-time', function ($query) use ($from, $to): void {
                     $query
-                        ->where('timestamp', '>', $from)
-                        ->where('timestamp', '<=', $to);
+                        ->where(DB::raw("to_char(to_timestamp(timestamp), 'yyyy-mm-dd')"), '>', $from)
+                        ->where(DB::raw("to_char(to_timestamp(timestamp), 'yyyy-mm-dd')"), '<=', $to);
                 })
                 ->latest('period')
                 ->groupBy('period')
