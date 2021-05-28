@@ -6,12 +6,12 @@ namespace App\Http\Livewire;
 
 use App\Facades\Network;
 use App\Services\CryptoCompare;
+use App\Services\NumberFormatter;
 use App\Services\Settings;
 use Illuminate\Support\Collection;
 use Illuminate\View\View;
-use Livewire\Component;
-use App\Services\NumberFormatter;
 use Konceiver\BetterNumberFormatter\BetterNumberFormatter;
+use Livewire\Component;
 
 final class PriceStats extends Component
 {
@@ -20,7 +20,7 @@ final class PriceStats extends Component
     /** @phpstan-ignore-next-line */
     protected $listeners = [
         'refreshNetworkStatusBlock' => '$refresh',
-        'currencyChanged' => '$refresh'
+        'currencyChanged'           => '$refresh',
     ];
 
     public function mount(bool $placeholder = false) : void
