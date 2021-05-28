@@ -2,7 +2,7 @@
     <div class="navbar-settings-button">
         <button
             @click="openDropdown = openDropdown === 'settings' ? null : 'settings'"
-            class="inline-flex justify-center items-center py-2 rounded-md transition duration-150 ease-in-out text-theme-primary-300 hover:text-theme-primary-400 dark:text-theme-secondary-600 dark:hover:text-theme-secondary-500"
+            class="inline-flex items-center justify-center py-2 transition duration-150 ease-in-out rounded-md text-theme-primary-300 hover:text-theme-primary-400 dark:text-theme-secondary-600 dark:hover:text-theme-secondary-500"
         >
             <span class="inline-flex">
                 <x-ark-icon name="filter" size="sm" />
@@ -55,7 +55,7 @@
                 <x-ark-toggle
                     name="state.compactTables"
                     hide-label
-                    :default="$this->state['compactTables'] ? 'true' : 'false'"
+                    :default="$this->state['compactTables'] ? 'false' : 'true'"
                     alpine-click="$dispatch('toggle-compact-table')"
                 />
             </x-navbar.setting-option>
