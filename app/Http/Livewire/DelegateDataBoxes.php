@@ -27,7 +27,9 @@ final class DelegateDataBoxes extends Component
     public array $forgingPerformances = [];
 
     public ?int $activeForging = 0;
+
     public ?int $missedForging = 0;
+
     public ?int $keepMissingForging = 0;
 
     public function render(): View
@@ -64,8 +66,8 @@ final class DelegateDataBoxes extends Component
 
             $parsedPerformances = array_count_values($this->forgingPerformances);
 
-            $this->activeForging = $parsedPerformances['active'];
-            $this->missedForging = $parsedPerformances['missed'];
+            $this->activeForging      = $parsedPerformances['active'];
+            $this->missedForging      = $parsedPerformances['missed'];
             $this->keepMissingForging = $parsedPerformances['missing'];
             // @codeCoverageIgnoreStart
         } catch (Throwable) {
