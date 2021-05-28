@@ -6,23 +6,25 @@ namespace App\Http\Livewire\Stats;
 
 use App\Facades\Network;
 use App\Http\Livewire\Concerns\AvailablePeriods;
+use App\Models\Transaction;
 use App\Services\NumberFormatter;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 use Livewire\Component;
 
-class InsightCurrentAverageFee extends Component
+final class InsightCurrentAverageFee extends Component
 {
     use AvailablePeriods;
 
     public string $period = 'week';
 
-    private string $currency = '';
-
     private string $refreshInterval = '';
 
     public function mount(): void
     {
-        $this->currency        = Network::currency();
         $this->refreshInterval = (string) config('explorer.statistics.refreshInterval', '60');
     }
 
@@ -36,21 +38,52 @@ class InsightCurrentAverageFee extends Component
             'maxFeeTitle' => trans('pages.statistics.insights.max-fee'),
             'maxFeeValue' => $this->maxFee($this->period),
             'options' => $this->availablePeriods(),
+            'refreshInterval' => $this->refreshInterval,
         ]);
     }
 
     private function currentAverageFee(): string
     {
-        return NumberFormatter::currency(0.36350066, $this->currency);
+        $value = $this->getFeeAggregationsPerPeriod('current');
+
+        return NumberFormatter::currency(data_get($value, 'average', 0), Network::currency());
     }
 
     private function minFee(string $period): string
     {
-        return NumberFormatter::currency(0.36350066, $this->currency);
+        $value = $this->getFeeAggregationsPerPeriod($period);
+
+        return NumberFormatter::currency(data_get($value, 'minimum', 0), Network::currency());
     }
 
     private function maxFee(string $period): string
     {
-        return NumberFormatter::currency(0.36350066, $this->currency);
+        $value = $this->getFeeAggregationsPerPeriod($period);
+
+        return NumberFormatter::currency(data_get($value, 'maximum', 0), Network::currency());
+    }
+
+    private function getFeeAggregationsPerPeriod(string $period): Model | null
+    {
+        $cacheKey = __CLASS__.".fee-aggregations-per-period.{$period}";
+
+        [$from, $to] = $this->getRangeFromPeriod($period);
+
+        if ($period !== 'current') {
+            $cacheKey .= ".{$from }.{$to}";
+        }
+
+        return Cache::remember($cacheKey, (int) $this->refreshInterval, fn () => Transaction::query()
+                ->select(DB::raw("to_char(to_timestamp(timestamp), 'yyyy-mm-dd') as period, AVG(fee / 1e8) as average, MIN(fee / 1e8) as minimum, MAX(fee / 1e8) as maximum"))
+                ->when($period === 'current', function ($query): void {
+                    $query->where('timestamp', '=', Carbon::now()->timestamp);
+                }, function ($query) use ($from, $to): void {
+                    $query
+                        ->where('timestamp', '>', $from)
+                        ->where('timestamp', '<=', $to);
+                })
+                ->groupBy('period')
+                ->first()
+        );
     }
 }

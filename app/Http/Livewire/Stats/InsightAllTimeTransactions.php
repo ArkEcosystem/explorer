@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire\Stats;
 
-use App\Facades\Network;
 use App\Http\Livewire\Concerns\AvailablePeriods;
 use App\Models\Transaction;
 use App\Services\NumberFormatter;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 use Livewire\Component;
@@ -23,13 +22,10 @@ final class InsightAllTimeTransactions extends Component
 
     private string $chartColor = 'grey';
 
-    private string $currency = '';
-
     private string $refreshInterval = '';
 
     public function mount(): void
     {
-        $this->currency        = Network::currency();
         $this->refreshInterval = (string) config('explorer.statistics.refreshInterval', '60');
     }
 
@@ -43,12 +39,13 @@ final class InsightAllTimeTransactions extends Component
             'chartValues' => $this->chartValues($this->period),
             'chartColor' => $this->chartColor,
             'options' => $this->availablePeriods(),
+            'refreshInterval' => $this->refreshInterval,
         ]);
     }
 
     private function allTimeTransactions(): string
     {
-        $value = Transaction::count();
+        $value = $this->transactionsPerPeriod('all-time');
 
         return NumberFormatter::number($value);
     }
@@ -67,24 +64,24 @@ final class InsightAllTimeTransactions extends Component
         return collect($value);
     }
 
-    private function transactionsPerPeriod(string $period): EloquentCollection
+    private function transactionsPerPeriod(string $period): EloquentCollection | string
     {
-        [$from, $to] = $this->getTimestampRange($period);
+        $cacheKey = __CLASS__.".transactions-per-period.{$period}";
 
-        return Transaction::query()
-            ->select(DB::raw("to_char(to_timestamp(timestamp), 'yyyy-mm-dd') as period, COUNT('id') as transactions"))
-            ->where('timestamp', '>', $from)
-            ->where('timestamp', '<=', $to)
-            ->latest('period')
-            ->groupBy('period')
-            ->get();
-    }
+        if ($period === 'all-time') {
+            return Cache::remember($cacheKey, (int) $this->refreshInterval, fn () => (string) Transaction::count());
+        }
 
-    private function getTimestampRange(string $period): array
-    {
-        $from = Carbon::now()->sub("1 $period")->timestamp;
-        $to = Carbon::now()->timestamp;
+        [$from, $to] = $this->getRangeFromPeriod($period);
+        $cacheKey .= ".{$from }.{$to}";
 
-        return [$from, $to];
+        return Cache::remember($cacheKey, (int) $this->refreshInterval, fn () => Transaction::query()
+                ->select(DB::raw("to_char(to_timestamp(timestamp), 'yyyy-mm-dd') as period, COUNT('id') as transactions"))
+                ->where('timestamp', '>', $from)
+                ->where('timestamp', '<=', $to)
+                ->latest('period')
+                ->groupBy('period')
+                ->get()
+        );
     }
 }

@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire\Concerns;
 
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Str;
+
 trait AvailablePeriods
 {
     private function availablePeriods(): array
@@ -13,7 +16,18 @@ trait AvailablePeriods
             'week' => trans('forms.statistics.week'),
             'month' => trans('forms.statistics.month'),
             'year' => trans('forms.statistics.year'),
-            'all-time' => trans('forms.statistics.all-time'),
         ];
+    }
+
+    private function getRangeFromPeriod(string $period): array
+    {
+        if (! collect($this->availablePeriods())->keys()->containsStrict(Str::lower($period))) {
+            return [null, null];
+        }
+
+        $from = Carbon::now()->sub("1 $period")->timestamp;
+        $to = Carbon::now()->timestamp;
+
+        return [$from, $to];
     }
 }
