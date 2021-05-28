@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use App\Facades\Network;
 use App\Http\Livewire\PriceStats;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Http;
