@@ -44,6 +44,10 @@
                     {{ $model->address() }}
                 @endif
             </a>
+
+            @if ($suffix ?? false)
+                {{ $suffix }}
+            @endif
         </div>
     </div>
 </div>
