@@ -26,17 +26,9 @@ final class DelegateDataBoxes extends Component
 
     public array $forgingPerformances = [];
 
-    public ?int $activeForging = 0;
-
-    public ?int $missedForging = 0;
-
-    public ?int $keepMissingForging = 0;
-
     public function render(): View
     {
         $this->delegates = $this->fetchDelegates();
-
-        $this->pollDelegatesPerformance();
 
         return view('livewire.delegate-data-boxes', [
             'statistics' => $this->statistics,
@@ -49,7 +41,9 @@ final class DelegateDataBoxes extends Component
             $this->statistics = [
                 'blockCount'      => $this->getBlockCount(),
                 'nextDelegate'    => $this->getNextDelegate(),
+                'performances'    => $this->getDelegatesPerformance(),
             ];
+
             // @codeCoverageIgnoreStart
         } catch (Throwable) {
             $this->pollStatistics();
@@ -57,23 +51,19 @@ final class DelegateDataBoxes extends Component
         // @codeCoverageIgnoreEnd
     }
 
-    public function pollDelegatesPerformance(): void
+    public function getDelegatesPerformance(): array
     {
-        try {
-            foreach ($this->delegates as $delegate) {
-                $this->lookupDelegatePerformance($delegate->wallet()->model()->public_key);
-            }
-
-            $parsedPerformances = array_count_values($this->forgingPerformances);
-
-            $this->activeForging      = $parsedPerformances['active'];
-            $this->missedForging      = $parsedPerformances['missed'];
-            $this->keepMissingForging = $parsedPerformances['missing'];
-            // @codeCoverageIgnoreStart
-        } catch (Throwable) {
-            $this->pollDelegatesPerformance();
+        foreach ($this->delegates as $delegate) {
+            $this->lookupDelegatePerformance($delegate->wallet()->model()->public_key);
         }
-        // @codeCoverageIgnoreEnd
+
+        $parsedPerformances = array_count_values($this->forgingPerformances);
+
+        return [
+            'forging'     => $parsedPerformances['active'],
+            'missed'      => $parsedPerformances['missed'],
+            'not_forging' => $parsedPerformances['missing'],
+        ];
     }
 
     private function lookupDelegatePerformance(string $publicKey)

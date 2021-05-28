@@ -6,17 +6,17 @@
     <div id="statistics-list" class="w-full" wire:poll.{{ Network::blockTime() }}s="pollStatistics" wire:key="poll_statistics_real">
         <div class="flex space-x-4 w-full md:flex-col xl:flex-row md:space-x-0 xl:space-x-4 md:space-y-4 xl:space-y-0">
             <div class="flex flex-row py-3 px-6 bg-white rounded-xl dark:bg-theme-secondary-900">
-                <div class="flex w-full lg:w-1/2 xl:w-full" wire:poll.{{ Network::blockTime() }}s="pollDelegatesPerformance" wire:key="poll_delegates_performances_real">
+                <div class="flex w-full lg:w-1/2 xl:w-full">
                     <x-general.header-entry
-                        title="Forging"
-                        text="{{ $this->activeForging }}"
+                        :title="trans('pages.delegates.statistics.forging')"
+                        :text="$statistics['performances']['forging']"
                         wrapper-class="pr-5 border-r border-theme-secondary-300 dark:border-theme-secondary-800"
                     >
                         <x-slot name="icon">
                             <div class="flex items-center mr-2">
                                 <x-delegates.progress-circle
                                     circle-color="success-600"
-                                    progress="{{ Percentage::calculate($this->activeForging, Network::delegateCount()) }}"
+                                    progress="{{ Percentage::calculate($statistics['performances']['forging'], Network::delegateCount()) }}"
                                 >
                                     <x-ark-icon class="rotate-90 text-theme-success-600 border-theme-success-600" name="checkmark-smooth" size="sm" />
                                 </x-delegates.progress-circle>
@@ -25,15 +25,15 @@
                     </x-general.header-entry>
 
                     <x-general.header-entry
-                        title="Missed"
-                        text="{{ $this->missedForging }}"
+                        :title="trans('pages.delegates.statistics.missed')"
+                        :text="$statistics['performances']['missed']"
                         wrapper-class="pr-5 ml-5 border-r border-theme-secondary-300 dark:border-theme-secondary-800"
                     >
                         <x-slot name="icon">
                             <div class="flex items-center mr-2">
                                 <x-delegates.progress-circle
                                     circle-color="warning-500"
-                                    progress="{{ Percentage::calculate($this->missedForging, Network::delegateCount()) }}"
+                                    progress="{{ Percentage::calculate($statistics['performances']['missed'], Network::delegateCount()) }}"
                                 >
                                     <x-ark-icon class="rotate-90 text-theme-warning-500 border-theme-warning-500" name="pause" size="xs" />
                                 </x-delegates.progress-circle>
@@ -42,8 +42,8 @@
                     </x-general.header-entry>
 
                     <x-general.header-entry
-                        title="Not Forging"
-                        text="{{ $this->keepMissingForging }}"
+                        :title="trans('pages.delegates.statistics.not_forging')"
+                        :text="$statistics['performances']['not_forging']"
                         wrapper-class="ml-5"
                         without-border
                     >
@@ -51,7 +51,7 @@
                             <div class="flex items-center mr-2">
                                 <x-delegates.progress-circle
                                     circle-color="danger-400"
-                                    progress="{{ Percentage::calculate($this->keepMissingForging, Network::delegateCount()) }}"
+                                    progress="{{ Percentage::calculate($statistics['performances']['not_forging'], Network::delegateCount()) }}"
                                 >
                                     <x-ark-icon class="rotate-90 text-theme-danger-400 border-theme-danger-400" name="cross" size="xs" />
                                 </x-delegates.progress-circle>
