@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire;
 
+use Livewire\Component;
+use App\Facades\Network;
+use Illuminate\View\View;
+use App\Services\Settings;
+use App\Services\CryptoCompare;
+use App\Services\NumberFormatter;
 use App\Actions\CacheNetworkHeight;
 use App\Actions\CacheNetworkSupply;
-use App\Facades\Network;
-use App\Services\CryptoCompare;
-use App\Services\ExchangeRate;
-use App\Services\Settings;
-use Illuminate\View\View;
 use Konceiver\BetterNumberFormatter\BetterNumberFormatter;
-use Livewire\Component;
 
 final class NetworkStatusBlock extends Component
 {
@@ -35,7 +35,7 @@ final class NetworkStatusBlock extends Component
         $currency = Settings::currency();
         $price    = CryptoCompare::price(Network::currency(), $currency);
 
-        if (ExchangeRate::isFiat($currency)) {
+        if (NumberFormatter::isFiat($currency)) {
             return BetterNumberFormatter::new()
                 ->withLocale(Settings::locale())
                 ->formatWithCurrencyAccounting($price);
@@ -45,7 +45,7 @@ final class NetworkStatusBlock extends Component
             ->formatWithCurrencyCustom(
                 $price,
                 $currency,
-                ExchangeRate::CRYPTO_DECIMALS
+                NumberFormatter::CRYPTO_DECIMALS
             );
     }
 
@@ -54,7 +54,7 @@ final class NetworkStatusBlock extends Component
         $currency = Settings::currency();
         $price    = $this->getMarketCap();
 
-        if (ExchangeRate::isFiat($currency)) {
+        if (NumberFormatter::isFiat($currency)) {
             return BetterNumberFormatter::new()
                 ->withLocale(Settings::locale())
                 ->formatWithCurrencyAccounting($price);
@@ -64,7 +64,7 @@ final class NetworkStatusBlock extends Component
             ->formatWithCurrencyCustom(
                 $price,
                 $currency,
-                ExchangeRate::CRYPTO_DECIMALS
+                NumberFormatter::CRYPTO_DECIMALS
             );
     }
 
