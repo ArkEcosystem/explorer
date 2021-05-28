@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire;
 
-use Livewire\Component;
-use App\Facades\Network;
-use Illuminate\View\View;
-use App\Services\Settings;
-use App\Services\CryptoCompare;
-use App\Services\NumberFormatter;
 use App\Actions\CacheNetworkHeight;
 use App\Actions\CacheNetworkSupply;
+use App\Facades\Network;
+use App\Services\CryptoCompare;
+use App\Services\NumberFormatter;
+use App\Services\Settings;
+use Illuminate\View\View;
 use Konceiver\BetterNumberFormatter\BetterNumberFormatter;
+use Livewire\Component;
 
 final class NetworkStatusBlock extends Component
 {

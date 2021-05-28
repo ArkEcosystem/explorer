@@ -59,7 +59,6 @@ it('should format a number with a K notation', function () {
     assertMatchesSnapshot(NumberFormatter::currencyShortNotation(104910000));
 });
 
-
 it('should use two decimals for a fiat currency', function () {
     expect(NumberFormatter::decimalsFor('USD'))->toBe(2);
     expect(NumberFormatter::decimalsFor('BTC'))->toBe(8);
