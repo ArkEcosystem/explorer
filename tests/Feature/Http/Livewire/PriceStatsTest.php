@@ -18,8 +18,6 @@ it('should render the price change', function () {
 });
 
 it('should render the values', function () {
-    Config::set('explorer.networks.development.canBeExchanged', true);
-
     Http::fake([
         'cryptocompare.com/data/histohour*' => Http::response(json_decode(file_get_contents(base_path('tests/fixtures/cryptocompare/histohour.json')), true)),
     ]);
