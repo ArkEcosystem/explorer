@@ -6,6 +6,7 @@ const PriceChart = (
     darkMode,
     time
 ) => {
+    // The margin is used to not cut the line at the top/bottom
     const margin = Math.max.apply(Math, values) * 0.01;
     const maxValue = Math.max.apply(Math, values) + margin;
     const minValue = Math.min.apply(Math, values) - margin;
