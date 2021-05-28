@@ -25,28 +25,8 @@ final class NetworkStatusBlock extends Component
             'height'    => CacheNetworkHeight::execute(),
             'network'   => Network::name(),
             'supply'    => CacheNetworkSupply::execute() / 1e8,
-            'price'     => $this->getPriceFormatted(),
             'marketCap' => $this->getMarketCapFormatted(),
         ]);
-    }
-
-    private function getPriceFormatted(): string
-    {
-        $currency = Settings::currency();
-        $price    = CryptoCompare::price(Network::currency(), $currency);
-
-        if (NumberFormatter::isFiat($currency)) {
-            return BetterNumberFormatter::new()
-                ->withLocale(Settings::locale())
-                ->formatWithCurrencyAccounting($price);
-        }
-
-        return BetterNumberFormatter::new()
-            ->formatWithCurrencyCustom(
-                $price,
-                $currency,
-                NumberFormatter::CRYPTO_DECIMALS
-            );
     }
 
     private function getMarketCapFormatted(): string

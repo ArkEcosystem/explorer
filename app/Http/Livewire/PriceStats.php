@@ -10,13 +10,18 @@ use App\Services\Settings;
 use Illuminate\Support\Collection;
 use Illuminate\View\View;
 use Livewire\Component;
+use App\Services\NumberFormatter;
+use Konceiver\BetterNumberFormatter\BetterNumberFormatter;
 
 final class PriceStats extends Component
 {
     public bool $placeholder = false;
 
     /** @phpstan-ignore-next-line */
-    protected $listeners = ['refreshNetworkStatusBlock' => '$refresh'];
+    protected $listeners = [
+        'refreshNetworkStatusBlock' => '$refresh',
+        'currencyChanged' => '$refresh'
+    ];
 
     public function mount(bool $placeholder = false) : void
     {
@@ -26,6 +31,7 @@ final class PriceStats extends Component
     public function render(): View
     {
         return view('livewire.price-stats', [
+            'price'       => $this->getPriceFormatted(),
             'from'        => Network::currency(),
             'to'          => Settings::currency(),
             'priceChange' => $this->getPriceChange(),
@@ -49,6 +55,25 @@ final class PriceStats extends Component
         }
 
         return ($finalPrice / $initialPrice) - 1;
+    }
+
+    private function getPriceFormatted(): string
+    {
+        $currency = Settings::currency();
+        $price    = CryptoCompare::price(Network::currency(), $currency);
+
+        if (NumberFormatter::isFiat($currency)) {
+            return BetterNumberFormatter::new()
+                ->withLocale(Settings::locale())
+                ->formatWithCurrencyAccounting($price);
+        }
+
+        return BetterNumberFormatter::new()
+            ->formatWithCurrencyCustom(
+                $price,
+                $currency,
+                NumberFormatter::CRYPTO_DECIMALS
+            );
     }
 
     private function getHistorical(): Collection
