@@ -6,9 +6,9 @@ const PriceChart = (
     darkMode,
     time
 ) => {
-    // The `0.02` is to left some space to prevent the border to be cropped
-    const maxValue = Math.max.apply(Math, values) + 0.02;
-    const minValue = Math.min.apply(Math, values) - 0.02;
+    const margin   = Math.max.apply(Math, values) * .01;
+    const maxValue = Math.max.apply(Math, values) + margin;
+    const minValue = Math.min.apply(Math, values) - margin;
 
     return {
         time: time,
