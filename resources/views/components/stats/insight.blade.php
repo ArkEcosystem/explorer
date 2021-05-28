@@ -61,7 +61,3 @@
     </div>
 
 </x-general.card>
-
-@push('scripts')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.9.1/dayjs.min.js"></script>
-@endpush

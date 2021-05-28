@@ -72,18 +72,20 @@ final class InsightAllTimeFeesCollected extends Component
         $cacheKey = __CLASS__.".transactions-per-period.{$period}";
 
         if ($period === 'all-time') {
-            return Cache::remember($cacheKey, (int) $this->refreshInterval, fn () => (string) Transaction::select(DB::raw('sum(fee / 1e8) as fees'))->first()?->fees);
+            return Cache::remember($cacheKey, (int) $this->refreshInterval, function (): string {
+                $value = Transaction::select(DB::raw('sum(fee / 1e8) as fees'))->first();
+
+                return (string) data_get($value, 'fees', '0');
+            });
         }
 
-        [$from, $to] = $this->getRangeFromPeriod($period);
-        $cacheKey .= ".{$from }.{$to}";
+        $from = $this->getRangeFromPeriod($period);
+        $cacheKey .= ".{$from }";
 
         return Cache::remember($cacheKey, (int) $this->refreshInterval, fn () => Transaction::query()
                 ->select(DB::raw("to_char(to_timestamp(timestamp), 'yyyy-mm-dd') as period, SUM(fee /1e8) as fees"))
-                ->when($period !== 'all-time', function ($query) use ($from, $to): void {
-                    $query
-                        ->whereRaw("to_char(to_timestamp(timestamp), 'yyyy-mm-dd') > ?", [$from])
-                        ->whereRaw("to_char(to_timestamp(timestamp), 'yyyy-mm-dd') <= ?", [$to]);
+                ->when($period !== 'all-time', function ($query) use ($from): void {
+                    $query->whereRaw("to_char(to_timestamp(timestamp), 'yyyy-mm-dd') > ?", [$from]);
                 })
                 ->latest('period')
                 ->groupBy('period')

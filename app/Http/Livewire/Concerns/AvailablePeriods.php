@@ -19,15 +19,15 @@ trait AvailablePeriods
         ];
     }
 
-    private function getRangeFromPeriod(string $period): array
+    private function getRangeFromPeriod(string $period): string | null
     {
         if (! collect($this->availablePeriods())->keys()->containsStrict(Str::lower($period))) {
-            return [null, null];
+            return null;
         }
 
-        $from = Carbon::now()->sub("1 $period")->toDateString();
-        $to   = Carbon::now()->toDateString();
+        $arkEpoch = 1490101200;
+        $epoch = (string) ((int) Carbon::now()->timestamp - $arkEpoch);
 
-        return [$from, $to];
+        return Carbon::parse($epoch)->sub("1 $period")->toDateString();
     }
 }
