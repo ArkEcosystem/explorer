@@ -6,12 +6,8 @@
             transactionTypeFilter: 'all',
             transactionTypeFilterLabel: 'All',
         }" x-cloak class="w-full">
-            <div class="mb-4 w-full md:mb-8">
-                <div class="flex relative flex-col justify-between md:items-end md:flex-row md:justify-start">
-                    <h4 class="mb-8 md:mb-0">
-                        @lang('pages.wallet.transaction_history')
-                    </h4>
-                </div>
+            <div class="md:hidden">
+                <x-transaction-table-filter :type="'all'" />
             </div>
 
             <livewire:wallet-transaction-table
