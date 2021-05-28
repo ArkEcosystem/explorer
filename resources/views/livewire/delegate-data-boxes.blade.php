@@ -5,19 +5,18 @@
 @else
     <div id="statistics-list" class="w-full" wire:poll.{{ Network::blockTime() }}s="pollStatistics" wire:key="poll_statistics_real">
         <div class="flex space-x-4 w-full md:flex-col xl:flex-row md:space-x-0 xl:space-x-4 md:space-y-4 xl:space-y-0">
-            {{--TODO: Replace the text and progress of the 3 boxes below with real data once implemented--}}
             <div class="flex flex-row py-3 px-6 bg-white rounded-xl dark:bg-theme-secondary-900">
-                <div class="flex w-full lg:w-1/2 xl:w-full">
+                <div class="flex w-full lg:w-1/2 xl:w-full" wire:poll.{{ Network::blockTime() }}s="pollDelegatesPerformance" wire:key="poll_delegates_performances_real">
                     <x-general.header-entry
                         title="Forging"
-                        text="49"
+                        text="{{ $this->activeForging }}"
                         wrapper-class="pr-5 border-r border-theme-secondary-300 dark:border-theme-secondary-800"
                     >
                         <x-slot name="icon">
                             <div class="flex items-center mr-2">
                                 <x-delegates.progress-circle
                                     circle-color="success-600"
-                                    progress="98"
+                                    progress="{{ Percentage::calculate($this->activeForging, Network::delegateCount()) }}"
                                 >
                                     <x-ark-icon class="rotate-90 text-theme-success-600 border-theme-success-600" name="checkmark-smooth" size="sm" />
                                 </x-delegates.progress-circle>
@@ -27,14 +26,14 @@
 
                     <x-general.header-entry
                         title="Missed"
-                        text="1"
+                        text="{{ $this->missedForging }}"
                         wrapper-class="pr-5 ml-5 border-r border-theme-secondary-300 dark:border-theme-secondary-800"
                     >
                         <x-slot name="icon">
                             <div class="flex items-center mr-2">
                                 <x-delegates.progress-circle
                                     circle-color="warning-500"
-                                    progress="1"
+                                    progress="{{ Percentage::calculate($this->missedForging, Network::delegateCount()) }}"
                                 >
                                     <x-ark-icon class="rotate-90 text-theme-warning-500 border-theme-warning-500" name="pause" size="xs" />
                                 </x-delegates.progress-circle>
@@ -44,14 +43,14 @@
 
                     <x-general.header-entry
                         title="Not Forging"
-                        text="1"
+                        text="{{ $this->keepMissingForging }}"
                         wrapper-class="ml-5"
                     >
                         <x-slot name="icon">
                             <div class="flex items-center mr-2">
                                 <x-delegates.progress-circle
                                     circle-color="danger-400"
-                                    progress="1"
+                                    progress="{{ Percentage::calculate($this->keepMissingForging, Network::delegateCount()) }}"
                                 >
                                     <x-ark-icon class="rotate-90 text-theme-danger-400 border-theme-danger-400" name="cross" size="xs" />
                                 </x-delegates.progress-circle>

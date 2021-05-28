@@ -18,8 +18,7 @@
             <x-ark-container>
                 <div x-data="{
                     dropdownOpen: false,
-                    {{--TODO: change back to table once done--}}
-                    component: 'monitor',
+                    component: 'table',
                     status: 'active',
                 }" x-cloak class="w-full">
                     <livewire:delegate-tabs />

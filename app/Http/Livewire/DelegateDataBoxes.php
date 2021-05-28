@@ -9,6 +9,7 @@ use App\Facades\Network;
 use App\Http\Livewire\Concerns\DelegateData;
 use App\Models\Block;
 use App\Services\Cache\MonitorCache;
+use App\Services\Cache\WalletCache;
 use App\Services\Monitor\Monitor;
 use App\ViewModels\WalletViewModel;
 use Illuminate\View\View;
@@ -23,8 +24,18 @@ final class DelegateDataBoxes extends Component
 
     private array $statistics = [];
 
+    public array $forgingPerformances = [];
+
+    public ?int $activeForging = 0;
+    public ?int $missedForging = 0;
+    public ?int $keepMissingForging = 0;
+
     public function render(): View
     {
+        $this->delegates = $this->fetchDelegates();
+
+        $this->pollDelegatesPerformance();
+
         return view('livewire.delegate-data-boxes', [
             'statistics' => $this->statistics,
         ]);
@@ -42,6 +53,53 @@ final class DelegateDataBoxes extends Component
             $this->pollStatistics();
         }
         // @codeCoverageIgnoreEnd
+    }
+
+    public function pollDelegatesPerformance(): void
+    {
+        try {
+            foreach ($this->delegates as $delegate) {
+                $this->lookupDelegatePerformance($delegate->wallet()->model()->public_key);
+            }
+
+            $parsedPerformances = array_count_values($this->forgingPerformances);
+
+            $this->activeForging = $parsedPerformances['active'];
+            $this->missedForging = $parsedPerformances['missed'];
+            $this->keepMissingForging = $parsedPerformances['missing'];
+            // @codeCoverageIgnoreStart
+        } catch (Throwable) {
+            $this->pollDelegatesPerformance();
+        }
+        // @codeCoverageIgnoreEnd
+    }
+
+    private function lookupDelegatePerformance(string $publicKey)
+    {
+        $performances = (new WalletCache())->getPerformance($publicKey);
+
+        $lastElement     = array_slice($performances, -1);
+        $lastTwoElements = array_slice($performances, -2);
+
+        if (array_unique($performances)[0] === true) {
+            $this->forgingPerformances[$publicKey] = 'active';
+        }
+
+        if (array_unique($performances)[0] === false) {
+            $this->forgingPerformances[$publicKey] = 'missing';
+        }
+
+        if ($lastElement[0] === false) {
+            $this->forgingPerformances[$publicKey] = 'missed';
+        }
+
+        if ($lastElement[0] === true) {
+            $this->forgingPerformances[$publicKey] = 'active';
+        }
+
+        if (array_unique($lastTwoElements)[0] === false) {
+            $this->forgingPerformances[$publicKey] = 'missing';
+        }
     }
 
     public function getBlockCount(): string
