@@ -58,7 +58,7 @@
                         {{ $historical->values()->toJson() }},
                         {{ $historical->keys()->toJson() }},
                         {{ $priceChange === null ? 0 : $priceChange }},
-                        {{ $placeholder ? 'true' : 'false' }},
+                        {{ ! Network::canBeExchanged() ? 'true' : 'false' }},
                         {{ Settings::usesDarkTheme() ? 'true' : 'false' }},
                         '{{ time() }}'
                     )"

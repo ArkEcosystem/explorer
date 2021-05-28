@@ -15,18 +15,8 @@ use Konceiver\BetterNumberFormatter\BetterNumberFormatter;
 
 final class PriceStats extends Component
 {
-    public bool $placeholder = false;
-
     /** @phpstan-ignore-next-line */
-    protected $listeners = [
-        'refreshNetworkStatusBlock' => '$refresh',
-        'currencyChanged' => '$refresh'
-    ];
-
-    public function mount(bool $placeholder = false) : void
-    {
-        $this->placeholder = $placeholder;
-    }
+    protected $listeners = ['currencyChanged' => '$refresh'];
 
     public function render(): View
     {
@@ -41,7 +31,7 @@ final class PriceStats extends Component
 
     private function getPriceChange(): ?float
     {
-        if ($this->placeholder) {
+        if (! Network::canBeExchanged()) {
             return null;
         }
 
@@ -78,7 +68,7 @@ final class PriceStats extends Component
 
     private function getHistorical(): Collection
     {
-        if ($this->placeholder) {
+        if (! Network::canBeExchanged()) {
             return collect([4, 5, 2, 2, 2, 3, 5, 1, 4, 5, 6, 5, 3, 3, 4, 5, 6, 4, 4, 4, 5, 8, 8, 10]);
         }
 
