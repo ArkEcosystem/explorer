@@ -48,21 +48,23 @@ final class InsightAllTimeFeesCollected extends Component
     {
         $value = $this->transactionsPerPeriod('all-time');
 
-        return NumberFormatter::currency($value, Network::currency());
+        return NumberFormatter::currency((string) $value, Network::currency());
     }
 
     private function fees(string $period): string
     {
-        $value = $this->transactionsPerPeriod($period)->pluck('fee')->sum();
+        /** @var Transaction $value */
+        $value = $this->transactionsPerPeriod($period);
 
-        return NumberFormatter::currency($value, Network::currency());
+        return NumberFormatter::currency($value->pluck('fee')->sum(), Network::currency());
     }
 
     private function chartValues(string $period): Collection
     {
-        $value = $this->transactionsPerPeriod($period)->pluck('fee');
+        /** @var Transaction $value */
+        $value = $this->transactionsPerPeriod($period);
 
-        return collect($value);
+        return collect($value->pluck('fee'));
     }
 
     private function transactionsPerPeriod(string $period): EloquentCollection | string
@@ -70,7 +72,7 @@ final class InsightAllTimeFeesCollected extends Component
         $cacheKey = __CLASS__.".transactions-per-period.{$period}";
 
         if ($period === 'all-time') {
-            return Cache::remember($cacheKey, (int) $this->refreshInterval, fn () => (string) Transaction::select(DB::raw('sum(fee / 1e8) as fee'))->first()->fee);
+            return Cache::remember($cacheKey, (int) $this->refreshInterval, fn () => (string) Transaction::select(DB::raw('sum(fee / 1e8) as fee'))->first()?->fee);
         }
 
         [$from, $to] = $this->getRangeFromPeriod($period);
@@ -80,8 +82,8 @@ final class InsightAllTimeFeesCollected extends Component
                 ->select(DB::raw("to_char(to_timestamp(timestamp), 'yyyy-mm-dd') as period, SUM(fee / 1e8) as fee"))
                 ->when($period !== 'all-time', function ($query) use ($from, $to): void {
                     $query
-                        ->where(DB::raw("to_char(to_timestamp(timestamp), 'yyyy-mm-dd')"), '>', $from)
-                        ->where(DB::raw("to_char(to_timestamp(timestamp), 'yyyy-mm-dd')"), '<=', $to);
+                        ->whereRaw("to_char(to_timestamp(timestamp), 'yyyy-mm-dd') > ?", [$from])
+                        ->whereRaw("to_char(to_timestamp(timestamp), 'yyyy-mm-dd') <= ?", [$to]);
                 })
                 ->latest('period')
                 ->groupBy('period')

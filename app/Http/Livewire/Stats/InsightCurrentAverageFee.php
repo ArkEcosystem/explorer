@@ -76,11 +76,11 @@ final class InsightCurrentAverageFee extends Component
         return Cache::remember($cacheKey, (int) $this->refreshInterval, fn () => Transaction::query()
                 ->select(DB::raw("to_char(to_timestamp(timestamp), 'yyyy-mm-dd') as period, AVG(fee / 1e8) as average, MIN(fee / 1e8) as minimum, MAX(fee / 1e8) as maximum"))
                 ->when($period === 'current', function ($query): void {
-                    $query->where(DB::raw("to_char(to_timestamp(timestamp), 'yyyy-mm-dd')"), '=', Carbon::now()->toDateString());
+                    $query->whereRaw("to_char(to_timestamp(timestamp), 'yyyy-mm-dd') = ?", [Carbon::now()->toDateString()]);
                 }, function ($query) use ($from, $to): void {
                     $query
-                        ->where(DB::raw("to_char(to_timestamp(timestamp), 'yyyy-mm-dd')"), '>', $from)
-                        ->where(DB::raw("to_char(to_timestamp(timestamp), 'yyyy-mm-dd')"), '<=', $to);
+                        ->whereRaw("to_char(to_timestamp(timestamp), 'yyyy-mm-dd') > ?", [$from])
+                        ->whereRaw("to_char(to_timestamp(timestamp), 'yyyy-mm-dd') <= ?", [$to]);
                 })
                 ->groupBy('period')
                 ->first()

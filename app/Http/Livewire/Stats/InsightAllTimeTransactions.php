@@ -47,21 +47,23 @@ final class InsightAllTimeTransactions extends Component
     {
         $value = $this->transactionsPerPeriod('all-time');
 
-        return NumberFormatter::number($value);
+        return NumberFormatter::number((string) $value);
     }
 
     private function countTransactionsPerPeriod(string $period): string
     {
-        $value = $this->transactionsPerPeriod($period)->pluck('transactions')->sum();
+        /** @var Transaction $value */
+        $value = $this->transactionsPerPeriod($period);
 
-        return NumberFormatter::number($value);
+        return NumberFormatter::number($value->pluck('transactions')->sum());
     }
 
     private function chartValues(string $period): Collection
     {
-        $value = $this->transactionsPerPeriod($period)->pluck('transactions');
+        /** @var Transaction $value */
+        $value = $this->transactionsPerPeriod($period);
 
-        return collect($value);
+        return collect($value->pluck('transactions'));
     }
 
     private function transactionsPerPeriod(string $period): EloquentCollection | string
@@ -77,8 +79,8 @@ final class InsightAllTimeTransactions extends Component
 
         return Cache::remember($cacheKey, (int) $this->refreshInterval, fn () => Transaction::query()
                 ->select(DB::raw("to_char(to_timestamp(timestamp), 'yyyy-mm-dd') as period, COUNT('id') as transactions"))
-                ->where(DB::raw("to_char(to_timestamp(timestamp), 'yyyy-mm-dd')"), '>', $from)
-                ->where(DB::raw("to_char(to_timestamp(timestamp), 'yyyy-mm-dd')"), '<=', $to)
+                ->whereRaw("to_char(to_timestamp(timestamp), 'yyyy-mm-dd') > ?", [$from])
+                ->whereRaw("to_char(to_timestamp(timestamp), 'yyyy-mm-dd') <= ?", [$to])
                 ->latest('period')
                 ->groupBy('period')
                 ->get()
