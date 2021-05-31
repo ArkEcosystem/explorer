@@ -120,12 +120,12 @@ final class Chart extends Component
 
     private function chart(string $period): Collection
     {
-        $collectionFiat = CryptoCompare::historical(Network::currency(), Settings::currency());
+        $collectionFiat   = CryptoCompare::historical(Network::currency(), Settings::currency());
         $collectionCrypto = CryptoCompare::historical(Network::currency(), CryptoCurrencies::BTC);
 
         $collection = $collectionFiat->mapWithKeys(fn ($value, $key) => [$key => [
             CryptoCurrencies::BTC => ServiceNumberFormatter::currency($collectionCrypto->get($key), CryptoCurrencies::BTC, 8),
-            Settings::currency() => BetterNumberFormatter::new()->formatWithCurrency($value),
+            Settings::currency()  => BetterNumberFormatter::new()->formatWithCurrency($value),
         ]]);
 
         if ($period !== 'all') {
