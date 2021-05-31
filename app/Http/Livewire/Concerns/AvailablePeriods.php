@@ -9,16 +9,33 @@ use Illuminate\Support\Str;
 
 trait AvailablePeriods
 {
+    private function defaultPeriod(): string
+    {
+        return 'week';
+    }
+
     private function availablePeriods(): array
     {
         return [
-            '0 day'   => trans('forms.statistics.day'),
-            '1 week'  => trans('forms.statistics.week'),
-            '1 month' => trans('forms.statistics.month'),
-            '1 quarter'  => trans('forms.statistics.quarter'),
-            '1 year'  => trans('forms.statistics.year'),
-            '90 years'  => trans('forms.statistics.all'),
+            'day'   => trans('forms.statistics.day'),
+            'week'  => trans('forms.statistics.week'),
+            'month' => trans('forms.statistics.month'),
+            'quarter'  => trans('forms.statistics.quarter'),
+            'year'  => trans('forms.statistics.year'),
+            'all'  => trans('forms.statistics.all'),
         ];
+    }
+
+    private function subtractFromPeriod(string $period): string
+    {
+        return collect([
+            'day' => '1 day',
+            'week' => '1 week',
+            'month' => '1 month',
+            'quarter' => '1 quarter',
+            'year' => '1 year',
+            'all' => '100 years',
+        ])->get($period);
     }
 
     private function getRangeFromPeriod(string $period): string | null
@@ -27,8 +44,13 @@ trait AvailablePeriods
             return null;
         }
 
-        $arkEpoch = 1490101200;
+        return Carbon::createFromTimestamp((int) Carbon::now()->timestamp - $this->getArkEpoch())
+            ->sub($this->subtractFromPeriod($period))
+            ->toDateString();
+    }
 
-        return Carbon::createFromTimestamp((int) Carbon::now()->timestamp - $arkEpoch)->sub($period)->toDateString();
+    private function getArkEpoch(): int
+    {
+        return 1490101200;
     }
 }

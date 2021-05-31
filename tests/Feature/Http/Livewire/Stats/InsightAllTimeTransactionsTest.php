@@ -8,7 +8,11 @@ use Illuminate\Support\Carbon;
 use Livewire\Livewire;
 use function Tests\configureExplorerDatabase;
 
-beforeEach(fn () => configureExplorerDatabase());
+beforeEach(function (): void {
+    configureExplorerDatabase();
+
+    Carbon::setTestNow('2021-01-01 00:00:00');
+});
 
 it('should render the component', function () {
     Transaction::factory(30)->create(['timestamp' => Carbon::createFromTimestamp((int) Carbon::now()->timestamp - 1490101200)->sub('2 years')->timestamp]);

@@ -26,6 +26,7 @@ final class InsightCurrentAverageFee extends Component
     public function mount(): void
     {
         $this->refreshInterval = (string) config('explorer.statistics.refreshInterval', '60');
+        $this->period = $this->defaultPeriod();
     }
 
     public function render(): View
@@ -76,7 +77,7 @@ final class InsightCurrentAverageFee extends Component
         return Cache::remember($cacheKey, (int) $this->refreshInterval, fn () => Transaction::query()
                 ->select(DB::raw("to_char(to_timestamp(timestamp), 'yyyy-mm-dd') as period, AVG(fee / 1e8) as average, MIN(fee / 1e8) as minimum, MAX(fee / 1e8) as maximum"))
                 ->when($period === 'current', function ($query): void {
-                    $now = Carbon::createFromTimestamp((int) Carbon::now()->timestamp - 1490101200)->toDateString();
+                    $now = Carbon::createFromTimestamp((int) Carbon::now()->timestamp - $this->getArkEpoch())->toDateString();
                     $query->whereRaw("to_char(to_timestamp(timestamp), 'yyyy-mm-dd') = ?", [$now]);
                 }, function ($query) use ($from): void {
                     $query->whereRaw("to_char(to_timestamp(timestamp), 'yyyy-mm-dd') > ?", [$from]);
