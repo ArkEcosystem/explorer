@@ -234,6 +234,7 @@ return [
         'NumberFormatter' => App\Services\NumberFormatter::class,
         'Settings'        => App\Services\Settings::class,
         'Percentage'      => Mattiasgeniar\Percentage\Percentage::class,
+        'ExchangeRate'    => App\Services\ExchangeRate::class,
     ],
 
 ];
