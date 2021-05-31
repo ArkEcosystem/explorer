@@ -12,8 +12,7 @@ use App\ViewModels\WalletViewModel;
 use Livewire\Livewire;
 use function Tests\configureExplorerDatabase;
 
-// TODO: Fix that, cause that helper method exists somewhere else and it fuck up
-function createRoundWithDelegatesBis(array $performances = null): void
+function createRoundWithDelegatesAndPerformances(array $performances = null): void
 {
     Wallet::factory(51)->create()->each(function ($wallet) use ($performances) {
         $block = Block::factory()->create([
@@ -55,7 +54,7 @@ beforeEach(fn () => configureExplorerDatabase());
 
 // @TODO: make assertions about data visibility
 it('should render without errors', function () {
-    createRoundWithDelegatesBis();
+    createRoundWithDelegatesAndPerformances();
 
     $component = Livewire::test(DelegateDataBoxes::class);
 
@@ -66,19 +65,19 @@ it('should render without errors', function () {
 });
 
 it('should get the performances of active delegates and parse it into a readable array', function () {
-    createRoundWithDelegatesBis();
+    createRoundWithDelegatesAndPerformances();
 
     $component = Livewire::test(DelegateDataBoxes::class);
 
     $component->call('pollStatistics');
 
     expect($component->instance()->getDelegatesPerformance())->toBeArray();
-    expect($component->instance()->getDelegatesPerformance())->toHaveKeys(['forging', 'missed', 'not_forging']);
+    expect($component->instance()->getDelegatesPerformance())->toHaveKeys(['forging', 'missed', 'missing']);
 
 });
 
 it('should determine if delegates are forging based on their round history', function () {
-    createRoundWithDelegatesBis([true, true, true, true, true]);
+    createRoundWithDelegatesAndPerformances([true, true, true, true, true]);
 
     $component = Livewire::test(DelegateDataBoxes::class);
 
@@ -94,7 +93,7 @@ it('should determine if delegates are forging based on their round history', fun
 });
 
 it('should determine if delegates are not forging based on their round history', function () {
-    createRoundWithDelegatesBis([false, false, false, false, false]);
+    createRoundWithDelegatesAndPerformances([false, false, false, false, false]);
 
     $component = Livewire::test(DelegateDataBoxes::class);
 
@@ -110,7 +109,7 @@ it('should determine if delegates are not forging based on their round history',
 });
 
 it('should determine if delegates just missed based on their round history', function () {
-    createRoundWithDelegatesBis([true, true, true, true, false]);
+    createRoundWithDelegatesAndPerformances([true, true, true, true, false]);
 
     $component = Livewire::test(DelegateDataBoxes::class);
 
@@ -126,7 +125,7 @@ it('should determine if delegates just missed based on their round history', fun
 });
 
 it('should determine if delegates are forging after missing 4 slots based on their round history', function () {
-    createRoundWithDelegatesBis([false, false, false, false, true]);
+    createRoundWithDelegatesAndPerformances([false, false, false, false, true]);
 
     $component = Livewire::test(DelegateDataBoxes::class);
 
@@ -142,7 +141,7 @@ it('should determine if delegates are forging after missing 4 slots based on the
 });
 
 it('should return the block count', function () {
-    createRoundWithDelegatesBis();
+    createRoundWithDelegatesAndPerformances();
 
     $component = Livewire::test(DelegateDataBoxes::class);
 
@@ -150,7 +149,7 @@ it('should return the block count', function () {
 });
 
 it('should return the next delegate', function () {
-    createRoundWithDelegatesBis();
+    createRoundWithDelegatesAndPerformances();
 
     $component = Livewire::test(DelegateDataBoxes::class);
 
