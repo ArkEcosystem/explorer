@@ -1,7 +1,7 @@
 <div class="bg-white border-t border-theme-secondary-300 dark:border-theme-secondary-800 dark:bg-theme-secondary-900">
     <x-ark-container>
         <div class="w-full">
-            <div class="relative flex items-end justify-between">
+            <div class="flex relative justify-between items-end">
                 <h2>@lang('general.transaction.types.vote-combination')</h2>
             </div>
 
@@ -19,7 +19,7 @@
                             <div class="flex items-center space-x-4">
                                 <x-general.avatar :identifier="$transaction->voted()->address()" no-shrink />
 
-                                <div class="flex items-center max-w-full space-x-3">
+                                <div class="flex items-center space-x-3 max-w-full">
                                     <a href="{{ route('wallet', $transaction->voted()->address()) }}" class="font-semibold link">
                                         {{ $transaction->voted()->username() }}
                                     </a>
@@ -34,7 +34,7 @@
                             <span class="mx-auto">#<x-number>{{ $transaction->voted()->rank() }}</x-number></span>
                         </x-ark-tables.cell>
                         <x-ark-tables.cell width="130">
-                            <div class="flex items-center justify-end flex-grow space-x-4">
+                            <div class="flex flex-grow justify-end items-center space-x-4">
                                 <span>@lang('pages.transaction.vote')</span>
 
                                 <div class="hidden lg:block">
@@ -54,7 +54,7 @@
                             <div class="flex items-center space-x-4">
                                 <x-general.avatar :identifier="$transaction->unvoted()->address()" no-shrink />
 
-                                <div class="flex items-center max-w-full space-x-3">
+                                <div class="flex items-center space-x-3 max-w-full">
                                     <a href="{{ route('wallet', $transaction->unvoted()->address()) }}" class="font-semibold link">
                                         {{ $transaction->unvoted()->username() }}
                                     </a>
@@ -68,7 +68,7 @@
                             <span class="mx-auto">#<x-number>{{ $transaction->unvoted()->rank() }}</x-number></span>
                         </x-ark-tables.cell>
                         <x-ark-tables.cell width="130">
-                            <div class="flex items-center justify-end flex-grow space-x-4">
+                            <div class="flex flex-grow justify-end items-center space-x-4">
                                 <span>@lang('pages.transaction.unvote')</span>
 
                                 <div class="hidden lg:block">
