@@ -69,7 +69,9 @@
 
 
                     <div class="flex items-center -mr-5 md:-mr-8 lg:hidden">
-                        <x-navbar.separator class="hidden md:inline" />
+                        @if(Network::canBeExchanged())
+                            <x-navbar.separator class="hidden md:inline" />
+                        @endif
 
                         {{-- Mobile Hamburger icon --}}
                         <x-navbar.button
