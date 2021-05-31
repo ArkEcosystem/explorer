@@ -2,7 +2,7 @@
     <x-ark-container>
         <div class="w-full">
             <div class="relative flex items-end justify-between">
-                <h4 class="text-2xl">@lang('pages.transaction.participants')</h4>
+                <h2>@lang('pages.transaction.participants')</h2>
             </div>
 
             <x-ark-tables.table class="hidden md:block">
