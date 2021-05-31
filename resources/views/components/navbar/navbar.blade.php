@@ -2,10 +2,10 @@
 <div x-data="{ open: false, showSettings: false }" id="navbar" class="fixed z-20 w-full">
     <nav class="relative z-30 bg-white shadow-header-smooth dark:shadow-header-smooth-dark dark:bg-theme-secondary-900">
         <div class="px-8 md:px-10 py-0.5">
-            <div class="flex relative justify-between h-20">
+            <div class="relative flex justify-between h-20">
 
                 {{-- LOGO --}}
-                <div class="flex flex-shrink-0 items-center">
+                <div class="flex items-center flex-shrink-0">
                     <a class="flex items-center" href="{{ route('home') }}">
                         @if($logo ?? false)
                             {{ $logo }}
@@ -17,13 +17,12 @@
                     </a>
                 </div>
 
-                <div class="hidden items-center mr-auto md:flex">
-                    <span class="ml-9 h-5 border-r border-theme-secondary-300 dark:border-theme-secondary-800" aria-hidden="true"></span>
+                <div class="items-center hidden mr-auto md:flex">
+                    <x-navbar.separator />
 
                     {{-- search modal trigger (tablet/desktop) --}}
-                    <button
-                        type="button"
-                        class="hidden items-center p-3 mx-4 rounded sm:flex text-theme-secondary-600 hover:text-theme-primary-500 focus:outline-none transition-default"
+                    <x-navbar.button
+                        class="hidden sm:flex"
                         @click="Livewire.emit('openSearchModal')"
                         dusk="navigation-search-modal-trigger"
                     >
@@ -32,17 +31,17 @@
                         <span class="sr-only">
                             @lang('actions.search')
                         </span>
-                    </button>
+                    </x-navbar.button>
                 </div>
 
                 <div class="flex justify-end">
-                    <div class="flex flex-1 justify-end items-center sm:items-stretch sm:justify-between">
+                    <div class="flex items-center justify-end flex-1 sm:items-stretch sm:justify-between">
                         {{-- Desktop Navbar Items --}}
-                        <div class="hidden items-center lg:ml-6 lg:flex">
+                        <div class="items-center hidden lg:flex">
                             @foreach ($navigation as $navItem)
                                 <a
                                     href="{{ route($navItem['route'], $navItem['params'] ?? []) }}"
-                                    class="inline-flex items-center px-1 font-semibold leading-5 border-b-2
+                                    class="inline-flex items-center font-semibold leading-5 border-b-2
                                         focus:outline-none transition duration-150 ease-in-out h-full
                                         -mb-1 pb-1
                                         @if(optional(Route::current())->getName() === $navItem['route'])
@@ -58,40 +57,49 @@
                         </div>
                     </div>
 
-                    <div class="flex inset-y-0 right-0 items-center pr-2 sm:static sm:inset-auto sm:ml-4 sm:pr-0">
-                        {{-- Mobile Hamburger icon --}}
-                        <div class="flex items-center lg:hidden">
-                            <button @click="open = !open" class="inline-flex justify-center items-center rounded-md transition duration-150 ease-in-out text-theme-secondary-900 dark:text-theme-secondary-600">
-                                <span :class="{'hidden': open, 'inline-flex': !open }">
-                                    <x-ark-icon name="menu" size="sm" />
-                                </span>
-
-                                <span :class="{'hidden': !open, 'inline-flex': open }" x-cloak>
-                                    <x-ark-icon name="menu-show" size="sm" />
-                                </span>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="flex items-center ml-6 md:hidden">
-                        <div class="pl-8 border-l border-theme-primary-100 text-theme-secondary-900 dark:text-theme-secondary-600 dark:border-theme-secondary-800">
-                            <button
-                                type="button"
-                                @click="Livewire.emit('openSearchModal')"
-                                class="inline-flex justify-center items-center py-2 rounded-md transition duration-150 ease-in-out text-theme-primary-300 dark:text-theme-secondary-600"
-                            >
-                                <span class="inline-flex"><x-ark-icon name="search" size="sm" /></span>
-                            </button>
-                        </div>
-                    </div>
-
                     @if(Network::canBeExchanged())
-                        <div class="hidden items-center ml-6 md:flex lg:ml-8">
-                            <div class="pl-8 font-semibold border-l border-theme-primary-100 text-theme-secondary-900 dark:text-theme-secondary-600 dark:border-theme-secondary-800">
+                        <div class="items-center hidden md:flex">
+                            <x-navbar.separator class="md:hidden lg:inline" />
+
+                            <div class="hidden font-semibold lg:pl-8 md:flex text-theme-secondary-900 dark:text-theme-secondary-600">
                                 <livewire:price-ticker />
                             </div>
                         </div>
                     @endif
+
+
+                    <div class="flex items-center -mr-5 md:-mr-8 lg:hidden">
+                        <x-navbar.separator class="hidden md:inline" />
+
+                        {{-- Mobile Hamburger icon --}}
+                        <x-navbar.button
+                            @click="open = !open"
+                            class="-mr-3 md:mr-4"
+                        >
+                            <span :class="{'hidden': open, 'inline-flex': !open }">
+                                <x-ark-icon name="menu" />
+                            </span>
+
+                            <span :class="{'hidden': !open, 'inline-flex': open }" x-cloak>
+                                <x-ark-icon name="menu-show" />
+                            </span>
+                        </x-navbar.button>
+
+                        <x-navbar.separator class="md:hidden" />
+
+                        <x-navbar.button
+                            class="md:hidden"
+                            @click="Livewire.emit('openSearchModal')"
+                            dusk="navigation-search-modal-trigger"
+                        >
+                            <x-ark-icon name="search" />
+
+                            <span class="sr-only">
+                                @lang('actions.search')
+                            </span>
+                        </x-navbar.button>
+                    </div>
+
 
                     <livewire:navbar-settings />
                 </div>
@@ -106,7 +114,7 @@
                     @endforeach
 
                     @if(Network::canBeExchanged())
-                        <div class="flex py-3 px-8 mt-2 -mb-4 font-semibold bg-theme-secondary-100 text-theme-secondary-900 dark:text-theme-secondary-300 dark:bg-theme-secondary-800">
+                        <div class="flex px-8 py-3 mt-2 -mb-4 font-semibold bg-theme-secondary-100 text-theme-secondary-900 dark:text-theme-secondary-300 dark:bg-theme-secondary-800">
                             <livewire:price-ticker />
                         </div>
                     @endif
