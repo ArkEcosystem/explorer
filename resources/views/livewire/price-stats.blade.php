@@ -44,7 +44,7 @@
             @toggle-dark-mode.window="toggleDarkMode"
             wire:loading.class="hidden"
         >
-            <div class="block" wire:ignore>
+            <div wire:ignore>
                 <canvas
                     x-ref="chart"
                     class="w-full h-full"
