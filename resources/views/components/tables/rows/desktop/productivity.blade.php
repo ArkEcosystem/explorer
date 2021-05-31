@@ -1,7 +1,7 @@
 @if($model->productivity() >= 0)
-<x-percentage>
-    {{ $model->productivity() }}
-</x-percentage>
+    <x-percentage>
+        {{ $model->productivity() }}
+    </x-percentage>
 @else
-    N/A
+    @lang('generic.not-available')
 @endif
