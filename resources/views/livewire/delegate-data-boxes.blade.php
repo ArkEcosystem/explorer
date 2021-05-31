@@ -69,10 +69,16 @@
                         without-border
                     >
                         <x-slot name="icon">
-                            <div class="flex items-center mr-2 circled-icon border-theme-secondary-900 dark:border-theme-secondary-600">
-                                <x-ark-icon class="rotate-90 text-theme-secondary-900 dark:text-theme-secondary-600" name="app-block-id" />
+                            <div class="flex items-center mr-2">
+                                {{-- TODO: Implement real time --}}
+                                <x-delegates.progress-circle circle-color="primary-600" progress="{{ Percentage::calculate((int) $statistics['blockCount'], Network::delegateCount()) }}">
+                                    <x-ark-icon class="rotate-90 text-theme-primary-600 border-theme-primary-600" name="app-block-id" size="xs" />
+                                </x-delegates.progress-circle>
                             </div>
                         </x-slot>
+                            {{--<div class="flex items-center mr-2 circled-icon border-theme-secondary-900 dark:border-theme-secondary-600">
+                                <x-ark-icon class="rotate-90 text-theme-secondary-900 dark:text-theme-secondary-600" name="app-block-id" />
+                            </div>--}}
                     </x-general.header-entry>
                 </div>
 
@@ -84,15 +90,20 @@
                         without-border
                     >
                         <x-slot name="icon">
-                            <div class="flex items-center mr-2">
-                                <x-page-headers.icon-with-icon
-                                    first-icon="app-forged"
-                                    first-icon-colors="text-theme-secondary-900"
-                                    first-icon-breakpoints="flex"
-                                    second-icon="app-next-delegate"
-                                    second-icon-colors="text-theme-secondary-900 dark:text-theme-secondary-600 dark:border-theme-secondary-600"
-                                    second-icon-breakpoints="flex"
-                                />
+                            <div class="flex items-center md:mr-2">
+                                <div class="hidden lg:flex">
+                                    <div
+                                        class="-mr-2 circled-icon text-theme-secondary-900 dark:text-theme-secondary-600 dark:border-theme-secondary-600">
+                                        <x-ark-icon name="app-forged" />
+                                    </div>
+                                </div>
+
+                                <div class="hidden rounded-full border-4 md:flex border-white text-theme-secondary-900 dark:text-theme-secondary-600 dark:border-theme-secondary-900">
+                                    <div
+                                        class="rounded-full circled-icon bg-white dark:bg-theme-secondary-900">
+                                        <x-ark-icon name="app-transactions.delegate-registration" />
+                                    </div>
+                                </div>
                             </div>
                         </x-slot>
                     </x-general.header-entry>

@@ -12,6 +12,7 @@ use App\Models\Block;
 use App\Services\Cache\MonitorCache;
 use App\Services\Cache\WalletCache;
 use App\Services\Monitor\Monitor;
+use App\ViewModels\ViewModelFactory;
 use App\ViewModels\WalletViewModel;
 use Illuminate\View\View;
 use Livewire\Component;
@@ -40,13 +41,13 @@ final class DelegateDataBoxes extends Component
     {
         try {
             $this->statistics = [
-                'blockCount'      => $this->getBlockCount(),
-                'nextDelegate'    => $this->getNextDelegate(),
-                'performances'    => $this->getDelegatesPerformance(),
+                'blockCount'   => $this->getBlockCount(),
+                'nextDelegate' => $this->getNextDelegate(),
+                'performances' => $this->getDelegatesPerformance(),
             ];
 
             // @codeCoverageIgnoreStart
-        } catch (Throwable) {
+        } catch (Throwable $t) {
             $this->pollStatistics();
         }
         // @codeCoverageIgnoreEnd
@@ -61,34 +62,23 @@ final class DelegateDataBoxes extends Component
         $parsedPerformances = array_count_values($this->forgingPerformances);
 
         return [
-            'forging'     => $parsedPerformances[DelegateForgingStatus::forging] ?? 0,
-            'missed'      => $parsedPerformances[DelegateForgingStatus::missed] ?? 0,
-            'missing'     => $parsedPerformances[DelegateForgingStatus::missing] ?? 0,
+            'forging' => $parsedPerformances[DelegateForgingStatus::forging] ?? 0,
+            'missed'  => $parsedPerformances[DelegateForgingStatus::missed] ?? 0,
+            'missing' => $parsedPerformances[DelegateForgingStatus::missing] ?? 0,
         ];
     }
 
     public function getDelegatePerformance(string $publicKey): void
     {
-        $performances = (new WalletCache())->getPerformance($publicKey);
+        $delegate = ViewModelFactory::make((new WalletCache())->getDelegate($publicKey));
 
-        $lastElement     = array_slice($performances, -1);
-        $lastTwoElements = array_slice($performances, -2);
-
-        $uniquePerformances = array_unique($performances);
-
-        if (count($uniquePerformances) === 1 && $uniquePerformances[0] === true || $lastElement[0] === true) {
+        if ($delegate->hasForged()) {
             $this->forgingPerformances[$publicKey] = DelegateForgingStatus::forging;
-
-            return;
-        }
-
-        if (count($uniquePerformances) === 1 && $uniquePerformances[0] === false || count(array_unique($lastTwoElements)) === 1 && array_unique($lastTwoElements)[0] === false) {
+        } elseif ($delegate->keepsMissing()) {
             $this->forgingPerformances[$publicKey] = DelegateForgingStatus::missing;
-
-            return;
+        } else {
+            $this->forgingPerformances[$publicKey] = DelegateForgingStatus::missed;
         }
-
-        $this->forgingPerformances[$publicKey] = DelegateForgingStatus::missed;
     }
 
     public function getBlockCount(): string
