@@ -99,7 +99,6 @@ it('should render with a height, supply and market cap for BTC', function () {
         ->assertSee('0.00003132'); // Price
 });
 
-
 it('should render the price change', function () {
     Config::set('explorer.networks.development.canBeExchanged', true);
 
@@ -109,7 +108,6 @@ it('should render the price change', function () {
 
     Livewire::test(NetworkStatusBlock::class)->assertSee('13.70%');
 });
-
 
 it('handle price change when price is zero', function () {
     Config::set('explorer.networks.development.canBeExchanged', true);
