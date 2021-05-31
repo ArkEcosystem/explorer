@@ -98,9 +98,9 @@
                                     </div>
                                 </div>
 
-                                <div class="hidden rounded-full border-4 md:flex border-white text-theme-secondary-900 dark:text-theme-secondary-600 dark:border-theme-secondary-900">
+                                <div class="hidden rounded-full border-4 border-white md:flex text-theme-secondary-900 dark:text-theme-secondary-600 dark:border-theme-secondary-900">
                                     <div
-                                        class="rounded-full circled-icon bg-white dark:bg-theme-secondary-900">
+                                        class="bg-white rounded-full circled-icon dark:bg-theme-secondary-900">
                                         <x-ark-icon name="app-transactions.delegate-registration" />
                                     </div>
                                 </div>
