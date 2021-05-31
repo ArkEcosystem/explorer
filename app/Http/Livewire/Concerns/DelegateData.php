@@ -92,8 +92,6 @@ trait DelegateData
             ], $roundBlocks, $roundNumber);
         }
 
-        //dd($delegates);
-
         return $delegates;
     }
 }
