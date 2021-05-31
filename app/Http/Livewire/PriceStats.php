@@ -10,6 +10,7 @@ use App\Services\Settings;
 use Illuminate\Support\Collection;
 use Illuminate\View\View;
 use Livewire\Component;
+
 final class PriceStats extends Component
 {
     /** @phpstan-ignore-next-line */
