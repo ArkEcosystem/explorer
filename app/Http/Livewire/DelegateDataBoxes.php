@@ -13,6 +13,7 @@ use App\Services\Cache\MonitorCache;
 use App\Services\Cache\WalletCache;
 use App\Services\Monitor\Monitor;
 use App\ViewModels\WalletViewModel;
+use Exception;
 use Illuminate\View\View;
 use Livewire\Component;
 use Throwable;
@@ -88,11 +89,7 @@ final class DelegateDataBoxes extends Component
             return;
         }
 
-        if ($lastElement[0] === false) {
-            $this->forgingPerformances[$publicKey] = DelegateForgingStatus::missed;
-
-            return;
-        }
+        $this->forgingPerformances[$publicKey] = DelegateForgingStatus::missed;
     }
 
     public function getBlockCount(): string
