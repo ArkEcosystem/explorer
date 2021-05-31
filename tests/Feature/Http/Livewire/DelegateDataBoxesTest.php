@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Enums\DelegateForgingStatus;
 use App\Http\Livewire\DelegateDataBoxes;
 use App\Models\Block;
 use App\Models\Round;
@@ -89,7 +90,7 @@ it('should determine if delegates are forging based on their round history', fun
     $component->instance()->getDelegatePerformance($delegate->publicKey());
 
     expect($component->instance()->forgingPerformances[$delegate->publicKey()])->toBeString();
-    expect($component->instance()->forgingPerformances[$delegate->publicKey()])->toBe('forging');
+    expect($component->instance()->forgingPerformances[$delegate->publicKey()])->toBe(DelegateForgingStatus::forging);
 });
 
 it('should determine if delegates are not forging based on their round history', function () {
@@ -105,7 +106,7 @@ it('should determine if delegates are not forging based on their round history',
     $component->instance()->getDelegatePerformance($delegate->publicKey());
 
     expect($component->instance()->forgingPerformances[$delegate->publicKey()])->toBeString();
-    expect($component->instance()->forgingPerformances[$delegate->publicKey()])->toBe('missing');
+    expect($component->instance()->forgingPerformances[$delegate->publicKey()])->toBe(DelegateForgingStatus::missing);
 });
 
 it('should determine if delegates just missed based on their round history', function () {
@@ -121,7 +122,7 @@ it('should determine if delegates just missed based on their round history', fun
     $component->instance()->getDelegatePerformance($delegate->publicKey());
 
     expect($component->instance()->forgingPerformances[$delegate->publicKey()])->toBeString();
-    expect($component->instance()->forgingPerformances[$delegate->publicKey()])->toBe('missed');
+    expect($component->instance()->forgingPerformances[$delegate->publicKey()])->toBe(DelegateForgingStatus::missed);
 });
 
 it('should determine if delegates are forging after missing 4 slots based on their round history', function () {
@@ -137,7 +138,7 @@ it('should determine if delegates are forging after missing 4 slots based on the
     $component->instance()->getDelegatePerformance($delegate->publicKey());
 
     expect($component->instance()->forgingPerformances[$delegate->publicKey()])->toBeString();
-    expect($component->instance()->forgingPerformances[$delegate->publicKey()])->toBe('forging');
+    expect($component->instance()->forgingPerformances[$delegate->publicKey()])->toBe(DelegateForgingStatus::forging);
 });
 
 it('should return the block count', function () {

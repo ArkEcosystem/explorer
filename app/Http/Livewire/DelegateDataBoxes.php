@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Livewire;
 
 use App\DTO\Slot;
+use App\Enums\DelegateForgingStatus;
 use App\Facades\Network;
 use App\Http\Livewire\Concerns\DelegateData;
 use App\Models\Block;
@@ -60,9 +61,9 @@ final class DelegateDataBoxes extends Component
         $parsedPerformances = array_count_values($this->forgingPerformances);
 
         return [
-            'forging'     => $parsedPerformances['forging'] ?? 0,
-            'missed'      => $parsedPerformances['missed'] ?? 0,
-            'not_forging' => $parsedPerformances['missing'] ?? 0,
+            'forging'     => $parsedPerformances[DelegateForgingStatus::forging] ?? 0,
+            'missed'      => $parsedPerformances[DelegateForgingStatus::missed] ?? 0,
+            'missing'     => $parsedPerformances[DelegateForgingStatus::missing] ?? 0,
         ];
     }
 
@@ -76,23 +77,23 @@ final class DelegateDataBoxes extends Component
         $uniquePerformances = array_unique($performances);
 
         if (count($uniquePerformances) === 1 && $uniquePerformances[0] === true) {
-            $this->forgingPerformances[$publicKey] = 'forging';
+            $this->forgingPerformances[$publicKey] = DelegateForgingStatus::forging;
         }
 
         if (count($uniquePerformances) === 1 && $uniquePerformances[0] === false) {
-            $this->forgingPerformances[$publicKey] = 'missing';
+            $this->forgingPerformances[$publicKey] = DelegateForgingStatus::missing;
         }
 
         if ($lastElement[0] === false) {
-            $this->forgingPerformances[$publicKey] = 'missed';
+            $this->forgingPerformances[$publicKey] = DelegateForgingStatus::missed;
         }
 
         if ($lastElement[0] === true) {
-            $this->forgingPerformances[$publicKey] = 'forging';
+            $this->forgingPerformances[$publicKey] = DelegateForgingStatus::forging;
         }
 
         if (count(array_unique($lastTwoElements)) === 1 && array_unique($lastTwoElements)[0] === false) {
-            $this->forgingPerformances[$publicKey] = 'missing';
+            $this->forgingPerformances[$publicKey] = DelegateForgingStatus::missing;
         }
     }
 

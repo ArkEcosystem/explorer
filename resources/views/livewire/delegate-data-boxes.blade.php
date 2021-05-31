@@ -43,7 +43,7 @@
 
                     <x-general.header-entry
                         :title="trans('pages.delegates.statistics.not_forging')"
-                        :text="$statistics['performances']['not_forging'] ?? '0'"
+                        :text="$statistics['performances']['missing'] ?? '0'"
                         wrapper-class="ml-5"
                         without-border
                     >
@@ -51,7 +51,7 @@
                             <div class="flex items-center mr-2">
                                 <x-delegates.progress-circle
                                     circle-color="danger-400"
-                                    progress="{{ Percentage::calculate($statistics['performances']['not_forging'] ?? 0, Network::delegateCount()) }}"
+                                    progress="{{ Percentage::calculate($statistics['performances']['missing'] ?? 0, Network::delegateCount()) }}"
                                 >
                                     <x-ark-icon class="rotate-90 text-theme-danger-400 border-theme-danger-400" name="cross" size="xs" />
                                 </x-delegates.progress-circle>
