@@ -332,25 +332,6 @@ body {
     @apply border-0;
 }
 
-/* Navbar Beta badge */
-.navbar-beta-badge {
-    @apply font-bold leading-tight border border-black rounded-sm text-theme-secondary-200 bg-theme-secondary-900;
-    padding: 2px 12px;
-    font-size: 0.6rem;
-    @apply absolute top-0 -mt-2 -ml-3 left-full;
-}
-.dark .navbar-beta-badge {
-    @apply border-theme-secondary-800;
-}
-
-@screen sm {
-    .navbar-beta-badge {
-        @apply top-auto left-auto mt-0 ml-2 text-xs;
-        padding: 2px 6px;
-        position: unset;
-    }
-}
-
 /* Table Avatar */
 td.hoverable-cell .table-avatar {
     @apply -my-1 border-4 border-white rounded-full;
