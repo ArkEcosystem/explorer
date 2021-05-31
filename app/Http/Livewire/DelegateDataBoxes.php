@@ -92,8 +92,8 @@ final class DelegateDataBoxes extends Component
             $this->forgingPerformances[$publicKey] = DelegateForgingStatus::missed;
 
             return;
+            // @codeCoverageIgnoreStart
         }
-        // @codeCoverageIgnoreStart
         // @codeCoverageIgnoreEnd
     }
 
