@@ -12,12 +12,12 @@ trait AvailablePeriods
     private function availablePeriods(): array
     {
         return [
-            '0 day'   => trans('forms.statistics.day'),
-            '1 week'  => trans('forms.statistics.week'),
-            '1 month' => trans('forms.statistics.month'),
+            '0 day'      => trans('forms.statistics.day'),
+            '1 week'     => trans('forms.statistics.week'),
+            '1 month'    => trans('forms.statistics.month'),
             '1 quarter'  => trans('forms.statistics.quarter'),
-            '1 year'  => trans('forms.statistics.year'),
-            '90 years'  => trans('forms.statistics.all'),
+            '1 year'     => trans('forms.statistics.year'),
+            '90 years'   => trans('forms.statistics.all'),
         ];
     }
 
