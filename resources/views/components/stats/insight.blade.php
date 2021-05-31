@@ -35,7 +35,9 @@
         <div class="sm:w-3/5 md:w-1/2 lg:w-1/3 xl:w-1/2">
             @if($chart)
                 <div class="flex-grow justify-end lg:flex" >
-                    <div x-data="PriceChart(
+                    <div
+                        wire:key="{{ $chart->values()->toJson() }}"
+                        x-data="PriceChart(
                             {{ $chart->values()->toJson() }},
                             {{ $chart->keys()->toJson() }},
                             0,
