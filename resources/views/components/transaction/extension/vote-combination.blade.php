@@ -5,7 +5,7 @@
                 <h4 class="text-2xl">@lang('general.transaction.types.vote-combination')</h4>
             </div>
 
-            <x-ark-tables.table sticky class="hidden md:block">
+            <x-ark-tables.table class="hidden md:block">
                 <thead>
                     <tr>
                         <x-tables.headers.desktop.text name="general.transaction.delegate" />
