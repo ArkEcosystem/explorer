@@ -26,7 +26,7 @@ final class InsightCurrentAverageFee extends Component
     public function mount(): void
     {
         $this->refreshInterval = (string) config('explorer.statistics.refreshInterval', '60');
-        $this->period = $this->defaultPeriod();
+        $this->period          = $this->defaultPeriod();
     }
 
     public function render(): View
