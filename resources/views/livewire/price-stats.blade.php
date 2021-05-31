@@ -67,7 +67,6 @@
                         )"
                         x-init="init"
                         @toggle-dark-mode.window="toggleDarkMode"
-                        wire:loading.class="hidden"
                     >
                         <div class="block" wire:ignore>
                             <canvas
