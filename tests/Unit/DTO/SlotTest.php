@@ -43,6 +43,7 @@ it('should make an instance that has all properties', function (string $status) 
 })->with(['done', 'next', 'pending']);
 
 it('should not be marked as missing if it never had a block', function () {
+    // TODO: update
     configureExplorerDatabase();
 
     $wallet = Wallet::factory()->create();
@@ -58,6 +59,7 @@ it('should not be marked as missing if it never had a block', function () {
 });
 
 it('should show the correct missed blocks amount when spanning multiple rounds', function () {
+    // TODO: update
     configureExplorerDatabase();
 
     $wallet = Wallet::factory()->create();
