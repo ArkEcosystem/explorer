@@ -9,14 +9,14 @@
                 <div class="flex w-full lg:w-1/2 xl:w-full">
                     <x-general.header-entry
                         :title="trans('pages.delegates.statistics.forging')"
-                        :text="$statistics['performances']['forging']"
+                        :text="$statistics['performances']['forging'] ?? '0'"
                         wrapper-class="pr-5 border-r border-theme-secondary-300 dark:border-theme-secondary-800"
                     >
                         <x-slot name="icon">
                             <div class="flex items-center mr-2">
                                 <x-delegates.progress-circle
                                     circle-color="success-600"
-                                    progress="{{ Percentage::calculate($statistics['performances']['forging'], Network::delegateCount()) }}"
+                                    progress="{{ Percentage::calculate($statistics['performances']['forging'] ?? 0, Network::delegateCount()) }}"
                                 >
                                     <x-ark-icon class="rotate-90 text-theme-success-600 border-theme-success-600" name="checkmark-smooth" size="sm" />
                                 </x-delegates.progress-circle>
@@ -26,14 +26,14 @@
 
                     <x-general.header-entry
                         :title="trans('pages.delegates.statistics.missed')"
-                        :text="$statistics['performances']['missed']"
+                        :text="$statistics['performances']['missed'] ?? '0'"
                         wrapper-class="pr-5 ml-5 border-r border-theme-secondary-300 dark:border-theme-secondary-800"
                     >
                         <x-slot name="icon">
                             <div class="flex items-center mr-2">
                                 <x-delegates.progress-circle
                                     circle-color="warning-500"
-                                    progress="{{ Percentage::calculate($statistics['performances']['missed'], Network::delegateCount()) }}"
+                                    progress="{{ Percentage::calculate($statistics['performances']['missed'] ?? 0, Network::delegateCount()) }}"
                                 >
                                     <x-ark-icon class="rotate-90 text-theme-warning-500 border-theme-warning-500" name="pause" size="xs" />
                                 </x-delegates.progress-circle>
@@ -43,7 +43,7 @@
 
                     <x-general.header-entry
                         :title="trans('pages.delegates.statistics.not_forging')"
-                        :text="$statistics['performances']['not_forging']"
+                        :text="$statistics['performances']['not_forging'] ?? '0'"
                         wrapper-class="ml-5"
                         without-border
                     >
@@ -51,7 +51,7 @@
                             <div class="flex items-center mr-2">
                                 <x-delegates.progress-circle
                                     circle-color="danger-400"
-                                    progress="{{ Percentage::calculate($statistics['performances']['not_forging'], Network::delegateCount()) }}"
+                                    progress="{{ Percentage::calculate($statistics['performances']['not_forging'] ?? 0, Network::delegateCount()) }}"
                                 >
                                     <x-ark-icon class="rotate-90 text-theme-danger-400 border-theme-danger-400" name="cross" size="xs" />
                                 </x-delegates.progress-circle>

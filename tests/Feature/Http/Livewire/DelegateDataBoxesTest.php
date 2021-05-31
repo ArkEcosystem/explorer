@@ -11,9 +11,10 @@ use App\ViewModels\WalletViewModel;
 use Livewire\Livewire;
 use function Tests\configureExplorerDatabase;
 
-function createRoundWithDelegates(): void
+// TODO: Fix that, cause that helper method exists somewhere else and it fuck up
+function createRoundWithDelegatesBis(array $performances = null): void
 {
-    Wallet::factory(51)->create()->each(function ($wallet) {
+    Wallet::factory(51)->create()->each(function ($wallet) use ($performances) {
         $block = Block::factory()->create([
             'height'               => 5720529,
             'timestamp'            => 113620904,
@@ -34,6 +35,14 @@ function createRoundWithDelegates(): void
 
         (new WalletCache())->setDelegate($wallet->public_key, $wallet);
 
+        if (is_null($performances)) {
+            for ($i = 0; $i < 5; $i++) {
+                $performances[] = (bool) mt_rand(0, 1);
+            }
+        }
+
+        (new WalletCache())->setPerformance($wallet->public_key, $performances);
+
         (new WalletCache())->setLastBlock($wallet->public_key, [
             'id'     => $block->id,
             'height' => $block->height->toNumber(),
@@ -45,16 +54,94 @@ beforeEach(fn () => configureExplorerDatabase());
 
 // @TODO: make assertions about data visibility
 it('should render without errors', function () {
-    createRoundWithDelegates();
+    createRoundWithDelegatesBis();
 
     $component = Livewire::test(DelegateDataBoxes::class);
+
     $component->call('pollStatistics');
+
     $component->assertHasNoErrors();
     $component->assertViewIs('livewire.delegate-data-boxes');
 });
 
+it('should get the performances of active delegates and parse it into a readable array', function () {
+    createRoundWithDelegatesBis();
+
+    $component = Livewire::test(DelegateDataBoxes::class);
+
+    $component->call('pollStatistics');
+
+    expect($component->instance()->getDelegatesPerformance())->toBeArray();
+    expect($component->instance()->getDelegatesPerformance())->toHaveKeys(['forging', 'missed', 'not_forging']);
+
+});
+
+it('should determine if delegates are forging based on their round history', function () {
+    createRoundWithDelegatesBis([true, true, true, true, true]);
+
+    $component = Livewire::test(DelegateDataBoxes::class);
+
+    $component->call('pollStatistics');
+
+    $delegateWallet = Wallet::first();
+    $delegate = new WalletViewModel($delegateWallet);
+
+    $component->instance()->getDelegatePerformance($delegate->publicKey());
+
+    expect($component->instance()->forgingPerformances[$delegate->publicKey()])->toBeString();
+    expect($component->instance()->forgingPerformances[$delegate->publicKey()])->toBe('forging');
+});
+
+it('should determine if delegates are not forging based on their round history', function () {
+    createRoundWithDelegatesBis([false, false, false, false, false]);
+
+    $component = Livewire::test(DelegateDataBoxes::class);
+
+    $component->call('pollStatistics');
+
+    $delegateWallet = Wallet::first();
+    $delegate = new WalletViewModel($delegateWallet);
+
+    $component->instance()->getDelegatePerformance($delegate->publicKey());
+
+    expect($component->instance()->forgingPerformances[$delegate->publicKey()])->toBeString();
+    expect($component->instance()->forgingPerformances[$delegate->publicKey()])->toBe('missing');
+});
+
+it('should determine if delegates just missed based on their round history', function () {
+    createRoundWithDelegatesBis([true, true, true, true, false]);
+
+    $component = Livewire::test(DelegateDataBoxes::class);
+
+    $component->call('pollStatistics');
+
+    $delegateWallet = Wallet::first();
+    $delegate = new WalletViewModel($delegateWallet);
+
+    $component->instance()->getDelegatePerformance($delegate->publicKey());
+
+    expect($component->instance()->forgingPerformances[$delegate->publicKey()])->toBeString();
+    expect($component->instance()->forgingPerformances[$delegate->publicKey()])->toBe('missed');
+});
+
+it('should determine if delegates are forging after missing 4 slots based on their round history', function () {
+    createRoundWithDelegatesBis([false, false, false, false, true]);
+
+    $component = Livewire::test(DelegateDataBoxes::class);
+
+    $component->call('pollStatistics');
+
+    $delegateWallet = Wallet::first();
+    $delegate = new WalletViewModel($delegateWallet);
+
+    $component->instance()->getDelegatePerformance($delegate->publicKey());
+
+    expect($component->instance()->forgingPerformances[$delegate->publicKey()])->toBeString();
+    expect($component->instance()->forgingPerformances[$delegate->publicKey()])->toBe('forging');
+});
+
 it('should return the block count', function () {
-    createRoundWithDelegates();
+    createRoundWithDelegatesBis();
 
     $component = Livewire::test(DelegateDataBoxes::class);
 
@@ -62,7 +149,7 @@ it('should return the block count', function () {
 });
 
 it('should return the next delegate', function () {
-    createRoundWithDelegates();
+    createRoundWithDelegatesBis();
 
     $component = Livewire::test(DelegateDataBoxes::class);
 

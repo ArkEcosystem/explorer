@@ -74,6 +74,7 @@ trait DelegateData
         $this->cacheLastBlocks($delegates->pluck('public_key')->toArray());
 
         $tracking    = DelegateTracker::execute($delegates, $heightRange[0]);
+
         $roundBlocks = $this->getBlocksByRange(Arr::pluck($tracking, 'publicKey'), $heightRange);
 
         $delegates = [];
@@ -90,6 +91,8 @@ trait DelegateData
                 'status'     => $delegate['status'],
             ], $roundBlocks, $roundNumber);
         }
+
+        //dd($delegates);
 
         return $delegates;
     }

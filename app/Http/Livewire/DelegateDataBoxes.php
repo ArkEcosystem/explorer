@@ -54,30 +54,32 @@ final class DelegateDataBoxes extends Component
     public function getDelegatesPerformance(): array
     {
         foreach ($this->delegates as $delegate) {
-            $this->lookupDelegatePerformance($delegate->wallet()->model()->public_key);
+            $this->getDelegatePerformance($delegate->wallet()->model()->public_key);
         }
 
         $parsedPerformances = array_count_values($this->forgingPerformances);
 
         return [
-            'forging'     => $parsedPerformances['active'],
-            'missed'      => $parsedPerformances['missed'],
-            'not_forging' => $parsedPerformances['missing'],
+            'forging'     => $parsedPerformances['forging'] ?? 0,
+            'missed'      => $parsedPerformances['missed'] ?? 0,
+            'not_forging' => $parsedPerformances['missing'] ?? 0,
         ];
     }
 
-    private function lookupDelegatePerformance(string $publicKey)
+    public function getDelegatePerformance(string $publicKey): void
     {
         $performances = (new WalletCache())->getPerformance($publicKey);
 
         $lastElement     = array_slice($performances, -1);
         $lastTwoElements = array_slice($performances, -2);
 
-        if (array_unique($performances)[0] === true) {
-            $this->forgingPerformances[$publicKey] = 'active';
+        $uniquePerformances = array_unique($performances);
+
+        if (count($uniquePerformances) === 1 && $uniquePerformances[0] === true) {
+            $this->forgingPerformances[$publicKey] = 'forging';
         }
 
-        if (array_unique($performances)[0] === false) {
+        if (count($uniquePerformances) === 1 && $uniquePerformances[0] === false) {
             $this->forgingPerformances[$publicKey] = 'missing';
         }
 
@@ -86,10 +88,10 @@ final class DelegateDataBoxes extends Component
         }
 
         if ($lastElement[0] === true) {
-            $this->forgingPerformances[$publicKey] = 'active';
+            $this->forgingPerformances[$publicKey] = 'forging';
         }
 
-        if (array_unique($lastTwoElements)[0] === false) {
+        if (count(array_unique($lastTwoElements)) === 1 && array_unique($lastTwoElements)[0] === false) {
             $this->forgingPerformances[$publicKey] = 'missing';
         }
     }
