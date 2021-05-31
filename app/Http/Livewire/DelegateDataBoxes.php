@@ -93,6 +93,8 @@ final class DelegateDataBoxes extends Component
 
             return;
         }
+        // @codeCoverageIgnoreStart
+        // @codeCoverageIgnoreEnd
     }
 
     public function getBlockCount(): string
