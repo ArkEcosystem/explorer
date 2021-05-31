@@ -22,19 +22,19 @@ trait AvailablePeriods
             'month'    => trans('forms.statistics.month'),
             'quarter'  => trans('forms.statistics.quarter'),
             'year'     => trans('forms.statistics.year'),
-            'all'   => trans('forms.statistics.all'),
+            'all'      => trans('forms.statistics.all'),
         ];
     }
 
     private function subtractFromPeriod(string $period): string
     {
         return collect([
-            'day' => '1 day',
-            'week' => '1 week',
-            'month' => '1 month',
+            'day'     => '1 day',
+            'week'    => '1 week',
+            'month'   => '1 month',
             'quarter' => '1 quarter',
-            'year' => '1 year',
-            'all' => '100 years',
+            'year'    => '1 year',
+            'all'     => '100 years',
         ])->get($period);
     }
 
