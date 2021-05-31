@@ -13,7 +13,6 @@ use App\Services\Cache\MonitorCache;
 use App\Services\Cache\WalletCache;
 use App\Services\Monitor\Monitor;
 use App\ViewModels\WalletViewModel;
-use Exception;
 use Illuminate\View\View;
 use Livewire\Component;
 use Throwable;
