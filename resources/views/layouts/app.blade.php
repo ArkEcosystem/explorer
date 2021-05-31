@@ -37,13 +37,11 @@
         @stack('scripts')
     </head>
     <body
-        @if(Settings::usesDarkTheme())
-            class="dark"
-        @endif
-        x-data="{ 'theme': '{{ Settings::theme() }}', 'expanded': '{{ Settings::usesCompactTables() }}' }"
-        :class="{ 'dark': theme === 'dark', 'table-compact': ! expanded }"
+        class="@if(Settings::usesDarkTheme()) dark @endif @if(Settings::usesCompactTables()) table-compact @endif"
+        x-data="{ 'theme': '{{ Settings::theme() }}', 'compact': {{ Settings::usesCompactTables() ? 'true' : 'false' }} }"
+        :class="{ 'dark': theme === 'dark', 'table-compact': compact }"
         @toggle-dark-mode.window="theme === 'dark' ? theme = 'light' : theme = 'dark'"
-        @toggle-compact-table="expanded = ! expanded"
+        @toggle-compact-table="compact = ! compact"
     >
         <div id="app" class="flex flex-col antialiased bg-white dark:bg-theme-secondary-900">
             <x-navbar.navbar
@@ -58,14 +56,16 @@
                 </x-slot>
             </x-navbar.navbar>
 
-            <main class="container flex-1 w-full mx-auto @unless($isLanding ?? false) pb-14 mt-16 @endif sm:max-w-full @unless($fullWidth ?? false) px-4 sm:px-8 lg:max-w-7xl @endif">
-                <div class="w-full bg-white dark:bg-theme-secondary-900">
+            <main class="container flex flex-1 w-full mx-auto @unless($isLanding ?? false) pb-14 mt-16 @endif sm:max-w-full @unless($fullWidth ?? false) px-4 sm:px-8 lg:max-w-7xl @endif">
+                <div class="{{ $containerChildClass ?? 'w-full bg-white dark:bg-theme-secondary-900' }}">
                     @yield('content')
                 </div>
             </main>
         </div>
 
         <x-footer />
+
+        <livewire:search-module is-modal />
 
         @livewireScripts()
 

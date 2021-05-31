@@ -39,107 +39,6 @@ body {
     }
 }
 
-/* Searchbar */
-.searchbar {
-    @apply fixed inset-0 z-40 hidden;
-}
-
-.search-container {
-    @apply absolute z-50 flex flex-col mb-20 overflow-visible bg-white rounded-lg top-24 left-8 right-8;
-}
-.dark .search-container {
-    @apply bg-theme-secondary-900;
-}
-
-.search-simple {
-    @apply flex items-center px-8 py-6;
-}
-.searchbar-slim .search-simple {
-    @apply px-5 py-4;
-}
-
-.search-mobile {
-    @apply block;
-}
-
-.searchbar-input {
-    @apply w-full;
-}
-.dark .searchbar-input {
-    @apply text-theme-secondary-700 bg-theme-secondary-900;
-}
-
-.dark .searchbar-input::placeholder {
-    @apply text-theme-secondary-700;
-}
-
-.search-advanced-options {
-    @apply grid grid-cols-1 border-t border-theme-secondary-300;
-}
-
-.dark .searchbar-slim .search-container,
-.dark .search-advanced-options {
-    @apply border-theme-secondary-800;
-}
-
-.search-advanced-option {
-    @apply flex flex-col max-w-full px-8 py-8 border-b border-theme-secondary-300;
-}
-
-.search-advanced-options
-    .search-advanced-option-wrapper:last-of-type
-    .search-advanced-option {
-    @apply border-b-0;
-}
-
-.dark .search-advanced-option {
-    @apply border-theme-secondary-800;
-}
-
-@screen md {
-    .searchbar {
-        @apply block;
-        position: unset;
-    }
-
-    .search-container {
-        @apply mb-0;
-        position: unset;
-    }
-
-    .search-advanced-options {
-        @apply grid-cols-2;
-    }
-
-    .search-advanced-option {
-        @apply py-0 my-6 border-b-0;
-    }
-
-    .search-advanced-option-wrapper {
-        @apply border-theme-secondary-300;
-    }
-    .dark .search-advanced-option-wrapper {
-        @apply border-theme-secondary-800;
-    }
-
-    .searchbar-slim .search-container {
-        @apply border border-theme-secondary-400;
-    }
-    .searchbar-slim.search-focused .search-container {
-        @apply border-theme-primary-600;
-    }
-}
-
-@screen xl {
-    .search-advanced-options {
-        @apply grid-cols-3;
-    }
-
-    .search-advanced-option {
-        @apply flex-1;
-    }
-}
-
 /* Navbar Settings */
 .navbar-settings-button {
     @apply pl-8 border-l border-theme-primary-100 text-theme-secondary-900;
@@ -165,7 +64,7 @@ body {
     @apply border-0;
 }
 .navbar-settings-option-with-border {
-    @apply navbar-settings-option border-b border-dashed pb-6;
+    @apply pb-6 border-b border-dashed navbar-settings-option;
 }
 .dark .navbar-settings-option {
     @apply border-theme-secondary-800;
@@ -207,40 +106,17 @@ body {
 }
 
 /* Tabs */
-.tabs {
-    @apply px-8 mb-8 font-semibold rounded-lg select-none bg-theme-secondary-100;
+.explorer-tab:first-child {
+    @apply ml-8;
 }
-.dark .tabs {
-    @apply bg-black;
-}
-
-.tab-item {
-    @apply relative pt-8 ml-16 border-b-4 border-transparent cursor-pointer whitespace-nowrap pb-7;
-}
-.tab-item:first-child {
-    @apply ml-0;
-}
-.tab-item-current,
-.tab-item:hover {
-    @apply text-theme-secondary-900 border-theme-primary-600;
-}
-
-.dark .tab-item:hover {
-    @apply text-theme-secondary-600;
-}
-.dark .tab-item-current,
-.dark .tab-item:hover {
-    @apply text-theme-secondary-200;
-}
-
-.tab-item::before {
+.explorer-tab::before {
     content: "";
-    @apply absolute left-0 h-6 -ml-8 border-l border-theme-secondary-300;
+    @apply absolute top-0 left-0 h-4 mt-5 -ml-8 border-l border-theme-secondary-300;
 }
-.tab-item:first-child::before {
+.explorer-tab:first-child::before {
     @apply border-l-0;
 }
-.dark .tab-item::before {
+.dark .explorer-tab::before {
     @apply border-theme-secondary-800;
 }
 
@@ -353,63 +229,6 @@ body {
 
 .dark .loading-state {
     @apply bg-theme-secondary-800;
-}
-/* Transaction Dropdown Filter */
-.transaction-filter-wrapper {
-    @apply relative w-full p-2 mb-2 border rounded-lg border-theme-secondary-300;
-}
-.dark .transaction-filter-wrapper {
-    @apply border-theme-secondary-800;
-}
-
-.transaction-filter-dropdown {
-    @apply right-0 w-full mt-3;
-}
-.dark .transaction-filter-dropdown {
-    @apply bg-theme-secondary-900;
-}
-
-.transaction-filter-button {
-    @apply w-full font-semibold text-left p-3 text-theme-secondary-900;
-}
-.dark .transaction-filter-button {
-    @apply text-theme-secondary-200;
-}
-
-.transaction-filter-button-container {
-    @apply flex items-center justify-between w-full font-semibold text-theme-secondary-500;
-}
-
-.transaction-filter-button-icon {
-    @apply flex items-center justify-center w-6 h-6 transition duration-150 ease-in-out rounded-full text-theme-secondary-400;
-}
-
-@screen md {
-    .dark .transaction-filter-button-icon {
-        @apply bg-theme-secondary-800 text-theme-secondary-200;
-    }
-}
-
-@screen md {
-    .transaction-filter-wrapper {
-        @apply absolute top-0 right-0 inline-block w-auto p-0 my-0 text-left border-0;
-    }
-
-    .transaction-filter-dropdown {
-        @apply w-84;
-    }
-
-    .transaction-filter-button {
-        @apply items-end h-10 pb-0 pr-0 w-84;
-    }
-
-    .transaction-filter-button-container {
-        @apply justify-end text-theme-secondary-700;
-    }
-
-    .transaction-filter-button-icon {
-        @apply w-4 h-4 bg-theme-primary-100 text-theme-primary-600;
-    }
 }
 
 /* Tab Badge */

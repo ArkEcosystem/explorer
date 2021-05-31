@@ -1,11 +1,14 @@
 <div class="dark:bg-theme-secondary-900">
     <x-ark-container container-class="flex flex-col space-y-5">
-        <x-general.search.header-slim :title="trans($title)" />
+        <h1 class="header-2">
+            @lang($title)
+        </h1>
 
         <x-general.entity-header :value="$wallet->address()">
             <x-slot name="title">
                 @isset($useGenerator)
-                    @lang('pages.wallet.address_generator', [$wallet->username()])
+                    <span class="hidden xl:inline">@lang('pages.wallet.generated_by')&nbsp;</span>
+                    <span>{{ $wallet->username() }}</span>
                 @else
                     @if($wallet->isDelegate())
                         {{ $wallet->username() }}
@@ -64,7 +67,8 @@
             <x-slot name="extension">
                 {{ $slot }}
 
-                <div class="flex items-center mt-6 space-x-2 text-theme-secondary-200 lg:mt-0">
+
+                <div class="flex flex-col items-center mt-6 space-y-2 sm:space-x-2 sm:space-y-0 sm:flex-row text-theme-secondary-200 lg:mt-0 lg:ml-4">
                     @unless($wallet->isCold())
                         <x-page-headers.wallet.actions.public-key :public-key="$wallet->publicKey()" />
                     @endunless
