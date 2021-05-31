@@ -67,9 +67,15 @@
                         )"
                         x-init="init"
                         @toggle-dark-mode.window="toggleDarkMode"
+                        wire:loading.class="hidden"
                     >
                         <div class="block" wire:ignore>
-                            <canvas x-ref="chart" class="w-full h-full" width="120" height="40" ></canvas>
+                            <canvas
+                                x-ref="chart"
+                                class="w-full h-full"
+                                width="{{ \App\Services\NumberFormatter::isFiat(Settings::currency()) ? 210 : 120 }}"
+                                height="40"
+                            ></canvas>
                         </div>
                     </div>
                 </div>
