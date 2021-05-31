@@ -14,7 +14,7 @@
 
     <div
         x-show.transition.origin.top="showSettings"
-        class="absolute top-0 left-0 right-0 z-30 p-8 mt-20 -mx-4 bg-white border-t-2 shadow-xl border-theme-secondary-100 dark:border-theme-secondary-800 dark:bg-theme-secondary-900 md:left-auto md:p-10 md:mx-0 md:mt-24 md:border-t-0 md:rounded-lg w-120"
+        class="absolute top-0 right-0 left-0 z-30 p-8 -mx-4 mt-20 bg-white border-t-2 shadow-xl border-theme-secondary-100 dark:border-theme-secondary-800 dark:bg-theme-secondary-900 md:left-auto md:p-10 md:mx-0 md:mt-24 md:border-t-0 md:rounded-lg w-120"
         @click.away="showSettings = false"
         x-cloak
     >
