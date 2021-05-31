@@ -184,11 +184,11 @@ body {
 }
 
 @screen sm {
-    .entity-header-item:nth-child(odd) {
+    .entity-header-item:nth-child(odd):not(:last-child) {
         @apply border-r border-theme-secondary-300;
     }
 
-    .dark .entity-header-item:nth-child(odd) {
+    .dark .entity-header-item:nth-child(odd):not(:last-child) {
         @apply border-theme-secondary-800;
     }
 }
