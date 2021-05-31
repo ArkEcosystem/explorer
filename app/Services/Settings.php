@@ -17,7 +17,7 @@ final class Settings
             'priceChart'    => true,
             'feeChart'      => true,
             'darkTheme'     => false,
-            'compactTables' => false,
+            'compactTables' => true,
         ];
 
         if (Session::has('settings')) {
@@ -32,6 +32,11 @@ final class Settings
     public static function currency(): string
     {
         return Str::upper(Arr::get(static::all(), 'currency', 'USD'));
+    }
+
+    public static function locale(): string
+    {
+        return Arr::get(config('currencies'), strtolower(static::currency()).'.locale', 'en_US');
     }
 
     public static function priceChart(): bool
