@@ -26,7 +26,7 @@ final class CryptoCompare
         });
     }
 
-    public static function marketCap(string $source, string $target): float
+        public static function marketCap(string $source, string $target): float
     {
         return (new CryptoCompareCache())->setMarketCap($source, $target, function () use ($source, $target): float {
             $result = Http::get('https://min-api.cryptocompare.com/data/pricemultifull', [

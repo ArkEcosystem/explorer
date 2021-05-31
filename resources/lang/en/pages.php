@@ -208,6 +208,13 @@ return [
             'registered-delegates' => 'Registered Delegates',
             'wallets'              => 'Wallets',
         ],
+
+        'chart' => [
+            'price'      => 'Price:',
+            'market-cap' => 'Market Cap',
+            'min-price'  => 'Min Price',
+            'max-price'  => 'Max Price',
+        ],
     ],
 
 ];
