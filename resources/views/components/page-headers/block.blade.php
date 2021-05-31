@@ -1,6 +1,8 @@
 <div class="dark:bg-theme-secondary-900">
-    <div class="flex-col pt-16 space-y-6 content-container">
-        <x-general.search.header-slim :title="trans('pages.block.title')" />
+    <x-ark-container container-class="flex flex-col space-y-6">
+        <h1 class="header-2">
+            @lang('pages.block.title')
+        </h1>
 
         <x-general.entity-header
             :title="trans('pages.block.block_id')"
@@ -65,5 +67,5 @@
                 </div>
             </x-slot>
         </x-general.entity-header>
-    </div>
+    </x-ark-container>
 </div>

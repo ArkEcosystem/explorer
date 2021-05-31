@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 use App\Contracts\Network as Contract;
 use App\Enums\CoreTransactionTypeEnum;
-use App\Enums\MagistrateTransactionEntityActionEnum;
-use App\Enums\MagistrateTransactionTypeEnum;
 use App\Enums\TransactionTypeGroupEnum;
 use App\Models\Block;
 use App\Models\Transaction;
@@ -15,7 +13,6 @@ use App\Services\Cache\DelegateCache;
 use App\Services\Cache\NetworkCache;
 use App\Services\Cache\WalletCache;
 use App\ViewModels\WalletViewModel;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use function Spatie\Snapshots\assertMatchesSnapshot;
 use function Tests\configureExplorerDatabase;
@@ -26,7 +23,7 @@ beforeEach(function () {
 
     $this->app->singleton(Contract::class, fn () => NetworkFactory::make('production'));
 
-    $wallet = Wallet::factory()->create([
+    $this->wallet = Wallet::factory()->create([
         'balance'      => '100000000000',
         'nonce'        => 1000,
         'attributes'   => [
@@ -36,13 +33,13 @@ beforeEach(function () {
         ],
     ]);
 
-    $this->subject = new WalletViewModel($wallet);
+    $this->subject = new WalletViewModel($this->wallet);
 
     Block::factory()->create([
         'total_amount'         => '1000000000',
         'total_fee'            => '800000000',
         'reward'               => '200000000',
-        'generator_public_key' => $wallet->public_key,
+        'generator_public_key' => $this->wallet->public_key,
     ]);
 });
 
@@ -169,25 +166,6 @@ it('should determine if the wallet is a delegate', function () {
     expect($this->subject->isDelegate())->toBeTrue();
 });
 
-it('should determine if the wallet has registrations', function () {
-    expect($this->subject->hasRegistrations())->toBeFalse();
-
-    Transaction::factory()->create([
-        'sender_public_key' => $this->subject->publicKey(),
-        'type'              => MagistrateTransactionTypeEnum::ENTITY,
-        'type_group'        => TransactionTypeGroupEnum::MAGISTRATE,
-        'asset'             => [
-            'action' => MagistrateTransactionEntityActionEnum::REGISTER,
-        ],
-    ]);
-
-    expect($this->subject->hasRegistrations())->toBeTrue();
-});
-
-it('should get the registrations', function () {
-    expect($this->subject->registrations())->toBeInstanceOf(Collection::class);
-});
-
 it('should determine if the wallet is voting', function () {
     expect($this->subject->isVoting())->toBeFalse();
 
@@ -214,6 +192,10 @@ it('should get the wallet of the vote', function () {
     (new WalletCache())->setVote($vote->public_key, $vote);
 
     expect($this->subject->vote())->toBeInstanceOf(WalletViewModel::class);
+});
+
+it('should get the wallet model', function () {
+    expect($this->subject->model())->toBe($this->wallet);
 });
 
 it('should fail to get the wallet of the vote if the wallet has no public key', function () {
@@ -475,4 +457,45 @@ it('should determine if the wallet has a second signature', function () {
 
 it('should determine if the wallet has a multi signature', function () {
     expect($this->subject->hasMultiSignature())->toBeBool();
+});
+
+it('can determine the colors for icons based on the status of a delegate', function () {
+    $this->subject = new WalletViewModel(Wallet::factory()->create([
+        'balance'      => '100000000000',
+        'nonce'        => 1000,
+        'attributes'   => [
+            'delegate' => [
+                'resigned' => true,
+            ],
+        ],
+    ]));
+
+    // Resigned colors
+    expect($this->subject->delegateRankStyling())->toBe('text-theme-secondary-500 border-theme-secondary-500 dark:text-theme-secondary-800 dark:border-theme-secondary-800');
+    expect($this->subject->delegateStatusStyling())->toBe('text-theme-secondary-500 border-theme-secondary-500 dark:text-theme-secondary-800 dark:border-theme-secondary-800');
+
+    // Standby colors
+    $this->subject = new WalletViewModel(Wallet::factory()->create([
+        'attributes'   => [
+            'delegate' => [
+                'username' => 'John',
+                'rank'     => 52,
+            ],
+        ],
+    ]));
+
+    expect($this->subject->delegateRankStyling())->toBe('text-theme-secondary-900 border-theme-secondary-900');
+    expect($this->subject->delegateStatusStyling())->toBe('text-theme-secondary-500 border-theme-secondary-500 dark:text-theme-secondary-800 dark:border-theme-secondary-800');
+
+    // Active colors
+    $this->subject = new WalletViewModel(Wallet::factory()->create([
+        'attributes'   => [
+            'delegate' => [
+                'username' => 'John',
+            ],
+        ],
+    ]));
+
+    expect($this->subject->delegateRankStyling())->toBe('text-theme-secondary-900 border-theme-secondary-900');
+    expect($this->subject->delegateStatusStyling())->toBe('text-theme-success-600 border-theme-success-600');
 });
