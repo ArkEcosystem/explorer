@@ -92,9 +92,7 @@ final class DelegateDataBoxes extends Component
             $this->forgingPerformances[$publicKey] = DelegateForgingStatus::missed;
 
             return;
-            // @codeCoverageIgnoreStart
         }
-        // @codeCoverageIgnoreEnd
     }
 
     public function getBlockCount(): string
