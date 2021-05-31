@@ -73,7 +73,6 @@ it('should get the performances of active delegates and parse it into a readable
 
     expect($component->instance()->getDelegatesPerformance())->toBeArray();
     expect($component->instance()->getDelegatesPerformance())->toHaveKeys(['forging', 'missed', 'missing']);
-
 });
 
 it('should determine if delegates are forging based on their round history', function () {

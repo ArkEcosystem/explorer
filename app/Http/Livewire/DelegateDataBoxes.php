@@ -78,16 +78,19 @@ final class DelegateDataBoxes extends Component
 
         if (count($uniquePerformances) === 1 && $uniquePerformances[0] === true || $lastElement[0] === true) {
             $this->forgingPerformances[$publicKey] = DelegateForgingStatus::forging;
+
             return;
         }
 
         if (count($uniquePerformances) === 1 && $uniquePerformances[0] === false || count(array_unique($lastTwoElements)) === 1 && array_unique($lastTwoElements)[0] === false) {
             $this->forgingPerformances[$publicKey] = DelegateForgingStatus::missing;
+
             return;
         }
 
         if ($lastElement[0] === false) {
             $this->forgingPerformances[$publicKey] = DelegateForgingStatus::missed;
+
             return;
         }
     }
