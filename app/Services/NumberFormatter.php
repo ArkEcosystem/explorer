@@ -49,6 +49,14 @@ final class NumberFormatter
     /**
      * @param string|int|float $value
      */
+    public static function currencyWithoutSuffix($value, string $currency): string
+    {
+        return trim(BetterNumberFormatter::new()->formatWithCurrencyCustom($value, '', static::decimalsFor($currency)));
+    }
+
+    /**
+     * @param string|int|float $value
+     */
     public static function currencyShort($value, string $currency): string
     {
         return BetterNumberFormatter::new()->formatWithCurrencyShort($value, $currency);
