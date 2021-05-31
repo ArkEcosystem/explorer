@@ -7,4 +7,5 @@ return [
     'hide_advanced'   => 'Hide Advanced',
     'find_it'         => 'Find It',
     'view_all'        => 'View All',
+    'view_statistics' => 'View Statistics',
 ];
