@@ -70,8 +70,9 @@ return [
         'day'      => 'Day',
         'week'     => 'Week',
         'month'    => 'Month',
+        'quarter'  => 'Quarter',
         'year'     => 'Year',
-        'all-time' => 'All-Time',
+        'all'      => 'All',
     ],
 
 ];

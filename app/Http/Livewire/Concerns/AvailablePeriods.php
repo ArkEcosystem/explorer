@@ -12,10 +12,12 @@ trait AvailablePeriods
     private function availablePeriods(): array
     {
         return [
-            'day'   => trans('forms.statistics.day'),
-            'week'  => trans('forms.statistics.week'),
-            'month' => trans('forms.statistics.month'),
-            'year'  => trans('forms.statistics.year'),
+            '0 day'   => trans('forms.statistics.day'),
+            '1 week'  => trans('forms.statistics.week'),
+            '1 month' => trans('forms.statistics.month'),
+            '1 quarter'  => trans('forms.statistics.quarter'),
+            '1 year'  => trans('forms.statistics.year'),
+            '90 years'  => trans('forms.statistics.all'),
         ];
     }
 
@@ -27,6 +29,6 @@ trait AvailablePeriods
 
         $arkEpoch = 1490101200;
 
-        return Carbon::createFromTimestamp((int) Carbon::now()->timestamp - $arkEpoch)->sub("1 $period")->toDateString();
+        return Carbon::createFromTimestamp((int) Carbon::now()->timestamp - $arkEpoch)->sub($period)->toDateString();
     }
 }
