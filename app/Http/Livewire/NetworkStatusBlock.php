@@ -24,10 +24,10 @@ final class NetworkStatusBlock extends Component
         return view('livewire.network-status-block', [
             'price'       => $this->getPriceFormatted(),
             'priceChange' => $this->getPriceChange(),
-            'height'    => CacheNetworkHeight::execute(),
-            'network'   => Network::name(),
-            'supply'    => CacheNetworkSupply::execute() / 1e8,
-            'marketCap' => $this->getMarketCapFormatted(),
+            'height'      => CacheNetworkHeight::execute(),
+            'network'     => Network::name(),
+            'supply'      => CacheNetworkSupply::execute() / 1e8,
+            'marketCap'   => $this->getMarketCapFormatted(),
         ]);
     }
 
