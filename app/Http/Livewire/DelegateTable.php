@@ -10,9 +10,12 @@ use App\ViewModels\ViewModelFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\View\View;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 final class DelegateTable extends Component
 {
+    use WithPagination;
+
     public array $state = [
         'status' => 'active',
     ];
@@ -23,15 +26,15 @@ final class DelegateTable extends Component
     public function render(): View
     {
         if ($this->state['status'] === 'resigned') {
-            $delegates = $this->resignedQuery()->get();
+            $delegates = $this->resignedQuery()->paginate(Network::delegateCount());
         } elseif ($this->state['status'] === 'standby') {
-            $delegates = $this->standbyQuery()->get();
+            $delegates = $this->standbyQuery()->paginate(Network::delegateCount());
         } else {
             $delegates = $this->activeQuery()->get();
         }
 
         return view('livewire.delegate-table', [
-            'delegates' => ViewModelFactory::collection($delegates),
+            'delegates' => $this->state['status'] === 'active' ? ViewModelFactory::collection($delegates) : ViewModelFactory::paginate($delegates),
         ]);
     }
 
@@ -53,15 +56,13 @@ final class DelegateTable extends Component
         return Wallet::query()
             ->whereNotNull('attributes->delegate->username')
             ->whereRaw("(\"attributes\"->'delegate'->>'rank')::numeric > ?", [Network::delegateCount()])
-            ->orderByRaw("(\"attributes\"->'delegate'->>'rank')::numeric ASC")
-            ->limit(Network::delegateCount());
+            ->orderByRaw("(\"attributes\"->'delegate'->>'rank')::numeric ASC");
     }
 
     public function resignedQuery(): Builder
     {
         return Wallet::query()
             ->whereNotNull('attributes->delegate->username')
-            ->where('attributes->delegate->resigned', true)
-            ->limit(Network::delegateCount());
+            ->where('attributes->delegate->resigned', true);
     }
 }
