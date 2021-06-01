@@ -2,10 +2,10 @@
 <div x-data="{ open: false, showSettings: false }" id="navbar" class="fixed z-20 w-full">
     <nav class="relative z-30 bg-white shadow-header-smooth dark:shadow-header-smooth-dark dark:bg-theme-secondary-900">
         <div class="px-8 md:px-10 py-0.5">
-            <div class="flex relative justify-between h-20">
+            <div class="relative flex justify-between h-20">
 
                 {{-- LOGO --}}
-                <div class="flex flex-shrink-0 items-center">
+                <div class="flex items-center flex-shrink-0">
                     <a class="flex items-center" href="{{ route('home') }}">
                         @if($logo ?? false)
                             {{ $logo }}
@@ -17,7 +17,7 @@
                     </a>
                 </div>
 
-                <div class="hidden items-center mr-auto md:flex">
+                <div class="items-center hidden mr-auto md:flex">
                     <x-navbar.separator />
 
                     {{-- search modal trigger (tablet/desktop) --}}
@@ -34,31 +34,32 @@
                     </x-navbar.button>
                 </div>
 
-                <div class="flex justify-end">
-                    <div class="flex flex-1 justify-end items-center sm:items-stretch sm:justify-between">
+                <div class="flex justify-end ">
+                    <div class="flex items-center justify-end flex-1 sm:items-stretch sm:justify-between">
                         {{-- Desktop Navbar Items --}}
-                        <div class="hidden items-center lg:flex">
+                        <div class="items-center hidden -mx-4 lg:flex">
                             @foreach ($navigation as $navItem)
                                 <a
                                     href="{{ route($navItem['route'], $navItem['params'] ?? []) }}"
-                                    class="inline-flex items-center font-semibold leading-5 border-b-2
-                                        focus:outline-none transition duration-150 ease-in-out h-full
-                                        -mb-1 pb-1
+                                    class="inline-flex font-semibold leading-5 group
+                                        focus:outline-none transition duration-150 ease-in-out h-full px-2 mx-2 relative border-t-2 border-transparent rounded
                                         @if(optional(Route::current())->getName() === $navItem['route'])
-                                            border-theme-primary-600 text-theme-secondary-900 dark:text-theme-secondary-400
+                                            text-theme-secondary-900 dark:text-theme-secondary-400
                                         @else
-                                            border-transparent text-theme-secondary-700 hover:text-theme-secondary-800 hover:border-theme-secondary-300 dark:text-theme-secondary-500 dark:hover:text-theme-secondary-400
+                                            text-theme-secondary-700 hover:text-theme-secondary-800 dark:text-theme-secondary-500 dark:hover:text-theme-secondary-400
                                         @endif
-                                        @if(!$loop->first) ml-8 @endif"
+                                    "
                                 >
-                                    {{ $navItem['label'] }}
+                                    <span class="flex items-center w-full h-full mt-0.5 border-b-2  @if(optional(Route::current())->getName() === $navItem['route']) border-theme-primary-600 @else border-transparent group-hover:border-theme-secondary-300 @endif">
+                                        <span class="-mt-0.5">{{ $navItem['label'] }}</span>
+                                    </span>
                                 </a>
                             @endforeach
                         </div>
                     </div>
 
                     @if(Network::canBeExchanged())
-                        <div class="hidden items-center md:flex">
+                        <div class="items-center hidden md:flex">
                             <x-navbar.separator class="md:hidden lg:inline" />
 
                             <div class="hidden font-semibold lg:pl-8 md:flex text-theme-secondary-900 dark:text-white">
@@ -116,7 +117,7 @@
                     @endforeach
 
                     @if(Network::canBeExchanged())
-                        <div class="flex py-3 px-8 mt-2 -mb-4 font-semibold bg-theme-secondary-100 text-theme-secondary-900 dark:text-white dark:bg-theme-secondary-800 md:hidden">
+                        <div class="flex px-8 py-3 mt-2 -mb-4 font-semibold bg-theme-secondary-100 text-theme-secondary-900 dark:text-white dark:bg-theme-secondary-800 md:hidden">
                             <livewire:price-ticker />
                         </div>
                     @endif

@@ -1,3 +1,4 @@
+import 'focus-visible';
 import "@ui/js/tippy.js";
 import "@ui/js/page-scroll";
 import Pagination from "@ui/js/pagination";
