@@ -6,6 +6,7 @@ namespace App\Services;
 
 use App\Facades\Network;
 use App\Services\Cache\CryptoCompareCache;
+use App\Services\Settings;
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
@@ -70,5 +71,23 @@ final class CryptoCompare
                     $day => ResolveScientificNotation::execute($transactions->sum('close')),
                 ]);
         });
+    }
+
+    public static function getPriceChange(): ?float
+    {
+        if (! Network::canBeExchanged()) {
+            return null;
+        }
+
+        $priceFullRange = CryptoCompare::historicalHourly(Network::currency(), Settings::currency(), 24);
+
+        $initialPrice = (float) $priceFullRange->first();
+        $finalPrice   = (float) $priceFullRange->last();
+
+        if ($initialPrice === 0.0 || $finalPrice === 0.0) {
+            return  0;
+        }
+
+        return ($finalPrice / $initialPrice) - 1;
     }
 }

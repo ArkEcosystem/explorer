@@ -20,7 +20,7 @@
                 <x-stats.stat :label="trans('general.price')" icon="app-price" :disabled="! Network::canBeExchanged()" class="flex-grow">
                     <x-slot name="side">
                         <div wire:ignore>
-                            <livewire:price-stats :is-positive="$priceChange >= 0" />
+                            <livewire:price-stats />
                         </div>
                     </x-slot>
 

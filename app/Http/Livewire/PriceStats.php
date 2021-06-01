@@ -16,20 +16,13 @@ final class PriceStats extends Component
     /** @phpstan-ignore-next-line */
     protected $listeners = ['currencyChanged' => '$refresh'];
 
-    public bool $isPositive = true;
-
-    public function mount(bool $isPositive = true): void
-    {
-        $this->isPositive = $isPositive;
-    }
-
     public function render(): View
     {
         return view('livewire.price-stats', [
             'from'       => Network::currency(),
             'to'         => Settings::currency(),
             'historical' => $this->getHistorical(),
-            'isPositive' => $this->isPositive,
+            'isPositive' => CryptoCompare::getPriceChange() >= 0,
         ]);
     }
 
