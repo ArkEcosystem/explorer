@@ -67,7 +67,7 @@ final class DelegateDataBoxes extends Component
         /** @var WalletViewModel $delegate */
         if ($delegate->hasForged()) {
             $this->forgingPerformances[$publicKey] = DelegateForgingStatus::forging;
-        /** @var WalletViewModel $delegate */
+        /* @var WalletViewModel $delegate */
         } elseif ($delegate->keepsMissing()) {
             $this->forgingPerformances[$publicKey] = DelegateForgingStatus::missing;
         } else {
