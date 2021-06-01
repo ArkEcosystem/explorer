@@ -18,7 +18,7 @@ final class PriceStats extends Component
 
     private bool $isPositive = true;
 
-    public function mount(bool $isPositive = true)
+    public function mount(bool $isPositive = true): void
     {
         $this->isPositive = $isPositive;
     }
