@@ -48,7 +48,7 @@ final class DelegateDataBoxes extends Component
         $performances = [];
 
         foreach ($this->delegates as $delegate) {
-            $publicKey = $delegate->wallet()->model()->public_key;
+            $publicKey                = $delegate->wallet()->model()->public_key;
             $performances[$publicKey] = $this->getDelegatePerformance($publicKey);
         }
 
@@ -68,12 +68,12 @@ final class DelegateDataBoxes extends Component
         /** @var WalletViewModel $delegate */
         if ($delegate->hasForged()) {
             return DelegateForgingStatus::forging;
-        /** @var WalletViewModel $delegate */
+        /* @var WalletViewModel $delegate */
         } elseif ($delegate->keepsMissing()) {
             return DelegateForgingStatus::missing;
-        } else {
-            return DelegateForgingStatus::missed;
         }
+
+        return DelegateForgingStatus::missed;
     }
 
     public function getBlockCount(): string
