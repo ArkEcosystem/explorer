@@ -1,5 +1,6 @@
 @props([
     'name',
+    'first' => null,
 ])
 
 <button
@@ -16,6 +17,7 @@
     @keydown.arrow-right="selectNextTab"
     :tabindex="selected === '{{ $name }}' ? 0 : -1"
     :aria-selected="selected === '{{ $name }}'"
+    {{ $attributes }}
 >
     <span
         class="block w-full h-full pt-4 pb-3 border-b-4 whitespace-nowrap"
