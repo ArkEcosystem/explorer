@@ -12,6 +12,30 @@
 
             this.onSelected(name);
         },
+        selectPrevTab(e) {
+            const el = e.target;
+            const wrapper = el.parentElement;
+            let = prevTab = el;
+            do {
+                prevTab = prevTab.previousElementSibling;
+                if (prevTab === null) {
+                    prevTab = wrapper.querySelector('[role=tab]:last-child');
+                }
+            } while(! prevTab.matches('[role=tab]'));
+            prevTab.focus();
+        },
+        selectNextTab(e) {
+            const el = e.target;
+            const wrapper = el.parentElement;
+            let = nextTab = el;
+            do {
+                nextTab = nextTab.nextElementSibling;
+                if (nextTab === null) {
+                    nextTab = wrapper.querySelector('[role=tab]');
+                }
+            } while(! nextTab.matches('[role=tab]'));
+            nextTab.focus();
+        },
         @if($onSelected)
             onSelected: {{ $onSelected }},
         @else
@@ -19,7 +43,7 @@
         @endif
     }"
 >
-    <div class="flex">
+    <div role="tablist" class="flex">
         {{ $slot }}
     </div>
 
