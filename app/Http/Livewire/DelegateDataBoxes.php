@@ -25,8 +25,6 @@ final class DelegateDataBoxes extends Component
 
     private array $statistics = [];
 
-    public array $forgingPerformances = [];
-
     public function render(): View
     {
         $this->delegates = $this->fetchDelegates();
@@ -47,11 +45,14 @@ final class DelegateDataBoxes extends Component
 
     public function getDelegatesPerformance(): array
     {
+        $performances = [];
+
         foreach ($this->delegates as $delegate) {
-            $this->getDelegatePerformance($delegate->wallet()->model()->public_key);
+            $publicKey = $delegate->wallet()->model()->public_key;
+            $performances[$publicKey] = $this->getDelegatePerformance($publicKey);
         }
 
-        $parsedPerformances = array_count_values($this->forgingPerformances);
+        $parsedPerformances = array_count_values($performances);
 
         return [
             'forging' => $parsedPerformances[DelegateForgingStatus::forging] ?? 0,
@@ -60,18 +61,18 @@ final class DelegateDataBoxes extends Component
         ];
     }
 
-    public function getDelegatePerformance(string $publicKey): void
+    public function getDelegatePerformance(string $publicKey): string
     {
         $delegate = ViewModelFactory::make((new WalletCache())->getDelegate($publicKey));
 
         /** @var WalletViewModel $delegate */
         if ($delegate->hasForged()) {
-            $this->forgingPerformances[$publicKey] = DelegateForgingStatus::forging;
+            return DelegateForgingStatus::forging;
         /** @var WalletViewModel $delegate */
         } elseif ($delegate->keepsMissing()) {
-            $this->forgingPerformances[$publicKey] = DelegateForgingStatus::missing;
+            return DelegateForgingStatus::missing;
         } else {
-            $this->forgingPerformances[$publicKey] = DelegateForgingStatus::missed;
+            return DelegateForgingStatus::missed;
         }
     }
 
