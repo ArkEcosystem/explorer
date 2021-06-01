@@ -34,7 +34,7 @@ final class DelegateTable extends Component
         }
 
         return view('livewire.delegate-table', [
-            'delegates' => $delegates
+            'delegates' => $delegates,
         ]);
     }
 
