@@ -1,14 +1,6 @@
 import { getInfoFromThemeName, makeGradient } from "./chart-theme";
 
-const ChartLine = (
-    id,
-    values,
-    labels,
-    grid,
-    tooltips,
-    theme,
-    height
-) => {
+const ChartLine = (id, values, labels, grid, tooltips, theme, height) => {
     return {
         getCanvasContext() {
             return this.$refs[id].getContext("2d");
@@ -23,7 +15,7 @@ const ChartLine = (
                 fontSize: 14,
                 fontStyle: 600,
                 fontColor: "#B0B0B8",
-            }
+            };
         },
 
         updateChart() {
@@ -42,8 +34,11 @@ const ChartLine = (
                 let themeName = value.type === "bar" ? "grey" : theme.name;
                 let graphic = getInfoFromThemeName(themeName, theme.mode);
                 let backgroundColor = graphic.backgroundColor;
-                if (backgroundColor.hasOwnProperty('gradient')) {
-                    backgroundColor = makeGradient(backgroundColor.gradient, height);
+                if (backgroundColor.hasOwnProperty("gradient")) {
+                    backgroundColor = makeGradient(
+                        backgroundColor.gradient,
+                        height
+                    );
                 }
 
                 datasets.push({
@@ -51,9 +46,18 @@ const ChartLine = (
                     label: value.name || "",
                     data: value.data || value,
                     type: value.type || "line",
-                    backgroundColor: value.type === "bar" ? graphic.borderColor : backgroundColor,
-                    borderColor: value.type === "bar" ? "transparent" : graphic.borderColor,
-                    borderWidth: value.type === "bar" ? "transparent" : graphic.borderWidth,
+                    backgroundColor:
+                        value.type === "bar"
+                            ? graphic.borderColor
+                            : backgroundColor,
+                    borderColor:
+                        value.type === "bar"
+                            ? "transparent"
+                            : graphic.borderColor,
+                    borderWidth:
+                        value.type === "bar"
+                            ? "transparent"
+                            : graphic.borderWidth,
                     lineTension: graphic.lineTension,
                     pointRadius: graphic.pointRadius,
                 });
@@ -70,8 +74,8 @@ const ChartLine = (
                 animation: { duration: 500, easing: "linear" },
                 legend: { display: false },
                 intersection: {
-                    axis: 'xy',
-                    mode: 'index',
+                    axis: "xy",
+                    mode: "index",
                     intersect: false,
                 },
                 tooltips: {
@@ -84,23 +88,24 @@ const ChartLine = (
                 plugins: {
                     tooltip: {
                         callbacks: {
-                            label: function(context) {
-                                let label = context.dataset.label || '';
-                                let scaleFactor = context.dataset.scaleFactor || null;
+                            label: function (context) {
+                                let label = context.dataset.label || "";
+                                let scaleFactor =
+                                    context.dataset.scaleFactor || null;
 
                                 if (scaleFactor) {
                                     return label / scaleFactor;
                                 }
 
                                 return label;
-                            }
-                        }
-                    }
+                            },
+                        },
+                    },
                 },
                 scales: {
                     xAxes: [
                         {
-                            type: 'time',
+                            type: "time",
                             ticks: {
                                 display: grid === "true",
                                 padding: 10,
@@ -114,16 +119,16 @@ const ChartLine = (
                     ],
                     yAxes: [
                         {
-                            type: 'linear',
+                            type: "linear",
                             position: "right",
                             stacked: true,
                             ticks: {
                                 padding: 15,
                                 ...fontConfig,
                                 display: grid === "true",
-                                callback: function(value, index, values) {
-                                    return '$' + parseFloat(value).toFixed(2);
-                                }
+                                callback: function (value, index, values) {
+                                    return "$" + parseFloat(value).toFixed(2);
+                                },
                             },
                             gridLines: {
                                 display: grid === "true",
@@ -131,7 +136,7 @@ const ChartLine = (
                             },
                         },
                     ],
-                }
+                },
             };
 
             const data = {
@@ -140,7 +145,7 @@ const ChartLine = (
             };
 
             new Chart(this.getCanvasContext(), { data, options });
-        }
+        },
     };
 };
 
