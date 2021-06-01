@@ -6,7 +6,6 @@ function themes() {
     };
 
     const colors = {
-
         black: {
             dark: {
                 ..._default,
@@ -138,21 +137,26 @@ export function hexToRgb(hex) {
     hex = hex.replace(re, (m, r, g, b) => r + r + g + g + b + b);
     const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
 
-    return result ? {
-        r: parseInt(result[1], 16),
-        g: parseInt(result[2], 16),
-        b: parseInt(result[3], 16)
-    } : null;
+    return result
+        ? {
+              r: parseInt(result[1], 16),
+              g: parseInt(result[2], 16),
+              b: parseInt(result[3], 16),
+          }
+        : null;
 }
 
 export function makeGradient(options, height) {
-    const ctx = document.createElement('canvas').getContext("2d");
+    const ctx = document.createElement("canvas").getContext("2d");
     const gradient = ctx.createLinearGradient(0, 0, 0, height);
 
     options.forEach((item) => {
         const color = hexToRgb(item.value);
 
-        gradient.addColorStop(item.stop, `rgba(${color.r}, ${color.g}, ${color.b}, ${item.alpha})`);
+        gradient.addColorStop(
+            item.stop,
+            `rgba(${color.r}, ${color.g}, ${color.b}, ${item.alpha})`
+        );
     });
 
     return gradient;

@@ -127,20 +127,20 @@ final class Chart extends Component
 
     private function chart(string $period): Collection
     {
-        $fiat = CryptoCompare::historical(Network::currency(), Settings::currency());
+        $fiat   = CryptoCompare::historical(Network::currency(), Settings::currency());
         $crypto = CryptoCompare::historical(Network::currency(), CryptoCurrencies::BTC);
 
         if ($period !== 'all') {
             $from = $this->getRangeFromPeriodWithoutArkEpoch($period);
 
-            $fiat = $fiat->filter(fn ($value, $key) => Carbon::parse($key)->greaterThanOrEqualTo($from));
+            $fiat   = $fiat->filter(fn ($value, $key) => Carbon::parse($key)->greaterThanOrEqualTo($from));
             $crypto = $crypto->filter(fn ($value, $key) => Carbon::parse($key)->greaterThanOrEqualTo($from));
         }
 
         $scaleFactor = 1000;
 
         return collect([
-            'labels' => $fiat->keys(),
+            'labels'   => $fiat->keys(),
             'datasets' => collect([
                 ['type' => 'line', 'name' => Settings::currency(), 'data' => $fiat->values()],
                 ['type' => 'bar', 'name' => CryptoCurrencies::BTC, 'data' => $crypto->values()->map(fn ($item) => ((float) ServiceNumberFormatter::currency($item, '', 8) * $scaleFactor)), 'scale' => $scaleFactor],
