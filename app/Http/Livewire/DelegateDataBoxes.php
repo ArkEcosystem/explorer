@@ -16,7 +16,6 @@ use App\ViewModels\ViewModelFactory;
 use App\ViewModels\WalletViewModel;
 use Illuminate\View\View;
 use Livewire\Component;
-use Throwable;
 
 final class DelegateDataBoxes extends Component
 {
