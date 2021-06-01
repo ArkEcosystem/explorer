@@ -26,15 +26,15 @@ final class DelegateTable extends Component
     public function render(): View
     {
         if ($this->state['status'] === 'resigned') {
-            $delegates = $this->resignedQuery()->paginate(Network::delegateCount());
+            $delegates = ViewModelFactory::paginate($this->resignedQuery()->paginate(Network::delegateCount()));
         } elseif ($this->state['status'] === 'standby') {
-            $delegates = $this->standbyQuery()->paginate(Network::delegateCount());
+            $delegates = ViewModelFactory::paginate($this->standbyQuery()->paginate(Network::delegateCount()));
         } else {
-            $delegates = $this->activeQuery()->get();
+            $delegates = ViewModelFactory::collection($this->activeQuery()->get());
         }
 
         return view('livewire.delegate-table', [
-            'delegates' => $this->state['status'] === 'active' ? ViewModelFactory::collection($delegates) : ViewModelFactory::paginate($delegates),
+            'delegates' => $delegates
         ]);
     }
 
