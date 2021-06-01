@@ -7,7 +7,7 @@
             transactionTypeFilterLabel: 'All',
         }" x-cloak class="w-full">
             <div class="md:hidden">
-                <x-transaction-table-filter :type="'all'" />
+                <x-transaction-table-filter />
             </div>
 
             <livewire:wallet-transaction-table

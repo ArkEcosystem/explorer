@@ -3,7 +3,7 @@
     dropdown-class="right-0 mt-2 origin-top-right"
     button-class="relative flex items-center w-full p-3 font-semibold text-left focus:outline-none md:px-8 text-theme-secondary-900 dark:text-theme-secondary-200 md:items-end md:inline"
     icon-class="hidden"
-    initial-value="all"
+    initial-value="{{ $this->state['type'] }}"
     wire:model="state.type"
     :options="collect([
         'all',

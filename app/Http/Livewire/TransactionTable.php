@@ -19,13 +19,8 @@ final class TransactionTable extends Component
         'type' => 'all',
     ];
 
-    /** @phpstan-ignore-next-line */
-    protected $listeners = ['filterTransactionsByType'];
-
-    public function filterTransactionsByType(string $value): void
+    public function updatedStateType(): void
     {
-        $this->state['type'] = $value;
-
         $this->gotoPage(1);
     }
 

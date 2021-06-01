@@ -21,9 +21,6 @@ final class LatestRecords extends Component
         'type'     => 'all',
     ];
 
-    /** @phpstan-ignore-next-line */
-    protected $listeners = ['filterTransactionsByType'];
-
     private ?Collection $blocks = null;
 
     private ?Collection $transactions = null;
@@ -48,11 +45,6 @@ final class LatestRecords extends Component
         return view('livewire.latest-records', [
             'blocks' => ViewModelFactory::collection($this->blocks),
         ]);
-    }
-
-    public function updatedStateType($type): void
-    {
-        $this->filterTransactionsByType($type);
     }
 
     private function renderTransactions(): View
