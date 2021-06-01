@@ -39,18 +39,11 @@ final class DelegateDataBoxes extends Component
 
     public function pollStatistics(): void
     {
-        try {
-            $this->statistics = [
-                'blockCount'   => $this->getBlockCount(),
-                'nextDelegate' => $this->getNextDelegate(),
-                'performances' => $this->getDelegatesPerformance(),
-            ];
-
-            // @codeCoverageIgnoreStart
-        } catch (Throwable $t) {
-            $this->pollStatistics();
-        }
-        // @codeCoverageIgnoreEnd
+        $this->statistics = [
+            'blockCount'   => $this->getBlockCount(),
+            'nextDelegate' => $this->getNextDelegate(),
+            'performances' => $this->getDelegatesPerformance(),
+        ];
     }
 
     public function getDelegatesPerformance(): array

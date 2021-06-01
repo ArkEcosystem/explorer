@@ -52,7 +52,6 @@ function createRoundWithDelegatesAndPerformances(array $performances = null): vo
 
 beforeEach(fn () => configureExplorerDatabase());
 
-// @TODO: make assertions about data visibility
 it('should render without errors', function () {
     createRoundWithDelegatesAndPerformances();
 
