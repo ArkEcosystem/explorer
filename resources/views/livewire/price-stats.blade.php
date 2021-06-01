@@ -3,7 +3,7 @@
     class="hidden flex-grow justify-end lg:flex"
 >
     <div
-        wire:key="{{ Settings::currency() }}"
+        wire:key="{{ Settings::currency() }}-{{ $isPositive ? 'positive' : 'negative' }}"
         class="ml-6"
         x-data="PriceChart(
             {{ $historical->values()->toJson() }},
