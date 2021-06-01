@@ -80,20 +80,20 @@ it('should show the correct missed blocks amount when spanning multiple rounds',
     ]);
 
     ForgingStats::create([
-        'timestamp' => 1,
+        'timestamp'  => 1,
         'public_key' => $wallet->public_key,
-        'forged' => true,
+        'forged'     => true,
     ]);
 
     ForgingStats::create([
-        'timestamp' => 2,
+        'timestamp'  => 2,
         'public_key' => $wallet->public_key,
-        'forged' => false,
+        'forged'     => false,
     ]);
     ForgingStats::create([
-        'timestamp' => 3,
+        'timestamp'  => 3,
         'public_key' => $wallet->public_key,
-        'forged' => false,
+        'forged'     => false,
     ]);
 
     $this->assertDatabaseHas('forging_stats', [
