@@ -1,15 +1,6 @@
 import { getInfoFromThemeName, makeGradient } from "./chart-theme";
 
-const ChartLine = (
-    id,
-    values,
-    labels,
-    grid,
-    tooltips,
-    theme,
-    height,
-    time
-) => {
+const ChartLine = (id, values, labels, grid, tooltips, theme, height, time) => {
     return {
         time: time,
 
