@@ -42,6 +42,7 @@ final class TransactionTable extends Component
         }
 
         return view('livewire.transaction-table', [
+            'showTitle' => true,
             'transactions' => ViewModelFactory::paginate($query->paginate()),
         ]);
     }
