@@ -1,7 +1,7 @@
 <div>
     @isset($showTitle)
-        <div class="w-full mb-8">
-            <div class="relative flex flex-col justify-between md:items-end md:flex-row">
+        <div class="mb-8 w-full">
+            <div class="flex relative flex-col justify-between md:items-end md:flex-row">
                 <h2 class="mb-8 md:mb-0">@lang('pages.transactions.title')</h2>
 
                 <div class="-my-3 -mr-8">

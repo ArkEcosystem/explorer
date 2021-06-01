@@ -1,4 +1,4 @@
-<div class="justify-between hidden mb-4 space-x-6 md:flex">
+<div class="hidden justify-between mb-4 space-x-6 md:flex">
     <x-tabs.wrapper
         class="w-9/12 lg:w-10/12"
         no-data
@@ -27,7 +27,7 @@
     <div class="relative z-10 w-3/12 text-center bg-theme-secondary-100 rounded-xl dark:bg-black lg:w-2/12">
         <button
             type="button"
-            class="relative flex items-center justify-center w-full px-2 cursor-pointer transition-default hover:text-theme-secondary-900 dark:hover:text-theme-secondary-200"
+            class="flex relative justify-center items-center px-2 w-full cursor-pointer transition-default hover:text-theme-secondary-900 dark:hover:text-theme-secondary-200"
             @click="select('monitor')"
             @keydown.enter="select('monitor')"
             @keydown.space.prevent="select('monitor')"
@@ -37,12 +37,12 @@
             wire:key="tab-monitor"
             :aria-selected="selected === 'monitor'"
         >
-            <span class="flex items-center justify-center space-x-2">
+            <span class="flex justify-center items-center space-x-2">
                 <span>
                     <x-ark-icon name="app-monitor" class="text-theme-secondary-700"/>
                 </span>
                 <span
-                    class="block w-full h-full pt-4 pb-3 border-b-4 whitespace-nowrap"
+                    class="block pt-4 pb-3 w-full h-full whitespace-nowrap border-b-4"
                     :class="{
                         'border-transparent dark:text-theme-secondary-500 ': selected !== 'monitor',
                         'text-theme-secondary-900 border-theme-primary-600 dark:text-theme-secondary-200 font-semibold': selected === 'monitor',
@@ -57,8 +57,8 @@
 
 <div class="md:hidden">
     <x-ark-dropdown
-        wrapper-class="relative w-full p-2 mb-8 border rounded-xl border-theme-primary-100 dark:border-theme-secondary-800"
-        button-class="w-full p-3 font-semibold text-left text-theme-secondary-900 dark:text-theme-secondary-200"
+        wrapper-class="relative p-2 mb-8 w-full rounded-xl border border-theme-primary-100 dark:border-theme-secondary-800"
+        button-class="p-3 w-full font-semibold text-left text-theme-secondary-900 dark:text-theme-secondary-200"
         dropdown-classes="left-0 w-full z-20"
         :init-alpine="false"
     >
