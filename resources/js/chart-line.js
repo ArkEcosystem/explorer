@@ -7,9 +7,12 @@ const ChartLine = (
     grid,
     tooltips,
     theme,
-    height
+    height,
+    time
 ) => {
     return {
+        time: time,
+
         getCanvasContext() {
             return this.$refs[id].getContext("2d");
         },
@@ -63,6 +66,8 @@ const ChartLine = (
         },
 
         init() {
+            this.$watch("time", () => this.updateChart());
+
             const fontConfig = this.getFontConfig();
 
             const options = {

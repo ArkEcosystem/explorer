@@ -18,12 +18,13 @@
         '{{ $grid }}',
         '{{ $tooltips }}',
         {{ $theme }},
-        '{{ $height }}'
+        '{{ $height }}',
+        '{{ time() }}'
     )"
     x-init="init"
     @toggle-dark-mode.window="updateChart"
     @stats-period-updated.window="updateChart"
-    wire:key="{{ $id }}"
+    wire:key="{{ $id.time() }}"
     {{ $attributes->only('class') }}
 >
     <div wire:ignore>
