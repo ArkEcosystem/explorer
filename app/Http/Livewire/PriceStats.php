@@ -18,7 +18,6 @@ final class PriceStats extends Component
 
     public function render(): View
     {
-        // dd(json_encode($this->getHistorical()->values()));
         return view('livewire.price-stats', [
             'from'        => Network::currency(),
             'to'          => Settings::currency(),
