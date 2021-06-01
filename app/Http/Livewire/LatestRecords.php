@@ -50,6 +50,11 @@ final class LatestRecords extends Component
         ]);
     }
 
+    public function updatedStateType($type): void
+    {
+        $this->filterTransactionsByType($type);
+    }
+
     private function renderTransactions(): View
     {
         if (is_null($this->transactions)) {
