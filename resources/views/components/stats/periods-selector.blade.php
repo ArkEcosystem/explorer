@@ -58,7 +58,7 @@
     {{--desktop: buttons group--}}
     <div class="hidden md:inline-flex">
         <x-tabs.wrapper
-            default-selected="all"
+            default-selected="{{ $selected }}"
             on-selected="function (value) {
                 this.$wire.set('period', value);
             }"

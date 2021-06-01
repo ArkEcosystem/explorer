@@ -1,37 +1,130 @@
 function themes() {
-    const lineTension = "0.25";
-    const borderWidth = "2";
-    const pointRadius = "0";
+    const _default = {
+        borderWidth: 2,
+        lineTension: 0.25,
+        pointRadius: 0,
+    };
 
     const colors = {
 
         black: {
-            dark: {},
-            light: {
+            dark: {
+                ..._default,
+                borderColor: "#eef3f5",
                 backgroundColor: {
                     gradient: [
-                        { stop: 0, alpha: 1, value: "" },
-                        { stop: 1, alpha: 0, value: "" },
+                        { stop: 0, alpha: 0.5, value: "#eef3f5" },
+                        { stop: 1, alpha: 0, value: "#eef3f5" },
                     ],
                 },
-                borderColor: "",
-                borderWidth: borderWidth,
-                lineTension: lineTension,
-                pointRadius: pointRadius,
+            },
+            light: {
+                ..._default,
+                borderColor: "#212225",
+                backgroundColor: {
+                    gradient: [
+                        { stop: 0, alpha: 10.5, value: "#212225" },
+                        { stop: 1, alpha: 0, value: "#212225" },
+                    ],
+                },
             },
         },
 
-        grey: {},
+        grey: {
+            dark: {
+                ..._default,
+                borderColor: "#7e8a9c",
+                backgroundColor: {
+                    gradient: [
+                        { stop: 0, alpha: 1, value: "#7e8a9c" },
+                        { stop: 1, alpha: 0, value: "#7e8a9c" },
+                    ],
+                },
+            },
+            light: {
+                ..._default,
+                borderColor: "#c4c8cf",
+                backgroundColor: {
+                    gradient: [
+                        { stop: 0, alpha: 1, value: "#c4c8cf" },
+                        { stop: 1, alpha: 0, value: "#c4c8cf" },
+                    ],
+                },
+            },
+        },
 
-        yellow: {},
+        yellow: {
+            dark: {
+                ..._default,
+                borderColor: "#ffae10",
+                backgroundColor: {
+                    gradient: [
+                        { stop: 0, alpha: 0.5, value: "#ffae10" },
+                        { stop: 1, alpha: 0, value: "#ffae10" },
+                    ],
+                },
+            },
+            light: {
+                ..._default,
+                borderColor: "#ffae10",
+                backgroundColor: {
+                    gradient: [
+                        { stop: 0, alpha: 0.5, value: "#ffae10" },
+                        { stop: 1, alpha: 0, value: "#ffae10" },
+                    ],
+                },
+            },
+        },
 
-        green: {},
+        green: {
+            dark: {
+                ..._default,
+                borderColor: "#289548",
+                backgroundColor: {
+                    gradient: [
+                        { stop: 0, alpha: 0.5, value: "#289548" },
+                        { stop: 1, alpha: 0, value: "#289548" },
+                    ],
+                },
+            },
+            light: {
+                ..._default,
+                borderColor: "#289548",
+                backgroundColor: {
+                    gradient: [
+                        { stop: 0, alpha: 0.5, value: "#289548" },
+                        { stop: 1, alpha: 0, value: "#289548" },
+                    ],
+                },
+            },
+        },
 
-        red: {},
+        red: {
+            dark: {
+                ..._default,
+                borderColor: "#de5846",
+                backgroundColor: {
+                    gradient: [
+                        { stop: 0, alpha: 0.5, value: "#de5846" },
+                        { stop: 1, alpha: 0, value: "#de5846" },
+                    ],
+                },
+            },
+            light: {
+                ..._default,
+                borderColor: "#de5846",
+                backgroundColor: {
+                    gradient: [
+                        { stop: 0, alpha: 0.5, value: "#de5846" },
+                        { stop: 1, alpha: 0, value: "#de5846" },
+                    ],
+                },
+            },
+        },
     };
 
     return {
-        placeholder: colors.grey,
+        grey: colors.grey,
         black: colors.black,
         yellow: colors.yellow,
         green: colors.green,
@@ -52,16 +145,17 @@ export function hexToRgb(hex) {
     } : null;
 }
 
-export function makeGradient(ctx, options) {
-    options.forEach((grad) => {
-        const stop = parseInt(grad.stop);
-        const color = hexToRgb(grad.value);
-        const alpha = parseFloat(grad.alpha);
+export function makeGradient(options, height) {
+    const ctx = document.createElement('canvas').getContext("2d");
+    const gradient = ctx.createLinearGradient(0, 0, 0, height);
 
-        ctx.addColorStop(stop, `rgba(${color.r}, ${color.g}, ${color.b}, ${alpha})`);
+    options.forEach((item) => {
+        const color = hexToRgb(item.value);
+
+        gradient.addColorStop(item.stop, `rgba(${color.r}, ${color.g}, ${color.b}, ${item.alpha})`);
     });
 
-    return ctx;
+    return gradient;
 }
 
 export function getInfoFromThemeName(name, mode) {

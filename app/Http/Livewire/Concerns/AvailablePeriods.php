@@ -45,13 +45,22 @@ trait AvailablePeriods
             return null;
         }
 
-        return Carbon::createFromTimestamp((int) Carbon::now()->timestamp - $this->getArkEpoch())
+        return Carbon::createFromTimestamp((int) Carbon::now()->unix() - $this->getArkEpoch())
             ->sub($this->subtractFromPeriod($period))
             ->toDateString();
     }
 
+    private function getRangeFromPeriodWithoutArkEpoch(string $period): string | null
+    {
+        if (! collect($this->availablePeriods())->keys()->containsStrict(Str::lower($period))) {
+            return null;
+        }
+
+        return Carbon::now()->sub($this->subtractFromPeriod($period))->toDateString();
+    }
+
     private function getArkEpoch(): int
     {
-        return Network::epoch()->unix();
+        return 1490101200;
     }
 }

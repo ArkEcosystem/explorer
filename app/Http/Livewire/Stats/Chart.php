@@ -10,7 +10,7 @@ use App\Http\Livewire\Concerns\AvailablePeriods;
 use App\Services\CryptoCompare;
 use App\Services\NumberFormatter as ServiceNumberFormatter;
 use App\Services\Settings;
-use Carbon\Carbon;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\View\View;
 use Konceiver\BetterNumberFormatter\BetterNumberFormatter;
@@ -43,10 +43,17 @@ final class Chart extends Component
             'marketCapValue'      => $this->marketCap(),
             'minPriceValue'       => $this->minPrice(),
             'maxPriceValue'       => $this->maxPrice(),
-            'chartValues'         => $this->chart($this->period),
+            'chartDatasets'       => $this->chart($this->period)->get('datasets')->values(),
+            'chartLabels'         => $this->chart($this->period)->get('labels')->values(),
+            'chartTheme'          => $this->chartTheme(),
             'options'             => $this->availablePeriods(),
             'refreshInterval'     => $this->refreshInterval,
         ]);
+    }
+
+    public function updatedPeriod()
+    {
+        $this->dispatchBrowserEvent('stats-period-updated', []);
     }
 
     private function mainValueBTC(): string
@@ -120,20 +127,32 @@ final class Chart extends Component
 
     private function chart(string $period): Collection
     {
-        $collectionFiat   = CryptoCompare::historical(Network::currency(), Settings::currency());
-        $collectionCrypto = CryptoCompare::historical(Network::currency(), CryptoCurrencies::BTC);
-
-        $collection = $collectionFiat->mapWithKeys(fn ($value, $key) => [$key => [
-            CryptoCurrencies::BTC => ServiceNumberFormatter::currency($collectionCrypto->get($key), CryptoCurrencies::BTC, 8),
-            Settings::currency()  => BetterNumberFormatter::new()->formatWithCurrency($value),
-        ]]);
+        $fiat = CryptoCompare::historical(Network::currency(), Settings::currency());
+        $crypto = CryptoCompare::historical(Network::currency(), CryptoCurrencies::BTC);
 
         if ($period !== 'all') {
-            $from = $this->getRangeFromPeriod($period);
+            $from = $this->getRangeFromPeriodWithoutArkEpoch($period);
 
-            return $collection->filter(fn ($value, $key) => Carbon::parse($key)->greaterThanOrEqualTo($from))->sortKeys();
+            $fiat = $fiat->filter(fn ($value, $key) => Carbon::parse($key)->greaterThanOrEqualTo($from));
+            $crypto = $crypto->filter(fn ($value, $key) => Carbon::parse($key)->greaterThanOrEqualTo($from));
         }
 
-        return $collection->sortKeys();
+        $scaleFactor = 1000;
+
+        return collect([
+            'labels' => $fiat->keys(),
+            'datasets' => collect([
+                ['type' => 'line', 'name' => Settings::currency(), 'data' => $fiat->values()],
+                ['type' => 'bar', 'name' => CryptoCurrencies::BTC, 'data' => $crypto->values()->map(fn ($item) => ((float) ServiceNumberFormatter::currency($item, '', 8) * $scaleFactor)), 'scale' => $scaleFactor],
+            ]),
+        ]);
+    }
+
+    private function chartTheme(): Collection
+    {
+        $mode = Settings::usesDarkTheme() ? 'dark' : 'light';
+        $name = $this->getDiffFromHistoricalHourly() > 0 ? 'green' : 'red';
+
+        return collect(['name' => $name, 'mode' => $mode]);
     }
 }

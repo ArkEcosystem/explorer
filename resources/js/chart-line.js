@@ -1,124 +1,146 @@
-/**
- * Render a line chart.
- *
- * @param data            Contains "values" object and an optional "labels" object
- * @param variation       A floating number that represent the price variation. It can be negative.
- * @param grid
- * @param tooltips
- * @param theme           Object containing "mode" (light|dark) and theme name (black|yellow|grey|dynamic)
- * @param time            Current timestamp
- */
-const ChartLine = (data, variation, grid, tooltips, theme, time) => {
+import { getInfoFromThemeName, makeGradient } from "./chart-theme";
 
-    const margin = Math.max.apply(Math, data.values) * 0.01;
-    const maxValue = Math.max.apply(Math, data.values) + margin;
-    const minValue = Math.min.apply(Math, data.values) - margin;
-
+const ChartLine = (
+    id,
+    values,
+    labels,
+    grid,
+    tooltips,
+    theme,
+    height
+) => {
     return {
-        time: time,
-        isDarkMode: theme.mode === "dark",
-
-        toggleDarkMode() {
-            this.isDarkMode = !this.isDarkMode;
-            this.updateChart();
-        },
-
         getCanvasContext() {
-            return this.$refs.chart.getContext("2d");
+            return this.$refs[id].getContext("2d");
         },
 
         getChartInstance(ctx) {
             return Object.values(Chart.instances).find((i) => i.ctx === ctx);
         },
 
+        getFontConfig() {
+            return {
+                fontSize: 14,
+                fontStyle: 600,
+                fontColor: "#B0B0B8",
+            }
+        },
+
         updateChart() {
             const ctx = this.getCanvasContext();
             const chart = this.getChartInstance(ctx);
 
-            this.init(chart);
+            chart.destroy();
+
+            this.init();
         },
 
-        getLabelsFromValues(values) {
-            const labels = [];
+        loadData() {
+            const datasets = [];
 
-            data.values.forEach((value, index) => labels.push(index));
+            values.forEach((value, key) => {
+                let themeName = value.type === "bar" ? "grey" : theme.name;
+                let graphic = getInfoFromThemeName(themeName, theme.mode);
+                let backgroundColor = graphic.backgroundColor;
+                if (backgroundColor.hasOwnProperty('gradient')) {
+                    backgroundColor = makeGradient(backgroundColor.gradient, height);
+                }
 
-            return labels;
-        },
-
-        init(chart = null) {
-            if (chart === null) {
-                this.$watch("time", () => this.updateChart());
-            }
-
-            // get colors info from theme name
-            const graphic = this.getInfoFromThemeName(theme);
-
-            const ctx = this.getCanvasContext();
-
-            // apply gradients to ctx
-
-            const datasets = [
-                {
-                    backgroundColor: graphic.backgroundColor,
-                    borderColor: graphic.borderColor,
-                    borderWidth: graphic.borderWidth,
-                    data: data.values,
+                datasets.push({
+                    scaleFactor: value.scaleFactor || null, // @TODO
+                    label: value.name || "",
+                    data: value.data || value,
+                    type: value.type || "line",
+                    backgroundColor: value.type === "bar" ? graphic.borderColor : backgroundColor,
+                    borderColor: value.type === "bar" ? "transparent" : graphic.borderColor,
+                    borderWidth: value.type === "bar" ? "transparent" : graphic.borderWidth,
                     lineTension: graphic.lineTension,
                     pointRadius: graphic.pointRadius,
-                },
-            ];
-
-            // get labels
-            const data = {
-                labels: data.labels || this.getLabelsFromValues(data.values),
-                datasets,
-            };
-
-            if (chart) {
-                data.labels.forEach((label, index) => {
-                    chart.data.labels.splice(index, 1, label);
                 });
+            });
 
-                data.datasets[0].data.forEach((value, index) => {
-                    chart.data.datasets[0].data.splice(index, 1, value);
-                });
+            return datasets;
+        },
 
-                chart.data.datasets[0].backgroundColor = graphic.backgroundColor;
-                chart.data.datasets[0].borderColor = graphic.borderColor;
-
-                chart.options.scales.yAxes[0].ticks.max = maxValue;
-                chart.options.scales.yAxes[0].ticks.min = minValue;
-
-                chart.update();
-
-                return;
-            }
+        init() {
+            const fontConfig = this.getFontConfig();
 
             const options = {
+                showScale: grid === "true",
                 animation: { duration: 500, easing: "linear" },
-                tooltips: { enabled: false },
                 legend: { display: false },
+                intersection: {
+                    axis: 'xy',
+                    mode: 'index',
+                    intersect: false,
+                },
+                tooltips: {
+                    enabled: tooltips === "true",
+                    padding: 10,
+                    displayColors: false,
+                    intersect: false,
+                    //@TODO: styling
+                },
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.dataset.label || '';
+                                let scaleFactor = context.dataset.scaleFactor || null;
+
+                                if (scaleFactor) {
+                                    return label / scaleFactor;
+                                }
+
+                                return label;
+                            }
+                        }
+                    }
+                },
                 scales: {
                     xAxes: [
                         {
-                            type: "time",
-                            ticks: { display: false },
-                            gridLines: { display: false, tickMarkLength: 0 },
+                            type: 'time',
+                            ticks: {
+                                display: grid === "true",
+                                padding: 10,
+                                ...fontConfig,
+                            },
+                            gridLines: {
+                                display: grid === "true",
+                                drawBorder: false,
+                            },
                         },
                     ],
                     yAxes: [
                         {
-                            ticks: { display: false, max: maxValue, min: minValue },
-                            gridLines: { display: false, tickMarkLength: 0 },
+                            type: 'linear',
+                            position: "right",
+                            stacked: true,
+                            ticks: {
+                                padding: 15,
+                                ...fontConfig,
+                                display: grid === "true",
+                                callback: function(value, index, values) {
+                                    return '$' + parseFloat(value).toFixed(2);
+                                }
+                            },
+                            gridLines: {
+                                display: grid === "true",
+                                drawBorder: false,
+                            },
                         },
                     ],
-                },
+                }
             };
 
-            new Chart(ctx, { type: "line", data, options });
-        },
+            const data = {
+                labels: labels,
+                datasets: this.loadData(),
+            };
 
+            new Chart(this.getCanvasContext(), { data, options });
+        }
     };
 };
 
