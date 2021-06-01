@@ -1,4 +1,11 @@
-const PriceChart = (values, labels, isPlaceholder, darkMode, time, isPositive) => {
+const PriceChart = (
+    values,
+    labels,
+    isPlaceholder,
+    darkMode,
+    time,
+    isPositive
+) => {
     // The margin is used to not cut the line at the top/bottom
     const margin = Math.max.apply(Math, values) * 0.01;
     const maxValue = Math.max.apply(Math, values) + margin;
