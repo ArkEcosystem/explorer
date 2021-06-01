@@ -1,7 +1,7 @@
 @if(! count($statistics))
     <div wire:poll="pollStatistics" wire:key="poll_statistics_skeleton">
         <x-delegates.skeletons.data-boxes />
-    </div>
+   </div>
 @else
     <div id="statistics-list" class="w-full" wire:poll.{{ Network::blockTime() }}s="pollStatistics" wire:key="poll_statistics_real">
         <div class="flex space-x-4 w-full md:flex-col xl:flex-row md:space-x-0 xl:space-x-4 md:space-y-4 xl:space-y-0">
@@ -70,15 +70,11 @@
                     >
                         <x-slot name="icon">
                             <div class="flex items-center mr-2">
-                                {{-- TODO: Implement real time --}}
                                 <x-delegates.progress-circle circle-color="primary-600" progress="{{ Percentage::calculate((int) $statistics['blockCount'], Network::delegateCount()) }}">
                                     <x-ark-icon class="rotate-90 text-theme-primary-600 border-theme-primary-600" name="app-block-id" size="xs" />
                                 </x-delegates.progress-circle>
                             </div>
                         </x-slot>
-                            {{--<div class="flex items-center mr-2 circled-icon border-theme-secondary-900 dark:border-theme-secondary-600">
-                                <x-ark-icon class="rotate-90 text-theme-secondary-900 dark:text-theme-secondary-600" name="app-block-id" />
-                            </div>--}}
                     </x-general.header-entry>
                 </div>
 
