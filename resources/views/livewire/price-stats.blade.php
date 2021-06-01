@@ -10,7 +10,8 @@
             {{ $historical->keys()->toJson() }},
             {{ ! Network::canBeExchanged() ? 'true' : 'false' }},
             {{ Settings::usesDarkTheme() ? 'true' : 'false' }},
-            '{{ time() }}'
+            '{{ time() }}',
+            {{ $isPositive ? 'true' : 'false' }}
         )"
         x-init="init"
         @toggle-dark-mode.window="toggleDarkMode"
