@@ -16,7 +16,7 @@ final class PriceStats extends Component
     /** @phpstan-ignore-next-line */
     protected $listeners = ['currencyChanged' => '$refresh'];
 
-    private bool $isPositive = true;
+    public bool $isPositive = true;
 
     public function mount(bool $isPositive = true): void
     {
