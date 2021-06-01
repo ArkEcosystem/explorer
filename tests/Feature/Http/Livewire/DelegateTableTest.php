@@ -17,24 +17,6 @@ use function Tests\configureExplorerDatabase;
 beforeEach(fn () => configureExplorerDatabase());
 
 it('should render with all delegates', function () {
-    /*$wallets = Wallet::factory()->count(51)->activeDelegate()->create();
-
-    $wallets->each(function ($wallet) {
-        Round::factory()->create([
-            'round'      => '1',
-            'public_key' => $wallet->public_key,
-        ]);
-
-        for ($i = 0; $i < 3; $i++) {
-            Block::factory()->create([
-                'height'               => $i,
-                'generator_public_key' => $wallet->public_key,
-            ]);
-        }
-
-        (new WalletCache())->setDelegate($wallet->public_key, $wallet);
-    });*/
-
     $component = Livewire::test(DelegateTable::class);
 
     $component->emit('filterByDelegateStatus', 'active');
