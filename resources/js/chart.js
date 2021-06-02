@@ -42,7 +42,7 @@ const CustomChart = (
         loadData() {
             const datasets = [];
 
-            if (! Array.isArray(values)) {
+            if (!Array.isArray(values)) {
                 values = [values];
             }
 
