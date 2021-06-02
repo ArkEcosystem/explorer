@@ -26,9 +26,6 @@ const ChartLine = (id, values, labels, grid, tooltips, theme, height, time) => {
         },
 
         updateChart() {
-            // this.chart.destroy();
-            // this.init();
-
             this.chart.datasets = this.loadData();
             this.chart.update();
         },
@@ -78,6 +75,8 @@ const ChartLine = (id, values, labels, grid, tooltips, theme, height, time) => {
             const fontConfig = this.getFontConfig();
 
             const options = {
+                parsing: false,
+                normalized: true,
                 showScale: grid === "true",
                 animation: { duration: 500, easing: "linear" },
                 legend: { display: false },
@@ -92,10 +91,6 @@ const ChartLine = (id, values, labels, grid, tooltips, theme, height, time) => {
                     padding: 10,
                     displayColors: false,
                     intersect: false,
-                    //@TODO: styling
-                },
-                plugins: {
-                    //@TODO: tooltip: {},
                 },
                 scales: {
                     xAxes: [

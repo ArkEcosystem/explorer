@@ -151,8 +151,6 @@ export function makeGradient(canvas, options) {
     const height = canvas.parentElement.clientHeight / 1.30;
     const gradient = ctx.createLinearGradient(0, 0, 0, height);
 
-    console.log('canvas height', canvas.parentElement, canvas.parentElement.clientHeight, height);
-
     options.forEach((item) => {
         const color = hexToRgb(item.value);
 

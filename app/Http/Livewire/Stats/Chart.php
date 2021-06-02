@@ -60,7 +60,7 @@ final class Chart extends Component
     {
         $value = CryptoCompare::price(Network::currency(), CryptoCurrencies::BTC);
 
-        return ServiceNumberFormatter::currency($value, CryptoCurrencies::BTC, 8);
+        return ServiceNumberFormatter::currency($value, CryptoCurrencies::BTC);
     }
 
     private function mainValueFiat(): string
@@ -127,21 +127,18 @@ final class Chart extends Component
 
     private function chart(string $period): Collection
     {
-        $fiat   = CryptoCompare::historical(Network::currency(), Settings::currency());
-        $crypto = CryptoCompare::historical(Network::currency(), CryptoCurrencies::BTC);
+        $values = CryptoCompare::historical(Network::currency(), Settings::currency());
 
         if ($period !== 'all') {
             $from = $this->getRangeFromPeriodWithoutArkEpoch($period);
 
-            $fiat   = $fiat->filter(fn ($value, $key) => Carbon::parse($key)->greaterThanOrEqualTo($from));
-            $crypto = $crypto->filter(fn ($value, $key) => Carbon::parse($key)->greaterThanOrEqualTo($from));
+            $values = $values->filter(fn ($value, $key) => Carbon::parse($key)->greaterThanOrEqualTo($from));
         }
 
         return collect([
-            'labels'   => $fiat->keys(),
+            'labels'   => $values->keys(),
             'datasets' => collect([
-                ['type' => 'line', 'name' => Settings::currency(), 'data' => $fiat->values()],
-                ['type' => 'bar', 'name' => CryptoCurrencies::BTC, 'data' => $crypto->values()],
+                ['type' => 'line', 'name' => Settings::currency(), 'data' => $values->values()],
             ]),
         ]);
     }
