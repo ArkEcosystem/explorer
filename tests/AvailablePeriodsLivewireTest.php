@@ -7,7 +7,11 @@ namespace Tests;
 use App\Http\Livewire\Concerns\AvailablePeriods;
 use Livewire\Component;
 
-class AvailablePeriodsLivewireTest extends Component {
+/**
+ * @coversNothing
+ */
+final class AvailablePeriodsLivewireTest extends Component
+{
     use AvailablePeriods;
 
     public string $period = 'day';
@@ -19,7 +23,7 @@ class AvailablePeriodsLivewireTest extends Component {
     public function updatedPeriod(): void
     {
         $this->rangeEpoch = $this->getRangeFromPeriod($this->period);
-        $this->range = $this->getRangeFromPeriodWithoutArkEpoch($this->period);
+        $this->range      = $this->getRangeFromPeriodWithoutArkEpoch($this->period);
     }
 
     public function render(): string
