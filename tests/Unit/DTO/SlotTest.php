@@ -103,7 +103,7 @@ it('should show the correct missed blocks amount when spanning multiple rounds',
     $missed = ForgingStats::where('forged', false)->where('public_key', $wallet->publicKey)->count();
 
     (new WalletCache())->setMissedBlocks(
-        $this->publicKey,
+        $wallet->publicKey,
         $missed
     );
 
