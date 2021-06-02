@@ -42,6 +42,10 @@ const CustomChart = (
         loadData() {
             const datasets = [];
 
+            if (! Array.isArray(values)) {
+                values = [values];
+            }
+
             values.forEach((value, key) => {
                 let themeName = value.type === "bar" ? "grey" : theme.name;
                 let graphic = getInfoFromThemeName(themeName, theme.mode);
