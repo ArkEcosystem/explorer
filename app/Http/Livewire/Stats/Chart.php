@@ -110,14 +110,14 @@ final class Chart extends Component
     {
         $range = $this->getPriceRange();
 
-        return ServiceNumberFormatter::currency((float) $range->min(), CryptoCurrencies::BTC, 8);
+        return ServiceNumberFormatter::currency((float) $range->min(), CryptoCurrencies::BTC);
     }
 
     private function maxPrice(): string
     {
         $range = $this->getPriceRange();
 
-        return ServiceNumberFormatter::currency((float) $range->max(), CryptoCurrencies::BTC, 8);
+        return ServiceNumberFormatter::currency((float) $range->max(), CryptoCurrencies::BTC);
     }
 
     private function getHistoricalHourly(string $target): Collection
@@ -137,13 +137,11 @@ final class Chart extends Component
             $crypto = $crypto->filter(fn ($value, $key) => Carbon::parse($key)->greaterThanOrEqualTo($from));
         }
 
-        $scaleFactor = 1000;
-
         return collect([
             'labels'   => $fiat->keys(),
             'datasets' => collect([
                 ['type' => 'line', 'name' => Settings::currency(), 'data' => $fiat->values()],
-                ['type' => 'bar', 'name' => CryptoCurrencies::BTC, 'data' => $crypto->values()->map(fn ($item) => ((float) ServiceNumberFormatter::currency($item, '', 8) * $scaleFactor)), 'scale' => $scaleFactor],
+                ['type' => 'bar', 'name' => CryptoCurrencies::BTC, 'data' => $crypto->values()],
             ]),
         ]);
     }

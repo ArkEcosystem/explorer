@@ -26,9 +26,11 @@ const ChartLine = (id, values, labels, grid, tooltips, theme, height, time) => {
         },
 
         updateChart() {
-            this.chart.destroy();
+            // this.chart.destroy();
+            // this.init();
 
-            this.init();
+            this.chart.datasets = this.loadData();
+            this.chart.update();
         },
 
         loadData() {
@@ -46,6 +48,7 @@ const ChartLine = (id, values, labels, grid, tooltips, theme, height, time) => {
                 }
 
                 datasets.push({
+                    stack: "combined",
                     label: value.name || "",
                     data: value.data || value,
                     type: value.type || "line",
@@ -132,6 +135,7 @@ const ChartLine = (id, values, labels, grid, tooltips, theme, height, time) => {
             };
 
             const data = {
+                type: "line",
                 labels: labels,
                 datasets: this.loadData(),
             };
