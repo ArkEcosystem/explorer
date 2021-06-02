@@ -1,14 +1,6 @@
 import { getInfoFromThemeName, makeGradient } from "./chart-theme";
 
-const CustomChart = (
-    id,
-    values,
-    labels,
-    grid,
-    tooltips,
-    theme,
-    time
-) => {
+const CustomChart = (id, values, labels, grid, tooltips, theme, time) => {
     return {
         time: time,
         chart: null,
@@ -41,7 +33,7 @@ const CustomChart = (
         loadData() {
             const datasets = [];
 
-            if (Array.isArray(values) && ! values[0].hasOwnProperty('data')) {
+            if (Array.isArray(values) && !values[0].hasOwnProperty("data")) {
                 values = [values];
             }
 
