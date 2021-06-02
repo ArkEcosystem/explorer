@@ -60,7 +60,7 @@ final class NumberFormatter
      */
     public static function currencyWithDecimalsWithoutSuffix($value, string $currency)
     {
-        return (number_format((float) ResolveScientificNotation::execute((float) $value), static::decimalsFor($currency)));
+        return number_format((float) ResolveScientificNotation::execute((float) $value), static::decimalsFor($currency));
     }
 
     /**
