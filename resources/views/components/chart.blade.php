@@ -11,7 +11,7 @@
 ])
 
 <div
-    x-data="ChartLine(
+    x-data="CustomChart(
         '{{ $id }}',
         {{ $data }},
         {{ $labels }},

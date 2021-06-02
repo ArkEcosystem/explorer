@@ -1,6 +1,6 @@
 import { getInfoFromThemeName, makeGradient } from "./chart-theme";
 
-const ChartLine = (id, values, labels, grid, tooltips, theme, height, time) => {
+const CustomChart = (id, values, labels, grid, tooltips, theme, height, time) => {
     return {
         time: time,
         chart: null,
@@ -140,4 +140,4 @@ const ChartLine = (id, values, labels, grid, tooltips, theme, height, time) => {
     };
 };
 
-export default ChartLine;
+export default CustomChart;
