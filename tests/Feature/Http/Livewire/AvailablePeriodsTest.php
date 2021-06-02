@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 it('');
 
-class TestComponent {
+final class AvailablePeriodsTest
+{
     //
 }
