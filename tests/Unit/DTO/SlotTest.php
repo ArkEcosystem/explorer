@@ -6,7 +6,7 @@ use App\DTO\Slot;
 use App\Models\Block;
 use App\Models\ForgingStats;
 use App\Models\Wallet;
-
+use App\Services\Cache\WalletCache;
 use App\ViewModels\WalletViewModel;
 use Carbon\Carbon;
 use function Tests\configureExplorerDatabase;
@@ -99,6 +99,13 @@ it('should show the correct missed blocks amount when spanning multiple rounds',
     $this->assertDatabaseHas('forging_stats', [
         'public_key' => $wallet->public_key,
     ]);
+
+    $missed = ForgingStats::where('forged', false)->where('public_key', $wallet->publicKey)->count();
+
+    (new WalletCache())->setMissedBlocks(
+        $this->publicKey,
+        $missed
+    );
 
     expect($subject->missedCount())->toBe(2);
 });
