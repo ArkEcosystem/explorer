@@ -7,7 +7,6 @@
         <x-general.entity-header
             :title="trans('pages.block.block_id')"
             :value="$block->id()"
-            is-block-page
         >
             <x-slot name="logo">
                 <x-page-headers.circle>
