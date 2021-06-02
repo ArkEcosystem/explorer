@@ -7,6 +7,7 @@ namespace App\Http\Livewire\Stats;
 use App\Http\Livewire\Concerns\AvailablePeriods;
 use App\Models\Transaction;
 use App\Services\NumberFormatter;
+use App\Services\Settings;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
@@ -38,7 +39,7 @@ final class InsightAllTimeTransactions extends Component
             'transactionsTitle'        => trans('pages.statistics.insights.transactions'),
             'transactionsValue'        => $this->countTransactionsPerPeriod($this->period),
             'chartValues'              => $this->chartValues($this->period),
-            'chartColor'               => $this->chartColor,
+            'chartTheme'               => $this->chartTheme(),
             'options'                  => $this->availablePeriods(),
             'refreshInterval'          => $this->refreshInterval,
         ]);
@@ -65,6 +66,13 @@ final class InsightAllTimeTransactions extends Component
         $value = $this->transactionsPerPeriod($period);
 
         return collect($value->pluck('transactions'));
+    }
+
+    private function chartTheme(): Collection
+    {
+        $mode = Settings::usesDarkTheme() ? 'dark' : 'light';
+
+        return collect(['name' => 'black', 'mode' => $mode]);
     }
 
     private function transactionsPerPeriod(string $period): EloquentCollection | string

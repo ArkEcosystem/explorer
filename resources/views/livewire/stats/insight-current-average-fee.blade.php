@@ -1,5 +1,6 @@
 <div wire:poll.{{ $refreshInterval }}s>
     <x-stats.insight
+        id="current-average-fee"
         :mainTitle="$currentAverageFeeTitle"
         :mainValue="$currentAverageFeeValue"
         :secondaryTitle="$minFeeTitle"

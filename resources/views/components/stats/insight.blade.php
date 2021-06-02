@@ -1,4 +1,5 @@
 @props([
+    'id',
     'mainTitle',
     'mainValue',
     'secondaryTitle',
@@ -6,7 +7,7 @@
     'tertiaryTitle' => null,
     'tertiaryValue' => null,
     'chart' => null,
-    'chartColor' => 'grey',
+    'chartTheme' => 'grey',
     'options',
 ])
 
@@ -42,26 +43,17 @@
             <p class="mt-2 text-base font-semibold text-theme-secondary-700 dark:text-theme-secondary-200">{{ $secondaryValue }}</p>
         </div>
 
-        @if($chart)
+            @if($chart)
             <div class="md:w-1/2 flex flex-1 justify-end">
-                <div class="flex-grow justify-end lg:flex" >
-                    <div
-                        wire:key="{{ $chart->values()->toJson() }}"
-                        x-data="PriceChart(
-                            {{ $chart->values()->toJson() }},
-                            {{ $chart->keys()->toJson() }},
-                            0,
-                            true,
-                            {{ Settings::usesDarkTheme() ? 'true' : 'false' }},
-                            '{{ time() }}'
-                        )"
-                        x-init="init"
-                        @toggle-dark-mode.window="toggleDarkMode"
-                    >
-                        <div wire:ignore>
-                            <canvas x-ref="chart" class="w-full h-full" width="120" height="40"></canvas>
-                        </div>
-                    </div>
+                <div class="flex-grow justify-end lg:flex">
+                    <x-chart
+                        id="stats-insight-{{ $id }}"
+                        :data="$chart->values()"
+                        :labels="$chart->keys()"
+                        :theme="$chartTheme"
+                        width="200"
+                        height="40"
+                    />
                 </div>
             </div>
         @else
