@@ -79,3 +79,11 @@ it('should get and set the username by public key', function () {
 
     expect($this->subject->getUsernameByPublicKey('publicKey'))->toBeString();
 });
+
+it('should get and set the missed blocks by public key', function () {
+    expect($this->subject->getMissedBlocks('publicKey'))->toBeNull();
+
+    $this->subject->setMissedBlocks('publicKey', 1);
+
+    expect($this->subject->getMissedBlocks('publicKey'))->toBe(1);
+});

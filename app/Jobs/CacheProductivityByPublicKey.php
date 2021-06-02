@@ -27,7 +27,14 @@ final class CacheProductivityByPublicKey implements ShouldQueue
         $forged = ForgingStats::where('forged', true)->where('public_key', $this->publicKey)->count();
         $total  = $forged + $missed;
 
-        (new WalletCache())->setProductivity(
+        $walletCache = new WalletCache();
+
+        $walletCache->setMissedBlocks(
+            $this->publicKey,
+            $missed
+        );
+
+        $walletCache->setProductivity(
             $this->publicKey,
             $total > 0 ? Percentage::calculate($forged, $total) : -1
         );

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\DTO;
 
 use App\Models\ForgingStats;
+use App\Services\Cache\WalletCache;
 use App\Services\Monitor\Monitor;
 use App\ViewModels\WalletViewModel;
 use Carbon\Carbon;
@@ -102,8 +103,7 @@ final class Slot
 
     public function missedCount(): int
     {
-        // TODO: cache?
-        return ForgingStats::where('forged', false)->where('public_key', $this->publicKey)->count();
+        return (new WalletCache())->getMissedBlocks($this->publicKey);
     }
 
     public function isDone(): bool
