@@ -24,6 +24,9 @@ it('should return the date from period', function ($period, $from, $fromEpoch) {
     ['all', '1920-06-15', '1873-03-27'],
 ]);
 
+/**
+ * @coversNothing
+ */
 final class AvailablePeriodsTest extends Component
 {
     use AvailablePeriods;
