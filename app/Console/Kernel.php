@@ -56,15 +56,15 @@ final class Kernel extends ConsoleKernel
 
         $schedule->command(CacheDelegatesWithVoters::class)->everyMinute();
 
-        $schedule->command(CacheDelegatePerformance::class)->everyMinute();
-
         $schedule->command(CacheDelegateProductivity::class)->everyMinute();
 
         $schedule->command(CacheDelegateResignationIds::class)->everyMinute();
 
         $schedule->command(CacheNetworkAggregates::class)->everyMinute();
 
-        $schedule->command(BuildForgingStats::class)->everyTenMinutes();
+        $schedule->command(BuildForgingStats::class)->everyMinute();
+
+        $schedule->command(CacheDelegatePerformance::class)->everyMinute();
     }
 
     /**
