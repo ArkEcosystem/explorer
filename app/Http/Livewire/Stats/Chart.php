@@ -51,7 +51,7 @@ final class Chart extends Component
         ]);
     }
 
-    public function updatedPeriod()
+    public function updatedPeriod(): void
     {
         $this->dispatchBrowserEvent('stats-period-updated', []);
     }

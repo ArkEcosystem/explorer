@@ -44,7 +44,7 @@ trait AvailablePeriods
             return null;
         }
 
-        return Carbon::createFromTimestamp((int) Carbon::now()->unix() - $this->getArkEpoch())
+        return Carbon::createFromTimestamp(Carbon::now()->unix() - $this->getArkEpoch())
             ->sub($this->subtractFromPeriod($period))
             ->toDateString();
     }
