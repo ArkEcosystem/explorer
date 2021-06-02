@@ -21,7 +21,9 @@
 
             <x-tables.rows.mobile.fee :model="$transaction" />
 
-            <x-tables.rows.mobile.confirmations :model="$transaction" />
+            @isset($useConfirmations)
+                <x-tables.rows.mobile.confirmations :model="$transaction" />
+            @endisset
         </div>
     @endforeach
 </div>
