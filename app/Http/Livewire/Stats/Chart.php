@@ -146,7 +146,7 @@ final class Chart extends Component
     private function chartTheme(): Collection
     {
         $mode = Settings::usesDarkTheme() ? 'dark' : 'light';
-        $name = $this->getDiffFromHistoricalHourly() > 0 ? 'green' : 'red';
+        $name = $this->mainValueVariation() === 'up' ? 'green' : 'red';
 
         return collect(['name' => $name, 'mode' => $mode]);
     }
