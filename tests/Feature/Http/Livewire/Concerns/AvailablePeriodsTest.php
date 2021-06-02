@@ -21,4 +21,5 @@ it('should return the date from period', function ($period, $from, $fromEpoch) {
     ['quarter', '2020-03-15', '1972-12-27'],
     ['year', '2019-06-15', '1972-03-27'],
     ['all', '1920-06-15', '1873-03-27'],
+    ['invalid-period', '', ''],
 ]);
