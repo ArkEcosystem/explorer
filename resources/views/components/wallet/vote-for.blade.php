@@ -1,6 +1,6 @@
-<div class="w-full pb-8 bg-white dark:bg-theme-secondary-900 content-container">
-    <div class="flex w-full px-8 py-4 border rounded-xl border-theme-secondary-300 dark:border-theme-secondary-800">
-        <div class="flex flex-col justify-between w-full space-y-6 sm:flex-row sm:space-y-0">
+<div class="pb-8 w-full bg-white dark:bg-theme-secondary-900 content-container">
+    <div class="flex py-4 px-8 w-full rounded-xl border border-theme-secondary-300 dark:border-theme-secondary-800">
+        <div class="flex flex-col justify-between space-y-6 w-full sm:flex-row sm:space-y-0">
             <div class="flex justify-start">
                 <div class="flex md:hidden">
                     <x-general.entity-header-item
@@ -29,7 +29,7 @@
                     <x-general.entity-header-item
                         :title="trans('pages.wallet.rank')"
                         without-icon
-                        content-class="space-y-2 border-r pr-7 sm:text-right border-theme-secondary-300 dark:border-theme-secondary-800 sm:border-r-0 sm:pr-0"
+                        content-class="pr-7 space-y-2 border-r sm:text-right border-theme-secondary-300 dark:border-theme-secondary-800 sm:border-r-0 sm:pr-0"
                     >
                         <x-slot name="text">
                             @if ($vote->isResigned())
