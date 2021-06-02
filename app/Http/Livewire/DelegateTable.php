@@ -41,6 +41,8 @@ final class DelegateTable extends Component
     public function filterByDelegateStatus(string $value): void
     {
         $this->state['status'] = $value;
+
+        $this->gotoPage(1);
     }
 
     public function activeQuery(): Builder
