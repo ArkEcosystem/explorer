@@ -54,14 +54,13 @@
 
             <div class="mt-5 sm:mt-6 sm:pt-6 sm:border-t lg:w-full border-theme-secondary-300 dark:border-theme-secondary-800">
                 <x-stats.periods-selector wire:model="period" :selected="$period" :options="$options" class="hidden sm:block"/>
-                {{-- on mobile display chart without grid --}}
                 <div class="mt-6 sm:hidden">
                     <x-linechart
-                        id="stats-chart"
+                        id="stats-chart-mobile"
                         :data="$chartDatasets"
                         :labels="$chartLabels"
                         :theme="$chartTheme"
-                        height="40"
+                        height="500"
                     />
                 </div>
 

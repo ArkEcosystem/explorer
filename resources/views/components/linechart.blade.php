@@ -2,7 +2,7 @@
     'id',
     'data',
     'labels',
-    'canvasClass' => 'w-full h-full',
+    'canvasClass' => '',
     'width' => '1000',
     'height' => '500',
     'grid' => false,
@@ -27,7 +27,7 @@
     wire:key="{{ $id.time() }}"
     {{ $attributes->only('class') }}
 >
-    <div wire:ignore>
+    <div wire:ignore class="relative w-full h-full">
         <canvas
             x-ref="{{ $id }}"
             @if($canvasClass) class="{{ $canvasClass }}" @endif

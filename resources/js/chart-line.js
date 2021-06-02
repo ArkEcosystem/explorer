@@ -3,13 +3,14 @@ import { getInfoFromThemeName, makeGradient } from "./chart-theme";
 const ChartLine = (id, values, labels, grid, tooltips, theme, height, time) => {
     return {
         time: time,
+        chart: null,
 
-        getCanvasContext() {
-            return this.$refs[id].getContext("2d");
+        getCanvas() {
+            return this.$refs[id];
         },
 
-        getChartInstance(ctx) {
-            return Object.values(Chart.instances).find((i) => i.ctx === ctx);
+        getCanvasContext() {
+            return this.getCanvas().getContext("2d");
         },
 
         getFontConfig() {
@@ -20,11 +21,12 @@ const ChartLine = (id, values, labels, grid, tooltips, theme, height, time) => {
             };
         },
 
-        updateChart() {
-            const ctx = this.getCanvasContext();
-            const chart = this.getChartInstance(ctx);
+        resizeChart() {
+            this.updateChart();
+        },
 
-            chart.destroy();
+        updateChart() {
+            this.chart.destroy();
 
             this.init();
         },
@@ -38,13 +40,12 @@ const ChartLine = (id, values, labels, grid, tooltips, theme, height, time) => {
                 let backgroundColor = graphic.backgroundColor;
                 if (backgroundColor.hasOwnProperty("gradient")) {
                     backgroundColor = makeGradient(
-                        backgroundColor.gradient,
-                        height
+                        this.getCanvas(),
+                        backgroundColor.gradient
                     );
                 }
 
                 datasets.push({
-                    scaleFactor: value.scaleFactor || null, // @TODO
                     label: value.name || "",
                     data: value.data || value,
                     type: value.type || "line",
@@ -77,6 +78,7 @@ const ChartLine = (id, values, labels, grid, tooltips, theme, height, time) => {
                 showScale: grid === "true",
                 animation: { duration: 500, easing: "linear" },
                 legend: { display: false },
+                onResize: () => this.resizeChart(),
                 intersection: {
                     axis: "xy",
                     mode: "index",
@@ -90,21 +92,7 @@ const ChartLine = (id, values, labels, grid, tooltips, theme, height, time) => {
                     //@TODO: styling
                 },
                 plugins: {
-                    tooltip: {
-                        callbacks: {
-                            label: function (context) {
-                                let label = context.dataset.label || "";
-                                let scaleFactor =
-                                    context.dataset.scaleFactor || null;
-
-                                if (scaleFactor) {
-                                    return label / scaleFactor;
-                                }
-
-                                return label;
-                            },
-                        },
-                    },
+                    //@TODO: tooltip: {},
                 },
                 scales: {
                     xAxes: [
@@ -148,7 +136,7 @@ const ChartLine = (id, values, labels, grid, tooltips, theme, height, time) => {
                 datasets: this.loadData(),
             };
 
-            new Chart(this.getCanvasContext(), { data, options });
+            this.chart = new Chart(this.getCanvasContext(), { data, options });
         },
     };
 };
