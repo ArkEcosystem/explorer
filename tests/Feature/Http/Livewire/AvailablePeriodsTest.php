@@ -2,15 +2,14 @@
 
 declare(strict_types=1);
 
-use App\Http\Livewire\Concerns\AvailablePeriods;
 use Illuminate\Support\Carbon;
-use Livewire\Component;
 use Livewire\Livewire;
+use Tests\AvailablePeriodsLivewireTest;
 
 beforeEach(fn () => Carbon::setTestNow('2020-06-15 00:00:00'));
 
 it('should return the date from period', function ($period, $from, $fromEpoch) {
-    Livewire::test(TestComponent::class)
+    Livewire::test(AvailablePeriodsLivewireTest::class)
         ->set('period', $period)
         ->assertSee($period)
         ->assertSee($from)
@@ -23,34 +22,3 @@ it('should return the date from period', function ($period, $from, $fromEpoch) {
     ['year', '2019-06-15', '1972-03-27'],
     ['all', '1920-06-15', '1873-03-27'],
 ]);
-
-/**
- * @coversNothing
- */
-final class AvailablePeriodsTest extends Component
-{
-    use AvailablePeriods;
-
-    public string $period = 'day';
-
-    public ?string $range;
-
-    public ?string $rangeEpoch;
-
-    public function updatedPeriod()
-    {
-        $this->rangeEpoch = $this->getRangeFromPeriod($this->period);
-        $this->range      = $this->getRangeFromPeriodWithoutArkEpoch($this->period);
-    }
-
-    public function render()
-    {
-        return <<<'blade'
-            <div>
-                <p>{{ $period }}</p>
-                <p>{{ $range }}</p>
-                <p>{{ $rangeEpoch }}</p>
-            </div>
-        blade;
-    }
-}
