@@ -55,7 +55,6 @@ body {
     @apply border-theme-secondary-800;
 }
 
-
 /* Tabs */
 .explorer-tab:first-child {
     @apply ml-8;
