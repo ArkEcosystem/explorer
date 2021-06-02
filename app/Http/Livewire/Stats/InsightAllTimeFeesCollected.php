@@ -73,7 +73,7 @@ final class InsightAllTimeFeesCollected extends Component
     {
         $mode = Settings::usesDarkTheme() ? 'dark' : 'light';
 
-        return collect(['name' => 'yellow', 'mode' => $mode]);
+        return collect(['name' => $this->chartColor, 'mode' => $mode]);
     }
 
     private function transactionsPerPeriod(string $period): EloquentCollection | float

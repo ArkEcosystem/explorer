@@ -21,7 +21,7 @@ final class InsightAllTimeTransactions extends Component
 
     public string $period = 'week';
 
-    private string $chartColor = 'grey';
+    private string $chartColor = 'black';
 
     private string $refreshInterval = '';
 
@@ -72,7 +72,7 @@ final class InsightAllTimeTransactions extends Component
     {
         $mode = Settings::usesDarkTheme() ? 'dark' : 'light';
 
-        return collect(['name' => 'black', 'mode' => $mode]);
+        return collect(['name' => $this->chartColor, 'mode' => $mode]);
     }
 
     private function transactionsPerPeriod(string $period): EloquentCollection | string
