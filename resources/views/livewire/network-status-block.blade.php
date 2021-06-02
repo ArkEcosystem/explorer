@@ -2,10 +2,10 @@
     <div class="py-8 content-container-full-width">
         <div class="px-10 md:w-full">
             <div
-                class="flex grid-cols-2 gap-3 w-full md:grid xl:space-x-3 xl:gap-0 xl:flex"
+                class="flex w-full grid-cols-2 gap-3 md:grid xl:space-x-3 xl:gap-0 xl:flex"
                 wire:poll.{{ Network::blockTime() }}s
             >
-                <x-stats.stat :label="trans('general.height')" icon="app-block_height">
+                <x-stats.stat :label="trans('general.height')" icon="app-height">
                     <x-number>{{ $height }}</x-number>
                 </x-stats.stat>
 
