@@ -1,7 +1,7 @@
 <div class="bg-white border-t border-theme-secondary-300 dark:border-theme-secondary-800 dark:bg-theme-secondary-900">
     <x-ark-container>
         <div class="w-full">
-            <div class="flex relative justify-between items-end">
+            <div class="relative flex items-end justify-between">
                 <h2>@lang('pages.transaction.participants')</h2>
             </div>
 
@@ -28,7 +28,7 @@
 
             <div class="divide-y md:hidden table-list-mobile">
                 @foreach($transaction->participants() as $participant)
-                    <div class="space-y-3 table-list-mobile-row">
+                    <div class="table-list-mobile-row">
                         <div>
                             #
 

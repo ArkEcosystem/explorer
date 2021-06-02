@@ -55,31 +55,6 @@ body {
     @apply border-theme-secondary-800;
 }
 
-/* Tables */
-.dark .table-container table thead th {
-    @apply text-theme-secondary-700;
-}
-
-/* Table List */
-.table-list-mobile-row {
-    @apply flex flex-col w-full border-t border-theme-secondary-300;
-}
-.table-list-mobile-row:first-child {
-    @apply pt-0 border-t-0;
-}
-.dark .table-list-mobile-row {
-    @apply border-theme-secondary-800;
-}
-
-.table-list-mobile-row > div {
-    @apply flex justify-between w-full;
-}
-
-@screen md {
-    .table-list-mobile {
-        @apply hidden;
-    }
-}
 
 /* Tabs */
 .explorer-tab:first-child {
