@@ -11,37 +11,37 @@ use function Tests\configureExplorerDatabase;
 beforeEach(function (): void {
     configureExplorerDatabase();
 
-    Carbon::setTestNow('2021-01-01 00:00:00');
+    Carbon::setTestNow('2020-06-15 00:00:00');
 });
 
 it('should render the component', function () {
-    Transaction::factory(30)->create(['fee' => 12345678910, 'timestamp' => Carbon::createFromTimestamp((int) Carbon::now()->timestamp - 1490101200)->sub('2 years')->timestamp]);
-    Transaction::factory(10)->create(['fee' => 237890, 'timestamp' => Carbon::createFromTimestamp((int) Carbon::now()->timestamp - 1490101200)->timestamp]);
-    Transaction::factory(20)->create(['fee' => 915637890, 'timestamp' => Carbon::createFromTimestamp((int) Carbon::now()->timestamp - 1490101200)->timestamp]);
-    Transaction::factory(30)->create(['fee' => 1234890, 'timestamp' => Carbon::createFromTimestamp((int) Carbon::now()->timestamp - 1490101200)->timestamp]);
+    Transaction::factory(30)->create(['fee' => 12345678910, 'timestamp' => Carbon::createFromTimestamp(Carbon::now()->unix() - 1490101200)->sub('2 years')->unix()]);
+    Transaction::factory(10)->create(['fee' => 237890, 'timestamp' => Carbon::createFromTimestamp(Carbon::now()->unix() - 1490101200)->unix()]);
+    Transaction::factory(20)->create(['fee' => 915637890, 'timestamp' => Carbon::createFromTimestamp(Carbon::now()->unix() - 1490101200)->unix()]);
+    Transaction::factory(30)->create(['fee' => 1234890, 'timestamp' => Carbon::createFromTimestamp(Carbon::now()->unix() - 1490101200)->unix()]);
 
     Livewire::test(InsightCurrentAverageFee::class)
         ->set('period', 'day')
         ->assertSee(trans('pages.statistics.insights.current-average-fee'))
-        ->assertSee('3.05869723 DARK')
+        ->assertSee('3.06 DARK')
         ->assertSee(trans('pages.statistics.insights.min-fee'))
-        ->assertSee('0.0023789 DARK')
+        ->assertSee('0. DARK')
         ->assertSee(trans('pages.statistics.insights.max-fee'))
-        ->assertSee('9.1563789 DARK');
+        ->assertSee('9.16 DARK');
 });
 
 it('should filter by year', function () {
-    Transaction::factory()->create(['fee' => 12345678910, 'timestamp' => Carbon::createFromTimestamp((int) Carbon::now()->timestamp - 1490101200)->sub('2 years')->timestamp]);
-    Transaction::factory()->create(['fee' => 2378922340, 'timestamp' => Carbon::createFromTimestamp((int) Carbon::now()->timestamp - 1490101200)->timestamp]);
-    Transaction::factory()->create(['fee' => 9156378901, 'timestamp' => Carbon::createFromTimestamp((int) Carbon::now()->timestamp - 1490101200)->timestamp]);
-    Transaction::factory()->create(['fee' => 1234890918, 'timestamp' => Carbon::createFromTimestamp((int) Carbon::now()->timestamp - 1490101200)->timestamp]);
+    Transaction::factory()->create(['fee' => 12345678910, 'timestamp' => Carbon::createFromTimestamp(Carbon::now()->unix() - 1490101200)->sub('2 years')->unix()]);
+    Transaction::factory()->create(['fee' => 2378922340, 'timestamp' => Carbon::createFromTimestamp(Carbon::now()->unix() - 1490101200)->unix()]);
+    Transaction::factory()->create(['fee' => 9156378901, 'timestamp' => Carbon::createFromTimestamp(Carbon::now()->unix() - 1490101200)->unix()]);
+    Transaction::factory()->create(['fee' => 1234890918, 'timestamp' => Carbon::createFromTimestamp(Carbon::now()->unix() - 1490101200)->unix()]);
 
     Livewire::test(InsightCurrentAverageFee::class)
         ->set('period', 'year')
         ->assertSee(trans('pages.statistics.insights.current-average-fee'))
-        ->assertSee('42.5673072 DARK')
+        ->assertSee('42.57 DARK')
         ->assertSee(trans('pages.statistics.insights.min-fee'))
-        ->assertSee('12.34890918 DARK')
+        ->assertSee('12.35 DARK')
         ->assertSee(trans('pages.statistics.insights.max-fee'))
-        ->assertSee('91.56378901 DARK');
+        ->assertSee('91.56 DARK');
 });

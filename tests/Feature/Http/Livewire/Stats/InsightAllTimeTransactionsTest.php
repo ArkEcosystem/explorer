@@ -15,8 +15,8 @@ beforeEach(function (): void {
 });
 
 it('should render the component', function () {
-    Transaction::factory(30)->create(['timestamp' => Carbon::createFromTimestamp((int) Carbon::now()->timestamp - 1490101200)->sub('2 years')->timestamp]);
-    Transaction::factory(30)->create(['timestamp' => Carbon::createFromTimestamp((int) Carbon::now()->timestamp - 1490101200)->timestamp]);
+    Transaction::factory(30)->create(['timestamp' => Carbon::createFromTimestamp(Carbon::now()->unix() - 1490101200)->sub('2 years')->unix()]);
+    Transaction::factory(30)->create(['timestamp' => Carbon::createFromTimestamp(Carbon::now()->unix() - 1490101200)->unix()]);
 
     Livewire::test(InsightAllTimeTransactions::class)
         ->set('period', 'day')
@@ -28,9 +28,9 @@ it('should render the component', function () {
 });
 
 it('it should filter by year', function () {
-    Transaction::factory(30)->create(['timestamp' => Carbon::createFromTimestamp((int) Carbon::now()->timestamp - 1490101200)->sub('2 years')->timestamp]);
-    Transaction::factory(40)->create(['timestamp' => Carbon::createFromTimestamp((int) Carbon::now()->timestamp - 1490101200)->sub('11 months')->timestamp]);
-    Transaction::factory(50)->create(['timestamp' => Carbon::createFromTimestamp((int) Carbon::now()->timestamp - 1490101200)->timestamp]);
+    Transaction::factory(30)->create(['timestamp' => Carbon::createFromTimestamp(Carbon::now()->unix() - 1490101200)->sub('2 years')->unix()]);
+    Transaction::factory(40)->create(['timestamp' => Carbon::createFromTimestamp(Carbon::now()->unix() - 1490101200)->sub('11 months')->unix()]);
+    Transaction::factory(50)->create(['timestamp' => Carbon::createFromTimestamp(Carbon::now()->unix() - 1490101200)->unix()]);
 
     Livewire::test(InsightAllTimeTransactions::class)
         ->set('period', 'year')
