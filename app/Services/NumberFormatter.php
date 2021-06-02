@@ -58,7 +58,7 @@ final class NumberFormatter
     /**
      * @param string|int|float $value
      */
-    public static function currencyWithDecimalsWithoutSuffix($value, string $currency)
+    public static function currencyWithDecimalsWithoutSuffix($value, string $currency): string
     {
         return number_format((float) ResolveScientificNotation::execute((float) $value), static::decimalsFor($currency));
     }
