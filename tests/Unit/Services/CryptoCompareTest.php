@@ -38,3 +38,11 @@ it('should fetch the marketCap for the given pair', function () {
 
     expect(CryptoCompare::marketCap('ARK', 'USD'))->toBe(254260570.5975121);
 });
+
+it('should get price change', function () {
+    Http::fake([
+        'cryptocompare.com/*' => Http::response(json_decode(file_get_contents(base_path('tests/fixtures/cryptocompare/histohour.json')), true)),
+    ]);
+
+    expect(CryptoCompare::getPriceChange())->toBe(-0.136986301369863);
+});
