@@ -25,7 +25,7 @@
                     }
                 },
             })"
-            class="container fixed inset-0 z-50 flex flex-col w-full h-screen py-16 mx-auto overflow-auto outline-none md:overflow-visible md:px-8"
+            class="container flex overflow-auto fixed inset-0 z-50 flex-col py-16 mx-auto w-full h-screen outline-none md:overflow-visible md:px-8"
             tabindex="0"
             data-modal
             wire:keydown.escape="closeModal"
@@ -37,10 +37,10 @@
         >
             <div wire:click.self="closeModal" class="fixed inset-0 opacity-70 dark:opacity-80 bg-theme-secondary-900 dark:bg-theme-secondary-800"></div>
 
-            <div class="relative flex flex-col w-full overflow-auto md:overflow-visible content-container-full-width md:px-8">
+            <div class="flex overflow-auto relative flex-col w-full md:overflow-visible content-container-full-width md:px-8">
                 <h2 class="px-8 mx-auto mb-8 text-4xl font-bold text-center text-white">@lang('pages.search.title')</h2>
 
-                <div class="flex flex-col overflow-auto bg-white rounded-lg md:overflow-visible dark:bg-theme-secondary-900 mb-14">
+                <div class="flex overflow-auto flex-col mb-14 bg-white rounded-lg md:overflow-visible dark:bg-theme-secondary-900">
                     <x-general.search.search-input />
 
                     <x-general.search.advanced-search
