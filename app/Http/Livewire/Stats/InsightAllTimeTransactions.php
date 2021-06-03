@@ -20,6 +20,7 @@ final class InsightAllTimeTransactions extends Component
     use AvailablePeriods;
 
     private const PERIOD_ALL_TIME = 'all-time';
+
     private const CHART_COLOR = 'black';
 
     public string $period = '';

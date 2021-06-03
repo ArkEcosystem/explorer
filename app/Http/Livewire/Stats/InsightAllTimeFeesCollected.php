@@ -21,6 +21,7 @@ final class InsightAllTimeFeesCollected extends Component
     use AvailablePeriods;
 
     private const PERIOD_ALL_TIME = 'all-time';
+
     private const CHART_COLOR = 'yellow';
 
     public string $period = '';
