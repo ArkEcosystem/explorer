@@ -33,6 +33,11 @@ const CustomChart = (id, values, labels, grid, tooltips, theme, time) => {
         loadData() {
             const datasets = [];
 
+            if (values.length === 0) {
+                values = [0,0];
+                labels = [0,1];
+            }
+
             if (Array.isArray(values) && !values[0].hasOwnProperty("data")) {
                 values = [values];
             }
@@ -143,8 +148,8 @@ const CustomChart = (id, values, labels, grid, tooltips, theme, time) => {
 
             const data = {
                 type: "line",
-                labels: labels,
                 datasets: this.loadData(),
+                labels: labels,
             };
 
             this.chart = new Chart(this.getCanvasContext(), { data, options });
