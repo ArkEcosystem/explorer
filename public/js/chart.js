@@ -79,7 +79,7 @@ const CustomChart = (id, values, labels, grid, tooltips, theme, time) => {
             }
 
             this.$watch("time", () => this.updateChart());
-            window.addEventListener('resize', () => this.resizeChart());
+            window.addEventListener("resize", () => this.resizeChart());
 
             const fontConfig = this.getFontConfig();
 
@@ -121,7 +121,7 @@ const CustomChart = (id, values, labels, grid, tooltips, theme, time) => {
                     yAxes: [
                         {
                             type: "linear",
-                                position: "right",
+                            position: "right",
                             stacked: true,
                             ticks: {
                                 padding: 15,
