@@ -48,6 +48,8 @@ it('should get price change', function () {
     ]);
 
     expect(CryptoCompare::getPriceChange())->toBe(-0.136986301369863);
+
+    Config::set('explorer.network', 'development');
 });
 
 it('should return null if cannot be exchanged', function () {
