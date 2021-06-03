@@ -14,7 +14,7 @@
 
     <div
         x-show.transition.origin.top="showSettings"
-        class="fixed top-0 left-0 right-0 z-30 w-full px-4 pt-3 mt-20 md:absolute md:p-0 md:left-auto md:mt-24 md:w-120"
+        class="fixed top-0 right-0 left-0 z-30 px-4 pt-3 mt-20 w-full md:absolute md:p-0 md:left-auto md:mt-24 md:w-120"
         x-cloak
         @click.away="showSettings = false"
     >
