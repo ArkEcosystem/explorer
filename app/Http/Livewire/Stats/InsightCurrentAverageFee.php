@@ -9,7 +9,6 @@ use App\Facades\Network;
 use App\Http\Livewire\Concerns\AvailableTransactionType;
 use App\Models\Transaction;
 use App\Services\NumberFormatter;
-use App\Services\Transactions\TransactionTypeIcon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
@@ -34,7 +33,7 @@ final class InsightCurrentAverageFee extends Component
     {
         return view('livewire.stats.insight-current-average-fee', [
             'currentAverageFeeTitle' => trans('pages.statistics.insights.current-average-fee', [
-                'type' => $this->getTransactionTypeLabel($this->transactionType)
+                'type' => $this->getTransactionTypeLabel($this->transactionType),
             ]),
             'currentAverageFeeValue' => $this->currentAverageFee($this->transactionType),
             'minFeeTitle'            => trans('pages.statistics.insights.min-fee'),
@@ -72,7 +71,7 @@ final class InsightCurrentAverageFee extends Component
         $cacheKey = collect([__CLASS__, 'fee-aggregates-per-transaction-type', $transactionType])->filter()->join('.');
 
         return Cache::remember($cacheKey, (int) $this->refreshInterval, fn () => Transaction::query()
-            ->select(DB::raw("AVG(fee / 1e8) as average, MIN(fee / 1e8) as minimum, MAX(fee / 1e8) as maximum"))
+            ->select(DB::raw('AVG(fee / 1e8) as average, MIN(fee / 1e8) as minimum, MAX(fee / 1e8) as maximum'))
             ->where('type_group', TransactionTypeGroupEnum::CORE)
             ->where('type', $transactionType)
             ->first()
