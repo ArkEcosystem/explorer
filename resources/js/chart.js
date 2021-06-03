@@ -34,8 +34,8 @@ const CustomChart = (id, values, labels, grid, tooltips, theme, time) => {
             const datasets = [];
 
             if (values.length === 0) {
-                values = [0,0];
-                labels = [0,1];
+                values = [0, 0];
+                labels = [0, 1];
             }
 
             if (Array.isArray(values) && !values[0].hasOwnProperty("data")) {

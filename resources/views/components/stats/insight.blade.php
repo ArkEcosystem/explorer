@@ -18,9 +18,9 @@
         <h2 class="mb-0 text-sm font-semibold leading-none text-theme-secondary-900 dark:text-theme-secondary-200">{{ $mainTitle }}</h2>
         <x-ark-rich-select
             wire:model="{{ $model }}"
-            wrapper-class="hidden relative mt-3 md:inline-block xl:hidden left-0"
+            wrapper-class="hidden relative left-0 mt-3 md:inline-block xl:hidden"
             dropdown-class="right-0 mt-1 origin-top-right"
-            button-class="block font-semibold text-sm text-left bg-transparent text-theme-secondary-700 dark:text-theme-secondary-200"
+            button-class="block text-sm font-semibold text-left bg-transparent text-theme-secondary-700 dark:text-theme-secondary-200"
             :initial-value="$selected"
             :placeholder="$selected"
             :options="$options"
@@ -32,9 +32,9 @@
         <div class="sm:w-1/3 md:w-1/2">
             <x-ark-rich-select
                 wire:model="{{ $model }}"
-                wrapper-class="relative md:hidden xl:inline-block left-0"
+                wrapper-class="relative left-0 md:hidden xl:inline-block"
                 dropdown-class="right-0 mt-1 origin-top-right"
-                button-class="block font-semibold text-sm text-left bg-transparent text-theme-secondary-700 dark:text-theme-secondary-200"
+                button-class="block text-sm font-semibold text-left bg-transparent text-theme-secondary-700 dark:text-theme-secondary-200"
                 :initial-value="$selected"
                 :placeholder="$selected"
                 :options="$options"
