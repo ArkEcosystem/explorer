@@ -56,7 +56,7 @@
                 />
             </div>
         @else
-            <div class="md:w-1/2 border-theme-secondary-300 dark:border-theme-secondary-800 sm:border-l sm:pl-6 md:pl-8">
+            <div class="md:w-1/2 border-theme-secondary-300 dark:border-theme-secondary-800 sm:border-l sm:pl-6 sm:transform sm:-translate-x-6 md:-translate-x-8 lg:-translate-x-6">
                 <h3 class="mb-0 text-sm font-semibold leading-none text-theme-secondary-500 dark:text-theme-secondary-700">{{ $tertiaryTitle }}</h3>
                 <p class="mt-2 text-base font-semibold text-theme-secondary-700 dark:text-theme-secondary-200">{{ $tertiaryValue }}</p>
             </div>
