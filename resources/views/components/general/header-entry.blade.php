@@ -1,14 +1,17 @@
 @props([
-    'withoutBorder' => false,
-    'icon'          => null,
-    'tooltip'       => null,
-    'url'           => null,
-    'wrapperClass'  => null,
+    'withoutBorder'       => false,
+    'icon'                => null,
+    'tooltip'             => null,
+    'url'                 => null,
+    'wrapperClass'        => null,
+    'textAlignment'       => null,
+    'wrapperMarginClass'  => 'sm:mr-7 lg:mr-0',
+    'wrapperPaddingClass' => 'lg:pr-7',
     'title',
     'text',
 ])
 
-<div class="flex @if (! $withoutBorder) sm:border-r sm:border-theme-secondary-300 dark:border-theme-secondary-800 sm:mr-6 lg:mr-0 lg:pr-6 @endif {{ $wrapperClass }}">
+<div class="flex @if (! $withoutBorder) sm:border-r sm:border-theme-secondary-300 dark:border-theme-secondary-800 {{ $wrapperMarginClass }} {{ $wrapperPaddingClass }} @endif {{ $wrapperClass }}">
     @if ($icon)
         {{ $icon }}
     @endif
@@ -24,7 +27,7 @@
 
         @if ($url)
             <a href="{{ $url }}" class="flex link">
-                <span class="w-full truncate">{{ $text }}</span>
+                <span class="w-full truncate {{ $textAlignment }}">{{ $text }}</span>
             </a>
         @else
             <span class="truncate text-theme-secondary-900 dark:text-theme-secondary-200">{{ $text }}</span>
