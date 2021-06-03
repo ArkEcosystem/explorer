@@ -83,10 +83,10 @@ final class InsightAllTimeFeesCollected extends Component
         $cacheKey = __CLASS__.".transactions-per-period.{$period}";
 
         if ($period === self::PERIOD_ALL_TIME) {
-            return Cache::remember($cacheKey, (int) $this->refreshInterval, function (): float {
+            return (float) Cache::remember($cacheKey, (int) $this->refreshInterval, function () {
                 $value = Transaction::select(DB::raw('sum(fee / 1e8) as fees'))->first();
 
-                return (float) data_get($value, 'fees', '0');
+                return data_get($value, 'fees', '0');
             });
         }
 
