@@ -30,7 +30,7 @@ return [
             'delegateResignation'           => 'Delegate Resignation',
             'ipfs'                          => 'IPFS',
             'multiPayment'                  => 'Multipayment',
-            'multiSignature'                => 'Multisignature Registration',
+            'multiSignature'                => 'Multisignature',
             'secondSignature'               => 'Second Signature',
             'timelockClaim'                 => 'Timelock Claim',
             'timelockRefund'                => 'Timelock Refund',

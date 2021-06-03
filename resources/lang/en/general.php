@@ -79,7 +79,7 @@ return [
             'module-entity-resignation'           => 'Module Resignation',
             'module-entity-update'                => 'Module Update',
             'vote-combination'                    => 'Multivote',
-            'multi-signature'                     => 'Multisignature Registration',
+            'multi-signature'                     => 'Multisignature',
             'plugin-entity-registration'          => 'Plugin Registration',
             'plugin-entity-resignation'           => 'Plugin Resignation',
             'plugin-entity-update'                => 'Plugin Update',
