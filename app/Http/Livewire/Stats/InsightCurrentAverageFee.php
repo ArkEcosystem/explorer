@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire\Stats;
 
+use App\Enums\TransactionTypeGroupEnum;
 use App\Facades\Network;
 use App\Http\Livewire\Concerns\AvailableTransactionType;
 use App\Models\Transaction;
 use App\Services\NumberFormatter;
+use App\Services\Transactions\TransactionTypeIcon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
@@ -71,6 +73,7 @@ final class InsightCurrentAverageFee extends Component
 
         return Cache::remember($cacheKey, (int) $this->refreshInterval, fn () => Transaction::query()
             ->select(DB::raw("AVG(fee / 1e8) as average, MIN(fee / 1e8) as minimum, MAX(fee / 1e8) as maximum"))
+            ->where('type_group', TransactionTypeGroupEnum::CORE)
             ->where('type', $transactionType)
             ->first()
         );
