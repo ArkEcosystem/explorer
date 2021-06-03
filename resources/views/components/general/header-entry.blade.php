@@ -8,7 +8,7 @@
     'text',
 ])
 
-<div class="flex @if (! $withoutBorder) sm:border-r sm:border-theme-secondary-300 dark:border-theme-secondary-800 sm:mr-5 lg:mr-0 lg:pr-5 @endif {{ $wrapperClass }}">
+<div class="flex @if (! $withoutBorder) sm:border-r sm:border-theme-secondary-300 dark:border-theme-secondary-800 sm:mr-6 lg:mr-0 lg:pr-6 @endif {{ $wrapperClass }}">
     @if ($icon)
         {{ $icon }}
     @endif
@@ -24,7 +24,7 @@
 
         @if ($url)
             <a href="{{ $url }}" class="flex link">
-                <span class="w-full truncate lg:text-right">{{ $text }}</span>
+                <span class="w-full truncate">{{ $text }}</span>
             </a>
         @else
             <span class="truncate text-theme-secondary-900 dark:text-theme-secondary-200">{{ $text }}</span>
