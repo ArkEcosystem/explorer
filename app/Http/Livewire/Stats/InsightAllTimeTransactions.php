@@ -77,12 +77,12 @@ final class InsightAllTimeTransactions extends Component
         return collect(['name' => self::CHART_COLOR, 'mode' => $mode]);
     }
 
-    private function transactionsPerPeriod(string $period): EloquentCollection | string
+    private function transactionsPerPeriod(string $period): EloquentCollection | float
     {
         $cacheKey = __CLASS__.".transactions-per-period.{$period}";
 
         if ($period === self::PERIOD_ALL_TIME) {
-            return Cache::remember($cacheKey, (int) $this->refreshInterval, fn () => (string) Transaction::count());
+            return (float) Cache::remember($cacheKey, (int) $this->refreshInterval, fn () => (string) Transaction::count());
         }
 
         $from = $this->getRangeFromPeriod($period);
