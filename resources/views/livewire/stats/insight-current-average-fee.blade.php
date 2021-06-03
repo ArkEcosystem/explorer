@@ -8,7 +8,7 @@
         :tertiaryTitle="$maxFeeTitle"
         :tertiaryValue="$maxFeeValue"
         :options="$options"
-        :selected="$period"
-        model="period"
+        :selected="$transactionType"
+        model="transactionType"
     />
 </div>

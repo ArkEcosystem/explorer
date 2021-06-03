@@ -5,11 +5,10 @@ declare(strict_types=1);
 namespace App\Http\Livewire\Stats;
 
 use App\Facades\Network;
-use App\Http\Livewire\Concerns\AvailablePeriods;
+use App\Http\Livewire\Concerns\AvailableTransactionType;
 use App\Models\Transaction;
 use App\Services\NumberFormatter;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
@@ -17,75 +16,63 @@ use Livewire\Component;
 
 final class InsightCurrentAverageFee extends Component
 {
-    use AvailablePeriods;
+    use AvailableTransactionType;
 
-    private const PERIOD_CURRENT = 'current';
-
-    public string $period = '';
+    public int $transactionType;
 
     private string $refreshInterval = '';
 
     public function mount(): void
     {
         $this->refreshInterval = (string) config('explorer.statistics.refreshInterval', '60');
-        $this->period          = $this->defaultPeriod();
+        $this->transactionType = $this->defaultTransactionType();
     }
 
     public function render(): View
     {
         return view('livewire.stats.insight-current-average-fee', [
-            'currentAverageFeeTitle' => trans('pages.statistics.insights.current-average-fee'),
-            'currentAverageFeeValue' => $this->currentAverageFee(),
+            'currentAverageFeeTitle' => trans('pages.statistics.insights.current-average-fee', [
+                'type' => $this->getTransactionTypeLabel($this->transactionType)
+            ]),
+            'currentAverageFeeValue' => $this->currentAverageFee($this->transactionType),
             'minFeeTitle'            => trans('pages.statistics.insights.min-fee'),
-            'minFeeValue'            => $this->minFee($this->period),
+            'minFeeValue'            => $this->minFee($this->transactionType),
             'maxFeeTitle'            => trans('pages.statistics.insights.max-fee'),
-            'maxFeeValue'            => $this->maxFee($this->period),
-            'options'                => $this->availablePeriods(),
+            'maxFeeValue'            => $this->maxFee($this->transactionType),
+            'options'                => $this->availableTransactionTypes(),
             'refreshInterval'        => $this->refreshInterval,
         ]);
     }
 
-    private function currentAverageFee(): string
+    private function currentAverageFee(int $transactionType): string
     {
-        $value = $this->getFeesAggregatesPerPeriod(self::PERIOD_CURRENT);
+        $value = $this->getFeesAggregatesPerPeriod($transactionType);
 
         return NumberFormatter::currency(data_get($value, 'average', 0), Network::currency());
     }
 
-    private function minFee(string $period): string
+    private function minFee(int $transactionType): string
     {
-        $value = $this->getFeesAggregatesPerPeriod($period);
+        $value = $this->getFeesAggregatesPerPeriod($transactionType);
 
         return NumberFormatter::currency(data_get($value, 'minimum', 0), Network::currency());
     }
 
-    private function maxFee(string $period): string
+    private function maxFee(int $transactionType): string
     {
-        $value = $this->getFeesAggregatesPerPeriod($period);
+        $value = $this->getFeesAggregatesPerPeriod($transactionType);
 
         return NumberFormatter::currency(data_get($value, 'maximum', 0), Network::currency());
     }
 
-    private function getFeesAggregatesPerPeriod(string $period): Model | null
+    private function getFeesAggregatesPerPeriod(int $transactionType): Model | null
     {
-        $cacheKey = __CLASS__.".fee-aggregates-per-period.{$period}";
-
-        $from = $this->getRangeFromPeriod($period);
-
-        if ($period !== self::PERIOD_CURRENT) {
-            $cacheKey .= ".{$from}";
-        }
+        $cacheKey = collect([__CLASS__, 'fee-aggregates-per-transaction-type', $transactionType])->filter()->join('.');
 
         return Cache::remember($cacheKey, (int) $this->refreshInterval, fn () => Transaction::query()
-                ->select(DB::raw("to_char(to_timestamp(timestamp), 'yyyy-mm-dd') as period, AVG(fee / 1e8) as average, MIN(fee / 1e8) as minimum, MAX(fee / 1e8) as maximum"))
-                ->when($period === self::PERIOD_CURRENT, function ($query): void {
-                    $now = Carbon::createFromTimestamp((int) Carbon::now()->timestamp - $this->getArkEpoch())->toDateString();
-                    $query->whereRaw("to_char(to_timestamp(timestamp), 'yyyy-mm-dd') = ?", [$now]);
-                }, function ($query) use ($from): void {
-                    $query->whereRaw("to_char(to_timestamp(timestamp), 'yyyy-mm-dd') > ?", [$from]);
-                })
-                ->groupBy('period')
-                ->first()
+            ->select(DB::raw("AVG(fee / 1e8) as average, MIN(fee / 1e8) as minimum, MAX(fee / 1e8) as maximum"))
+            ->where('type', $transactionType)
+            ->first()
         );
     }
 }

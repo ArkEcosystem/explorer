@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire\Stats;
 
+use App\Enums\StatsPeriods;
 use App\Http\Livewire\Concerns\AvailablePeriods;
 use App\Models\Transaction;
 use App\Services\NumberFormatter;
 use App\Services\Settings;
-use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
@@ -18,8 +18,6 @@ use Livewire\Component;
 final class InsightAllTimeTransactions extends Component
 {
     use AvailablePeriods;
-
-    private const PERIOD_ALL_TIME = 'all-time';
 
     private const CHART_COLOR = 'black';
 
@@ -49,25 +47,21 @@ final class InsightAllTimeTransactions extends Component
 
     private function allTimeTransactions(): string
     {
-        $value = $this->transactionsPerPeriod(self::PERIOD_ALL_TIME);
+        $value = $this->transactionsPerPeriod(StatsPeriods::ALL);
 
-        return NumberFormatter::number((string) $value);
+        return NumberFormatter::number($value->sum());
     }
 
     private function countTransactionsPerPeriod(string $period): string
     {
-        /** @var Transaction $value */
         $value = $this->transactionsPerPeriod($period);
 
-        return NumberFormatter::number($value->pluck('transactions')->sum());
+        return NumberFormatter::number($value->sum());
     }
 
     private function chartValues(string $period): Collection
     {
-        /** @var Transaction $value */
-        $value = $this->transactionsPerPeriod($period);
-
-        return collect($value->pluck('transactions'));
+        return $this->transactionsPerPeriod($period);
     }
 
     private function chartTheme(): Collection
@@ -77,23 +71,18 @@ final class InsightAllTimeTransactions extends Component
         return collect(['name' => self::CHART_COLOR, 'mode' => $mode]);
     }
 
-    private function transactionsPerPeriod(string $period): EloquentCollection | float
+    private function transactionsPerPeriod(string $period): Collection
     {
-        $cacheKey = __CLASS__.".transactions-per-period.{$period}";
-
-        if ($period === self::PERIOD_ALL_TIME) {
-            return (float) Cache::remember($cacheKey, (int) $this->refreshInterval, fn () => (string) Transaction::count());
-        }
-
         $from = $this->getRangeFromPeriod($period);
-        $cacheKey .= ".{$from}";
+
+        $cacheKey = collect([__CLASS__, 'transactions-per-period', $period, $from])->filter()->join('.');
 
         return Cache::remember($cacheKey, (int) $this->refreshInterval, fn () => Transaction::query()
-                ->select(DB::raw("to_char(to_timestamp(timestamp), 'yyyy-mm-dd') as period, COUNT('id') as transactions"))
-                ->whereRaw("to_char(to_timestamp(timestamp), 'yyyy-mm-dd') > ?", [$from])
-                ->latest('period')
-                ->groupBy('period')
-                ->get()
+            ->select(DB::raw("to_char(to_timestamp(timestamp), 'yyyy-mm-dd') as period, COUNT('id') as transactions"))
+            ->when($from, fn ($query) => $query->whereRaw("to_char(to_timestamp(timestamp), 'yyyy-mm-dd') > ?", [$from]))
+            ->latest('period')
+            ->groupBy('period')
+            ->pluck('transactions')
         );
     }
 }

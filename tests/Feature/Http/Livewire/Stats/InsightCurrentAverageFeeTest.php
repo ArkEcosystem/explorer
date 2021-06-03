@@ -21,7 +21,7 @@ it('should render the component', function () {
     Transaction::factory(30)->create(['fee' => 1234890, 'timestamp' => Carbon::createFromTimestamp(Carbon::now()->unix() - 1490101200)->unix()]);
 
     Livewire::test(InsightCurrentAverageFee::class)
-        ->set('period', 'day')
+        ->set('transactionType', 'day')
         ->assertSee(trans('pages.statistics.insights.current-average-fee'))
         ->assertSee('3.06 DARK')
         ->assertSee(trans('pages.statistics.insights.min-fee'))
@@ -37,7 +37,7 @@ it('should filter by year', function () {
     Transaction::factory()->create(['fee' => 1234890918, 'timestamp' => Carbon::createFromTimestamp(Carbon::now()->unix() - 1490101200)->unix()]);
 
     Livewire::test(InsightCurrentAverageFee::class)
-        ->set('period', 'year')
+        ->set('transactionType', 'year')
         ->assertSee(trans('pages.statistics.insights.current-average-fee'))
         ->assertSee('42.57 DARK')
         ->assertSee(trans('pages.statistics.insights.min-fee'))
