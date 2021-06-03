@@ -20,9 +20,10 @@ final class InsightAllTimeFeesCollected extends Component
 {
     use AvailablePeriods;
 
-    public string $period = 'week';
+    private const PERIOD_ALL_TIME = 'all-time';
+    private const CHART_COLOR = 'yellow';
 
-    private string $chartColor = 'yellow';
+    public string $period = '';
 
     private string $refreshInterval = '';
 
@@ -48,7 +49,7 @@ final class InsightAllTimeFeesCollected extends Component
 
     private function allTimeFeesCollected(): string
     {
-        $value = $this->transactionsPerPeriod('all-time');
+        $value = $this->transactionsPerPeriod(self::PERIOD_ALL_TIME);
 
         return NumberFormatter::currency((string) $value, Network::currency());
     }
@@ -73,14 +74,14 @@ final class InsightAllTimeFeesCollected extends Component
     {
         $mode = Settings::usesDarkTheme() ? 'dark' : 'light';
 
-        return collect(['name' => $this->chartColor, 'mode' => $mode]);
+        return collect(['name' => self::CHART_COLOR, 'mode' => $mode]);
     }
 
     private function transactionsPerPeriod(string $period): EloquentCollection | float
     {
         $cacheKey = __CLASS__.".transactions-per-period.{$period}";
 
-        if ($period === 'all-time') {
+        if ($period === self::PERIOD_ALL_TIME) {
             return Cache::remember($cacheKey, (int) $this->refreshInterval, function (): float {
                 $value = Transaction::select(DB::raw('sum(fee / 1e8) as fees'))->first();
 
@@ -93,7 +94,7 @@ final class InsightAllTimeFeesCollected extends Component
 
         return Cache::remember($cacheKey, (int) $this->refreshInterval, fn () => Transaction::query()
                 ->select(DB::raw("to_char(to_timestamp(timestamp), 'yyyy-mm-dd') as period, SUM(fee /1e8) as fees"))
-                ->when($period !== 'all-time', function ($query) use ($from): void {
+                ->when($period !== self::PERIOD_ALL_TIME, function ($query) use ($from): void {
                     $query->whereRaw("to_char(to_timestamp(timestamp), 'yyyy-mm-dd') > ?", [$from]);
                 })
                 ->latest('period')

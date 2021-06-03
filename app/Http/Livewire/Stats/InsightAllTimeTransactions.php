@@ -19,9 +19,10 @@ final class InsightAllTimeTransactions extends Component
 {
     use AvailablePeriods;
 
-    public string $period = 'week';
+    private const PERIOD_ALL_TIME = 'all-time';
+    private const CHART_COLOR = 'black';
 
-    private string $chartColor = 'black';
+    public string $period = '';
 
     private string $refreshInterval = '';
 
@@ -47,7 +48,7 @@ final class InsightAllTimeTransactions extends Component
 
     private function allTimeTransactions(): string
     {
-        $value = $this->transactionsPerPeriod('all-time');
+        $value = $this->transactionsPerPeriod(self::PERIOD_ALL_TIME);
 
         return NumberFormatter::number((string) $value);
     }
@@ -72,14 +73,14 @@ final class InsightAllTimeTransactions extends Component
     {
         $mode = Settings::usesDarkTheme() ? 'dark' : 'light';
 
-        return collect(['name' => $this->chartColor, 'mode' => $mode]);
+        return collect(['name' => self::CHART_COLOR, 'mode' => $mode]);
     }
 
     private function transactionsPerPeriod(string $period): EloquentCollection | string
     {
         $cacheKey = __CLASS__.".transactions-per-period.{$period}";
 
-        if ($period === 'all-time') {
+        if ($period === self::PERIOD_ALL_TIME) {
             return Cache::remember($cacheKey, (int) $this->refreshInterval, fn () => (string) Transaction::count());
         }
 

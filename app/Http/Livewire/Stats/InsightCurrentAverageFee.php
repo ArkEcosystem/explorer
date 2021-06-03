@@ -19,7 +19,9 @@ final class InsightCurrentAverageFee extends Component
 {
     use AvailablePeriods;
 
-    public string $period = 'week';
+    private const PERIOD_CURRENT = 'current';
+
+    public string $period = '';
 
     private string $refreshInterval = '';
 
@@ -45,7 +47,7 @@ final class InsightCurrentAverageFee extends Component
 
     private function currentAverageFee(): string
     {
-        $value = $this->getFeesAggregatesPerPeriod('current');
+        $value = $this->getFeesAggregatesPerPeriod(self::PERIOD_CURRENT);
 
         return NumberFormatter::currency(data_get($value, 'average', 0), Network::currency());
     }
@@ -70,13 +72,13 @@ final class InsightCurrentAverageFee extends Component
 
         $from = $this->getRangeFromPeriod($period);
 
-        if ($period !== 'current') {
+        if ($period !== self::PERIOD_CURRENT) {
             $cacheKey .= ".{$from}";
         }
 
         return Cache::remember($cacheKey, (int) $this->refreshInterval, fn () => Transaction::query()
                 ->select(DB::raw("to_char(to_timestamp(timestamp), 'yyyy-mm-dd') as period, AVG(fee / 1e8) as average, MIN(fee / 1e8) as minimum, MAX(fee / 1e8) as maximum"))
-                ->when($period === 'current', function ($query): void {
+                ->when($period === self::PERIOD_CURRENT, function ($query): void {
                     $now = Carbon::createFromTimestamp((int) Carbon::now()->timestamp - $this->getArkEpoch())->toDateString();
                     $query->whereRaw("to_char(to_timestamp(timestamp), 'yyyy-mm-dd') = ?", [$now]);
                 }, function ($query) use ($from): void {
