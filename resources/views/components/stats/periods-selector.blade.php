@@ -11,8 +11,12 @@
             <x-ark-icon name="chevron-down" size="2xs" />
         </span>
         <select
+            style="-moz-transform: translateX(-4px);"
+            {{-- https://searchfox.org/mozilla-central/source/layout/style/res/forms.css#310 --}}
+            {{-- https://bugzilla.mozilla.org/show_bug.cgi?id=1582545 --}}
             {{ $attributes->wire('model') }}
-            class="-ml-1 text-sm font-semibold bg-transparent appearance-none text-theme-secondary-700">
+            class="text-sm font-semibold bg-transparent appearance-none text-theme-secondary-700"
+        >
             @foreach($options as $val => $label)
                 <option value="{{ $val }}">{{ $label }}</option>
             @endforeach

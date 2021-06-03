@@ -56,6 +56,7 @@
                 <x-stats.periods-selector wire:model="period" :selected="$period" :options="$options" class="hidden sm:block"/>
                 <div class="mt-6 sm:hidden">
                     <x-chart
+                        class="w-full h-auto"
                         id="stats-chart-mobile"
                         :data="$chartDatasets"
                         :labels="$chartLabels"
@@ -66,6 +67,7 @@
 
                 <div class="hidden mt-6 sm:block">
                     <x-chart
+                        class="w-full h-auto"
                         id="stats-chart"
                         :data="$chartDatasets"
                         :labels="$chartLabels"

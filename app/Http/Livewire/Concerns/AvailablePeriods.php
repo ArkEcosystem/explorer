@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire\Concerns;
 
+use App\Facades\Network;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 
@@ -60,6 +61,6 @@ trait AvailablePeriods
 
     private function getArkEpoch(): int
     {
-        return 1490101200;
+        return Network::epoch()->unix();
     }
 }

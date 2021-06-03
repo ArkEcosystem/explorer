@@ -83,7 +83,12 @@ const CustomChart = (
         },
 
         init() {
+            if (this.chart) {
+                this.chart.destroy();
+            }
+
             this.$watch("time", () => this.updateChart());
+            window.addEventListener("resize", () => this.resizeChart());
 
             const fontConfig = this.getFontConfig();
 
@@ -129,6 +134,7 @@ const CustomChart = (
                                 padding: 15,
                                 ...fontConfig,
                                 display: grid === "true",
+                                suggestedMin: 0,
                                 callback: function (value, index, values) {
                                     return "$" + parseFloat(value).toFixed(2);
                                 },
