@@ -8,6 +8,7 @@
         :chart="$chartValues"
         :chart-theme="$chartTheme"
         :options="$options"
-        wire:model="period"
+        :selected="$period"
+        model="period"
     />
 </div>

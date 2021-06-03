@@ -8,6 +8,7 @@
         :tertiaryTitle="$maxFeeTitle"
         :tertiaryValue="$maxFeeValue"
         :options="$options"
-        wire:model="period"
+        :selected="$period"
+        model="period"
     />
 </div>
