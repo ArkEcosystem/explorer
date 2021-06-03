@@ -3,15 +3,13 @@
     'icon'                => null,
     'tooltip'             => null,
     'url'                 => null,
-    'wrapperClass'        => null,
-    'textAlignment'       => null,
-    'wrapperMarginClass'  => 'sm:mr-7 lg:mr-0',
-    'wrapperPaddingClass' => 'lg:pr-7',
+    'wrapperClass'        => 'sm:mr-7 lg:mr-0 lg:pr-7',
+    'linkAlignment'       => null,
     'title',
     'text',
 ])
 
-<div class="flex @if (! $withoutBorder) sm:border-r sm:border-theme-secondary-300 dark:border-theme-secondary-800 {{ $wrapperMarginClass }} {{ $wrapperPaddingClass }} @endif {{ $wrapperClass }}">
+<div class="flex @if (! $withoutBorder) sm:border-r sm:border-theme-secondary-300 dark:border-theme-secondary-800 @endif {{ $wrapperClass }}">
     @if ($icon)
         {{ $icon }}
     @endif
@@ -27,10 +25,10 @@
 
         @if ($url)
             <a href="{{ $url }}" class="flex link">
-                <span class="w-full truncate {{ $textAlignment }}">{{ $text }}</span>
+                <span class="w-full truncate {{ $linkAlignment }}">{{ $text }}</span>
             </a>
         @else
-            <span class="truncate text-theme-secondary-900 dark:text-theme-secondary-200">{{ $text }}</span>
+            <span class="truncate text-theme-secondary-900 dark:text-theme-secondary-200 {{ $linkAlignment }}">{{ $text }}</span>
         @endif
     </div>
 </div>

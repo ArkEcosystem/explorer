@@ -10,9 +10,7 @@
                     <x-general.header-entry
                         :title="trans('pages.delegates.statistics.forging')"
                         :text="$statistics['performances']['forging']"
-                        wrapper-class="border-r border-theme-secondary-300 dark:border-theme-secondary-800"
-                        wrapper-margin-class="sm:mr-6 lg:mr-0"
-                        wrapper-padding-class="lg:pr-6"
+                        wrapper-class="sm:mr-6 lg:mr-0 pr-6"
                     >
                         <x-slot name="icon">
                             <div class="flex items-center mr-2">
@@ -29,9 +27,7 @@
                     <x-general.header-entry
                         :title="trans('pages.delegates.statistics.missed')"
                         :text="$statistics['performances']['missed']"
-                        wrapper-class="ml-6 border-r border-theme-secondary-300 dark:border-theme-secondary-800"
-                        wrapper-margin-class="sm:mr-6 lg:mr-0"
-                        wrapper-padding-class="lg:pr-6"
+                        wrapper-class="sm:mr-6 lg:mr-0 pr-6 ml-6 sm:ml-0 lg:ml-6"
                     >
                         <x-slot name="icon">
                             <div class="flex items-center mr-2">
@@ -48,9 +44,7 @@
                     <x-general.header-entry
                         :title="trans('pages.delegates.statistics.not_forging')"
                         :text="$statistics['performances']['missing']"
-                        wrapper-class="ml-6"
-                        wrapper-margin-class="sm:mr-6 lg:mr-0"
-                        wrapper-padding-class="lg:pr-6"
+                        wrapper-class="sm:mr-6 lg:mr-0 lg:pr-6 ml-6 sm:ml-0 lg:ml-6"
                         without-border
                     >
                         <x-slot name="icon">
