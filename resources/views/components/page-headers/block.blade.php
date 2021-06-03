@@ -21,8 +21,6 @@
                             <a href="{{ $block->previousBlockUrl() }}" class="flex flex-1 justify-center items-center px-4 h-11 rounded cursor-pointer bg-theme-secondary-800 hover:bg-theme-secondary-700 transition-default lg:flex-none">
                                 <x-ark-icon name="chevron-left" size="sm" />
                             </a>
-                        @else
-                            {{-- <span class="flex-1"></span> --}}
                         @endif
 
                         @if ($block->nextBlockUrl())

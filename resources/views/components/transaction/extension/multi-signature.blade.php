@@ -30,9 +30,7 @@
                 @foreach($transaction->participants() as $participant)
                     <div class="table-list-mobile-row">
                         <div>
-                            #
-
-                            <span>{{ $loop->index + 1}}</span>
+                            #<span>{{ $loop->index + 1}}</span>
                         </div>
 
                         <x-tables.rows.mobile.address :model="$participant" />
