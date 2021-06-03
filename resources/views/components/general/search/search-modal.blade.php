@@ -37,7 +37,7 @@
         >
             <div wire:click.self="closeModal" class="fixed inset-0 opacity-70 dark:opacity-80 bg-theme-secondary-900 dark:bg-theme-secondary-800"></div>
 
-            <div class="relative flex flex-col w-full pb-10 overflow-auto md:overflow-visible content-container-full-width md:px-8">
+            <div class="relative flex flex-col w-full overflow-auto md:overflow-visible content-container-full-width md:px-8">
                 <h2 class="px-8 mx-auto mb-8 text-4xl font-bold text-center text-white">@lang('pages.search.title')</h2>
 
                 <div class="flex flex-col overflow-auto bg-white rounded-lg md:overflow-visible dark:bg-theme-secondary-900 mb-14">
