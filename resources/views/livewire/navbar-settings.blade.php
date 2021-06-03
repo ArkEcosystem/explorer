@@ -12,12 +12,13 @@
     </x-navbar.button>
 
 
-    <div x-show.transition.origin.top="showSettings" class="fixed top-0 right-0 left-0 z-30 px-4 pt-3 mt-20 w-full md:absolute md:p-0 md:left-auto md:mt-24 md:w-120">
-        <div
-            class="p-8 bg-white rounded-lg shadow-xl dark:bg-theme-secondary-900 md:p-10 "
-            @click.away="showSettings = false"
-            x-cloak
-        >
+    <div
+        x-show.transition.origin.top="showSettings"
+        class="fixed top-0 left-0 right-0 z-30 w-full px-4 pt-3 mt-20 md:absolute md:p-0 md:left-auto md:mt-24 md:w-120"
+        x-cloak
+        @click.away="showSettings = false"
+    >
+        <div class="p-8 bg-white rounded-lg shadow-xl dark:bg-theme-secondary-900 md:p-10">
             <div class="flex flex-col">
                 @if(Network::canBeExchanged())
                     <x-navbar.setting-option
