@@ -18,7 +18,10 @@
             <span class="flex absolute top-0 right-0 bottom-0 items-center transform translate-x-2 translate-y-px">
                 <x-ark-icon name="chevron-down" size="2xs"/>
             </span>
-            <select {{ $attributes->wire('model') }} class="-ml-1 text-sm font-semibold bg-transparent appearance-none text-theme-secondary-700 dark:text-theme-secondary-200">
+            <select
+                style="-moz-transform: translateX(-5px);" {{-- https://bugzilla.mozilla.org/show_bug.cgi?id=1582545 --}}
+                {{ $attributes->wire('model') }}
+                class="text-sm font-semibold bg-transparent appearance-none text-theme-secondary-700 dark:text-theme-secondary-200">
                 @foreach($options as $val => $label)
                     <option value="{{ $val }}">{{ $label }}</option>
                 @endforeach
@@ -28,12 +31,15 @@
     </div>
 
     <div class="border-t border-theme-secondary-300 dark:border-theme-secondary-800 pt-6 md:pt-0 md:border-t-0 xl:pt-6 xl:border-t row-span-2 sm:row-span-1 flex gap-5 flex-col sm:flex-row sm:items-end md:w-1/2 lg:justify-end xl:w-full">
-        <div class="md:w-1/2">
+        <div class="sm:w-1/3 md:w-1/2">
             <label class="relative md:hidden xl:inline-block">
                 <span class="flex absolute top-0 right-0 bottom-0 items-center transform translate-x-2 translate-y-px">
                     <x-ark-icon name="chevron-down" size="2xs"/>
                 </span>
-                <select {{ $attributes->wire('model') }} class="-ml-1 text-sm font-semibold bg-transparent appearance-none text-theme-secondary-700 dark:text-theme-secondary-200">
+                <select
+                    style="-moz-transform: translateX(-5px);" {{-- https://bugzilla.mozilla.org/show_bug.cgi?id=1582545 --}}
+                    {{ $attributes->wire('model') }}
+                    class="text-sm font-semibold bg-transparent appearance-none text-theme-secondary-700 dark:text-theme-secondary-200">
                     @foreach($options as $val => $label)
                         <option value="{{ $val }}">{{ $label }}</option>
                     @endforeach
@@ -43,18 +49,17 @@
             <p class="mt-2 text-base font-semibold text-theme-secondary-700 dark:text-theme-secondary-200">{{ $secondaryValue }}</p>
         </div>
 
-            @if($chart)
+        @if($chart)
             <div class="md:w-1/2 flex flex-1 justify-end">
-                <div class="flex-grow justify-end lg:flex">
-                    <x-chart
-                        id="stats-insight-{{ $id }}"
-                        :data="$chart->values()"
-                        :labels="$chart->keys()"
-                        :theme="$chartTheme"
-                        width="200"
-                        height="40"
-                    />
-                </div>
+                <x-chart
+                    class="w-full h-auto"
+                    id="stats-insight-{{ $id }}"
+                    :data="$chart->values()"
+                    :labels="$chart->keys()"
+                    :theme="$chartTheme"
+                    width="200"
+                    height="50"
+                />
             </div>
         @else
             <div class="md:w-1/2 border-theme-secondary-300 dark:border-theme-secondary-800 sm:border-l sm:pl-6 md:pl-8">

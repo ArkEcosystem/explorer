@@ -74,13 +74,20 @@ const CustomChart = (id, values, labels, grid, tooltips, theme, time) => {
         },
 
         init() {
+            if (this.chart) {
+                this.chart.destroy();
+            }
+
             this.$watch("time", () => this.updateChart());
+            window.addEventListener('resize', () => this.resizeChart());
 
             const fontConfig = this.getFontConfig();
 
             const options = {
                 parsing: false,
                 normalized: true,
+                responsive: true,
+                maintainAspectRatio: false,
                 showScale: grid === "true",
                 animation: { duration: 500, easing: "linear" },
                 legend: { display: false },
@@ -114,12 +121,13 @@ const CustomChart = (id, values, labels, grid, tooltips, theme, time) => {
                     yAxes: [
                         {
                             type: "linear",
-                            position: "right",
+                                position: "right",
                             stacked: true,
                             ticks: {
                                 padding: 15,
                                 ...fontConfig,
                                 display: grid === "true",
+                                suggestedMin: 0,
                                 callback: function (value, index, values) {
                                     return "$" + parseFloat(value).toFixed(2);
                                 },
