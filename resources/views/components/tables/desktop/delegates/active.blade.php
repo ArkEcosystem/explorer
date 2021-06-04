@@ -33,7 +33,12 @@
                     <x-tables.rows.desktop.round-status-history :model="$delegate" />
                 </x-ark-tables.cell>
                 <x-ark-tables.cell class="text-right" responsive>
-                    <x-tables.rows.desktop.votes :model="$delegate" />
+                    <span class="hidden sm:inline">
+                        <x-tables.rows.desktop.votes :model="$delegate" />
+                    </span>
+                    <span class="sm:hidden">
+                        <x-tables.rows.mobile.votes :model="$delegate" />
+                    </span>
                 </x-ark-tables.cell>
                 <x-ark-tables.cell class="text-right" responsive breakpoint="md">
                     <x-tables.rows.desktop.productivity :model="$delegate" />
