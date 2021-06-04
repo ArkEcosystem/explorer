@@ -10,12 +10,12 @@ trait ValidatesTerm
 {
     private function couldBeATransactionID(string $term): bool
     {
-        return $this->is64CharsLongHexadecimalString($term);
+        return $this->isA64CharsLongHexadecimalString($term);
     }
 
     private function couldBeABlockID(string $term): bool
     {
-        return $this->is64CharsLongHexadecimalString($term);
+        return $this->isA64CharsLongHexadecimalString($term);
     }
 
     private function couldBeAnAddress(string $term): bool
@@ -50,7 +50,7 @@ trait ValidatesTerm
         return $this->isOnlyNumbers($numericTerm) && $this->numericTermIsInRange($numericTerm);
     }
 
-    private function is64CharsLongHexadecimalString(string $term): bool
+    private function isA64CharsLongHexadecimalString(string $term): bool
     {
         return $this->isOnlyNumbers($term)
             || (strlen($term) === 64 && $this->isHexadecimalString($term));
