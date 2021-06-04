@@ -1,13 +1,25 @@
+@props([
+    'class' => 'hidden md:block'
+])
+
 <x-table-skeleton
+    :class="$class"
     device="desktop"
     :items="[
         'general.delegates.rank'         => 'text',
         'general.delegates.name'         => 'address',
-        'general.delegates.status'       => 'status',
+        'general.delegates.status'       => [
+            'type' => 'status',
+            'lastOn' => 'md',
+        ],
         'general.delegates.votes'  => [
             'type' => 'number',
             'responsive' => true,
         ],
-        'general.delegates.productivity' => 'number'
+        'general.delegates.productivity' => [
+            'type' => 'number',
+            'responsive' => true,
+            'breakpoint' => 'md',
+        ]
     ]"
 />

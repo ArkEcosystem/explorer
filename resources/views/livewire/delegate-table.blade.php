@@ -2,8 +2,7 @@
     <span x-show="selected !== 'active'">
         <x-loading.visible>
             <span x-show="selected === 'active'">
-                <x-tables.desktop.skeleton.delegates.active />
-                <x-tables.mobile.skeleton.delegates.active />
+                <x-tables.desktop.skeleton.delegates.active class="block" />
             </span>
 
             <span x-show="selected === 'standby'">
@@ -22,18 +21,15 @@
         <div wire:poll.{{ Network::blockTime() }}s wire:key="poll_active_delegates_skeleton">
             @if (count($delegates) && $state['status'] === 'active')
                 <x-tables.desktop.delegates.active :delegates="$delegates" />
-                <x-tables.mobile.delegates.active :delegates="$delegates" />
             @else
                 <x-loading.hidden>
                     <x-tables.desktop.delegates.active :delegates="$delegates" />
-                    <x-tables.mobile.delegates.active :delegates="$delegates" />
                 </x-loading.hidden>
             @endif
         </div>
     @elseif (! count($delegates) || $state['status'] !== 'active')
         <span x-show="selected === 'active'">
-            <x-tables.desktop.skeleton.delegates.active />
-            <x-tables.mobile.skeleton.delegates.active />
+            <x-tables.desktop.skeleton.delegates.active class="block" />
         </span>
     @endif
 
