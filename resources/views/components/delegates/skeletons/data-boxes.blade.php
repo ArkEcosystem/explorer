@@ -4,7 +4,7 @@
             <div class="flex pr-6 space-x-4 border-r border-theme-secondary-300 dark:border-theme-secondary-800">
                 <div class="h-11 rounded-xl border-none loading-state circled-icon"></div>
 
-                <div class="flex flex-col justify-center space-y-2 p-1">
+                <div class="flex flex-col justify-center p-1 space-y-2">
                     <div class="flex items-center">
                         <div class="w-12 h-4 rounded-md loading-state"></div>
                     </div>
@@ -16,7 +16,7 @@
             <div class="flex pr-6 ml-6 space-x-4 border-r border-theme-secondary-300 dark:border-theme-secondary-800">
                 <div class="h-11 rounded-xl border-none loading-state circled-icon"></div>
 
-                <div class="flex flex-col justify-center space-y-2 p-1">
+                <div class="flex flex-col justify-center p-1 space-y-2">
                     <div class="flex items-center">
                         <div class="w-12 h-4 rounded-md loading-state"></div>
                     </div>
@@ -28,7 +28,7 @@
             <div class="flex ml-6 space-x-4">
                 <div class="h-11 rounded-xl border-none loading-state circled-icon"></div>
 
-                <div class="flex flex-col justify-center space-y-2 p-1">
+                <div class="flex flex-col justify-center p-1 space-y-2">
                     <div class="flex items-center">
                         <div class="w-20 h-4 rounded-md loading-state"></div>
                     </div>
@@ -41,12 +41,12 @@
 
     <div class="flex flex-row space-x-4 w-full">
         <div class="flex flex-grow py-3 px-6 bg-white rounded-xl dark:bg-theme-secondary-900">
-            <div class="flex items-center space-x-4 mr-4">
+            <div class="flex items-center mr-4 space-x-4">
                 <div
                     class="h-11 rounded-xl border-none loading-state circled-icon">
                 </div>
 
-                <div class="flex flex-col justify-center space-y-2 p-1">
+                <div class="flex flex-col justify-center p-1 space-y-2">
                     <div class="flex items-center">
                         <div class="h-4 rounded-md w-25 loading-state"></div>
                     </div>
@@ -68,7 +68,7 @@
                     </div>
                 </div>
 
-                <div class="flex flex-col justify-center space-y-2 p-1">
+                <div class="flex flex-col justify-center p-1 space-y-2">
                     <div class="flex items-center">
                         <div class="h-4 rounded-md w-15 loading-state"></div>
                     </div>
