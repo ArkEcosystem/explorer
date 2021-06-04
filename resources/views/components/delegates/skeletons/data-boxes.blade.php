@@ -2,38 +2,38 @@
     <div class="flex flex-row py-3 px-6 bg-white rounded-xl dark:bg-theme-secondary-900">
         <div class="flex w-full lg:w-1/2 xl:w-full">
             <div class="flex pr-6 space-x-4 border-r border-theme-secondary-300 dark:border-theme-secondary-800">
-                <div class="h-11 rounded-xl loading-state circled-icon border-none"></div>
+                <div class="h-11 rounded-xl border-none loading-state circled-icon"></div>
 
                 <div class="flex flex-col justify-center space-y-2">
                     <div class="flex items-center">
-                        <div class="w-12 h-4 loading-state rounded-md"></div>
+                        <div class="w-12 h-4 rounded-md loading-state"></div>
                     </div>
 
-                    <span class="w-5 h-5 loading-state rounded-md"></span>
+                    <span class="w-5 h-5 rounded-md loading-state"></span>
                 </div>
             </div>
 
             <div class="flex pr-6 ml-6 space-x-4 border-r border-theme-secondary-300 dark:border-theme-secondary-800">
-                <div class="h-11 rounded-xl loading-state circled-icon border-none"></div>
+                <div class="h-11 rounded-xl border-none loading-state circled-icon"></div>
 
                 <div class="flex flex-col justify-center space-y-2">
                     <div class="flex items-center">
-                        <div class="w-12 h-4 loading-state rounded-md"></div>
+                        <div class="w-12 h-4 rounded-md loading-state"></div>
                     </div>
 
-                    <span class="w-5 h-5 loading-state rounded-md"></span>
+                    <span class="w-5 h-5 rounded-md loading-state"></span>
                 </div>
             </div>
 
             <div class="flex ml-6 space-x-4">
-                <div class="h-11 rounded-xl loading-state circled-icon border-none"></div>
+                <div class="h-11 rounded-xl border-none loading-state circled-icon"></div>
 
                 <div class="flex flex-col justify-center space-y-2">
                     <div class="flex items-center">
-                        <div class="w-20 h-4 loading-state rounded-md"></div>
+                        <div class="w-20 h-4 rounded-md loading-state"></div>
                     </div>
 
-                    <span class="w-5 h-5 loading-state rounded-md"></span>
+                    <span class="w-5 h-5 rounded-md loading-state"></span>
                 </div>
             </div>
         </div>
@@ -43,15 +43,15 @@
         <div class="flex flex-grow py-3 px-6 bg-white rounded-xl dark:bg-theme-secondary-900">
             <div class="flex space-x-4">
                 <div
-                    class="h-11 rounded-xl loading-state circled-icon border-none">
+                    class="h-11 rounded-xl border-none loading-state circled-icon">
                 </div>
 
                 <div class="flex flex-col justify-center space-y-2">
                     <div class="flex items-center">
-                        <div class="h-4 w-25 loading-state rounded-md"></div>
+                        <div class="h-4 rounded-md w-25 loading-state"></div>
                     </div>
 
-                    <span class="h-5 w-25 loading-state rounded-md"></span>
+                    <span class="h-5 rounded-md w-25 loading-state"></span>
                 </div>
             </div>
         </div>
@@ -63,17 +63,17 @@
                         <div class="-mr-2 h-11 rounded-xl circled-icon border-theme-secondary-300 bg-theme-secondary-300 dark:bg-theme-secondary-800"></div>
                     </div>
 
-                    <div class="flex rounded-full border-4 border-white dark:border-theme-secondary-900 animate-pulse">
+                    <div class="flex rounded-full border-4 border-white animate-pulse dark:border-theme-secondary-900">
                         <div class="h-11 rounded-xl circled-icon border-theme-secondary-300 bg-theme-secondary-300 dark:bg-theme-secondary-800"></div>
                     </div>
                 </div>
 
                 <div class="flex flex-col justify-center space-y-2">
                     <div class="flex items-center">
-                        <div class="h-4 w-15 loading-state rounded-md"></div>
+                        <div class="h-4 rounded-md w-15 loading-state"></div>
                     </div>
 
-                    <span class="h-5 w-30 loading-state rounded-md"></span>
+                    <span class="h-5 rounded-md w-30 loading-state"></span>
                 </div>
             </div>
         </div>
