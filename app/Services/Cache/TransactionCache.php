@@ -16,13 +16,6 @@ final class TransactionCache implements Contract
     use ManagesCache;
     use ManagesChart;
 
-    public function all(string $period): array
-    {
-        return [
-            'historical' => $this->getHistorical($period),
-        ];
-    }
-
     public function getHistorical(string $period): array
     {
         return $this->get(sprintf('historical/%s', $period), []);
