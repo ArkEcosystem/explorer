@@ -18,6 +18,7 @@ use App\Console\Commands\CacheMultiSignatureAddresses;
 use App\Console\Commands\CacheNetworkAggregates;
 use App\Console\Commands\CacheNodeFees;
 use App\Console\Commands\CachePrices;
+use App\Console\Commands\CacheTransactions;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -68,6 +69,8 @@ final class Kernel extends ConsoleKernel
         $schedule->command(CacheDelegateProductivity::class)->everyMinute();
 
         $schedule->command(CacheNodeFees::class)->everyMinute();
+
+        $schedule->command(CacheTransactions::class)->everyMinute();
     }
 
     /**

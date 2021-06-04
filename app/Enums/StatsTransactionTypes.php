@@ -8,27 +8,27 @@ final class StatsTransactionTypes
 {
     public const ALL = 'all';
 
-    public const TRANSFER = '1:transfer';
+    public const TRANSFER = 'transfer';
 
-    public const SECOND_SIG = '1:secondSignature';
+    public const SECOND_SIG = 'secondSignature';
 
-    public const DELEGATE_REG = '1:delegateRegistration';
+    public const DELEGATE_REG = 'delegateRegistration';
 
-    public const VOTE = '1:vote';
+    public const VOTE = 'vote';
 
-    public const MULTI_SIG = '1:multiSignature';
+    public const MULTI_SIG = 'multiSignature';
 
-    public const IPFS = '1:ipfs';
+    public const IPFS = 'ipfs';
 
-    public const MULTI_PAY = '1:multiPayment';
+    public const MULTI_PAY = 'multiPayment';
 
-    public const DELEGATE_RES = '1:delegateResignation';
+    public const DELEGATE_RES = 'delegateResignation';
 
-    public const TIMELOCK = '1:htlcLock';
+    public const TIMELOCK = 'htlcLock';
 
-    public const TIMELOCK_CLAIM = '1:htlcClaim';
+    public const TIMELOCK_CLAIM = 'htlcClaim';
 
-    public const TIMELOCK_REFUND = '1:htlcRefund';
+    public const TIMELOCK_REFUND = 'htlcRefund';
 
     public const MAGISTRATE = 'magistrate';
 }

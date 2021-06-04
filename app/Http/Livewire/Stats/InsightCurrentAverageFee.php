@@ -84,8 +84,6 @@ use Livewire\Component;
                 ]);
             }
 
-            [$typeGroup, $type] = explode(':', $transactionType, 2);
-
-            return collect(data_get($result, "$typeGroup.$type"))->map(fn ($value, $key) => (float) $value / 1e8);
+            return collect(data_get($result, "1.$transactionType"))->map(fn ($value, $key) => (float) $value / 1e8);
         }
     }
