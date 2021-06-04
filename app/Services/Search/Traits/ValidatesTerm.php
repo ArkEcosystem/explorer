@@ -10,22 +10,22 @@ use ArkEcosystem\Crypto\Identities\Address;
 
 trait ValidatesTerm
 {
-    protected function couldBeATransactionID(string $term): bool
+    private function couldBeATransactionID(string $term): bool
     {
         return $this->is64CharsLongHexadecimalString($term);
     }
 
-    protected function couldBeABlockID(string $term): bool
+    private function couldBeABlockID(string $term): bool
     {
         return $this->is64CharsLongHexadecimalString($term);
     }
 
-    protected function couldBeAnAddress(string $term): bool
+    private function couldBeAnAddress(string $term): bool
     {
         return Address::validate($term, Network::config());
     }
 
-    protected function couldBeAPublicKey(string $term): bool
+    private function couldBeAPublicKey(string $term): bool
     {
         return strlen($term) === 66 && $this->isHexadecimalString($term);
     }
@@ -36,7 +36,7 @@ trait ValidatesTerm
      *
      * @return bool
      */
-    protected function couldBeAUsername(string $term): bool
+    private function couldBeAUsername(string $term): bool
     {
         $regex = '/^[a-z0-9!@$&_.]+$/';
 
@@ -45,23 +45,23 @@ trait ValidatesTerm
             && preg_match($regex, $term, $matches) > 0;
     }
 
-    protected function couldBeHeightValue(string $term): bool
+    private function couldBeHeightValue(string $term): bool
     {
         return $this->isOnlyNumbers($term) && $this->numericTermIsInRange($term);
     }
 
-    protected function is64CharsLongHexadecimalString(string $term): bool
+    private function is64CharsLongHexadecimalString(string $term): bool
     {
         return $this->isOnlyNumbers($term)
             || (strlen($term) === 64 && $this->isHexadecimalString($term));
     }
 
-    protected function isOnlyNumbers(string $term): bool
+    private function isOnlyNumbers(string $term): bool
     {
         return ctype_digit($term);
     }
 
-    protected function isHexadecimalString(string $term): bool
+    private function isHexadecimalString(string $term): bool
     {
         return ctype_xdigit($term);
     }
@@ -72,7 +72,7 @@ trait ValidatesTerm
      *
      * @return bool
      */
-    protected function numericTermIsInRange(string $term): bool
+    private function numericTermIsInRange(string $term): bool
     {
         return floatval($term) <= SQLEnum::INT4_MAXVALUE;
     }
