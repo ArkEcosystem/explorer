@@ -4,7 +4,7 @@
     'tooltip'             => null,
     'url'                 => null,
     'wrapperClass'        => 'sm:mr-7 lg:mr-0 lg:pr-7',
-    'linkAlignment'       => null,
+    'textAlignment'       => null,
     'title',
     'text',
 ])
@@ -25,10 +25,10 @@
 
         @if ($url)
             <a href="{{ $url }}" class="flex link">
-                <span class="w-full truncate {{ $linkAlignment }}">{{ $text }}</span>
+                <span class="w-full truncate {{ $textAlignment }}">{{ $text }}</span>
             </a>
         @else
-            <span class="truncate text-theme-secondary-900 dark:text-theme-secondary-200 {{ $linkAlignment }}">{{ $text }}</span>
+            <span class="truncate text-theme-secondary-900 dark:text-theme-secondary-200 {{ $textAlignment }}">{{ $text }}</span>
         @endif
     </div>
 </div>

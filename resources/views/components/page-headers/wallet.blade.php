@@ -89,7 +89,7 @@
                         :title="trans('pages.wallet.delegate.forged_blocks')"
                         :text="trans('general.see_all')"
                         :url="route('wallet.blocks', $wallet->address())"
-                        link-alignment="lg:text-right"
+                        text-alignment="lg:text-right"
                     >
                         <x-slot name="icon">
                             <div class="md:w-11 md:mr-4 lg:w-0 lg:mr-0"></div>
@@ -101,7 +101,7 @@
                         :text="trans('general.see_all')"
                         :url="route('wallet.voters', $wallet->address())"
                         without-border
-                        link-alignment="lg:text-right"
+                        text-alignment="lg:text-right"
                     />
                 </div>
             </div>
