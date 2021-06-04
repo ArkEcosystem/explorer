@@ -22,7 +22,7 @@ trait ValidatesTerm
 
     private function couldBeAnAddress(string $term): bool
     {
-        return Address::validate($term, Network::config());
+        return strlen($term) === 34;
     }
 
     private function couldBeAPublicKey(string $term): bool

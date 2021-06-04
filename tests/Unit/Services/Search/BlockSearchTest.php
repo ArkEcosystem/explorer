@@ -226,8 +226,8 @@ it('should search for blocks by generator with an address', function (?string $m
 
     $block = Block::factory()->create([
         'generator_public_key' => Wallet::factory()->create([
-            'address'    => 'someaddress',
-            'public_key' => 'somepubkey',
+            'address'    => 'DUUT1TENLRT6qRDceBHGGcJtjU8kuQEmk4',
+            'public_key' => '03b4d12354584371a54846082067c6da895dbe0699282dc462be0199a0f79b2d16',
         ])->public_key,
     ]);
 
