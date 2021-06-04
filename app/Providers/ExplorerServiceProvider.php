@@ -18,13 +18,15 @@ final class ExplorerServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $network = NetworkFactory::make($this->app['config']['explorer']['network']);
+
         $this->app->singleton(
             Network::class,
-            fn ($app) => NetworkFactory::make($app['config']['explorer']['network'])
+            fn () => $network
         );
 
         // Used for crypto calculations, e.g. multisig address derivation
-        NetworkConfiguration::set(NetworkFactory::make($this->app['config']['explorer']['network'])->config());
+        NetworkConfiguration::set($network->config());
     }
 
     /**
