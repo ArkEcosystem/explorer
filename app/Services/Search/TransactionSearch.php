@@ -29,7 +29,7 @@ final class TransactionSearch implements Search
 
         if (! is_null($term)) {
             if ($this->couldBeATransactionID($term)) {
-                $query->whereLowerEqual('id', $term);
+                $query->whereLower('id', $term);
             } else {
                 $query->empty();
             }
@@ -40,13 +40,13 @@ final class TransactionSearch implements Search
                     $wallet = Wallets::findByIdentifier($term);
 
                     $query->where(function ($query) use ($parameters, $wallet): void {
-                        $query->whereLowerEqual('sender_public_key', $wallet->public_key);
+                        $query->whereLower('sender_public_key', $wallet->public_key);
 
                         $this->applyScopes($query, $parameters);
                     });
 
                     $query->orWhere(function ($query) use ($parameters, $wallet): void {
-                        $query->whereLowerEqual('recipient_id', $wallet->address);
+                        $query->whereLower('recipient_id', $wallet->address);
 
                         $this->applyScopes($query, $parameters);
                     });

@@ -28,7 +28,7 @@ final class BlockSearch implements Search
 
         if (! is_null($term)) {
             if ($this->couldBeABlockID($term)) {
-                $query = $query->whereLowerEqual('id', $term);
+                $query = $query->whereLower('id', $term);
             } else {
                 // Forces empty results when it has a term but not possible
                 // block ID
@@ -45,7 +45,7 @@ final class BlockSearch implements Search
                 $query->orWhere(function ($query) use ($parameters, $term): void {
                     $wallet = Wallets::findByIdentifier($term);
 
-                    $query->whereLowerEqual('generator_public_key', $wallet->public_key);
+                    $query->whereLower('generator_public_key', $wallet->public_key);
 
                     $this->applyScopes($query, $parameters);
                 });
@@ -70,7 +70,7 @@ final class BlockSearch implements Search
         TimestampRangeComposer::compose($query, $parameters);
 
         if (! is_null(Arr::get($parameters, 'generatorPublicKey'))) {
-            $query->whereLowerEqual('generator_public_key', $parameters['generatorPublicKey']);
+            $query->whereLower('generator_public_key', $parameters['generatorPublicKey']);
         }
     }
 }
