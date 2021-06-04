@@ -51,9 +51,9 @@ use Livewire\Component;
         }
 
         private function minFee(string $transactionType): string
-
         {
             $value = $this->getFeesAggregatesPerPeriod($transactionType);
+
             return NumberFormatter::currency(data_get($value, 'min', 0), Network::currency());
         }
 
