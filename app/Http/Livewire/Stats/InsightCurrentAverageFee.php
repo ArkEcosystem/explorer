@@ -4,22 +4,21 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire\Stats;
 
-use App\Enums\TransactionTypeGroupEnum;
+use App\Enums\StatsTransactionTypes;
 use App\Facades\Network;
 use App\Http\Livewire\Concerns\AvailableTransactionType;
-use App\Models\Transaction;
+use App\Services\Cache\NodeFeesCache;
 use App\Services\NumberFormatter;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Http;
 use Illuminate\View\View;
 use Livewire\Component;
 
-final class InsightCurrentAverageFee extends Component
+    final class InsightCurrentAverageFee extends Component
 {
     use AvailableTransactionType;
 
-    public int $transactionType;
+    public string $transactionType = '';
 
     private string $refreshInterval = '';
 
@@ -45,36 +44,49 @@ final class InsightCurrentAverageFee extends Component
         ]);
     }
 
-    private function currentAverageFee(int $transactionType): string
+    private function currentAverageFee(string $transactionType): string
     {
         $value = $this->getFeesAggregatesPerPeriod($transactionType);
 
-        return NumberFormatter::currency(data_get($value, 'average', 0), Network::currency());
+        return NumberFormatter::currency(data_get($value, 'avg', 0), Network::currency());
     }
 
-    private function minFee(int $transactionType): string
+    private function minFee(string $transactionType): string
     {
         $value = $this->getFeesAggregatesPerPeriod($transactionType);
 
-        return NumberFormatter::currency(data_get($value, 'minimum', 0), Network::currency());
+        return NumberFormatter::currency(data_get($value, 'min', 0), Network::currency());
     }
 
-    private function maxFee(int $transactionType): string
+    private function maxFee(string $transactionType): string
     {
         $value = $this->getFeesAggregatesPerPeriod($transactionType);
 
-        return NumberFormatter::currency(data_get($value, 'maximum', 0), Network::currency());
+        return NumberFormatter::currency(data_get($value, 'max', 0), Network::currency());
     }
 
-    private function getFeesAggregatesPerPeriod(int $transactionType): Model | null
+    private function getFeesAggregatesPerPeriod(string $transactionType): Collection | null
     {
-        $cacheKey = collect([__CLASS__, 'fee-aggregates-per-transaction-type', $transactionType])->filter()->join('.');
+        $result = collect((new NodeFeesCache())->getAggregates()->get('data'));
 
-        return Cache::remember($cacheKey, (int) $this->refreshInterval, fn () => Transaction::query()
-            ->select(DB::raw('AVG(fee / 1e8) as average, MIN(fee / 1e8) as minimum, MAX(fee / 1e8) as maximum'))
-            ->where('type_group', TransactionTypeGroupEnum::CORE)
-            ->where('type', $transactionType)
-            ->first()
-        );
+        if ($transactionType === StatsTransactionTypes::ALL) {
+            return collect([
+              'avg' => (float) $result->flatten(1)->avg('avg') / 1e8,
+              'max' => (float) $result->flatten(1)->max('max') / 1e8,
+              'min' => (float) $result->flatten(1)->min('min') / 1e8,
+            ]);
+        }
+
+        if ($transactionType === StatsTransactionTypes::MAGISTRATE) {
+            return collect([
+                'avg' => (float) collect($result->get(2, []))->avg('avg') / 1e8,
+                'max' => (float) collect($result->get(2, []))->max('max') / 1e8,
+                'min' => (float) collect($result->get(2, []))->min('min') / 1e8,
+            ]);
+        }
+
+        [$typeGroup, $type] = explode(':', $transactionType, 2);
+
+        return collect(data_get($result, "$typeGroup.$type"))->map(fn ($value, $key) => (float) $value / 1e8);
     }
 }
