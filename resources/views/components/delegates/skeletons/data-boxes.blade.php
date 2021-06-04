@@ -1,7 +1,7 @@
-<div class="flex space-x-4 w-full md:flex-col xl:flex-row md:space-x-0 xl:space-x-4 md:space-y-4 xl:space-y-0">
+<div class="flex space-x-4 w-full md:flex-col xl:flex-row md:space-x-0 xl:space-x-4 md:space-y-4 xl:space-y-0 h-20">
     <div class="flex flex-row py-3 px-6 bg-white rounded-xl dark:bg-theme-secondary-900">
         <div class="flex w-full lg:w-1/2 xl:w-full mr-2">
-            <div class="flex pr-6 space-x-4 border-r border-theme-secondary-300 dark:border-theme-secondary-800">
+            <div class="flex pr-6 items-center space-x-4 border-r border-theme-secondary-300 dark:border-theme-secondary-800">
                 <div class="h-11 rounded-xl border-none loading-state circled-icon"></div>
 
                 <div class="flex flex-col justify-center p-1 space-y-2">
@@ -13,7 +13,7 @@
                 </div>
             </div>
 
-            <div class="flex pr-6 ml-6 space-x-4 border-r border-theme-secondary-300 dark:border-theme-secondary-800">
+            <div class="flex items-center pr-6 ml-6 space-x-4 border-r border-theme-secondary-300 dark:border-theme-secondary-800">
                 <div class="h-11 rounded-xl border-none loading-state circled-icon"></div>
 
                 <div class="flex flex-col justify-center p-1 space-y-2">
@@ -25,7 +25,7 @@
                 </div>
             </div>
 
-            <div class="flex ml-6 space-x-4">
+            <div class="flex ml-6 items-center space-x-4">
                 <div class="h-11 rounded-xl border-none loading-state circled-icon"></div>
 
                 <div class="flex flex-col justify-center p-1 space-y-2">
