@@ -197,10 +197,6 @@ body {
     @apply bg-theme-secondary-800;
 }
 
-.custom-pulse {
-    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-}
-
 /* Tab Badge */
 .info-badge {
     @apply ml-1 text-sm rounded bg-theme-primary-100;
