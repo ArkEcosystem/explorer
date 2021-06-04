@@ -8,7 +8,7 @@
     @else
         <x-slot name="address">
             <span class="lg:hidden">
-                <x-truncate-middle>{{ $model->address() }}aaaa</x-truncate-middle>
+                <x-truncate-middle>{{ $model->address() }}</x-truncate-middle>
             </span>
             <span class="hidden lg:inline">
                 {{ $model->address() }}
