@@ -6,12 +6,10 @@ namespace App\Http\Livewire\Stats;
 
 use App\Enums\StatsPeriods;
 use App\Http\Livewire\Concerns\AvailablePeriods;
-use App\Models\Transaction;
+use App\Services\Cache\TransactionCache;
 use App\Services\NumberFormatter;
 use App\Services\Settings;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 use Livewire\Component;
 
@@ -47,16 +45,16 @@ final class InsightAllTimeTransactions extends Component
 
     private function allTimeTransactions(): string
     {
-        $value = $this->transactionsPerPeriod(StatsPeriods::ALL);
+        $transactions = collect($this->transactionsPerPeriod(StatsPeriods::ALL)->get('datasets'));
 
-        return NumberFormatter::number($value->sum());
+        return NumberFormatter::number($transactions->sum());
     }
 
     private function countTransactionsPerPeriod(string $period): string
     {
-        $value = $this->transactionsPerPeriod($period);
+        $transactions = collect($this->transactionsPerPeriod($period)->get('datasets'));
 
-        return NumberFormatter::number($value->sum());
+        return NumberFormatter::number($transactions->sum());
     }
 
     private function chartValues(string $period): Collection
@@ -73,16 +71,6 @@ final class InsightAllTimeTransactions extends Component
 
     private function transactionsPerPeriod(string $period): Collection
     {
-        $from = $this->getRangeFromPeriod($period);
-
-        $cacheKey = collect([__CLASS__, 'transactions-per-period', $period, $from])->filter()->join('.');
-
-        return Cache::remember($cacheKey, (int) $this->refreshInterval, fn () => Transaction::query()
-            ->select(DB::raw("to_char(to_timestamp(timestamp), 'yyyy-mm-dd') as period, COUNT('id') as transactions"))
-            ->when($from, fn ($query) => $query->whereRaw("to_char(to_timestamp(timestamp), 'yyyy-mm-dd') > ?", [$from]))
-            ->latest('period')
-            ->groupBy('period')
-            ->pluck('transactions')
-        );
+        return collect((new TransactionCache())->getHistorical($period));
     }
 }

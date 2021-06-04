@@ -19,7 +19,7 @@
         <x-ark-rich-select
             wire:model="{{ $model }}"
             wrapper-class="hidden relative left-0 mt-3 md:inline-block xl:hidden"
-            dropdown-class="right-0 mt-1 origin-top-right"
+            dropdown-class="left-0 mt-1 origin-top-left"
             button-class="block text-sm font-semibold text-left bg-transparent text-theme-secondary-700 dark:text-theme-secondary-200"
             :initial-value="$selected"
             :placeholder="$selected"
@@ -33,7 +33,7 @@
             <x-ark-rich-select
                 wire:model="{{ $model }}"
                 wrapper-class="relative left-0 md:hidden xl:inline-block"
-                dropdown-class="right-0 mt-1 origin-top-right"
+                dropdown-class="left-0 mt-1 origin-top-left"
                 button-class="block text-sm font-semibold text-left bg-transparent text-theme-secondary-700 dark:text-theme-secondary-200"
                 :initial-value="$selected"
                 :placeholder="$selected"
@@ -48,8 +48,8 @@
                 <x-chart
                     class="w-full h-auto"
                     id="stats-insight-{{ $id }}"
-                    :data="$chart->get('datasets')"
-                    :labels="$chart->get('labels')"
+                    :data="collect($chart->get('datasets'))->toJson()"
+                    :labels="collect($chart->get('labels'))->toJson()"
                     :theme="$chartTheme"
                     width="200"
                     height="50"

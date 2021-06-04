@@ -51,9 +51,9 @@ use Livewire\Component;
         }
 
         private function minFee(string $transactionType): string
+
         {
             $value = $this->getFeesAggregatesPerPeriod($transactionType);
-
             return NumberFormatter::currency(data_get($value, 'min', 0), Network::currency());
         }
 
@@ -64,24 +64,24 @@ use Livewire\Component;
             return NumberFormatter::currency(data_get($value, 'max', 0), Network::currency());
         }
 
-        private function getFeesAggregatesPerPeriod(string $transactionType): Collection | null
+        private function getFeesAggregatesPerPeriod(string $transactionType): Collection
         {
             $result = collect((new NodeFeesCache())->getAggregates()->get('data'));
 
             if ($transactionType === StatsTransactionTypes::ALL) {
                 return collect([
-              'avg' => (float) $result->flatten(1)->avg('avg') / 1e8,
-              'max' => (float) $result->flatten(1)->max('max') / 1e8,
-              'min' => (float) $result->flatten(1)->min('min') / 1e8,
-            ]);
+                  'avg' => (float) $result->flatten(1)->avg('avg') / 1e8,
+                  'max' => (float) $result->flatten(1)->max('max') / 1e8,
+                  'min' => (float) $result->flatten(1)->min('min') / 1e8,
+                ]);
             }
 
             if ($transactionType === StatsTransactionTypes::MAGISTRATE) {
                 return collect([
-                'avg' => (float) collect($result->get(2, []))->avg('avg') / 1e8,
-                'max' => (float) collect($result->get(2, []))->max('max') / 1e8,
-                'min' => (float) collect($result->get(2, []))->min('min') / 1e8,
-            ]);
+                    'avg' => (float) collect($result->get(2, []))->avg('avg') / 1e8,
+                    'max' => (float) collect($result->get(2, []))->max('max') / 1e8,
+                    'min' => (float) collect($result->get(2, []))->min('min') / 1e8,
+                ]);
             }
 
             [$typeGroup, $type] = explode(':', $transactionType, 2);
