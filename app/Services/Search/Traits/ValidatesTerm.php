@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace App\Services\Search\Traits;
 
 use App\Enums\SQLEnum;
-use App\Facades\Network;
-use ArkEcosystem\Crypto\Identities\Address;
 
 trait ValidatesTerm
 {
@@ -48,6 +46,7 @@ trait ValidatesTerm
     private function couldBeHeightValue(string $term): bool
     {
         $numericTerm = strval(filter_var($term, FILTER_VALIDATE_FLOAT, FILTER_FLAG_ALLOW_THOUSAND));
+
         return $this->isOnlyNumbers($numericTerm) && $this->numericTermIsInRange($numericTerm);
     }
 
