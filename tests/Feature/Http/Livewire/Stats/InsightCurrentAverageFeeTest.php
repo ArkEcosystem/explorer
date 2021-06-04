@@ -5,13 +5,10 @@ declare(strict_types=1);
 use App\Enums\StatsTransactionTypes;
 use App\Http\Livewire\Stats\InsightCurrentAverageFee;
 use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Http;
 use Livewire\Livewire;
 
 beforeEach(function () {
-    Config::set('explorer.network', 'development');
-
     Http::fake([
         'dwallets.ark.io/api/node/fees*' => Http::response(json_decode(file_get_contents(base_path('tests/fixtures/fees.json')), true), 200),
     ]);
