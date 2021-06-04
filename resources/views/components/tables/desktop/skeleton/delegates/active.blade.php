@@ -1,13 +1,9 @@
-@props([
-    'class' => 'hidden md:block'
-])
-
 <x-table-skeleton
-    :class="$class"
+    class="block"
     device="desktop"
     :items="[
         'general.delegates.rank'         => 'text',
-        'general.delegates.name'         => 'address',
+        'general.delegates.name' => 'address-alt',
         'general.delegates.status'       => [
             'type' => 'status',
             'lastOn' => 'md',

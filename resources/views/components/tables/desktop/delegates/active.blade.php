@@ -1,4 +1,4 @@
-<x-ark-tables.table sticky>
+<x-ark-tables.table sticky class="w-full">
     <thead>
         <tr>
             <x-tables.headers.desktop.text name="general.delegates.rank" />
