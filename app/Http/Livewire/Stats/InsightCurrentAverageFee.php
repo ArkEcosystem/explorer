@@ -10,27 +10,26 @@ use App\Http\Livewire\Concerns\AvailableTransactionType;
 use App\Services\Cache\NodeFeesCache;
 use App\Services\NumberFormatter;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Http;
 use Illuminate\View\View;
 use Livewire\Component;
 
     final class InsightCurrentAverageFee extends Component
-{
-    use AvailableTransactionType;
-
-    public string $transactionType = '';
-
-    private string $refreshInterval = '';
-
-    public function mount(): void
     {
-        $this->refreshInterval = (string) config('explorer.statistics.refreshInterval', '60');
-        $this->transactionType = $this->defaultTransactionType();
-    }
+        use AvailableTransactionType;
 
-    public function render(): View
-    {
-        return view('livewire.stats.insight-current-average-fee', [
+        public string $transactionType = '';
+
+        private string $refreshInterval = '';
+
+        public function mount(): void
+        {
+            $this->refreshInterval = (string) config('explorer.statistics.refreshInterval', '60');
+            $this->transactionType = $this->defaultTransactionType();
+        }
+
+        public function render(): View
+        {
+            return view('livewire.stats.insight-current-average-fee', [
             'currentAverageFeeTitle' => trans('pages.statistics.insights.current-average-fee', [
                 'type' => $this->getTransactionTypeLabel($this->transactionType),
             ]),
@@ -42,51 +41,51 @@ use Livewire\Component;
             'options'                => $this->availableTransactionTypes(),
             'refreshInterval'        => $this->refreshInterval,
         ]);
-    }
+        }
 
-    private function currentAverageFee(string $transactionType): string
-    {
-        $value = $this->getFeesAggregatesPerPeriod($transactionType);
+        private function currentAverageFee(string $transactionType): string
+        {
+            $value = $this->getFeesAggregatesPerPeriod($transactionType);
 
-        return NumberFormatter::currency(data_get($value, 'avg', 0), Network::currency());
-    }
+            return NumberFormatter::currency(data_get($value, 'avg', 0), Network::currency());
+        }
 
-    private function minFee(string $transactionType): string
-    {
-        $value = $this->getFeesAggregatesPerPeriod($transactionType);
+        private function minFee(string $transactionType): string
+        {
+            $value = $this->getFeesAggregatesPerPeriod($transactionType);
 
-        return NumberFormatter::currency(data_get($value, 'min', 0), Network::currency());
-    }
+            return NumberFormatter::currency(data_get($value, 'min', 0), Network::currency());
+        }
 
-    private function maxFee(string $transactionType): string
-    {
-        $value = $this->getFeesAggregatesPerPeriod($transactionType);
+        private function maxFee(string $transactionType): string
+        {
+            $value = $this->getFeesAggregatesPerPeriod($transactionType);
 
-        return NumberFormatter::currency(data_get($value, 'max', 0), Network::currency());
-    }
+            return NumberFormatter::currency(data_get($value, 'max', 0), Network::currency());
+        }
 
-    private function getFeesAggregatesPerPeriod(string $transactionType): Collection | null
-    {
-        $result = collect((new NodeFeesCache())->getAggregates()->get('data'));
+        private function getFeesAggregatesPerPeriod(string $transactionType): Collection | null
+        {
+            $result = collect((new NodeFeesCache())->getAggregates()->get('data'));
 
-        if ($transactionType === StatsTransactionTypes::ALL) {
-            return collect([
+            if ($transactionType === StatsTransactionTypes::ALL) {
+                return collect([
               'avg' => (float) $result->flatten(1)->avg('avg') / 1e8,
               'max' => (float) $result->flatten(1)->max('max') / 1e8,
               'min' => (float) $result->flatten(1)->min('min') / 1e8,
             ]);
-        }
+            }
 
-        if ($transactionType === StatsTransactionTypes::MAGISTRATE) {
-            return collect([
+            if ($transactionType === StatsTransactionTypes::MAGISTRATE) {
+                return collect([
                 'avg' => (float) collect($result->get(2, []))->avg('avg') / 1e8,
                 'max' => (float) collect($result->get(2, []))->max('max') / 1e8,
                 'min' => (float) collect($result->get(2, []))->min('min') / 1e8,
             ]);
+            }
+
+            [$typeGroup, $type] = explode(':', $transactionType, 2);
+
+            return collect(data_get($result, "$typeGroup.$type"))->map(fn ($value, $key) => (float) $value / 1e8);
         }
-
-        [$typeGroup, $type] = explode(':', $transactionType, 2);
-
-        return collect(data_get($result, "$typeGroup.$type"))->map(fn ($value, $key) => (float) $value / 1e8);
     }
-}
