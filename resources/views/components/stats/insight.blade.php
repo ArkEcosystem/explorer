@@ -49,7 +49,7 @@
                     class="w-full h-auto"
                     id="stats-insight-{{ $id }}"
                     :data="collect($chart->get('datasets'))->toJson()"
-                    :labels="collect($chart->get('labels'))->toJson()"
+                        :labels="collect($chart->get('labels'))->keys()->toJson()"
                     :theme="$chartTheme"
                     width="200"
                     height="50"
