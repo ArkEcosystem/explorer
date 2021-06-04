@@ -72,6 +72,6 @@ final class InsightAllTimeFeesCollected extends Component
 
     private function transactionsPerPeriod(string $period): Collection
     {
-        return collect((new FeeCache)->getHistorical($period));
+        return collect((new FeeCache())->getHistorical($period));
     }
 }
