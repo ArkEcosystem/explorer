@@ -21,7 +21,12 @@
                     </span>
                 </x-ark-tables.cell>
                 <x-ark-tables.cell class="text-right">
-                    <x-tables.rows.desktop.votes :model="$delegate" />
+                    <span class="hidden sm:inline">
+                        <x-tables.rows.desktop.votes :model="$delegate" />
+                    </span>
+                    <span class="sm:hidden">
+                        <x-tables.rows.mobile.votes :model="$delegate" />
+                    </span>
                 </x-ark-tables.cell>
             </x-ark-tables.row>
         @endforeach
