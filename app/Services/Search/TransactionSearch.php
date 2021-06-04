@@ -69,7 +69,8 @@ final class TransactionSearch implements Search
                     }
 
                     if ($this->couldBeHeightValue($term)) {
-                        $query->orWhere(fn ($query): Builder => $query->where('block_height', $term));
+                        $numericTerm = strval(filter_var($term, FILTER_VALIDATE_FLOAT, FILTER_FLAG_ALLOW_THOUSAND));
+                        $query->orWhere(fn ($query): Builder => $query->where('block_height', $numericTerm));
                     }
                 });
             }

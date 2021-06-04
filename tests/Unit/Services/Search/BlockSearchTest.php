@@ -174,7 +174,7 @@ it('should search for blocks by height as term', function () {
     Block::factory()->create(['height' => $height]);
 
     $result = (new BlockSearch())->search([
-        'term' => $height,
+        'term' => strval($height),
     ]);
 
     expect($result->get())->toHaveCount(1);

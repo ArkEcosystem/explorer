@@ -30,12 +30,14 @@ final class BlockSearch implements Search
             if ($this->couldBeABlockID($term)) {
                 $query = $query->whereLowerEqual('id', $term);
             } else {
-                // Forces empty results when it has a term but not possible results
-                return $query->empty();
+                // Forces empty results when it has a term but not possible
+                // block ID
+                $query->empty();
             }
 
             if ($this->couldBeHeightValue($term)) {
-                $query->orWhere('height', $term);
+                $numericTerm = strval(filter_var($term, FILTER_VALIDATE_FLOAT, FILTER_FLAG_ALLOW_THOUSAND));
+                $query->orWhere('height', $numericTerm);
             }
 
             try {
