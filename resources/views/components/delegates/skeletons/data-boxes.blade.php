@@ -1,4 +1,4 @@
-<div class="flex space-x-4 w-full h-20 md:flex-col xl:flex-row md:space-x-0 xl:space-x-4 md:space-y-4 xl:space-y-0">
+<div class="flex space-x-4 w-full h-18 md:flex-col xl:flex-row md:space-x-0 xl:space-x-4 md:space-y-4 xl:space-y-0">
     <div class="flex flex-row py-3 px-6 bg-white rounded-xl dark:bg-theme-secondary-900">
         <div class="flex w-full lg:w-1/2 xl:w-full mr-2">
             <div class="flex items-center pr-6 space-x-4 border-r border-theme-secondary-300 dark:border-theme-secondary-800">
