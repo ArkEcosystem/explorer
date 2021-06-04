@@ -7,12 +7,10 @@ namespace App\Http\Livewire\Stats;
 use App\Enums\StatsPeriods;
 use App\Facades\Network;
 use App\Http\Livewire\Concerns\AvailablePeriods;
-use App\Models\Transaction;
+use App\Services\Cache\FeeCache;
 use App\Services\NumberFormatter;
 use App\Services\Settings;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 use Livewire\Component;
 
@@ -48,14 +46,14 @@ final class InsightAllTimeFeesCollected extends Component
 
     private function allTimeFeesCollected(): string
     {
-        $fees = $this->transactionsPerPeriod(StatsPeriods::ALL);
+        $fees = collect($this->transactionsPerPeriod(StatsPeriods::ALL)->get('datasets'));
 
         return NumberFormatter::currency($fees->sum(), Network::currency());
     }
 
     private function fees(string $period): string
     {
-        $fees = $this->transactionsPerPeriod($period);
+        $fees = collect($this->transactionsPerPeriod($period)->get('datasets'));
 
         return NumberFormatter::currency($fees->sum(), Network::currency());
     }
@@ -74,16 +72,6 @@ final class InsightAllTimeFeesCollected extends Component
 
     private function transactionsPerPeriod(string $period): Collection
     {
-        $from = $this->getRangeFromPeriod($period);
-
-        $cacheKey = collect([__CLASS__, 'transactions-per-period', $period, $from])->filter()->join('.');
-
-        return Cache::remember($cacheKey, (int) $this->refreshInterval, fn () => Transaction::query()
-                ->select(DB::raw("to_char(to_timestamp(timestamp), 'yyyy-mm-dd') as period, SUM(fee /1e8) as fees"))
-                ->when($from, fn ($query) => $query->whereRaw("to_char(to_timestamp(timestamp), 'yyyy-mm-dd') > ?", [$from]))
-                ->latest('period')
-                ->groupBy('period')
-                ->pluck('fees')
-        );
+        return collect((new FeeCache)->getHistorical($period));
     }
 }

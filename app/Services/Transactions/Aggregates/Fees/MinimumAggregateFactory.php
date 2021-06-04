@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Transactions\Aggregates\Fees;
 
+use App\Services\Transactions\Aggregates\Fees\Minimum\AllAggregate;
 use App\Services\Transactions\Aggregates\Fees\Minimum\DayAggregate;
 use App\Services\Transactions\Aggregates\Fees\Minimum\MonthAggregate;
 use App\Services\Transactions\Aggregates\Fees\Minimum\QuarterAggregate;
@@ -14,7 +15,7 @@ use InvalidArgumentException;
 final class MinimumAggregateFactory
 {
     /**
-     * @return DayAggregate|WeekAggregate|MonthAggregate|QuarterAggregate|YearAggregate
+     * @return DayAggregate|WeekAggregate|MonthAggregate|QuarterAggregate|YearAggregate|AllAggregate
      */
     public static function make(string $period)
     {
@@ -36,6 +37,10 @@ final class MinimumAggregateFactory
 
         if ($period === 'year') {
             return new YearAggregate();
+        }
+
+        if ($period === 'all') {
+            return new AllAggregate();
         }
 
         throw new InvalidArgumentException('Invalid aggregate period.');

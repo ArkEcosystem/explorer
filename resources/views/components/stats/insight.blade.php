@@ -48,8 +48,8 @@
                 <x-chart
                     class="w-full h-auto"
                     id="stats-insight-{{ $id }}"
-                    :data="$chart->values()"
-                    :labels="$chart->keys()"
+                    :data="$chart->get('datasets')"
+                    :labels="$chart->get('labels')"
                     :theme="$chartTheme"
                     width="200"
                     height="50"

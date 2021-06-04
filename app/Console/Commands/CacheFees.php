@@ -34,7 +34,7 @@ final class CacheFees extends Command
      */
     public function handle(FeeCache $cache)
     {
-        foreach (['day', 'week', 'month', 'quarter', 'year'] as $period) {
+        foreach (['day', 'week', 'month', 'quarter', 'year', 'all'] as $period) {
             $cache->setHistorical($period, HistoricalAggregateFactory::make($period)->aggregate());
 
             $cache->setMinimum($period, MinimumAggregateFactory::make($period)->aggregate());
