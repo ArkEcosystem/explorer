@@ -16,8 +16,6 @@ use App\Services\Search\Traits\ValidatesTerm;
 
 final class BlockSearch implements Search
 {
-    const INT4_MAXVALUE = 2147483647;
-
     use ValidatesTerm;
 
     public function search(array $parameters): Builder
@@ -36,7 +34,7 @@ final class BlockSearch implements Search
                 return $query->empty();
             }
 
-            if ($this->isOnlyNumbers($term) && $this->numericRangeIsInRange($term)) {
+            if ($this->couldBeHeightValue($term)) {
                 $query->orWhere('height', $term);
             }
 
@@ -57,16 +55,6 @@ final class BlockSearch implements Search
         return $query;
     }
 
-    /**
-     * Validates that the numnber is smaller that the max size for a type integer
-     * on pgsql. Searching for a bigger number will result in an SQL exception
-     *
-     * @return bool
-     */
-    private function numericRangeIsInRange(string $term): bool
-    {
-        return floatval($term) <= static::INT4_MAXVALUE;
-    }
 
     private function applyScopes(Builder $query, array $parameters): void
     {

@@ -3,15 +3,21 @@
 declare(strict_types=1);
 
 namespace App\Services\Search\Traits;
+
+use App\Enums\SQLEnum;
 use ArkEcosystem\Crypto\Identities\Address;
 use App\Facades\Network;
 
 trait ValidatesTerm
 {
+    protected function couldBeATransactionID(string $term): bool
+    {
+        return $this->is64CharsLongHexadecimalString($term);
+    }
+
     protected function couldBeABlockID(string $term): bool
     {
-        return $this->isOnlyNumbers($term)
-            || (strlen($term) === 64 && $this->isHexadecimalString($term));
+        return $this->is64CharsLongHexadecimalString($term);
     }
 
     protected function couldBeAnAddress(string $term): bool
@@ -39,6 +45,18 @@ trait ValidatesTerm
             && preg_match($regex, $term, $matches) > 0;
     }
 
+
+    protected function couldBeHeightValue(string $term): bool
+    {
+        return $this->isOnlyNumbers($term) && $this->numericTermIsInRange($term);
+    }
+
+    protected function is64CharsLongHexadecimalString(string $term): bool
+    {
+        return $this->isOnlyNumbers($term)
+            || (strlen($term) === 64 && $this->isHexadecimalString($term));
+    }
+
     protected function isOnlyNumbers(string $term): bool
     {
         return ctype_digit($term);
@@ -47,5 +65,16 @@ trait ValidatesTerm
     protected function isHexadecimalString(string $term): bool
     {
         return ctype_xdigit($term);
+    }
+
+    /**
+     * Validates that the numnber is smaller that the max size for a type integer
+     * on pgsql. Searching for a bigger number will result in an SQL exception
+     *
+     * @return bool
+     */
+    protected function numericTermIsInRange(string $term): bool
+    {
+        return floatval($term) <= SQLEnum::INT4_MAXVALUE;
     }
 }

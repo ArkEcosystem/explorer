@@ -23,6 +23,7 @@ use App\Services\BigNumber;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Builder;
 
 /**
  * @property string $id
@@ -132,5 +133,13 @@ final class Transaction extends Model
     public function getConnectionName()
     {
         return 'explorer';
+    }
+
+    /**
+     * Used to force a query with no results
+     */
+    public function scopeEmpty(Builder $query): Builder
+    {
+        return $query->whereNull('id');
     }
 }

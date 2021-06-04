@@ -25,22 +25,28 @@ final class TransactionSearch implements Search
 
         $this->applyScopes($query, $parameters);
 
-        if (! is_null(Arr::get($parameters, 'term'))) {
-            $query->whereLower('id', $parameters['term']);
+        $term = Arr::get($parameters, 'term');
+
+        if (! is_null($term)) {
+            if ($this->couldBeATransactionID($term)) {
+                $query->whereLowerEqual('id', $term);
+            } else {
+                $query->empty();
+            }
 
             // Consider the term to be a wallet
             try {
-                $query->orWhere(function ($query) use ($parameters): void {
-                    $wallet = Wallets::findByIdentifier($parameters['term']);
+                $query->orWhere(function ($query) use ($parameters, $term): void {
+                    $wallet = Wallets::findByIdentifier($term);
 
                     $query->where(function ($query) use ($parameters, $wallet): void {
-                        $query->whereLower('sender_public_key', $wallet->public_key);
+                        $query->whereLowerEqual('sender_public_key', $wallet->public_key);
 
                         $this->applyScopes($query, $parameters);
                     });
 
                     $query->orWhere(function ($query) use ($parameters, $wallet): void {
-                        $query->whereLower('recipient_id', $wallet->address);
+                        $query->whereLowerEqual('recipient_id', $wallet->address);
 
                         $this->applyScopes($query, $parameters);
                     });
@@ -55,14 +61,18 @@ final class TransactionSearch implements Search
                 // If this throws then the term was not a valid address, public key or username.
             }
 
-            // Consider the term to be a block
-            $query->orWhere(function ($query) use ($parameters): void {
-                $query->where(fn ($query): Builder => $query->whereLower('block_id', $parameters['term']));
+            if ($this->couldBeABlockID($term) || $this->couldBeHeightValue($term)) {
+                // Consider the term to be a block
+                $query->orWhere(function ($query) use ($term): void {
+                    if ($this->couldBeABlockID($term)) {
+                        $query->where(fn ($query): Builder => $query->whereLower('block_id', $term));
+                    }
 
-                if (is_numeric($parameters['term'])) {
-                    $query->orWhere(fn ($query): Builder => $query->where('block_height', $parameters['term']));
-                }
-            });
+                    if ($this->couldBeHeightValue($term)) {
+                        $query->orWhere(fn ($query): Builder => $query->where('block_height', $term));
+                    }
+                });
+            }
         }
 
         return $query;
