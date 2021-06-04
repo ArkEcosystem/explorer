@@ -613,20 +613,20 @@ it('should search for transactions by wallet with a username', function () {
         ->assertSee($tx3->id);
 });
 
-it('should search for transactions by block with an ID', function () {
-    Transaction::factory(10)->create();
+// it('should search for transactions by block with an ID', function () {
+//     Transaction::factory(10)->create();
 
-    $tx = Transaction::factory()->create([
-        'block_id' => 'blockid',
-    ]);
+//     $tx = Transaction::factory()->create([
+//         'block_id' => 'blockid',
+//     ]);
 
-    Livewire::test(SearchPage::class)
-        ->set('state.type', 'transaction')
-        ->set('state.transactionType', 'all')
-        ->set('state.term', 'blockid')
-        ->call('performSearch')
-        ->assertSee($tx->id);
-});
+//     Livewire::test(SearchPage::class)
+//         ->set('state.type', 'transaction')
+//         ->set('state.transactionType', 'all')
+//         ->set('state.term', 'blockid')
+//         ->call('performSearch')
+//         ->assertSee($tx->id);
+// });
 
 it('should search for transactions by block with a height', function () {
     Transaction::factory(10)->create();
