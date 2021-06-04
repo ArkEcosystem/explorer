@@ -20,10 +20,10 @@
                 </x-ark-tables.cell>
                 <x-ark-tables.cell wire:key="{{ $delegate->publicKey() }}-username-desktop">
                     <span class="hidden md:inline">
-                        <x-tables.rows.desktop.username :model="$delegate" />
+                        <x-tables.rows.desktop.username :model="$delegate->wallet()" />
                     </span>
                     <span class="md:hidden">
-                        <x-tables.rows.mobile.username-with-avatar :model="$delegate" />
+                        <x-tables.rows.mobile.username-with-avatar :model="$delegate->wallet()" />
                     </span>
                 </x-ark-tables.cell>
                 <x-ark-tables.cell responsive breakpoint="sm">
