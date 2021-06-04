@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Services\Transactions\Aggregates\Historical;
 
-
 use App\Services\Timestamp;
 use App\Services\Transactions\Aggregates\Concerns\HasQueries;
 use Carbon\Carbon;
