@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Services\Transactions\Aggregates\Fees\Maximum\AllAggregate;
 use App\Services\Transactions\Aggregates\Fees\Maximum\DayAggregate;
 use App\Services\Transactions\Aggregates\Fees\Maximum\MonthAggregate;
 use App\Services\Transactions\Aggregates\Fees\Maximum\QuarterAggregate;
@@ -17,6 +18,7 @@ it('should create an instance that matches the period', function (string $type, 
     ['quarter', QuarterAggregate::class],
     ['week', WeekAggregate::class],
     ['year', YearAggregate::class],
+    ['all', AllAggregate::class],
 ]);
 
 it('should throw if an unknown period is used', function () {

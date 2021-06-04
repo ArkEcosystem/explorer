@@ -36,3 +36,14 @@ it('should filter by transfer', function () {
         ->assertSee(trans('pages.statistics.insights.max-fee'))
         ->assertSee('0.1 DARK');
 });
+
+it('should filter by magistrate', function () {
+    Livewire::test(InsightCurrentAverageFee::class)
+        ->set('transactionType', StatsTransactionTypes::MAGISTRATE)
+        ->assertSee(trans('pages.statistics.insights.current-average-fee', ['type' => 'Magistrate']))
+        ->assertSee('20 DARK')
+        ->assertSee(trans('pages.statistics.insights.min-fee'))
+        ->assertSee('5 DARK')
+        ->assertSee(trans('pages.statistics.insights.max-fee'))
+        ->assertSee('50 DARK');
+});
