@@ -10,10 +10,10 @@ use App\Models\Composers\MultiPaymentAmountValueRangeComposer;
 use App\Models\Composers\TimestampRangeComposer;
 use App\Models\Composers\ValueRangeComposer;
 use App\Models\Transaction;
+use App\Services\Search\Traits\ValidatesTerm;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
 use Throwable;
-use App\Services\Search\Traits\ValidatesTerm;
 
 final class TransactionSearch implements Search
 {

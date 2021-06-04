@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Services\Search\Traits;
 
 use App\Enums\SQLEnum;
-use ArkEcosystem\Crypto\Identities\Address;
 use App\Facades\Network;
+use ArkEcosystem\Crypto\Identities\Address;
 
 trait ValidatesTerm
 {
@@ -32,7 +32,7 @@ trait ValidatesTerm
 
     /**
      * Check if the query can be a username
-     * Regex source: https://github.com/ArkEcosystem/core/blob/4e149f039b59da97d224db1c593059dbc8e0f385/packages/core-api/src/handlers/shared/schemas/username.ts
+     * Regex source: https://github.com/ArkEcosystem/core/blob/4e149f039b59da97d224db1c593059dbc8e0f385/packages/core-api/src/handlers/shared/schemas/username.ts.
      *
      * @return bool
      */
@@ -44,7 +44,6 @@ trait ValidatesTerm
             && strlen($term) <= 20
             && preg_match($regex, $term, $matches) > 0;
     }
-
 
     protected function couldBeHeightValue(string $term): bool
     {
@@ -69,7 +68,7 @@ trait ValidatesTerm
 
     /**
      * Validates that the numnber is smaller that the max size for a type integer
-     * on pgsql. Searching for a bigger number will result in an SQL exception
+     * on pgsql. Searching for a bigger number will result in an SQL exception.
      *
      * @return bool
      */

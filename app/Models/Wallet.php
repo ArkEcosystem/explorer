@@ -7,10 +7,10 @@ namespace App\Models;
 use App\Models\Casts\BigInteger;
 use App\Models\Concerns\SearchesCaseInsensitive;
 use App\Services\BigNumber;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Builder;
 
 /**
  * @property string $address
@@ -95,7 +95,7 @@ final class Wallet extends Model
     }
 
     /**
-     * Used to force a query with no results
+     * Used to force a query with no results.
      */
     public function scopeEmpty(Builder $query): Builder
     {

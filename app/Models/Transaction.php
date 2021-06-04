@@ -20,10 +20,10 @@ use App\Models\Scopes\TransferScope;
 use App\Models\Scopes\VoteCombinationScope;
 use App\Models\Scopes\VoteScope;
 use App\Services\BigNumber;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Builder;
 
 /**
  * @property string $id
@@ -136,7 +136,7 @@ final class Transaction extends Model
     }
 
     /**
-     * Used to force a query with no results
+     * Used to force a query with no results.
      */
     public function scopeEmpty(Builder $query): Builder
     {

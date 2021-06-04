@@ -61,9 +61,9 @@ final class WalletRepository implements Contract
 
         if ($this->couldBeAnAddress($identifier)) {
             $query->whereLowerEqual('address', $identifier);
-        } else if ($this->couldBeAPublicKey($identifier)) {
+        } elseif ($this->couldBeAPublicKey($identifier)) {
             $query->orWhereLowerEqual('public_key', $identifier);
-        } else if ($this->couldBeAUsername($identifier)) {
+        } elseif ($this->couldBeAUsername($identifier)) {
             $username = substr(DB::getPdo()->quote($identifier), 1, -1);
             $query->orWhereRaw('lower(attributes::text)::jsonb @> lower(\'{"delegate":{"username":"'.$username.'"}}\')::jsonb');
         } else {

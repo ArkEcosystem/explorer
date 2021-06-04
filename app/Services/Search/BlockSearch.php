@@ -9,10 +9,10 @@ use App\Facades\Wallets;
 use App\Models\Block;
 use App\Models\Composers\TimestampRangeComposer;
 use App\Models\Composers\ValueRangeComposer;
+use App\Services\Search\Traits\ValidatesTerm;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
 use Throwable;
-use App\Services\Search\Traits\ValidatesTerm;
 
 final class BlockSearch implements Search
 {
@@ -54,7 +54,6 @@ final class BlockSearch implements Search
 
         return $query;
     }
-
 
     private function applyScopes(Builder $query, array $parameters): void
     {

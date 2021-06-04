@@ -7,10 +7,10 @@ namespace App\Services\Search;
 use App\Contracts\Search;
 use App\Models\Composers\ValueRangeComposer;
 use App\Models\Wallet;
+use App\Services\Search\Traits\ValidatesTerm;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
-use App\Services\Search\Traits\ValidatesTerm;
 
 final class WalletSearch implements Search
 {
@@ -27,9 +27,9 @@ final class WalletSearch implements Search
         if (! is_null($term)) {
             if ($this->couldBeAnAddress($term)) {
                 $query->whereLowerEqual('address', $term);
-            } else if ($this->couldBeAPublicKey($term)) {
+            } elseif ($this->couldBeAPublicKey($term)) {
                 $query->whereLowerEqual('public_key', $term);
-            } else if ($this->couldBeAUsername($term)) {
+            } elseif ($this->couldBeAUsername($term)) {
                 $username = substr(DB::getPdo()->quote($term), 1, -1);
                 $query->whereRaw('lower(attributes::text)::jsonb @> lower(\'{"delegate":{"username":"'.$username.'"}}\')::jsonb');
             } else {
@@ -50,6 +50,4 @@ final class WalletSearch implements Search
 
         return $query;
     }
-
-
 }
