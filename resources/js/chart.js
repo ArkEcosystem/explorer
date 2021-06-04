@@ -36,6 +36,7 @@ const CustomChart = (
 
         updateChart() {
             this.chart.datasets = this.loadData();
+            this.chart.labels = labels;
             this.chart.update();
         },
 
@@ -135,7 +136,7 @@ const CustomChart = (
                                 ...fontConfig,
                                 display: grid === "true",
                                 suggestedMin: 0,
-                                callback: function (value, index, values) {
+                                callback: function (value, index, data) {
                                     return "$" + parseFloat(value).toFixed(2);
                                 },
                             },

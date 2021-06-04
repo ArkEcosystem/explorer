@@ -11,6 +11,7 @@ use App\Services\CryptoCompare;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 
 final class CachePrices extends Command
 {
@@ -28,35 +29,60 @@ final class CachePrices extends Command
      */
     protected $description = 'Cache prices and exchange rates.';
 
-    public function handle(CryptoCompareCache $crypto, PriceChartCache $chart): void
+    public function handle(CryptoCompareCache $crypto, PriceChartCache $cache): void
     {
         if (! Network::canBeExchanged()) {
             return;
         }
 
-        foreach (array_values(config('currencies')) as $currency) {
+        collect(config('currencies'))->values()->each(function ($currency) use ($crypto, $cache) {
             $currency = $currency['currency'];
-            $prices   = (new CryptoCompare())->historical(Network::currency(), $currency);
+            $prices   = CryptoCompare::historical(Network::currency(), $currency);
 
             $crypto->setPrices($currency, $prices);
 
-            $chart->setDay($currency, $this->groupByDate($prices->take(1), 'H:s'));
+            collect(['day', 'week', 'month', 'quarter', 'year', 'all'])->each(function ($period) use ($currency, $cache, $prices) {
+                $method = sprintf('get%s', Str::title($period));
 
-            $chart->setWeek($currency, $this->groupByDate($prices->take(7), 'd.m'));
-
-            $chart->setMonth($currency, $this->groupByDate($prices->take(30), 'd.m'));
-
-            $chart->setQuarter($currency, $this->groupByDate($prices->take(120), 'W'));
-
-            $chart->setYear($currency, $this->groupByDate($prices->take(365), 'M'));
-        }
+                $cache->setHistorical($currency, $period, $this->{$method}($prices));
+            });
+        });
     }
 
-    private function groupByDate(Collection $datasets, string $dateFormat): Collection
+    private function getDay(Collection $datasets): Collection
+    {
+        return $this->groupByDate($datasets->take(1), 'H:s');
+    }
+
+    private function getWeek(Collection $datasets): Collection
+    {
+        return $this->groupByDate($datasets->take(7), 'd.m');
+    }
+
+    private function getMonth(Collection $datasets): Collection
+    {
+        return $this->groupByDate($datasets->take(30), 'd.m');
+    }
+
+    private function getQuarter(Collection $datasets): Collection
+    {
+        return $this->groupByDate($datasets->take(120), 'd.m');
+    }
+
+    private function getYear(Collection $datasets): Collection
+    {
+        return $this->groupByDate($datasets->take(365), 'd.m');
+    }
+
+    private function getAll(Collection $datasets): Collection
+    {
+        return $this->groupByDate($datasets, 'Y');
+    }
+
+    private function groupByDate(Collection $datasets, string $format): Collection
     {
         return $datasets
-            ->groupBy(fn ($_, $key) => Carbon::parse($key)->format($dateFormat))
-            ->mapWithKeys(fn ($values, $key) => [$key => $values->first()])
-            ->ksort();
+            ->groupBy(fn ($_, $key) => Carbon::parse($key)->format($format))
+            ->mapWithKeys(fn ($values, $key) => [$key => $values->first()]);
     }
 }

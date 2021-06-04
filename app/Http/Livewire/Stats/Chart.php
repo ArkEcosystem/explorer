@@ -7,10 +7,10 @@ namespace App\Http\Livewire\Stats;
 use App\Enums\CryptoCurrencies;
 use App\Facades\Network;
 use App\Http\Livewire\Concerns\AvailablePeriods;
+use App\Services\Cache\PriceChartCache;
 use App\Services\CryptoCompare;
 use App\Services\NumberFormatter as ServiceNumberFormatter;
 use App\Services\Settings;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\View\View;
 use Konceiver\BetterNumberFormatter\BetterNumberFormatter;
@@ -43,8 +43,7 @@ final class Chart extends Component
             'marketCapValue'      => $this->marketCap(),
             'minPriceValue'       => $this->minPrice(),
             'maxPriceValue'       => $this->maxPrice(),
-            'chartDatasets'       => $this->chart($this->period)->get('datasets')->values(),
-            'chartLabels'         => $this->chart($this->period)->get('labels')->values(),
+            'chart'               => $this->chart($this->period),
             'chartTheme'          => $this->chartTheme(),
             'options'             => $this->availablePeriods(),
             'refreshInterval'     => $this->refreshInterval,
@@ -58,16 +57,12 @@ final class Chart extends Component
 
     private function mainValueBTC(): string
     {
-        $value = CryptoCompare::price(Network::currency(), CryptoCurrencies::BTC);
-
-        return ServiceNumberFormatter::currency($value, CryptoCurrencies::BTC);
+        return ServiceNumberFormatter::currency($this->getPrice(CryptoCurrencies::BTC), CryptoCurrencies::BTC);
     }
 
     private function mainValueFiat(): string
     {
-        $value = CryptoCompare::price(Network::currency(), Settings::currency());
-
-        return BetterNumberFormatter::new()->formatWithCurrency($value);
+        return BetterNumberFormatter::new()->formatWithCurrency($this->getPrice(Settings::currency()));
     }
 
     private function mainValuePercentage(): float
@@ -101,6 +96,11 @@ final class Chart extends Component
         return BetterNumberFormatter::new()->formatWithCurrency($value);
     }
 
+    private function getPrice(string $currency): float
+    {
+        return CryptoCompare::price(Network::currency(), $currency);
+    }
+
     private function getPriceRange(): Collection
     {
         return $this->getHistoricalHourly(CryptoCurrencies::BTC);
@@ -127,20 +127,7 @@ final class Chart extends Component
 
     private function chart(string $period): Collection
     {
-        $values = CryptoCompare::historical(Network::currency(), Settings::currency());
-
-        if ($period !== 'all') {
-            $from = $this->getRangeFromPeriodWithoutArkEpoch($period);
-
-            $values = $values->filter(fn ($value, $key) => Carbon::parse($key)->greaterThanOrEqualTo($from));
-        }
-
-        return collect([
-            'labels'   => $values->keys(),
-            'datasets' => collect([
-                ['type' => 'line', 'name' => Settings::currency(), 'data' => $values->values()],
-            ]),
-        ]);
+        return collect((new PriceChartCache())->getHistorical(Settings::currency(), $period));
     }
 
     private function chartTheme(): Collection

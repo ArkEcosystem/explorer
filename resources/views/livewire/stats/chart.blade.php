@@ -58,8 +58,8 @@
                     <x-chart
                         class="w-full h-auto"
                         id="stats-chart-mobile"
-                        :data="$chartDatasets"
-                        :labels="$chartLabels"
+                        :data="collect($chart->get('datasets'))->toJson()"
+                        :labels="collect($chart->get('labels'))->toJson()"
                         :theme="$chartTheme"
                         height="500"
                     />
@@ -69,8 +69,8 @@
                     <x-chart
                         class="w-full h-auto"
                         id="stats-chart"
-                        :data="$chartDatasets"
-                        :labels="$chartLabels"
+                        :data="collect($chart->get('datasets'))->toJson()"
+                        :labels="collect($chart->get('labels'))->toJson()"
                         :theme="$chartTheme"
                         height="500"
                         grid="true"
