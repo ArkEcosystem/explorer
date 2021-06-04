@@ -13,9 +13,12 @@ use App\Models\Transaction;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
 use Throwable;
+use App\Services\Search\Traits\ValidatesTerm;
 
 final class TransactionSearch implements Search
 {
+    use ValidatesTerm;
+
     public function search(array $parameters): Builder
     {
         $query = Transaction::query();

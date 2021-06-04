@@ -10,6 +10,7 @@ use App\Services\BigNumber;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Builder;
 
 /**
  * @property string $address
@@ -91,5 +92,13 @@ final class Wallet extends Model
     public function getConnectionName()
     {
         return 'explorer';
+    }
+
+    /**
+     * Used to force a query with no results
+     */
+    public function scopeEmpty(Builder $query): Builder
+    {
+        return $query->whereNull('address');
     }
 }
