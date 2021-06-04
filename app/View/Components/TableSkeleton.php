@@ -15,10 +15,10 @@ final class TableSkeleton extends Component
 
     public string $class;
 
-    public function __construct(private string $device, array $items, string $class = 'hidden md:block')
+    public function __construct(private string $device, array $items, ?string $class)
     {
         $this->items   = collect($items);
-        $this->class   = $class;
+        $this->class   = $class ?? 'hidden md:block';
     }
 
     public function render(): View
