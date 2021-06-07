@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
-use App\Enums\StatsTransactionTypes;
 use App\Services\Cache\FeeCache;
 use App\Services\Transactions\Aggregates\Fees\AverageAggregateFactory;
 use App\Services\Transactions\Aggregates\Fees\HistoricalAggregateFactory;
