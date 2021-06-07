@@ -8,6 +8,7 @@
     'grid' => false,
     'tooltips' => false,
     'theme' => collect(['name' => 'grey', 'mode' => 'light']),
+    'currency' => \App\Services\Settings::currency(),
 ])
 
 <div
@@ -18,7 +19,8 @@
         '{{ $grid }}',
         '{{ $tooltips }}',
         {{ $theme }},
-        '{{ time() }}'
+        '{{ time() }}',
+        '{{ $currency }}'
     )"
     x-init="init"
     @toggle-dark-mode.window="updateChart"
