@@ -13,7 +13,7 @@ const CustomChart = (
     return {
         time: time,
         chart: null,
-        currency: currency || 'USD',
+        currency: currency || "USD",
 
         getCanvas() {
             return this.$refs[id];
@@ -43,7 +43,10 @@ const CustomChart = (
         },
 
         getCurrencyValue(value) {
-            return new Intl.NumberFormat('en-US', { style: 'currency', currency: this.currency }).format(value);
+            return new Intl.NumberFormat("en-US", {
+                style: "currency",
+                currency: this.currency,
+            }).format(value);
         },
 
         resizeChart() {
@@ -101,7 +104,8 @@ const CustomChart = (
                     pointRadius: graphic.pointRadius,
                     pointHoverRadius: graphic.pointHoverRadius,
                     pointHoverBorderWidth: graphic.pointHoverBorderWidth,
-                    pointHoverBackgroundColor: graphic.pointHoverBackgroundColor,
+                    pointHoverBackgroundColor:
+                        graphic.pointHoverBackgroundColor,
                     pointHitRadius: graphic.pointHitRadius,
                     pointBackgroundColor: graphic.pointBackgroundColor,
                 });
@@ -127,7 +131,8 @@ const CustomChart = (
                         padding: 15,
                         display: grid === "true" && key === 0,
                         suggestedMax: range.max,
-                        callback: (value, index, data) => this.getCurrencyValue(value),
+                        callback: (value, index, data) =>
+                            this.getCurrencyValue(value),
                     },
                     gridLines: {
                         display: grid === "true" && key === 0,
@@ -167,7 +172,7 @@ const CustomChart = (
                 legend: { display: false },
                 onResize: () => this.resizeChart(),
                 onHover: (e) => {
-                    console.log('hover', e)
+                    console.log("hover", e);
                 },
                 layout: {
                     padding: {
@@ -190,7 +195,8 @@ const CustomChart = (
                     axis: "x",
                     callbacks: {
                         title: (items, data) => {},
-                        label: (context) => this.getCurrencyValue(context.value)
+                        label: (context) =>
+                            this.getCurrencyValue(context.value),
                     },
                     backgroundColor: "rgba(0, 0, 0, 0.8)",
                     bodyColor: "#ffffff",

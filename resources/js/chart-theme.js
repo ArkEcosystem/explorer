@@ -7,7 +7,7 @@ function themes() {
         pointHoverBorderWidth: 2,
         pointHoverBackgroundColor: "rgba(204,230,211,0.5)",
         pointHitRadius: 1,
-        pointBackgroundColor: "rgba(255,255,255,1)"
+        pointBackgroundColor: "rgba(255,255,255,1)",
     };
 
     const colors = {
@@ -181,6 +181,6 @@ export function getInfoFromThemeName(name, mode) {
         pointHoverBorderWidth: theme.pointHoverBorderWidth,
         pointHoverBackgroundColor: theme.pointHoverBackgroundColor,
         pointHitRadius: theme.pointHitRadius,
-        pointBackgroundColor: theme.pointBackgroundColor
+        pointBackgroundColor: theme.pointBackgroundColor,
     };
 }
