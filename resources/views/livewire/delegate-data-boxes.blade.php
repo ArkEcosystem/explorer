@@ -4,8 +4,8 @@
    </div>
 @else
     <div id="statistics-list" class="w-full" wire:poll.{{ Network::blockTime() }}s="pollStatistics" wire:key="poll_statistics_real">
-        <div class="flex space-x-4 w-full md:flex-col xl:flex-row md:space-x-0 xl:space-x-4 md:space-y-4 xl:space-y-0">
-            <div class="flex flex-row py-3 px-6 bg-white rounded-xl dark:bg-theme-secondary-900">
+        <div class="flex w-full space-x-4 md:flex-col xl:flex-row md:space-x-0 xl:space-x-4 md:space-y-4 xl:space-y-0">
+            <div class="flex flex-row px-6 py-3 bg-white rounded-xl dark:bg-theme-secondary-900">
                 <div class="flex w-full lg:w-1/2 xl:w-full">
                     <x-general.header-entry
                         :title="trans('pages.delegates.statistics.forging')"
@@ -61,8 +61,8 @@
                 </div>
             </div>
 
-            <div class="flex flex-row space-x-4 w-full">
-                <div class="flex flex-grow py-3 px-6 bg-white rounded-xl dark:bg-theme-secondary-900">
+            <div class="flex flex-row w-full space-x-4">
+                <div class="flex flex-grow px-6 py-3 bg-white rounded-xl dark:bg-theme-secondary-900">
                     <x-general.header-entry
                         :title="trans('pages.delegates.statistics.block_count')"
                         :text="$statistics['blockCount']"
@@ -78,31 +78,54 @@
                     </x-general.header-entry>
                 </div>
 
-                <div class="flex flex-grow py-3 px-6 bg-white rounded-xl dark:bg-theme-secondary-900">
-                    <x-general.header-entry
-                        :title="trans('pages.delegates.statistics.next_slot')"
-                        :text="$statistics['nextDelegate']->username()"
-                        :url="route('wallet', $statistics['nextDelegate']->address())"
-                        without-border
-                    >
-                        <x-slot name="icon">
-                            <div class="flex items-center md:mr-2">
-                                <div class="hidden lg:flex">
-                                    <div
-                                        class="-mr-2 circled-icon text-theme-secondary-900 dark:text-theme-secondary-600 dark:border-theme-secondary-600">
-                                        <x-ark-icon name="app-forged" />
+
+                <div class="flex flex-grow px-6 py-3 bg-white rounded-xl dark:bg-theme-secondary-900">
+                    @if($statistics['nextDelegate'])
+                        <x-general.header-entry
+                            :title="trans('pages.delegates.statistics.next_slot')"
+                            :text="$statistics['nextDelegate']->username()"
+                            :url="route('wallet', $statistics['nextDelegate']->address())"
+                            without-border
+                        >
+                            <x-slot name="icon">
+                                <div class="flex items-center md:mr-2">
+                                    <div class="hidden lg:flex">
+                                        <div
+                                            class="-mr-2 circled-icon text-theme-secondary-900 dark:text-theme-secondary-600 dark:border-theme-secondary-600">
+                                            <x-ark-icon name="app-forged" />
+                                        </div>
                                     </div>
+
+                                    <div class="hidden border-4 border-white rounded-full md:flex text-theme-secondary-900 dark:text-theme-secondary-600 dark:border-theme-secondary-900">
+                                        <div
+                                            class="bg-white rounded-full circled-icon dark:bg-theme-secondary-900">
+                                            <x-ark-icon name="app-transactions.delegate-registration" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </x-slot>
+                        </x-general.header-entry>
+                    @else
+                        <div class="flex space-x-4">
+                            <div class="flex items-center">
+                                <div class="flex animate-pulse">
+                                    <div class="-mr-2 h-11 rounded-xl circled-icon border-theme-secondary-300 dark:border-theme-secondary-800 bg-theme-secondary-300 dark:bg-theme-secondary-800"></div>
                                 </div>
 
-                                <div class="hidden rounded-full border-4 border-white md:flex text-theme-secondary-900 dark:text-theme-secondary-600 dark:border-theme-secondary-900">
-                                    <div
-                                        class="bg-white rounded-full circled-icon dark:bg-theme-secondary-900">
-                                        <x-ark-icon name="app-transactions.delegate-registration" />
-                                    </div>
+                                <div class="flex border-4 border-white rounded-full animate-pulse dark:border-theme-secondary-900">
+                                    <div class="h-11 rounded-xl circled-icon border-theme-secondary-300 dark:border-theme-secondary-800 bg-theme-secondary-300 dark:bg-theme-secondary-800"></div>
                                 </div>
                             </div>
-                        </x-slot>
-                    </x-general.header-entry>
+
+                            <div class="flex flex-col justify-center p-1 space-y-2">
+                                <div class="flex items-center">
+                                    <div class="h-4 rounded-md w-15 loading-state"></div>
+                                </div>
+
+                                <span class="h-5 rounded-md w-25 loading-state"></span>
+                            </div>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
