@@ -61,7 +61,7 @@
                         :data="collect($chart->get('datasets'))->toJson()"
                         :labels="collect($chart->get('labels'))->toJson()"
                         :theme="$chartTheme"
-                        height="500"
+                        height="50"
                     />
                 </div>
 

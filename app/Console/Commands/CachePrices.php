@@ -76,7 +76,7 @@ final class CachePrices extends Command
 
     private function getAll(Collection $datasets): Collection
     {
-        return $this->groupByDate($datasets, 'Y');
+        return $this->groupByDate($datasets, 'd.m');
     }
 
     private function groupByDate(Collection $datasets, string $format): Collection

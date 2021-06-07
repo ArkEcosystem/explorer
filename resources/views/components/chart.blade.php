@@ -18,7 +18,6 @@
         '{{ $grid }}',
         '{{ $tooltips }}',
         {{ $theme }},
-        '{{ $height }}',
         '{{ time() }}'
     )"
     x-init="init"

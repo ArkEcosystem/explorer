@@ -7,7 +7,6 @@ const CustomChart = (
     grid,
     tooltips,
     theme,
-    height,
     time
 ) => {
     return {
@@ -30,6 +29,17 @@ const CustomChart = (
             };
         },
 
+        getRangeFromValues(values, margin = 0) {
+            const max = Math.max.apply(Math, values);
+            const min = Math.min.apply(Math, values);
+            margin = max * margin;
+
+            return {
+                min: min - margin,
+                max: max + margin,
+            };
+        },
+
         resizeChart() {
             this.updateChart();
         },
@@ -43,7 +53,12 @@ const CustomChart = (
         loadData() {
             const datasets = [];
 
-            if (!Array.isArray(values)) {
+            if (values.length === 0) {
+                values = [0, 0];
+                labels = [0, 1];
+            }
+
+            if (Array.isArray(values) && !values[0].hasOwnProperty("data")) {
                 values = [values];
             }
 
@@ -83,6 +98,37 @@ const CustomChart = (
             return datasets;
         },
 
+        loadYAxes() {
+            const axes = [];
+
+            const fontConfig = this.getFontConfig();
+
+            values.forEach((value, key) => {
+                let range = this.getRangeFromValues(value, 0.01);
+
+                axes.push({
+                    type: "linear",
+                    position: "right",
+                    stacked: true,
+                    ticks: {
+                        padding: 15,
+                        ...fontConfig,
+                        display: grid === "true" && key === 0,
+                        suggestedMax: range.max,
+                        callback: function (value, index, data) {
+                            return "$" + parseFloat(value).toFixed(2);
+                        },
+                    },
+                    gridLines: {
+                        display: grid === "true" && key === 0,
+                        drawBorder: false,
+                    },
+                });
+            });
+
+            return axes;
+        },
+
         init() {
             if (this.chart) {
                 this.chart.destroy();
@@ -93,9 +139,19 @@ const CustomChart = (
 
             const fontConfig = this.getFontConfig();
 
+            const data = {
+                type: "line",
+                labels: labels,
+                datasets: this.loadData(),
+            };
+
+            const yAxes = this.loadYAxes();
+
             const options = {
                 parsing: false,
                 normalized: true,
+                responsive: true,
+                maintainAspectRatio: false,
                 showScale: grid === "true",
                 animation: { duration: 500, easing: "linear" },
                 legend: { display: false },
@@ -114,7 +170,8 @@ const CustomChart = (
                 scales: {
                     xAxes: [
                         {
-                            type: "time",
+                            type: "category",
+                            labels: labels,
                             ticks: {
                                 display: grid === "true",
                                 padding: 10,
@@ -126,33 +183,8 @@ const CustomChart = (
                             },
                         },
                     ],
-                    yAxes: [
-                        {
-                            type: "linear",
-                            position: "right",
-                            stacked: true,
-                            ticks: {
-                                padding: 15,
-                                ...fontConfig,
-                                display: grid === "true",
-                                suggestedMin: 0,
-                                callback: function (value, index, data) {
-                                    return "$" + parseFloat(value).toFixed(2);
-                                },
-                            },
-                            gridLines: {
-                                display: grid === "true",
-                                drawBorder: false,
-                            },
-                        },
-                    ],
+                    yAxes: yAxes,
                 },
-            };
-
-            const data = {
-                type: "line",
-                labels: labels,
-                datasets: this.loadData(),
             };
 
             this.chart = new Chart(this.getCanvasContext(), { data, options });
