@@ -84,7 +84,6 @@ const CustomChart = (
                     label: value.name || "",
                     data: value.data || value,
                     type: value.type || "line",
-                    fill: false,
                     backgroundColor:
                         value.type === "bar"
                             ? graphic.borderColor
