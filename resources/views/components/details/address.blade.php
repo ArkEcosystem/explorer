@@ -4,8 +4,8 @@
             <span class="text-sm font-semibold text-theme-secondary-500 dark:text-theme-secondary-700">
                 {{ $title }}
             </span>
-            @if ($icon ?? false)
-                <x-ark-icon :name="$icon" size="{{ $iconSize ?? 'sm' }}" class="{{ $iconClass ?? '' }}" />
+            @if ($titleIcon ?? false)
+                <x-ark-icon :name="$titleIcon" size="sm" class="ml-2 text-theme-secondary-500 dark:text-theme-secondary-700" />
             @endif
         </div>
         <span class="font-semibold text-theme-secondary-700">
