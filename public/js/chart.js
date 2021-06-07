@@ -1,6 +1,15 @@
 import { getInfoFromThemeName, makeGradient } from "./chart-theme";
 
-const CustomChart = (id, values, labels, grid, tooltips, theme, time, currency) => {
+const CustomChart = (
+    id,
+    values,
+    labels,
+    grid,
+    tooltips,
+    theme,
+    time,
+    currency
+) => {
     return {
         time: time,
         chart: null,
