@@ -7,11 +7,13 @@ const CustomChart = (
     grid,
     tooltips,
     theme,
-    time
+    time,
+    currency
 ) => {
     return {
         time: time,
         chart: null,
+        currency: currency || 'USD',
 
         getCanvas() {
             return this.$refs[id];
@@ -38,6 +40,10 @@ const CustomChart = (
                 min: min - margin,
                 max: max + margin,
             };
+        },
+
+        getCurrencyValue(value) {
+            return new Intl.NumberFormat('en-US', { style: 'currency', currency: this.currency }).format(value);
         },
 
         resizeChart() {
@@ -78,6 +84,7 @@ const CustomChart = (
                     label: value.name || "",
                     data: value.data || value,
                     type: value.type || "line",
+                    fill: false,
                     backgroundColor:
                         value.type === "bar"
                             ? graphic.borderColor
@@ -92,6 +99,11 @@ const CustomChart = (
                             : graphic.borderWidth,
                     lineTension: graphic.lineTension,
                     pointRadius: graphic.pointRadius,
+                    pointHoverRadius: graphic.pointHoverRadius,
+                    pointHoverBorderWidth: graphic.pointHoverBorderWidth,
+                    pointHoverBackgroundColor: graphic.pointHoverBackgroundColor,
+                    pointHitRadius: graphic.pointHitRadius,
+                    pointBackgroundColor: graphic.pointBackgroundColor,
                 });
             });
 
@@ -111,13 +123,11 @@ const CustomChart = (
                     position: "right",
                     stacked: true,
                     ticks: {
-                        padding: 15,
                         ...fontConfig,
+                        padding: 15,
                         display: grid === "true" && key === 0,
                         suggestedMax: range.max,
-                        callback: function (value, index, data) {
-                            return "$" + parseFloat(value).toFixed(2);
-                        },
+                        callback: (value, index, data) => this.getCurrencyValue(value),
                     },
                     gridLines: {
                         display: grid === "true" && key === 0,
@@ -153,19 +163,40 @@ const CustomChart = (
                 responsive: true,
                 maintainAspectRatio: false,
                 showScale: grid === "true",
-                animation: { duration: 500, easing: "linear" },
+                animation: { duration: 100, easing: "easeInOutQuad" },
                 legend: { display: false },
                 onResize: () => this.resizeChart(),
-                intersection: {
-                    axis: "xy",
-                    mode: "index",
+                onHover: (e) => {
+                    console.log('hover', e)
+                },
+                layout: {
+                    padding: {
+                        left: 0,
+                        right: 0,
+                        top: 0,
+                        bottom: 0,
+                    },
+                },
+                interaction: {
+                    axis: "x",
+                    mode: "nearest",
                     intersect: false,
                 },
                 tooltips: {
                     enabled: tooltips === "true",
-                    padding: 10,
                     displayColors: false,
+                    mode: "nearest",
                     intersect: false,
+                    axis: "x",
+                    callbacks: {
+                        title: (items, data) => {},
+                        label: (context) => this.getCurrencyValue(context.value)
+                    },
+                    backgroundColor: "rgba(0, 0, 0, 0.8)",
+                    bodyColor: "#ffffff",
+                    bodyFont: fontConfig,
+                    padding: 12,
+                    position: "nearest",
                 },
                 scales: {
                     xAxes: [
@@ -174,6 +205,7 @@ const CustomChart = (
                             labels: labels,
                             ticks: {
                                 display: grid === "true",
+                                includeBounds: true,
                                 padding: 10,
                                 ...fontConfig,
                             },

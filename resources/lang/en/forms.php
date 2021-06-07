@@ -67,12 +67,14 @@ return [
     ],
 
     'statistics' => [
-        'day'      => 'Day',
-        'week'     => 'Week',
-        'month'    => 'Month',
-        'quarter'  => 'Quarter',
-        'year'     => 'Year',
-        'all'      => 'All',
+        'periods' => [
+            'day'     => 'Day',
+            'week'    => 'Week',
+            'month'   => 'Month',
+            'quarter' => 'Quarter',
+            'year'    => 'Year',
+            'all'     => 'All',
+        ],
     ],
 
 ];
