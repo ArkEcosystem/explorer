@@ -45,11 +45,11 @@ final class CacheFees extends Command
         }
 
         foreach (['transfer', 'secondSignature',  'delegateRegistration',  'vote',  'multiSignature',  'ipfs',  'multiPayment',  'delegateResignation',  'timelock',  'timelockClaim',  'timelockRefund',  'magistrate'] as $type) {
-            $cache->setMinimum('all', MinimumAggregateFactory::make('all', $type)->aggregate(), $type);
+            $cache->setMinimum($type, MinimumAggregateFactory::make('all', $type)->aggregate());
 
-            $cache->setAverage('all', AverageAggregateFactory::make('all', $type)->aggregate(), $type);
+            $cache->setAverage($type, AverageAggregateFactory::make('all', $type)->aggregate());
 
-            $cache->setMaximum('all', MaximumAggregateFactory::make('all', $type)->aggregate(), $type);
+            $cache->setMaximum($type, MaximumAggregateFactory::make('all', $type)->aggregate());
         }
     }
 }
