@@ -2,7 +2,7 @@
     <div>
         @lang('labels.wallet_type')
 
-        <div class="flex flex-col space-y-4">
+        <div class="flex flex-col items-end space-y-4">
             @if ($model->isKnown())
                 <div>
                     <div class="flex items-center space-x-4">
