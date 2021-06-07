@@ -36,6 +36,6 @@ final class CacheNodeFees extends Command
 
         $endpoint = Config::get(sprintf('explorer.node-fees.%s.endpoint', $network));
 
-        $cache->setAggregates(collect(Http::get($endpoint, ['day' => 20])->json()));
+        $cache->setAggregates(collect(Http::get($endpoint)->json()));
     }
 }
