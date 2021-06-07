@@ -1,4 +1,4 @@
-@if ($model->isKnown() || $model->isOwnedByExchange())
+@if ($model->hasSpecialType())
     <div>
         @lang('labels.wallet_type')
 
