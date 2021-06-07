@@ -2,48 +2,81 @@
 
 declare(strict_types=1);
 
+use App\Enums\CoreTransactionTypeEnum;
 use App\Enums\StatsTransactionTypes;
+use App\Enums\TransactionTypeGroupEnum;
 use App\Http\Livewire\Stats\InsightCurrentAverageFee;
+use App\Models\Transaction;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\Http;
 use Livewire\Livewire;
+use function Tests\configureExplorerDatabase;
 
-beforeEach(function () {
-    Http::fake([
-        'dwallets.ark.io/api/node/fees*' => Http::response(json_decode(file_get_contents(base_path('tests/fixtures/fees.json')), true), 200),
-    ]);
-
-    Artisan::call('explorer:cache-node-fees');
-});
+beforeEach(fn () => configureExplorerDatabase());
 
 it('should render the component', function () {
-    Livewire::test(InsightCurrentAverageFee::class)
-        ->assertSee(trans('pages.statistics.insights.current-average-fee', ['type' => 'All']))
-        ->assertSee('9.31 DARK')
-        ->assertSee(trans('pages.statistics.insights.min-fee'))
-        ->assertSee('0 DARK')
-        ->assertSee(trans('pages.statistics.insights.max-fee'))
-        ->assertSee('50 DARK');
-});
+    Transaction::factory(5)
+        ->state(new Sequence(
+            ['fee' => 1 * 1e8, 'type_group' => TransactionTypeGroupEnum::CORE, 'type' => CoreTransactionTypeEnum::TRANSFER],
+            ['fee' => 25 * 1e8, 'type_group' => TransactionTypeGroupEnum::CORE, 'type' => CoreTransactionTypeEnum::TRANSFER],
+            ['fee' => 50 * 1e8, 'type_group' => TransactionTypeGroupEnum::CORE, 'type' => CoreTransactionTypeEnum::TRANSFER],
+            ['fee' => 75 * 1e8, 'type_group' => TransactionTypeGroupEnum::CORE, 'type' => CoreTransactionTypeEnum::TRANSFER],
+            ['fee' => 100 * 1e8, 'type_group' => TransactionTypeGroupEnum::CORE, 'type' => CoreTransactionTypeEnum::TRANSFER],
+        ))
+        ->create();
 
-it('should filter by transfer', function () {
+    Transaction::factory(5)
+        ->state(new Sequence(
+            ['fee' => 2 * 1e8, 'type_group' => TransactionTypeGroupEnum::CORE, 'type' => CoreTransactionTypeEnum::MULTI_SIGNATURE],
+            ['fee' => 24 * 1e8, 'type_group' => TransactionTypeGroupEnum::CORE, 'type' => CoreTransactionTypeEnum::MULTI_SIGNATURE],
+            ['fee' => 50 * 1e8, 'type_group' => TransactionTypeGroupEnum::CORE, 'type' => CoreTransactionTypeEnum::MULTI_SIGNATURE],
+            ['fee' => 71 * 1e8, 'type_group' => TransactionTypeGroupEnum::CORE, 'type' => CoreTransactionTypeEnum::MULTI_SIGNATURE],
+            ['fee' => 99 * 1e8, 'type_group' => TransactionTypeGroupEnum::CORE, 'type' => CoreTransactionTypeEnum::MULTI_SIGNATURE],
+        ))
+        ->create();
+
+    Artisan::call('explorer:cache-fees');
+
     Livewire::test(InsightCurrentAverageFee::class)
         ->set('transactionType', StatsTransactionTypes::TRANSFER)
         ->assertSee(trans('pages.statistics.insights.current-average-fee', ['type' => 'Transfer']))
-        ->assertSee('0.07 DARK')
+        ->assertSee('50.2 DARK')
         ->assertSee(trans('pages.statistics.insights.min-fee'))
-        ->assertSee('0.01 DARK')
+        ->assertSee('1 DARK')
         ->assertSee(trans('pages.statistics.insights.max-fee'))
-        ->assertSee('0.1 DARK');
+        ->assertSee('100 DARK');
 });
 
-it('should filter by magistrate', function () {
+it('should filter by transfer', function () {
+    Transaction::factory(5)
+        ->state(new Sequence(
+            ['fee' => 1 * 1e8, 'type_group' => TransactionTypeGroupEnum::CORE, 'type' => CoreTransactionTypeEnum::TRANSFER],
+            ['fee' => 25 * 1e8, 'type_group' => TransactionTypeGroupEnum::CORE, 'type' => CoreTransactionTypeEnum::TRANSFER],
+            ['fee' => 50 * 1e8, 'type_group' => TransactionTypeGroupEnum::CORE, 'type' => CoreTransactionTypeEnum::TRANSFER],
+            ['fee' => 75 * 1e8, 'type_group' => TransactionTypeGroupEnum::CORE, 'type' => CoreTransactionTypeEnum::TRANSFER],
+            ['fee' => 100 * 1e8, 'type_group' => TransactionTypeGroupEnum::CORE, 'type' => CoreTransactionTypeEnum::TRANSFER],
+        ))
+        ->create();
+
+    Transaction::factory(5)
+        ->state(new Sequence(
+            ['fee' => 2 * 1e8, 'type_group' => TransactionTypeGroupEnum::CORE, 'type' => CoreTransactionTypeEnum::MULTI_SIGNATURE],
+            ['fee' => 24 * 1e8, 'type_group' => TransactionTypeGroupEnum::CORE, 'type' => CoreTransactionTypeEnum::MULTI_SIGNATURE],
+            ['fee' => 50 * 1e8, 'type_group' => TransactionTypeGroupEnum::CORE, 'type' => CoreTransactionTypeEnum::MULTI_SIGNATURE],
+            ['fee' => 71 * 1e8, 'type_group' => TransactionTypeGroupEnum::CORE, 'type' => CoreTransactionTypeEnum::MULTI_SIGNATURE],
+            ['fee' => 99 * 1e8, 'type_group' => TransactionTypeGroupEnum::CORE, 'type' => CoreTransactionTypeEnum::MULTI_SIGNATURE],
+        ))
+        ->create();
+
+    Artisan::call('explorer:cache-fees');
+
     Livewire::test(InsightCurrentAverageFee::class)
-        ->set('transactionType', StatsTransactionTypes::MAGISTRATE)
-        ->assertSee(trans('pages.statistics.insights.current-average-fee', ['type' => 'Magistrate']))
-        ->assertSee('20 DARK')
+        ->set('transactionType', StatsTransactionTypes::MULTI_SIG)
+        ->assertSee(trans('pages.statistics.insights.current-average-fee', ['type' => 'Multisignature']))
+        ->assertSee('49.2 DARK')
         ->assertSee(trans('pages.statistics.insights.min-fee'))
-        ->assertSee('5 DARK')
+        ->assertSee('2 DARK')
         ->assertSee(trans('pages.statistics.insights.max-fee'))
-        ->assertSee('50 DARK');
+        ->assertSee('99 DARK');
 });
