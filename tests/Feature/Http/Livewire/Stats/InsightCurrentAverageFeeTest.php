@@ -7,7 +7,6 @@ use App\Enums\StatsTransactionTypes;
 use App\Enums\TransactionTypeGroupEnum;
 use App\Http\Livewire\Stats\InsightCurrentAverageFee;
 use App\Models\Transaction;
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Support\Facades\Artisan;
 use Livewire\Livewire;

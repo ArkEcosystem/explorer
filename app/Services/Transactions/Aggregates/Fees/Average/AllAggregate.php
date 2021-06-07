@@ -14,7 +14,6 @@ final class AllAggregate
 
     private ?string $type;
 
-
     public function setType(?string $type = null): self
     {
         $this->type = $type;
