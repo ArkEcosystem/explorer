@@ -68,8 +68,6 @@ final class Kernel extends ConsoleKernel
 
         $schedule->command(CacheDelegateProductivity::class)->everyMinute();
 
-        $schedule->command(CacheNodeFees::class)->everyMinute();
-
         $schedule->command(CacheTransactions::class)->everyMinute();
     }
 

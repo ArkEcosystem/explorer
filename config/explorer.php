@@ -36,15 +36,6 @@ return [
         ],
     ],
 
-    'node-fees' => [
-        'production' => [
-            'endpoint' => 'https://wallets.ark.io/api/node/fees',
-        ],
-        'development' => [
-            'endpoint' => 'https://dwallets.ark.io/api/node/fees',
-        ],
-    ],
-
     'statistics' => [
 
         /*
