@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
+use App\Enums\StatsTransactionTypes;
 use App\Services\Cache\FeeCache;
 use App\Services\Transactions\Aggregates\Fees\AverageAggregateFactory;
 use App\Services\Transactions\Aggregates\Fees\HistoricalAggregateFactory;
@@ -42,6 +43,14 @@ final class CacheFees extends Command
             $cache->setAverage($period, AverageAggregateFactory::make($period)->aggregate());
 
             $cache->setMaximum($period, MaximumAggregateFactory::make($period)->aggregate());
+        }
+
+        foreach (['transfer', 'secondSignature',  'delegateRegistration',  'vote',  'multiSignature',  'ipfs',  'multiPayment',  'delegateResignation',  'timelock',  'timelockClaim',  'timelockRefund',  'magistrate'] as $type) {
+            $cache->setMinimum('all', MinimumAggregateFactory::make('all', $type)->aggregate(), $type);
+
+            $cache->setAverage('all', AverageAggregateFactory::make('all', $type)->aggregate(), $type);
+
+            $cache->setMaximum('all', MaximumAggregateFactory::make('all', $type)->aggregate(), $type);
         }
     }
 }

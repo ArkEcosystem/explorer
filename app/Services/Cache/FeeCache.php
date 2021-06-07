@@ -16,13 +16,13 @@ final class FeeCache implements Contract
     use ManagesCache;
     use ManagesChart;
 
-    public function all(string $period): array
+    public function all(string $period, ?string $type = null): array
     {
         return [
             'historical' => $this->getHistorical($period),
-            'min'        => $this->getMinimum($period),
-            'avg'        => $this->getAverage($period),
-            'max'        => $this->getMaximum($period),
+            'min'        => $this->getMinimum($period, $type),
+            'avg'        => $this->getAverage($period, $type),
+            'max'        => $this->getMaximum($period, $type),
         ];
     }
 
@@ -36,34 +36,46 @@ final class FeeCache implements Contract
         $this->put(sprintf('historical/%s', $period), $this->chartjs($data));
     }
 
-    public function getMinimum(string $period): float
+    public function getMinimum(string $period, ?string $type = null): float
     {
-        return (float) $this->get(sprintf('minimum/%s', $period));
+        $key = collect(['minimum', $period, $type])->filter()->join('/');
+
+        return (float) $this->get($key);
     }
 
-    public function setMinimum(string $period, float $data): void
+    public function setMinimum(string $period, float $data, ?string $type = null): void
     {
-        $this->put(sprintf('minimum/%s', $period), $data);
+        $key = collect(['minimum', $period, $type])->filter()->join('/');
+
+        $this->put($key, $data);
     }
 
-    public function getAverage(string $period): float
+    public function getAverage(string $period, ?string $type = null): float
     {
-        return (float) $this->get(sprintf('average/%s', $period));
+        $key = collect(['average', $period, $type])->filter()->join('/');
+
+        return (float) $this->get($key);
     }
 
-    public function setAverage(string $period, float $data): void
+    public function setAverage(string $period, float $data, ?string $type = null): void
     {
-        $this->put(sprintf('average/%s', $period), $data);
+        $key = collect(['average', $period, $type])->filter()->join('/');
+
+        $this->put($key, $data);
     }
 
-    public function getMaximum(string $period): float
+    public function getMaximum(string $period, ?string $type = null): float
     {
-        return (float) $this->get(sprintf('maximum/%s', $period));
+        $key = collect(['maximum', $period, $type])->filter()->join('/');
+
+        return (float) $this->get($key);
     }
 
-    public function setMaximum(string $period, float $data): void
+    public function setMaximum(string $period, float $data, ?string $type = null): void
     {
-        $this->put(sprintf('maximum/%s', $period), $data);
+        $key = collect(['maximum', $period, $type])->filter()->join('/');
+
+        $this->put($key, $data);
     }
 
     public function getCache(): TaggedCache

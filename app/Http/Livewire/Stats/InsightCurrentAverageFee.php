@@ -7,6 +7,9 @@ namespace App\Http\Livewire\Stats;
 use App\Enums\StatsTransactionTypes;
 use App\Facades\Network;
 use App\Http\Livewire\Concerns\AvailableTransactionType;
+use App\Models\Scopes\OrderByTimestampScope;
+use App\Models\Transaction;
+use App\Services\Cache\FeeCache;
 use App\Services\Cache\NodeFeesCache;
 use App\Services\NumberFormatter;
 use Illuminate\Support\Collection;
@@ -66,24 +69,12 @@ use Livewire\Component;
 
         private function getFeesAggregatesPerPeriod(string $transactionType): Collection
         {
-            $result = collect((new NodeFeesCache())->getAggregates()->get('data'));
+            $fees = (new FeeCache());
 
-            if ($transactionType === StatsTransactionTypes::ALL) {
-                return collect([
-                  'avg' => (float) $result->flatten(1)->avg('avg') / 1e8,
-                  'max' => (float) $result->flatten(1)->max('max') / 1e8,
-                  'min' => (float) $result->flatten(1)->min('min') / 1e8,
-                ]);
-            }
-
-            if ($transactionType === StatsTransactionTypes::MAGISTRATE) {
-                return collect([
-                    'avg' => (float) collect($result->get(2, []))->avg('avg') / 1e8,
-                    'max' => (float) collect($result->get(2, []))->max('max') / 1e8,
-                    'min' => (float) collect($result->get(2, []))->min('min') / 1e8,
-                ]);
-            }
-
-            return collect(data_get($result, "1.$transactionType"))->map(fn ($value, $key) => (float) $value / 1e8);
+            return collect([
+                'avg' => $fees->getAverage('all', $transactionType),
+                'min' => $fees->getMinimum('all', $transactionType),
+                'max' => $fees->getMaximum('all', $transactionType),
+            ]);
         }
     }

@@ -25,7 +25,6 @@ return [
         'type'                    => 'Search Type',
         'transaction_type'        => 'Transaction Type',
         'transaction_types'       => [
-            'all'                  => 'All',
             'delegateRegistration' => 'Delegate Registration',
             'delegateResignation'  => 'Delegate Resignation',
             'ipfs'                 => 'IPFS',

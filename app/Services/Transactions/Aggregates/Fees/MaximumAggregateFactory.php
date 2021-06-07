@@ -17,7 +17,7 @@ final class MaximumAggregateFactory
     /**
      * @return DayAggregate|WeekAggregate|MonthAggregate|QuarterAggregate|YearAggregate|AllAggregate
      */
-    public static function make(string $period)
+    public static function make(string $period, ?string $type = null)
     {
         if ($period === 'day') {
             return new DayAggregate();
@@ -40,7 +40,7 @@ final class MaximumAggregateFactory
         }
 
         if ($period === 'all') {
-            return new AllAggregate();
+            return new AllAggregate($type);
         }
 
         throw new InvalidArgumentException('Invalid aggregate period.');

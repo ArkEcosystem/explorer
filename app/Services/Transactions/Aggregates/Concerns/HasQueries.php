@@ -18,4 +18,13 @@ trait HasQueries
             Timestamp::fromUnix($end->unix())->unix(),
         ]);
     }
+
+    private function getScopeByType(?string $type = null): ?string
+    {
+        if (is_null($type)) {
+            return null;
+        }
+
+        return data_get(Transaction::TYPE_SCOPES, $type);
+    }
 }

@@ -6,8 +6,6 @@ namespace App\Enums;
 
 final class StatsTransactionTypes
 {
-    public const ALL = 'all';
-
     public const TRANSFER = 'transfer';
 
     public const SECOND_SIG = 'secondSignature';
@@ -24,11 +22,11 @@ final class StatsTransactionTypes
 
     public const DELEGATE_RES = 'delegateResignation';
 
-    public const TIMELOCK = 'htlcLock';
+    public const TIMELOCK = 'timelock';
 
-    public const TIMELOCK_CLAIM = 'htlcClaim';
+    public const TIMELOCK_CLAIM = 'timelockClaim';
 
-    public const TIMELOCK_REFUND = 'htlcRefund';
+    public const TIMELOCK_REFUND = 'timelockRefund';
 
     public const MAGISTRATE = 'magistrate';
 }

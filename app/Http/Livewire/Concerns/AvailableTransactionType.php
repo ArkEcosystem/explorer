@@ -10,13 +10,12 @@ trait AvailableTransactionType
 {
     private function defaultTransactionType(): string
     {
-        return StatsTransactionTypes::ALL;
+        return StatsTransactionTypes::TRANSFER;
     }
 
     private function availableTransactionTypes(): array
     {
         return [
-            StatsTransactionTypes::ALL             => trans('forms.search.transaction_types.all'),
             StatsTransactionTypes::TRANSFER        => trans('forms.search.transaction_types.transfer'),
             StatsTransactionTypes::SECOND_SIG      => trans('forms.search.transaction_types.secondSignature'),
             StatsTransactionTypes::DELEGATE_REG    => trans('forms.search.transaction_types.delegateRegistration'),
