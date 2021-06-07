@@ -22,7 +22,7 @@
                 <x-ark-container>
                     <div id="transaction-list" class="w-full">
                         <div class="flex relative justify-between items-end mb-3">
-                            <h2>@lang('pages.block.transactions')</h2>
+                            <h2 class="text-2xl">@lang('pages.block.transactions')</h2>
                         </div>
 
                         <livewire:block-transactions-table :block-id="$block->id()" />
