@@ -14,9 +14,11 @@ final class AllAggregate
 
     private ?string $type;
 
-    public function __construct(?string $type = null)
+    public function setType(?string $type = null): self
     {
         $this->type = $type;
+
+        return $this;
     }
 
     public function aggregate(): float

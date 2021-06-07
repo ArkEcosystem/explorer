@@ -40,7 +40,7 @@ final class MinimumAggregateFactory
         }
 
         if ($period === 'all') {
-            return new AllAggregate($type);
+            return (new AllAggregate())->setType($type);
         }
 
         throw new InvalidArgumentException('Invalid aggregate period.');

@@ -68,9 +68,9 @@ use Livewire\Component;
             $fees = (new FeeCache());
 
             return collect([
-                'avg' => $fees->getAverage('all', $transactionType),
-                'min' => $fees->getMinimum('all', $transactionType),
-                'max' => $fees->getMaximum('all', $transactionType),
+                'avg' => $fees->getAverage($transactionType),
+                'min' => $fees->getMinimum($transactionType),
+                'max' => $fees->getMaximum($transactionType),
             ]);
         }
     }
