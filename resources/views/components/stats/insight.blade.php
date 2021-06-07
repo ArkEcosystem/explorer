@@ -29,7 +29,7 @@
     </div>
 
     <div class="border-t border-theme-secondary-300 dark:border-theme-secondary-800 pt-6 md:pt-0 md:border-t-0 xl:pt-6 xl:border-t row-span-2 sm:row-span-1 flex gap-5 flex-col sm:flex-row sm:items-end md:w-1/2 lg:justify-end xl:w-full">
-        <div class="sm:w-1/3 md:w-1/2">
+        <div class="sm:w-1/3 md:w-7/12">
             <x-ark-rich-select
                 wire:model="{{ $model }}"
                 wrapper-class="relative left-0 md:hidden xl:inline-block"
@@ -44,19 +44,19 @@
         </div>
 
         @if($chart)
-            <div class="md:w-1/2 flex flex-1 justify-end">
+            <div class="md:w-5/12 flex flex-1 justify-end">
                 <x-chart
                     class="w-full h-auto"
                     id="stats-insight-{{ $id }}"
                     :data="collect($chart->get('datasets'))->toJson()"
-                        :labels="collect($chart->get('labels'))->keys()->toJson()"
+                    :labels="collect($chart->get('labels'))->keys()->toJson()"
                     :theme="$chartTheme"
                     width="200"
                     height="50"
                 />
             </div>
         @else
-            <div class="md:w-1/2 border-theme-secondary-300 dark:border-theme-secondary-800 sm:border-l sm:pl-6 sm:transform sm:-translate-x-6 md:-translate-x-8 lg:-translate-x-6">
+            <div class="md:w-5/12 border-theme-secondary-300 dark:border-theme-secondary-800 sm:border-l sm:pl-6 sm:transform sm:-translate-x-6 md:-translate-x-8 lg:-translate-x-6">
                 <h3 class="mb-0 text-sm font-semibold leading-none text-theme-secondary-500 dark:text-theme-secondary-700">{{ $tertiaryTitle }}</h3>
                 <p class="mt-2 text-base font-semibold text-theme-secondary-700 dark:text-theme-secondary-200">{{ $tertiaryValue }}</p>
             </div>
