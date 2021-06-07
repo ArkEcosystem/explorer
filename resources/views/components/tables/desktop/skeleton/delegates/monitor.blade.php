@@ -3,7 +3,7 @@
     device="desktop"
     :items="[
         'pages.delegates.order'      => 'text',
-        'pages.delegates.name'       => 'address-alt',
+        'pages.delegates.name'       => 'address',
         'pages.delegates.forging_at' => [
             'type' => 'number',
             'responsive' => true,

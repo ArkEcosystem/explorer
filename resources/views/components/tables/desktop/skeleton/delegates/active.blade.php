@@ -3,7 +3,7 @@
     device="desktop"
     :items="[
         'general.delegates.rank'         => 'text',
-        'general.delegates.name' => 'address-alt',
+        'general.delegates.name' => 'address',
         'general.delegates.status'       => [
             'type' => 'status',
             'lastOn' => 'md',
