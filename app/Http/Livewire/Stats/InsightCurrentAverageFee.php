@@ -4,13 +4,9 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire\Stats;
 
-use App\Enums\StatsTransactionTypes;
 use App\Facades\Network;
 use App\Http\Livewire\Concerns\AvailableTransactionType;
-use App\Models\Scopes\OrderByTimestampScope;
-use App\Models\Transaction;
 use App\Services\Cache\FeeCache;
-use App\Services\Cache\NodeFeesCache;
 use App\Services\NumberFormatter;
 use Illuminate\Support\Collection;
 use Illuminate\View\View;
