@@ -1,14 +1,14 @@
 <div
     wire:poll.60s
-    class="hidden flex-grow justify-end lg:flex"
+    class="justify-end flex-grow hidden lg:flex"
 >
     <div
-        wire:key="{{ Settings::currency() }}-{{ $isPositive ? 'positive' : 'negative' }}"
+        wire:key="{{ Settings::currency() }}-{{ $isPositive ? 'positive' : 'negative' }}-{{ $usePlaceholder ? 'placeholder' : 'live' }}"
         class="ml-6"
         x-data="PriceChart(
             {{ $historical->values()->toJson() }},
             {{ $historical->keys()->toJson() }},
-            {{ ! Network::canBeExchanged() ? 'true' : 'false' }},
+            {{ $usePlaceholder ? 'true' : 'false' }},
             {{ Settings::usesDarkTheme() ? 'true' : 'false' }},
             '{{ time() }}',
             {{ $isPositive ? 'true' : 'false' }}

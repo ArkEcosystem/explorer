@@ -72,13 +72,13 @@ final class CryptoCompare
         });
     }
 
-    public static function getPriceChange(): ?float
+    public static function getPriceChange(string $source, string $target): ?float
     {
         if (! Network::canBeExchanged()) {
             return null;
         }
 
-        $priceFullRange = self::historicalHourly(Network::currency(), Settings::currency(), 24);
+        $priceFullRange = self::historicalHourly($source, $target, 24);
 
         $initialPrice = (float) $priceFullRange->first();
         $finalPrice   = (float) $priceFullRange->last();

@@ -47,7 +47,7 @@ it('should get price change', function () {
         'cryptocompare.com/*' => Http::response(json_decode(file_get_contents(base_path('tests/fixtures/cryptocompare/histohour.json')), true)),
     ]);
 
-    expect(CryptoCompare::getPriceChange())->toBe(-0.136986301369863);
+    expect(CryptoCompare::getPriceChange('ARK', 'USD'))->toBe(-0.136986301369863);
 
     Config::set('explorer.network', 'development');
 });
@@ -55,5 +55,5 @@ it('should get price change', function () {
 it('should return null if cannot be exchanged', function () {
     Config::set('explorer.network', 'development');
 
-    expect(CryptoCompare::getPriceChange())->toBeNull();
+    expect(CryptoCompare::getPriceChange('ARK', 'USD'))->toBeNull();
 });

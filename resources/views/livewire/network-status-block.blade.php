@@ -2,7 +2,7 @@
     <div class="py-8 content-container-full-width">
         <div class="px-10 md:w-full">
             <div
-                class="flex grid-cols-2 gap-3 w-full md:grid xl:space-x-3 xl:gap-0 xl:flex"
+                class="flex w-full grid-cols-2 gap-3 md:grid xl:space-x-3 xl:gap-0 xl:flex"
                 wire:poll.{{ Network::blockTime() }}s
             >
                 <x-stats.stat :label="trans('general.height')" icon="app-height">
@@ -13,11 +13,11 @@
                     <x-currency :currency="Network::currency()">{{ $supply }}</x-currency>
                 </x-stats.stat>
 
-                <x-stats.stat :label="trans('general.market_cap')" icon="app-monitor" :disabled="! Network::canBeExchanged()">
+                <x-stats.stat :label="trans('general.market_cap')" icon="app-monitor" :disabled="! Network::canBeExchanged() || $marketCap === null">
                     {{ $marketCap }}
                 </x-stats.stat>
 
-                <x-stats.stat :label="trans('general.price')" icon="app-price" :disabled="! Network::canBeExchanged()" class="flex-grow">
+                <x-stats.stat :label="trans('general.price')" icon="app-price" :disabled="! Network::canBeExchanged()  || $price === null" class="flex-grow">
                     <x-slot name="side">
                         <div wire:ignore>
                             <livewire:price-stats />
