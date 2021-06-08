@@ -3,20 +3,20 @@
 <svg version="1.1" id="Слой_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 20 20" style="enable-background:new 0 0 20 20;" xml:space="preserve">
 <style type="text/css">
-	.st0{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+	.price-st0{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
 </style>
 <g id="_2" transform="translate(-452.161 119.89) rotate(-45)">
 	<g id="Group_15" transform="translate(396.75 245.5)">
 		<g id="accounting-bills">
-			<path id="Shape_118" class="st0" d="M2.1,0.3c0.1,0,0.2,0.1,0.2,0.2c0,0.1-0.1,0.2-0.2,0.2S1.9,0.6,1.9,0.5l0,0
+			<path id="Shape_118" class="price-st0" d="M2.1,0.3c0.1,0,0.2,0.1,0.2,0.2c0,0.1-0.1,0.2-0.2,0.2S1.9,0.6,1.9,0.5l0,0
 				C1.8,0.4,2,0.3,2.1,0.3"/>
-			<path id="Shape_119" class="st0" d="M10.7,3.8c0.1,0,0.2,0.1,0.2,0.2c0,0.1-0.1,0.2-0.2,0.2c-0.1,0-0.2-0.1-0.2-0.2c0,0,0,0,0,0
+			<path id="Shape_119" class="price-st0" d="M10.7,3.8c0.1,0,0.2,0.1,0.2,0.2c0,0.1-0.1,0.2-0.2,0.2c-0.1,0-0.2-0.1-0.2-0.2c0,0,0,0,0,0
 				l0,0C10.5,3.9,10.6,3.8,10.7,3.8"/>
-			<path id="Rectangle-path_16" class="st0" d="M-0.2-0.8c0-0.6,0.5-1,1-1H12c0.6,0,1,0.5,1,1v6.1c0,0.6-0.5,1-1,1H0.8
+			<path id="Rectangle-path_16" class="price-st0" d="M-0.2-0.8c0-0.6,0.5-1,1-1H12c0.6,0,1,0.5,1,1v6.1c0,0.6-0.5,1-1,1H0.8
 				c-0.6,0-1-0.5-1-1V-0.8z"/>
-			<path id="Oval_4" class="st0" d="M6.4,4c1,0,1.7-0.8,1.8-1.8c0-1-0.8-1.7-1.8-1.8C5.4,0.5,4.7,1.3,4.6,2.2C4.7,3.2,5.4,4,6.4,4z"
+			<path id="Oval_4" class="price-st0" d="M6.4,4c1,0,1.7-0.8,1.8-1.8c0-1-0.8-1.7-1.8-1.8C5.4,0.5,4.7,1.3,4.6,2.2C4.7,3.2,5.4,4,6.4,4z"
 				/>
-			<path id="Shape_120" class="st0" d="M15.7,1.9V8c0,0.6-0.5,1-1,1H3.4"/>
+			<path id="Shape_120" class="price-st0" d="M15.7,1.9V8c0,0.6-0.5,1-1,1H3.4"/>
 		</g>
 	</g>
 </g>

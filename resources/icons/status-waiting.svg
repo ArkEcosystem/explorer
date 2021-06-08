@@ -3,10 +3,10 @@
 <svg version="1.1" id="Слой_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 20 20" style="enable-background:new 0 0 20 20;" xml:space="preserve">
 <style type="text/css">
-	.st0{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+	.status-waiting-st0{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
 </style>
 <g id="Standby" transform="translate(267.985 -799.783)">
-	<path id="Oval_563" class="st0" d="M-258,818.8c4.9,0,9-4.1,9-9c0-5-4.1-9-9-9s-9,4-9,9S-263,818.8-258,818.8L-258,818.8z"/>
-	<path id="Shape_1504" class="st0" d="M-254.1,809.8h-4v-4"/>
+	<path id="Oval_563" class="status-waiting-st0" d="M-258,818.8c4.9,0,9-4.1,9-9c0-5-4.1-9-9-9s-9,4-9,9S-263,818.8-258,818.8L-258,818.8z"/>
+	<path id="Shape_1504" class="status-waiting-st0" d="M-254.1,809.8h-4v-4"/>
 </g>
 </svg>

@@ -3,14 +3,14 @@
 <svg version="1.1" id="Слой_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 20 20" style="enable-background:new 0 0 20 20;" xml:space="preserve">
 <style type="text/css">
-	.st0{fill:none;stroke:currentColor;stroke-width:2;}
-	.st1{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+	.status-undone-st0{fill:none;stroke:currentColor;stroke-width:2;}
+	.status-undone-st1{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
 </style>
 <g id="_2_and_Blocks_Missed" transform="translate(600 -1405.038)">
 	<g id="Эллипс_542_копия_3-2" transform="translate(454 1604)">
-		<circle class="st0" cx="-1044" cy="-189" r="9"/>
+		<circle class="status-undone-st0" cx="-1044" cy="-189" r="9"/>
 	</g>
-	<path id="Shape_1765-5" class="st1" d="M-592.8,1417.9l5.6-5.6"/>
-	<path id="Shape_1766-6" class="st1" d="M-587.2,1417.9l-5.6-5.6"/>
+	<path id="Shape_1765-5" class="status-undone-st1" d="M-592.8,1417.9l5.6-5.6"/>
+	<path id="Shape_1766-6" class="status-undone-st1" d="M-587.2,1417.9l-5.6-5.6"/>
 </g>
 </svg>

@@ -3,13 +3,13 @@
 <svg version="1.1" id="Слой_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 20 20" style="enable-background:new 0 0 20 20;" xml:space="preserve">
 <style type="text/css">
-	.st0{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+	.smartbridge-st0{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
 </style>
 <g id="SmartBridge" transform="translate(797.5 325.569)">
-	<path id="Контур_325" class="st0" d="M-779.6-307.8c0,0.6-0.4,1.2-1.1,1.2h-13.6c-0.6,0-1.2-0.5-1.2-1.2v-15.6
+	<path id="Контур_325" class="smartbridge-st0" d="M-779.6-307.8c0,0.6-0.4,1.2-1.1,1.2h-13.6c-0.6,0-1.2-0.5-1.2-1.2v-15.6
 		c0-0.6,0.5-1.2,1.2-1.2h11.4c0.3,0,0.6,0.1,0.8,0.3l2.2,2.2c0.2,0.2,0.3,0.5,0.3,0.8v12.4L-779.6-307.8L-779.6-307.8z"/>
-	<line id="Линия_12" class="st0" x1="-792.3" y1="-311.8" x2="-787.5" y2="-311.8"/>
-	<line id="Линия_11" class="st0" x1="-792.3" y1="-315.1" x2="-782.7" y2="-315.1"/>
-	<line id="Линия_10" class="st0" x1="-792.3" y1="-318.3" x2="-782.7" y2="-318.3"/>
+	<line id="Линия_12" class="smartbridge-st0" x1="-792.3" y1="-311.8" x2="-787.5" y2="-311.8"/>
+	<line id="Линия_11" class="smartbridge-st0" x1="-792.3" y1="-315.1" x2="-782.7" y2="-315.1"/>
+	<line id="Линия_10" class="smartbridge-st0" x1="-792.3" y1="-318.3" x2="-782.7" y2="-318.3"/>
 </g>
 </svg>

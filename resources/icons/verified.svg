@@ -3,14 +3,14 @@
 <svg version="1.1" id="Слой_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 20 20" style="enable-background:new 0 0 20 20;" xml:space="preserve">
 <style type="text/css">
-	.st0{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+	.verified-st0{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
 </style>
 <g id="Verifed" transform="translate(192 -2238.578)">
 	<g id="Regular_349" transform="translate(658.75 2565.75)">
-		<path id="Shape_1401" class="st0" d="M-848.1-308.8c0-3.7,3-6.6,6.6-6.6c0.9,0,1.8,0.2,2.6,0.5"/>
-		<path id="Oval_513" class="st0" d="M-840.9-318.6c2.1,0,3.8-1.7,3.8-3.8s-1.7-3.8-3.8-3.8s-3.8,1.7-3.8,3.8l0,0
+		<path id="Shape_1401" class="verified-st0" d="M-848.1-308.8c0-3.7,3-6.6,6.6-6.6c0.9,0,1.8,0.2,2.6,0.5"/>
+		<path id="Oval_513" class="verified-st0" d="M-840.9-318.6c2.1,0,3.8-1.7,3.8-3.8s-1.7-3.8-3.8-3.8s-3.8,1.7-3.8,3.8l0,0
 			C-844.7-320.3-842.9-318.6-840.9-318.6z"/>
-		<path id="Shape_1402" class="st0" d="M-833.5-312.3l-2.8,3.8c-0.3,0.4-0.7,0.4-1.1,0.2c0,0-0.2-0.2-0.3-0.3l-1.1-1.1"/>
+		<path id="Shape_1402" class="verified-st0" d="M-833.5-312.3l-2.8,3.8c-0.3,0.4-0.7,0.4-1.1,0.2c0,0-0.2-0.2-0.3-0.3l-1.1-1.1"/>
 	</g>
 </g>
 </svg>

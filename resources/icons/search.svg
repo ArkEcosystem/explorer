@@ -3,14 +3,14 @@
 <svg version="1.1" id="Слой_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 20 20" style="enable-background:new 0 0 20 20;" xml:space="preserve">
 <style type="text/css">
-	.st0{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+	.search-st0{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
 </style>
 <g id="Search" transform="translate(-368.336 -3338.335)">
 	<g id="Group_342">
 		<g id="search-2">
-			<path id="Oval_210" class="st0" d="M380.4,3354.7c4.1-1.7,6-6.5,4.3-10.5c-1.7-4.1-6.5-6-10.5-4.3c-4,1.7-6,6.5-4.3,10.5l0,0
+			<path id="Oval_210" class="search-st0" d="M380.4,3354.7c4.1-1.7,6-6.5,4.3-10.5c-1.7-4.1-6.5-6-10.5-4.3c-4,1.7-6,6.5-4.3,10.5l0,0
 				C371.7,3354.5,376.3,3356.4,380.4,3354.7L380.4,3354.7z"/>
-			<path id="Shape_1557" class="st0" d="M383,3353l4.3,4.3"/>
+			<path id="Shape_1557" class="search-st0" d="M383,3353l4.3,4.3"/>
 		</g>
 	</g>
 </g>
