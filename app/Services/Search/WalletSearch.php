@@ -25,11 +25,11 @@ final class WalletSearch implements Search
         $term = Arr::get($parameters, 'term');
 
         if (! is_null($term)) {
-            if ($this->couldBeAnAddress($term)) {
+            if ($this->couldBeAddress($term)) {
                 $query->whereLower('address', $term);
-            } elseif ($this->couldBeAPublicKey($term)) {
+            } elseif ($this->couldBePublicKey($term)) {
                 $query->whereLower('public_key', $term);
-            } elseif ($this->couldBeAUsername($term)) {
+            } elseif ($this->couldBeUsername($term)) {
                 $username = substr(DB::getPdo()->quote($term), 1, -1);
                 $query->whereRaw('lower(attributes::text)::jsonb @> lower(\'{"delegate":{"username":"'.$username.'"}}\')::jsonb');
             } else {

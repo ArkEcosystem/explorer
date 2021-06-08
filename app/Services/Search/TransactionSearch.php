@@ -28,7 +28,7 @@ final class TransactionSearch implements Search
         $term = Arr::get($parameters, 'term');
 
         if (! is_null($term)) {
-            if ($this->couldBeATransactionID($term)) {
+            if ($this->couldBeTransactionID($term)) {
                 $query->whereLower('id', $term);
             } else {
                 $query->empty();
@@ -61,10 +61,10 @@ final class TransactionSearch implements Search
                 // If this throws then the term was not a valid address, public key or username.
             }
 
-            if ($this->couldBeABlockID($term) || $this->couldBeHeightValue($term)) {
+            if ($this->couldBeBlockID($term) || $this->couldBeHeightValue($term)) {
                 // Consider the term to be a block
                 $query->orWhere(function ($query) use ($term): void {
-                    if ($this->couldBeABlockID($term)) {
+                    if ($this->couldBeBlockID($term)) {
                         $query->where(fn ($query): Builder => $query->whereLower('block_id', $term));
                     }
 

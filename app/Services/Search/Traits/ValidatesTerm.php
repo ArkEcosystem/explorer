@@ -8,22 +8,22 @@ use App\Enums\SQLEnum;
 
 trait ValidatesTerm
 {
-    private function couldBeATransactionID(string $term): bool
+    private function couldBeTransactionID(string $term): bool
     {
-        return $this->isA64CharsLongHexadecimalString($term);
+        return $this->is64CharsHexadecimalString($term);
     }
 
-    private function couldBeABlockID(string $term): bool
+    private function couldBeBlockID(string $term): bool
     {
-        return $this->isA64CharsLongHexadecimalString($term);
+        return $this->is64CharsHexadecimalString($term);
     }
 
-    private function couldBeAnAddress(string $term): bool
+    private function couldBeAddress(string $term): bool
     {
         return strlen($term) === 34;
     }
 
-    private function couldBeAPublicKey(string $term): bool
+    private function couldBePublicKey(string $term): bool
     {
         return strlen($term) === 66 && $this->isHexadecimalString($term);
     }
@@ -34,7 +34,7 @@ trait ValidatesTerm
      *
      * @return bool
      */
-    private function couldBeAUsername(string $term): bool
+    private function couldBeUsername(string $term): bool
     {
         $regex = '/^[a-zA-Z0-9!@$&_.]+$/';
 
@@ -50,7 +50,7 @@ trait ValidatesTerm
         return $this->isOnlyNumbers($numericTerm) && $this->numericTermIsInRange($numericTerm);
     }
 
-    private function isA64CharsLongHexadecimalString(string $term): bool
+    private function is64CharsHexadecimalString(string $term): bool
     {
         return $this->isOnlyNumbers($term)
             || (strlen($term) === 64 && $this->isHexadecimalString($term));

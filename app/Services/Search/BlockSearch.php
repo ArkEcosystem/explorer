@@ -27,7 +27,7 @@ final class BlockSearch implements Search
         $term = Arr::get($parameters, 'term');
 
         if (! is_null($term)) {
-            if ($this->couldBeABlockID($term)) {
+            if ($this->couldBeBlockID($term)) {
                 $query = $query->whereLower('id', $term);
             } else {
                 // Forces empty results when it has a term but not possible
