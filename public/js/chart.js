@@ -1,4 +1,8 @@
-import {getInfoFromThemeName, makeGradient, getFontConfig} from "./chart-theme";
+import {
+    getInfoFromThemeName,
+    makeGradient,
+    getFontConfig,
+} from "./chart-theme";
 
 const CustomChart = (
     id,
@@ -14,6 +18,7 @@ const CustomChart = (
         time: time,
         chart: null,
         currency: currency || "USD",
+        fontConfig: {},
 
         getCanvas() {
             return this.$refs[id];
@@ -37,8 +42,7 @@ const CustomChart = (
         getCurrencyValue(value) {
             return new Intl.NumberFormat("en-US", {
                 style: "currency",
-                currency: this.currency
-           ,
+                currency: this.currency,
             }).format(value);
         },
 
@@ -50,6 +54,10 @@ const CustomChart = (
             this.chart.datasets = this.loadData();
             this.chart.labels = labels;
             this.chart.update();
+        },
+
+        loadFontConfig() {
+            this.fontConfig = getFontConfig();
         },
 
         loadData() {
@@ -92,14 +100,15 @@ const CustomChart = (
                         value.type === "bar"
                             ? "transparent"
                             : graphic.borderWidth,
-                    cubicInterpolationMode: 'monotone',
+                    cubicInterpolationMode: "monotone",
                     tension: graphic.lineTension,
                     pointRadius: graphic.pointRadius,
                     pointBackgroundColor: graphic.pointBackgroundColor,
                     pointHoverRadius: graphic.pointHoverRadius,
                     pointHoverBorderWidth: graphic.pointHoverBorderWidth,
                     pointHoverBorderColor: graphic.borderColor,
-                    pointHoverBackgroundColor: graphic.pointHoverBackgroundColor,
+                    pointHoverBackgroundColor:
+                        graphic.pointHoverBackgroundColor,
                 });
             });
 
@@ -117,7 +126,7 @@ const CustomChart = (
                     type: "linear",
                     position: "right",
                     ticks: {
-                        ...getFontConfig('axis', theme.mode),
+                        ...this.fontConfig.axis,
                         padding: 15,
                         suggestedMax: range.max,
                         callback: (value, index, data) =>
@@ -140,6 +149,8 @@ const CustomChart = (
             this.$watch("time", () => this.updateChart());
             window.addEventListener("resize", () => this.resizeChart());
 
+            this.loadFontConfig();
+
             const data = {
                 type: "line",
                 labels: labels,
@@ -155,8 +166,8 @@ const CustomChart = (
                 responsive: true,
                 maintainAspectRatio: false,
                 showScale: grid === "true",
-                animation: {duration: 300, easing: "easeOutQuad"},
-                legend: {display: false},
+                animation: { duration: 300, easing: "easeOutQuad" },
+                legend: { display: false },
                 onResize: () => this.resizeChart(),
                 layout: {
                     padding: {
@@ -181,10 +192,12 @@ const CustomChart = (
                     stacked: false,
                     callbacks: {
                         title: (items) => {},
-                        label: (context) => this.getCurrencyValue(context.value),
-                        labelTextColor: (context) => getFontConfig('tooltip', theme.mode).fontColor,
+                        label: (context) =>
+                            this.getCurrencyValue(context.value),
+                        labelTextColor: (context) =>
+                            this.fontConfig.tooltip.fontColor,
                     },
-                    backgroundColor: getFontConfig('tooltip', theme.mode).backgroundColor,
+                    backgroundColor: this.fontConfig.tooltip.backgroundColor,
                 },
                 scales: {
                     xAxes: [
@@ -194,7 +207,7 @@ const CustomChart = (
                             labels: labels,
                             ticks: {
                                 padding: 10,
-                                ...getFontConfig('axis', theme.mode),
+                                ...this.fontConfig.axis,
                             },
                             gridLines: {
                                 drawBorder: false,
@@ -205,7 +218,7 @@ const CustomChart = (
                 },
             };
 
-            this.chart = new Chart(this.getCanvasContext(), {data, options});
+            this.chart = new Chart(this.getCanvasContext(), { data, options });
         },
     };
 };

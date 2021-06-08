@@ -1,4 +1,8 @@
-import {getInfoFromThemeName, makeGradient, getFontConfig} from "./chart-theme";
+import {
+    getInfoFromThemeName,
+    makeGradient,
+    getFontConfig,
+} from "./chart-theme";
 
 const CustomChart = (
     id,
@@ -37,8 +41,7 @@ const CustomChart = (
         getCurrencyValue(value) {
             return new Intl.NumberFormat("en-US", {
                 style: "currency",
-                currency: this.currency
-           ,
+                currency: this.currency,
             }).format(value);
         },
 
@@ -92,14 +95,15 @@ const CustomChart = (
                         value.type === "bar"
                             ? "transparent"
                             : graphic.borderWidth,
-                    cubicInterpolationMode: 'monotone',
+                    cubicInterpolationMode: "monotone",
                     tension: graphic.lineTension,
                     pointRadius: graphic.pointRadius,
                     pointBackgroundColor: graphic.pointBackgroundColor,
                     pointHoverRadius: graphic.pointHoverRadius,
                     pointHoverBorderWidth: graphic.pointHoverBorderWidth,
                     pointHoverBorderColor: graphic.borderColor,
-                    pointHoverBackgroundColor: graphic.pointHoverBackgroundColor,
+                    pointHoverBackgroundColor:
+                        graphic.pointHoverBackgroundColor,
                 });
             });
 
@@ -155,8 +159,8 @@ const CustomChart = (
                 responsive: true,
                 maintainAspectRatio: false,
                 showScale: grid === "true",
-                animation: {duration: 300, easing: "easeOutQuad"},
-                legend: {display: false},
+                animation: { duration: 300, easing: "easeOutQuad" },
+                legend: { display: false },
                 onResize: () => this.resizeChart(),
                 layout: {
                     padding: {
@@ -181,8 +185,10 @@ const CustomChart = (
                     stacked: false,
                     callbacks: {
                         title: (items) => {},
-                        label: (context) => this.getCurrencyValue(context.value),
-                        labelTextColor: (context) => getFontConfig('tooltip', theme.mode).fontColor,
+                        label: (context) =>
+                            this.getCurrencyValue(context.value),
+                        labelTextColor: (context) =>
+                            getFontConfig('tooltip', theme.mode).fontColor,
                     },
                     backgroundColor: getFontConfig('tooltip', theme.mode).backgroundColor,
                 },
@@ -205,7 +211,7 @@ const CustomChart = (
                 },
             };
 
-            this.chart = new Chart(this.getCanvasContext(), {data, options});
+            this.chart = new Chart(this.getCanvasContext(), { data, options });
         },
     };
 };
