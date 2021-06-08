@@ -7,7 +7,10 @@ use App\Contracts\Network as NetworkContract;
 use App\Facades\Network;
 use App\Services\Blockchain\Network as Blockchain;
 use App\Services\Cache\NetworkStatusBlockCache;
+use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Http;
+
 use function Tests\configureExplorerDatabase;
 use function Tests\fakeCryptoCompare;
 
@@ -63,6 +66,42 @@ it('should execute the command', function () {
         '2021-05-19 16:00:00' => '1.61',
         '2021-05-19 17:00:00' => '1.638',
     ]));
+});
+
+it('set values to null when cryptocompare is down', function () {
+    Config::set('currencies', [
+        'usd' => [
+            'currency' => 'USD',
+            'locale'   => 'en_US',
+        ],
+    ]);
+
+
+
+    configureExplorerDatabase();
+
+    $this->app->singleton(NetworkContract::class, fn () => new Blockchain(config('explorer.networks.production')));
+
+
+    $cache = new NetworkStatusBlockCache();
+
+    $cache->setPrice(Network::currency(), 'USD', 1);
+    $cache->setMarketCap(Network::currency(), 'USD', 1);
+    $cache->setPriceChange(Network::currency(), 'USD', 1);
+    $cache->setHistoricalHourly(Network::currency(), 'USD', collect());
+
+    Http::fake([
+        'cryptocompare.com/*' => function () {
+            throw new ConnectionException();
+        },
+    ]);
+
+    (new CacheNetworkStatusBlock())->handle($cache);
+
+    expect($cache->getPrice(Network::currency(), 'USD'))->toBeNull();
+    expect($cache->getMarketCap(Network::currency(), 'USD'))->toBeNull();
+    expect($cache->getPriceChange(Network::currency(), 'USD'))->toBeNull();
+    expect($cache->getHistoricalHourly(Network::currency(), 'USD'))->toBeNull();
 });
 
 it('should ignore the cache for development network', function () {
