@@ -79,7 +79,7 @@
                 </div>
 
                 <div class="flex flex-grow px-6 py-3 bg-white rounded-xl dark:bg-theme-secondary-900">
-                    @if(false)
+                    @if($statistics['nextDelegate'])
                         <x-general.header-entry
                             :title="trans('pages.delegates.statistics.next_slot')"
                             :text="$statistics['nextDelegate']->username()"
