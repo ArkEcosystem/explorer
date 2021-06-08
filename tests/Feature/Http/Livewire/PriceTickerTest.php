@@ -5,13 +5,12 @@ declare(strict_types=1);
 use App\Facades\Network;
 use App\Http\Livewire\PriceTicker;
 use App\Services\Settings;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Session;
 use Livewire\Livewire;
+use App\Services\Cache\NetworkStatusBlockCache;
 
 it('should render with the source currency, target currency and exchange rate', function () {
-    Http::fakeSequence()
-        ->push(['USD' => 0.2907]);
+    (new NetworkStatusBlockCache)->setPrice('ARK', 'USD', 0.2907);
 
     Livewire::test(PriceTicker::class)
         ->assertSee(Network::currency())
@@ -19,10 +18,9 @@ it('should render with the source currency, target currency and exchange rate', 
         ->assertSee(0.29);
 });
 
-it('should update the price if currency change', function () {
-    Http::fakeSequence()
-        ->push(['USD' => 0.2907])
-        ->push(['MXN' => 0.22907]);
+it('should update the price if the currency changes', function () {
+    (new NetworkStatusBlockCache)->setPrice('ARK', 'USD', 0.2907);
+    (new NetworkStatusBlockCache)->setPrice('ARK', 'MXN', 0.22907);
 
     $component = Livewire::test(PriceTicker::class);
 
