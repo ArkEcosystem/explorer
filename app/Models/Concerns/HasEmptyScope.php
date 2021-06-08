@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Models\Concerns;
 
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Facades\DB;
 
 trait HasEmptyScope
 {
@@ -14,6 +13,6 @@ trait HasEmptyScope
      */
     public function scopeEmpty(Builder $query): Builder
     {
-        return $query->where(DB::raw('false'));
+        return $query->whereRaw('false');
     }
 }
