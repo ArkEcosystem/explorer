@@ -18,6 +18,13 @@ it('should render with the source currency, target currency and exchange rate', 
         ->assertSee(0.29);
 });
 
+it('should render an empty state if not price set', function () {
+    Livewire::test(PriceTicker::class)
+        ->assertSee(Network::currency())
+        ->assertSee(Settings::currency())
+        ->assertSeeHtml('<span class="dark:text-theme-secondary-600 text-theme-secondary-500">-</span>');
+});
+
 it('should update the price if the currency changes', function () {
     (new NetworkStatusBlockCache())->setPrice('DARK', 'USD', 0.2907);
     (new NetworkStatusBlockCache())->setPrice('DARK', 'MXN', 0.22907);

@@ -52,6 +52,23 @@ it('should get price change', function () {
     Config::set('explorer.network', 'development');
 });
 
+it('should handle zero price', function () {
+    Config::set('explorer.network', 'production');
+
+    $response = json_decode(file_get_contents(base_path('tests/fixtures/cryptocompare/histohour.json')), true);
+
+    $response['Data'][0]['close'] = 0;
+    $response['Data'][count($response['Data']) - 1]['close'] = 0;
+
+    Http::fake([
+        'cryptocompare.com/*' => Http::response($response),
+    ]);
+
+    expect(CryptoCompare::getPriceChange('ARK', 'USD'))->toBe(0.0);
+
+    Config::set('explorer.network', 'development');
+});
+
 it('should return null if cannot be exchanged', function () {
     Config::set('explorer.network', 'development');
 

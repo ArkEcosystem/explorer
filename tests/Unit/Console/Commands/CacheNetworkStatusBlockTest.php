@@ -9,8 +9,9 @@ use function Tests\fakeCryptoCompare;
 use App\Facades\Network;
 use App\Console\Commands\CacheNetworkStatusBlock;
 use Illuminate\Support\Facades\Config;
+use App\Contracts\Network as NetworkContract;
 
-it('should execute the command', function (string $network) {
+it('should execute the command', function () {
     Config::set('currencies', [
         'usd' => [
             'currency' => 'USD',
@@ -22,7 +23,7 @@ it('should execute the command', function (string $network) {
 
     configureExplorerDatabase();
 
-    $this->app->singleton(Network::class, fn () => new Blockchain(config($network)));
+    $this->app->singleton(NetworkContract::class, fn () => new Blockchain(config('explorer.networks.production')));
 
     $cache = new NetworkStatusBlockCache();
 
@@ -62,4 +63,33 @@ it('should execute the command', function (string $network) {
         '2021-05-19 16:00:00' => '1.61',
         '2021-05-19 17:00:00' => '1.638',
     ]));
-})->with(['explorer.networks.development', 'explorer.networks.production']);
+});
+
+it('should ignore the cache for development network', function () {
+    Config::set('currencies', [
+        'usd' => [
+            'currency' => 'USD',
+            'locale'   => 'en_US',
+        ],
+    ]);
+
+    fakeCryptoCompare();
+
+    configureExplorerDatabase();
+
+    $this->app->singleton(NetworkContract::class, fn () => new Blockchain(config('explorer.networks.development')));
+
+    $cache = new NetworkStatusBlockCache();
+
+    expect($cache->getPrice(Network::currency(), 'USD'))->toBeNull();
+    expect($cache->getMarketCap(Network::currency(), 'USD'))->toBeNull();
+    expect($cache->getPriceChange(Network::currency(), 'USD'))->toBeNull();
+    expect($cache->getHistoricalHourly(Network::currency(), 'USD'))->toBeNull();
+
+    (new CacheNetworkStatusBlock())->handle($cache);
+
+    expect($cache->getPrice(Network::currency(), 'USD'))->toBeNull();
+    expect($cache->getMarketCap(Network::currency(), 'USD'))->toBeNull();
+    expect($cache->getPriceChange(Network::currency(), 'USD'))->toBeNull();
+    expect($cache->getHistoricalHourly(Network::currency(), 'USD'))->toBeNull();
+});
