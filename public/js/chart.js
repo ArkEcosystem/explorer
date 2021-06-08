@@ -1,4 +1,4 @@
-import {getInfoFromThemeName, makeGradient, getFontConfig} from "./chart-theme";
+import { getInfoFromThemeName, makeGradient } from "./chart-theme";
 
 const CustomChart = (
     id,
@@ -13,8 +13,7 @@ const CustomChart = (
     return {
         time: time,
         chart: null,
-        currency: currency || 'USD',
-        fontConfig: {},
+        currency: currency || "USD",
 
         getCanvas() {
             return this.$refs[id];
@@ -24,21 +23,29 @@ const CustomChart = (
             return this.getCanvas().getContext("2d");
         },
 
+        getFontConfig() {
+            return {
+                fontSize: 14,
+                fontStyle: 600,
+                fontColor: "#B0B0B8",
+            };
+        },
+
         getRangeFromValues(values, margin = 0) {
             const max = Math.max.apply(Math, values);
             const min = Math.min.apply(Math, values);
-            const _margin = max * margin;
+            margin = max * margin;
 
             return {
-                min: min - _margin,
-                max: max + _margin,
+                min: min - margin,
+                max: max + margin,
             };
         },
 
         getCurrencyValue(value) {
-            return new Intl.NumberFormat('en-US', {
-                style: 'currency',
-                currency: this.currency
+            return new Intl.NumberFormat("en-US", {
+                style: "currency",
+                currency: this.currency,
             }).format(value);
         },
 
@@ -50,10 +57,6 @@ const CustomChart = (
             this.chart.datasets = this.loadData();
             this.chart.labels = labels;
             this.chart.update();
-        },
-
-        loadFontConfig() {
-            this.fontConfig = getFontConfig();
         },
 
         loadData() {
@@ -81,9 +84,10 @@ const CustomChart = (
 
                 datasets.push({
                     stack: "combined",
-                    label: value.name || "default",
+                    label: value.name || "",
                     data: value.data || value,
                     type: value.type || "line",
+                    fill: false,
                     backgroundColor:
                         value.type === "bar"
                             ? graphic.borderColor
@@ -96,14 +100,14 @@ const CustomChart = (
                         value.type === "bar"
                             ? "transparent"
                             : graphic.borderWidth,
-                    cubicInterpolationMode: 'monotone',
-                    tension: graphic.lineTension,
+                    lineTension: graphic.lineTension,
                     pointRadius: graphic.pointRadius,
-                    pointBackgroundColor: graphic.pointBackgroundColor,
                     pointHoverRadius: graphic.pointHoverRadius,
                     pointHoverBorderWidth: graphic.pointHoverBorderWidth,
-                    pointHoverBorderColor: graphic.borderColor,
-                    pointHoverBackgroundColor: graphic.pointHoverBackgroundColor,
+                    pointHoverBackgroundColor:
+                        graphic.pointHoverBackgroundColor,
+                    pointHitRadius: graphic.pointHitRadius,
+                    pointBackgroundColor: graphic.pointBackgroundColor,
                 });
             });
 
@@ -113,20 +117,25 @@ const CustomChart = (
         loadYAxes() {
             const axes = [];
 
+            const fontConfig = this.getFontConfig();
+
             values.forEach((value, key) => {
                 let range = this.getRangeFromValues(value, 0.01);
 
                 axes.push({
-                    display: grid === "true" && key === 0,
                     type: "linear",
                     position: "right",
+                    stacked: true,
                     ticks: {
-                        ...this.fontConfig.axis,
+                        ...fontConfig,
                         padding: 15,
+                        display: grid === "true" && key === 0,
                         suggestedMax: range.max,
-                        callback: (value, index, data) => this.getCurrencyValue(value),
+                        callback: (value, index, data) =>
+                            this.getCurrencyValue(value),
                     },
                     gridLines: {
+                        display: grid === "true" && key === 0,
                         drawBorder: false,
                     },
                 });
@@ -143,7 +152,7 @@ const CustomChart = (
             this.$watch("time", () => this.updateChart());
             window.addEventListener("resize", () => this.resizeChart());
 
-            this.loadFontConfig();
+            const fontConfig = this.getFontConfig();
 
             const data = {
                 type: "line",
@@ -154,15 +163,17 @@ const CustomChart = (
             const yAxes = this.loadYAxes();
 
             const options = {
-                spanGaps: true,
                 parsing: false,
                 normalized: true,
                 responsive: true,
                 maintainAspectRatio: false,
                 showScale: grid === "true",
-                animation: {duration: 300, easing: "easeOutQuad"},
-                legend: {display: false},
+                animation: { duration: 100, easing: "easeInOutQuad" },
+                legend: { display: false },
                 onResize: () => this.resizeChart(),
+                onHover: (e) => {
+                    console.log("hover", e);
+                },
                 layout: {
                     padding: {
                         left: 0,
@@ -171,37 +182,41 @@ const CustomChart = (
                         bottom: 0,
                     },
                 },
-                hover: {
+                interaction: {
+                    axis: "x",
                     mode: "nearest",
                     intersect: false,
-                    axis: "x",
                 },
                 tooltips: {
                     enabled: tooltips === "true",
+                    displayColors: false,
                     mode: "nearest",
                     intersect: false,
                     axis: "x",
-                    external: this.tooltip,
-                    displayColors: false,
-                    stacked: false,
                     callbacks: {
-                        title: (items) => {},
-                        label: (context) => this.getCurrencyValue(context.value),
-                        labelTextColor: (context) => this.fontConfig.tooltip.fontColor,
+                        title: (items, data) => {},
+                        label: (context) =>
+                            this.getCurrencyValue(context.value),
                     },
-                    backgroundColor: this.fontConfig.tooltip.backgroundColor,
+                    backgroundColor: "rgba(0, 0, 0, 0.8)",
+                    bodyColor: "#ffffff",
+                    bodyFont: fontConfig,
+                    padding: 12,
+                    position: "nearest",
                 },
                 scales: {
                     xAxes: [
                         {
-                            display: grid === "true",
                             type: "category",
                             labels: labels,
                             ticks: {
+                                display: grid === "true",
+                                includeBounds: true,
                                 padding: 10,
-                                ...this.fontConfig.axis,
+                                ...fontConfig,
                             },
                             gridLines: {
+                                display: grid === "true",
                                 drawBorder: false,
                             },
                         },
@@ -210,7 +225,7 @@ const CustomChart = (
                 },
             };
 
-            this.chart = new Chart(this.getCanvasContext(), {data, options});
+            this.chart = new Chart(this.getCanvasContext(), { data, options });
         },
     };
 };

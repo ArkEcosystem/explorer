@@ -13,7 +13,7 @@ const CustomChart = (
     return {
         time: time,
         chart: null,
-        currency: currency || 'USD',
+        currency: currency || "USD",
         fontConfig: {},
 
         getCanvas() {
@@ -36,9 +36,10 @@ const CustomChart = (
         },
 
         getCurrencyValue(value) {
-            return new Intl.NumberFormat('en-US', {
-                style: 'currency',
+            return new Intl.NumberFormat("en-US", {
+                style: "currency",
                 currency: this.currency
+           ,
             }).format(value);
         },
 
@@ -124,7 +125,8 @@ const CustomChart = (
                         ...this.fontConfig.axis,
                         padding: 15,
                         suggestedMax: range.max,
-                        callback: (value, index, data) => this.getCurrencyValue(value),
+                        callback: (value, index, data) =>
+                            this.getCurrencyValue(value),
                     },
                     gridLines: {
                         drawBorder: false,
