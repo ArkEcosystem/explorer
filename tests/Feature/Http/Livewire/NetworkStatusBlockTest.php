@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Session;
 use Livewire\Livewire;
 use function Tests\configureExplorerDatabase;
+use App\Services\Cache\NetworkStatusBlockCache;
 
 it('should render with a height, supply and not available market cap', function () {
     configureExplorerDatabase();
@@ -41,13 +42,6 @@ it('should render with a height, supply and not available market cap', function 
 it('should render with a height, supply and market cap', function () {
     Config::set('explorer.network', 'production');
 
-    Http::fake([
-        'cryptocompare.com/data/pricemultifull*' => Http::response(json_decode(file_get_contents(base_path('tests/fixtures/cryptocompare/pricemultifull.json')), true), 200),
-        'cryptocompare.com/data/price*'          => Http::response(['USD' => 0.2907], 200),
-        'cryptocompare.com/data/histoday*'       => Http::response(json_decode(file_get_contents(base_path('tests/fixtures/cryptocompare/historical.json')), true), 200),
-        'cryptocompare.com/data/histohour*'      => Http::response(json_decode(file_get_contents(base_path('tests/fixtures/cryptocompare/histohour.json')), true), 200),
-    ]);
-
     configureExplorerDatabase();
 
     Block::factory()->create([
@@ -57,7 +51,8 @@ it('should render with a height, supply and market cap', function () {
         ])->public_key,
     ]);
 
-    (new CryptoCompareCache())->setPrice('USD', 'USD', fn () => 1.646);
+    (new NetworkStatusBlockCache)->setPrice('ARK', 'USD', 1.606);
+    (new NetworkStatusBlockCache)->setMarketCap('ARK', 'USD', 254260570.60);
 
     Livewire::test(NetworkStatusBlock::class)
         ->assertSee('5,651,290') // Height
@@ -74,13 +69,6 @@ it('should render with a height, supply and market cap for BTC', function () {
 
     Session::put('settings', json_encode($settings));
 
-    Http::fake([
-        'cryptocompare.com/data/pricemultifull*' => Http::response(json_decode(file_get_contents(base_path('tests/fixtures/cryptocompare/pricemultifull.json')), true), 200),
-        'cryptocompare.com/data/price*'          => Http::response(['BTC' => 0.00003132], 200),
-        'cryptocompare.com/data/histoday*'       => Http::response(json_decode(file_get_contents(base_path('tests/fixtures/cryptocompare/historical.json')), true), 200),
-        'cryptocompare.com/data/histohour*'      => Http::response(json_decode(file_get_contents(base_path('tests/fixtures/cryptocompare/histohour.json')), true), 200),
-    ]);
-
     configureExplorerDatabase();
 
     Block::factory()->create([
@@ -90,7 +78,8 @@ it('should render with a height, supply and market cap for BTC', function () {
         ])->public_key,
     ]);
 
-    (new CryptoCompareCache())->setPrice('BTC', 'BTC', fn () => 0.00003132);
+    (new NetworkStatusBlockCache)->setPrice('ARK', 'BTC', 0.00003132);
+    (new NetworkStatusBlockCache)->setMarketCap('ARK', 'BTC', 4934.2677444);
 
     Livewire::test(NetworkStatusBlock::class)
         ->assertSee('5,651,290') // Height
@@ -102,9 +91,8 @@ it('should render with a height, supply and market cap for BTC', function () {
 it('should render the price change', function () {
     Config::set('explorer.networks.development.canBeExchanged', true);
 
-    Http::fake([
-        'cryptocompare.com/data/histohour*' => Http::response(json_decode(file_get_contents(base_path('tests/fixtures/cryptocompare/histohour.json')), true)),
-    ]);
+    (new NetworkStatusBlockCache)->setPriceChange('DARK', 'USD', 0.137);
+    (new NetworkStatusBlockCache)->setPrice('DARK', 'USD', 1);
 
     Livewire::test(NetworkStatusBlock::class)->assertSee('13.70%');
 });
@@ -112,13 +100,8 @@ it('should render the price change', function () {
 it('handle price change when price is zero', function () {
     Config::set('explorer.networks.development.canBeExchanged', true);
 
-    $response = json_decode(file_get_contents(base_path('tests/fixtures/cryptocompare/histohour.json')), true);
-    // Force 0 price
-    $response['Data'] = collect($response['Data'])->map(fn ($item) => array_merge($item, ['close' => 0]))->toArray();
-
-    Http::fake([
-        'cryptocompare.com/data/histohour*' => Http::response($response),
-    ]);
+    (new NetworkStatusBlockCache)->setPriceChange('DARK', 'USD', 0);
+    (new NetworkStatusBlockCache)->setPrice('DARK', 'USD', 1);
 
     Livewire::test(NetworkStatusBlock::class)->assertSee('0.00%');
 });
