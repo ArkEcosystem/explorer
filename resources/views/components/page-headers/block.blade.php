@@ -1,6 +1,6 @@
 <div class="dark:bg-theme-secondary-900">
     <x-ark-container container-class="flex flex-col space-y-6">
-        <h1 class="header-2">
+        <h1>
             @lang('pages.block.title')
         </h1>
 
@@ -50,7 +50,7 @@
                     />
                     <x-general.entity-header-item
                         :title="trans('pages.block.transaction_volume')"
-                        icon="app-transactions-amount"
+                        icon="app-supply"
                     >
                         <x-slot name="text">
                             <x-currency :currency="Network::currency()">{{ $block->amount() }}</x-currency>
