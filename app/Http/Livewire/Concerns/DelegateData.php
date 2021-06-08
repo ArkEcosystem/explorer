@@ -73,7 +73,7 @@ trait DelegateData
 
         $this->cacheLastBlocks($delegates->pluck('public_key')->toArray());
 
-        if (!Block::where('height', $heightRange[0])->exists()) {
+        if (! Block::where('height', $heightRange[0])->exists()) {
             return [];
         }
 
