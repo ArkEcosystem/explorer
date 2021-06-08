@@ -148,7 +148,7 @@ function fakeCryptoCompare(): void
 {
     Http::fake([
         'min-api.cryptzocompare.com/data/price*'    => Http::response(['USD' => 0.2907]),
-        'min-api.cryptocompare.com/data/histoday*' => Http::response(json_decode(file_get_contents(base_path('tests/fixtures/cryptocompare/historical.json')), true)),
+        'min-api.cryptocompare.com/data/histoday*'  => Http::response(json_decode(file_get_contents(base_path('tests/fixtures/cryptocompare/historical.json')), true)),
     ]);
 }
 
