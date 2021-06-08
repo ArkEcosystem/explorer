@@ -17,13 +17,6 @@ use function Tests\configureExplorerDatabase;
 it('should render with a height, supply and not available market cap', function () {
     configureExplorerDatabase();
 
-    Http::fake([
-        'cryptocompare.com/data/pricemultifull*' => Http::response(json_decode(file_get_contents(base_path('tests/fixtures/cryptocompare/pricemultifull.json')), true), 200),
-        'cryptocompare.com/data/price*'          => Http::response(['USD' => 0.2907], 200),
-        'cryptocompare.com/data/histoday*'       => Http::response(json_decode(file_get_contents(base_path('tests/fixtures/cryptocompare/historical.json')), true), 200),
-        'cryptocompare.com/data/histohour*'      => Http::response(json_decode(file_get_contents(base_path('tests/fixtures/cryptocompare/histohour.json')), true), 200),
-    ]);
-
     Block::factory()->create([
         'height'               => 5651290,
         'generator_public_key' => Wallet::factory()->create([
@@ -53,6 +46,7 @@ it('should render with a height, supply and market cap', function () {
 
     (new NetworkStatusBlockCache())->setPrice('ARK', 'USD', 1.606);
     (new NetworkStatusBlockCache())->setMarketCap('ARK', 'USD', 254260570.60);
+    (new NetworkStatusBlockCache())->setHistoricalHourly('ARK', 'USD', collect());
 
     Livewire::test(NetworkStatusBlock::class)
         ->assertSee('5,651,290') // Height
@@ -80,6 +74,7 @@ it('should render with a height, supply and market cap for BTC', function () {
 
     (new NetworkStatusBlockCache())->setPrice('ARK', 'BTC', 0.00003132);
     (new NetworkStatusBlockCache())->setMarketCap('ARK', 'BTC', 4934.2677444);
+    (new NetworkStatusBlockCache())->setHistoricalHourly('ARK', 'BTC', collect());
 
     Livewire::test(NetworkStatusBlock::class)
         ->assertSee('5,651,290') // Height
@@ -93,6 +88,7 @@ it('should render the price change', function () {
 
     (new NetworkStatusBlockCache())->setPriceChange('DARK', 'USD', 0.137);
     (new NetworkStatusBlockCache())->setPrice('DARK', 'USD', 1);
+    (new NetworkStatusBlockCache())->setHistoricalHourly('DARK', 'USD', collect());
 
     Livewire::test(NetworkStatusBlock::class)->assertSee('13.70%');
 });
@@ -102,6 +98,7 @@ it('handle price change when price is zero', function () {
 
     (new NetworkStatusBlockCache())->setPriceChange('DARK', 'USD', 0);
     (new NetworkStatusBlockCache())->setPrice('DARK', 'USD', 1);
+    (new NetworkStatusBlockCache())->setHistoricalHourly('DARK', 'USD', collect());
 
     Livewire::test(NetworkStatusBlock::class)->assertSee('0.00%');
 });
