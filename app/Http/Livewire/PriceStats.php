@@ -38,7 +38,7 @@ final class PriceStats extends Component
         return (new NetworkStatusBlockCache())->getPriceChange(Network::currency(), Settings::currency());
     }
 
-    private function getHistorical(): Collection
+    private function getHistorical(): ? Collection
     {
         if (! $this->isAvailable()) {
             return collect([4, 5, 2, 2, 2, 3, 5, 1, 4, 5, 6, 5, 3, 3, 4, 5, 6, 4, 4, 4, 5, 8, 8, 10]);

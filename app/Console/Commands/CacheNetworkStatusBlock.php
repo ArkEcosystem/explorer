@@ -32,14 +32,14 @@ final class CacheNetworkStatusBlock extends Command
             return;
         }
 
-        collect(array_values(config('currencies')))->each(function ($currency) use ($cache) {
+        collect(array_values(config('currencies')))->each(function ($currency) use ($cache) :void {
             $source = Network::currency();
             $target = $currency['currency'];
 
             try {
-                $cache->setPrice($source, $target, (float) CryptoCompare::price($source, $target));
-                $cache->setMarketCap($source, $target, (float) CryptoCompare::marketCap($source, $target));
-                $cache->setPriceChange($source, $target, (float) CryptoCompare::getPriceChange($source, $target));
+                $cache->setPrice($source, $target, CryptoCompare::price($source, $target));
+                $cache->setMarketCap($source, $target, CryptoCompare::marketCap($source, $target));
+                $cache->setPriceChange($source, $target, CryptoCompare::getPriceChange($source, $target));
                 $cache->setHistoricalHourly($source, $target, CryptoCompare::historicalHourly($source, $target));
             } catch (ConnectionException $e) {
                 $cache->setPrice($source, $target, null);

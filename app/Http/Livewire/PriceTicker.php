@@ -22,7 +22,7 @@ final class PriceTicker extends Component
 
     public string $to;
 
-    public bool $isAvailable;
+    public bool $isAvailable = false;
 
     public function mount(): void
     {
@@ -37,9 +37,13 @@ final class PriceTicker extends Component
         $this->to          = Settings::currency();
     }
 
-    private function getPriceFormatted(): ? string
+    private function getPriceFormatted(): string
     {
         $price = (new NetworkStatusBlockCache())->getPrice(Network::currency(), Settings::currency());
+
+        if ($price === null) {
+            return '';
+        }
 
         return NumberFormatter::currencyWithDecimalsWithoutSuffix($price, Settings::currency());
     }
