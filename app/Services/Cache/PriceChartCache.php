@@ -16,9 +16,9 @@ final class PriceChartCache implements Contract
     use ManagesCache;
     use ManagesChart;
 
-    public function getHistorical(string $currency, string $period): Collection
+    public function getHistorical(string $currency, string $period): array
     {
-        return $this->get(sprintf('historical/%s/%s', $currency, $period), collect([]));
+        return $this->get(sprintf('historical/%s/%s', $currency, $period), []);
     }
 
     public function setHistorical(string $currency, string $period, Collection $data): void

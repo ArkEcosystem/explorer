@@ -127,7 +127,7 @@ final class Chart extends Component
 
     private function chart(string $period): Collection
     {
-        return (new PriceChartCache())->getHistorical(Settings::currency(), $period);
+        return collect((new PriceChartCache())->getHistorical(Settings::currency(), $period));
     }
 
     private function chartTheme(): Collection
