@@ -4,8 +4,8 @@
    </div>
 @else
     <div id="statistics-list" class="w-full" wire:poll.{{ Network::blockTime() }}s="pollStatistics" wire:key="poll_statistics_real">
-        <div class="flex w-full space-x-4 md:flex-col xl:flex-row md:space-x-0 xl:space-x-4 md:space-y-4 xl:space-y-0">
-            <div class="flex flex-row px-6 py-3 bg-white rounded-xl dark:bg-theme-secondary-900">
+        <div class="flex space-x-4 w-full md:flex-col xl:flex-row md:space-x-0 xl:space-x-4 md:space-y-4 xl:space-y-0">
+            <div class="flex flex-row py-3 px-6 bg-white rounded-xl dark:bg-theme-secondary-900">
                 <div class="flex w-full lg:w-1/2 xl:w-full">
                     <x-general.header-entry
                         :title="trans('pages.delegates.statistics.forging')"
@@ -61,8 +61,8 @@
                 </div>
             </div>
 
-            <div class="flex flex-row w-full space-x-4">
-                <div class="flex flex-grow px-6 py-3 bg-white rounded-xl dark:bg-theme-secondary-900">
+            <div class="flex flex-row space-x-4 w-full">
+                <div class="flex flex-grow py-3 px-6 bg-white rounded-xl dark:bg-theme-secondary-900">
                     <x-general.header-entry
                         :title="trans('pages.delegates.statistics.block_count')"
                         :text="$statistics['blockCount']"
@@ -78,7 +78,7 @@
                     </x-general.header-entry>
                 </div>
 
-                <div class="flex flex-grow px-6 py-3 bg-white rounded-xl dark:bg-theme-secondary-900">
+                <div class="flex flex-grow py-3 px-6 bg-white rounded-xl dark:bg-theme-secondary-900">
                     @if($statistics['nextDelegate'])
                         <x-general.header-entry
                             :title="trans('pages.delegates.statistics.next_slot')"
@@ -88,7 +88,7 @@
                         >
                             <x-slot name="icon">
                                 <div class="flex items-center md:mr-4">
-                                    <div class="hidden border-4 border-white rounded-full md:flex text-theme-secondary-900 dark:text-theme-secondary-600 dark:border-theme-secondary-900">
+                                    <div class="hidden rounded-full border-4 border-white md:flex text-theme-secondary-900 dark:text-theme-secondary-600 dark:border-theme-secondary-900">
                                         <div
                                             class="bg-white rounded-full circled-icon dark:bg-theme-secondary-900">
                                             <x-ark-icon name="app-transactions.delegate-registration" />
