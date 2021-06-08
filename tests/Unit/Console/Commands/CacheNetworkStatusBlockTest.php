@@ -76,12 +76,9 @@ it('set values to null when cryptocompare is down', function () {
         ],
     ]);
 
-
-
     configureExplorerDatabase();
 
     $this->app->singleton(NetworkContract::class, fn () => new Blockchain(config('explorer.networks.production')));
-
 
     $cache = new NetworkStatusBlockCache();
 
