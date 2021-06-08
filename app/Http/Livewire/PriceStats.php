@@ -19,10 +19,10 @@ final class PriceStats extends Component
     public function render(): View
     {
         return view('livewire.price-stats', [
-            'from'       => Network::currency(),
-            'to'         => Settings::currency(),
-            'historical' => $this->getHistorical(),
-            'isPositive' => $this->getPriceChange() >= 0,
+            'from'           => Network::currency(),
+            'to'             => Settings::currency(),
+            'historical'     => $this->getHistorical(),
+            'isPositive'     => $this->getPriceChange() >= 0,
             'usePlaceholder' => ! $this->isAvailable(),
         ]);
     }
@@ -30,14 +30,13 @@ final class PriceStats extends Component
     private function isAvailable(): bool
     {
         return Network::canBeExchanged()
-            && (new NetworkStatusBlockCache)->getIsAvailable(Network::currency(), Settings::currency());
+            && (new NetworkStatusBlockCache())->getIsAvailable(Network::currency(), Settings::currency());
     }
 
     private function getPriceChange(): ?float
     {
-        return (new NetworkStatusBlockCache)->getPriceChange(Network::currency(), Settings::currency());
+        return (new NetworkStatusBlockCache())->getPriceChange(Network::currency(), Settings::currency());
     }
-
 
     private function getHistorical(): Collection
     {
@@ -45,6 +44,6 @@ final class PriceStats extends Component
             return collect([4, 5, 2, 2, 2, 3, 5, 1, 4, 5, 6, 5, 3, 3, 4, 5, 6, 4, 4, 4, 5, 8, 8, 10]);
         }
 
-        return (new NetworkStatusBlockCache)->getHistoricalHourly(Network::currency(), Settings::currency());
+        return (new NetworkStatusBlockCache())->getHistoricalHourly(Network::currency(), Settings::currency());
     }
 }

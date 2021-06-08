@@ -33,13 +33,13 @@ final class NetworkStatusBlock extends Component
 
     private function getPriceChange(): ?float
     {
-        return (new NetworkStatusBlockCache)->getPriceChange(Network::currency(), Settings::currency());
+        return (new NetworkStatusBlockCache())->getPriceChange(Network::currency(), Settings::currency());
     }
 
     private function getPriceFormatted(): ? string
     {
         $currency = Settings::currency();
-        $price = (new NetworkStatusBlockCache)->getPrice(Network::currency(), $currency);
+        $price    = (new NetworkStatusBlockCache())->getPrice(Network::currency(), $currency);
 
         if ($price === null) {
             return null;
@@ -62,7 +62,7 @@ final class NetworkStatusBlock extends Component
     private function getMarketCapFormatted(): ? string
     {
         $currency  = Settings::currency();
-        $marketcap = (new NetworkStatusBlockCache)->getMarketCap(Network::currency(), $currency);
+        $marketcap = (new NetworkStatusBlockCache())->getMarketCap(Network::currency(), $currency);
 
         if ($marketcap === null) {
             return null;

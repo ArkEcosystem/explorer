@@ -31,15 +31,15 @@ final class PriceTicker extends Component
 
     public function setValues(): void
     {
-        $this->isAvailable = (new NetworkStatusBlockCache)->getIsAvailable(Network::currency(), Settings::currency());
-        $this->price = $this->getPriceFormatted();
-        $this->from  = Network::currency();
-        $this->to    = Settings::currency();
+        $this->isAvailable = (new NetworkStatusBlockCache())->getIsAvailable(Network::currency(), Settings::currency());
+        $this->price       = $this->getPriceFormatted();
+        $this->from        = Network::currency();
+        $this->to          = Settings::currency();
     }
 
     private function getPriceFormatted(): ? string
     {
-        $price = (new NetworkStatusBlockCache)->getPrice(Network::currency(), Settings::currency());
+        $price = (new NetworkStatusBlockCache())->getPrice(Network::currency(), Settings::currency());
 
         return NumberFormatter::currencyWithDecimalsWithoutSuffix($price, Settings::currency());
     }

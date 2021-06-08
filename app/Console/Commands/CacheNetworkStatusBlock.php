@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Console\Commands;
 
 use App\Facades\Network;
-use Illuminate\Console\Command;
 use App\Services\Cache\NetworkStatusBlockCache;
 use App\Services\CryptoCompare;
+use Illuminate\Console\Command;
 use Illuminate\Http\Client\ConnectionException;
 
 final class CacheNetworkStatusBlock extends Command
@@ -32,7 +32,7 @@ final class CacheNetworkStatusBlock extends Command
             return;
         }
 
-        collect (array_values(config('currencies')))->each(function ($currency) use ($cache) {
+        collect(array_values(config('currencies')))->each(function ($currency) use ($cache) {
             $source = Network::currency();
             $target = $currency['currency'];
 

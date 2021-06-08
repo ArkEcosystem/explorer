@@ -17,6 +17,7 @@ final class NetworkStatusBlockCache implements Contract
     public function getMarketCap(string $source, string $target): ?float
     {
         $marketCap = $this->get(sprintf('marketcap/%s/%s', $source, $target));
+
         return $marketCap === null ? null : (float) $marketCap;
     }
 
@@ -42,6 +43,7 @@ final class NetworkStatusBlockCache implements Contract
     public function getPrice(string $source, string $target): ?float
     {
         $price = $this->get(sprintf('price/%s/%s', $source, $target));
+
         return $price === null ? null : (float) $price;
     }
 
@@ -55,6 +57,7 @@ final class NetworkStatusBlockCache implements Contract
     public function getPriceChange(string $source, string $target): ?float
     {
         $priceChange = $this->get(sprintf('pricechange/%s/%s', $source, $target));
+
         return $priceChange === null ? null : (float) $priceChange;
     }
 
