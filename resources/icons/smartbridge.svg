@@ -3,7 +3,7 @@
 <svg version="1.1" id="Слой_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 20 20" style="enable-background:new 0 0 20 20;" xml:space="preserve">
 <style type="text/css">
-	.st0{fill:none;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+	.st0{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
 </style>
 <g id="SmartBridge" transform="translate(797.5 325.569)">
 	<path id="Контур_325" class="st0" d="M-779.6-307.8c0,0.6-0.4,1.2-1.1,1.2h-13.6c-0.6,0-1.2-0.5-1.2-1.2v-15.6

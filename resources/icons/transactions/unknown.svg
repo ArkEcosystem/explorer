@@ -3,8 +3,8 @@
 <svg version="1.1" id="Слой_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 20 20" style="enable-background:new 0 0 20 20;" xml:space="preserve">
 <style type="text/css">
-	.st0{fill:none;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
-	.st1{fill:none;stroke:#000000;stroke-width:2;stroke-linecap:round;}
+	.st0{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+	.st1{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;}
 </style>
 <g id="Unknown_transaction_" transform="translate(477.25 322.25)">
 	<path id="Shape_895" class="st0" d="M-467-303.6c0.1,0,0.2,0.1,0.2,0.2s-0.1,0.2-0.2,0.2s-0.2-0.1-0.2-0.2l0,0
