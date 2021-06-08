@@ -121,7 +121,7 @@ const CustomChart = (
                     type: "linear",
                     position: "right",
                     ticks: {
-                        ...getFontConfig('axis', theme.mode),
+                        ...getFontConfig("axis", theme.mode),
                         padding: 15,
                         suggestedMax: range.max,
                         callback: (value, index, data) =>
@@ -188,9 +188,10 @@ const CustomChart = (
                         label: (context) =>
                             this.getCurrencyValue(context.value),
                         labelTextColor: (context) =>
-                            getFontConfig('tooltip', theme.mode).fontColor,
+                            getFontConfig("tooltip", theme.mode).fontColor,
                     },
-                    backgroundColor: getFontConfig('tooltip', theme.mode).backgroundColor,
+                    backgroundColor: getFontConfig("tooltip", theme.mode)
+                        .backgroundColor,
                 },
                 scales: {
                     xAxes: [
@@ -200,7 +201,7 @@ const CustomChart = (
                             labels: labels,
                             ticks: {
                                 padding: 10,
-                                ...getFontConfig('axis', theme.mode),
+                                ...getFontConfig("axis", theme.mode),
                             },
                             gridLines: {
                                 drawBorder: false,
