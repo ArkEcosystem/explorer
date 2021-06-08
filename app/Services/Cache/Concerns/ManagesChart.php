@@ -8,11 +8,11 @@ use Illuminate\Support\Collection;
 
 trait ManagesChart
 {
-    private function chartjs(Collection $datasets): array
+    private function chartjs(Collection $datasets): Collection
     {
-        return [
+        return collect([
             'labels'   => $datasets->keys()->toArray(),
             'datasets' => $datasets->values()->toArray(),
-        ];
+        ]);
     }
 }

@@ -38,10 +38,14 @@ final class CachePrices extends Command
         collect(config('currencies'))->values()->each(function ($currency) use ($crypto, $cache): void {
             $currency = $currency['currency'];
             $prices   = CryptoCompare::historical(Network::currency(), $currency);
+            $hourlyPrices   = CryptoCompare::historicalHourly(Network::currency(), $currency);
 
-            $crypto->setPrices($currency, $prices);
+            collect(['day', 'week', 'month', 'quarter', 'year', 'all'])->each(function ($period) use ($currency, $crypto, $cache, $prices, $hourlyPrices): void {
+                if ($period === 'day') {
+                    $prices = $hourlyPrices;
+                }
 
-            collect(['day', 'week', 'month', 'quarter', 'year', 'all'])->each(function ($period) use ($currency, $cache, $prices): void {
+                $crypto->setPrices($currency.'.'.$period, $prices);
                 $method = sprintf('get%s', Str::title($period));
 
                 $cache->setHistorical($currency, $period, $this->{$method}($prices));
@@ -83,6 +87,6 @@ final class CachePrices extends Command
     {
         return $datasets
             ->groupBy(fn ($_, $key) => Carbon::parse($key)->format($format))
-            ->mapWithKeys(fn ($values, $key) => [$key => $values->first()]);
+            ->mapWithKeys(fn ($values, $key) => [$key => (float) $values->first()]);
     }
 }
