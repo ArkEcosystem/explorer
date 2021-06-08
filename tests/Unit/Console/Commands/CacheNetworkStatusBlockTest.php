@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
+use App\Console\Commands\CacheNetworkStatusBlock;
+use App\Contracts\Network as NetworkContract;
+use App\Facades\Network;
 use App\Services\Blockchain\Network as Blockchain;
 use App\Services\Cache\NetworkStatusBlockCache;
+use Illuminate\Support\Facades\Config;
 use function Tests\configureExplorerDatabase;
 use function Tests\fakeCryptoCompare;
-use App\Facades\Network;
-use App\Console\Commands\CacheNetworkStatusBlock;
-use Illuminate\Support\Facades\Config;
-use App\Contracts\Network as NetworkContract;
 
 it('should execute the command', function () {
     Config::set('currencies', [
