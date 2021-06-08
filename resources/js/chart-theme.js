@@ -19,8 +19,8 @@ function themes() {
                         {stop: 1, alpha: 0, value: "#eef3f5"},
                     ],
                 },
-                pointBackgroundColor: "#ffffff",
-                pointHoverBackgroundColor: "#ffffff",
+                pointBackgroundColor: "#212225",
+                pointHoverBackgroundColor: "#212225",
             },
             light: {
                 ..._default,
@@ -48,8 +48,8 @@ function themes() {
                         {stop: 1, alpha: 0, value: "#7e8a9c"},
                     ],
                 },
-                pointBackgroundColor: "#ffffff",
-                pointHoverBackgroundColor: "#ffffff",
+                pointBackgroundColor: "#212225",
+                pointHoverBackgroundColor: "#212225",
             },
             light: {
                 ..._default,
@@ -77,8 +77,8 @@ function themes() {
                         {stop: 1, alpha: 0, value: "#ffae10"},
                     ],
                 },
-                pointBackgroundColor: "#ffffff",
-                pointHoverBackgroundColor: "#ffffff",
+                pointBackgroundColor: "#212225",
+                pointHoverBackgroundColor: "#212225",
             },
             light: {
                 ..._default,
@@ -106,8 +106,8 @@ function themes() {
                         {stop: 1, alpha: 0, value: "#289548"},
                     ],
                 },
-                pointBackgroundColor: "#ffffff",
-                pointHoverBackgroundColor: "#ffffff",
+                pointBackgroundColor: "#212225",
+                pointHoverBackgroundColor: "#212225",
             },
             light: {
                 ..._default,
@@ -135,8 +135,8 @@ function themes() {
                         {stop: 1, alpha: 0, value: "#de5846"},
                     ],
                 },
-                pointBackgroundColor: "#ffffff",
-                pointHoverBackgroundColor: "#ffffff",
+                pointBackgroundColor: "#212225",
+                pointHoverBackgroundColor: "#212225",
             },
             light: {
                 ..._default,
@@ -191,16 +191,36 @@ export function getInfoFromThemeName(name, mode) {
     return themes()[name][mode];
 }
 
-export function getFontConfig() {
-    return {
+export function getFontConfig(type, mode) {
+    const _default = {
         axis: {
             fontSize: 14,
             fontStyle: 600,
-            fontColor: "#B0B0B8",
-        },
-        tooltip: {
-            fontColor: "#637282",
-            backgroundColor: "#ffffff",
         },
     };
+
+    const config = {
+        axis: {
+            light: {
+                ..._default.axis,
+                fontColor: "#A5ADB9",
+            },
+            dark: {
+                ..._default.axis,
+                fontColor: "#637282",
+            },
+        },
+        tooltip: {
+            light: {
+                fontColor: "#637282",
+                backgroundColor: "#ffffff",
+            },
+            dark: {
+                fontColor: "#A5ADB9",
+                backgroundColor: "#212225",
+            },
+        },
+    };
+
+    return config[type][mode];
 }

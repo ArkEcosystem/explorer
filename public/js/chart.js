@@ -14,7 +14,6 @@ const CustomChart = (
         time: time,
         chart: null,
         currency: currency || "USD",
-        fontConfig: {},
 
         getCanvas() {
             return this.$refs[id];
@@ -51,10 +50,6 @@ const CustomChart = (
             this.chart.datasets = this.loadData();
             this.chart.labels = labels;
             this.chart.update();
-        },
-
-        loadFontConfig() {
-            this.fontConfig = getFontConfig();
         },
 
         loadData() {
@@ -122,7 +117,7 @@ const CustomChart = (
                     type: "linear",
                     position: "right",
                     ticks: {
-                        ...this.fontConfig.axis,
+                        ...getFontConfig('axis', theme.mode),
                         padding: 15,
                         suggestedMax: range.max,
                         callback: (value, index, data) =>
@@ -144,8 +139,6 @@ const CustomChart = (
 
             this.$watch("time", () => this.updateChart());
             window.addEventListener("resize", () => this.resizeChart());
-
-            this.loadFontConfig();
 
             const data = {
                 type: "line",
@@ -189,9 +182,9 @@ const CustomChart = (
                     callbacks: {
                         title: (items) => {},
                         label: (context) => this.getCurrencyValue(context.value),
-                        labelTextColor: (context) => this.fontConfig.tooltip.fontColor,
+                        labelTextColor: (context) => getFontConfig('tooltip', theme.mode).fontColor,
                     },
-                    backgroundColor: this.fontConfig.tooltip.backgroundColor,
+                    backgroundColor: getFontConfig('tooltip', theme.mode).backgroundColor,
                 },
                 scales: {
                     xAxes: [
@@ -201,7 +194,7 @@ const CustomChart = (
                             labels: labels,
                             ticks: {
                                 padding: 10,
-                                ...this.fontConfig.axis,
+                                ...getFontConfig('axis', theme.mode),
                             },
                             gridLines: {
                                 drawBorder: false,
