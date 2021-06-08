@@ -49,7 +49,7 @@
                     @if ($wallet->isResigned())
                         <x-page-headers.avatar-with-icon :model="$wallet" icon="app.transactions-delegate-resignation" />
                     @else
-                        <x-page-headers.avatar-with-icon :model="$wallet" icon="app-delegate" />
+                        <x-page-headers.avatar-with-icon :model="$wallet" icon="app-delegate-name" />
                     @endif
                 @else
                     <x-page-headers.avatar :model="$wallet" />
@@ -59,7 +59,7 @@
             @if($wallet->isDelegate())
                 <x-slot name="extraLogo">
                     <div class="lg:hidden circled-icon text-theme-secondary-400 border-theme-danger-400">
-                        <x-ark-icon name="app-delegate" />
+                        <x-ark-icon name="app-delegate-name" />
                     </div>
                 </x-slot>
             @endif
