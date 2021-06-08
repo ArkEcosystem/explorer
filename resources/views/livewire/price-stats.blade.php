@@ -1,6 +1,6 @@
 <div
     wire:poll.60s
-    class="justify-end flex-grow hidden lg:flex"
+    class="hidden flex-grow justify-end lg:flex"
 >
     <div
         wire:key="{{ Settings::currency() }}-{{ $isPositive ? 'positive' : 'negative' }}-{{ $usePlaceholder ? 'placeholder' : 'live' }}"
