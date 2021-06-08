@@ -35,13 +35,13 @@ final class CachePrices extends Command
             return;
         }
 
-        collect(config('currencies'))->values()->each(function ($currency) use ($crypto, $cache) {
+        collect(config('currencies'))->values()->each(function ($currency) use ($crypto, $cache): void {
             $currency = $currency['currency'];
             $prices   = CryptoCompare::historical(Network::currency(), $currency);
 
             $crypto->setPrices($currency, $prices);
 
-            collect(['day', 'week', 'month', 'quarter', 'year', 'all'])->each(function ($period) use ($currency, $cache, $prices) {
+            collect(['day', 'week', 'month', 'quarter', 'year', 'all'])->each(function ($period) use ($currency, $cache, $prices): void {
                 $method = sprintf('get%s', Str::title($period));
 
                 $cache->setHistorical($currency, $period, $this->{$method}($prices));
