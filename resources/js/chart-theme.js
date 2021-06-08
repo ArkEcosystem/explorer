@@ -15,8 +15,8 @@ function themes() {
                 pointHoverBorderColor: "#eef3f5",
                 backgroundColor: {
                     gradient: [
-                        {stop: 0, alpha: 0.5, value: "#eef3f5"},
-                        {stop: 1, alpha: 0, value: "#eef3f5"},
+                        { stop: 0, alpha: 0.5, value: "#eef3f5" },
+                        { stop: 1, alpha: 0, value: "#eef3f5" },
                     ],
                 },
                 pointBackgroundColor: "#ffffff",
@@ -28,8 +28,8 @@ function themes() {
                 pointHoverBorderColor: "#212225",
                 backgroundColor: {
                     gradient: [
-                        {stop: 0, alpha: 10.5, value: "#212225"},
-                        {stop: 1, alpha: 0, value: "#212225"},
+                        { stop: 0, alpha: 10.5, value: "#212225" },
+                        { stop: 1, alpha: 0, value: "#212225" },
                     ],
                 },
                 pointBackgroundColor: "#ffffff",
@@ -44,8 +44,8 @@ function themes() {
                 pointHoverBorderColor: "#7e8a9c",
                 backgroundColor: {
                     gradient: [
-                        {stop: 0, alpha: 1, value: "#7e8a9c"},
-                        {stop: 1, alpha: 0, value: "#7e8a9c"},
+                        { stop: 0, alpha: 1, value: "#7e8a9c" },
+                        { stop: 1, alpha: 0, value: "#7e8a9c" },
                     ],
                 },
                 pointBackgroundColor: "#ffffff",
@@ -57,8 +57,8 @@ function themes() {
                 pointHoverBorderColor: "#c4c8cf",
                 backgroundColor: {
                     gradient: [
-                        {stop: 0, alpha: 1, value: "#c4c8cf"},
-                        {stop: 1, alpha: 0, value: "#c4c8cf"},
+                        { stop: 0, alpha: 1, value: "#c4c8cf" },
+                        { stop: 1, alpha: 0, value: "#c4c8cf" },
                     ],
                 },
                 pointBackgroundColor: "#ffffff",
@@ -73,8 +73,8 @@ function themes() {
                 pointHoverBorderColor: "#ffae10",
                 backgroundColor: {
                     gradient: [
-                        {stop: 0, alpha: 0.5, value: "#ffae10"},
-                        {stop: 1, alpha: 0, value: "#ffae10"},
+                        { stop: 0, alpha: 0.5, value: "#ffae10" },
+                        { stop: 1, alpha: 0, value: "#ffae10" },
                     ],
                 },
                 pointBackgroundColor: "#ffffff",
@@ -86,8 +86,8 @@ function themes() {
                 pointHoverBorderColor: "#ffae10",
                 backgroundColor: {
                     gradient: [
-                        {stop: 0, alpha: 0.5, value: "#ffae10"},
-                        {stop: 1, alpha: 0, value: "#ffae10"},
+                        { stop: 0, alpha: 0.5, value: "#ffae10" },
+                        { stop: 1, alpha: 0, value: "#ffae10" },
                     ],
                 },
                 pointBackgroundColor: "#ffffff",
@@ -102,8 +102,8 @@ function themes() {
                 pointHoverBorderColor: "#289548",
                 backgroundColor: {
                     gradient: [
-                        {stop: 0, alpha: 0.5, value: "#289548"},
-                        {stop: 1, alpha: 0, value: "#289548"},
+                        { stop: 0, alpha: 0.5, value: "#289548" },
+                        { stop: 1, alpha: 0, value: "#289548" },
                     ],
                 },
                 pointBackgroundColor: "#ffffff",
@@ -115,8 +115,8 @@ function themes() {
                 pointHoverBorderColor: "#289548",
                 backgroundColor: {
                     gradient: [
-                        {stop: 0, alpha: 0.5, value: "#289548"},
-                        {stop: 1, alpha: 0, value: "#289548"},
+                        { stop: 0, alpha: 0.5, value: "#289548" },
+                        { stop: 1, alpha: 0, value: "#289548" },
                     ],
                 },
                 pointBackgroundColor: "#ffffff",
@@ -131,8 +131,8 @@ function themes() {
                 pointHoverBorderColor: "#de5846",
                 backgroundColor: {
                     gradient: [
-                        {stop: 0, alpha: 0.5, value: "#de5846"},
-                        {stop: 1, alpha: 0, value: "#de5846"},
+                        { stop: 0, alpha: 0.5, value: "#de5846" },
+                        { stop: 1, alpha: 0, value: "#de5846" },
                     ],
                 },
                 pointBackgroundColor: "#ffffff",
@@ -144,8 +144,8 @@ function themes() {
                 pointHoverBorderColor: "#de5846",
                 backgroundColor: {
                     gradient: [
-                        {stop: 0, alpha: 0.5, value: "#de5846"},
-                        {stop: 1, alpha: 0, value: "#de5846"},
+                        { stop: 0, alpha: 0.5, value: "#de5846" },
+                        { stop: 1, alpha: 0, value: "#de5846" },
                     ],
                 },
                 pointBackgroundColor: "#ffffff",
@@ -163,10 +163,10 @@ export function hexToRgb(hex) {
 
     return result
         ? {
-            r: parseInt(result[1], 16),
-            g: parseInt(result[2], 16),
-            b: parseInt(result[3], 16),
-        }
+              r: parseInt(result[1], 16),
+              g: parseInt(result[2], 16),
+              b: parseInt(result[3], 16),
+          }
         : null;
 }
 
