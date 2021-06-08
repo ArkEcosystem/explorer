@@ -9,7 +9,6 @@ use App\Services\Cache\CryptoCompareCache;
 use App\Services\Cache\NetworkStatusBlockCache;
 use App\Services\Settings;
 use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Session;
 use Livewire\Livewire;
 use function Tests\configureExplorerDatabase;
