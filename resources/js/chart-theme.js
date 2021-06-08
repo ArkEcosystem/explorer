@@ -5,32 +5,35 @@ function themes() {
         pointRadius: 0,
         pointHoverRadius: 6,
         pointHoverBorderWidth: 2,
-        pointHoverBackgroundColor: "rgba(204,230,211,0.5)",
-        pointHitRadius: 1,
-        pointBackgroundColor: "rgba(255,255,255,1)"
     };
 
-    const colors = {
+    return {
         black: {
             dark: {
                 ..._default,
                 borderColor: "#eef3f5",
+                pointHoverBorderColor: "#eef3f5",
                 backgroundColor: {
                     gradient: [
-                        { stop: 0, alpha: 0.5, value: "#eef3f5" },
-                        { stop: 1, alpha: 0, value: "#eef3f5" },
+                        {stop: 0, alpha: 0.5, value: "#eef3f5"},
+                        {stop: 1, alpha: 0, value: "#eef3f5"},
                     ],
                 },
+                pointBackgroundColor: "#ffffff",
+                pointHoverBackgroundColor: "#ffffff",
             },
             light: {
                 ..._default,
                 borderColor: "#212225",
+                pointHoverBorderColor: "#212225",
                 backgroundColor: {
                     gradient: [
-                        { stop: 0, alpha: 10.5, value: "#212225" },
-                        { stop: 1, alpha: 0, value: "#212225" },
+                        {stop: 0, alpha: 10.5, value: "#212225"},
+                        {stop: 1, alpha: 0, value: "#212225"},
                     ],
                 },
+                pointBackgroundColor: "#ffffff",
+                pointHoverBackgroundColor: "#ffffff",
             },
         },
 
@@ -38,22 +41,28 @@ function themes() {
             dark: {
                 ..._default,
                 borderColor: "#7e8a9c",
+                pointHoverBorderColor: "#7e8a9c",
                 backgroundColor: {
                     gradient: [
-                        { stop: 0, alpha: 1, value: "#7e8a9c" },
-                        { stop: 1, alpha: 0, value: "#7e8a9c" },
+                        {stop: 0, alpha: 1, value: "#7e8a9c"},
+                        {stop: 1, alpha: 0, value: "#7e8a9c"},
                     ],
                 },
+                pointBackgroundColor: "#ffffff",
+                pointHoverBackgroundColor: "#ffffff",
             },
             light: {
                 ..._default,
                 borderColor: "#c4c8cf",
+                pointHoverBorderColor: "#c4c8cf",
                 backgroundColor: {
                     gradient: [
-                        { stop: 0, alpha: 1, value: "#c4c8cf" },
-                        { stop: 1, alpha: 0, value: "#c4c8cf" },
+                        {stop: 0, alpha: 1, value: "#c4c8cf"},
+                        {stop: 1, alpha: 0, value: "#c4c8cf"},
                     ],
                 },
+                pointBackgroundColor: "#ffffff",
+                pointHoverBackgroundColor: "#ffffff",
             },
         },
 
@@ -61,22 +70,28 @@ function themes() {
             dark: {
                 ..._default,
                 borderColor: "#ffae10",
+                pointHoverBorderColor: "#ffae10",
                 backgroundColor: {
                     gradient: [
-                        { stop: 0, alpha: 0.5, value: "#ffae10" },
-                        { stop: 1, alpha: 0, value: "#ffae10" },
+                        {stop: 0, alpha: 0.5, value: "#ffae10"},
+                        {stop: 1, alpha: 0, value: "#ffae10"},
                     ],
                 },
+                pointBackgroundColor: "#ffffff",
+                pointHoverBackgroundColor: "#ffffff",
             },
             light: {
                 ..._default,
                 borderColor: "#ffae10",
+                pointHoverBorderColor: "#ffae10",
                 backgroundColor: {
                     gradient: [
-                        { stop: 0, alpha: 0.5, value: "#ffae10" },
-                        { stop: 1, alpha: 0, value: "#ffae10" },
+                        {stop: 0, alpha: 0.5, value: "#ffae10"},
+                        {stop: 1, alpha: 0, value: "#ffae10"},
                     ],
                 },
+                pointBackgroundColor: "#ffffff",
+                pointHoverBackgroundColor: "#ffffff",
             },
         },
 
@@ -84,22 +99,28 @@ function themes() {
             dark: {
                 ..._default,
                 borderColor: "#289548",
+                pointHoverBorderColor: "#289548",
                 backgroundColor: {
                     gradient: [
-                        { stop: 0, alpha: 0.5, value: "#289548" },
-                        { stop: 1, alpha: 0, value: "#289548" },
+                        {stop: 0, alpha: 0.5, value: "#289548"},
+                        {stop: 1, alpha: 0, value: "#289548"},
                     ],
                 },
+                pointBackgroundColor: "#ffffff",
+                pointHoverBackgroundColor: "#ffffff",
             },
             light: {
                 ..._default,
                 borderColor: "#289548",
+                pointHoverBorderColor: "#289548",
                 backgroundColor: {
                     gradient: [
-                        { stop: 0, alpha: 0.5, value: "#289548" },
-                        { stop: 1, alpha: 0, value: "#289548" },
+                        {stop: 0, alpha: 0.5, value: "#289548"},
+                        {stop: 1, alpha: 0, value: "#289548"},
                     ],
                 },
+                pointBackgroundColor: "#ffffff",
+                pointHoverBackgroundColor: "#ffffff",
             },
         },
 
@@ -107,32 +128,30 @@ function themes() {
             dark: {
                 ..._default,
                 borderColor: "#de5846",
+                pointHoverBorderColor: "#de5846",
                 backgroundColor: {
                     gradient: [
-                        { stop: 0, alpha: 0.5, value: "#de5846" },
-                        { stop: 1, alpha: 0, value: "#de5846" },
+                        {stop: 0, alpha: 0.5, value: "#de5846"},
+                        {stop: 1, alpha: 0, value: "#de5846"},
                     ],
                 },
+                pointBackgroundColor: "#ffffff",
+                pointHoverBackgroundColor: "#ffffff",
             },
             light: {
                 ..._default,
                 borderColor: "#de5846",
+                pointHoverBorderColor: "#de5846",
                 backgroundColor: {
                     gradient: [
-                        { stop: 0, alpha: 0.5, value: "#de5846" },
-                        { stop: 1, alpha: 0, value: "#de5846" },
+                        {stop: 0, alpha: 0.5, value: "#de5846"},
+                        {stop: 1, alpha: 0, value: "#de5846"},
                     ],
                 },
+                pointBackgroundColor: "#ffffff",
+                pointHoverBackgroundColor: "#ffffff",
             },
         },
-    };
-
-    return {
-        grey: colors.grey,
-        black: colors.black,
-        yellow: colors.yellow,
-        green: colors.green,
-        red: colors.red,
     };
 }
 
@@ -144,10 +163,10 @@ export function hexToRgb(hex) {
 
     return result
         ? {
-              r: parseInt(result[1], 16),
-              g: parseInt(result[2], 16),
-              b: parseInt(result[3], 16),
-          }
+            r: parseInt(result[1], 16),
+            g: parseInt(result[2], 16),
+            b: parseInt(result[3], 16),
+        }
         : null;
 }
 
@@ -169,18 +188,19 @@ export function makeGradient(canvas, options) {
 }
 
 export function getInfoFromThemeName(name, mode) {
-    const theme = themes()[name][mode];
+    return themes()[name][mode];
+}
 
+export function getFontConfig() {
     return {
-        backgroundColor: theme.backgroundColor,
-        borderColor: theme.borderColor,
-        borderWidth: theme.borderWidth,
-        lineTension: theme.lineTension,
-        pointRadius: theme.pointRadius,
-        pointHoverRadius: theme.pointHoverRadius,
-        pointHoverBorderWidth: theme.pointHoverBorderWidth,
-        pointHoverBackgroundColor: theme.pointHoverBackgroundColor,
-        pointHitRadius: theme.pointHitRadius,
-        pointBackgroundColor: theme.pointBackgroundColor
+        axis: {
+            fontSize: 14,
+            fontStyle: 600,
+            fontColor: "#B0B0B8",
+        },
+        tooltip: {
+            fontColor: "#637282",
+            backgroundColor: "#ffffff",
+        },
     };
 }
