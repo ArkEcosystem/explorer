@@ -1,7 +1,7 @@
-<div class="h-20"></div>
+<div class="h-20 mb-0.5"></div>
 <div x-data="{ open: false, showSettings: false }" id="navbar" class="fixed z-20 w-full">
     <nav class="relative z-30 bg-white shadow-header-smooth dark:shadow-header-smooth-dark dark:bg-theme-secondary-900">
-        <div class="px-8 md:px-10">
+        <div class="px-8 border-t border-b border-transparent md:px-10">
             <div class="relative flex justify-between h-20">
 
                 {{-- LOGO --}}
