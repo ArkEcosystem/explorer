@@ -16,7 +16,7 @@
     :class="$class . ' text-left'"
 >
     @isset ($slot)
-        <div class="inline-flex items-center justify-end w-full space-x-2 md:justify-start">
+        <div class="inline-flex justify-end items-center space-x-2 w-full md:justify-start">
             <div>@lang($name)</div>
 
             {{ $slot }}
