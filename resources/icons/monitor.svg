@@ -1,1 +1,17 @@
-<svg version="1.1" id="Слой_1" xmlns="http://www.w3.org/2000/svg" x="0" y="0" viewBox="0 0 20.7 20.7" xml:space="preserve"><style>.monitor-st0{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}</style><g id="monitor" transform="translate(-348.498 -1689.998)"><g id="Group_169" transform="translate(349.498 1690.998)"><g id="analytics-pie-1"><path id="Shape_1038" class="monitor-st0" d="M10.7 0v8h8c0-4.4-3.6-8-8-8z"/><path id="Shape_1039" class="monitor-st0" d="M8 2.7c-4.4 0-8 3.6-8 8s3.6 8 8 8 8-3.6 8-8H8v-8z"/></g></g></g></svg>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 25.2.3, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Слой_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 20 20" style="enable-background:new 0 0 20 20;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:none;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+</style>
+<g id="Market_Cap_Fees_Monitor" transform="translate(-57.246 -1397.998)">
+	<g id="Group_169" transform="translate(349.498 1690.998)">
+		<g id="analytics-pie-1">
+			<path id="Shape_1038" class="st0" d="M-280.1-292v6.8h6.8C-273.2-289-276.3-292-280.1-292L-280.1-292z"/>
+			<path id="Shape_1039" class="st0" d="M-283.5-289.4c-4.2,0-7.7,3.4-7.7,7.7c0,4.2,3.4,7.7,7.7,7.7c4.2,0,7.7-3.4,7.7-7.7l0,0
+				h-7.7V-289.4z"/>
+		</g>
+	</g>
+</g>
+</svg>

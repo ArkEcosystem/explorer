@@ -6,8 +6,12 @@
 	.st0{fill:none;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
 </style>
 <g id="Vote" transform="translate(-41.8 -993.3)">
-	<path id="Shape_1754" class="st0" d="M48.8,1002.7l2.1,3.2c0.2,0.3,0.4,0.4,0.7,0.4s0.6-0.1,0.8-0.3l6.7-9.1"/>
+	<path id="Shape_1764" class="st0" d="M60.8,1005.7v4.1c0,1.4-1.1,2.6-2.5,2.6h-0.1H45.4c-1.4,0-2.6-1.1-2.6-2.5v-0.1v-12.9
+		c0-1.4,1.1-2.6,2.5-2.6h0.1h6.7"/>
+	<g id="check-double-1-2" transform="translate(397.625 1170.654)">
+		<path id="Shape_1757-2" class="st0" d="M-336.8-174.3l-7.3,9.8c-0.4,0.5-0.9,0.5-1.4,0.2l-0.1-0.1l-1.9-1.9"/>
+		<path id="Shape_1758-2" class="st0" d="M-348-164.3c-0.4,0.4-1,0.4-1.4,0l0,0l-1.9-1.9"/>
+		<path id="Shape_1759-2" class="st0" d="M-340.5-174.2l-5.2,7"/>
+	</g>
 </g>
-<path id="Shape_1764_1_" class="st0" d="M19,12.4v4.1c0,1.4-1.1,2.6-2.5,2.6h-0.1H3.6C2.2,19,1,18,1,16.5v-0.1V3.5
-	C1,2.1,2.1,1,3.5,1h0.1h6.7"/>
 </svg>

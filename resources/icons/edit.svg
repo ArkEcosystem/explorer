@@ -5,8 +5,10 @@
 <style type="text/css">
 	.st0{fill:none;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
 </style>
-<g id="Incoming" transform="translate(607.973 460.719)">
-	<line id="Линия_23-2" class="st0" x1="-598" y1="-459.7" x2="-598" y2="-442.2"/>
-	<path id="Контур_341-2" class="st0" d="M-589.6-450.2l-8.4,8.4l-8.4-8.4"/>
+<g id="M-of-N_Multisig" transform="translate(546.229 325.174)">
+	<path id="Контур_328" class="st0" d="M-528.1-323.3c-1.2-1.2-2.9-1.2-4.1,0l0,0l-11.6,11.6l-1.4,5.5l5.5-1.4l11.6-11.6
+		C-526.9-320.3-526.9-322.1-528.1-323.3C-528.1-323.2-528.1-323.2-528.1-323.3L-528.1-323.3z"/>
+	<line id="Линия_13" class="st0" x1="-532.2" y1="-322.5" x2="-529" y2="-319.2"/>
+	<line id="Линия_14" class="st0" x1="-543.7" y1="-311.3" x2="-540.1" y2="-307.8"/>
 </g>
 </svg>

@@ -5,8 +5,12 @@
 <style type="text/css">
 	.st0{fill:none;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
 </style>
-<g id="Incoming" transform="translate(607.973 460.719)">
-	<line id="Линия_23-2" class="st0" x1="-598" y1="-459.7" x2="-598" y2="-442.2"/>
-	<path id="Контур_341-2" class="st0" d="M-589.6-450.2l-8.4,8.4l-8.4-8.4"/>
+<g id="Arrows-At_the_very_beginning" transform="translate(928.061 446.75)">
+	<g id="Group_17-2" transform="translate(0)">
+		<g id="Regular_17-2">
+			<path id="Shape_19-2" class="st0" d="M-918.1-445.8l-8.6,8.6c-0.3,0.3-0.3,0.6,0,0.8l0,0l8.6,8.6"/>
+			<path id="Shape_20-2" class="st0" d="M-909.1-445.8l-8.6,8.6c-0.3,0.3-0.3,0.6,0,0.8l0,0l8.6,8.6"/>
+		</g>
+	</g>
 </g>
 </svg>

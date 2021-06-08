@@ -5,8 +5,13 @@
 <style type="text/css">
 	.st0{fill:none;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
 </style>
-<g id="Incoming" transform="translate(607.973 460.719)">
-	<line id="Линия_23-2" class="st0" x1="-598" y1="-459.7" x2="-598" y2="-442.2"/>
-	<path id="Контур_341-2" class="st0" d="M-589.6-450.2l-8.4,8.4l-8.4-8.4"/>
+<g id="Public_Key" transform="translate(17.593 85.719)">
+	<g id="car-key-1" transform="translate(552 277.279)">
+		<g id="car-key-1-2" transform="translate(-35.75 84.006)">
+			<circle id="Эллипс_7" class="st0" cx="-528.8" cy="-437" r="4"/>
+			<path id="Контур_312" class="st0" d="M-524.8-437h10v3"/>
+			<line id="Линия_9" class="st0" x1="-518.7" y1="-437" x2="-518.7" y2="-435"/>
+		</g>
+	</g>
 </g>
 </svg>
