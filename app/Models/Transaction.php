@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Models\Casts\BigInteger;
+use App\Models\Concerns\HasEmptyScope;
 use App\Models\Concerns\SearchesCaseInsensitive;
 use App\Models\Scopes\DelegateRegistrationScope;
 use App\Models\Scopes\DelegateResignationScope;
@@ -20,7 +21,6 @@ use App\Models\Scopes\TransferScope;
 use App\Models\Scopes\VoteCombinationScope;
 use App\Models\Scopes\VoteScope;
 use App\Services\BigNumber;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -43,6 +43,7 @@ final class Transaction extends Model
 {
     use HasFactory;
     use SearchesCaseInsensitive;
+    use HasEmptyScope;
 
     /**
      * A list of transaction scopes used for filtering based on type.
@@ -133,13 +134,5 @@ final class Transaction extends Model
     public function getConnectionName()
     {
         return 'explorer';
-    }
-
-    /**
-     * Used to force a query with no results.
-     */
-    public function scopeEmpty(Builder $query): Builder
-    {
-        return $query->whereNull('id');
     }
 }

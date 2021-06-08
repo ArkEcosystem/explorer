@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Models\Casts\BigInteger;
+use App\Models\Concerns\HasEmptyScope;
 use App\Models\Concerns\SearchesCaseInsensitive;
 use App\Services\BigNumber;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -23,6 +23,7 @@ final class Wallet extends Model
 {
     use HasFactory;
     use SearchesCaseInsensitive;
+    use HasEmptyScope;
 
     /**
      * Indicates if the IDs are auto-incrementing.
@@ -92,13 +93,5 @@ final class Wallet extends Model
     public function getConnectionName()
     {
         return 'explorer';
-    }
-
-    /**
-     * Used to force a query with no results.
-     */
-    public function scopeEmpty(Builder $query): Builder
-    {
-        return $query->whereNull('address');
     }
 }
