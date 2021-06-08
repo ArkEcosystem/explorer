@@ -30,7 +30,7 @@ final class NetworkStatusBlockCache implements Contract
 
     public function getHistoricalHourly(string $source, string $target): ?Collection
     {
-        return $this->get(sprintf('historical-hourly/%s/%s', $source, $target), collect());
+        return $this->get(sprintf('historical-hourly/%s/%s', $source, $target));
     }
 
     public function setHistoricalHourly(string $source, string $target, ?Collection $historical): ?Collection
