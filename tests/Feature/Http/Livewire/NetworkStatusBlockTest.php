@@ -6,13 +6,13 @@ use App\Http\Livewire\NetworkStatusBlock;
 use App\Models\Block;
 use App\Models\Wallet;
 use App\Services\Cache\CryptoCompareCache;
+use App\Services\Cache\NetworkStatusBlockCache;
 use App\Services\Settings;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Session;
 use Livewire\Livewire;
 use function Tests\configureExplorerDatabase;
-use App\Services\Cache\NetworkStatusBlockCache;
 
 it('should render with a height, supply and not available market cap', function () {
     configureExplorerDatabase();
@@ -51,8 +51,8 @@ it('should render with a height, supply and market cap', function () {
         ])->public_key,
     ]);
 
-    (new NetworkStatusBlockCache)->setPrice('ARK', 'USD', 1.606);
-    (new NetworkStatusBlockCache)->setMarketCap('ARK', 'USD', 254260570.60);
+    (new NetworkStatusBlockCache())->setPrice('ARK', 'USD', 1.606);
+    (new NetworkStatusBlockCache())->setMarketCap('ARK', 'USD', 254260570.60);
 
     Livewire::test(NetworkStatusBlock::class)
         ->assertSee('5,651,290') // Height
@@ -78,8 +78,8 @@ it('should render with a height, supply and market cap for BTC', function () {
         ])->public_key,
     ]);
 
-    (new NetworkStatusBlockCache)->setPrice('ARK', 'BTC', 0.00003132);
-    (new NetworkStatusBlockCache)->setMarketCap('ARK', 'BTC', 4934.2677444);
+    (new NetworkStatusBlockCache())->setPrice('ARK', 'BTC', 0.00003132);
+    (new NetworkStatusBlockCache())->setMarketCap('ARK', 'BTC', 4934.2677444);
 
     Livewire::test(NetworkStatusBlock::class)
         ->assertSee('5,651,290') // Height
@@ -91,8 +91,8 @@ it('should render with a height, supply and market cap for BTC', function () {
 it('should render the price change', function () {
     Config::set('explorer.networks.development.canBeExchanged', true);
 
-    (new NetworkStatusBlockCache)->setPriceChange('DARK', 'USD', 0.137);
-    (new NetworkStatusBlockCache)->setPrice('DARK', 'USD', 1);
+    (new NetworkStatusBlockCache())->setPriceChange('DARK', 'USD', 0.137);
+    (new NetworkStatusBlockCache())->setPrice('DARK', 'USD', 1);
 
     Livewire::test(NetworkStatusBlock::class)->assertSee('13.70%');
 });
@@ -100,8 +100,8 @@ it('should render the price change', function () {
 it('handle price change when price is zero', function () {
     Config::set('explorer.networks.development.canBeExchanged', true);
 
-    (new NetworkStatusBlockCache)->setPriceChange('DARK', 'USD', 0);
-    (new NetworkStatusBlockCache)->setPrice('DARK', 'USD', 1);
+    (new NetworkStatusBlockCache())->setPriceChange('DARK', 'USD', 0);
+    (new NetworkStatusBlockCache())->setPrice('DARK', 'USD', 1);
 
     Livewire::test(NetworkStatusBlock::class)->assertSee('0.00%');
 });
