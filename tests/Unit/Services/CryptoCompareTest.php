@@ -12,11 +12,11 @@ it('should fetch the price data for the given collection', function () {
     fakeCryptoCompare();
 
     expect(CryptoCompare::getCurrenciesData('ARK', collect(['USD'])))->toEqual(collect([
-        "USD" => [
-            "priceChange" => 0.14989143413680925,
-            "price" => 1.2219981765,
-            "marketCap" => 192865161.6011891,
-        ]
+        'USD' => [
+            'priceChange' => 0.14989143413680925,
+            'price'       => 1.2219981765,
+            'marketCap'   => 192865161.6011891,
+        ],
     ]));
 });
 
@@ -35,4 +35,3 @@ it('should fetch the historical prices per hour for the given pair', function ()
 
     assertMatchesSnapshot(CryptoCompare::historicalHourly('ARK', 'USD'));
 });
-

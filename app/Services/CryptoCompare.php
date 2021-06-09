@@ -52,16 +52,15 @@ final class CryptoCompare
     {
         $result = Http::get('https://min-api.cryptocompare.com/data/pricemultifull', [
             'fsyms'  => $source,
-            'tsyms' => $targets->join(','),
+            'tsyms'  => $targets->join(','),
         ])->json();
 
-        return $targets->mapWithKeys(fn($currency) => [
-            strtoupper($currency) =>
-                [
-                    'priceChange' => Arr::get($result, 'RAW.'.$source.'.' . strtoupper($currency) . '.CHANGEPCT24HOUR', 0)  / 100,
-                    'price' => Arr::get($result, 'RAW.'.$source.'.' . strtoupper($currency) . '.PRICE', 0),
-                    'marketCap' => Arr::get($result, 'RAW.'.$source.'.' . strtoupper($currency) . '.MKTCAP', 0),
-                ]
+        return $targets->mapWithKeys(fn ($currency) => [
+            strtoupper($currency) => [
+                    'priceChange' => Arr::get($result, 'RAW.'.$source.'.'.strtoupper($currency).'.CHANGEPCT24HOUR', 0) / 100,
+                    'price'       => Arr::get($result, 'RAW.'.$source.'.'.strtoupper($currency).'.PRICE', 0),
+                    'marketCap'   => Arr::get($result, 'RAW.'.$source.'.'.strtoupper($currency).'.MKTCAP', 0),
+                ],
             ]);
     }
 }
