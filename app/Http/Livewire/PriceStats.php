@@ -30,7 +30,8 @@ final class PriceStats extends Component
     private function isAvailable(): bool
     {
         return Network::canBeExchanged()
-            && (new NetworkStatusBlockCache())->getIsAvailable(Network::currency(), Settings::currency());
+            && (new NetworkStatusBlockCache())->getIsAvailable(Network::currency(), Settings::currency())
+            && $this->getHistorical() !== null;
     }
 
     private function getPriceChange(): ?float

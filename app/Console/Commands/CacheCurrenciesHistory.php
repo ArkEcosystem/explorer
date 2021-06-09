@@ -44,11 +44,13 @@ final class CacheCurrenciesHistory extends Command
             }
 
             dispatch(function () use ($source, $cache, $currency) : void {
-                try {
-                    $cache->setHistoricalHourly($source, $currency, CryptoCompare::historicalHourly($source, $currency));
-                } catch (ConnectionException $e) {
-                    $cache->setHistoricalHourly($source, $currency, null);
-                }
+                $cache->setHistoricalHourly($source, $currency, null);
+                // try {
+                //     $cache->setHistoricalHourly($source, $currency, CryptoCompare::historicalHourly($source, $currency));
+                // } catch (ConnectionException $e) {
+                //     $cache->setHistoricalHourly($source, $currency, null);
+
+                // }
             })->delay($delay);
         });
     }
