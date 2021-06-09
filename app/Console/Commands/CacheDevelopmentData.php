@@ -34,6 +34,8 @@ final class CacheDevelopmentData extends Command
             'explorer:cache-network-aggregates',
             'explorer:cache-fees',
             'explorer:cache-prices',
+            'explorer:cache-currencies-data',
+            'explorer:cache-currencies-history --no-delay',
             'explorer:cache-delegate-aggregates',
             'explorer:cache-delegate-performance',
             'explorer:cache-delegate-productivity',
@@ -43,7 +45,6 @@ final class CacheDevelopmentData extends Command
             'explorer:cache-delegates-with-voters',
             'explorer:cache-delegate-voter-counts',
             'explorer:cache-multi-signature-addresses',
-            'explorer:cache-network-status-block',
         ])->map(fn (string $command) => Artisan::call($command));
     }
 }

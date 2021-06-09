@@ -43,16 +43,12 @@ final class CacheCurrenciesData extends Command
                 $cache->setPrice($source, $currency, $price);
                 $cache->setPriceChange($source, $currency, $priceChange);
                 $cache->setMarketCap($source, $currency, $marketCap);
-                // @TODO move to another job
-                // $cache->setHistoricalHourly($source, $currency, collect());
             });
         } catch (ConnectionException $e) {
             $currencies->each(function ($currency) use ($source, $cache) {
                 $cache->setPrice($source, $currency, null);
                 $cache->setMarketCap($source, $currency, null);
                 $cache->setPriceChange($source, $currency, null);
-                // @TODO move to another job
-                // $cache->setHistoricalHourly($source, $currency, null);
             });
 
         }
