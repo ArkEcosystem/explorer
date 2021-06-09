@@ -74,6 +74,4 @@ it('set values to null when cryptocompare is down', function () {
     } catch (ConnectionException $e) {
         expect($cache->getHistoricalHourly(Network::currency(), 'USD'))->toBeNull();
     }
-
 });
-

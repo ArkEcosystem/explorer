@@ -33,7 +33,6 @@ final class CacheCurrenciesHistory extends Command
         $source     = Network::currency();
         $currencies = collect(config('currencies'))->pluck('currency');
 
-
         $currencies->each(function ($currency, $index) use ($source): void {
             // Cache one currency history per-minute
             if ($this->option('no-delay') === true) {
