@@ -56,7 +56,7 @@ final class PriceStats extends Component
 
     private function shouldUsePlaceholder(): bool
     {
-        if (!$this->isAvailable()) {
+        if (! $this->isAvailable()) {
             return false;
         }
 
