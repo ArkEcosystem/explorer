@@ -23,7 +23,7 @@ final class PriceStats extends Component
             'to'             => Settings::currency(),
             'historical'     => $this->getHistorical(),
             'isPositive'     => $this->getPriceChange() >= 0,
-            'usePlaceholder' => ! $this->isAvailable() || $this->getHistoricalData() === null,
+            'usePlaceholder' => $this->shouldUsePlaceholder(),
         ]);
     }
 
@@ -52,5 +52,18 @@ final class PriceStats extends Component
     private function getHistoricalData(): ? Collection
     {
         return (new NetworkStatusBlockCache())->getHistoricalHourly(Network::currency(), Settings::currency());
+    }
+
+    private function shouldUsePlaceholder(): bool
+    {
+        if (!$this->isAvailable()) {
+            return false;
+        }
+
+        if ($this->getHistoricalData() === null) {
+            return false;
+        }
+
+        return true;
     }
 }
