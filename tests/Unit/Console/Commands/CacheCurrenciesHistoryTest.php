@@ -62,8 +62,6 @@ it('should execute the command', function () {
 });
 
 it('set values to null when cryptocompare is down', function () {
-    $this->expectException(ConnectionException::class);
-
     Config::set('currencies', [
         'usd' => [
             'currency' => 'USD',
