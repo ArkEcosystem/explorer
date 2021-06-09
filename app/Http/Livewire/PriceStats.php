@@ -21,9 +21,9 @@ final class PriceStats extends Component
         return view('livewire.price-stats', [
             'from'           => Network::currency(),
             'to'             => Settings::currency(),
-            'historical'     => $this->getHistorical() ?: collect(),
+            'historical'     => $this->getHistorical(),
             'isPositive'     => $this->getPriceChange() >= 0,
-            'usePlaceholder' => ! $this->isAvailable() || $this->getHistorical() === null,
+            'usePlaceholder' => ! $this->isAvailable() || $this->getHistoricalData() === null,
         ]);
     }
 
@@ -38,12 +38,19 @@ final class PriceStats extends Component
         return (new NetworkStatusBlockCache())->getPriceChange(Network::currency(), Settings::currency());
     }
 
-    private function getHistorical(): ? Collection
+    private function getHistorical(): Collection
     {
-        if (! $this->isAvailable()) {
+        $historicalData = $this->getHistoricalData();
+
+        if (! $this->isAvailable() || $historicalData === null) {
             return collect([4, 5, 2, 2, 2, 3, 5, 1, 4, 5, 6, 5, 3, 3, 4, 5, 6, 4, 4, 4, 5, 8, 8, 10]);
         }
 
+        return $historicalData;
+    }
+
+    private function getHistoricalData(): ? Collection
+    {
         return (new NetworkStatusBlockCache())->getHistoricalHourly(Network::currency(), Settings::currency());
     }
 }
