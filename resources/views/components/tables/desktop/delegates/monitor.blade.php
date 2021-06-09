@@ -5,7 +5,12 @@
             <x-tables.headers.desktop.address name="pages.delegates.name" />
             <x-tables.headers.desktop.text name="pages.delegates.forging_at" alignment="text-left" responsive breakpoint="sm" />
             <x-tables.headers.desktop.status name="pages.delegates.status" last-on="md"  />
-            <x-tables.headers.desktop.text name="pages.delegates.block_id" responsive breakpoint="md" />
+            <x-tables.headers.desktop.text
+                name="pages.delegates.block_id"
+                responsive
+                breakpoint="md"
+                align="right"
+            />
         </tr>
     </thead>
     <tbody>
