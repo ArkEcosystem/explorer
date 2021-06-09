@@ -7,6 +7,7 @@ use App\Services\Cache\FeeCache;
 use App\Services\Cache\NetworkCache;
 use App\Services\Cache\PriceChartCache;
 use function Tests\configureExplorerDatabase;
+use App\Services\Cache\NetworkStatusBlockCache;
 
 it('should render the page without any errors', function () {
     $this->withoutExceptionHandling();
@@ -26,8 +27,8 @@ it('should render the page without any errors', function () {
         (new FeeCache())->setMaximum($period, 0);
     }
 
-    (new CryptoCompareCache())->setMarketCap('DARK', 'USD', fn () => 40898444.3361);
-    (new CryptoCompareCache())->setPrice('DARK', 'USD', fn () => 0.2907);
+    (new NetworkStatusBlockCache())->setMarketCap('DARK', 'USD',40898444.3361);
+    (new NetworkStatusBlockCache())->setPrice('DARK', 'USD', 0.2907);
     (new CryptoCompareCache())->setHistoricalHourly('DARK', 'USD', 'Y-m-d H:i:s', 23, fn () => collect([]));
     (new CryptoCompareCache())->setHistoricalHourly('DARK', 'USD', 'Y-m-d H:i:s', 24, fn () => collect([]));
 

@@ -5,7 +5,6 @@ declare(strict_types=1);
 use App\Http\Livewire\NetworkStatusBlock;
 use App\Models\Block;
 use App\Models\Wallet;
-use App\Services\Cache\CryptoCompareCache;
 use App\Services\Cache\NetworkStatusBlockCache;
 use App\Services\Settings;
 use Illuminate\Support\Facades\Config;
@@ -23,7 +22,7 @@ it('should render with a height, supply and not available market cap', function 
         ])->public_key,
     ]);
 
-    (new CryptoCompareCache())->setPrice('USD', 'USD', fn () => 0.2907);
+    (new NetworkStatusBlockCache())->setPrice('USD', 'USD', 0.2907);
 
     Livewire::test(NetworkStatusBlock::class)
         ->assertSee('5,651,290')

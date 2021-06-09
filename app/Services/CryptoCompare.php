@@ -55,12 +55,12 @@ final class CryptoCompare
             'tsyms' => $targets->join(','),
         ])->json();
 
-        return collect(Arr::get($result, 'RAW.'.$source, []))
-            ->mapWithKeys(fn($data, $currency) => [strtoupper($currency) =>
+        return $targets->mapWithKeys(fn($currency) => [
+            strtoupper($currency) =>
                 [
-                    'priceChange' => $data['CHANGEPCT24HOUR']  / 100,
-                    'price' => $data['PRICE'],
-                    'marketCap' => $data['MKTCAP'],
+                    'priceChange' => Arr::get($result, 'RAW.'.$source.'.' . strtoupper($currency) . '.CHANGEPCT24HOUR', 0)  / 100,
+                    'price' => Arr::get($result, 'RAW.'.$source.'.' . strtoupper($currency) . '.PRICE', 0),
+                    'marketCap' => Arr::get($result, 'RAW.'.$source.'.' . strtoupper($currency) . '.MKTCAP', 0),
                 ]
             ]);
     }
