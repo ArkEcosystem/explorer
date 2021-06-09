@@ -33,39 +33,12 @@ it('should execute the command', function () {
     expect($cache->getPrice(Network::currency(), 'USD'))->toBeNull();
     expect($cache->getMarketCap(Network::currency(), 'USD'))->toBeNull();
     expect($cache->getPriceChange(Network::currency(), 'USD'))->toBeNull();
-    // expect($cache->getHistoricalHourly(Network::currency(), 'USD'))->toBeNull();
 
     (new CacheCurrenciesData())->handle($cache);
 
     expect($cache->getPrice(Network::currency(), 'USD'))->toBe(1.2219981765);
     expect($cache->getMarketCap(Network::currency(), 'USD'))->toBe(192865161.6011891);
     expect($cache->getPriceChange(Network::currency(), 'USD'))->toBe(0.14989143413680925);
-    // expect($cache->getHistoricalHourly(Network::currency(), 'USD'))->toEqual(collect([
-    //     '2021-05-18 18:00:00' => '1.898',
-    //     '2021-05-18 19:00:00' => '1.904',
-    //     '2021-05-18 20:00:00' => '1.967',
-    //     '2021-05-18 21:00:00' => '1.941',
-    //     '2021-05-18 22:00:00' => '2.013',
-    //     '2021-05-18 23:00:00' => '2.213',
-    //     '2021-05-19 00:00:00' => '2.414',
-    //     '2021-05-19 01:00:00' => '2.369',
-    //     '2021-05-19 02:00:00' => '2.469',
-    //     '2021-05-19 03:00:00' => '2.374',
-    //     '2021-05-19 04:00:00' => '2.228',
-    //     '2021-05-19 05:00:00' => '2.211',
-    //     '2021-05-19 06:00:00' => '2.266',
-    //     '2021-05-19 07:00:00' => '2.364',
-    //     '2021-05-19 08:00:00' => '2.341',
-    //     '2021-05-19 09:00:00' => '2.269',
-    //     '2021-05-19 10:00:00' => '1.981',
-    //     '2021-05-19 11:00:00' => '1.889',
-    //     '2021-05-19 12:00:00' => '1.275',
-    //     '2021-05-19 13:00:00' => '1.471',
-    //     '2021-05-19 14:00:00' => '1.498',
-    //     '2021-05-19 15:00:00' => '1.518',
-    //     '2021-05-19 16:00:00' => '1.61',
-    //     '2021-05-19 17:00:00' => '1.638',
-    // ]));
 });
 
 it('set values to null when cryptocompare is down', function () {
@@ -85,7 +58,6 @@ it('set values to null when cryptocompare is down', function () {
     $cache->setPrice(Network::currency(), 'USD', 1);
     $cache->setMarketCap(Network::currency(), 'USD', 1);
     $cache->setPriceChange(Network::currency(), 'USD', 1);
-    // $cache->setHistoricalHourly(Network::currency(), 'USD', collect());
 
     Http::fake([
         'cryptocompare.com/*' => function () {
@@ -98,7 +70,6 @@ it('set values to null when cryptocompare is down', function () {
     expect($cache->getPrice(Network::currency(), 'USD'))->toBeNull();
     expect($cache->getMarketCap(Network::currency(), 'USD'))->toBeNull();
     expect($cache->getPriceChange(Network::currency(), 'USD'))->toBeNull();
-    // expect($cache->getHistoricalHourly(Network::currency(), 'USD'))->toBeNull();
 });
 
 it('should ignore the cache for development network', function () {
@@ -120,12 +91,10 @@ it('should ignore the cache for development network', function () {
     expect($cache->getPrice(Network::currency(), 'USD'))->toBeNull();
     expect($cache->getMarketCap(Network::currency(), 'USD'))->toBeNull();
     expect($cache->getPriceChange(Network::currency(), 'USD'))->toBeNull();
-    // expect($cache->getHistoricalHourly(Network::currency(), 'USD'))->toBeNull();
 
     (new CacheCurrenciesData())->handle($cache);
 
     expect($cache->getPrice(Network::currency(), 'USD'))->toBeNull();
     expect($cache->getMarketCap(Network::currency(), 'USD'))->toBeNull();
     expect($cache->getPriceChange(Network::currency(), 'USD'))->toBeNull();
-    // expect($cache->getHistoricalHourly(Network::currency(), 'USD'))->toBeNull();
 });
