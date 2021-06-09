@@ -21,17 +21,16 @@ final class PriceStats extends Component
         return view('livewire.price-stats', [
             'from'           => Network::currency(),
             'to'             => Settings::currency(),
-            'historical'     => $this->getHistorical(),
+            'historical'     => $this->getHistorical() ?: collect(),
             'isPositive'     => $this->getPriceChange() >= 0,
-            'usePlaceholder' => ! $this->isAvailable(),
+            'usePlaceholder' => ! $this->isAvailable() || $this->getHistorical() === null,
         ]);
     }
 
     private function isAvailable(): bool
     {
         return Network::canBeExchanged()
-            && (new NetworkStatusBlockCache())->getIsAvailable(Network::currency(), Settings::currency())
-            && $this->getHistorical() !== null;
+            && (new NetworkStatusBlockCache())->getIsAvailable(Network::currency(), Settings::currency());
     }
 
     private function getPriceChange(): ?float
