@@ -1,7 +1,7 @@
-<div class="h-20 mb-0.5"></div>
+<div class="h-20 mb-1"></div>
 <div x-data="{ open: false, showSettings: false }" id="navbar" class="fixed z-20 w-full">
     <nav class="relative z-30 bg-white shadow-header-smooth dark:shadow-header-smooth-dark dark:bg-theme-secondary-900">
-        <div class="px-8 border-t border-b border-transparent md:px-10">
+        <div class="px-8 md:px-10 py-0.5">
             <div class="relative flex justify-between h-20">
 
                 {{-- LOGO --}}
@@ -37,12 +37,12 @@
                 <div class="flex justify-end ">
                     <div class="flex items-center justify-end flex-1 sm:items-stretch sm:justify-between">
                         {{-- Desktop Navbar Items --}}
-                        <div class="items-center hidden -mx-4 lg:flex ">
+                        <div class="items-center hidden -mx-4 lg:flex">
                             @foreach ($navigation as $navItem)
                                 <a
                                     href="{{ route($navItem['route'], $navItem['params'] ?? []) }}"
                                     class="inline-flex font-semibold leading-5 group
-                                        focus:outline-none transition duration-150 ease-in-out h-full px-2 mx-2 relative rounded
+                                        focus:outline-none transition duration-150 ease-in-out h-full px-2 mx-2 relative border-t-2 border-transparent rounded
                                         @if(optional(Route::current())->getName() === $navItem['route'])
                                             text-theme-secondary-900 dark:text-theme-secondary-400
                                         @else
@@ -50,7 +50,7 @@
                                         @endif
                                     "
                                 >
-                                    <span class="flex items-center w-full h-full border-b-2 mt-0.5 @if(optional(Route::current())->getName() === $navItem['route']) border-theme-primary-600 @else border-transparent group-hover:border-theme-secondary-300 @endif">
+                                    <span class="flex items-center w-full h-full mt-0.5 border-b-2  @if(optional(Route::current())->getName() === $navItem['route']) border-theme-primary-600 @else border-transparent group-hover:border-theme-secondary-300 @endif">
                                         <span class="-mt-0.5">{{ $navItem['label'] }}</span>
                                     </span>
                                 </a>
