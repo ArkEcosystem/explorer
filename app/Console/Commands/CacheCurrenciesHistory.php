@@ -5,10 +5,8 @@ declare(strict_types=1);
 namespace App\Console\Commands;
 
 use App\Facades\Network;
-use App\Services\Cache\NetworkStatusBlockCache;
-use App\Services\CryptoCompare;
+use App\Jobs\CacheCurrenciesHistory as CacheCurrenciesHistoryJob;
 use Illuminate\Console\Command;
-use Illuminate\Http\Client\ConnectionException;
 
 final class CacheCurrenciesHistory extends Command
 {
@@ -26,7 +24,7 @@ final class CacheCurrenciesHistory extends Command
      */
     protected $description = 'Cache currencies history';
 
-    public function handle(NetworkStatusBlockCache $cache): void
+    public function handle(): void
     {
         if (! Network::canBeExchanged()) {
             return;
@@ -35,7 +33,7 @@ final class CacheCurrenciesHistory extends Command
         $source     = Network::currency();
         $currencies = collect(config('currencies'))->pluck('currency');
 
-        $currencies->each(function ($currency, $index) use ($source, $cache): void {
+        $currencies->each(function ($currency, $index) use ($source): void {
             // Cache one currency history per-minute
             if ($this->option('no-delay') === true) {
                 $delay = null;
@@ -43,15 +41,7 @@ final class CacheCurrenciesHistory extends Command
                 $delay = now()->addMinutes($index);
             }
 
-            dispatch(function () use ($source, $cache, $currency) : void {
-                $cache->setHistoricalHourly($source, $currency, null);
-                // try {
-                //     $cache->setHistoricalHourly($source, $currency, CryptoCompare::historicalHourly($source, $currency));
-                // } catch (ConnectionException $e) {
-                //     $cache->setHistoricalHourly($source, $currency, null);
-
-                // }
-            })->delay($delay);
+            CacheCurrenciesHistoryJob::dispatch($source, $currency)->delay($delay);
         });
     }
 }
