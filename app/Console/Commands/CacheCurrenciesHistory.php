@@ -16,7 +16,7 @@ final class CacheCurrenciesHistory extends Command
      *
      * @var string
      */
-    protected $signature = 'explorer:cache-currencies-history { }';
+    protected $signature = 'explorer:cache-currencies-history {--no-delay}';
 
     /**
      * The console command description.
@@ -43,8 +43,8 @@ final class CacheCurrenciesHistory extends Command
             }
 
             dispatch(fn () => $cache->setHistoricalHourly($source, $currency, CryptoCompare::historicalHourly($source, $currency)))
-                ->delay($delay)
-                ->catch(fn () => $cache->setHistoricalHourly($source, $currency, null));
+                ->catch(fn () => $cache->setHistoricalHourly($source, $currency, null))
+                ->delay($delay);
         });
     }
 }
