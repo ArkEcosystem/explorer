@@ -39,7 +39,7 @@ final class CacheCurrenciesHistory extends Command
             // Cache one currency history per-minute
             $delay = $this->option('no-delay') ? null : now()->addMinutes($index);
 
-            dispatch(fn() => $cache->setHistoricalHourly($source, $currency, CryptoCompare::historicalHourly($source, $currency)))
+            dispatch(fn () => $cache->setHistoricalHourly($source, $currency, CryptoCompare::historicalHourly($source, $currency)))
                 ->delay($delay)
                 ->catch(fn (ConnectionException $e) => $cache->setHistoricalHourly($source, $currency, null));
         });
