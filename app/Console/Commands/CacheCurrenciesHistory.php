@@ -8,7 +8,6 @@ use App\Facades\Network;
 use App\Services\Cache\NetworkStatusBlockCache;
 use App\Services\CryptoCompare;
 use Illuminate\Console\Command;
-use Illuminate\Http\Client\ConnectionException;
 
 final class CacheCurrenciesHistory extends Command
 {
@@ -17,7 +16,7 @@ final class CacheCurrenciesHistory extends Command
      *
      * @var string
      */
-    protected $signature = 'explorer:cache-currencies-history {--no-delay}';
+    protected $signature = 'explorer:cache-currencies-history { }';
 
     /**
      * The console command description.
@@ -37,11 +36,15 @@ final class CacheCurrenciesHistory extends Command
 
         $currencies->each(function ($currency, $index) use ($source, $cache) {
             // Cache one currency history per-minute
-            $delay = $this->option('no-delay') ? null : now()->addMinutes($index);
+            if ($this->option('no-delay')) {
+                $delay = null;
+            } else {
+                $delay = now()->addMinutes($index);
+            }
 
             dispatch(fn () => $cache->setHistoricalHourly($source, $currency, CryptoCompare::historicalHourly($source, $currency)))
                 ->delay($delay)
-                ->catch(fn (ConnectionException $e) => $cache->setHistoricalHourly($source, $currency, null));
+                ->catch(fn () => $cache->setHistoricalHourly($source, $currency, null));
         });
     }
 }

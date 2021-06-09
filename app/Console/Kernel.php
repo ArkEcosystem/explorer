@@ -44,9 +44,9 @@ final class Kernel extends ConsoleKernel
     {
         $schedule->command(CachePrices::class)->everyMinute();
 
-        $schedule->command(CacheCurrenciesData::class)->hourly()->withoutOverlapping();
+        $schedule->command(CacheCurrenciesData::class)->everyMinute()->withoutOverlapping();
 
-        $schedule->command(CacheCurrenciesHistory::class)->everyHour();
+        $schedule->command(CacheCurrenciesHistory::class)->hourly();
 
         $schedule->command(CacheDelegateWallets::class)->everyTenMinutes();
 
