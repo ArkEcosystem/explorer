@@ -32,7 +32,7 @@ final class CacheCurrenciesData extends Command
             return;
         }
 
-        $source = Network::currency();
+        $source     = Network::currency();
         $currencies = collect(config('currencies'))->pluck('currency');
 
         try {
@@ -50,7 +50,6 @@ final class CacheCurrenciesData extends Command
                 $cache->setMarketCap($source, $currency, null);
                 $cache->setPriceChange($source, $currency, null);
             });
-
         }
     }
 }

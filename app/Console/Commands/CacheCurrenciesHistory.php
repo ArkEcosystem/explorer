@@ -32,7 +32,7 @@ final class CacheCurrenciesHistory extends Command
             return;
         }
 
-        $source = Network::currency();
+        $source     = Network::currency();
         $currencies = collect(config('currencies'))->pluck('currency');
 
         $currencies->each(function ($currency, $index) use ($source, $cache) {
