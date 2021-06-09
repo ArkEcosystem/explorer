@@ -42,7 +42,7 @@ final class CacheCurrenciesHistory extends Command
                 $delay = now()->addMinutes($index);
             }
 
-            dispatch(fn () => $cache->setHistoricalHourly($source, $currency, CryptoCompare::historicalHourly($source, $currency)))
+            dispatch(fn ()    => $cache->setHistoricalHourly($source, $currency, CryptoCompare::historicalHourly($source, $currency)))
                 ->catch(fn () => $cache->setHistoricalHourly($source, $currency, null))
                 ->delay($delay);
         });
