@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Console;
 
 use App\Console\Commands\BuildForgingStats;
+use App\Console\Commands\CacheCurrenciesData;
+use App\Console\Commands\CacheCurrenciesHistory;
 use App\Console\Commands\CacheDelegateAggregates;
 use App\Console\Commands\CacheDelegatePerformance;
 use App\Console\Commands\CacheDelegateProductivity;
@@ -16,8 +18,6 @@ use App\Console\Commands\CacheDelegateWallets;
 use App\Console\Commands\CacheFees;
 use App\Console\Commands\CacheMultiSignatureAddresses;
 use App\Console\Commands\CacheNetworkAggregates;
-use App\Console\Commands\CacheCurrenciesData;
-use App\Console\Commands\CacheCurrenciesHistory;
 use App\Console\Commands\CachePrices;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
