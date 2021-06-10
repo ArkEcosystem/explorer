@@ -17,7 +17,7 @@
             'type' => 'text',
             'responsive' => true,
             'breakpoint' => 'md',
-            'align' => 'right',
+            'class' => 'text-right',
         ]
     ]"
 />

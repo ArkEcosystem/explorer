@@ -9,7 +9,7 @@
                 name="pages.delegates.block_id"
                 responsive
                 breakpoint="md"
-                align="right"
+                class="text-right"
             />
         </tr>
     </thead>
