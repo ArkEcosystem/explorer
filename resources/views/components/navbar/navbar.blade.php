@@ -1,11 +1,11 @@
-<div class="h-20 mb-1"></div>
+<div class="mb-1 h-20"></div>
 <div x-data="{ open: false, showSettings: false }" id="navbar" class="fixed z-20 w-full">
     <nav class="relative z-30 bg-white border-b border-theme-secondary-300 dark:bg-theme-secondary-900 dark:border-theme-secondary-800">
         <div class="px-8 md:px-10 py-0.5">
-            <div class="relative flex justify-between h-20">
+            <div class="flex relative justify-between h-20">
 
                 {{-- LOGO --}}
-                <div class="flex items-center flex-shrink-0">
+                <div class="flex flex-shrink-0 items-center">
                     <a class="flex items-center" href="{{ route('home') }}">
                         @if($logo ?? false)
                             {{ $logo }}
@@ -17,7 +17,7 @@
                     </a>
                 </div>
 
-                <div class="items-center hidden mr-auto md:flex">
+                <div class="hidden items-center mr-auto md:flex">
                     <x-navbar.separator />
 
                     {{-- search modal trigger (tablet/desktop) --}}
@@ -35,9 +35,9 @@
                 </div>
 
                 <div class="flex justify-end">
-                    <div class="flex items-center justify-end flex-1 sm:items-stretch sm:justify-between">
+                    <div class="flex flex-1 justify-end items-center sm:items-stretch sm:justify-between">
                         {{-- Desktop Navbar Items --}}
-                        <div class="items-center hidden -mx-4 lg:flex">
+                        <div class="hidden items-center -mx-4 lg:flex">
                             @foreach ($navigation as $navItem)
                                 <a
                                     href="{{ route($navItem['route'], $navItem['params'] ?? []) }}"
@@ -59,7 +59,7 @@
                     </div>
 
                     @if(Network::canBeExchanged())
-                        <div class="items-center hidden md:flex">
+                        <div class="hidden items-center md:flex">
                             <x-navbar.separator class="md:hidden lg:inline" />
 
                             <div class="hidden font-semibold lg:pl-8 md:flex text-theme-secondary-900 dark:text-white">
@@ -117,7 +117,7 @@
                     @endforeach
 
                     @if(Network::canBeExchanged())
-                        <div class="flex px-8 py-3 mt-2 -mb-4 font-semibold bg-theme-secondary-100 text-theme-secondary-900 dark:text-white dark:bg-theme-secondary-800 md:hidden">
+                        <div class="flex py-3 px-8 mt-2 -mb-4 font-semibold bg-theme-secondary-100 text-theme-secondary-900 dark:text-white dark:bg-theme-secondary-800 md:hidden">
                             <livewire:price-ticker />
                         </div>
                     @endif
