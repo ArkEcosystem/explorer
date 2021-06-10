@@ -6,8 +6,6 @@ namespace App\Services;
 
 use App\Actions\CacheNetworkSupply;
 use App\Services\Cache\NetworkStatusBlockCache;
-use App\Services\NumberFormatter;
-use App\Services\Settings;
 use Konceiver\BetterNumberFormatter\BetterNumberFormatter;
 
 final class MarketCap
