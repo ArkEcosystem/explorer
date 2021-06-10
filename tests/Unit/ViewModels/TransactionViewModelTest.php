@@ -118,6 +118,42 @@ it('should get the amount for multi payments', function () {
     assertMatchesSnapshot($this->subject->amount());
 });
 
+
+it('should get the amount for multi payments excluding payment to the same address', function () {
+    $sender = Wallet::factory()->create();
+
+    $this->subject = new TransactionViewModel(Transaction::factory()->create([
+        'sender_public_key' => $sender->public_key,
+        'type'       => CoreTransactionTypeEnum::MULTI_PAYMENT,
+        'type_group' => TransactionTypeGroupEnum::CORE,
+        'asset'      => [
+            'payments' => [
+                [
+                    'amount'      => '1000000000',
+                    'recipientId' => 'A',
+                ], [
+                    'amount'      => '2000000000',
+                    'recipientId' => 'B',
+                ], [
+                    'amount'      => '3000000000',
+                    'recipientId' => 'C',
+                ], [
+                    'amount'      => '5000000000',
+                    'recipientId' => $sender->address,
+                ], [
+                    'amount'      => '4000000000',
+                    'recipientId' => 'D',
+                ], [
+                    'amount'      => '6000000000',
+                    'recipientId' => 'E',
+                ],
+            ],
+        ],
+    ]));
+
+    expect($this->subject->amount())->toEqual(160);
+});
+
 it('should get the specific multi payment amount for a wallet recipient', function () {
     $this->subject = new TransactionViewModel(Transaction::factory()->create([
         'type'       => CoreTransactionTypeEnum::MULTI_PAYMENT,

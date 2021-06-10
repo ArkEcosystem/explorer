@@ -8,6 +8,7 @@ use App\Actions\CacheNetworkHeight;
 use App\Contracts\ViewModel;
 use App\Facades\Wallets;
 use App\Models\Transaction;
+use App\Models\Wallet;
 use App\Services\ExchangeRate;
 use App\Services\Timestamp;
 use App\Services\Transactions\TransactionDirection;
@@ -92,10 +93,39 @@ final class TransactionViewModel implements ViewModel
         return ExchangeRate::convert($this->transaction->fee->toFloat(), $this->transaction->timestamp);
     }
 
+    public function amountForMyself(): float
+    {
+        if (!$this->isMultiPayment()) {
+            return 0.0;
+        }
+
+        $payments = collect(Arr::get($this->transaction->asset ?? [], 'payments', []));
+
+        return $payments
+            ->filter(fn ($payment) => $this->sender()->address === $payment['recipientId'])
+            ->sum('amount') / 1e8;
+    }
+
+    public function amountExcludingMyself(): float
+    {
+        if ($this->isMultiPayment()) {
+            $payments = collect(Arr::get($this->transaction->asset ?? [], 'payments', []));
+
+            return $payments
+                ->filter(fn ($payment) => $this->sender()->address !== $payment['recipientId'])
+                ->sum('amount') / 1e8;
+        }
+
+        return $this->transaction->amount->toFloat();
+    }
+
     public function amount(): float
     {
         if ($this->isMultiPayment()) {
-            return collect(Arr::get($this->transaction->asset ?? [], 'payments', []))->sum('amount') / 1e8;
+            $payments = collect(Arr::get($this->transaction->asset ?? [], 'payments', []));
+
+            return $payments
+                ->sum('amount') / 1e8;
         }
 
         return $this->transaction->amount->toFloat();
@@ -110,6 +140,11 @@ final class TransactionViewModel implements ViewModel
         }
 
         return $this->amount();
+    }
+
+    public function amountFiatExcludingMyself(): string
+    {
+        return ExchangeRate::convert($this->amountExcludingMyself(), $this->transaction->timestamp);
     }
 
     public function amountFiat(): string
