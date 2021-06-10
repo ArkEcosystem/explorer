@@ -71,6 +71,7 @@ final class NetworkStatusBlock extends Component
         if (NumberFormatter::isFiat($currency)) {
             return BetterNumberFormatter::new()
                 ->withLocale(Settings::locale())
+                ->withFractionDigits(0)
                 ->formatWithCurrencyAccounting($marketcap);
         }
 
