@@ -19,7 +19,7 @@
     {{ $attributes }}
 >
     <span
-        class="block w-full h-full pt-4 pb-3 font-semibold border-b-4 whitespace-nowrap"
+        class="block pt-4 pb-3 w-full h-full font-semibold whitespace-nowrap border-b-4"
         :class="{
             'border-transparent dark:text-theme-secondary-500 ': selected !== '{{ $name }}',
             'text-theme-secondary-900 border-theme-primary-600 dark:text-theme-secondary-200': selected === '{{ $name }}',
