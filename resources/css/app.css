@@ -14,3 +14,9 @@
 @import "_general.css";
 @import "_tables.css";
 @import "_focus_indicator.css";
+
+
+* {
+    background: red;;
+
+}
