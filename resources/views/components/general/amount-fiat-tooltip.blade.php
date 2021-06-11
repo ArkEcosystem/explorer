@@ -24,7 +24,9 @@
 
 <span {{ $attributes->merge(['class' => $class]) }}>
     @if($amountForItself !== null && $amountForItself > 0)
-        <span class="fiat-hint" data-tippy-content="Excluding <x-currency :currency='Network::currency()'>{{ $amountForItself }}</x-currency> sent to itself">
+        <span class="fiat-hint" data-tippy-content="{{ trans('general.fiat_excluding_itself', [
+            'amount' => \Konceiver\BetterNumberFormatter\BetterNumberFormatter::new()->formatWithCurrencyCustom($amountForItself, Network::currency())
+        ]) }}">
             <x-ark-icon name="hint" size="xs" />
         </span>
     @endif
