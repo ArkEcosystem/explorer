@@ -1,6 +1,6 @@
 <div class="dark:bg-theme-secondary-900">
     <x-ark-container container-class="flex flex-col space-y-5">
-        <h1 class="header-2">
+        <h1>
             @lang($title)
         </h1>
 
