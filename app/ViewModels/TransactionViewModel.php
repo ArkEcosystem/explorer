@@ -8,7 +8,6 @@ use App\Actions\CacheNetworkHeight;
 use App\Contracts\ViewModel;
 use App\Facades\Wallets;
 use App\Models\Transaction;
-use App\Models\Wallet;
 use App\Services\ExchangeRate;
 use App\Services\Timestamp;
 use App\Services\Transactions\TransactionDirection;
@@ -95,7 +94,7 @@ final class TransactionViewModel implements ViewModel
 
     public function amountForItself(): float
     {
-        if (!$this->isMultiPayment()) {
+        if (! $this->isMultiPayment()) {
             return 0.0;
         }
 
