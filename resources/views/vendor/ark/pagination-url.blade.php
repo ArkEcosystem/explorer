@@ -93,7 +93,7 @@
                 </button>
             </form>
 
-            <div class="hidden px-2 rounded bg-theme-primary-100 dark:bg-theme-secondary-800 md:flex flex-inline">
+            <div class="hidden px-2 rounded md:flex bg-theme-primary-100 dark:bg-theme-secondary-800 flex-inline">
                 @foreach ($elements as $element)
                     {{-- "Three Dots" Separator --}}
                     @if (is_string($element))
@@ -122,7 +122,7 @@
                 @endforeach
             </div>
 
-            <div class="pagination-pages md:hidden">
+            <div class="md:hidden pagination-pages">
                 <button
                     x-on:click="toggleSearch"
                     type="button"
