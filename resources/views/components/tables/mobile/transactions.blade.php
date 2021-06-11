@@ -1,3 +1,11 @@
+@props([
+    'transactions',
+    'wallet',
+    'useDirection' => false,
+    'excludeItself' => false,
+    'useConfirmations' => false,
+])
+
 <div class="divide-y table-list-mobile">
     @foreach ($transactions as $transaction)
         <div class="table-list-mobile-row">
@@ -11,7 +19,7 @@
 
             @isset($useDirection)
                 @if($transaction->isSent($wallet->address()))
-                    <x-tables.rows.mobile.amount-sent :model="$transaction" />
+                    <x-tables.rows.mobile.amount-sent :model="$transaction" :exclude-itself="$excludeItself" />
                 @else
                     <x-tables.rows.mobile.amount-received
                         :model="$transaction"

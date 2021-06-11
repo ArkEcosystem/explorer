@@ -7,10 +7,10 @@
 ])
 
 @php
-    $class = 'relative';
+    $class = '';
 
     if($isSent || $isReceived) {
-        $class.= ' flex px-1.5 py-1 font-semibold whitespace-nowrap rounded border overflow-hidden';
+        $class.= ' flex px-1.5 py-1 font-semibold whitespace-nowrap rounded border';
     }
 
     if($isSent) {
