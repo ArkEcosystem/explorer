@@ -29,7 +29,7 @@
                     <x-general.entity-header-item
                         :title="trans('pages.wallet.rank')"
                         without-icon
-                        content-class="pr-7 space-y-2 border-r sm:text-right border-theme-secondary-300 dark:border-theme-secondary-800 sm:border-r-0 sm:pr-0"
+                        content-class="pr-7 space-y-2 border-r sm:pr-0 sm:text-right sm:border-r-0 border-theme-secondary-300 dark:border-theme-secondary-800"
                     >
                         <x-slot name="text">
                             @if ($vote->isResigned())
