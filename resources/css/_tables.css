@@ -53,7 +53,6 @@ tr:hover td.hoverable-cell .table-avatar {
     @apply space-x-2;
 }
 
-
 .table-compact .fiat-tooltip-sent,
 .table-compact .fiat-tooltip-received {
     @apply p-0 border-0;
@@ -99,7 +98,7 @@ body:not(.table-compact) .arrow-direction {
     }
 
     .sender-direction-wrapper {
-        @apply p-0 pr-2 ;
+        @apply p-0 pr-2;
     }
 
     .fiat-tooltip-sent,
