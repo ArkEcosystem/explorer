@@ -1,9 +1,15 @@
-@if($model->isMultiPayment())
-    <x-general.amount-fiat-tooltip :amount="$model->amountExcludingMyself()" :fiat="$model->amountFiatExcludingMyself()" is-sent />
+@props([
+    'model',
+    'excludeItself' => false,
+])
 
-    <span data-tippy-content="Excluding <x-currency :currency='Network::currency()'>{{ $model->amountForMyself() }}</x-currency> sent to itself">
-        <x-ark-icon name="info" />
-    </span>
+@if($excludeItself && $model->isMultiPayment())
+    <x-general.amount-fiat-tooltip
+        :amount="$model->amountExcludingItSelf()"
+        :fiat="$model->amountFiatExcludingItSelf()"
+        :amount-for-itself="$model->amountForItSelf()"
+        is-sent
+    />
 @else
     <x-general.amount-fiat-tooltip :amount="$model->amount()" :fiat="$model->amountFiat()" is-sent />
 @endif

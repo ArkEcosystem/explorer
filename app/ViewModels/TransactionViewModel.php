@@ -93,7 +93,7 @@ final class TransactionViewModel implements ViewModel
         return ExchangeRate::convert($this->transaction->fee->toFloat(), $this->transaction->timestamp);
     }
 
-    public function amountForMyself(): float
+    public function amountForItself(): float
     {
         if (!$this->isMultiPayment()) {
             return 0.0;
@@ -106,7 +106,7 @@ final class TransactionViewModel implements ViewModel
             ->sum('amount') / 1e8;
     }
 
-    public function amountExcludingMyself(): float
+    public function amountExcludingItself(): float
     {
         if ($this->isMultiPayment()) {
             $payments = collect(Arr::get($this->transaction->asset ?? [], 'payments', []));
@@ -142,9 +142,9 @@ final class TransactionViewModel implements ViewModel
         return $this->amount();
     }
 
-    public function amountFiatExcludingMyself(): string
+    public function amountFiatExcludingItself(): string
     {
-        return ExchangeRate::convert($this->amountExcludingMyself(), $this->transaction->timestamp);
+        return ExchangeRate::convert($this->amountExcludingItself(), $this->transaction->timestamp);
     }
 
     public function amountFiat(): string

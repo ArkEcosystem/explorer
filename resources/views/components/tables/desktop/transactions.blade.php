@@ -2,6 +2,7 @@
     'transactions',
     'wallet',
     'useDirection' => false,
+    'excludeItself' => false,
     'useConfirmations' => false,
 ])
 
@@ -48,7 +49,7 @@
                 >
                     @if($useDirection)
                         @if($transaction->isSent($wallet->address()))
-                            <x-tables.rows.desktop.amount-sent :model="$transaction" />
+                            <x-tables.rows.desktop.amount-sent :model="$transaction" :exclude-itself="$excludeItself" />
                         @else
                             <x-tables.rows.desktop.amount-received :model="$transaction" :wallet="$wallet" />
                         @endif
