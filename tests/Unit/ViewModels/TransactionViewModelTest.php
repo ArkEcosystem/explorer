@@ -158,9 +158,9 @@ it('should get the amount in fiat for multi payments excluding payment to the sa
 
     $this->subject = new TransactionViewModel(Transaction::factory()->create([
         'sender_public_key' => $sender->public_key,
-        'type'       => CoreTransactionTypeEnum::MULTI_PAYMENT,
-        'type_group' => TransactionTypeGroupEnum::CORE,
-        'asset'      => [
+        'type'              => CoreTransactionTypeEnum::MULTI_PAYMENT,
+        'type_group'        => TransactionTypeGroupEnum::CORE,
+        'asset'             => [
             'payments' => [
                 [
                     'amount'      => '1000000000',
@@ -197,9 +197,9 @@ it('should get the amount for itself on multi payments', function () {
 
     $this->subject = new TransactionViewModel(Transaction::factory()->create([
         'sender_public_key' => $sender->public_key,
-        'type'       => CoreTransactionTypeEnum::MULTI_PAYMENT,
-        'type_group' => TransactionTypeGroupEnum::CORE,
-        'asset'      => [
+        'type'              => CoreTransactionTypeEnum::MULTI_PAYMENT,
+        'type_group'        => TransactionTypeGroupEnum::CORE,
+        'asset'             => [
             'payments' => [
                 [
                     'amount'      => '1000000000',
