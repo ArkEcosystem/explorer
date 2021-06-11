@@ -79,7 +79,7 @@
                 </button>
             </form>
 
-            <div class="hidden px-2 rounded bg-theme-primary-100 dark:bg-theme-secondary-800 md:flex flex-inline">
+            <div class="hidden px-2 rounded md:flex bg-theme-primary-100 dark:bg-theme-secondary-800 flex-inline">
                 @php ($pageIndex = 1)
 
                 @foreach ($elements as $element)
@@ -113,7 +113,7 @@
                 @endforeach
             </div>
 
-            <div class="pagination-pages md:hidden">
+            <div class="md:hidden pagination-pages">
                 <button
                     x-on:click="toggleSearch"
                     type="button"
