@@ -21,7 +21,7 @@
                 </p>
             </div>
 
-            <div class="pt-6 mt-6 border-t sm:border-t-0 sm:flex sm:pt-0 lg:mt-0 lg:flex-1 lg:justify-end border-theme-secondary-300 dark:border-theme-secondary-800">
+            <div class="pt-6 mt-6 border-t sm:flex sm:pt-0 sm:border-t-0 lg:flex-1 lg:justify-end lg:mt-0 border-theme-secondary-300 dark:border-theme-secondary-800">
                 <x-stats.periods-selector wire:model="period" :selected="$period" :options="$options" class="sm:hidden" />
 
                 <div class="mt-3 sm:mt-0">
@@ -33,7 +33,7 @@
                     </p>
                 </div>
 
-                <div class="mt-4 sm:mt-0 sm:ml-6 sm:pl-6 sm:border-l sm:border-theme-secondary-300 dark:border-theme-secondary-800">
+                <div class="mt-4 sm:pl-6 sm:mt-0 sm:ml-6 sm:border-l sm:border-theme-secondary-300 dark:border-theme-secondary-800">
                     <h3 class="mb-0 text-sm font-semibold leading-none text-theme-secondary-500 dark:text-theme-secondary-700">
                         @lang('pages.statistics.chart.min-price')
                     </h3>
@@ -42,7 +42,7 @@
                     </p>
                 </div>
 
-                <div class="mt-4 sm:mt-0 sm:ml-6 sm:pl-6 sm:border-l sm:border-theme-secondary-300 dark:border-theme-secondary-800">
+                <div class="mt-4 sm:pl-6 sm:mt-0 sm:ml-6 sm:border-l sm:border-theme-secondary-300 dark:border-theme-secondary-800">
                     <h3 class="mb-0 text-sm font-semibold leading-none text-theme-secondary-500 dark:text-theme-secondary-700">
                         @lang('pages.statistics.chart.max-price')
                     </h3>
@@ -52,7 +52,7 @@
                 </div>
             </div>
 
-            <div class="mt-5 sm:mt-6 sm:pt-6 sm:border-t lg:w-full border-theme-secondary-300 dark:border-theme-secondary-800">
+            <div class="mt-5 sm:pt-6 sm:mt-6 sm:border-t lg:w-full border-theme-secondary-300 dark:border-theme-secondary-800">
                 <x-stats.periods-selector wire:model="period" :selected="$period" :options="$options" class="hidden sm:block"/>
                 <div class="mt-6 sm:hidden">
                     <x-chart
