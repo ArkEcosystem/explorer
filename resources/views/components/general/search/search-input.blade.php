@@ -1,4 +1,4 @@
-<div class="flex items-center px-8 py-6">
+<div class="flex items-center py-6 px-8">
     <div class="flex-1 mr-8">
         <input
             x-ref="input"
@@ -22,7 +22,7 @@
 
     <button
         type="button"
-        class="hidden px-4 py-2 mr-8 font-normal text-center rounded md:block text-theme-primary-500 transition-default dark:hover:bg-theme-secondary-800 dark:text-theme-secondary-600 hover:bg-theme-primary-100"
+        class="hidden py-2 px-4 mr-8 font-normal text-center rounded md:block text-theme-primary-500 transition-default dark:hover:bg-theme-secondary-800 dark:text-theme-secondary-600 hover:bg-theme-primary-100"
         @click="showAdvanced = !showAdvanced;"
     >
         <span x-show="!showAdvanced">@lang('actions.advanced_search')</span>
@@ -31,12 +31,12 @@
 
     <button
         type="button"
-        class="relative hidden md:block button-primary"
+        class="hidden relative md:block button-primary"
         :class="{ 'pointer-events-none' : searching }"
         wire:click="performSearch"
         @click="searching = true"
     >
-        <span x-show="searching" class="absolute left-0 right-0 flex items-center justify-center" x-cloak>
+        <span x-show="searching" class="flex absolute right-0 left-0 justify-center items-center" x-cloak>
             <x-ark-spinner-icon />
         </span>
         <span :class="{ 'invisible': searching }">@lang('actions.find_it')</span>

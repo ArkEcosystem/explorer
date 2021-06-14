@@ -19,13 +19,13 @@
                 <x-slot name="extension">
                     <div class="flex items-center mt-6 space-x-2 lg:mt-0 lg:ml-3 text-theme-secondary-400">
                         @if ($block->previousBlockUrl())
-                            <a href="{{ $block->previousBlockUrl() }}" class="flex items-center justify-center flex-1 px-4 rounded cursor-pointer h-11 lg:flex-none bg-theme-secondary-800 transition-default hover:bg-theme-secondary-700">
+                            <a href="{{ $block->previousBlockUrl() }}" class="flex flex-1 justify-center items-center px-4 h-11 rounded cursor-pointer lg:flex-none bg-theme-secondary-800 transition-default hover:bg-theme-secondary-700">
                                 <x-ark-icon name="chevron-left" size="sm" />
                             </a>
                         @endif
 
                         @if ($block->nextBlockUrl())
-                            <a href="{{ $block->nextBlockUrl() }}" class="flex items-center justify-center flex-1 px-4 rounded cursor-pointer h-11 lg:flex-none bg-theme-secondary-800 transition-default hover:bg-theme-secondary-700">
+                            <a href="{{ $block->nextBlockUrl() }}" class="flex flex-1 justify-center items-center px-4 h-11 rounded cursor-pointer lg:flex-none bg-theme-secondary-800 transition-default hover:bg-theme-secondary-700">
                                 <x-ark-icon name="chevron-right" size="sm" />
                             </a>
                         @endif
