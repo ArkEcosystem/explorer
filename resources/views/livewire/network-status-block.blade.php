@@ -1,4 +1,4 @@
-<div class="overflow-auto bg-theme-secondary-100 dark:bg-black">
+<div class="overflow-auto dark:bg-black bg-theme-secondary-100">
     <div class="py-8 content-container-full-width">
         <div class="px-10 md:w-full">
             <div
@@ -25,7 +25,7 @@
                     </x-slot>
 
                     <div class="flex space-x-3">
-                        <span class="font-semibold leading-none whitespace-nowrap text-theme-secondary-900 dark:text-white">
+                        <span class="font-semibold leading-none whitespace-nowrap dark:text-white text-theme-secondary-900">
                             {{ $price }}
                         </span>
 
