@@ -146,7 +146,7 @@ function fakeKnownWallets(): void
 
 function fakeCryptoCompare(bool $setToZero = false): void
 {
-    $histohour = 'histohour' . ($setToZero ? '-zero' : '');
+    $histohour = 'histohour'.($setToZero ? '-zero' : '');
 
     Http::fake([
         'cryptocompare.com/data/pricemultifull*' => Http::response(json_decode(file_get_contents(base_path('tests/fixtures/cryptocompare/pricemultifull.json')), true), 200),

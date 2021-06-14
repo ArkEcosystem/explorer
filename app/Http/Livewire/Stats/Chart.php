@@ -97,7 +97,7 @@ final class Chart extends Component
 
     private function getPrice(string $currency): float
     {
-        return (new NetworkStatusBlockCache)->getPrice(Network::currency(), $currency) ?? 0.0;
+        return (new NetworkStatusBlockCache())->getPrice(Network::currency(), $currency) ?? 0.0;
     }
 
     private function getPriceRange(): Collection
