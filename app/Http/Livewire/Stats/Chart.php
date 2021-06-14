@@ -9,6 +9,7 @@ use App\Facades\Network;
 use App\Http\Livewire\Concerns\AvailablePeriods;
 use App\Services\Cache\PriceChartCache;
 use App\Services\CryptoCompare;
+use App\Services\MarketCap;
 use App\Services\NumberFormatter as ServiceNumberFormatter;
 use App\Services\Settings;
 use Illuminate\Support\Collection;
@@ -91,14 +92,12 @@ final class Chart extends Component
 
     private function marketCap(): string
     {
-        $value = CryptoCompare::marketCap(Network::currency(), Settings::currency());
-
-        return BetterNumberFormatter::new()->formatWithCurrency($value);
+        return MarketCap::getFormatted(Network::currency(), Settings::currency()) ?? '';
     }
 
     private function getPrice(string $currency): float
     {
-        return CryptoCompare::price(Network::currency(), $currency);
+        return CryptoCompare::getCurrenciesData(Network::currency(), collect([$currency]))->get('price') ?? 0.0;
     }
 
     private function getPriceRange(): Collection
