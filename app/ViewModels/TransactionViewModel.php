@@ -97,7 +97,7 @@ final class TransactionViewModel implements ViewModel
         $payments = collect(Arr::get($this->transaction->asset ?? [], 'payments', []));
 
         return $payments
-            ->filter(function ($payment) {
+            ->filter(function ($payment): bool {
                 $sender = $this->sender();
 
                 return $sender !== null && $sender->address === $payment['recipientId'];
@@ -110,7 +110,7 @@ final class TransactionViewModel implements ViewModel
         $payments = collect(Arr::get($this->transaction->asset ?? [], 'payments', []));
 
         return $payments
-            ->filter(function ($payment) {
+            ->filter(function ($payment): bool {
                 $sender = $this->sender();
 
                 return $sender === null || $sender->address !== $payment['recipientId'];
