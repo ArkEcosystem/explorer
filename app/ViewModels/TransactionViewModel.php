@@ -99,6 +99,7 @@ final class TransactionViewModel implements ViewModel
         return $payments
             ->filter(function ($payment) {
                 $sender = $this->sender();
+
                 return $sender !== null && $sender->address === $payment['recipientId'];
             })
             ->sum('amount') / 1e8;
@@ -111,6 +112,7 @@ final class TransactionViewModel implements ViewModel
         return $payments
             ->filter(function ($payment) {
                 $sender = $this->sender();
+
                 return $sender === null || $sender->address !== $payment['recipientId'];
             })
             ->sum('amount') / 1e8;
