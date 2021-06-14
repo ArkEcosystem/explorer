@@ -1,6 +1,6 @@
 @props([
     'transactions',
-    'wallet',
+    'wallet' => null,
     'useDirection' => false,
     'excludeItself' => false,
     'useConfirmations' => false,
@@ -17,7 +17,7 @@
 
             <x-tables.rows.mobile.recipient :model="$transaction" />
 
-            @isset($useDirection)
+            @if($useDirection)
                 @if($transaction->isSent($wallet->address()))
                     <x-tables.rows.mobile.amount-sent :model="$transaction" :exclude-itself="$excludeItself" />
                 @else
@@ -28,7 +28,7 @@
                 @endif
             @else
                 <x-tables.rows.mobile.amount :model="$transaction" />
-            @endisset
+            @endif
 
             <x-tables.rows.mobile.fee :model="$transaction" />
 
