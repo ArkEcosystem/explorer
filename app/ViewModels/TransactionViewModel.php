@@ -94,9 +94,7 @@ final class TransactionViewModel implements ViewModel
 
     public function amountForItself(): float
     {
-        $payments = collect(Arr::get($this->transaction->asset ?? [], 'payments', []));
-
-        return $payments
+        return collect(Arr::get($this->transaction->asset ?? [], 'payments', []))
             ->filter(function ($payment): bool {
                 $sender = $this->sender();
 
@@ -107,9 +105,7 @@ final class TransactionViewModel implements ViewModel
 
     public function amountExcludingItself(): float
     {
-        $payments = collect(Arr::get($this->transaction->asset ?? [], 'payments', []));
-
-        return $payments
+        return collect(Arr::get($this->transaction->asset ?? [], 'payments', []))
             ->filter(function ($payment): bool {
                 $sender = $this->sender();
 
@@ -121,9 +117,7 @@ final class TransactionViewModel implements ViewModel
     public function amount(): float
     {
         if ($this->isMultiPayment()) {
-            $payments = collect(Arr::get($this->transaction->asset ?? [], 'payments', []));
-
-            return $payments
+            return collect(Arr::get($this->transaction->asset ?? [], 'payments', []))
                 ->sum('amount') / 1e8;
         }
 
