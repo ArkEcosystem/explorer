@@ -17,7 +17,7 @@
                     <x-wallet.qr-address :model="$wallet" />
                 </div>
 
-                <div x-show="options" class="space-y-8">
+                <div x-show="options" class="space-y-5">
                     <x-ark-input
                         :label="trans('pages.wallet.amount')"
                         type="number"
@@ -25,12 +25,10 @@
                         name="amount"
                         max="17"
                         :errors="$errors"
-                        required
                         autofocus
                     />
 
                     <x-ark-input
-                        class="mt-5"
                         type="text"
                         id="smartbridge"
                         name="smartbridge"
@@ -76,7 +74,7 @@
     <button
         wire:click="toggleQrCode"
         type="button"
-        class="flex flex-1 justify-center items-center w-full h-11 rounded cursor-pointer lg:w-16 bg-theme-primary-600 hover:bg-theme-primary-700 transition-default lg:flex-none lg:px-3"
+        class="flex flex-1 justify-center items-center w-full h-11 rounded cursor-pointer lg:flex-none lg:px-3 lg:w-16 bg-theme-primary-600 transition-default hover:bg-theme-primary-700"
     >
         <x-ark-icon name="app-qr-code" size="md" />
     </button>

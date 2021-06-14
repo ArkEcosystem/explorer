@@ -1,5 +1,5 @@
 <div>
-    <div class="flex {{ ($withoutReverse ?? false) ? 'space-x-3' : 'flex-row-reverse md:space-x-3' }} items-center md:flex-row md:justify-start">
+    <div class="flex {{ ($withoutReverse ?? false) ? 'space-x-3' : 'flex-row-reverse md:space-x-4' }} items-center md:flex-row md:justify-start">
         @unless ($icon ?? false)
             <x-general.avatar :identifier="$model->address()" />
         @else
@@ -11,7 +11,7 @@
                 {{ $prefix }}
             @endif
 
-            <a href="{{ route('wallet', $model->address()) }}" class="font-semibold link sm:hidden md:flex">
+            <a href="{{ route('wallet', $model->address()) }}" class="font-semibold sm:hidden md:flex link">
                 @if ($model->username())
                     @if ($prefix ?? false)
                         <div class="delegate-name-truncate-prefix">
@@ -41,7 +41,7 @@
                 @endif
             </a>
 
-            <a href="{{ route('wallet', $model->address()) }}" class="hidden font-semibold link sm:flex md:hidden">
+            <a href="{{ route('wallet', $model->address()) }}" class="hidden font-semibold sm:flex md:hidden link">
                 @if ($model->username())
                     {{ $model->username() }}
                 @else

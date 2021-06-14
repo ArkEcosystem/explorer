@@ -1,8 +1,8 @@
-<div class="overflow-auto bg-theme-secondary-100 dark:bg-black ">
+<div class="overflow-auto dark:bg-black bg-theme-secondary-100">
     <div class="py-8 content-container-full-width">
         <div class="px-10 md:w-full">
             <div
-                class="flex grid-cols-2 gap-3 w-full md:grid xl:space-x-3 xl:gap-0 xl:flex"
+                class="flex grid-cols-2 gap-3 w-full md:grid xl:flex xl:gap-0 xl:space-x-3"
                 wire:poll.{{ Network::blockTime() }}s
             >
                 <x-stats.stat :label="trans('general.height')" icon="app-height">
@@ -13,11 +13,11 @@
                     <x-currency :currency="Network::currency()">{{ $supply }}</x-currency>
                 </x-stats.stat>
 
-                <x-stats.stat :label="trans('general.market_cap')" icon="app-monitor" :disabled="! Network::canBeExchanged()">
+                <x-stats.stat :label="trans('general.market_cap')" icon="app-monitor" :disabled="! Network::canBeExchanged() || $marketCap === null">
                     {{ $marketCap }}
                 </x-stats.stat>
 
-                <x-stats.stat :label="trans('general.price')" icon="app-price" :disabled="! Network::canBeExchanged()" class="flex-grow">
+                <x-stats.stat :label="trans('general.price')" icon="app-price" :disabled="! Network::canBeExchanged() || $price === null" class="flex-grow">
                     <x-slot name="side">
                         <div wire:ignore>
                             <livewire:price-stats />
@@ -25,7 +25,7 @@
                     </x-slot>
 
                     <div class="flex space-x-3">
-                        <span class="font-semibold leading-none whitespace-nowrap text-theme-secondary-900 dark:text-white">
+                        <span class="font-semibold leading-none whitespace-nowrap dark:text-white text-theme-secondary-900">
                             {{ $price }}
                         </span>
 
