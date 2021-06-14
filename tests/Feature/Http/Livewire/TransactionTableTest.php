@@ -137,10 +137,10 @@ it('should update the records fiat tooltip when currency changed', function () {
         '2020-10-19' => 0.1234567,
     ]));
 
-    ViewModelFactory::make(Transaction::factory()->create([
+    Transaction::factory()->create([
         'timestamp'         => 112982056,
         'amount'            => 499 * 1e8,
-    ]));
+    ]);
 
     $component = Livewire::test(TransactionTable::class);
 
