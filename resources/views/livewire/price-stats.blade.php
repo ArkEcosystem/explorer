@@ -1,6 +1,6 @@
 <div
     wire:poll.60s
-    class="hidden flex-grow justify-end lg:flex"
+    class="justify-end flex-grow hidden lg:flex"
 >
     <div
         wire:key="{{ Settings::currency() }}-{{ $isPositive ? 'positive' : 'negative' }}-{{ $usePlaceholder ? 'placeholder' : 'live' }}"
@@ -20,7 +20,7 @@
             <canvas
                 x-ref="chart"
                 class="w-full h-full"
-                width="{{ \App\Services\NumberFormatter::isFiat(Settings::currency()) ? 210 : 120 }}"
+                width="{{ ExplorerNumberFormatter::isFiat(Settings::currency()) ? 210 : 120 }}"
                 height="40"
             ></canvas>
         </div>

@@ -231,7 +231,7 @@ return [
         'View'            => Illuminate\Support\Facades\View::class,
         'Avatar'          => App\Services\Avatar::class,
         'Network'         => App\Facades\Network::class,
-        'NumberFormatter' => App\Services\NumberFormatter::class,
+        'ExplorerNumberFormatter' => App\Services\NumberFormatter::class,
         'Settings'        => App\Services\Settings::class,
         'Percentage'      => Mattiasgeniar\Percentage\Percentage::class,
         'ExchangeRate'    => App\Services\ExchangeRate::class,
