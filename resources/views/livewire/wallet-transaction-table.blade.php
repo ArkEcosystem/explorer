@@ -3,7 +3,7 @@
         class="hidden mb-4 md:flex"
         default-selected="all"
         on-selected="function (value) {
-            this.$wire.set('state.selected', value);
+            this.$wire.set('state.direction', value);
         }"
     >
         <x-tabs.tab name="all">
@@ -29,7 +29,7 @@
         </x-slot>
     </x-tabs.wrapper>
 
-    <div class="mb-4 md:hidden ">
+    <div class="mb-4 md:hidden">
         <x-ark-dropdown
             wrapper-class="relative p-2 w-full rounded-xl border border-theme-primary-100 dark:border-theme-secondary-800"
             button-class="p-3 w-full font-semibold text-left text-theme-secondary-900 dark:text-theme-secondary-200"

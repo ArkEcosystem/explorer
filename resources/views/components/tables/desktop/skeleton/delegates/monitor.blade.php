@@ -2,10 +2,10 @@
     class="block"
     device="desktop"
     :items="[
-        'pages.delegates.order'      => 'text',
+        'pages.delegates.order'      => 'rank',
         'pages.delegates.name'       => 'address',
         'pages.delegates.forging_at' => [
-            'type' => 'number',
+            'type' => 'text',
             'responsive' => true,
             'breakpoint' => 'sm',
         ],
@@ -17,6 +17,7 @@
             'type' => 'text',
             'responsive' => true,
             'breakpoint' => 'md',
+            'class' => 'text-right',
         ]
     ]"
 />
