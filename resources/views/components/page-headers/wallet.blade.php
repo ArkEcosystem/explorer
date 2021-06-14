@@ -15,7 +15,7 @@
         @endphp
 
         <x-slot name="extension">
-            <div class="flex flex-col w-full space-y-4 lg:flex-row lg:justify-between lg:space-y-0">
+            <div class="flex flex-col space-y-4 w-full lg:flex-row lg:justify-between lg:space-y-0">
                 <div class="grid grid-cols-1 space-y-4 sm:grid-cols-3 sm:space-y-0 lg:flex lg:space-x-5">
                     <x-general.header-entry
                         title="{{ trans('pages.wallet.delegate.rank') }} / {{ trans('pages.wallet.delegate.status') }}"
@@ -28,7 +28,7 @@
                                     </div>
                                 </div>
 
-                                <div class="hidden border-4 rounded-full md:flex border-theme-secondary-100 dark:border-theme-secondary-900">
+                                <div class="hidden rounded-full border-4 md:flex border-theme-secondary-100 dark:border-theme-secondary-900">
                                     <div class="rounded-full circled-icon {{ $wallet->delegateStatusStyling() }} bg-theme-secondary-100 dark:bg-theme-secondary-900">
                                         <x-ark-icon :name="$isStandby ? 'clock' : 'checkmark-smooth'" />
                                     </div>
