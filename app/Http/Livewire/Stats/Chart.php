@@ -7,8 +7,8 @@ namespace App\Http\Livewire\Stats;
 use App\Enums\CryptoCurrencies;
 use App\Facades\Network;
 use App\Http\Livewire\Concerns\AvailablePeriods;
+use App\Services\Cache\NetworkStatusBlockCache;
 use App\Services\Cache\PriceChartCache;
-use App\Services\CryptoCompare;
 use App\Services\MarketCap;
 use App\Services\NumberFormatter as ServiceNumberFormatter;
 use App\Services\Settings;
@@ -92,12 +92,12 @@ final class Chart extends Component
 
     private function marketCap(): string
     {
-        return MarketCap::getFormatted(Network::currency(), Settings::currency()) ?? '';
+        return MarketCap::getFormatted(Network::currency(), Settings::currency()) ?? '0';
     }
 
     private function getPrice(string $currency): float
     {
-        return CryptoCompare::getCurrenciesData(Network::currency(), collect([$currency]))->get('price') ?? 0.0;
+        return (new NetworkStatusBlockCache)->getPrice(Network::currency(), $currency) ?? 0.0;
     }
 
     private function getPriceRange(): Collection
@@ -121,7 +121,7 @@ final class Chart extends Component
 
     private function getHistoricalHourly(string $target): Collection
     {
-        return CryptoCompare::historicalHourly(Network::currency(), $target, 24);
+        return (new NetworkStatusBlockCache())->getHistoricalHourly(Network::currency(), $target) ?? collect();
     }
 
     private function chart(string $period): Collection
