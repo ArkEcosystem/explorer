@@ -1,6 +1,6 @@
 <div class="divide-y table-list-mobile">
     @foreach ($transactions as $transaction)
-        <div class="table-list-mobile-row">
+        <div class="table-list-mobile-row" wire:key="mobile-transaction-{{ $transaction->id() }}-{{ Settings::currency() }}">
             <x-tables.rows.mobile.transaction-id :model="$transaction" />
 
             <x-tables.rows.mobile.timestamp :model="$transaction" />
