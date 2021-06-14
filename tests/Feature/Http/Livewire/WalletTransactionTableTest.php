@@ -295,7 +295,6 @@ it('should apply directions through an event', function () {
     $component->assertSee($sent->id);
 });
 
-
 it('should update the records fiat tooltip when currency changed', function () {
     Config::set('explorer.networks.development.canBeExchanged', true);
 

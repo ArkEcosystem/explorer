@@ -31,11 +31,11 @@ it('updates the balance when currency changes', function () {
 
     $wallet = Wallet::factory()->create(['balance' => 125456]);
 
-    $component = Livewire::test(WalletBalance::class, ['wallet' => $wallet])->assertSee('0.01 USD');;
+    $component = Livewire::test(WalletBalance::class, ['wallet' => $wallet])->assertSee('0.01 USD');
 
     $settings = Settings::all();
     $settings['currency'] = 'BTC';
     Session::put('settings', json_encode($settings));
 
-    $component->emit('currencyChanged', 'BTC')->assertSee('0.00015488 BTC');;
+    $component->emit('currencyChanged', 'BTC')->assertSee('0.00015488 BTC');
 });

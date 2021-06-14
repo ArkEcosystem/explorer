@@ -28,7 +28,7 @@ final class WalletTransactionTable extends Component
     /** @phpstan-ignore-next-line */
     protected $listeners = [
         'filterTransactionsByDirection',
-        'currencyChanged' => '$refresh'
+        'currencyChanged' => '$refresh',
     ];
 
     public function mount(string $address, bool $isCold, ?string $publicKey): void

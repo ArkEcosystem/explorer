@@ -44,7 +44,7 @@ it('should update the records fiat tooltip when currency changed', function () {
     $block = Block::factory()->create();
 
     Transaction::factory()->create([
-        'block_id' => $block->id,
+        'block_id'          => $block->id,
         'timestamp'         => 112982056,
         'amount'            => 499 * 1e8,
     ]);
@@ -63,4 +63,3 @@ it('should update the records fiat tooltip when currency changed', function () {
     $component->assertDontSeeHtml('data-tippy-content="12,080,790 USD"');
     $component->assertSeeHtml('data-tippy-content="61.6048933 BTC"');
 });
-

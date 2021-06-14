@@ -143,7 +143,6 @@ it('should apply filters through an event for transactions', function () {
     }
 });
 
-
 it('should poll transactions when currency changed', function () {
     $transaction = Transaction::factory()->create();
 

@@ -6,7 +6,6 @@ use App\Facades\Network;
 use App\Http\Livewire\BlockTable;
 use App\Models\Block;
 use App\Models\Scopes\OrderByHeightScope;
-use App\Models\Transaction;
 use App\Services\Cache\CryptoCompareCache;
 use App\Services\NumberFormatter;
 use App\Services\Settings;
@@ -33,7 +32,6 @@ it('should list the first page of records', function () {
         $component->assertSee(NumberFormatter::currency($block->fee(), Network::currency()));
     }
 });
-
 
 it('should update the records fiat tooltip when currency changed', function () {
     Config::set('explorer.networks.development.canBeExchanged', true);
