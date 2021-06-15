@@ -44,10 +44,16 @@ final class NumberFormatter
      */
     public static function currency($value, string $currency): string
     {
+        if (! static::isFiat($currency)) {
+            return number_format(
+                BetterNumberFormatter::new()
+                ->formatWithCurrencyCustom($value, $currency, static::decimalsFor($currency));
+        }
+
         return BetterNumberFormatter::new()
             ->withLocale('international')
             ->withFractionDigits(static::decimalsFor($currency))
-            ->formatCurrency($value, $currency);
+            ->formatCurrency((float) $value, $currency);
     }
 
     /**
