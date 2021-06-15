@@ -45,8 +45,7 @@ final class NumberFormatter
     public static function currency($value, string $currency): string
     {
         if (! static::isFiat($currency)) {
-            return number_format(
-                BetterNumberFormatter::new()
+            return BetterNumberFormatter::new()
                 ->formatWithCurrencyCustom($value, $currency, static::decimalsFor($currency));
         }
 
