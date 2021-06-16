@@ -4,6 +4,8 @@
     'useDirection' => false,
     'excludeItself' => false,
     'useConfirmations' => false,
+    'isSent' => null,
+    'isReceived' => null,
 ])
 
 <x-ark-tables.table sticky class="hidden md:block">
@@ -48,7 +50,7 @@
                     last-on="xl"
                 >
                     @if($useDirection)
-                        @if($transaction->isSent($wallet->address()))
+                        @if(($transaction->isSent($wallet->address()) || $isSent === true) && $isReceived !== true)
                             <x-tables.rows.desktop.amount-sent :model="$transaction" :exclude-itself="$excludeItself" />
                         @else
                             <x-tables.rows.desktop.amount-received :model="$transaction" :wallet="$wallet" />

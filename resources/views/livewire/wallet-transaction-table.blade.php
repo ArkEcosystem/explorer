@@ -31,8 +31,8 @@
 
     <div class="mb-4 md:hidden">
         <x-ark-dropdown
-            wrapper-class="relative p-2 w-full rounded-xl border border-theme-primary-100 dark:border-theme-secondary-800"
-            button-class="p-3 w-full font-semibold text-left text-theme-secondary-900 dark:text-theme-secondary-200"
+            wrapper-class="relative w-full p-2 border rounded-xl border-theme-primary-100 dark:border-theme-secondary-800"
+            button-class="w-full p-3 font-semibold text-left text-theme-secondary-900 dark:text-theme-secondary-200"
             dropdown-classes="left-0 w-full z-20"
             :init-alpine="false"
         >
@@ -56,7 +56,7 @@
                 </div>
             </x-slot>
 
-            <div class="block justify-center items-center py-3 mt-1">
+            <div class="items-center justify-center block py-3 mt-1">
                 <a
                     wire:click="$set('state.direction', 'all');"
                     @click="direction = 'all'"
@@ -99,7 +99,15 @@
             @if ($transactions->isEmpty() && $state['type'] !== 'all')
                 <x-general.no-results :text="trans('pages.home.no_transaction_results', [trans('forms.search.transaction_types.'.$state['type'])])" />
             @else
-                <x-tables.desktop.transactions :transactions="$transactions" :wallet="$wallet" use-confirmations use-direction :exclude-itself="$state['direction'] === 'all'" />
+                <x-tables.desktop.transactions
+                    :transactions="$transactions"
+                    :wallet="$wallet"
+                    use-confirmations
+                    use-direction
+                    :exclude-itself="$state['direction'] === 'all'"
+                    :is-sent="$state['direction'] === 'sent'"
+                    :is-received="$state['direction'] === 'received'"
+                />
 
                 <x-tables.mobile.transactions :transactions="$transactions" :wallet="$wallet" use-confirmations use-direction :exclude-itself="$state['direction'] === 'all'" />
 

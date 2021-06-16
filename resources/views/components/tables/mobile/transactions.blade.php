@@ -4,6 +4,8 @@
     'useDirection' => false,
     'excludeItself' => false,
     'useConfirmations' => false,
+    'isSent' => null,
+    'isReceived' => null,
 ])
 
 <div class="divide-y table-list-mobile">
@@ -18,7 +20,7 @@
             <x-tables.rows.mobile.recipient :model="$transaction" />
 
             @if($useDirection)
-                @if($transaction->isSent($wallet->address()))
+                @if(($transaction->isSent($wallet->address()) || $isSent === true) && $isReceived !== true)
                     <x-tables.rows.mobile.amount-sent :model="$transaction" :exclude-itself="$excludeItself" />
                 @else
                     <x-tables.rows.mobile.amount-received
