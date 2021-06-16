@@ -22,7 +22,7 @@ tr:hover td.hoverable-cell .table-avatar {
 }
 
 .fiat-hint {
-    @apply -ml-1.5 -my-1 bg-theme-danger-100 hover:bg-theme-danger-200 flex items-center justify-center px-2 mr-2;
+    @apply -ml-1.5 -my-1 bg-theme-danger-100 hover:bg-theme-danger-200 flex items-center justify-center px-2 mr-2 transition-default;
 }
 
 .dark .fiat-hint {
