@@ -26,7 +26,7 @@
     </thead>
     <tbody>
         @foreach($transactions as $transaction)
-            <x-ark-tables.row wire:key="transaction-{{ $transaction->id() }}">
+            <x-ark-tables.row wire:key="transaction-{{ $transaction->id() }}-{{ $useDirection ? 'dir' : 'no-dir' }}-{{ $excludeItself ? 'ei' : 'no-ei' }}">
                 <x-ark-tables.cell>
                     <x-tables.rows.desktop.transaction-id :model="$transaction" />
                 </x-ark-tables.cell>
