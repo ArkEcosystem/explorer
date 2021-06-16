@@ -17,7 +17,7 @@ final class GenerateVoteReport implements ShouldQueue
 
     public function handle(): void
     {
-        $process = (new Process(['bash', resource_path('scripts/vote-report.sh')]))
+        (new Process(['bash', resource_path('scripts/vote-report.sh')]))
             ->setTimeout(300)
             ->run();
     }
