@@ -20,6 +20,7 @@ return [
             'blockTime'        => intval(env('EXPLORER_NETWORK_BLOCK_TIME', 8)),
             'blockReward'      => intval(env('EXPLORER_NETWORK_BLOCK_REWARD', 2)),
             'base58Prefix'     => intval(env('EXPLORER_NETWORK_BASE58_PREFIX', 23)),
+            'api'              => env('EXPLORER_NETWORK_API', 'https://wallets.ark.io/api'),
         ],
         'development' => [
             'name'             => env('EXPLORER_NETWORK_NAME', 'ARK Development Network'),
@@ -33,6 +34,7 @@ return [
             'blockTime'        => intval(env('EXPLORER_NETWORK_BLOCK_TIME', 8)),
             'blockReward'      => intval(env('EXPLORER_NETWORK_BLOCK_REWARD', 2)),
             'base58Prefix'     => intval(env('EXPLORER_NETWORK_BASE58_PREFIX', 30)),
+            'api'              => env('EXPLORER_NETWORK_API', 'https://dwallets.ark.io/api'),
         ],
     ],
 
