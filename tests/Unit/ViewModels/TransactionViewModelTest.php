@@ -804,6 +804,83 @@ it('should determine legacy types', function (int $type, int $typeGroup, bool $e
     ],
 ]);
 
+it('should determine transactions that doesnt have amount', function (int $type, int $typeGroup, array $asset) {
+    $subject = new TransactionViewModel(Transaction::factory()->create([
+        'type'       => $type,
+        'type_group' => $typeGroup,
+        'asset'      => $asset,
+    ]));
+
+    expect($subject->hasAmount())->toBeFalse();
+})->with([
+    // 'DelegateRegistration',
+    [
+        CoreTransactionTypeEnum::DELEGATE_REGISTRATION,
+        TransactionTypeGroupEnum::CORE,
+        [],
+    ],
+    // 'EntityRegistration',
+    [
+        MagistrateTransactionTypeEnum::ENTITY,
+        TransactionTypeGroupEnum::MAGISTRATE,
+        [
+            'action' => MagistrateTransactionEntityActionEnum::REGISTER,
+        ],
+    ],
+    // 'EntityResignation',
+    [
+        MagistrateTransactionTypeEnum::ENTITY,
+        TransactionTypeGroupEnum::MAGISTRATE,
+        [
+            'action' => MagistrateTransactionEntityActionEnum::RESIGN,
+        ],
+    ],
+    // 'EntityUpdate',
+    [
+        MagistrateTransactionTypeEnum::ENTITY,
+        TransactionTypeGroupEnum::MAGISTRATE,
+        [
+            'action' => MagistrateTransactionEntityActionEnum::UPDATE,
+        ],
+    ],
+    // 'MultiSignature',
+    [
+        CoreTransactionTypeEnum::MULTI_SIGNATURE,
+        TransactionTypeGroupEnum::CORE,
+        [],
+    ],
+    // 'Unvote',
+    [
+        CoreTransactionTypeEnum::VOTE,
+        TransactionTypeGroupEnum::CORE,
+        [
+            'votes' => ['-publicKey'],
+        ],
+    ],
+    // 'VoteCombination',
+    [
+        CoreTransactionTypeEnum::VOTE,
+        TransactionTypeGroupEnum::CORE,
+        [
+            'votes' => ['+publicKey', '-publicKey'],
+        ],
+    ],
+    // 'Vote',
+    [
+        CoreTransactionTypeEnum::VOTE,
+        TransactionTypeGroupEnum::CORE,
+        [
+            'votes' => ['+publicKey'],
+        ],
+    ],
+]);
+
+it('should determine that transactions have amount by default', function () {
+    $subject = new TransactionViewModel(Transaction::factory()->transfer()->create());
+
+    expect($subject->hasAmount())->toBeTrue();
+});
+
 it('should determine the direction icon', function () {
     expect($this->subject->iconDirection('sender'))->toBeString();
 });
