@@ -100,11 +100,11 @@ trait InteractsWithTypeData
             return false;
         }
 
-        if ($this->isUnvote()) {
+        if ($this->isVoteCombination()) {
             return false;
         }
 
-        if ($this->isVoteCombination()) {
+        if ($this->isUnvote()) {
             return false;
         }
 

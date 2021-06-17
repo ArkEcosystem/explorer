@@ -849,20 +849,20 @@ it('should determine transactions that doesnt have amount', function (int $type,
         TransactionTypeGroupEnum::CORE,
         [],
     ],
-    // 'Unvote',
-    [
-        CoreTransactionTypeEnum::VOTE,
-        TransactionTypeGroupEnum::CORE,
-        [
-            'votes' => ['-publicKey'],
-        ],
-    ],
     // 'VoteCombination',
     [
         CoreTransactionTypeEnum::VOTE,
         TransactionTypeGroupEnum::CORE,
         [
             'votes' => ['+publicKey', '-publicKey'],
+        ],
+    ],
+    // 'Unvote',
+    [
+        CoreTransactionTypeEnum::VOTE,
+        TransactionTypeGroupEnum::CORE,
+        [
+            'votes' => ['-publicKey'],
         ],
     ],
     // 'Vote',
