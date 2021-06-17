@@ -13,7 +13,7 @@
 
 <div class="entity-header-item {{ $wrapperClass }}{{ $truncate ? ' overflow-x-auto truncate' : '' }}">
     @unless($withoutIcon)
-        <div class="items-center hidden md:flex">
+        <div class="hidden items-center md:flex">
             <div class="circled-icon text-theme-secondary-900 border-theme-secondary-900 dark:text-theme-secondary-600 dark:border-theme-secondary-600">
                 @if ($icon)
                     @if ($iconSize)

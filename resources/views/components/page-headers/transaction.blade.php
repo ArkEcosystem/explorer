@@ -16,7 +16,7 @@
 
             <x-slot name="bottom">
                 @if($transaction->hasAmount())
-                    <div class="grid grid-cols-1 xl:grid-cols-2 gap-y-8">
+                    <div class="grid grid-cols-1 gap-y-8 xl:grid-cols-2">
                         <x-dynamic-component :component="$transaction->headerComponent()" :transaction="$transaction" />
                     </div>
                 @else

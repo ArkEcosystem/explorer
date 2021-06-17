@@ -1,4 +1,4 @@
-<div class="flex flex-col space-y-8 sm:space-y-0 sm:flex-row xl:border-r xl:border-theme-secondary-300 xl:pr-7">
+<div class="flex flex-col space-y-8 sm:flex-row sm:space-y-0 xl:pr-7 xl:border-r xl:border-theme-secondary-300">
     <x-page-headers.transaction.icon-type :model="$transaction" wrapper-class="sm:w-1/2" />
 
     <x-general.entity-header-item
@@ -12,7 +12,7 @@
     </x-general.entity-header-item>
 </div>
 
-<div class="grid grid-cols-1 sm:grid-cols-2 gap-y-8 xl:pl-7">
+<div class="grid grid-cols-1 gap-y-8 sm:grid-cols-2 xl:pl-7">
     <x-general.entity-header-item
         :title="trans('pages.transaction.fee')"
         :wrapper-class="$wrapperClass ?? ''"
