@@ -7,13 +7,7 @@
 @else
     <span>
 @endif
-    @if(Network::canBeExchanged())
-        <span data-tippy-content="{{ $fiat }}">
-            <x-currency :currency="Network::currency()">{{ $amount }}</x-currency>
-        </span>
-    @else
-        <span>
-            <x-currency :currency="Network::currency()">{{ $amount }}</x-currency>
-        </span>
-    @endif
+    <span @if(Network::canBeExchanged()) data-tippy-content="{{ $fiat }}" @endif>
+        <x-currency :currency="Network::currency()">{{ $amount }}</x-currency>
+    </span>
 </span>
