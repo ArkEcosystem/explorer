@@ -11,7 +11,7 @@
 
 <div class="divide-y table-list-mobile">
     @foreach ($transactions as $transaction)
-        <div class="table-list-mobile-row" wire:key="{{ Helpers::generateId('mobile', $transaction->id(), Settings::curency(), ...$params) }}">
+        <div class="table-list-mobile-row" wire:key="{{ Helpers::generateId('mobile', $transaction->id(), Settings::currency(), ...$params) }}">
             <x-tables.rows.mobile.transaction-id :model="$transaction" />
 
             <x-tables.rows.mobile.timestamp :model="$transaction" />
