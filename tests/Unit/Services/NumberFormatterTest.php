@@ -40,8 +40,8 @@ it('should format fiat currency with the correct decimal places', function () {
 });
 
 it('should format crypto currency with the correct decimal places', function () {
-    expect(NumberFormatter::currency(123.456, 'BTC'))->toEqual('123.45600000 BTC');
-    expect(NumberFormatter::currency('123.456', 'BTC'))->toEqual('123.45600000 BTC');
+    expect(NumberFormatter::currency(123.456, 'BTC'))->toEqual('123.456 BTC');
+    expect(NumberFormatter::currency('123.456', 'BTC'))->toEqual('123.456 BTC');
 });
 
 it('should format a number without a suffix', function () {

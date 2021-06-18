@@ -184,7 +184,7 @@ it('should get the amount as fiat', function () {
         Carbon::parse($this->subject->timestamp())->format('Y-m-d') => 0.2907,
     ]));
 
-    expect($this->subject->amountFiat())->toBe('43.61 USD');
+    expect($this->subject->amountFiat())->toBe('US$ 43.61');
 
     assertMatchesSnapshot($this->subject->amountFiat());
 });
@@ -224,7 +224,7 @@ it('should get the specific multi payment fiat amount for a wallet recipient', f
         Carbon::parse($this->subject->timestamp())->format('Y-m-d') => 0.2907,
     ]));
 
-    expect($this->subject->amountReceivedFiat('B'))->toBe('20.35 USD');
+    expect($this->subject->amountReceivedFiat('B'))->toBe('US$ 20.35');
 
     assertMatchesSnapshot($this->subject->amountReceivedFiat('B'));
 });

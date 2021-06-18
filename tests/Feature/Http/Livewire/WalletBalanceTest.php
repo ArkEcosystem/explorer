@@ -15,5 +15,5 @@ it('should show the balance of the wallet', function () {
 
     $wallet = Wallet::factory()->create(['balance' => 125456]);
 
-    Livewire::test(WalletBalance::class, ['wallet' => $wallet])->assertSee('0.01 USD');
+    Livewire::test(WalletBalance::class, ['wallet' => $wallet])->assertSee('US$ 0.01');
 });

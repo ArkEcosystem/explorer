@@ -9,7 +9,7 @@ use Carbon\Carbon;
 it('should convert with a historical rate', function () {
     (new CryptoCompareCache())->setPrices('USD', collect([]));
 
-    expect(ExchangeRate::convert(1, 0))->toBe('0 USD');
+    expect(ExchangeRate::convert(1, 0))->toBe('US$ 0.00');
 });
 
 it('should convert with the current rate', function () {

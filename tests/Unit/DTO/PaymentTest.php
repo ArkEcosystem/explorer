@@ -18,7 +18,7 @@ it('should make an instance that has all properties', function () {
     ]);
 
     expect($subject->amount())->toBe(1.0);
-    expect($subject->amountFiat())->toBe('0 USD');
+    expect($subject->amountFiat())->toBe('US$ 0.00');
     expect($subject->address())->toBe($wallet->address);
     expect($subject->username())->toBe($wallet->attributes['delegate']['username']);
     expect($subject->recipient())->toBeInstanceOf(Payment::class);
