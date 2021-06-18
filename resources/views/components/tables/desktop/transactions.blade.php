@@ -6,6 +6,7 @@
     'useConfirmations' => false,
     'isSent' => null,
     'isReceived' => null,
+    'params' => [],
 ])
 
 <x-ark-tables.table sticky class="hidden md:block">
@@ -28,7 +29,7 @@
     </thead>
     <tbody>
         @foreach($transactions as $transaction)
-            <x-ark-tables.row wire:key="{{ Helpers::blend($transaction->id(), $useDirection, $excludeItself, $isSent, $isReceived) }}">
+            <x-ark-tables.row wire:key="{{ Helpers::blend($transaction->id(), ...$params) }}">
                 <x-ark-tables.cell>
                     <x-tables.rows.desktop.transaction-id :model="$transaction" />
                 </x-ark-tables.cell>
