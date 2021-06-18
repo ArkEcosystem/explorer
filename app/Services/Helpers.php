@@ -7,7 +7,7 @@ namespace App\Services;
 final class Helpers
 {
     /**
-     * Blends multiple parameters and creates an unique 8 chars string.
+     * Blends multiple parameters and creates an unique 10 chars string.
      * Useful for wire:keys.
      */
     public static function blend(int|bool|string ...$params): string
