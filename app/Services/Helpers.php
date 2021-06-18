@@ -10,7 +10,7 @@ final class Helpers
      * Blends multiple parameters and creates an unique 8 chars string.
      * Useful for wire:keys.
      */
-    public static function blend(int|bool|string ...$params): string
+    public static function blend(int | bool | string ...$params): string
     {
         return substr(md5(implode('*', $params)), 0, 10);
     }
