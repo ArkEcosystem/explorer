@@ -6,12 +6,12 @@
     'useConfirmations' => false,
     'isSent' => null,
     'isReceived' => null,
-    'params' => [],
+    'state' => [],
 ])
 
-<div class="divide-y table-list-mobile">
+<div class="divide-y table-list-mobile" wire:key="{{ Helpers::generateId('transactions-mobile', ...$state) }}">
     @foreach ($transactions as $transaction)
-        <div class="table-list-mobile-row" wire:key="{{ Helpers::generateId('mobile', $transaction->id(), ...$params) }}">
+        <div class="table-list-mobile-row">
             <x-tables.rows.mobile.transaction-id :model="$transaction" />
 
             <x-tables.rows.mobile.timestamp :model="$transaction" />
