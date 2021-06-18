@@ -30,7 +30,7 @@ final class Chart extends Component
     /** @phpstan-ignore-next-line */
     protected $listeners = [
         'currencyChanged' => '$refresh',
-        'toggleDarkMode' => '$refresh',
+        'toggleDarkMode'  => '$refresh',
     ];
 
     public function mount(): void
@@ -140,7 +140,7 @@ final class Chart extends Component
 
     public function chartTheme(): Collection
     {
-        $mode = Settings::usesDarkTheme() ? 'dark' : 'light';
+        $mode  = Settings::usesDarkTheme() ? 'dark' : 'light';
         $color = $this->mainValueVariation() === 'up' ? 'green' : 'red';
 
         return collect(['name' => $color, 'mode' => $mode]);
