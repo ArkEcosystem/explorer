@@ -20,7 +20,7 @@
 
             <x-tables.rows.mobile.recipient :model="$transaction" />
 
-            @isset($useDirection)
+            @if($useDirection)
                 @if($transaction->isSent($wallet->address()))
                     <x-tables.rows.mobile.amount-sent :model="$transaction" />
                 @else
@@ -31,13 +31,13 @@
                 @endif
             @else
                 <x-tables.rows.mobile.amount :model="$transaction" />
-            @endisset
+            @endif
 
             <x-tables.rows.mobile.fee :model="$transaction" />
 
-            @isset($useConfirmations)
+            @if($useConfirmations)
                 <x-tables.rows.mobile.confirmations :model="$transaction" />
-            @endisset
+            @endif
         </div>
     @endforeach
 </div>

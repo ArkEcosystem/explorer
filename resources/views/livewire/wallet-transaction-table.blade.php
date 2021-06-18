@@ -31,8 +31,8 @@
 
     <div class="mb-4 md:hidden">
         <x-ark-dropdown
-            wrapper-class="relative p-2 w-full rounded-xl border border-theme-primary-100 dark:border-theme-secondary-800"
-            button-class="p-3 w-full font-semibold text-left text-theme-secondary-900 dark:text-theme-secondary-200"
+            wrapper-class="relative w-full p-2 border rounded-xl border-theme-primary-100 dark:border-theme-secondary-800"
+            button-class="w-full p-3 font-semibold text-left text-theme-secondary-900 dark:text-theme-secondary-200"
             dropdown-classes="left-0 w-full z-20"
             :init-alpine="false"
         >
@@ -56,7 +56,7 @@
                 </div>
             </x-slot>
 
-            <div class="block justify-center items-center py-3 mt-1">
+            <div class="items-center justify-center block py-3 mt-1">
                 <a
                     wire:click="$set('state.direction', 'all');"
                     @click="direction = 'all'"

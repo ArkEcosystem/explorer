@@ -15,7 +15,7 @@
             <x-tables.headers.desktop.id name="general.transaction.id" />
             <x-tables.headers.desktop.text name="general.transaction.timestamp" responsive />
             @if($useDirection)
-                <x-tables.headers.desktop.address name="general.transaction.sender" icon use-direction />
+                <x-tables.headers.desktop.address name="general.transaction.sender" icon />
             @else
                 <x-tables.headers.desktop.address name="general.transaction.sender" icon />
             @endif
@@ -79,7 +79,7 @@
                     >
                         <x-tables.rows.desktop.confirmations :model="$transaction" />
                     </x-ark-tables.cell>
-                @endisset
+                @endif
             </x-ark-tables.row>
         @endforeach
     </tbody>
