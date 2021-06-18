@@ -7,7 +7,10 @@
         :truncate="false"
     >
         <x-slot name="text">
-            <x-currency :currency="Network::currency()">{{ $transaction->amount() }}</x-currency>
+            <x-general.amount-fiat-tooltip
+                :amount="$transaction->amount()"
+                :fiat="$transaction->amountFiat()"
+            />
         </x-slot>
     </x-general.entity-header-item>
 </div>
@@ -19,7 +22,10 @@
         icon="app-monitor"
     >
         <x-slot name="text">
-            <x-currency :currency="Network::currency()">{{ $transaction->fee() }}</x-currency>
+            <x-general.amount-fiat-tooltip
+            :amount="$transaction->fee()"
+            :fiat="$transaction->feeFiat()"
+        />
         </x-slot>
     </x-general.entity-header-item>
 
