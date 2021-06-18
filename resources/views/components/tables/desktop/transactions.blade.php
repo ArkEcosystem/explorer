@@ -6,6 +6,7 @@
     'useConfirmations' => false,
     'isSent' => null,
     'isReceived' => null,
+    'params' => [],
 ])
 
 <x-ark-tables.table sticky class="hidden md:block">
