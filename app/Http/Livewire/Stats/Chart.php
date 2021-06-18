@@ -28,7 +28,10 @@ final class Chart extends Component
     private string $refreshInterval = '';
 
     /** @phpstan-ignore-next-line */
-    protected $listeners = ['currencyChanged' => '$refresh'];
+    protected $listeners = [
+        'currencyChanged' => '$refresh',
+        'toggleDarkMode' => '$refresh',
+    ];
 
     public function mount(): void
     {
@@ -135,11 +138,11 @@ final class Chart extends Component
         return collect((new PriceChartCache())->getHistorical(Settings::currency(), $period));
     }
 
-    private function chartTheme(): Collection
+    public function chartTheme(): Collection
     {
         $mode = Settings::usesDarkTheme() ? 'dark' : 'light';
-        $name = $this->mainValueVariation() === 'up' ? 'green' : 'red';
+        $color = $this->mainValueVariation() === 'up' ? 'green' : 'red';
 
-        return collect(['name' => $name, 'mode' => $mode]);
+        return collect(['name' => $color, 'mode' => $mode]);
     }
 }

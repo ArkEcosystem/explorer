@@ -2,8 +2,20 @@ import {
     getInfoFromThemeName,
     makeGradient,
     getFontConfig,
+    getAxisThemeConfig,
 } from "./chart-theme";
 
+/**
+ * @param {String} id
+ * @param {Array} values
+ * @param {Array} labels
+ * @param {Boolean} grid
+ * @param {Boolean} tooltips
+ * @param {Array<Object{name, mode}>} theme
+ * @param {Number} time
+ * @param {String} currency
+ * @return {Object}
+ */
 const CustomChart = (
     id,
     values,
@@ -115,7 +127,6 @@ const CustomChart = (
 
             values.forEach((value, key) => {
                 let range = this.getRangeFromValues(value, 0.01);
-
                 axes.push({
                     display: grid === "true" && key === 0,
                     type: "linear",
@@ -129,6 +140,7 @@ const CustomChart = (
                     },
                     gridLines: {
                         drawBorder: false,
+                        color: getAxisThemeConfig(theme.mode).y.color,
                     },
                 });
             });
@@ -205,6 +217,7 @@ const CustomChart = (
                             },
                             gridLines: {
                                 drawBorder: false,
+                                color: getAxisThemeConfig(theme.mode).x.color,
                             },
                         },
                     ],

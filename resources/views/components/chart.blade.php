@@ -23,7 +23,7 @@
         '{{ $currency }}',
     )"
     x-init="init"
-    @toggle-dark-mode.window="updateChart"
+    @toggle-dark-mode.window="Livewire.emit('toggleDarkMode')"
     @stats-period-updated.window="updateChart"
     wire:key="{{ $id.time() }}"
     {{ $attributes->only('class') }}

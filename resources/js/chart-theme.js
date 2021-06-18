@@ -224,3 +224,26 @@ export function getFontConfig(type, mode) {
 
     return config[type][mode];
 }
+
+export function getAxisThemeConfig(mode) {
+    const config = {
+        light: {
+            x: {
+                color: "#eef3f5",
+            },
+            y: {
+                color: "#eef3f5",
+            },
+        },
+        dark: {
+            x: {
+                color: "#3c4249",
+            },
+            y: {
+                color: "#3c4249",
+            },
+        },
+    };
+
+    return config[mode];
+}
