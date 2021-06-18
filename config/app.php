@@ -235,6 +235,7 @@ return [
         'Settings'                => App\Services\Settings::class,
         'Percentage'              => Mattiasgeniar\Percentage\Percentage::class,
         'ExchangeRate'            => App\Services\ExchangeRate::class,
+        'Helpers'                 => App\Services\Helpers::class,
     ],
 
 ];
