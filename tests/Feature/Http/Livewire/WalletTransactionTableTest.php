@@ -9,12 +9,8 @@ use App\Http\Livewire\WalletTransactionTable;
 use App\Models\Block;
 use App\Models\Transaction;
 use App\Models\Wallet;
-use App\Services\Cache\CryptoCompareCache;
 use App\Services\NumberFormatter;
-use App\Services\Settings;
 use App\ViewModels\ViewModelFactory;
-use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Session;
 use Livewire\Livewire;
 use Ramsey\Uuid\Uuid;
 use function Tests\configureExplorerDatabase;
@@ -172,8 +168,9 @@ it('should apply filters', function () {
     foreach (ViewModelFactory::collection($notExpected) as $transaction) {
         $component->assertDontSee($transaction->id());
         $component->assertDontSee($transaction->timestamp());
-        $component->assertDontSee($transaction->sender()->address());
-        $component->assertDontSee($transaction->recipient()->address());
+        // Need to include part of the url because the id is in the wire:key
+        $component->assertDontSee('/wallets/' . $transaction->sender()->address());
+        $component->assertDontSee('/wallets/' . $transaction->recipient()->address());
         $component->assertDontSee(NumberFormatter::currency($transaction->fee(), Network::currency()));
         $component->assertDontSee(NumberFormatter::currency($transaction->amount(), Network::currency()));
     }
@@ -189,8 +186,8 @@ it('should apply filters', function () {
     foreach (ViewModelFactory::collection($expected) as $transaction) {
         $component->assertSee($transaction->id());
         $component->assertSee($transaction->timestamp());
-        $component->assertSee($transaction->sender()->address());
-        $component->assertSee($transaction->recipient()->address());
+        $component->assertSee('/wallets/' . $transaction->sender()->address());
+        $component->assertSee('/wallets/' . $transaction->recipient()->address());
         $component->assertSee(NumberFormatter::currency($transaction->fee(), Network::currency()));
         $component->assertSee(NumberFormatter::currency($transaction->amount(), Network::currency()));
     }
@@ -232,8 +229,9 @@ it('should apply filters through an event', function () {
     foreach (ViewModelFactory::collection($notExpected) as $transaction) {
         $component->assertDontSee($transaction->id());
         $component->assertDontSee($transaction->timestamp());
-        $component->assertDontSee($transaction->sender()->address());
-        $component->assertDontSee($transaction->recipient()->address());
+        // Need to include part of the url because the id is in the wire:key
+        $component->assertDontSee('/wallets/' . $transaction->sender()->address());
+        $component->assertDontSee('/wallets/' . $transaction->recipient()->address());
         $component->assertDontSee(NumberFormatter::currency($transaction->fee(), Network::currency()));
         $component->assertDontSee(NumberFormatter::currency($transaction->amount(), Network::currency()));
     }
@@ -249,8 +247,8 @@ it('should apply filters through an event', function () {
     foreach (ViewModelFactory::collection($expected) as $transaction) {
         $component->assertSee($transaction->id());
         $component->assertSee($transaction->timestamp());
-        $component->assertSee($transaction->sender()->address());
-        $component->assertSee($transaction->recipient()->address());
+        $component->assertSee('/wallets/' . $transaction->sender()->address());
+        $component->assertSee('/wallets/' . $transaction->recipient()->address());
         $component->assertSee(NumberFormatter::currency($transaction->fee(), Network::currency()));
         $component->assertSee(NumberFormatter::currency($transaction->amount(), Network::currency()));
     }
@@ -293,36 +291,4 @@ it('should apply directions through an event', function () {
 
     $component->assertSee($received->id);
     $component->assertSee($sent->id);
-});
-
-it('should update the records fiat tooltip when currency changed', function () {
-    Config::set('explorer.networks.development.canBeExchanged', true);
-
-    (new CryptoCompareCache())->setPrices('USD', collect([
-        '2020-10-19' => 24210,
-    ]));
-
-    (new CryptoCompareCache())->setPrices('BTC', collect([
-        '2020-10-19' => 0.1234567,
-    ]));
-
-    Transaction::factory()->create([
-        'sender_public_key' => $this->subject->public_key,
-        'timestamp'         => 112982056,
-        'amount'            => 499 * 1e8,
-    ]);
-
-    $component = Livewire::test(WalletTransactionTable::class, [$this->subject->address, false, $this->subject->public_key]);
-
-    $component->assertSeeHtml('data-tippy-content="12,080,790 USD"');
-    $component->assertDontSeeHtml('data-tippy-content="61.6048933 BTC"');
-
-    $settings = Settings::all();
-    $settings['currency'] = 'BTC';
-    Session::put('settings', json_encode($settings));
-
-    $component->emit('currencyChanged', 'BTC');
-
-    $component->assertDontSeeHtml('data-tippy-content="12,080,790 USD"');
-    $component->assertSeeHtml('data-tippy-content="61.6048933 BTC"');
 });
