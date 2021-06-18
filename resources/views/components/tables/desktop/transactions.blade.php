@@ -59,7 +59,7 @@
                         @endif
                     @else
                         <x-tables.rows.desktop.amount :model="$transaction" />
-                    @endisset
+                    @endif
                 </x-ark-tables.cell>
                 <x-ark-tables.cell
                     class="text-right"
@@ -76,7 +76,7 @@
                     >
                         <x-tables.rows.desktop.confirmations :model="$transaction" />
                     </x-ark-tables.cell>
-                @endisset
+                @endif
             </x-ark-tables.row>
         @endforeach
     </tbody>

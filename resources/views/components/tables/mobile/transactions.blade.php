@@ -35,9 +35,9 @@
 
             <x-tables.rows.mobile.fee :model="$transaction" />
 
-            @isset($useConfirmations)
+            @if($useConfirmations)
                 <x-tables.rows.mobile.confirmations :model="$transaction" />
-            @endisset
+            @endif
         </div>
     @endforeach
 </div>
