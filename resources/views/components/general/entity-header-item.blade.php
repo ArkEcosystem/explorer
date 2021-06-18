@@ -33,7 +33,7 @@
 
         @if ($url)
             <a href="{{ $url }}" class="flex leading-tight link">
-                <span class="{{ $truncate ? ' truncate' : 'whitespace-nowrap' }}">{{ $text }}</span>
+                <span class="{{ $truncate ? 'truncate' : 'whitespace-nowrap' }}">{{ $text }}</span>
             </a>
         @else
             <span class="leading-tight text-theme-secondary-900 dark:text-theme-secondary-200{{ $truncate ? ' truncate' : ' whitespace-nowrap' }} ">{{ $text }}</span>
