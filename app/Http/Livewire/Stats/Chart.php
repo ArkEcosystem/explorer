@@ -23,9 +23,12 @@ final class Chart extends Component
 
     public bool $show = true;
 
-    public string $period = 'week';
+    public string $period = '';
 
     private string $refreshInterval = '';
+
+    /** @phpstan-ignore-next-line */
+    protected $listeners = ['currencyChanged' => '$refresh'];
 
     public function mount(): void
     {
