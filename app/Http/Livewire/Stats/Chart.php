@@ -66,7 +66,10 @@ final class Chart extends Component
 
     private function mainValueFiat(): string
     {
-        return BetterNumberFormatter::new()->formatWithCurrency($this->getPrice(Settings::currency()));
+        return BetterNumberFormatter::new()
+                ->withLocale(Settings::locale())
+                ->withFractionDigits(2)
+                ->formatWithCurrencyAccounting($this->getPrice(Settings::currency()));
     }
 
     private function mainValuePercentage(): float
