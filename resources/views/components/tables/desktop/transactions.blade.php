@@ -2,7 +2,11 @@
     'transactions',
     'wallet',
     'useDirection' => false,
+    'excludeItself' => false,
     'useConfirmations' => false,
+    'isSent' => null,
+    'isReceived' => null,
+    'params' => [],
 ])
 
 <x-ark-tables.table sticky class="hidden md:block">
@@ -29,7 +33,7 @@
     </thead>
     <tbody>
         @foreach($transactions as $transaction)
-            <x-ark-tables.row wire:key="transaction-{{ $transaction->id() }}-{{ Settings::currency() }}">
+            <x-ark-tables.row wire:key="{{ Helpers::generateId($transaction->id(), Settings::currency(), ...$params) }}">
                 <x-ark-tables.cell>
                     <x-tables.rows.desktop.transaction-id :model="$transaction" />
                 </x-ark-tables.cell>

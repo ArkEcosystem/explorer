@@ -1,6 +1,17 @@
+@props([
+    'transactions',
+    'wallet' => null,
+    'useDirection' => false,
+    'excludeItself' => false,
+    'useConfirmations' => false,
+    'isSent' => null,
+    'isReceived' => null,
+    'params' => [],
+])
+
 <div class="divide-y table-list-mobile">
     @foreach ($transactions as $transaction)
-        <div class="table-list-mobile-row" wire:key="mobile-transaction-{{ $transaction->id() }}-{{ Settings::currency() }}">
+        <div class="table-list-mobile-row" wire:key="{{ Helpers::generateId('mobile', $transaction->id(), Settings::curency(), ...$params) }}">
             <x-tables.rows.mobile.transaction-id :model="$transaction" />
 
             <x-tables.rows.mobile.timestamp :model="$transaction" />
