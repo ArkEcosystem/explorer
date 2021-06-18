@@ -1,5 +1,5 @@
 @props([
-    'transactions',
+    'transaction',
     'wallet' => null,
     'useDirection' => false,
     'excludeItself' => false,
