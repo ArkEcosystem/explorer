@@ -163,8 +163,6 @@ final class TransactionFactory extends Factory
         ]);
     }
 
-
-
     public function entityRegistration(): Factory
     {
         return $this->state(fn () => [
