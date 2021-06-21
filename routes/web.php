@@ -9,7 +9,6 @@ use App\Http\Controllers\ShowBlockController;
 use App\Http\Controllers\ShowTransactionController;
 use App\Http\Controllers\ShowWalletController;
 use App\Http\Controllers\TransactionsController;
-use App\Models\Transaction;
 use Illuminate\Support\Facades\Route;
 
 /*
