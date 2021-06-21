@@ -10,9 +10,9 @@ use function Tests\configureExplorerDatabase;
 beforeEach(fn () => configureExplorerDatabase());
 
 it('redirects to the correct route', function ($model, $oldUrl, $newUrl): void {
-    $model = $model::factory()->create();
+    $modelId = $model::factory()->create()->id;
 
-    $this->get(sprintf('%s/%s', $oldUrl, $model->id))->assertRedirect(sprintf('%s/%s', $newUrl, $model->id));
+    $this->get(sprintf('%s/%s', $oldUrl, $modelId))->assertRedirect(sprintf('%s/%s', $newUrl, $modelId));
 })->with([
     [Transaction::class, 'transaction', 'transactions'],
     [Wallet::class, 'wallet', 'wallets'],
