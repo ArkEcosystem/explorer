@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace Database\Factories;
 
 use App\Enums\CoreTransactionTypeEnum;
-use App\Enums\TransactionTypeGroupEnum;
 use App\Enums\MagistrateTransactionEntityActionEnum;
 use App\Enums\MagistrateTransactionEntitySubTypeEnum;
 use App\Enums\MagistrateTransactionEntityTypeEnum;
 use App\Enums\MagistrateTransactionTypeEnum;
+use App\Enums\TransactionTypeGroupEnum;
 use App\Models\Block;
 use App\Models\Transaction;
 use App\Models\Wallet;

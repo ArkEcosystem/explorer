@@ -229,7 +229,7 @@ it('should apply filters through an event', function () {
 
     $expected = Transaction::factory(10)->vote()->create([
         'sender_public_key' => $this->subject->public_key,
-        'asset'             => null
+        'asset'             => null,
     ]);
 
     $component->set('state.type', 'vote');
