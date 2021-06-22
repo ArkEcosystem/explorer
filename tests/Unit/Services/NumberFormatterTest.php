@@ -29,19 +29,19 @@ it('should format a number with a currency symbol if it has a [.]', function () 
 });
 
 it('should format fiat currency with the correct decimal places', function () {
-    expect(NumberFormatter::currency(123.456, 'GBP'))->toEqual('£ 123.46');
-    expect(NumberFormatter::currency('123.456', 'GBP'))->toEqual('£ 123.46');
+    assertMatchesSnapshot(NumberFormatter::currency(123.456, 'GBP'));
+    assertMatchesSnapshot(NumberFormatter::currency('123.456', 'GBP'));
 
-    expect(NumberFormatter::currency(123.456, 'USD'))->toEqual('US$ 123.46');
-    expect(NumberFormatter::currency('123.456', 'USD'))->toEqual('US$ 123.46');
+    assertMatchesSnapshot(NumberFormatter::currency(123.456, 'USD'));
+    assertMatchesSnapshot(NumberFormatter::currency('123.456', 'USD'));
 
-    expect(NumberFormatter::currency(123.456, 'CAD'))->toEqual('CA$ 123.46');
-    expect(NumberFormatter::currency('123.456', 'CAD'))->toEqual('CA$ 123.46');
+    assertMatchesSnapshot(NumberFormatter::currency(123.456, 'CAD'));
+    assertMatchesSnapshot(NumberFormatter::currency('123.456', 'CAD'));
 });
 
 it('should format crypto currency with the correct decimal places', function () {
-    expect(NumberFormatter::currency(123.456, 'BTC'))->toEqual('123.456 BTC');
-    expect(NumberFormatter::currency('123.456', 'BTC'))->toEqual('123.456 BTC');
+    assertMatchesSnapshot(NumberFormatter::currency(123.456, 'BTC'));
+    assertMatchesSnapshot(NumberFormatter::currency('123.456', 'BTC'));
 });
 
 it('should format a number without a suffix', function () {
