@@ -21,8 +21,8 @@
             <x-tables.rows.mobile.recipient :model="$transaction" />
 
             @if($useDirection)
-                @if($transaction->isSent($wallet->address()))
-                    <x-tables.rows.mobile.amount-sent :model="$transaction" />
+                @if(($transaction->isSent($wallet->address()) || $isSent === true) && $isReceived !== true)
+                    <x-tables.rows.mobile.amount-sent :model="$transaction" :exclude-itself="$excludeItself" />
                 @else
                     <x-tables.rows.mobile.amount-received
                         :model="$transaction"

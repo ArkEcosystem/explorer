@@ -2,9 +2,6 @@
 
 declare(strict_types=1);
 
-use App\Enums\CoreTransactionTypeEnum;
-use App\Enums\TransactionTypeGroupEnum;
-
 use App\Facades\Network;
 use App\Http\Livewire\TransactionTable;
 use App\Models\Block;
@@ -44,11 +41,9 @@ it('should apply filters', function () {
 
     $component = Livewire::test(TransactionTable::class);
 
-    $notExpected = Transaction::factory(10)->create([
+    $notExpected = Transaction::factory(10)->transfer()->create([
         'id'                => (string) Uuid::uuid4(),
         'block_id'          => $block->id,
-        'type'              => TransactionTypeGroupEnum::CORE,
-        'type_group'        => CoreTransactionTypeEnum::TRANSFER,
         'sender_public_key' => $wallet->public_key,
         'recipient_id'      => $wallet->address,
         'timestamp'         => 112982056,
@@ -65,10 +60,7 @@ it('should apply filters', function () {
         $component->assertDontSee(NumberFormatter::currency($transaction->amount(), Network::currency()));
     }
 
-    $expected = Transaction::factory(10)->create([
-        'type_group' => TransactionTypeGroupEnum::CORE,
-        'type'       => CoreTransactionTypeEnum::VOTE,
-    ]);
+    $expected = Transaction::factory(10)->vote()->create(['asset' => null]);
 
     $component->set('state.type', 'vote');
 
@@ -88,11 +80,9 @@ it('should apply filters through an event', function () {
 
     $component = Livewire::test(TransactionTable::class);
 
-    $notExpected = Transaction::factory(10)->create([
+    $notExpected = Transaction::factory(10)->transfer()->create([
         'id'                => (string) Uuid::uuid4(),
         'block_id'          => $block->id,
-        'type'              => TransactionTypeGroupEnum::CORE,
-        'type_group'        => CoreTransactionTypeEnum::TRANSFER,
         'sender_public_key' => $wallet->public_key,
         'recipient_id'      => $wallet->address,
         'timestamp'         => 112982056,
@@ -109,10 +99,7 @@ it('should apply filters through an event', function () {
         $component->assertDontSee(NumberFormatter::currency($transaction->amount(), Network::currency()));
     }
 
-    $expected = Transaction::factory(10)->create([
-        'type_group' => TransactionTypeGroupEnum::CORE,
-        'type'       => CoreTransactionTypeEnum::VOTE,
-    ]);
+    $expected = Transaction::factory(10)->vote()->create(['asset' => null]);
 
     $component->set('state.type', 'vote');
 
