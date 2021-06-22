@@ -44,6 +44,22 @@ it('should format crypto currency with the correct decimal places', function () 
     expect(NumberFormatter::currency('123.456', 'BTC'))->toEqual('123.456 BTC');
 });
 
+it('should format fiat currency with the correct decimal places', function () {
+    expect(NumberFormatter::currency(123.456, 'GBP'))->toEqual('£ 123.46');
+    expect(NumberFormatter::currency('123.456', 'GBP'))->toEqual('£ 123.46');
+
+    expect(NumberFormatter::currency(123.456, 'USD'))->toEqual('US$ 123.46');
+    expect(NumberFormatter::currency('123.456', 'USD'))->toEqual('US$ 123.46');
+
+    expect(NumberFormatter::currency(123.456, 'CAD'))->toEqual('CA$ 123.46');
+    expect(NumberFormatter::currency('123.456', 'CAD'))->toEqual('CA$ 123.46');
+});
+
+it('should format crypto currency with the correct decimal places', function () {
+    expect(NumberFormatter::currency(123.456, 'BTC'))->toEqual('123.456 BTC');
+    expect(NumberFormatter::currency('123.456', 'BTC'))->toEqual('123.456 BTC');
+});
+
 it('should format a number without a suffix', function () {
     assertMatchesSnapshot(NumberFormatter::currencyWithoutSuffix(123, 'ARK'));
     assertMatchesSnapshot(NumberFormatter::currencyWithoutSuffix(1e8, 'ARK'));

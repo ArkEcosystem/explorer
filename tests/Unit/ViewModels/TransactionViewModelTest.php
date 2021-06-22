@@ -2,22 +2,24 @@
 
 declare(strict_types=1);
 
+use Carbon\Carbon;
 use App\DTO\Payment;
 use App\Models\Block;
-use App\Models\Transaction;
 use App\Models\Wallet;
-use App\Services\Blockchain\NetworkFactory;
-use App\Services\Cache\CryptoCompareCache;
-use App\Services\Cache\NetworkCache;
-use App\ViewModels\TransactionViewModel;
-use App\ViewModels\WalletViewModel;
-use ArkEcosystem\Crypto\Configuration\Network as NetworkConfiguration;
-use ArkEcosystem\Crypto\Identities\Address;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\Config;
+use App\Models\Transaction;
 use Illuminate\Support\Facades\DB;
-use function Spatie\Snapshots\assertMatchesSnapshot;
+use App\ViewModels\WalletViewModel;
+use App\Services\Cache\NetworkCache;
+use App\Enums\CoreTransactionTypeEnum;
+use Illuminate\Support\Facades\Config;
+use App\Enums\TransactionTypeGroupEnum;
+use App\ViewModels\TransactionViewModel;
+use App\Services\Cache\CryptoCompareCache;
+use App\Services\Blockchain\NetworkFactory;
+use ArkEcosystem\Crypto\Identities\Address;
 use function Tests\configureExplorerDatabase;
+use function Spatie\Snapshots\assertMatchesSnapshot;
+use ArkEcosystem\Crypto\Configuration\Network as NetworkConfiguration;
 
 beforeEach(function () {
     configureExplorerDatabase();
@@ -113,10 +115,8 @@ it('should get the amount for multi payments', function () {
 it('should get the amount for multi payments excluding payment to the same address', function () {
     $sender = Wallet::factory()->create();
 
-    $this->subject = new TransactionViewModel(Transaction::factory()->create([
+    $this->subject = new TransactionViewModel(Transaction::factory()->multiPayment()->create([
         'sender_public_key' => $sender->public_key,
-        'type'              => CoreTransactionTypeEnum::MULTI_PAYMENT,
-        'type_group'        => TransactionTypeGroupEnum::CORE,
         'asset'             => [
             'payments' => [
                 [
@@ -148,10 +148,8 @@ it('should get the amount for multi payments excluding payment to the same addre
 it('should get the amount in fiat for multi payments excluding payment to the same address', function () {
     $sender = Wallet::factory()->create();
 
-    $this->subject = new TransactionViewModel(Transaction::factory()->create([
+    $this->subject = new TransactionViewModel(Transaction::factory()->multiPayment()->create([
         'sender_public_key' => $sender->public_key,
-        'type'              => CoreTransactionTypeEnum::MULTI_PAYMENT,
-        'type_group'        => TransactionTypeGroupEnum::CORE,
         'asset'             => [
             'payments' => [
                 [
@@ -181,7 +179,7 @@ it('should get the amount in fiat for multi payments excluding payment to the sa
         Carbon::parse($this->subject->timestamp())->format('Y-m-d') => 0.2907,
     ]));
 
-    expect($this->subject->amountFiatExcludingItself())->toEqual('46.51 USD');
+    assertMatchesSnapshot($this->subject->amountFiatExcludingItself());
 });
 
 it('should get the amount for itself on multi payments', function () {
@@ -281,8 +279,6 @@ it('should get the amount as fiat', function () {
         Carbon::parse($this->subject->timestamp())->format('Y-m-d') => 0.2907,
     ]));
 
-    expect($this->subject->amountFiat())->toBe('US$ 43.61');
-
     assertMatchesSnapshot($this->subject->amountFiat());
 });
 
@@ -318,8 +314,6 @@ it('should get the specific multi payment fiat amount for a wallet recipient', f
     (new CryptoCompareCache())->setPrices('USD', collect([
         Carbon::parse($this->subject->timestamp())->format('Y-m-d') => 0.2907,
     ]));
-
-    expect($this->subject->amountReceivedFiat('B'))->toBe('US$ 20.35');
 
     assertMatchesSnapshot($this->subject->amountReceivedFiat('B'));
 });
