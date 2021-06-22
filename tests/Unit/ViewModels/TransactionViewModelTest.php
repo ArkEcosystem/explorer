@@ -2,24 +2,22 @@
 
 declare(strict_types=1);
 
-use Carbon\Carbon;
 use App\DTO\Payment;
 use App\Models\Block;
-use App\Models\Wallet;
 use App\Models\Transaction;
-use Illuminate\Support\Facades\DB;
-use App\ViewModels\WalletViewModel;
-use App\Services\Cache\NetworkCache;
-use App\Enums\CoreTransactionTypeEnum;
-use Illuminate\Support\Facades\Config;
-use App\Enums\TransactionTypeGroupEnum;
-use App\ViewModels\TransactionViewModel;
-use App\Services\Cache\CryptoCompareCache;
+use App\Models\Wallet;
 use App\Services\Blockchain\NetworkFactory;
-use ArkEcosystem\Crypto\Identities\Address;
-use function Tests\configureExplorerDatabase;
-use function Spatie\Snapshots\assertMatchesSnapshot;
+use App\Services\Cache\CryptoCompareCache;
+use App\Services\Cache\NetworkCache;
+use App\ViewModels\TransactionViewModel;
+use App\ViewModels\WalletViewModel;
 use ArkEcosystem\Crypto\Configuration\Network as NetworkConfiguration;
+use ArkEcosystem\Crypto\Identities\Address;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\DB;
+use function Spatie\Snapshots\assertMatchesSnapshot;
+use function Tests\configureExplorerDatabase;
 
 beforeEach(function () {
     configureExplorerDatabase();
