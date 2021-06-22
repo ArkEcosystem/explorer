@@ -494,75 +494,19 @@ it('should determine legacy types', function (string $type, bool $expectation) {
     ],
 ]);
 
-it('should determine transactions that doesnt have amount', function (int $type, int $typeGroup, array $asset) {
-    $subject = new TransactionViewModel(Transaction::factory()->create([
-        'type'       => $type,
-        'type_group' => $typeGroup,
-        'asset'      => $asset,
-    ]));
+it('should determine transactions that doesnt have amount', function (string $type) {
+    $subject = new TransactionViewModel(Transaction::factory()->{$type}()->create();
 
     expect($subject->hasAmount())->toBeFalse();
 })->with([
-    // 'DelegateRegistration',
-    [
-        CoreTransactionTypeEnum::DELEGATE_REGISTRATION,
-        TransactionTypeGroupEnum::CORE,
-        [],
-    ],
-    // 'EntityRegistration',
-    [
-        MagistrateTransactionTypeEnum::ENTITY,
-        TransactionTypeGroupEnum::MAGISTRATE,
-        [
-            'action' => MagistrateTransactionEntityActionEnum::REGISTER,
-        ],
-    ],
-    // 'EntityResignation',
-    [
-        MagistrateTransactionTypeEnum::ENTITY,
-        TransactionTypeGroupEnum::MAGISTRATE,
-        [
-            'action' => MagistrateTransactionEntityActionEnum::RESIGN,
-        ],
-    ],
-    // 'EntityUpdate',
-    [
-        MagistrateTransactionTypeEnum::ENTITY,
-        TransactionTypeGroupEnum::MAGISTRATE,
-        [
-            'action' => MagistrateTransactionEntityActionEnum::UPDATE,
-        ],
-    ],
-    // 'MultiSignature',
-    [
-        CoreTransactionTypeEnum::MULTI_SIGNATURE,
-        TransactionTypeGroupEnum::CORE,
-        [],
-    ],
-    // 'VoteCombination',
-    [
-        CoreTransactionTypeEnum::VOTE,
-        TransactionTypeGroupEnum::CORE,
-        [
-            'votes' => ['+publicKey', '-publicKey'],
-        ],
-    ],
-    // 'Unvote',
-    [
-        CoreTransactionTypeEnum::VOTE,
-        TransactionTypeGroupEnum::CORE,
-        [
-            'votes' => ['-publicKey'],
-        ],
-    ],
-    // 'Vote',
-    [
-        CoreTransactionTypeEnum::VOTE,
-        TransactionTypeGroupEnum::CORE,
-        [
-            'votes' => ['+publicKey'],
-        ],
-    ],
+    'isDelegateRegistration',
+    'isEntityRegistration',
+    'isEntityResignation',
+    'isEntityUpdate',
+    'isMultiSignature',
+    'isVoteCombination',
+    'isUnvote',
+    'isVote',
 ]);
 
 it('should determine that transactions have amount by default', function () {
