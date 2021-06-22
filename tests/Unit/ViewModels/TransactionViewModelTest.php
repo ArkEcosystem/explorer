@@ -113,10 +113,8 @@ it('should get the amount for multi payments', function () {
 it('should get the amount for multi payments excluding payment to the same address', function () {
     $sender = Wallet::factory()->create();
 
-    $this->subject = new TransactionViewModel(Transaction::factory()->create([
+    $this->subject = new TransactionViewModel(Transaction::factory()->multiPayment()->create([
         'sender_public_key' => $sender->public_key,
-        'type'              => CoreTransactionTypeEnum::MULTI_PAYMENT,
-        'type_group'        => TransactionTypeGroupEnum::CORE,
         'asset'             => [
             'payments' => [
                 [
@@ -148,10 +146,8 @@ it('should get the amount for multi payments excluding payment to the same addre
 it('should get the amount in fiat for multi payments excluding payment to the same address', function () {
     $sender = Wallet::factory()->create();
 
-    $this->subject = new TransactionViewModel(Transaction::factory()->create([
+    $this->subject = new TransactionViewModel(Transaction::factory()->multiPayment()->create([
         'sender_public_key' => $sender->public_key,
-        'type'              => CoreTransactionTypeEnum::MULTI_PAYMENT,
-        'type_group'        => TransactionTypeGroupEnum::CORE,
         'asset'             => [
             'payments' => [
                 [
@@ -181,16 +177,14 @@ it('should get the amount in fiat for multi payments excluding payment to the sa
         Carbon::parse($this->subject->timestamp())->format('Y-m-d') => 0.2907,
     ]));
 
-    expect($this->subject->amountFiatExcludingItself())->toEqual('46.51 USD');
+    expect($this->subject->amountFiatExcludingItself())->toEqual('US$ 46.51');
 });
 
 it('should get the amount for itself on multi payments', function () {
     $sender = Wallet::factory()->create();
 
-    $this->subject = new TransactionViewModel(Transaction::factory()->create([
+    $this->subject = new TransactionViewModel(Transaction::factory()->multiPayment()->create([
         'sender_public_key' => $sender->public_key,
-        'type'              => CoreTransactionTypeEnum::MULTI_PAYMENT,
-        'type_group'        => TransactionTypeGroupEnum::CORE,
         'asset'             => [
             'payments' => [
                 [
