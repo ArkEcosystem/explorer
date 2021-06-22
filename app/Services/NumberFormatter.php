@@ -49,10 +49,14 @@ final class NumberFormatter
                 ->formatWithCurrencyCustom($value, $currency, static::decimalsFor($currency));
         }
 
-        return BetterNumberFormatter::new()
+        return str_replace(
+            ' ',
+            ' ',
+            BetterNumberFormatter::new()
             ->withLocale('international')
             ->withFractionDigits(static::decimalsFor($currency))
-            ->formatCurrency((float) $value, $currency);
+            ->formatCurrency((float) $value, $currency)
+        );
     }
 
     /**
