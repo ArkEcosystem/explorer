@@ -32,8 +32,8 @@ it('should format fiat currency with the correct decimal places', function () {
     expect(NumberFormatter::currency(123.456, 'GBP'))->toEqual('£ 123.46');
     expect(NumberFormatter::currency('123.456', 'GBP'))->toEqual('£ 123.46');
 
-    expect(NumberFormatter::currency(123.456, 'USD'))->toEqual('$ 123.46');
-    expect(NumberFormatter::currency('123.456', 'USD'))->toEqual('$ 123.46');
+    expect(NumberFormatter::currency(123.456, 'USD'))->toEqual('US$ 123.46');
+    expect(NumberFormatter::currency('123.456', 'USD'))->toEqual('US$ 123.46');
 
     expect(NumberFormatter::currency(123.456, 'CAD'))->toEqual('CA$ 123.46');
     expect(NumberFormatter::currency('123.456', 'CAD'))->toEqual('CA$ 123.46');
