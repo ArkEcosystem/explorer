@@ -78,6 +78,11 @@ trait InteractsWithTypeData
         return false;
     }
 
+    /**
+     * The transactions that return `false` are the ones that don't show an
+     * amount on the transaction details page. We are validating one by one so
+     * it can be considered within the test coverage driver.
+     */
     public function hasAmount(): bool
     {
         if ($this->isDelegateRegistration()) {
