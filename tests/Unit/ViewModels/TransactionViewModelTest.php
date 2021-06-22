@@ -495,18 +495,18 @@ it('should determine legacy types', function (string $type, bool $expectation) {
 ]);
 
 it('should determine transactions that doesnt have amount', function (string $type) {
-    $subject = new TransactionViewModel(Transaction::factory()->{$type}()->create();
+    $subject = new TransactionViewModel(Transaction::factory()->{$type}()->create());
 
     expect($subject->hasAmount())->toBeFalse();
 })->with([
-    'isDelegateRegistration',
-    'isEntityRegistration',
-    'isEntityResignation',
-    'isEntityUpdate',
-    'isMultiSignature',
-    'isVoteCombination',
-    'isUnvote',
-    'isVote',
+    'delegateRegistration',
+    'entityRegistration',
+    'entityResignation',
+    'entityUpdate',
+    'multiSignature',
+    'voteCombination',
+    'unvote',
+    'vote',
 ]);
 
 it('should determine that transactions have amount by default', function () {
