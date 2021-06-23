@@ -5,7 +5,6 @@ declare(strict_types=1);
 use App\Http\Livewire\Stats\InsightAllTimeFeesCollected;
 use App\Models\Transaction;
 use App\Services\Timestamp;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Artisan;
 use Livewire\Livewire;
 use function Tests\configureExplorerDatabase;
