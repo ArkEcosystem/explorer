@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Http\Livewire\Stats\InsightAllTimeFeesCollected;
 use App\Models\Transaction;
+use App\Services\Timestamp;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Artisan;
 use Livewire\Livewire;
@@ -12,32 +13,39 @@ use function Tests\configureExplorerDatabase;
 beforeEach(fn () => configureExplorerDatabase());
 
 it('should render the component', function () {
-    Transaction::factory(30)->create(['fee' => 12345678910, 'timestamp' => Carbon::createFromTimestamp(Carbon::now()->unix() - 1490101200)->sub('2 years')->unix()]);
-    Transaction::factory(30)->create(['fee' => 9234567890, 'timestamp' => Carbon::createFromTimestamp(Carbon::now()->unix() - 1490101200)->unix()]);
+    Transaction::factory(10)->create(['fee' => 12345678910, 'timestamp' => Timestamp::now()->unix()]);
+    Transaction::factory(15)->create(['fee' => 12345678910, 'timestamp' => Timestamp::now()->sub('1 hour')->unix()]);
+    Transaction::factory(20)->create(['fee' => 12345678910, 'timestamp' => Timestamp::now()->sub('2 hours')->unix()]);
+    Transaction::factory(25)->create(['fee' => 12345678910, 'timestamp' => Timestamp::now()->sub('3 hours')->unix()]);
+    Transaction::factory(30)->create(['fee' => 12345678910, 'timestamp' => Timestamp::now()->sub('4 hours')->unix()]);
+    Transaction::factory(35)->create(['fee' => 12345678910, 'timestamp' => Timestamp::now()->sub('25 hours')->unix()]);
 
     Artisan::call('explorer:cache-fees');
 
     Livewire::test(InsightAllTimeFeesCollected::class)
         ->set('period', 'day')
         ->assertSee(trans('pages.statistics.insights.all-time-fees-collected'))
-        ->assertSee('6,474.07 DARK')
+        ->assertSee('16,666.67 DARK')
         ->assertSee(trans('pages.statistics.insights.fees'))
-        ->assertSee('2,770.37 DARK')
-        ->assertSee('[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2770.370367]');
+        ->assertSee('12,345.68 DARK')
+        ->assertSee('[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3703.703673,3086.4197275,2469.135782,1851.8518365,1234.567891]');
 });
 
 it('should filter by year', function () {
-    Transaction::factory(30)->create(['fee' => 234678910, 'timestamp' => Carbon::createFromTimestamp(Carbon::now()->unix() - 1490101200)->sub('2 years')->unix()]);
-    Transaction::factory(30)->create(['fee' => 12345678910, 'timestamp' => Carbon::createFromTimestamp(Carbon::now()->unix() - 1490101200)->sub('11 months')->unix()]);
-    Transaction::factory(30)->create(['fee' => 9234567890, 'timestamp' => Carbon::createFromTimestamp(Carbon::now()->unix() - 1490101200)->unix()]);
+    Transaction::factory(10)->create(['fee' => 12345678910, 'timestamp' => Timestamp::now()->unix()]);
+    Transaction::factory(15)->create(['fee' => 12345678910, 'timestamp' => Timestamp::now()->sub('1 month')->unix()]);
+    Transaction::factory(20)->create(['fee' => 12345678910, 'timestamp' => Timestamp::now()->sub('2 months')->unix()]);
+    Transaction::factory(25)->create(['fee' => 12345678910, 'timestamp' => Timestamp::now()->sub('3 months')->unix()]);
+    Transaction::factory(30)->create(['fee' => 12345678910, 'timestamp' => Timestamp::now()->sub('4 months')->unix()]);
+    Transaction::factory(35)->create(['fee' => 12345678910, 'timestamp' => Timestamp::now()->sub('13 months')->unix()]);
 
     Artisan::call('explorer:cache-fees');
 
     Livewire::test(InsightAllTimeFeesCollected::class)
         ->set('period', 'year')
         ->assertSee(trans('pages.statistics.insights.all-time-fees-collected'))
-        ->assertSee('6,544.48 DARK')
+        ->assertSee('16,666.67 DARK')
         ->assertSee(trans('pages.statistics.insights.fees'))
-        ->assertSee('6,474.07 DARK')
-        ->assertSee('[3703.703673,0,0,0,0,0,0,0,0,0,0,2770.370367]');
+        ->assertSee('12,345.68 DARK')
+        ->assertSee('[0,0,0,0,0,0,0,3703.703673,3086.4197275,2469.135782,1851.8518365,1234.567891]');
 });
