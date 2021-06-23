@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Http\Livewire\Stats\InsightAllTimeTransactions;
 use App\Models\Transaction;
+use App\Services\Timestamp;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Artisan;
 use Livewire\Livewire;
@@ -12,32 +13,39 @@ use function Tests\configureExplorerDatabase;
 beforeEach(fn () => configureExplorerDatabase());
 
 it('should render the component', function () {
-    Transaction::factory(30)->create(['timestamp' => Carbon::createFromTimestamp(Carbon::now()->unix() - 1490101200)->sub('2 years')->unix()]);
-    Transaction::factory(30)->create(['timestamp' => Carbon::createFromTimestamp(Carbon::now()->unix() - 1490101200)->unix()]);
+    Transaction::factory(10)->create(['timestamp' => Timestamp::now()->unix()]);
+    Transaction::factory(15)->create(['timestamp' => Timestamp::now()->sub('1 hour')->unix()]);
+    Transaction::factory(20)->create(['timestamp' => Timestamp::now()->sub('2 hours')->unix()]);
+    Transaction::factory(25)->create(['timestamp' => Timestamp::now()->sub('3 hours')->unix()]);
+    Transaction::factory(30)->create(['timestamp' => Timestamp::now()->sub('4 hours')->unix()]);
+    Transaction::factory(35)->create(['timestamp' => Timestamp::now()->sub('3 years')->unix()]);
 
     Artisan::call('explorer:cache-transactions');
 
     Livewire::test(InsightAllTimeTransactions::class)
         ->set('period', 'day')
         ->assertSee(trans('pages.statistics.insights.all-time-transactions'))
-        ->assertSee('60')
+        ->assertSee('135')
         ->assertSee(trans('pages.statistics.insights.transactions'))
-        ->assertSee('30')
-        ->assertSee('[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,30]');
+        ->assertSee('100')
+        ->assertSee('[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,30,25,20,15,10]');
 });
 
-it('it should filter by year', function () {
-    Transaction::factory(30)->create(['timestamp' => Carbon::createFromTimestamp(Carbon::now()->unix() - 1490101200)->sub('2 years')->unix()]);
-    Transaction::factory(40)->create(['timestamp' => Carbon::createFromTimestamp(Carbon::now()->unix() - 1490101200)->sub('11 months')->unix()]);
-    Transaction::factory(50)->create(['timestamp' => Carbon::createFromTimestamp(Carbon::now()->unix() - 1490101200)->unix()]);
+it('should filter by year', function () {
+    Transaction::factory(10)->create(['timestamp' => Timestamp::now()->unix()]);
+    Transaction::factory(15)->create(['timestamp' => Timestamp::now()->sub('1 month')->unix()]);
+    Transaction::factory(20)->create(['timestamp' => Timestamp::now()->sub('2 months')->unix()]);
+    Transaction::factory(25)->create(['timestamp' => Timestamp::now()->sub('3 months')->unix()]);
+    Transaction::factory(30)->create(['timestamp' => Timestamp::now()->sub('4 months')->unix()]);
+    Transaction::factory(35)->create(['timestamp' => Timestamp::now()->sub('3 years')->unix()]);
 
     Artisan::call('explorer:cache-transactions');
 
     Livewire::test(InsightAllTimeTransactions::class)
         ->set('period', 'year')
         ->assertSee(trans('pages.statistics.insights.all-time-transactions'))
-        ->assertSee('120')
+        ->assertSee('135')
         ->assertSee(trans('pages.statistics.insights.transactions'))
-        ->assertSee('90')
-        ->assertSee('[40,0,0,0,0,0,0,0,0,0,0,50]');
+        ->assertSee('100')
+        ->assertSee('[0,0,0,0,0,0,0,30,25,20,15,10]');
 });
