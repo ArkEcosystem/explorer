@@ -16,6 +16,9 @@ final class DelegateMonitor extends Component
 
     private array $delegates = [];
 
+    /** @phpstan-ignore-next-line  */
+    protected $listeners = ['polling' => 'pollDelegates'];
+
     public function render(): View
     {
         return view('livewire.delegate-monitor', [

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services\Cache;
 
 use App\Contracts\Cache as Contract;
+use App\Facades\Network;
 use App\Models\Wallet;
 use App\Services\Cache\Concerns\ManagesCache;
 use Closure;
@@ -33,6 +34,11 @@ final class WalletCache implements Contract
     public function setLastBlock(string $publicKey, array $blocks): void
     {
         $this->put(sprintf('last_block/%s', $publicKey), $blocks);
+    }
+
+    public function rememberLastBlock(string $publicKey, int $ttl, array $blocks): void
+    {
+        $this->remember(sprintf('last_block/%s', $publicKey), $ttl, fn () => $blocks);
     }
 
     public function getPerformance(string $publicKey): array

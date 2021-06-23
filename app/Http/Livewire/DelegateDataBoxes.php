@@ -25,10 +25,11 @@ final class DelegateDataBoxes extends Component
 
     private array $statistics = [];
 
+    /** @phpstan-ignore-next-line  */
+    protected $listeners = ['polling' => 'pollStatistics'];
+
     public function render(): View
     {
-        $this->delegates = $this->fetchDelegates();
-
         return view('livewire.delegate-data-boxes', [
             'statistics' => $this->statistics,
         ]);
@@ -36,6 +37,8 @@ final class DelegateDataBoxes extends Component
 
     public function pollStatistics(): void
     {
+        $this->delegates = $this->fetchDelegates();
+
         $this->statistics = [
             'blockCount'   => $this->getBlockCount(),
             'nextDelegate' => $this->getNextDelegate(),
@@ -87,8 +90,6 @@ final class DelegateDataBoxes extends Component
 
     public function getNextDelegate(): ? WalletViewModel
     {
-        $this->delegates = $this->fetchDelegates();
-
         return (new MonitorCache())->setNextDelegate(function (): ? WalletViewModel {
             return optional($this->getSlotsByStatus($this->delegates, 'pending'))->wallet();
         });

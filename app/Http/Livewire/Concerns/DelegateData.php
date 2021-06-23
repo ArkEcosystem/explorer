@@ -15,45 +15,41 @@ use App\Services\Timestamp;
 use App\ViewModels\ViewModelFactory;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Cache;
 
 trait DelegateData
 {
     private function cacheLastBlocks(array $delegates): void
     {
-        $ttl = (int) ceil(Network::blockTime() / 2);
+        $blocks = Block::query()
+            ->orderBy('height', 'desc')
+            ->limit(Network::delegateCount() * 2)
+            ->get();
 
-        Cache::remember('monitor:last-blocks', $ttl, function () use ($delegates): void {
-            $blocks = Block::query()
-                ->orderBy('height', 'desc')
-                ->limit(Network::delegateCount() * 2)
-                ->get();
+        foreach ($delegates as $delegate) {
+            $block = $blocks->firstWhere('generator_public_key', $delegate);
 
-            foreach ($delegates as $delegate) {
-                $block = $blocks->firstWhere('generator_public_key', $delegate);
-
-                // The delegate hasn't forged in some rounds.
-                if (is_null($block)) {
-                    $block = Block::query()
-                        ->where('generator_public_key', $delegate)
-                        ->orderBy('height', 'desc')
-                        ->limit(1)
-                        ->first();
-                }
-
-                // The delegate has never forged.
-                if (is_null($block)) {
-                    continue;
-                }
-
-                (new WalletCache())->setLastBlock($delegate, [
-                    'id'                   => $block->id,
-                    'height'               => $block->height->toNumber(),
-                    'timestamp'            => Timestamp::fromGenesis($block->timestamp)->unix(),
-                    'generator_public_key' => $block->generator_public_key,
-                ]);
+            // The delegate hasn't forged in some rounds.
+            if (is_null($block)) {
+                $block = Block::query()
+                    ->where('generator_public_key', $delegate)
+                    ->orderBy('height', 'desc')
+                    ->limit(1)
+                    ->first();
             }
-        });
+
+            // The delegate has never forged.
+            if (is_null($block)) {
+                continue;
+            }
+
+            $ttl = Network::blockTime() / 4;
+            (new WalletCache())->rememberLastBlock($delegate, $ttl, [
+                'id'                   => $block->id,
+                'height'               => $block->height->toNumber(),
+                'timestamp'            => Timestamp::fromGenesis($block->timestamp)->unix(),
+                'generator_public_key' => $block->generator_public_key,
+            ]);
+        }
     }
 
     private function getBlocksByRange(array $publicKeys, array $heightRange): Collection
@@ -83,7 +79,7 @@ trait DelegateData
 
         $delegates = [];
 
-        for ($i = 0; $i < count($tracking); $i++) {
+        for ($i = 0, $iMax = count($tracking); $i < $iMax; $i++) {
             $delegate = array_values($tracking)[$i];
 
             $delegates[] = new Slot([

@@ -1,5 +1,7 @@
 @component('layouts.app', ['isLanding' => true, 'fullWidth' => true])
     @section('content')
+        <livewire:sync-poll />
+
         <x-general.header class="overflow-auto">
             <div class="px-10 md:w-full">
                 <livewire:delegate-data-boxes />

@@ -34,7 +34,7 @@
                 <x-ark-tables.cell responsive breakpoint="sm">
                     <x-tables.rows.desktop.slot-time :model="$delegate" />
                 </x-ark-tables.cell>
-                <x-ark-tables.cell wire:key="{{ $delegate->publicKey() }}-round-status-{{ $delegate->status() }}-desktop" last-on="md">
+                <x-ark-tables.cell wire:key="{{ $delegate->publicKey() }}-{{ $round }}-round-status-desktop" last-on="md">
                     <x-tables.rows.desktop.round-status :model="$delegate" />
                 </x-ark-tables.cell>
                 <x-ark-tables.cell class="text-right" responsive breakpoint="md" >
