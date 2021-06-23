@@ -42,7 +42,7 @@
                     @lang('pages.search.title')
                 </h2>
 
-                <div class="flex overflow-auto flex-col bg-white rounded-xl md:overflow-visible dark:bg-theme-secondary-900 md:mb-14">
+                <div class="flex overflow-auto flex-col bg-white rounded-xl md:overflow-visible md:mb-14 dark:bg-theme-secondary-900">
                     <x-general.search.search-input />
 
                     <x-general.search.advanced-search
