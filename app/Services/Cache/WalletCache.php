@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Services\Cache;
 
 use App\Contracts\Cache as Contract;
-use App\Facades\Network;
 use App\Models\Wallet;
 use App\Services\Cache\Concerns\ManagesCache;
 use Closure;

@@ -8,7 +8,7 @@ use App\Facades\Network;
 use Illuminate\View\View;
 use Livewire\Component;
 
-class SyncPoll extends Component
+final class SyncPoll extends Component
 {
     public int $seconds;
 
