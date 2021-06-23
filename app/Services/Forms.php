@@ -26,7 +26,7 @@ final class Forms
 
     /**
      * Map the transaction type options as the rich select component expects.
-     * 
+     *
      * return array
      */
     public static function getTransactionOptions(): array
