@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
+use App\Enums\StatsPeriods;
+use App\Enums\StatsTransactionTypes;
 use App\Services\Cache\FeeCache;
 use App\Services\Transactions\Aggregates\Fees\AverageAggregateFactory;
 use App\Services\Transactions\Aggregates\Fees\HistoricalAggregateFactory;
@@ -13,6 +15,8 @@ use Illuminate\Console\Command;
 
 final class CacheFees extends Command
 {
+    private const LAST_20 = 'last20';
+
     /**
      * The name and signature of the console command.
      *
@@ -29,27 +33,40 @@ final class CacheFees extends Command
 
     /**
      * Execute the console command.
-     *
-     * @return int
      */
     public function handle(FeeCache $cache)
     {
-        foreach (['day', 'week', 'month', 'quarter', 'year', 'all'] as $period) {
+        collect([
+            StatsPeriods::DAY,
+            StatsPeriods::WEEK,
+            StatsPeriods::MONTH,
+            StatsPeriods::QUARTER,
+            StatsPeriods::YEAR,
+            StatsPeriods::ALL,
+        ])->each(function ($period) use ($cache): void {
             $cache->setHistorical($period, HistoricalAggregateFactory::make($period)->aggregate());
-
             $cache->setMinimum($period, MinimumAggregateFactory::make($period)->aggregate());
-
             $cache->setAverage($period, AverageAggregateFactory::make($period)->aggregate());
-
             $cache->setMaximum($period, MaximumAggregateFactory::make($period)->aggregate());
-        }
+        });
 
-        foreach (['transfer', 'secondSignature',  'delegateRegistration',  'vote',  'multiSignature',  'ipfs',  'multiPayment',  'delegateResignation',  'timelock',  'timelockClaim',  'timelockRefund',  'magistrate'] as $type) {
-            $cache->setMinimum($type, MinimumAggregateFactory::make('all', $type)->aggregate());
-
-            $cache->setAverage($type, AverageAggregateFactory::make('all', $type)->aggregate());
-
-            $cache->setMaximum($type, MaximumAggregateFactory::make('all', $type)->aggregate());
-        }
+        collect([
+            StatsTransactionTypes::TRANSFER,
+            StatsTransactionTypes::SECOND_SIGNATURE,
+            StatsTransactionTypes::DELEGATE_REGISTRATION,
+            StatsTransactionTypes::VOTE,
+            StatsTransactionTypes::MULTI_SIGNATURE,
+            StatsTransactionTypes::IPFS,
+            StatsTransactionTypes::MULTI_PAYMENT,
+            StatsTransactionTypes::DELEGATE_RESIGNATION,
+            StatsTransactionTypes::TIMELOCK,
+            StatsTransactionTypes::TIMELOCK_CLAIM,
+            StatsTransactionTypes::TIMELOCK_REFUND,
+            StatsTransactionTypes::MAGISTRATE,
+        ])->each(function ($type) use ($cache):void {
+            $cache->setMinimum($type, MinimumAggregateFactory::make(self::LAST_20, $type)->aggregate());
+            $cache->setAverage($type, AverageAggregateFactory::make(self::LAST_20, $type)->aggregate());
+            $cache->setMaximum($type, MaximumAggregateFactory::make(self::LAST_20, $type)->aggregate());
+        });
     }
 }

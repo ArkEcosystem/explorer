@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Services\Transactions\Aggregates\Fees;
 
-use App\Services\Transactions\Aggregates\Fees\Maximum\AllAggregate;
 use App\Services\Transactions\Aggregates\Fees\Maximum\DayAggregate;
+use App\Services\Transactions\Aggregates\Fees\Maximum\LastAggregate;
 use App\Services\Transactions\Aggregates\Fees\Maximum\MonthAggregate;
 use App\Services\Transactions\Aggregates\Fees\Maximum\QuarterAggregate;
 use App\Services\Transactions\Aggregates\Fees\Maximum\WeekAggregate;
@@ -15,7 +15,7 @@ use InvalidArgumentException;
 final class MaximumAggregateFactory
 {
     /**
-     * @return DayAggregate|WeekAggregate|MonthAggregate|QuarterAggregate|YearAggregate|AllAggregate
+     * @return DayAggregate|WeekAggregate|MonthAggregate|QuarterAggregate|YearAggregate|LastAggregate
      */
     public static function make(string $period, ?string $type = null)
     {
@@ -39,8 +39,10 @@ final class MaximumAggregateFactory
             return new YearAggregate();
         }
 
-        if ($period === 'all') {
-            return (new AllAggregate())->setType($type);
+        if ($period === 'last20') {
+            return (new LastAggregate())
+                ->setLimit(20)
+                ->setType($type);
         }
 
         throw new InvalidArgumentException('Invalid aggregate period.');

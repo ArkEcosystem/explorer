@@ -6,20 +6,20 @@
     initial-value="{{ $this->state['type'] }}"
     wire:model="state.type"
     :options="collect([
-        'all',
-        'transfer',
-        'secondSignature',
-        'delegateRegistration',
-        'vote',
-        'voteCombination',
-        'multiSignature',
-        'ipfs',
-        'multiPayment',
-        'delegateResignation',
-        'timelock',
-        'timelockClaim',
-        'timelockRefund',
-        'magistrate',
+        \App\Enums\StatsPeriods::ALL,
+        \App\Enums\StatsTransactionTypes::TRANSFER,
+        \App\Enums\StatsTransactionTypes::SECOND_SIGNATURE,
+        \App\Enums\StatsTransactionTypes::DELEGATE_REGISTRATION,
+        \App\Enums\StatsTransactionTypes::VOTE,
+        \App\Enums\StatsTransactionTypes::VOTE_COMBINATION,
+        \App\Enums\StatsTransactionTypes::MULTI_SIGNATURE,
+        \App\Enums\StatsTransactionTypes::IPFS,
+        \App\Enums\StatsTransactionTypes::MULTI_PAYMENT,
+        \App\Enums\StatsTransactionTypes::DELEGATE_RESIGNATION,
+        \App\Enums\StatsTransactionTypes::TIMELOCK,
+        \App\Enums\StatsTransactionTypes::TIMELOCK_CLAIM,
+        \App\Enums\StatsTransactionTypes::TIMELOCK_REFUND,
+        \App\Enums\StatsTransactionTypes::MAGISTRATE,
     ])->mapWithKeys(fn ($type) => [$type => trans('forms.search.transaction_types.'.$type)])->toArray()"
 >
     <x-slot name="dropdownEntry">

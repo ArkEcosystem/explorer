@@ -8,15 +8,24 @@ use App\Models\Transaction;
 use App\Services\BigNumber;
 use App\Services\Transactions\Aggregates\Concerns\HasQueries;
 
-final class AllAggregate
+final class LastAggregate
 {
     use HasQueries;
 
-    private ?string $type;
+    private string $type;
 
-    public function setType(?string $type = null): self
+    private int $limit = 20;
+
+    public function setType(string $type): self
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    public function setLimit(int $limit): self
+    {
+        $this->limit = $limit;
 
         return $this;
     }
@@ -26,8 +35,10 @@ final class AllAggregate
         $scope = $this->getScopeByType($this->type);
 
         return BigNumber::new(
-            Transaction::query()
-                ->when($scope, fn ($query) => $query->withScope($scope))
+            Transaction::select(['id', 'fee'])
+                ->withScope($scope)
+                ->latest('timestamp')
+                ->take($this->limit)
                 ->min('fee') ?? 0
         )->toFloat();
     }

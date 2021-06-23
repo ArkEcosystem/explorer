@@ -9,21 +9,21 @@ function themes() {
         black: {
             dark: {
                 ..._default,
-                borderColor: "#eef3f5",
+                borderColor: "rgba(238,243,245,1)", // theme-secondary-200
                 backgroundColor: {
                     gradient: [
-                        { stop: 0, alpha: 0.5, value: "#eef3f5" },
-                        { stop: 1, alpha: 0, value: "#eef3f5" },
+                        { stop: 0, value: "rgba(238,243,245,0.5)" }, // theme-secondary-200
+                        { stop: 1, value: "rgba(238,243,245,0)" }, // theme-secondary-200
                     ],
                 },
             },
             light: {
                 ..._default,
-                borderColor: "#212225",
+                borderColor: "rgba(33,34,37,1)", // theme-secondary-900
                 backgroundColor: {
                     gradient: [
-                        { stop: 0, alpha: 0.5, value: "#212225" },
-                        { stop: 1, alpha: 0, value: "#212225" },
+                        { stop: 0, value: "rgba(33,34,37,0.5)" }, // theme-secondary-900
+                        { stop: 1, value: "rgba(33,34,37,0)" }, // theme-secondary-900
                     ],
                 },
             },
@@ -32,21 +32,21 @@ function themes() {
         grey: {
             dark: {
                 ..._default,
-                borderColor: "#7e8a9c",
+                borderColor: "rgba(126,138,156,1)", // theme-secondary-600
                 backgroundColor: {
                     gradient: [
-                        { stop: 0, alpha: 1, value: "#7e8a9c" },
-                        { stop: 1, alpha: 0, value: "#7e8a9c" },
+                        { stop: 0, value: "rgba(126,138,156,1)" }, // theme-secondary-600
+                        { stop: 1, value: "rgba(126,138,156,0)" }, // theme-secondary-600
                     ],
                 },
             },
             light: {
                 ..._default,
-                borderColor: "#c4c8cf",
+                borderColor: "rgba(196,200,207,1)", // theme-secondary-400
                 backgroundColor: {
                     gradient: [
-                        { stop: 0, alpha: 1, value: "#c4c8cf" },
-                        { stop: 1, alpha: 0, value: "#c4c8cf" },
+                        { stop: 0, value: "rgba(196,200,207,1)" }, // theme-secondary-400
+                        { stop: 1, value: "rgba(196,200,207,0)" }, // theme-secondary-400
                     ],
                 },
             },
@@ -55,21 +55,21 @@ function themes() {
         yellow: {
             dark: {
                 ..._default,
-                borderColor: "#ffae10",
+                borderColor: "rgba(255,174,16,1)", // theme-warning-500
                 backgroundColor: {
                     gradient: [
-                        { stop: 0, alpha: 0.5, value: "#ffae10" },
-                        { stop: 1, alpha: 0, value: "#ffae10" },
+                        { stop: 0, value: "rgba(255,174,16,0.5)" }, // theme-warning-500
+                        { stop: 1, value: "rgba(255,174,16,0)" }, // theme-warning-500
                     ],
                 },
             },
             light: {
                 ..._default,
-                borderColor: "#ffae10",
+                borderColor: "rgba(255,174,16,1)", // theme-warning-500
                 backgroundColor: {
                     gradient: [
-                        { stop: 0, alpha: 0.5, value: "#ffae10" },
-                        { stop: 1, alpha: 0, value: "#ffae10" },
+                        { stop: 0, value: "rgba(255,174,16,0.5)" }, // theme-warning-500
+                        { stop: 1, value: "rgba(255,174,16,0)" }, // theme-warning-500
                     ],
                 },
             },
@@ -78,21 +78,21 @@ function themes() {
         green: {
             dark: {
                 ..._default,
-                borderColor: "#289548",
+                borderColor: "rgba(40,149,72,1)", // theme-success-600
                 backgroundColor: {
                     gradient: [
-                        { stop: 0, alpha: 0.5, value: "#289548" },
-                        { stop: 1, alpha: 0, value: "#289548" },
+                        { stop: 0, value: "rgba(40,149,72,0.5)" }, // theme-success-600
+                        { stop: 1, value: "rgba(40,149,72,0)" }, // theme-success-600
                     ],
                 },
             },
             light: {
                 ..._default,
-                borderColor: "#289548",
+                borderColor: "rgba(40,149,72,1)", // theme-success-600
                 backgroundColor: {
                     gradient: [
-                        { stop: 0, alpha: 0.5, value: "#289548" },
-                        { stop: 1, alpha: 0, value: "#289548" },
+                        { stop: 0, value: "rgba(40,149,72,0.5)" }, // theme-success-600
+                        { stop: 1, value: "rgba(40,149,72,0)" }, // theme-success-600
                     ],
                 },
             },
@@ -101,21 +101,21 @@ function themes() {
         red: {
             dark: {
                 ..._default,
-                borderColor: "#de5846",
+                borderColor: "rgba(222,88,70,1)", // theme-danger-400
                 backgroundColor: {
                     gradient: [
-                        { stop: 0, alpha: 0.5, value: "#de5846" },
-                        { stop: 1, alpha: 0, value: "#de5846" },
+                        { stop: 0, value: "rgba(222,88,70,0.5)" }, // theme-danger-400
+                        { stop: 1, value: "rgba(222,88,70,0)" }, // theme-danger-400
                     ],
                 },
             },
             light: {
                 ..._default,
-                borderColor: "#de5846",
+                borderColor: "rgba(222,88,70,1)", // theme-danger-400
                 backgroundColor: {
                     gradient: [
-                        { stop: 0, alpha: 0.5, value: "#de5846" },
-                        { stop: 1, alpha: 0, value: "#de5846" },
+                        { stop: 0, value: "rgba(222,88,70,0.5)" }, // theme-danger-400
+                        { stop: 1, value: "rgba(222,88,70,0)" }, // theme-danger-400
                     ],
                 },
             },
@@ -131,33 +131,13 @@ function themes() {
     };
 }
 
-export function hexToRgb(hex) {
-    const re = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
-
-    hex = hex.replace(re, (m, r, g, b) => r + r + g + g + b + b);
-    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-
-    return result
-        ? {
-              r: parseInt(result[1], 16),
-              g: parseInt(result[2], 16),
-              b: parseInt(result[3], 16),
-          }
-        : null;
-}
-
 export function makeGradient(canvas, options) {
     const ctx = canvas.getContext("2d");
     const height = canvas.parentElement.clientHeight / 1.3;
     const gradient = ctx.createLinearGradient(0, 0, 0, height);
 
-    options.forEach((item) => {
-        const color = hexToRgb(item.value);
-
-        gradient.addColorStop(
-            item.stop,
-            `rgba(${color.r}, ${color.g}, ${color.b}, ${item.alpha})`
-        );
+    options.forEach((color) => {
+        gradient.addColorStop(color.stop, color.value);
     });
 
     return gradient;

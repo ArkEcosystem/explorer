@@ -16,22 +16,22 @@ trait AvailableTransactionType
     private function availableTransactionTypes(): array
     {
         return [
-            StatsTransactionTypes::TRANSFER        => trans('forms.search.transaction_types.transfer'),
-            StatsTransactionTypes::SECOND_SIG      => trans('forms.search.transaction_types.secondSignature'),
-            StatsTransactionTypes::DELEGATE_REG    => trans('forms.search.transaction_types.delegateRegistration'),
-            StatsTransactionTypes::VOTE            => trans('forms.search.transaction_types.vote'),
-            StatsTransactionTypes::MULTI_SIG       => trans('forms.search.transaction_types.multiSignature'),
-            StatsTransactionTypes::IPFS            => trans('forms.search.transaction_types.ipfs'),
-            StatsTransactionTypes::MULTI_PAY       => trans('forms.search.transaction_types.multiPayment'),
-            StatsTransactionTypes::DELEGATE_RES    => trans('forms.search.transaction_types.delegateResignation'),
-            StatsTransactionTypes::TIMELOCK        => trans('forms.search.transaction_types.timelock'),
-            StatsTransactionTypes::TIMELOCK_CLAIM  => trans('forms.search.transaction_types.timelockClaim'),
+            StatsTransactionTypes::TRANSFER => trans('forms.search.transaction_types.transfer'),
+            StatsTransactionTypes::SECOND_SIGNATURE => trans('forms.search.transaction_types.secondSignature'),
+            StatsTransactionTypes::DELEGATE_REGISTRATION => trans('forms.search.transaction_types.delegateRegistration'),
+            StatsTransactionTypes::VOTE => trans('forms.search.transaction_types.vote'),
+            StatsTransactionTypes::MULTI_SIGNATURE => trans('forms.search.transaction_types.multiSignature'),
+            StatsTransactionTypes::IPFS => trans('forms.search.transaction_types.ipfs'),
+            StatsTransactionTypes::MULTI_PAYMENT => trans('forms.search.transaction_types.multiPayment'),
+            StatsTransactionTypes::DELEGATE_RESIGNATION => trans('forms.search.transaction_types.delegateResignation'),
+            StatsTransactionTypes::TIMELOCK => trans('forms.search.transaction_types.timelock'),
+            StatsTransactionTypes::TIMELOCK_CLAIM => trans('forms.search.transaction_types.timelockClaim'),
             StatsTransactionTypes::TIMELOCK_REFUND => trans('forms.search.transaction_types.timelockRefund'),
-            StatsTransactionTypes::MAGISTRATE      => trans('forms.search.transaction_types.magistrate'),
+            StatsTransactionTypes::MAGISTRATE => trans('forms.search.transaction_types.magistrate'),
         ];
     }
 
-    private function getTransactionTypeLabel(string $type): string | null
+    private function getTransactionTypeLabel(string $type): string|null
     {
         return collect($this->availableTransactionTypes())->get($type);
     }

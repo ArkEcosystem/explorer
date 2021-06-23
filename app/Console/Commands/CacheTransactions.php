@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
+use App\Enums\StatsPeriods;
 use App\Services\Cache\TransactionCache;
 use App\Services\Transactions\Aggregates\HistoricalAggregateFactory;
 use Illuminate\Console\Command;
@@ -26,13 +27,16 @@ final class CacheTransactions extends Command
 
     /**
      * Execute the console command.
-     *
-     * @return int
      */
     public function handle(TransactionCache $cache)
     {
-        foreach (['day', 'week', 'month', 'quarter', 'year', 'all'] as $period) {
-            $cache->setHistorical($period, HistoricalAggregateFactory::make($period)->aggregate());
-        }
+        collect([
+            StatsPeriods::DAY,
+            StatsPeriods::WEEK,
+            StatsPeriods::MONTH,
+            StatsPeriods::QUARTER,
+            StatsPeriods::YEAR,
+            StatsPeriods::ALL,
+        ])->each(fn ($period) => $cache->setHistorical($period, HistoricalAggregateFactory::make($period)->aggregate()));
     }
 }
