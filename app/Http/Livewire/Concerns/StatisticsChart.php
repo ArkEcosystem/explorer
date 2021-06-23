@@ -31,7 +31,7 @@ trait StatisticsChart
     private function sum(string $cache, string $period, string $format): string
     {
         $datasets = $this->transactionsPerPeriod($cache, $period)->get('datasets');
-        $sum = collect($datasets)->sum();
+        $sum      = collect($datasets)->sum();
 
         return $format === 'money'
             ? NumberFormatter::currency($sum, Network::currency())

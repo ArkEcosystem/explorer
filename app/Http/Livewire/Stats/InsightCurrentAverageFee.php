@@ -22,7 +22,7 @@ final class InsightCurrentAverageFee extends Component
 
     public function mount(): void
     {
-        $this->refreshInterval = (string)config('explorer.statistics.refreshInterval', '60');
+        $this->refreshInterval = (string) config('explorer.statistics.refreshInterval', '60');
         $this->transactionType = $this->defaultTransactionType();
     }
 
@@ -33,12 +33,12 @@ final class InsightCurrentAverageFee extends Component
                 'type' => $this->getTransactionTypeLabel($this->transactionType),
             ]),
             'currentAverageFeeValue' => $this->currentAverageFee($this->transactionType),
-            'minFeeTitle' => trans('pages.statistics.insights.min-fee'),
-            'minFeeValue' => $this->minFee($this->transactionType),
-            'maxFeeTitle' => trans('pages.statistics.insights.max-fee'),
-            'maxFeeValue' => $this->maxFee($this->transactionType),
-            'options' => $this->availableTransactionTypes(),
-            'refreshInterval' => $this->refreshInterval,
+            'minFeeTitle'            => trans('pages.statistics.insights.min-fee'),
+            'minFeeValue'            => $this->minFee($this->transactionType),
+            'maxFeeTitle'            => trans('pages.statistics.insights.max-fee'),
+            'maxFeeValue'            => $this->maxFee($this->transactionType),
+            'options'                => $this->availableTransactionTypes(),
+            'refreshInterval'        => $this->refreshInterval,
         ]);
     }
 
@@ -63,7 +63,7 @@ final class InsightCurrentAverageFee extends Component
         return $this->asMoney($fee->get('max', 0));
     }
 
-    private function asMoney(string|int|float $value): string
+    private function asMoney(string | int | float $value): string
     {
         return NumberFormatter::currency($value, Network::currency());
     }
