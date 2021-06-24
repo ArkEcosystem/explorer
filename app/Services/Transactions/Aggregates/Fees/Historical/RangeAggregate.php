@@ -18,8 +18,9 @@ final class RangeAggregate
         return $this
             ->dateRangeQuery($start, $end)
             ->orderBy('timestamp')
-            ->get()
+            ->cursor()
             ->groupBy(fn ($date) => Timestamp::fromGenesis($date->timestamp)->format($format))
-            ->mapWithKeys(fn ($transactions, $day) => [$day => $transactions->sumBigNumber('fee')->toNumber() / 1e8]);
+            ->mapWithKeys(fn ($transactions, $day) => [$day => $transactions->sumBigNumber('fee')->toNumber() / 1e8])
+            ->collect();
     }
 }

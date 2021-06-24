@@ -38,10 +38,11 @@ final class LastAggregate
         $sub = Transaction::select(['id', 'fee'])
             ->withScope($scope)
             ->orderByDesc('timestamp')
-            ->limit(20);
+            ->limit($this->limit);
 
-        return DB::connection('explorer')->table(DB::raw("({$sub->toSql()}) as fees"))
+        return BigNumber::new(DB::connection('explorer')
+            ->table(DB::raw("({$sub->toSql()}) as fees"))
             ->mergeBindings($sub->getQuery())
-            ->avg('fee');
+            ->avg('fee'))->toFloat();
     }
 }

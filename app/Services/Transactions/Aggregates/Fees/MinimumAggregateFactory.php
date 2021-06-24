@@ -10,12 +10,13 @@ use App\Services\Transactions\Aggregates\Fees\Minimum\MonthAggregate;
 use App\Services\Transactions\Aggregates\Fees\Minimum\QuarterAggregate;
 use App\Services\Transactions\Aggregates\Fees\Minimum\WeekAggregate;
 use App\Services\Transactions\Aggregates\Fees\Minimum\YearAggregate;
+use Illuminate\Support\Str;
 use InvalidArgumentException;
 
 final class MinimumAggregateFactory
 {
     /**
-     * @return DayAggregate|WeekAggregate|MonthAggregate|QuarterAggregate|YearAggregate|LastAggregate
+     * @return DayAggregate|LastAggregate|MonthAggregate|QuarterAggregate|WeekAggregate|YearAggregate
      */
     public static function make(string $period, ?string $type = null)
     {
@@ -39,9 +40,11 @@ final class MinimumAggregateFactory
             return new YearAggregate();
         }
 
-        if ($period === 'last20') {
+        if (Str::of($period)->contains('last')) {
+            preg_match('/^[a-z]+(\d+)$/', $period, $match);
+
             return (new LastAggregate())
-                ->setLimit(20)
+                ->setLimit((int) $match[1])
                 ->setType($type);
         }
 
