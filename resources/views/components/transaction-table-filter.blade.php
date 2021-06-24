@@ -5,22 +5,7 @@
     icon-class="hidden"
     initial-value="{{ $this->state['type'] }}"
     wire:model="state.type"
-    :options="collect([
-        \App\Enums\StatsPeriods::ALL,
-        \App\Enums\StatsTransactionTypes::TRANSFER,
-        \App\Enums\StatsTransactionTypes::SECOND_SIGNATURE,
-        \App\Enums\StatsTransactionTypes::DELEGATE_REGISTRATION,
-        \App\Enums\StatsTransactionTypes::VOTE,
-        \App\Enums\StatsTransactionTypes::VOTE_COMBINATION,
-        \App\Enums\StatsTransactionTypes::MULTI_SIGNATURE,
-        \App\Enums\StatsTransactionTypes::IPFS,
-        \App\Enums\StatsTransactionTypes::MULTI_PAYMENT,
-        \App\Enums\StatsTransactionTypes::DELEGATE_RESIGNATION,
-        \App\Enums\StatsTransactionTypes::TIMELOCK,
-        \App\Enums\StatsTransactionTypes::TIMELOCK_CLAIM,
-        \App\Enums\StatsTransactionTypes::TIMELOCK_REFUND,
-        \App\Enums\StatsTransactionTypes::MAGISTRATE,
-    ])->mapWithKeys(fn ($type) => [$type => trans('forms.search.transaction_types.'.$type)])->toArray()"
+    :options="Forms::getTransactionOptions()"
 >
     <x-slot name="dropdownEntry">
         <div class="flex justify-between items-center w-full font-semibold md:justify-end md:space-x-2 text-theme-secondary-500 md:text-theme-secondary-700">
