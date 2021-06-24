@@ -28,7 +28,7 @@ trait StatisticsChart
         return $this->transactionsPerPeriod($cache, $period);
     }
 
-    private function totalTransactionsPerPeriod(string $cache, string $period): int|float
+    private function totalTransactionsPerPeriod(string $cache, string $period): int | float
     {
         $datasets = $this->transactionsPerPeriod($cache, $period)->get('datasets');
 

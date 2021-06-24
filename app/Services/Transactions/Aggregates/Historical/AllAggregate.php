@@ -14,7 +14,7 @@ final class AllAggregate
     public function aggregate(): Collection
     {
         return Transaction::query()
-            ->select(DB::raw("COUNT(*) as transactions, to_char(to_timestamp(timestamp+".Network::epoch()->timestamp."), 'YYYY-MM') as month"))
+            ->select(DB::raw('COUNT(*) as transactions, to_char(to_timestamp(timestamp+'.Network::epoch()->timestamp."), 'YYYY-MM') as month"))
             ->groupBy('month')
             ->orderBy('month')
             ->pluck('transactions', 'month')

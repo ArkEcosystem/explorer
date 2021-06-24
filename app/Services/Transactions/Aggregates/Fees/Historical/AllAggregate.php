@@ -6,10 +6,8 @@ namespace App\Services\Transactions\Aggregates\Fees\Historical;
 
 use App\Facades\Network;
 use App\Models\Transaction;
-use App\Services\Timestamp;
 use App\Services\Transactions\Aggregates\Concerns\HasPlaceholders;
 use App\Services\Transactions\Aggregates\Concerns\HasQueries;
-use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
@@ -21,7 +19,7 @@ final class AllAggregate
     public function aggregate(): Collection
     {
         return Transaction::query()
-            ->select(DB::raw("SUM(fee) as fee, to_char(to_timestamp(timestamp+".Network::epoch()->timestamp."), 'YYYY-MM') as month"))
+            ->select(DB::raw('SUM(fee) as fee, to_char(to_timestamp(timestamp+'.Network::epoch()->timestamp."), 'YYYY-MM') as month"))
             ->groupBy('month')
             ->orderBy('month')
             ->pluck('fee', 'month')
