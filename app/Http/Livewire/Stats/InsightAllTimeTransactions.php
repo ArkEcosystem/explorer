@@ -32,9 +32,9 @@ final class InsightAllTimeTransactions extends Component
     {
         return view('livewire.stats.insight-all-time-transactions', [
             'allTimeTransactionsTitle' => trans('pages.statistics.insights.all-time-transactions'),
-            'allTimeTransactionsValue' => $this->sum(TransactionCache::class, StatsPeriods::ALL, 'numeric'),
+            'allTimeTransactionsValue' => $this->asNumber($this->totalTransactionsPerPeriod(TransactionCache::class, StatsPeriods::ALL)),
             'transactionsTitle'        => trans('pages.statistics.insights.transactions'),
-            'transactionsValue'        => $this->sum(TransactionCache::class, $this->period, 'numeric'),
+            'transactionsValue'        => $this->asNumber($this->totalTransactionsPerPeriod(TransactionCache::class, $this->period)),
             'chartValues'              => $this->chartValues(TransactionCache::class, $this->period),
             'chartTheme'               => $this->chartTheme(),
             'options'                  => $this->availablePeriods(),

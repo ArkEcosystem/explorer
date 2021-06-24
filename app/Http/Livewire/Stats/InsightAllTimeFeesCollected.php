@@ -32,9 +32,9 @@ final class InsightAllTimeFeesCollected extends Component
     {
         return view('livewire.stats.insight-all-time-fees-collected', [
             'allTimeFeesCollectedTitle' => trans('pages.statistics.insights.all-time-fees-collected'),
-            'allTimeFeesCollectedValue' => $this->sum(FeeCache::class, StatsPeriods::ALL, 'money'),
+            'allTimeFeesCollectedValue' => $this->asMoney($this->totalTransactionsPerPeriod(FeeCache::class, StatsPeriods::ALL)),
             'feesTitle'                 => trans('pages.statistics.insights.fees'),
-            'feesValue'                 => $this->sum(FeeCache::class, $this->period, 'money'),
+            'feesValue'                 => $this->asMoney($this->totalTransactionsPerPeriod(FeeCache::class, $this->period)),
             'chartValues'               => $this->chartValues(FeeCache::class, $this->period),
             'chartTheme'                => $this->chartTheme(),
             'options'                   => $this->availablePeriods(),

@@ -7,6 +7,7 @@ namespace App\Services\Transactions\Aggregates\Fees\Average;
 use App\Models\Transaction;
 use App\Services\BigNumber;
 use App\Services\Transactions\Aggregates\Concerns\HasQueries;
+use Illuminate\Support\Facades\DB;
 
 final class LastAggregate
 {
@@ -34,12 +35,13 @@ final class LastAggregate
     {
         $scope = $this->getScopeByType($this->type);
 
-        return BigNumber::new(
-            Transaction::select(['id', 'fee'])
-                ->withScope($scope)
-                ->latest('timestamp')
-                ->take($this->limit)
-                ->avg('fee') ?? 0
-        )->toFloat();
+        $sub = Transaction::select(['id', 'fee'])
+            ->withScope($scope)
+            ->orderByDesc('timestamp')
+            ->limit(20);
+
+        return DB::connection('explorer')->table(DB::raw("({$sub->toSql()}) as fees"))
+            ->mergeBindings($sub->getQuery())
+            ->avg('fee');
     }
 }

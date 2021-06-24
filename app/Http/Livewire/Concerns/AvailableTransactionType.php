@@ -20,6 +20,7 @@ trait AvailableTransactionType
             StatsTransactionTypes::SECOND_SIGNATURE      => trans('forms.search.transaction_types.secondSignature'),
             StatsTransactionTypes::DELEGATE_REGISTRATION => trans('forms.search.transaction_types.delegateRegistration'),
             StatsTransactionTypes::VOTE                  => trans('forms.search.transaction_types.vote'),
+            StatsTransactionTypes::VOTE_COMBINATION      => trans('forms.search.transaction_types.voteCombination'),
             StatsTransactionTypes::MULTI_SIGNATURE       => trans('forms.search.transaction_types.multiSignature'),
             StatsTransactionTypes::IPFS                  => trans('forms.search.transaction_types.ipfs'),
             StatsTransactionTypes::MULTI_PAYMENT         => trans('forms.search.transaction_types.multiPayment'),

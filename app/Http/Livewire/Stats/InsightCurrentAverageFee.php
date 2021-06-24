@@ -4,17 +4,21 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire\Stats;
 
-use App\Facades\Network;
 use App\Http\Livewire\Concerns\AvailableTransactionType;
+use App\Http\Livewire\Concerns\StatisticsChart;
+use App\Models\Scopes\VoteScope;
+use App\Models\Transaction;
+use App\Services\BigNumber;
 use App\Services\Cache\FeeCache;
-use App\Services\NumberFormatter;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 use Livewire\Component;
 
 final class InsightCurrentAverageFee extends Component
 {
     use AvailableTransactionType;
+    use StatisticsChart;
 
     public string $transactionType = '';
 
@@ -61,11 +65,6 @@ final class InsightCurrentAverageFee extends Component
         $fee = $this->getFeesAggregatesPerType($transactionType);
 
         return $this->asMoney($fee->get('max', 0));
-    }
-
-    private function asMoney(string | int | float $value): string
-    {
-        return NumberFormatter::currency($value, Network::currency());
     }
 
     private function getFeesAggregatesPerType(string $transactionType): Collection

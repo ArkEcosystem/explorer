@@ -55,6 +55,7 @@ final class CacheFees extends Command
             StatsTransactionTypes::SECOND_SIGNATURE,
             StatsTransactionTypes::DELEGATE_REGISTRATION,
             StatsTransactionTypes::VOTE,
+            StatsTransactionTypes::VOTE_COMBINATION,
             StatsTransactionTypes::MULTI_SIGNATURE,
             StatsTransactionTypes::IPFS,
             StatsTransactionTypes::MULTI_PAYMENT,
@@ -63,7 +64,7 @@ final class CacheFees extends Command
             StatsTransactionTypes::TIMELOCK_CLAIM,
             StatsTransactionTypes::TIMELOCK_REFUND,
             StatsTransactionTypes::MAGISTRATE,
-        ])->each(function ($type) use ($cache):void {
+        ])->each(function ($type) use ($cache): void {
             $cache->setMinimum($type, MinimumAggregateFactory::make(self::LAST_20, $type)->aggregate());
             $cache->setAverage($type, AverageAggregateFactory::make(self::LAST_20, $type)->aggregate());
             $cache->setMaximum($type, MaximumAggregateFactory::make(self::LAST_20, $type)->aggregate());

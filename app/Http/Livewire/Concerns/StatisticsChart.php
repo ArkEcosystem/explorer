@@ -28,13 +28,20 @@ trait StatisticsChart
         return $this->transactionsPerPeriod($cache, $period);
     }
 
-    private function sum(string $cache, string $period, string $format): string
+    private function totalTransactionsPerPeriod(string $cache, string $period): int|float
     {
         $datasets = $this->transactionsPerPeriod($cache, $period)->get('datasets');
-        $sum      = collect($datasets)->sum();
 
-        return $format === 'money'
-            ? NumberFormatter::currency($sum, Network::currency())
-            : NumberFormatter::number($sum);
+        return collect($datasets)->sum();
+    }
+
+    private function asMoney(string | int | float $value): string
+    {
+        return NumberFormatter::currency($value, Network::currency());
+    }
+
+    private function asNumber(string | int | float $value): string
+    {
+        return NumberFormatter::number($value);
     }
 }
