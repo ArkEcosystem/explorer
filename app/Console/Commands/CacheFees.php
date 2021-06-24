@@ -7,6 +7,7 @@ namespace App\Console\Commands;
 use App\Enums\StatsPeriods;
 use App\Enums\StatsTransactionTypes;
 use App\Services\Cache\FeeCache;
+use App\Services\Forms;
 use App\Services\Transactions\Aggregates\Fees\AverageAggregateFactory;
 use App\Services\Transactions\Aggregates\Fees\HistoricalAggregateFactory;
 use App\Services\Transactions\Aggregates\Fees\MaximumAggregateFactory;
@@ -50,21 +51,7 @@ final class CacheFees extends Command
             $cache->setMaximum($period, MaximumAggregateFactory::make($period)->aggregate());
         });
 
-        collect([
-            StatsTransactionTypes::TRANSFER,
-            StatsTransactionTypes::SECOND_SIGNATURE,
-            StatsTransactionTypes::DELEGATE_REGISTRATION,
-            StatsTransactionTypes::VOTE,
-            StatsTransactionTypes::VOTE_COMBINATION,
-            StatsTransactionTypes::MULTI_SIGNATURE,
-            StatsTransactionTypes::IPFS,
-            StatsTransactionTypes::MULTI_PAYMENT,
-            StatsTransactionTypes::DELEGATE_RESIGNATION,
-            StatsTransactionTypes::TIMELOCK,
-            StatsTransactionTypes::TIMELOCK_CLAIM,
-            StatsTransactionTypes::TIMELOCK_REFUND,
-            StatsTransactionTypes::MAGISTRATE,
-        ])->each(function ($type) use ($cache): void {
+        collect(Forms::getTransactionOptions())->except('all')->keys()->each(function ($type) use ($cache): void {
             $cache->setMinimum($type, MinimumAggregateFactory::make(self::LAST_20, $type)->aggregate());
             $cache->setAverage($type, AverageAggregateFactory::make(self::LAST_20, $type)->aggregate());
             $cache->setMaximum($type, MaximumAggregateFactory::make(self::LAST_20, $type)->aggregate());
