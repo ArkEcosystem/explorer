@@ -1,4 +1,4 @@
-<div wire:poll.{{ $refreshInterval }}s>
+<div class="w-full h-full" wire:poll.{{ $refreshInterval }}s>
     <x-stats.insight
         id="all-time-fees-collected"
         :mainTitle="$allTimeFeesCollectedTitle"

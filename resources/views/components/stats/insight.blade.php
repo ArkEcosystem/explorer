@@ -13,7 +13,7 @@
     'selected',
 ])
 
-<x-general.card with-border class="flex flex-col gap-6 md:flex-row xl:flex-col">
+<x-general.card with-border class="flex flex-col gap-6 md:flex-row xl:flex-col xl:h-full">
     <div class="md:w-1/2 xl:w-full">
         <h2 class="mb-0 text-sm font-semibold leading-none text-theme-secondary-900 dark:text-theme-secondary-200">{{ $mainTitle }}</h2>
         <x-ark-rich-select
