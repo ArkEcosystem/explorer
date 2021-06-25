@@ -7,7 +7,6 @@ namespace App\Services\Transactions\Aggregates\Fees\Average;
 use App\Models\Transaction;
 use App\Services\BigNumber;
 use App\Services\Transactions\Aggregates\Concerns\HasQueries;
-use Illuminate\Support\Facades\DB;
 
 final class LastAggregate
 {
