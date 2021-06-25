@@ -13,11 +13,11 @@ final class LastAggregate
 {
     use HasQueries;
 
-    private string $type;
+    private ?string $type;
 
     private int $limit = 20;
 
-    public function setType(string $type): self
+    public function setType(?string $type): self
     {
         $this->type = $type;
 

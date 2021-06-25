@@ -5,9 +5,12 @@ declare(strict_types=1);
 namespace App\Http\Livewire\Stats;
 
 use App\Http\Livewire\Concerns\ChartNumberFormatters;
+use App\Models\Scopes\VoteScope;
+use App\Models\Transaction;
 use App\Services\Cache\FeeCache;
 use App\Services\Forms;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 use Livewire\Component;
 
