@@ -6,6 +6,7 @@ namespace App\Http\Livewire\Stats;
 
 use App\Enums\StatsPeriods;
 use App\Http\Livewire\Concerns\AvailablePeriods;
+use App\Http\Livewire\Concerns\ChartNumberFormatters;
 use App\Http\Livewire\Concerns\StatisticsChart;
 use App\Services\Cache\TransactionCache;
 use Illuminate\View\View;
@@ -14,6 +15,7 @@ use Livewire\Component;
 final class InsightAllTimeTransactions extends Component
 {
     use AvailablePeriods;
+    use ChartNumberFormatters;
     use StatisticsChart;
 
     private const CHART_COLOR = 'black';

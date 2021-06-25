@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire\Stats;
 
-use App\Http\Livewire\Concerns\StatisticsChart;
+use App\Http\Livewire\Concerns\ChartNumberFormatters;
 use App\Services\Cache\FeeCache;
 use App\Services\Forms;
 use Illuminate\Support\Collection;
@@ -13,7 +13,7 @@ use Livewire\Component;
 
 final class InsightCurrentAverageFee extends Component
 {
-    use StatisticsChart;
+    use ChartNumberFormatters;
 
     public string $transactionType = 'transfer';
 

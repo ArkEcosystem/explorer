@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire\Concerns;
 
-use App\Facades\Network;
-use App\Services\NumberFormatter;
 use App\Services\Settings;
 use Illuminate\Support\Collection;
 
@@ -33,15 +31,5 @@ trait StatisticsChart
         $datasets = $this->transactionsPerPeriod($cache, $period)->get('datasets');
 
         return collect($datasets)->sum();
-    }
-
-    private function asMoney(string | int | float $value): string
-    {
-        return NumberFormatter::currency($value, Network::currency());
-    }
-
-    private function asNumber(string | int | float $value): string
-    {
-        return NumberFormatter::number($value);
     }
 }
