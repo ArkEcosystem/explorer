@@ -3,7 +3,6 @@
 declare(strict_types=1);
 
 use App\Enums\CoreTransactionTypeEnum;
-use App\Enums\StatsTransactionTypes;
 use App\Enums\TransactionTypeGroupEnum;
 use App\Http\Livewire\Stats\InsightCurrentAverageFee;
 use App\Models\Transaction;
@@ -38,7 +37,7 @@ it('should render the component', function () {
     Artisan::call('explorer:cache-fees');
 
     Livewire::test(InsightCurrentAverageFee::class)
-        ->set('transactionType', StatsTransactionTypes::TRANSFER)
+        ->set('transactionType', 'transfer')
         ->assertSee(trans('pages.statistics.insights.current-average-fee', ['type' => 'Transfer']))
         ->assertSee('50.2 DARK')
         ->assertSee(trans('pages.statistics.insights.min-fee'))
@@ -71,7 +70,7 @@ it('should filter by transfer', function () {
     Artisan::call('explorer:cache-fees');
 
     Livewire::test(InsightCurrentAverageFee::class)
-        ->set('transactionType', StatsTransactionTypes::MULTI_SIG)
+        ->set('transactionType', 'multiSignature')
         ->assertSee(trans('pages.statistics.insights.current-average-fee', ['type' => 'Multisignature']))
         ->assertSee('49.2 DARK')
         ->assertSee(trans('pages.statistics.insights.min-fee'))

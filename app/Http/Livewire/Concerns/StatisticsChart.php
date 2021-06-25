@@ -9,11 +9,6 @@ use Illuminate\Support\Collection;
 
 trait StatisticsChart
 {
-    private function transactionsPerPeriod(string $cache, string $period): Collection
-    {
-        return collect((new $cache())->getHistorical($period));
-    }
-
     private function chartTheme(): Collection
     {
         $mode = Settings::usesDarkTheme() ? 'dark' : 'light';
@@ -31,5 +26,10 @@ trait StatisticsChart
         $datasets = $this->transactionsPerPeriod($cache, $period)->get('datasets');
 
         return collect($datasets)->sum();
+    }
+
+    private function transactionsPerPeriod(string $cache, string $period): Collection
+    {
+        return collect((new $cache())->getHistorical($period));
     }
 }

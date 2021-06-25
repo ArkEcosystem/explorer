@@ -50,6 +50,7 @@ final class CacheFees extends Command
             $cache->setMinimum($period, MinimumAggregateFactory::make($period)->aggregate());
             $cache->setAverage($period, AverageAggregateFactory::make($period)->aggregate());
             $cache->setMaximum($period, MaximumAggregateFactory::make($period)->aggregate());
+            $cache->setHistorical($period, HistoricalAggregateFactory::make($period)->aggregate());
         });
 
         collect(Forms::getTransactionOptions())->except('all')->keys()->each(function ($type) use ($cache): void {

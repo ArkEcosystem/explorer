@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Enums\StatsPeriods;
 use App\Http\Livewire\Stats\InsightAllTimeFeesCollected;
 use App\Models\Transaction;
 use App\Services\Timestamp;
@@ -22,11 +23,11 @@ it('should render the component', function () {
     Artisan::call('explorer:cache-fees');
 
     Livewire::test(InsightAllTimeFeesCollected::class)
-        ->set('period', 'day')
+        ->set('period', StatsPeriods::DAY)
         ->assertSee(trans('pages.statistics.insights.all-time-fees-collected'))
-        ->assertSee('16,666.67 DARK')
+        ->assertSee('16,666.6665285 DARK')
         ->assertSee(trans('pages.statistics.insights.fees'))
-        ->assertSee('12,345.68 DARK')
+        ->assertSee('12,345.67891 DARK')
         ->assertSee('[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3703.703673,3086.4197275,2469.135782,1851.8518365,1234.567891]');
 });
 
@@ -41,10 +42,10 @@ it('should filter by year', function () {
     Artisan::call('explorer:cache-fees');
 
     Livewire::test(InsightAllTimeFeesCollected::class)
-        ->set('period', 'year')
+        ->set('period', StatsPeriods::YEAR)
         ->assertSee(trans('pages.statistics.insights.all-time-fees-collected'))
-        ->assertSee('16,666.67 DARK')
+        ->assertSee('16,666.6665285 DARK')
         ->assertSee(trans('pages.statistics.insights.fees'))
-        ->assertSee('12,345.68 DARK')
+        ->assertSee('12,345.67891 DARK')
         ->assertSee('[0,0,0,0,0,0,0,3703.703673,3086.4197275,2469.135782,1851.8518365,1234.567891]');
 });

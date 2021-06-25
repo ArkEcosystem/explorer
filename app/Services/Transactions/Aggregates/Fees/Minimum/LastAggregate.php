@@ -39,7 +39,7 @@ final class LastAggregate
             ->orderByDesc('timestamp')
             ->limit($this->limit);
 
-        return BigNumber::new(Transaction::fromSub($sub, 'fees')->min('fee'))
+        return BigNumber::new(Transaction::fromSub($sub, 'fees')->min('fee') ?? 0)
             ->toFloat();
     }
 }
