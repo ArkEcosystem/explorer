@@ -45,7 +45,7 @@ final class MinimumAggregateFactory
 
             return (new LastAggregate())
                 ->setLimit((int) $match[1])
-                ->setType($type);
+                ->setType($type ?? '');
         }
 
         throw new InvalidArgumentException('Invalid aggregate period.');
