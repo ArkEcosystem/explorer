@@ -8,7 +8,7 @@ use App\Services\Transactions\Aggregates\Fees\Maximum\LastAggregate;
 use Carbon\Carbon;
 use function Tests\configureExplorerDatabase;
 
-beforeEach(fn() => configureExplorerDatabase());
+beforeEach(fn () => configureExplorerDatabase());
 
 it('should determine the maximum fee', function ($limit, $type) {
     Carbon::setTestNow('2021-01-01 00:00:00');
