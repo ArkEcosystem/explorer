@@ -40,9 +40,7 @@ final class LastAggregate
             ->orderByDesc('timestamp')
             ->limit($this->limit);
 
-        return BigNumber::new(DB::connection('explorer')
-            ->table(DB::raw("({$sub->toSql()}) as fees"))
-            ->mergeBindings($sub->getQuery())
-            ->max('fee'))->toFloat();
+        return BigNumber::new(Transaction::fromSub($sub, 'fees')->max('fee'))
+            ->toFloat();
     }
 }

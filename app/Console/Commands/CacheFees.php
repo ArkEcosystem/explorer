@@ -33,8 +33,10 @@ final class CacheFees extends Command
 
     /**
      * Execute the console command.
+     *
+     * @return int
      */
-    public function handle(FeeCache $cache): int
+    public function handle(FeeCache $cache)
     {
         $cache->setHistorical(StatsPeriods::ALL, HistoricalAggregateFactory::make(StatsPeriods::ALL)->aggregate());
 

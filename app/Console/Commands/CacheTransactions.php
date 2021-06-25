@@ -27,8 +27,10 @@ final class CacheTransactions extends Command
 
     /**
      * Execute the console command.
+     *
+     * @return int
      */
-    public function handle(TransactionCache $cache): int
+    public function handle(TransactionCache $cache)
     {
         collect([
             StatsPeriods::DAY,
