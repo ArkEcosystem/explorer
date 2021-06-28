@@ -24,6 +24,9 @@ final class InsightAllTimeFeesCollected extends Component
 
     private string $refreshInterval = '';
 
+    /** @phpstan-ignore-next-line */
+    protected $listeners = ['toggleDarkMode' => '$refresh'];
+
     public function mount(): void
     {
         $this->refreshInterval = (string) config('explorer.statistics.refreshInterval', '60');

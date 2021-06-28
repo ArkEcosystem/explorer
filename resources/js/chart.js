@@ -59,11 +59,6 @@ const CustomChart = (
             this.chart.update();
         },
 
-        toggleDarkMode() {
-            this.themeMode = this.themeMode === 'light' ? 'dark' : 'light';
-            this.updateChart();
-        },
-
         loadData() {
             const datasets = [];
 

@@ -9,6 +9,7 @@ use App\Http\Livewire\Concerns\AvailablePeriods;
 use App\Http\Livewire\Concerns\ChartNumberFormatters;
 use App\Http\Livewire\Concerns\StatisticsChart;
 use App\Services\Cache\TransactionCache;
+use App\Services\Settings;
 use Illuminate\View\View;
 use Livewire\Component;
 
@@ -23,6 +24,9 @@ final class InsightAllTimeTransactions extends Component
     public string $period = '';
 
     private string $refreshInterval = '';
+
+    /** @phpstan-ignore-next-line */
+    protected $listeners = ['toggleDarkMode' => '$refresh'];
 
     public function mount(): void
     {
