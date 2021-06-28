@@ -14,6 +14,7 @@ const CustomChart = (
         time: time,
         chart: null,
         currency: currency || "USD",
+        themeMode: theme.mode,
 
         getCanvas() {
             return this.$refs[id];
@@ -58,6 +59,11 @@ const CustomChart = (
             this.chart.update();
         },
 
+        toggleDarkMode() {
+            this.themeMode = this.themeMode === 'light' ? 'dark' : 'light';
+            this.updateChart();
+        },
+
         loadData() {
             const datasets = [];
 
@@ -72,7 +78,7 @@ const CustomChart = (
 
             values.forEach((value, key) => {
                 let themeName = value.type === "bar" ? "grey" : theme.name;
-                let graphic = getInfoFromThemeName(themeName, theme.mode);
+                let graphic = getInfoFromThemeName(themeName, this.themeMode);
                 let backgroundColor = graphic.backgroundColor;
                 if (backgroundColor.hasOwnProperty("gradient")) {
                     backgroundColor = makeGradient(
@@ -147,7 +153,6 @@ const CustomChart = (
             const fontConfig = this.getFontConfig();
 
             const data = {
-                type: "line",
                 labels: labels,
                 datasets: this.loadData(),
             };
