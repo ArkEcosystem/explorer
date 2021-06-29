@@ -9,7 +9,6 @@ use App\Facades\Network;
 use App\Http\Livewire\Concerns\AvailablePeriods;
 use App\Http\Livewire\Concerns\StatisticsChart;
 use App\Services\Cache\NetworkStatusBlockCache;
-use App\Services\Cache\PriceChartCache;
 use App\Services\MarketCap;
 use App\Services\NumberFormatter as ServiceNumberFormatter;
 use App\Services\Settings;
@@ -32,7 +31,7 @@ final class Chart extends Component
     /** @phpstan-ignore-next-line */
     protected $listeners = [
         'currencyChanged' => '$refresh',
-        'toggleDarkMode' => '$refresh',
+        'toggleDarkMode'  => '$refresh',
     ];
 
     public function mount(): void
