@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Artisan;
 use Livewire\Livewire;
 use function Tests\configureExplorerDatabase;
 
-beforeEach(function() {
+beforeEach(function () {
     configureExplorerDatabase();
 
     Carbon::setTestNow('2021-01-01 00:00:00');

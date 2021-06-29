@@ -13,7 +13,7 @@ trait StatisticsChart
     {
         return collect([
             'name' => $color,
-            'mode' => Settings::theme()
+            'mode' => Settings::theme(),
         ]);
     }
 
