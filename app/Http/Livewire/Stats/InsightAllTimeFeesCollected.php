@@ -19,8 +19,6 @@ final class InsightAllTimeFeesCollected extends Component
     use ChartNumberFormatters;
     use StatisticsChart;
 
-    private const CHART_COLOR = 'yellow';
-
     public string $period = '';
 
     private string $refreshInterval = '';
@@ -42,8 +40,8 @@ final class InsightAllTimeFeesCollected extends Component
             'feesTitle'                 => trans('pages.statistics.insights.fees'),
             'feesValue'                 => $this->asNumber($this->totalTransactionsPerPeriod(FeeCache::class, $this->period)).' '.Network::currency(),
             'feesTooltip'               => $this->asMoney($this->totalTransactionsPerPeriod(FeeCache::class, $this->period)),
-            'chartValues'               => $this->chartValues(FeeCache::class, $this->period),
-            'chartTheme'                => $this->chartTheme(),
+            'chartValues'               => $this->chartTotalTransactionsPerPeriod(FeeCache::class, $this->period),
+            'chartTheme'                => $this->chartTheme('yellow'),
             'options'                   => $this->availablePeriods(),
             'refreshInterval'           => $this->refreshInterval,
         ]);

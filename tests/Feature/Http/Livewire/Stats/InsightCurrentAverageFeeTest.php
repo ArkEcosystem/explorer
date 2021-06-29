@@ -6,12 +6,17 @@ use App\Enums\CoreTransactionTypeEnum;
 use App\Enums\TransactionTypeGroupEnum;
 use App\Http\Livewire\Stats\InsightCurrentAverageFee;
 use App\Models\Transaction;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Support\Facades\Artisan;
 use Livewire\Livewire;
 use function Tests\configureExplorerDatabase;
 
-beforeEach(fn () => configureExplorerDatabase());
+beforeEach(function() {
+    configureExplorerDatabase();
+
+    Carbon::setTestNow('2021-01-01 00:00:00');
+});
 
 it('should render the component', function () {
     Transaction::factory(5)

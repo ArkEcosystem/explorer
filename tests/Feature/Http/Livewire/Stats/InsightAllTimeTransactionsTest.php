@@ -5,11 +5,16 @@ declare(strict_types=1);
 use App\Http\Livewire\Stats\InsightAllTimeTransactions;
 use App\Models\Transaction;
 use App\Services\Timestamp;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Artisan;
 use Livewire\Livewire;
 use function Tests\configureExplorerDatabase;
 
-beforeEach(fn () => configureExplorerDatabase());
+beforeEach(function () {
+    configureExplorerDatabase();
+
+    Carbon::setTestNow('2021-01-01 00:00:00');
+});
 
 it('should render the component', function () {
     Transaction::factory(10)->create(['timestamp' => Timestamp::now()->unix()]);

@@ -9,14 +9,15 @@ use Illuminate\Support\Collection;
 
 trait StatisticsChart
 {
-    private function chartTheme(): Collection
+    private function chartTheme(string $color): Collection
     {
-        $mode = Settings::usesDarkTheme() ? 'dark' : 'light';
-
-        return collect(['name' => self::CHART_COLOR, 'mode' => $mode]);
+        return collect([
+            'name' => $color,
+            'mode' => Settings::theme()
+        ]);
     }
 
-    private function chartValues(string $cache, string $period): Collection
+    private function chartTotalTransactionsPerPeriod(string $cache, string $period): Collection
     {
         return $this->transactionsPerPeriod($cache, $period);
     }

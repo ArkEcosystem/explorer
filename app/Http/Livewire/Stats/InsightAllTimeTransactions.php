@@ -18,8 +18,6 @@ final class InsightAllTimeTransactions extends Component
     use ChartNumberFormatters;
     use StatisticsChart;
 
-    private const CHART_COLOR = 'black';
-
     public string $period = '';
 
     private string $refreshInterval = '';
@@ -40,8 +38,8 @@ final class InsightAllTimeTransactions extends Component
             'allTimeTransactionsValue' => $this->asNumber($this->totalTransactionsPerPeriod(TransactionCache::class, StatsPeriods::ALL)),
             'transactionsTitle'        => trans('pages.statistics.insights.transactions'),
             'transactionsValue'        => $this->asNumber($this->totalTransactionsPerPeriod(TransactionCache::class, $this->period)),
-            'chartValues'              => $this->chartValues(TransactionCache::class, $this->period),
-            'chartTheme'               => $this->chartTheme(),
+            'chartValues'              => $this->chartTotalTransactionsPerPeriod(TransactionCache::class, $this->period),
+            'chartTheme'               => $this->chartTheme('black'),
             'options'                  => $this->availablePeriods(),
             'refreshInterval'          => $this->refreshInterval,
         ]);
