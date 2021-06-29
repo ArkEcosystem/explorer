@@ -12,10 +12,7 @@ trait StatisticsChart
 {
     private function chartTheme(string $color): Collection
     {
-        return collect([
-            'name' => $color,
-            'mode' => Settings::theme(),
-        ]);
+        return collect(['name' => $color, 'mode' => Settings::theme()]);
     }
 
     private function chartHistoricalPrice(string $period): Collection

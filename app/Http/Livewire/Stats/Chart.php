@@ -32,7 +32,7 @@ final class Chart extends Component
     /** @phpstan-ignore-next-line */
     protected $listeners = [
         'currencyChanged' => '$refresh',
-        'toggleDarkMode'  => '$refresh',
+        'toggleDarkMode' => '$refresh',
     ];
 
     public function mount(): void
