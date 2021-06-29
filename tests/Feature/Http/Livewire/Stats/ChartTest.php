@@ -41,7 +41,7 @@ it('should render the component', function () {
         ->assertSee('1.275 BTC')
         ->assertSee(trans('pages.statistics.chart.max-price'))
         ->assertSee('2.469 BTC')
-        ->assertSee('[1.898]');
+        ->assertSee('[1.898,1.904,1.967,1.941,2.013,2.213,2.414,2.369,2.469,2.374,2.228,2.211,2.266,2.364,2.341,2.269,1.981,1.889,1.275,1.471,1.498,1.518,1.61,1.638]');
 });
 
 it('should not render the component', function () {
