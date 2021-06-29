@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Livewire\Stats;
 
 use App\Enums\StatsPeriods;
+use App\Facades\Network;
 use App\Http\Livewire\Concerns\AvailablePeriods;
 use App\Http\Livewire\Concerns\ChartNumberFormatters;
 use App\Http\Livewire\Concerns\StatisticsChart;
@@ -39,7 +40,8 @@ final class InsightAllTimeFeesCollected extends Component
             'allTimeFeesCollectedTitle' => trans('pages.statistics.insights.all-time-fees-collected'),
             'allTimeFeesCollectedValue' => $this->asMoney($this->totalTransactionsPerPeriod(FeeCache::class, StatsPeriods::ALL)),
             'feesTitle'                 => trans('pages.statistics.insights.fees'),
-            'feesValue'                 => $this->asMoney($this->totalTransactionsPerPeriod(FeeCache::class, $this->period)),
+            'feesValue'                 => $this->asNumber($this->totalTransactionsPerPeriod(FeeCache::class, $this->period)).' '.Network::currency(),
+            'feesTooltip'               => $this->asMoney($this->totalTransactionsPerPeriod(FeeCache::class, $this->period)),
             'chartValues'               => $this->chartValues(FeeCache::class, $this->period),
             'chartTheme'                => $this->chartTheme(),
             'options'                   => $this->availablePeriods(),

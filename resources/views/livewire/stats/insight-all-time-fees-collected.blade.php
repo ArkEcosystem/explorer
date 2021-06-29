@@ -5,6 +5,7 @@
         :mainValue="$allTimeFeesCollectedValue"
         :secondaryTitle="$feesTitle"
         :secondaryValue="$feesValue"
+        :secondaryTooltip="$feesTooltip"
         :chart="$chartValues"
         :chart-theme="$chartTheme"
         :options="$options"

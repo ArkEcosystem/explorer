@@ -4,6 +4,7 @@
     'mainValue',
     'secondaryTitle',
     'secondaryValue',
+    'secondaryTooltip' => null,
     'tertiaryTitle' => null,
     'tertiaryValue' => null,
     'chart' => null,
@@ -40,7 +41,14 @@
                 :options="$options"
             />
             <h3 class="mt-4 mb-0 text-sm font-semibold leading-none text-theme-secondary-500 dark:text-theme-secondary-700">{{ $secondaryTitle }}</h3>
-            <p class="mt-2 text-base font-semibold text-theme-secondary-700 dark:text-theme-secondary-200">{{ $secondaryValue }}</p>
+            <p class="mt-2 text-base font-semibold text-theme-secondary-700 dark:text-theme-secondary-200"
+               @if($secondaryTooltip)
+               data-tippy-content="{{ $secondaryTooltip }}"
+               wire:key="{{ md5($secondaryTooltip) }}"
+               @endif
+            >
+                {{ $secondaryValue }}
+            </p>
         </div>
 
         @if($chart)
