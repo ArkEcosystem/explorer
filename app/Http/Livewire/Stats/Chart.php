@@ -7,6 +7,7 @@ namespace App\Http\Livewire\Stats;
 use App\Enums\CryptoCurrencies;
 use App\Facades\Network;
 use App\Http\Livewire\Concerns\AvailablePeriods;
+use App\Http\Livewire\Concerns\StatisticsChart;
 use App\Services\Cache\NetworkStatusBlockCache;
 use App\Services\Cache\PriceChartCache;
 use App\Services\MarketCap;
@@ -20,6 +21,7 @@ use Livewire\Component;
 final class Chart extends Component
 {
     use AvailablePeriods;
+    use StatisticsChart;
 
     public bool $show = true;
 
@@ -50,8 +52,8 @@ final class Chart extends Component
             'marketCapValue'      => $this->marketCap(),
             'minPriceValue'       => $this->minPrice(),
             'maxPriceValue'       => $this->maxPrice(),
-            'chart'               => $this->chart($this->period),
-            'chartTheme'          => $this->chartTheme(),
+            'chart'               => $this->chartHistoricalPrice($this->period),
+            'chartTheme'          => $this->chartTheme($this->mainValueVariation() === 'up' ? 'green' : 'red'),
             'options'             => $this->availablePeriods(),
             'refreshInterval'     => $this->refreshInterval,
         ]);
@@ -131,18 +133,5 @@ final class Chart extends Component
     private function getHistoricalHourly(string $target): Collection
     {
         return (new NetworkStatusBlockCache())->getHistoricalHourly(Network::currency(), $target) ?? collect();
-    }
-
-    private function chart(string $period): Collection
-    {
-        return collect((new PriceChartCache())->getHistorical(Settings::currency(), $period));
-    }
-
-    public function chartTheme(): Collection
-    {
-        $mode  = Settings::usesDarkTheme() ? 'dark' : 'light';
-        $color = $this->mainValueVariation() === 'up' ? 'green' : 'red';
-
-        return collect(['name' => $color, 'mode' => $mode]);
     }
 }
