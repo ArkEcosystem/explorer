@@ -26,7 +26,7 @@ final class InsightCurrentAverageFee extends Component
 
     public function render(): View
     {
-        $transactionOptions = collect(Forms::getTransactionOptions())->except('all')->toArray();
+        $transactionOptions = collect(Forms::getTransactionOptions())->except(['all', 'timelockClaim', 'timelockRefund'])->toArray();
 
         return view('livewire.stats.insight-current-average-fee', [
             'currentAverageFeeTitle' => trans('pages.statistics.insights.current-average-fee', [
