@@ -11,163 +11,148 @@ function themes() {
         black: {
             dark: {
                 ..._default,
-                borderColor: "#eef3f5",
-                pointHoverBorderColor: "#eef3f5",
+                borderColor: "rgba(238,243,245,1)", // theme-secondary-200
+                pointHoverBorderColor: "rgba(238,243,245,1)", // theme-secondary-200
                 backgroundColor: {
                     gradient: [
-                        { stop: 0, alpha: 0.5, value: "#eef3f5" },
-                        { stop: 1, alpha: 0, value: "#eef3f5" },
+                        { stop: 0, value: "rgba(238,243,245,0.5)" }, // theme-secondary-200
+                        { stop: 1, value: "rgba(238,243,245,0)" }, // theme-secondary-200
                     ],
                 },
-                pointBackgroundColor: "#212225",
-                pointHoverBackgroundColor: "#212225",
+                pointBackgroundColor: "rgba(33,34,37,1)", // theme-secondary-900
+                pointHoverBackgroundColor: "rgba(33,34,37,1)", // theme-secondary-900
             },
             light: {
                 ..._default,
-                borderColor: "#212225",
-                pointHoverBorderColor: "#212225",
+                borderColor: "rgba(33,34,37,1)", // theme-secondary-900
+                pointHoverBorderColor: "rgba(33,34,37,1)", // theme-secondary-900
                 backgroundColor: {
                     gradient: [
-                        { stop: 0, alpha: 10.5, value: "#212225" },
-                        { stop: 1, alpha: 0, value: "#212225" },
+                        { stop: 0, value: "rgba(33,34,37,0.5)" }, // theme-secondary-900
+                        { stop: 1, value: "rgba(33,34,37,0)" }, // theme-secondary-900
                     ],
                 },
-                pointBackgroundColor: "#ffffff",
-                pointHoverBackgroundColor: "#ffffff",
+                pointBackgroundColor: "rgba(255,255,255,1)", // theme-white
+                pointHoverBackgroundColor: "rgba(255,255,255,1)", // theme-white
             },
         },
 
         grey: {
             dark: {
                 ..._default,
-                borderColor: "#7e8a9c",
-                pointHoverBorderColor: "#7e8a9c",
+                borderColor: "rgba(126,138,156,1)", // theme-secondary-600
+                pointHoverBorderColor: "rgba(126,138,156,1)", // theme-secondary-600
                 backgroundColor: {
                     gradient: [
-                        { stop: 0, alpha: 1, value: "#7e8a9c" },
-                        { stop: 1, alpha: 0, value: "#7e8a9c" },
+                        { stop: 0, value: "rgba(126,138,156,1)" }, // theme-secondary-600
+                        { stop: 1, value: "rgba(126,138,156,0)" }, // theme-secondary-600
                     ],
                 },
-                pointBackgroundColor: "#212225",
-                pointHoverBackgroundColor: "#212225",
+                pointBackgroundColor: "rgba(33,34,37,1)", // theme-secondary-900
+                pointHoverBackgroundColor: "rgba(33,34,37,1)", // theme-secondary-900
             },
             light: {
                 ..._default,
-                borderColor: "#c4c8cf",
-                pointHoverBorderColor: "#c4c8cf",
+                borderColor: "rgba(196,200,207,1)", // theme-secondary-400
+                pointHoverBorderColor: "rgba(196,200,207,1)", // theme-secondary-400
                 backgroundColor: {
                     gradient: [
-                        { stop: 0, alpha: 1, value: "#c4c8cf" },
-                        { stop: 1, alpha: 0, value: "#c4c8cf" },
+                        { stop: 0, value: "rgba(196,200,207,1)" }, // theme-secondary-400
+                        { stop: 1, value: "rgba(196,200,207,0)" }, // theme-secondary-400
                     ],
                 },
-                pointBackgroundColor: "#ffffff",
-                pointHoverBackgroundColor: "#ffffff",
+                pointBackgroundColor: "rgba(255,255,255,1)", // theme-white
+                pointHoverBackgroundColor: "rgba(255,255,255,1)", // theme-white
             },
         },
 
         yellow: {
             dark: {
                 ..._default,
-                borderColor: "#ffae10",
-                pointHoverBorderColor: "#ffae10",
+                borderColor: "rgba(255,174,16,1)", // theme-warning-500
+                pointHoverBorderColor: "rgba(255,174,16,1)", // theme-warning-500
                 backgroundColor: {
                     gradient: [
-                        { stop: 0, alpha: 0.5, value: "#ffae10" },
-                        { stop: 1, alpha: 0, value: "#ffae10" },
+                        { stop: 0, value: "rgba(255,174,16,0.5)" }, // theme-warning-500
+                        { stop: 1, value: "rgba(255,174,16,0)" }, // theme-warning-500
                     ],
                 },
-                pointBackgroundColor: "#212225",
-                pointHoverBackgroundColor: "#212225",
+                pointBackgroundColor: "rgba(33,34,37,1)", // theme-secondary-900
+                pointHoverBackgroundColor: "rgba(33,34,37,1)", // theme-secondary-900
             },
             light: {
                 ..._default,
-                borderColor: "#ffae10",
-                pointHoverBorderColor: "#ffae10",
+                borderColor: "rgba(255,174,16,1)", // theme-warning-500
+                pointHoverBorderColor: "rgba(255,174,16,1)", // theme-warning-500
                 backgroundColor: {
                     gradient: [
-                        { stop: 0, alpha: 0.5, value: "#ffae10" },
-                        { stop: 1, alpha: 0, value: "#ffae10" },
+                        { stop: 0, value: "rgba(255,174,16,0.5)" }, // theme-warning-500
+                        { stop: 1, value: "rgba(255,174,16,0)" }, // theme-warning-500
                     ],
                 },
-                pointBackgroundColor: "#ffffff",
-                pointHoverBackgroundColor: "#ffffff",
+                pointBackgroundColor: "rgba(255,255,255,1)", // theme-white
+                pointHoverBackgroundColor: "rgba(255,255,255,1)", // theme-white
             },
         },
 
         green: {
             dark: {
                 ..._default,
-                borderColor: "#289548",
-                pointHoverBorderColor: "#289548",
+                borderColor: "rgba(40,149,72,1)", // theme-success-600
+                pointHoverBorderColor: "rgba(40,149,72,1)", // theme-success-600
                 backgroundColor: {
                     gradient: [
-                        { stop: 0, alpha: 0.5, value: "#289548" },
-                        { stop: 1, alpha: 0, value: "#289548" },
+                        { stop: 0, value: "rgba(40,149,72,0.5)" }, // theme-success-600
+                        { stop: 1, value: "rgba(40,149,72,0)" }, // theme-success-600
                     ],
                 },
-                pointBackgroundColor: "#212225",
-                pointHoverBackgroundColor: "#212225",
+                pointBackgroundColor: "rgba(33,34,37,1)", // theme-secondary-900
+                pointHoverBackgroundColor: "rgba(33,34,37,1)", // theme-secondary-900
             },
             light: {
                 ..._default,
-                borderColor: "#289548",
-                pointHoverBorderColor: "#289548",
+                borderColor: "rgba(40,149,72,1)", // theme-success-600
+                pointHoverBorderColor: "rgba(40,149,72,1)", // theme-success-600
                 backgroundColor: {
                     gradient: [
-                        { stop: 0, alpha: 0.5, value: "#289548" },
-                        { stop: 1, alpha: 0, value: "#289548" },
+                        { stop: 0, value: "rgba(40,149,72,0.5)" }, // theme-success-600
+                        { stop: 1, value: "rgba(40,149,72,0)" }, // theme-success-600
                     ],
                 },
-                pointBackgroundColor: "#ffffff",
-                pointHoverBackgroundColor: "#ffffff",
+                pointBackgroundColor: "rgba(255,255,255,1)", // theme-white
+                pointHoverBackgroundColor: "rgba(255,255,255,1)", // theme-white
             },
         },
 
         red: {
             dark: {
                 ..._default,
-                borderColor: "#de5846",
-                pointHoverBorderColor: "#de5846",
+                borderColor: "rgba(222,88,70,1)", // theme-danger-400
+                pointHoverBorderColor: "rgba(222,88,70,1)", // theme-danger-400
                 backgroundColor: {
                     gradient: [
-                        { stop: 0, alpha: 0.5, value: "#de5846" },
-                        { stop: 1, alpha: 0, value: "#de5846" },
+                        { stop: 0, value: "rgba(222,88,70,0.5)" }, // theme-danger-400
+                        { stop: 1, value: "rgba(222,88,70,0)" }, // theme-danger-400
                     ],
                 },
-                pointBackgroundColor: "#212225",
-                pointHoverBackgroundColor: "#212225",
+                pointBackgroundColor: "rgba(33,34,37,1)", // theme-secondary-900
+                pointHoverBackgroundColor: "rgba(33,34,37,1)", // theme-secondary-900
             },
             light: {
                 ..._default,
-                borderColor: "#de5846",
-                pointHoverBorderColor: "#de5846",
+                borderColor: "rgba(222,88,70,1)", // theme-danger-400
+                pointHoverBorderColor: "rgba(222,88,70,1)", // theme-danger-400
                 backgroundColor: {
                     gradient: [
-                        { stop: 0, alpha: 0.5, value: "#de5846" },
-                        { stop: 1, alpha: 0, value: "#de5846" },
+                        { stop: 0, value: "rgba(222,88,70,0.5)" }, // theme-danger-400
+                        { stop: 1, value: "rgba(222,88,70,0)" }, // theme-danger-400
                     ],
                 },
-                pointBackgroundColor: "#ffffff",
-                pointHoverBackgroundColor: "#ffffff",
+                pointBackgroundColor: "rgba(255,255,255,1)", // theme-white
+                pointHoverBackgroundColor: "rgba(255,255,255,1)", // theme-white
             },
         },
     };
-}
-
-export function hexToRgb(hex) {
-    const re = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
-
-    hex = hex.replace(re, (m, r, g, b) => r + r + g + g + b + b);
-    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-
-    return result
-        ? {
-              r: parseInt(result[1], 16),
-              g: parseInt(result[2], 16),
-              b: parseInt(result[3], 16),
-          }
-        : null;
 }
 
 export function makeGradient(canvas, options) {
@@ -175,13 +160,8 @@ export function makeGradient(canvas, options) {
     const height = canvas.parentElement.clientHeight / 1.3;
     const gradient = ctx.createLinearGradient(0, 0, 0, height);
 
-    options.forEach((item) => {
-        const color = hexToRgb(item.value);
-
-        gradient.addColorStop(
-            item.stop,
-            `rgba(${color.r}, ${color.g}, ${color.b}, ${item.alpha})`
-        );
+    options.forEach((color) => {
+        gradient.addColorStop(color.stop, color.value);
     });
 
     return gradient;
@@ -203,21 +183,21 @@ export function getFontConfig(type, mode) {
         axis: {
             light: {
                 ..._default.axis,
-                fontColor: "#A5ADB9",
+                fontColor: "rgba(165,173,185,1)", // theme-secondary-500
             },
             dark: {
                 ..._default.axis,
-                fontColor: "#637282",
+                fontColor: "rgba(99,114,130,1)", // theme-secondary-700
             },
         },
         tooltip: {
             light: {
-                fontColor: "#637282",
-                backgroundColor: "#ffffff",
+                fontColor: "rgba(99,114,130,1)", // theme-secondary-700
+                backgroundColor: "rgba(255,255,255,1)", // theme-white
             },
             dark: {
-                fontColor: "#A5ADB9",
-                backgroundColor: "#212225",
+                fontColor: "rgba(165,173,185,1)", // theme-secondary-500
+                backgroundColor: "rgba(33,34,37,1)", // theme-secondary-900
             },
         },
     };
@@ -229,18 +209,18 @@ export function getAxisThemeConfig(mode) {
     const config = {
         light: {
             x: {
-                color: "#eef3f5",
+                color: "rgba(238,243,245,1)", // theme-secondary-200
             },
             y: {
-                color: "#eef3f5",
+                color: "rgba(238,243,245,1)", // theme-secondary-200
             },
         },
         dark: {
             x: {
-                color: "#3c4249",
+                color: "rgba(60,66,73,1)", // theme-secondary-800
             },
             y: {
-                color: "#3c4249",
+                color: "rgba(60,66,73,1)", // theme-secondary-800
             },
         },
     };

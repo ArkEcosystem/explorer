@@ -128,7 +128,7 @@ const CustomChart = (
             values.forEach((value, key) => {
                 let range = this.getRangeFromValues(value, 0.01);
                 axes.push({
-                    display: grid === "true" && key === 0,
+                    display: grid && key === 0,
                     type: "linear",
                     position: "right",
                     ticks: {
@@ -157,7 +157,6 @@ const CustomChart = (
             window.addEventListener("resize", () => this.resizeChart());
 
             const data = {
-                type: "line",
                 labels: labels,
                 datasets: this.loadData(),
             };
@@ -170,7 +169,7 @@ const CustomChart = (
                 normalized: true,
                 responsive: true,
                 maintainAspectRatio: false,
-                showScale: grid === "true",
+                showScale: grid,
                 animation: { duration: 300, easing: "easeOutQuad" },
                 legend: { display: false },
                 onResize: () => this.resizeChart(),
@@ -188,7 +187,7 @@ const CustomChart = (
                     axis: "x",
                 },
                 tooltips: {
-                    enabled: tooltips === "true",
+                    enabled: tooltips,
                     mode: "nearest",
                     intersect: false,
                     axis: "x",
@@ -208,7 +207,7 @@ const CustomChart = (
                 scales: {
                     xAxes: [
                         {
-                            display: grid === "true",
+                            display: grid,
                             type: "category",
                             labels: labels,
                             ticks: {

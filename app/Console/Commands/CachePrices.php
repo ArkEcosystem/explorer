@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
+use App\Enums\StatsPeriods;
 use App\Facades\Network;
 use App\Services\Cache\CryptoCompareCache;
 use App\Services\Cache\PriceChartCache;
@@ -40,8 +41,15 @@ final class CachePrices extends Command
             $prices   = CryptoCompare::historical(Network::currency(), $currency);
             $hourlyPrices   = CryptoCompare::historicalHourly(Network::currency(), $currency);
 
-            collect(['day', 'week', 'month', 'quarter', 'year', 'all'])->each(function ($period) use ($currency, $crypto, $cache, $prices, $hourlyPrices): void {
-                if ($period === 'day') {
+            collect([
+                StatsPeriods::DAY,
+                StatsPeriods::WEEK,
+                StatsPeriods::MONTH,
+                StatsPeriods::QUARTER,
+                StatsPeriods::YEAR,
+                StatsPeriods::ALL,
+            ])->each(function ($period) use ($currency, $crypto, $cache, $prices, $hourlyPrices): void {
+                if ($period === StatsPeriods::DAY) {
                     $prices = $hourlyPrices;
                 }
 
@@ -55,7 +63,7 @@ final class CachePrices extends Command
 
     private function getDay(Collection $datasets): Collection
     {
-        return $this->groupByDate($datasets->take(1), 'H:s');
+        return $this->groupByDate($datasets->take(24), 'H:s');
     }
 
     private function getWeek(Collection $datasets): Collection
