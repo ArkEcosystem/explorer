@@ -31,4 +31,6 @@ it('should execute the command', function () {
         expect($cache->getAverage($period))->toBeFloat();
         expect($cache->getMaximum($period))->toBeFloat();
     }
+
+    expect($cache->all('day'))->toHaveKeys(['historical', 'min', 'avg', 'max']);
 });
