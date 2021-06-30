@@ -14,7 +14,7 @@
     'selected',
 ])
 
-<x-general.card with-border class="flex flex-col gap-6 ">
+<x-general.card with-border class="flex flex-col gap-6">
     <div class="xl:w-full">
         <h2 class="mb-0 text-sm font-semibold leading-none text-theme-secondary-900 dark:text-theme-secondary-200">{{ $mainTitle }}</h2>
         <p class="mt-3 text-lg font-bold sm:text-2xl text-theme-secondary-900 dark:text-theme-secondary-200">{{ $mainValue }}</p>
@@ -45,7 +45,7 @@
             </div>
 
             @if($chart)
-                <div class="max-w-xs w-full xl:w-1/3">
+                <div class="w-full max-w-xs xl:w-1/3">
                     <x-chart
                         class="w-full h-auto"
                         id="stats-insight-{{ $id }}"
