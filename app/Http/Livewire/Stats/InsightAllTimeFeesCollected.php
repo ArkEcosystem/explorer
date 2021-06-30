@@ -38,12 +38,28 @@ final class InsightAllTimeFeesCollected extends Component
             'allTimeFeesCollectedTitle' => trans('pages.statistics.insights.all-time-fees-collected'),
             'allTimeFeesCollectedValue' => $this->asMoney($this->totalTransactionsPerPeriod(FeeCache::class, StatsPeriods::ALL)),
             'feesTitle'                 => trans('pages.statistics.insights.fees'),
-            'feesValue'                 => $this->asNumber($this->totalTransactionsPerPeriod(FeeCache::class, $this->period)).' '.Network::currency(),
-            'feesTooltip'               => $this->asMoney($this->totalTransactionsPerPeriod(FeeCache::class, $this->period)),
+            'feesValue'                 => $this->truncate(),
+            'feesTooltip'               => $this->tooltip(),
             'chartValues'               => $this->chartTotalTransactionsPerPeriod(FeeCache::class, $this->period),
             'chartTheme'                => $this->chartTheme('yellow'),
             'options'                   => $this->availablePeriods(),
             'refreshInterval'           => $this->refreshInterval,
         ]);
+    }
+
+    private function tooltip(): ?string
+    {
+        $number =$this->totalTransactionsPerPeriod(FeeCache::class, $this->period);
+
+        return $number < 10000 ? null : $this->asMoney($number);
+    }
+
+    private function truncate(): string
+    {
+        $number = $this->totalTransactionsPerPeriod(FeeCache::class, $this->period);
+
+        return $number > 10000
+            ? sprintf('%s %s', $this->asNumber($number), Network::currency())
+            : $this->asMoney($number);
     }
 }
