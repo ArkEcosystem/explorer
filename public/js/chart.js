@@ -1,21 +1,5 @@
-import {
-    getInfoFromThemeName,
-    makeGradient,
-    getFontConfig,
-    getAxisThemeConfig,
-} from "./chart-theme";
+import { getInfoFromThemeName, makeGradient } from "./chart-theme";
 
-/**
- * @param {String} id
- * @param {Array} values
- * @param {Array} labels
- * @param {Boolean} grid
- * @param {Boolean} tooltips
- * @param {Array<Object{name, mode}>} theme
- * @param {Number} time
- * @param {String} currency
- * @return {Object}
- */
 const CustomChart = (
     id,
     values,
@@ -30,6 +14,7 @@ const CustomChart = (
         time: time,
         chart: null,
         currency: currency || "USD",
+        themeMode: theme.mode,
 
         getCanvas() {
             return this.$refs[id];
@@ -37,6 +22,14 @@ const CustomChart = (
 
         getCanvasContext() {
             return this.getCanvas().getContext("2d");
+        },
+
+        getFontConfig() {
+            return {
+                fontSize: 14,
+                fontStyle: 600,
+                fontColor: "#B0B0B8",
+            };
         },
 
         getRangeFromValues(values, margin = 0) {
@@ -63,7 +56,6 @@ const CustomChart = (
 
         updateChart() {
             this.chart.datasets = this.loadData();
-            this.chart.labels = labels;
             this.chart.update();
         },
 
@@ -81,7 +73,7 @@ const CustomChart = (
 
             values.forEach((value, key) => {
                 let themeName = value.type === "bar" ? "grey" : theme.name;
-                let graphic = getInfoFromThemeName(themeName, theme.mode);
+                let graphic = getInfoFromThemeName(themeName, this.themeMode);
                 let backgroundColor = graphic.backgroundColor;
                 if (backgroundColor.hasOwnProperty("gradient")) {
                     backgroundColor = makeGradient(
@@ -92,7 +84,7 @@ const CustomChart = (
 
                 datasets.push({
                     stack: "combined",
-                    label: value.name || "default",
+                    label: value.name || "",
                     data: value.data || value,
                     type: value.type || "line",
                     backgroundColor:
@@ -107,15 +99,8 @@ const CustomChart = (
                         value.type === "bar"
                             ? "transparent"
                             : graphic.borderWidth,
-                    cubicInterpolationMode: "monotone",
-                    tension: graphic.lineTension,
+                    lineTension: graphic.lineTension,
                     pointRadius: graphic.pointRadius,
-                    pointBackgroundColor: graphic.pointBackgroundColor,
-                    pointHoverRadius: graphic.pointHoverRadius,
-                    pointHoverBorderWidth: graphic.pointHoverBorderWidth,
-                    pointHoverBorderColor: graphic.borderColor,
-                    pointHoverBackgroundColor:
-                        graphic.pointHoverBackgroundColor,
                 });
             });
 
@@ -125,22 +110,26 @@ const CustomChart = (
         loadYAxes() {
             const axes = [];
 
+            const fontConfig = this.getFontConfig();
+
             values.forEach((value, key) => {
                 let range = this.getRangeFromValues(value, 0.01);
+
                 axes.push({
-                    display: grid && key === 0,
                     type: "linear",
                     position: "right",
+                    stacked: true,
                     ticks: {
-                        ...getFontConfig("axis", theme.mode),
+                        ...fontConfig,
                         padding: 15,
+                        display: grid === "true" && key === 0,
                         suggestedMax: range.max,
                         callback: (value, index, data) =>
                             this.getCurrencyValue(value),
                     },
                     gridLines: {
+                        display: grid === "true" && key === 0,
                         drawBorder: false,
-                        color: getAxisThemeConfig(theme.mode).y.color,
                     },
                 });
             });
@@ -156,6 +145,8 @@ const CustomChart = (
             this.$watch("time", () => this.updateChart());
             window.addEventListener("resize", () => this.resizeChart());
 
+            const fontConfig = this.getFontConfig();
+
             const data = {
                 labels: labels,
                 datasets: this.loadData(),
@@ -164,12 +155,11 @@ const CustomChart = (
             const yAxes = this.loadYAxes();
 
             const options = {
-                spanGaps: true,
                 parsing: false,
                 normalized: true,
                 responsive: true,
                 maintainAspectRatio: false,
-                showScale: grid,
+                showScale: grid === "true",
                 animation: { duration: 300, easing: "easeOutQuad" },
                 legend: { display: false },
                 onResize: () => this.resizeChart(),
@@ -181,42 +171,20 @@ const CustomChart = (
                         bottom: 0,
                     },
                 },
-                hover: {
-                    mode: "nearest",
-                    intersect: false,
-                    axis: "x",
-                },
-                tooltips: {
-                    enabled: tooltips,
-                    mode: "nearest",
-                    intersect: false,
-                    axis: "x",
-                    external: this.tooltip,
-                    displayColors: false,
-                    stacked: false,
-                    callbacks: {
-                        title: (items) => {},
-                        label: (context) =>
-                            this.getCurrencyValue(context.value),
-                        labelTextColor: (context) =>
-                            getFontConfig("tooltip", theme.mode).fontColor,
-                    },
-                    backgroundColor: getFontConfig("tooltip", theme.mode)
-                        .backgroundColor,
-                },
                 scales: {
                     xAxes: [
                         {
-                            display: grid,
                             type: "category",
                             labels: labels,
                             ticks: {
+                                display: grid === "true",
+                                includeBounds: true,
                                 padding: 10,
-                                ...getFontConfig("axis", theme.mode),
+                                ...fontConfig,
                             },
                             gridLines: {
+                                display: grid === "true",
                                 drawBorder: false,
-                                color: getAxisThemeConfig(theme.mode).x.color,
                             },
                         },
                     ],

@@ -19,4 +19,21 @@ trait StatisticsChart
     {
         return collect((new PriceChartCache())->getHistorical(Settings::currency(), $period));
     }
+
+    private function chartTotalTransactionsPerPeriod(string $cache, string $period): Collection
+    {
+        return $this->transactionsPerPeriod($cache, $period);
+    }
+
+    private function totalTransactionsPerPeriod(string $cache, string $period): int | float
+    {
+        $datasets = $this->transactionsPerPeriod($cache, $period)->get('datasets');
+
+        return collect($datasets)->sum();
+    }
+
+    private function transactionsPerPeriod(string $cache, string $period): Collection
+    {
+        return collect((new $cache())->getHistorical($period));
+    }
 }

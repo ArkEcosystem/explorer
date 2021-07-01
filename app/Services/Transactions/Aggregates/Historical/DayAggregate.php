@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Services\Transactions\Aggregates\Fees\Historical;
+namespace App\Services\Transactions\Aggregates\Historical;
 
 use App\Services\Transactions\Aggregates\Concerns\HasPlaceholders;
 use App\Services\Transactions\Aggregates\Concerns\HasQueries;
@@ -11,8 +11,8 @@ use Illuminate\Support\Collection;
 
 final class DayAggregate
 {
-    use HasPlaceholders;
     use HasQueries;
+    use HasPlaceholders;
 
     public function aggregate(): Collection
     {
