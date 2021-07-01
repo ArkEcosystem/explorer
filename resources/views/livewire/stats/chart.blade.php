@@ -1,5 +1,5 @@
 @if($show)
-    <div wire:poll.{{ $refreshInterval }}s>
+    <div class="mt-5" wire:poll.{{ $refreshInterval }}s>
         <x-general.card with-border class="flex flex-col lg:flex-row lg:flex-wrap lg:items-end">
 
             <div>
