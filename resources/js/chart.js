@@ -104,9 +104,13 @@ const CustomChart = (
                     pointRadius: graphic.pointRadius,
                     pointBackgroundColor: graphic.pointBackgroundColor,
                     pointHoverRadius: tooltips ? graphic.pointHoverRadius : 0,
-                    pointHoverBorderWidth: tooltips ? graphic.pointHoverBorderWidth : 0,
+                    pointHoverBorderWidth: tooltips
+                        ? graphic.pointHoverBorderWidth
+                        : 0,
                     pointHoverBorderColor: tooltips ? graphic.borderColor : 0,
-                    pointHoverBackgroundColor: tooltips ? graphic.pointHoverBackgroundColor : 0,
+                    pointHoverBackgroundColor: tooltips
+                        ? graphic.pointHoverBackgroundColor
+                        : 0,
                 });
             });
 
