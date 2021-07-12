@@ -79,7 +79,7 @@ it('should get the last blocks from the last 2 rounds and beyond', function () {
 });
 
 it('should correctly show the block is missed', function () {
-    $wallets = Wallet::factory(51)->create()->each(function ($wallet) use (&$height) {
+    $wallets = Wallet::factory(51)->create()->each(function ($wallet) {
         Round::factory()->create([
             'round'      => '1',
             'public_key' => $wallet->public_key,
