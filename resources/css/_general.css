@@ -169,6 +169,7 @@ body {
     }
 }
 
+/* purgecss start ignore */
 ::-webkit-scrollbar {
     @apply bg-transparent;
     width: 6px;
@@ -193,8 +194,9 @@ body {
     @apply bg-theme-primary-200;
 }
 
-/* set button(top and bottom of the scrollbar) */
+
 ::-webkit-scrollbar-button {display:none}
+/* purgecss end ignore */
 
 /* Dropdowns Scrolling */
 .dropdown-scrolling::-webkit-scrollbar {
