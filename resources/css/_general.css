@@ -170,7 +170,7 @@ body {
 }
 
 ::-webkit-scrollbar {
-    @apply bg-transparent;
+    @apply bg-transparent rounded-lg;
     width: 6px;
     height: 6px;
 }
@@ -185,7 +185,7 @@ body {
 
 /* scrollbar itself */
 ::-webkit-scrollbar-thumb {
-    @apply bg-theme-primary-100;
+    @apply rounded-lg bg-theme-primary-100;
     border-radius: 16px;
 }
 
