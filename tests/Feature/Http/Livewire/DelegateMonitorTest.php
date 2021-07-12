@@ -98,7 +98,7 @@ it('should correctly show the block is missed', function () {
         $height++;
     });
 
-    $delegateProperty = new ReflectionProperty(DelegateMonitor::class, "delegates");
+    $delegateProperty = new ReflectionProperty(DelegateMonitor::class, 'delegates');
     $delegateProperty->setAccessible(true);
 
     $instance = Livewire::test(DelegateMonitor::class)
