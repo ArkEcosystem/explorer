@@ -79,27 +79,16 @@ it('should get the last blocks from the last 2 rounds and beyond', function () {
 });
 
 it('should correctly show the block is missed', function () {
-    $height = 1;
     $wallets = Wallet::factory(51)->create()->each(function ($wallet) use (&$height) {
         Round::factory()->create([
             'round'      => '1',
             'public_key' => $wallet->public_key,
         ]);
-        Round::factory()->create([
-            'round'      => '2',
-            'public_key' => $wallet->public_key,
-        ]);
-
-        Block::factory()->create([
-            'height'               => $height,
-            'generator_public_key' => $wallet->public_key,
-        ]);
 
         (new WalletCache())->setDelegate($wallet->public_key, $wallet);
-
-        $height++;
     });
 
+    $height = 1;
     $wallets->take(5)->each(function ($wallet) use (&$height) {
         Block::factory()->create([
             'height'               => $height,
@@ -124,7 +113,7 @@ it('should correctly show the block is missed', function () {
     $missedDelegates = $delegates->splice(0, 5);
 
     // dd($delegates->pluck('status'));
-    dd($delegates, $forgedDelegates, $missedDelegates);
+    // dd($delegates, $forgedDelegates, $missedDelegates);
 
     $forgedDelegates->each(fn ($delegate) => expect($delegate->hasForged())->toBeTrue());
     $missedDelegates->each(fn ($delegate) => expect($delegate->justMissed())->toBeTrue());
