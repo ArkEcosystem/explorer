@@ -69,8 +69,7 @@ it('should get the last blocks from the last 2 rounds and beyond', function () {
 
     $wallets->first()->blocks()->delete();
 
-    $component = Livewire::test(DelegateMonitor::class);
-    $component->call('pollDelegates');
+    Livewire::test(DelegateMonitor::class)->call('pollDelegates');
 
     expect((new WalletCache())->getLastBlock($wallets->first()->public_key))->toBe([]);
 
