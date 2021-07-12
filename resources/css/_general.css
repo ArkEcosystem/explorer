@@ -186,7 +186,7 @@ body {
 /* scrollbar itself */
 ::-webkit-scrollbar-thumb {
     @apply bg-theme-primary-100;
-    border-radius:16px;
+    border-radius: 16px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -194,7 +194,9 @@ body {
 }
 
 /* set button(top and bottom of the scrollbar) */
-::-webkit-scrollbar-button {display:none}
+::-webkit-scrollbar-button {
+    display: none;
+}
 
 /* Dropdowns Scrolling */
 .dropdown-scrolling::-webkit-scrollbar {
