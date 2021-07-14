@@ -111,11 +111,14 @@ const CustomChart = (
                     tension: graphic.lineTension,
                     pointRadius: graphic.pointRadius,
                     pointBackgroundColor: graphic.pointBackgroundColor,
-                    pointHoverRadius: graphic.pointHoverRadius,
-                    pointHoverBorderWidth: graphic.pointHoverBorderWidth,
-                    pointHoverBorderColor: graphic.borderColor,
-                    pointHoverBackgroundColor:
-                        graphic.pointHoverBackgroundColor,
+                    pointHoverRadius: tooltips ? graphic.pointHoverRadius : 0,
+                    pointHoverBorderWidth: tooltips
+                        ? graphic.pointHoverBorderWidth
+                        : 0,
+                    pointHoverBorderColor: tooltips ? graphic.borderColor : 0,
+                    pointHoverBackgroundColor: tooltips
+                        ? graphic.pointHoverBackgroundColor
+                        : 0,
                 });
             });
 
@@ -134,11 +137,13 @@ const CustomChart = (
                     ticks: {
                         ...getFontConfig("axis", theme.mode),
                         padding: 15,
+                        display: grid && key === 0,
                         suggestedMax: range.max,
                         callback: (value, index, data) =>
                             this.getCurrencyValue(value),
                     },
                     gridLines: {
+                        display: grid && key === 0,
                         drawBorder: false,
                         color: getAxisThemeConfig(theme.mode).y.color,
                     },
@@ -160,8 +165,6 @@ const CustomChart = (
                 labels: labels,
                 datasets: this.loadData(),
             };
-
-            const yAxes = this.loadYAxes();
 
             const options = {
                 spanGaps: true,
@@ -205,22 +208,25 @@ const CustomChart = (
                         .backgroundColor,
                 },
                 scales: {
+                    yAxes: this.loadYAxes(),
                     xAxes: [
                         {
                             display: grid,
                             type: "category",
                             labels: labels,
                             ticks: {
+                                display: grid,
+                                includeBounds: true,
                                 padding: 10,
                                 ...getFontConfig("axis", theme.mode),
                             },
                             gridLines: {
+                                display: grid,
                                 drawBorder: false,
                                 color: getAxisThemeConfig(theme.mode).x.color,
                             },
                         },
                     ],
-                    yAxes: yAxes,
                 },
             };
 
