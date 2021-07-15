@@ -63,32 +63,32 @@ final class CachePrices extends Command
 
     private function getDay(Collection $datasets): Collection
     {
-        return $this->groupByDate($datasets->take(24), 'H:s');
+        return $this->groupByDate($datasets->take(-24), 'H:s');
     }
 
     private function getWeek(Collection $datasets): Collection
     {
-        return $this->groupByDate($datasets->take(7), 'd.m');
+        return $this->groupByDate($datasets->take(-7), 'd.m');
     }
 
     private function getMonth(Collection $datasets): Collection
     {
-        return $this->groupByDate($datasets->take(30), 'd.m');
+        return $this->groupByDate($datasets->take(-30), 'd.m');
     }
 
     private function getQuarter(Collection $datasets): Collection
     {
-        return $this->groupByDate($datasets->take(120), 'd.m');
+        return $this->groupByDate($datasets->take(-120), 'd.m');
     }
 
     private function getYear(Collection $datasets): Collection
     {
-        return $this->groupByDate($datasets->take(365), 'd.m');
+        return $this->groupByDate($datasets->take(-365), 'd.m');
     }
 
     private function getAll(Collection $datasets): Collection
     {
-        return $this->groupByDate($datasets, 'd.m');
+        return $this->groupByDate($datasets, 'm.Y');
     }
 
     private function groupByDate(Collection $datasets, string $format): Collection

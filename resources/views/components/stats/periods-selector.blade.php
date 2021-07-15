@@ -42,7 +42,7 @@
                         </div>
                     </div>
 
-                    <div>@lang('forms.statistics.'.$selected)</div>
+                    <div>@lang('forms.statistics.periods.'.$selected)</div>
                 </div>
             </x-slot>
 

@@ -26,7 +26,7 @@ final class Chart extends Component
 
     public string $period = '';
 
-    private string $refreshInterval = '';
+    public string $refreshInterval = '';
 
     /** @phpstan-ignore-next-line */
     protected $listeners = [
