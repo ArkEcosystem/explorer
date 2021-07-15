@@ -73,8 +73,8 @@
                         :labels="collect($chart->get('labels'))->toJson()"
                         :theme="$chartTheme"
                         height="500"
-                        grid="true"
-                        tooltips="true"
+                        tooltips
+                        grid
                     />
                 </div>
             </div>

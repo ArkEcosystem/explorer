@@ -32,6 +32,7 @@ final class Chart extends Component
     protected $listeners = [
         'currencyChanged' => '$refresh',
         'toggleDarkMode'  => '$refresh',
+        'updateChart'     => '$refresh',
     ];
 
     public function mount(): void

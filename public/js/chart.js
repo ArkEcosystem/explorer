@@ -159,7 +159,7 @@ const CustomChart = (
             }
 
             this.$watch("time", () => this.updateChart());
-            window.addEventListener("resize", () => this.resizeChart());
+            window.addEventListener("resize", () => window.livewire.emit('updateChart'));
 
             const data = {
                 labels: labels,
@@ -175,7 +175,6 @@ const CustomChart = (
                 showScale: grid,
                 animation: { duration: 300, easing: "easeOutQuad" },
                 legend: { display: false },
-                onResize: () => this.resizeChart(),
                 layout: {
                     padding: {
                         left: 0,
