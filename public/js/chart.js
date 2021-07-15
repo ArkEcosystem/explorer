@@ -92,7 +92,7 @@ const CustomChart = (
 
                 datasets.push({
                     stack: "combined",
-                    label: value.name || "default",
+                    label: value.name || "",
                     data: value.data || value,
                     type: value.type || "line",
                     backgroundColor:
