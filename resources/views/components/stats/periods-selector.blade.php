@@ -7,23 +7,17 @@
 
     {{--mobile: input select--}}
     <label class="relative sm:hidden">
-        <span class="flex absolute top-0 right-0 bottom-0 items-center transform translate-y-px">
-            <x-ark-icon name="chevron-down" size="2xs" />
-        </span>
-        <select
-            style="-moz-transform: translateX(-4px);"
-            {{-- Mozilla has a known bug about adding an additional `padding-start` to select element.
-                 We apply this hack to keep padding similar to the other browsers.
-                 For further information, see links below...
-                 https://bugzilla.mozilla.org/show_bug.cgi?id=1582545
-                 https://searchfox.org/mozilla-central/source/layout/style/res/forms.css#312 --}}
-            {{ $attributes->wire('model') }}
-            class="text-sm font-semibold bg-transparent appearance-none text-theme-secondary-700"
-        >
-            @foreach($options as $val => $label)
-                <option value="{{ $val }}">{{ $label }}</option>
-            @endforeach
-        </select>
+        <div wire:ignore>
+            <x-ark-rich-select
+                wire:model="{{ $attributes->wire('model')->value() }}"
+                wrapper-class="relative left-0 xl:inline-block"
+                dropdown-class="left-0 mt-1 origin-top-left"
+                button-class="block text-sm font-semibold text-left bg-transparent text-theme-secondary-700 dark:text-theme-secondary-200"
+                :initial-value="$selected"
+                :placeholder="$selected"
+                :options="$options"
+            />
+        </div>
     </label>
 
     {{--tablet: dropdown--}}
