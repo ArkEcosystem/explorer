@@ -79,12 +79,12 @@ final class Chart extends Component
 
     private function mainValuePercentage(): float
     {
-        return abs($this->getDiffFromHistoricalHourly()) * 100;
+        return abs($this->getPriceChange()) * 100;
     }
 
     private function mainValueVariation(): string
     {
-        return $this->getDiffFromHistoricalHourly() < 0 ? 'down' : 'up';
+        return $this->getPriceChange() < 0 ? 'down' : 'up';
     }
 
     private function getDiffFromHistoricalHourly(): float
@@ -104,6 +104,11 @@ final class Chart extends Component
     private function marketCap(): string
     {
         return MarketCap::getFormatted(Network::currency(), Settings::currency()) ?? '0';
+    }
+
+    private function getPriceChange(): ?float
+    {
+        return (new NetworkStatusBlockCache())->getPriceChange(Network::currency(), Settings::currency());
     }
 
     private function getPrice(string $currency): float
