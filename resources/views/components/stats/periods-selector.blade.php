@@ -63,7 +63,7 @@
     </div>
 
     {{--desktop: buttons group--}}
-    <div class="hidden md:inline-flex">
+    <div class="hidden md:inline-flex relative z-0">
         <x-tabs.wrapper
             default-selected="{{ $selected }}"
             on-selected="function (value) {
