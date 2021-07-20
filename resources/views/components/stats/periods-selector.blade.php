@@ -12,8 +12,11 @@
         </span>
         <select
             style="-moz-transform: translateX(-4px);"
-            {{-- https://searchfox.org/mozilla-central/source/layout/style/res/forms.css#310 --}}
-            {{-- https://bugzilla.mozilla.org/show_bug.cgi?id=1582545 --}}
+            {{-- Mozilla has a known bug about adding an additional `padding-start` to select element.
+                 We apply this hack to keep padding similar to the other browsers.
+                 For further information, see links below...
+                 https://bugzilla.mozilla.org/show_bug.cgi?id=1582545
+                 https://searchfox.org/mozilla-central/source/layout/style/res/forms.css#312 --}}
             {{ $attributes->wire('model') }}
             class="text-sm font-semibold bg-transparent appearance-none text-theme-secondary-700"
         >
