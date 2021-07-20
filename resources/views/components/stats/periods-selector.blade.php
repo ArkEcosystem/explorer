@@ -7,7 +7,7 @@
 
     {{--mobile: input select--}}
     <label class="relative sm:hidden">
-        <span class="flex absolute top-0 right-0 bottom-0 items-center transform translate-x-2 translate-y-px">
+        <span class="flex absolute top-0 right-0 bottom-0 items-center transform translate-y-px">
             <x-ark-icon name="chevron-down" size="2xs" />
         </span>
         <select
