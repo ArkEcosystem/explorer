@@ -87,20 +87,6 @@ final class Chart extends Component
         return $this->getPriceChange() < 0 ? 'down' : 'up';
     }
 
-    private function getDiffFromHistoricalHourly(): float
-    {
-        $fullRange = $this->getHistoricalHourly(Settings::currency());
-
-        $initial = (float) $fullRange->first();
-        $final   = (float) $fullRange->last();
-
-        if ($initial === 0.0 || $final === 0.0) {
-            return  0;
-        }
-
-        return ($final / $initial) - 1;
-    }
-
     private function marketCap(): string
     {
         return MarketCap::getFormatted(Network::currency(), Settings::currency()) ?? '0';
