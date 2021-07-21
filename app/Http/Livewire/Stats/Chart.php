@@ -79,7 +79,7 @@ final class Chart extends Component
 
     private function mainValuePercentage(): float
     {
-        return abs($this->getPriceChange()) * 100;
+        return abs((float) $this->getPriceChange()) * 100;
     }
 
     private function mainValueVariation(): string
