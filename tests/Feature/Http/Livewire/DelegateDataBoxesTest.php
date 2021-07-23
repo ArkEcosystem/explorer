@@ -9,10 +9,16 @@ use App\Models\Round;
 use App\Models\Wallet;
 use App\Services\Cache\WalletCache;
 use App\ViewModels\WalletViewModel;
+use Illuminate\Support\Facades\Artisan;
 use Livewire\Livewire;
 
 function createRoundWithDelegatesAndPerformances(array $performances = null, bool $addBlockForNextRound = true): void
 {
+    Artisan::call('migrate:fresh', [
+        '--database' => 'explorer',
+        '--path'     => 'tests/migrations',
+    ]);
+
     Wallet::factory(51)->create()->each(function ($wallet) use ($performances, $addBlockForNextRound) {
         $block = Block::factory()->create([
             'height'               => 5720529,
@@ -50,6 +56,7 @@ function createRoundWithDelegatesAndPerformances(array $performances = null, boo
         ]);
     });
 }
+
 
 it('should render without errors', function () {
     createRoundWithDelegatesAndPerformances();
