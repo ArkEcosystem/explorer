@@ -11,8 +11,6 @@ use Livewire\Livewire;
 
 function createRoundWithDelegates(): void
 {
-
-
     Wallet::factory(51)->create()->each(function ($wallet) {
         $block = Block::factory()->create([
             'height'               => 5720529,
