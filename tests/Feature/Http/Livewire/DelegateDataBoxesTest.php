@@ -59,7 +59,6 @@ beforeEach(function () {
     ]);
 });
 
-
 it('should render without errors', function () {
     createRoundWithDelegatesAndPerformances();
 
