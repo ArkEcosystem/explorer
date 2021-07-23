@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ab25fb580bd5c65ce29dbcd67abf6358",
+    "content-hash": "a84116ab62fbf8f6f332a118d0b2f542",
     "packages": [
         {
             "name": "arkecosystem/crypto",
@@ -3893,16 +3893,16 @@
         },
         {
             "name": "monolog/monolog",
-            "version": "2.3.1",
+            "version": "2.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "9738e495f288eec0b187e310b7cdbbb285777dbe"
+                "reference": "71312564759a7db5b789296369c1a264efc43aad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/9738e495f288eec0b187e310b7cdbbb285777dbe",
-                "reference": "9738e495f288eec0b187e310b7cdbbb285777dbe",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/71312564759a7db5b789296369c1a264efc43aad",
+                "reference": "71312564759a7db5b789296369c1a264efc43aad",
                 "shasum": ""
             },
             "require": {
@@ -3973,7 +3973,7 @@
             ],
             "support": {
                 "issues": "https://github.com/Seldaek/monolog/issues",
-                "source": "https://github.com/Seldaek/monolog/tree/2.3.1"
+                "source": "https://github.com/Seldaek/monolog/tree/2.3.2"
             },
             "funding": [
                 {
@@ -3985,7 +3985,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-07-14T11:56:39+00:00"
+            "time": "2021-07-23T07:42:52+00:00"
         },
         {
             "name": "myclabs/php-enum",
@@ -8958,34 +8958,40 @@
     "packages-dev": [
         {
             "name": "arkecosystem/stan",
-            "version": "dev-main",
+            "version": "dev-chore/ugprade-deps",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ArkEcosystem/laravel-stan.git",
+                "reference": "b780668649b15f27ad9f7ab7f470bc74d83e8f48"
+            },
             "dist": {
-                "type": "path",
-                "url": "../laravel-stan",
-                "reference": "86870a6577564db8b35c6c3f964e3fbfca39e189"
+                "type": "zip",
+                "url": "https://api.github.com/repos/ArkEcosystem/laravel-stan/zipball/b780668649b15f27ad9f7ab7f470bc74d83e8f48",
+                "reference": "b780668649b15f27ad9f7ab7f470bc74d83e8f48",
+                "shasum": ""
             },
             "require": {
-                "ergebnis/phpstan-rules": "^0.15",
-                "fakerphp/faker": "^1.13",
+                "ergebnis/phpstan-rules": "^0.15.3",
+                "fakerphp/faker": "^1.15",
                 "friendsofphp/php-cs-fixer": "^2.16",
                 "graham-campbell/analyzer": "^3.0",
-                "jasonmccreary/laravel-test-assertions": "^1.0",
-                "johnkary/phpunit-speedtrap": "^3.2",
-                "mockery/mockery": "^1.3",
-                "nunomaduro/collision": "^5.0",
-                "nunomaduro/larastan": "^0.6",
-                "nunomaduro/laravel-mojito": "^0.2",
-                "orchestra/testbench": "^6.11",
-                "pestphp/pest": "^0.3",
-                "pestphp/pest-plugin-faker": "^0.3",
-                "pestphp/pest-plugin-laravel": "^0.3",
-                "pestphp/pest-plugin-livewire": "^0.3",
-                "phpstan/extension-installer": "^1.0",
-                "phpstan/phpstan-deprecation-rules": "^0.12",
-                "phpstan/phpstan-strict-rules": "^0.12",
-                "phpunit/phpunit": "^9.3",
-                "rector/rector": "^0.8",
-                "spatie/pest-plugin-snapshots": "^0.3.1"
+                "jasonmccreary/laravel-test-assertions": "^1.1",
+                "johnkary/phpunit-speedtrap": "^4.0",
+                "mockery/mockery": "^1.4",
+                "nunomaduro/collision": "^5.5",
+                "nunomaduro/larastan": "^0.7.11",
+                "nunomaduro/laravel-mojito": "^0.2.8",
+                "orchestra/testbench": "^6.19",
+                "pestphp/pest": "^1.11",
+                "pestphp/pest-plugin-faker": "^1.0",
+                "pestphp/pest-plugin-laravel": "^1.1",
+                "pestphp/pest-plugin-livewire": "^1.0",
+                "phpstan/extension-installer": "^1.1",
+                "phpstan/phpstan-deprecation-rules": "^0.12.6",
+                "phpstan/phpstan-strict-rules": "^0.12.10",
+                "phpunit/phpunit": "^9.5",
+                "rector/rector": "^0.11.38",
+                "spatie/pest-plugin-snapshots": "^1.1"
             },
             "type": "library",
             "extra": {
@@ -9000,6 +9006,7 @@
                     "ARKEcosystem\\Stan\\": "src/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -9010,9 +9017,11 @@
                 }
             ],
             "description": "Static Analysis & Testing for Laravel. Powered by PHPStan and Pest.",
-            "transport-options": {
-                "relative": true
-            }
+            "support": {
+                "issues": "https://github.com/ArkEcosystem/laravel-stan/issues",
+                "source": "https://github.com/ArkEcosystem/laravel-stan/tree/chore/ugprade-deps"
+            },
+            "time": "2021-07-22T17:45:29+00:00"
         },
         {
             "name": "barryvdh/laravel-debugbar",
@@ -9173,16 +9182,16 @@
         },
         {
             "name": "composer/composer",
-            "version": "2.1.4",
+            "version": "2.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/composer.git",
-                "reference": "5701b38ec6c66dd143658e6aa18e1808d2d5dc4b"
+                "reference": "ac679902e9f66b85a8f9d8c1c88180f609a8745d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/composer/zipball/5701b38ec6c66dd143658e6aa18e1808d2d5dc4b",
-                "reference": "5701b38ec6c66dd143658e6aa18e1808d2d5dc4b",
+                "url": "https://api.github.com/repos/composer/composer/zipball/ac679902e9f66b85a8f9d8c1c88180f609a8745d",
+                "reference": "ac679902e9f66b85a8f9d8c1c88180f609a8745d",
                 "shasum": ""
             },
             "require": {
@@ -9251,7 +9260,7 @@
             "support": {
                 "irc": "irc://irc.freenode.org/composer",
                 "issues": "https://github.com/composer/composer/issues",
-                "source": "https://github.com/composer/composer/tree/2.1.4"
+                "source": "https://github.com/composer/composer/tree/2.1.5"
             },
             "funding": [
                 {
@@ -9267,7 +9276,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-07-22T11:55:24+00:00"
+            "time": "2021-07-23T08:35:47+00:00"
         },
         {
             "name": "composer/metadata-minifier",
@@ -10300,16 +10309,16 @@
         },
         {
             "name": "johnkary/phpunit-speedtrap",
-            "version": "v3.3.0",
+            "version": "v4.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/johnkary/phpunit-speedtrap.git",
-                "reference": "9ba81d42676da31366c85d3ff8c10a8352d02030"
+                "reference": "5f9b160eac87e975f1c6ca9faee5125f0616fba3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/johnkary/phpunit-speedtrap/zipball/9ba81d42676da31366c85d3ff8c10a8352d02030",
-                "reference": "9ba81d42676da31366c85d3ff8c10a8352d02030",
+                "url": "https://api.github.com/repos/johnkary/phpunit-speedtrap/zipball/5f9b160eac87e975f1c6ca9faee5125f0616fba3",
+                "reference": "5f9b160eac87e975f1c6ca9faee5125f0616fba3",
                 "shasum": ""
             },
             "require": {
@@ -10346,9 +10355,9 @@
             ],
             "support": {
                 "issues": "https://github.com/johnkary/phpunit-speedtrap/issues",
-                "source": "https://github.com/johnkary/phpunit-speedtrap/tree/v3.3.0"
+                "source": "https://github.com/johnkary/phpunit-speedtrap/tree/v4.0.0"
             },
-            "time": "2020-12-18T16:20:16+00:00"
+            "time": "2021-05-03T02:37:05+00:00"
         },
         {
             "name": "justinrainbow/json-schema",
@@ -10766,16 +10775,16 @@
         },
         {
             "name": "nunomaduro/larastan",
-            "version": "v0.6.13",
+            "version": "v0.7.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nunomaduro/larastan.git",
-                "reference": "7a047f7974e6e16d04ee038d86e2c5e6c59e9dfe"
+                "reference": "9e777a9c21cccdebffb1d0bce3d73cbda2560c1e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nunomaduro/larastan/zipball/7a047f7974e6e16d04ee038d86e2c5e6c59e9dfe",
-                "reference": "7a047f7974e6e16d04ee038d86e2c5e6c59e9dfe",
+                "url": "https://api.github.com/repos/nunomaduro/larastan/zipball/9e777a9c21cccdebffb1d0bce3d73cbda2560c1e",
+                "reference": "9e777a9c21cccdebffb1d0bce3d73cbda2560c1e",
                 "shasum": ""
             },
             "require": {
@@ -10790,15 +10799,15 @@
                 "illuminate/support": "^6.0 || ^7.0 || ^8.0 || ^9.0",
                 "mockery/mockery": "^0.9 || ^1.0",
                 "php": "^7.2 || ^8.0",
-                "phpstan/phpstan": "^0.12.65",
-                "symfony/process": "^4.3 || ^5.0"
+                "phpstan/phpstan": "^0.12.90",
+                "symfony/process": "^4.3 || ^5.0 || ^6.0"
             },
             "require-dev": {
                 "orchestra/testbench": "^4.0 || ^5.0 || ^6.0 || ^7.0",
                 "phpunit/phpunit": "^7.3 || ^8.2 || ^9.3"
             },
             "suggest": {
-                "orchestra/testbench": "^4.0 || ^5.0"
+                "orchestra/testbench": "Using Larastan for analysing a package needs Testbench"
             },
             "type": "phpstan-extension",
             "extra": {
@@ -10839,7 +10848,7 @@
             ],
             "support": {
                 "issues": "https://github.com/nunomaduro/larastan/issues",
-                "source": "https://github.com/nunomaduro/larastan/tree/v0.6.13"
+                "source": "https://github.com/nunomaduro/larastan/tree/v0.7.11"
             },
             "funding": [
                 {
@@ -10859,7 +10868,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2021-01-22T12:51:26+00:00"
+            "time": "2021-07-22T12:42:28+00:00"
         },
         {
             "name": "nunomaduro/laravel-mojito",
@@ -11079,32 +11088,28 @@
         },
         {
             "name": "pestphp/pest",
-            "version": "v0.3.19",
+            "version": "v1.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pestphp/pest.git",
-                "reference": "26b2e3561a9f76d8918727e7bc34ddf9b977d923"
+                "reference": "328427bfdb1c21687afff0eb83c64e417b4539c6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pestphp/pest/zipball/26b2e3561a9f76d8918727e7bc34ddf9b977d923",
-                "reference": "26b2e3561a9f76d8918727e7bc34ddf9b977d923",
+                "url": "https://api.github.com/repos/pestphp/pest/zipball/328427bfdb1c21687afff0eb83c64e417b4539c6",
+                "reference": "328427bfdb1c21687afff0eb83c64e417b4539c6",
                 "shasum": ""
             },
             "require": {
-                "nunomaduro/collision": "^5.0",
-                "pestphp/pest-plugin": "^0.3",
-                "pestphp/pest-plugin-coverage": "^0.3",
-                "pestphp/pest-plugin-expectations": "^0.3.3",
-                "pestphp/pest-plugin-init": "^0.3",
+                "nunomaduro/collision": "^5.4.0",
+                "pestphp/pest-plugin": "^1.0.0",
                 "php": "^7.3 || ^8.0",
-                "phpunit/phpunit": ">= 9.3.7 <= 9.5.0"
+                "phpunit/phpunit": ">= 9.3.7 <= 9.5.6"
             },
             "require-dev": {
-                "illuminate/console": "^7.16.1",
-                "illuminate/support": "^7.16.1",
-                "laravel/dusk": "^6.9.1",
-                "mockery/mockery": "^1.4.1",
+                "illuminate/console": "^8.47.0",
+                "illuminate/support": "^8.47.0",
+                "laravel/dusk": "^6.15.0",
                 "pestphp/pest-dev-tools": "dev-master"
             },
             "bin": [
@@ -11113,10 +11118,12 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.3.x-dev"
+                    "dev-master": "1.x-dev"
                 },
                 "pest": {
                     "plugins": [
+                        "Pest\\Plugins\\Coverage",
+                        "Pest\\Plugins\\Init",
                         "Pest\\Plugins\\Version"
                     ]
                 },
@@ -11156,15 +11163,27 @@
             ],
             "support": {
                 "issues": "https://github.com/pestphp/pest/issues",
-                "source": "https://github.com/pestphp/pest/tree/v0.3.19"
+                "source": "https://github.com/pestphp/pest/tree/v1.11.0"
             },
             "funding": [
                 {
-                    "url": "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=66BYDWAT92N6L",
-                    "type": "custom"
+                    "url": "https://github.com/lukeraymonddowning",
+                    "type": "github"
                 },
                 {
                     "url": "https://github.com/nunomaduro",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/octoper",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/olivernybroe",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/owenvoke",
                     "type": "github"
                 },
                 {
@@ -11172,20 +11191,20 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2020-12-27T11:36:24+00:00"
+            "time": "2021-07-21T11:59:45+00:00"
         },
         {
             "name": "pestphp/pest-plugin",
-            "version": "v0.3.0",
+            "version": "v1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pestphp/pest-plugin.git",
-                "reference": "635f8c33a3eed910ac3cd5cb02a7163c5c70c033"
+                "reference": "fc8519de148699fe612d9c669be60554cd2db4fa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pestphp/pest-plugin/zipball/635f8c33a3eed910ac3cd5cb02a7163c5c70c033",
-                "reference": "635f8c33a3eed910ac3cd5cb02a7163c5c70c033",
+                "url": "https://api.github.com/repos/pestphp/pest-plugin/zipball/fc8519de148699fe612d9c669be60554cd2db4fa",
+                "reference": "fc8519de148699fe612d9c669be60554cd2db4fa",
                 "shasum": ""
             },
             "require": {
@@ -11193,17 +11212,17 @@
                 "php": "^7.3 || ^8.0"
             },
             "conflict": {
-                "pestphp/pest": "<0.3"
+                "pestphp/pest": "<1.0"
             },
             "require-dev": {
-                "composer/composer": "^1.10",
-                "pestphp/pest": "^0.3",
+                "composer/composer": "^1.10.19",
+                "pestphp/pest": "^1.0",
                 "pestphp/pest-dev-tools": "dev-master"
             },
             "type": "composer-plugin",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.4.x-dev"
+                    "dev-master": "1.x-dev"
                 },
                 "class": "Pest\\Plugin\\Manager"
             },
@@ -11228,7 +11247,7 @@
                 "unit"
             ],
             "support": {
-                "source": "https://github.com/pestphp/pest-plugin/tree/v0.3.0"
+                "source": "https://github.com/pestphp/pest-plugin/tree/v1.0.0"
             },
             "funding": [
                 {
@@ -11244,172 +11263,25 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2020-08-25T20:53:40+00:00"
-        },
-        {
-            "name": "pestphp/pest-plugin-coverage",
-            "version": "v0.3.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/pestphp/pest-plugin-coverage.git",
-                "reference": "f209bb62728841f21f267759a374d66172a162ea"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/pestphp/pest-plugin-coverage/zipball/f209bb62728841f21f267759a374d66172a162ea",
-                "reference": "f209bb62728841f21f267759a374d66172a162ea",
-                "shasum": ""
-            },
-            "require": {
-                "pestphp/pest-plugin": "^0.3",
-                "php": "^7.3 || ^8.0",
-                "sebastian/environment": "^5.1.2"
-            },
-            "conflict": {
-                "pestphp/pest": "<0.3"
-            },
-            "require-dev": {
-                "pestphp/pest": "^0.3",
-                "pestphp/pest-dev-tools": "dev-master"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "0.3.x-dev"
-                },
-                "pest": {
-                    "plugins": [
-                        "Pest\\PluginCoverage\\Plugin"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Pest\\PluginCoverage\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "The Pest Coverage Plugin",
-            "keywords": [
-                "coverage",
-                "framework",
-                "pest",
-                "php",
-                "plugin",
-                "test",
-                "testing",
-                "unit"
-            ],
-            "support": {
-                "source": "https://github.com/pestphp/pest-plugin-coverage/tree/master"
-            },
-            "funding": [
-                {
-                    "url": "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=66BYDWAT92N6L",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/nunomaduro",
-                    "type": "github"
-                },
-                {
-                    "url": "https://www.patreon.com/nunomaduro",
-                    "type": "patreon"
-                }
-            ],
-            "abandoned": "pestphp/pest",
-            "time": "2020-08-25T20:42:46+00:00"
-        },
-        {
-            "name": "pestphp/pest-plugin-expectations",
-            "version": "v0.3.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/pestphp/pest-plugin-expectations.git",
-                "reference": "1d10f8b6d2dced7accffe16eabdee44b1ef90c6a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/pestphp/pest-plugin-expectations/zipball/1d10f8b6d2dced7accffe16eabdee44b1ef90c6a",
-                "reference": "1d10f8b6d2dced7accffe16eabdee44b1ef90c6a",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.3 || ^8.0",
-                "phpunit/phpunit": "^9.0"
-            },
-            "require-dev": {
-                "pestphp/pest": "^0.3.16",
-                "pestphp/pest-dev-tools": "dev-master"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "0.3.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Pest\\Expectations\\": "src/"
-                },
-                "files": [
-                    "src/Autoload.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Add expectations testing capabilities to Pest or PHPUnit",
-            "keywords": [
-                "expectations",
-                "framework",
-                "pest",
-                "php",
-                "test",
-                "testing",
-                "unit"
-            ],
-            "support": {
-                "source": "https://github.com/pestphp/pest-plugin-expectations/tree/v0.3.3"
-            },
-            "funding": [
-                {
-                    "url": "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=66BYDWAT92N6L",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/nunomaduro",
-                    "type": "github"
-                },
-                {
-                    "url": "https://www.patreon.com/nunomaduro",
-                    "type": "patreon"
-                }
-            ],
-            "abandoned": "pestphp/pest",
-            "time": "2020-12-26T20:28:03+00:00"
+            "time": "2021-01-03T15:53:42+00:00"
         },
         {
             "name": "pestphp/pest-plugin-faker",
-            "version": "v0.3.1",
+            "version": "v1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pestphp/pest-plugin-faker.git",
-                "reference": "417787ec2b846717d79795fc23ba2d309141b332"
+                "reference": "9d93419f1f47ffd856ee544317b2f9144a129044"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pestphp/pest-plugin-faker/zipball/417787ec2b846717d79795fc23ba2d309141b332",
-                "reference": "417787ec2b846717d79795fc23ba2d309141b332",
+                "url": "https://api.github.com/repos/pestphp/pest-plugin-faker/zipball/9d93419f1f47ffd856ee544317b2f9144a129044",
+                "reference": "9d93419f1f47ffd856ee544317b2f9144a129044",
                 "shasum": ""
             },
             "require": {
                 "fakerphp/faker": "^1.9.1",
-                "pestphp/pest": "^0.3",
+                "pestphp/pest": "^1.0",
                 "php": "^7.3 || ^8.0"
             },
             "require-dev": {
@@ -11418,7 +11290,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.4.x-dev"
+                    "dev-master": "1.x-dev"
                 }
             },
             "autoload": {
@@ -11445,7 +11317,7 @@
                 "unit"
             ],
             "support": {
-                "source": "https://github.com/pestphp/pest-plugin-faker/tree/v0.3.1"
+                "source": "https://github.com/pestphp/pest-plugin-faker/tree/v1.0.0"
             },
             "funding": [
                 {
@@ -11461,111 +11333,35 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2020-10-29T17:04:54+00:00"
-        },
-        {
-            "name": "pestphp/pest-plugin-init",
-            "version": "v0.3.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/pestphp/pest-plugin-init.git",
-                "reference": "7406643b47835b6c6da709b11da89b0844b8d163"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/pestphp/pest-plugin-init/zipball/7406643b47835b6c6da709b11da89b0844b8d163",
-                "reference": "7406643b47835b6c6da709b11da89b0844b8d163",
-                "shasum": ""
-            },
-            "require": {
-                "pestphp/pest-plugin": "^0.3",
-                "php": "^7.3 || ^8.0"
-            },
-            "conflict": {
-                "pestphp/pest": "<0.3"
-            },
-            "require-dev": {
-                "pestphp/pest": "^0.3",
-                "pestphp/pest-dev-tools": "dev-master"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "0.4.x-dev"
-                },
-                "pest": {
-                    "plugins": [
-                        "Pest\\Init\\Plugin"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Pest\\Init\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "The Pest Init plugin",
-            "keywords": [
-                "framework",
-                "init",
-                "pest",
-                "php",
-                "plugin",
-                "test",
-                "testing",
-                "unit"
-            ],
-            "support": {
-                "source": "https://github.com/pestphp/pest-plugin-init/tree/v0.3.1"
-            },
-            "funding": [
-                {
-                    "url": "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=66BYDWAT92N6L",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/nunomaduro",
-                    "type": "github"
-                },
-                {
-                    "url": "https://www.patreon.com/nunomaduro",
-                    "type": "patreon"
-                }
-            ],
-            "abandoned": "pestphp/pest",
-            "time": "2020-09-27T12:48:43+00:00"
+            "time": "2021-01-03T15:42:35+00:00"
         },
         {
             "name": "pestphp/pest-plugin-laravel",
-            "version": "v0.3.0",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pestphp/pest-plugin-laravel.git",
-                "reference": "0ec53f5cc2d661088683318629ca16dcd72c41d1"
+                "reference": "bacc1ef1f537cf9adf692b6930e54f607ae530ad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pestphp/pest-plugin-laravel/zipball/0ec53f5cc2d661088683318629ca16dcd72c41d1",
-                "reference": "0ec53f5cc2d661088683318629ca16dcd72c41d1",
+                "url": "https://api.github.com/repos/pestphp/pest-plugin-laravel/zipball/bacc1ef1f537cf9adf692b6930e54f607ae530ad",
+                "reference": "bacc1ef1f537cf9adf692b6930e54f607ae530ad",
                 "shasum": ""
             },
             "require": {
                 "laravel/framework": "^7.0 || ^8.0",
-                "pestphp/pest": "^0.3",
+                "pestphp/pest": "^1.7",
                 "php": "^7.3 || ^8.0"
             },
             "require-dev": {
-                "orchestra/testbench": "^5.2 || ^6.0",
+                "orchestra/testbench": "^5.12.1 || ^6.7.2",
                 "pestphp/pest-dev-tools": "dev-master"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.4.x-dev"
+                    "dev-master": "1.x-dev"
                 }
             },
             "autoload": {
@@ -11583,15 +11379,15 @@
             "description": "The Pest Laravel Plugin",
             "keywords": [
                 "framework",
+                "laravel",
                 "pest",
                 "php",
-                "plugin",
                 "test",
                 "testing",
                 "unit"
             ],
             "support": {
-                "source": "https://github.com/pestphp/pest-plugin-laravel/tree/v0.3.0"
+                "source": "https://github.com/pestphp/pest-plugin-laravel/tree/v1.1.0"
             },
             "funding": [
                 {
@@ -11607,25 +11403,25 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2020-08-25T21:08:14+00:00"
+            "time": "2021-07-07T09:11:42+00:00"
         },
         {
             "name": "pestphp/pest-plugin-livewire",
-            "version": "v0.3.2",
+            "version": "v1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pestphp/pest-plugin-livewire.git",
-                "reference": "6a2b7cc4b1091a202bc62a42343da92420967568"
+                "reference": "30e259e57c18dd40402e7fd29d46344a6cb9ff03"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pestphp/pest-plugin-livewire/zipball/6a2b7cc4b1091a202bc62a42343da92420967568",
-                "reference": "6a2b7cc4b1091a202bc62a42343da92420967568",
+                "url": "https://api.github.com/repos/pestphp/pest-plugin-livewire/zipball/30e259e57c18dd40402e7fd29d46344a6cb9ff03",
+                "reference": "30e259e57c18dd40402e7fd29d46344a6cb9ff03",
                 "shasum": ""
             },
             "require": {
                 "livewire/livewire": "^1.2|^2.0",
-                "pestphp/pest": "^0.3",
+                "pestphp/pest": "^1.0",
                 "php": "^7.3|^8.0"
             },
             "require-dev": {
@@ -11635,7 +11431,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.4.x-dev"
+                    "dev-master": "1.x-dev"
                 }
             },
             "autoload": {
@@ -11662,7 +11458,7 @@
                 "unit"
             ],
             "support": {
-                "source": "https://github.com/pestphp/pest-plugin-livewire/tree/v0.3.2"
+                "source": "https://github.com/pestphp/pest-plugin-livewire/tree/v1.0.0"
             },
             "funding": [
                 {
@@ -11678,7 +11474,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2020-12-01T09:24:55+00:00"
+            "time": "2021-01-03T15:37:46+00:00"
         },
         {
             "name": "phar-io/manifest",
@@ -12189,16 +11985,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "0.12.93",
+            "version": "0.12.91",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "7b7602f05d340ffa418c59299f8c053ac6c3e7ea"
+                "reference": "8226701cd228a0d63c2df995de7ab6070c69ac6a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/7b7602f05d340ffa418c59299f8c053ac6c3e7ea",
-                "reference": "7b7602f05d340ffa418c59299f8c053ac6c3e7ea",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/8226701cd228a0d63c2df995de7ab6070c69ac6a",
+                "reference": "8226701cd228a0d63c2df995de7ab6070c69ac6a",
                 "shasum": ""
             },
             "require": {
@@ -12229,7 +12025,7 @@
             "description": "PHPStan - PHP Static Analysis Tool",
             "support": {
                 "issues": "https://github.com/phpstan/phpstan/issues",
-                "source": "https://github.com/phpstan/phpstan/tree/0.12.93"
+                "source": "https://github.com/phpstan/phpstan/tree/0.12.91"
             },
             "funding": [
                 {
@@ -12249,7 +12045,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-07-20T10:49:53+00:00"
+            "time": "2021-07-04T15:31:48+00:00"
         },
         {
             "name": "phpstan/phpstan-deprecation-rules",
@@ -12672,16 +12468,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "9.5.0",
+            "version": "9.5.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "8e16c225d57c3d6808014df6b1dd7598d0a5bbbe"
+                "reference": "fb9b8333f14e3dce976a60ef6a7e05c7c7ed8bfb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/8e16c225d57c3d6808014df6b1dd7598d0a5bbbe",
-                "reference": "8e16c225d57c3d6808014df6b1dd7598d0a5bbbe",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/fb9b8333f14e3dce976a60ef6a7e05c7c7ed8bfb",
+                "reference": "fb9b8333f14e3dce976a60ef6a7e05c7c7ed8bfb",
                 "shasum": ""
             },
             "require": {
@@ -12711,7 +12507,7 @@
                 "sebastian/global-state": "^5.0.1",
                 "sebastian/object-enumerator": "^4.0.3",
                 "sebastian/resource-operations": "^3.0.3",
-                "sebastian/type": "^2.3",
+                "sebastian/type": "^2.3.4",
                 "sebastian/version": "^3.0.2"
             },
             "require-dev": {
@@ -12759,7 +12555,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/9.5.0"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/9.5.6"
             },
             "funding": [
                 {
@@ -12771,7 +12567,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-12-04T05:05:53+00:00"
+            "time": "2021-06-23T05:14:38+00:00"
         },
         {
             "name": "psr/cache",
@@ -12873,39 +12669,63 @@
             "time": "2020-05-12T15:16:56+00:00"
         },
         {
-            "name": "rector/rector-prefixed",
-            "version": "0.8.56",
+            "name": "rector/rector",
+            "version": "0.11.38",
             "source": {
                 "type": "git",
-                "url": "https://github.com/rectorphp/rector-prefixed.git",
-                "reference": "d33f40735fb6a7371b5a106f10edde58ce3a1164"
+                "url": "https://github.com/rectorphp/rector.git",
+                "reference": "26b3ebb197ff812982fe79af757c4e301f6a4c84"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/rector-prefixed/zipball/d33f40735fb6a7371b5a106f10edde58ce3a1164",
-                "reference": "d33f40735fb6a7371b5a106f10edde58ce3a1164",
+                "url": "https://api.github.com/repos/rectorphp/rector/zipball/26b3ebb197ff812982fe79af757c4e301f6a4c84",
+                "reference": "26b3ebb197ff812982fe79af757c4e301f6a4c84",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.2.4|^8.0"
+                "php": "^7.1|^8.0",
+                "phpstan/phpstan": "0.12.91"
             },
-            "replace": {
-                "rector/rector": "self.version"
+            "conflict": {
+                "phpstan/phpdoc-parser": "<=0.5.3",
+                "phpstan/phpstan": "<=0.12.82",
+                "rector/rector-cakephp": "*",
+                "rector/rector-doctrine": "*",
+                "rector/rector-nette": "*",
+                "rector/rector-phpunit": "*",
+                "rector/rector-prefixed": "*",
+                "rector/rector-symfony": "*"
             },
             "bin": [
                 "bin/rector"
             ],
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "0.10-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "bootstrap.php"
+                ]
+            },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
-            "description": "Prefixed scoped version of rector/rector package",
+            "description": "Prefixed and PHP 7.1 downgraded version of rector/rector",
             "support": {
-                "source": "https://github.com/rectorphp/rector-prefixed/tree/0.8.56"
+                "issues": "https://github.com/rectorphp/rector/issues",
+                "source": "https://github.com/rectorphp/rector/tree/0.11.38"
             },
-            "abandoned": "rector/rector",
-            "time": "2020-11-21T01:01:18+00:00"
+            "funding": [
+                {
+                    "url": "https://github.com/tomasvotruba",
+                    "type": "github"
+                }
+            ],
+            "time": "2021-07-21T14:29:45+00:00"
         },
         {
             "name": "sebastian/cli-parser",
@@ -14178,30 +13998,30 @@
         },
         {
             "name": "spatie/pest-plugin-snapshots",
-            "version": "0.3.1",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/pest-plugin-snapshots.git",
-                "reference": "bb136e29a052ee201a51dc930056640b41621164"
+                "reference": "7932ba9a44f9c5d010bcda4dc06ceb0474e13d6d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/pest-plugin-snapshots/zipball/bb136e29a052ee201a51dc930056640b41621164",
-                "reference": "bb136e29a052ee201a51dc930056640b41621164",
+                "url": "https://api.github.com/repos/spatie/pest-plugin-snapshots/zipball/7932ba9a44f9c5d010bcda4dc06ceb0474e13d6d",
+                "reference": "7932ba9a44f9c5d010bcda4dc06ceb0474e13d6d",
                 "shasum": ""
             },
             "require": {
-                "pestphp/pest": "^0.3",
+                "pestphp/pest": "^1.0",
                 "php": "^7.4 || ^8.0",
                 "spatie/phpunit-snapshot-assertions": "^4.2.2"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^2.16.3"
+                "friendsofphp/php-cs-fixer": "^3.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.4.x-dev"
+                    "dev-master": "1.x-dev"
                 }
             },
             "autoload": {
@@ -14232,7 +14052,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/pest-plugin-snapshots/issues",
-                "source": "https://github.com/spatie/pest-plugin-snapshots/tree/0.3.1"
+                "source": "https://github.com/spatie/pest-plugin-snapshots/tree/1.1.0"
             },
             "funding": [
                 {
@@ -14244,7 +14064,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-09-30T23:37:18+00:00"
+            "time": "2021-07-08T18:00:48+00:00"
         },
         {
             "name": "spatie/phpunit-snapshot-assertions",
@@ -15533,7 +15353,14 @@
             "time": "2021-07-08T19:01:59+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "package": "arkecosystem/stan",
+            "version": "dev-chore/ugprade-deps",
+            "alias": "3.99.9",
+            "alias_normalized": "3.99.9.0"
+        }
+    ],
     "minimum-stability": "dev",
     "stability-flags": {
         "arkecosystem/stan": 20
