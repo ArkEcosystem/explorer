@@ -23,8 +23,8 @@ abstract class TestCase extends BaseTestCase
 
         return array_merge(
             [
-                '--database' => 'explorer',
-                '--path'     => 'tests/migrations',
+                '--database'   => 'explorer',
+                '--path'       => 'tests/migrations',
                 '--drop-views' => $this->shouldDropViews(),
                 '--drop-types' => $this->shouldDropTypes(),
             ],
@@ -42,7 +42,7 @@ abstract class TestCase extends BaseTestCase
         return [
             '--database' => 'explorer',
             '--path'     => 'tests/migrations',
-            '--seed' => $this->shouldSeed(),
+            '--seed'     => $this->shouldSeed(),
         ];
     }
 }

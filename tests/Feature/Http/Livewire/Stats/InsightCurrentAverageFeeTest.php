@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Support\Facades\Artisan;
 use Livewire\Livewire;
+
 beforeEach(function () {
     Carbon::setTestNow('2021-01-01 00:00:00');
 });
