@@ -7,7 +7,6 @@ use App\Models\Block;
 use App\Models\Round;
 use App\Models\Wallet;
 use App\Services\Cache\WalletCache;
-use Illuminate\Support\Facades\Artisan;
 use Livewire\Livewire;
 
 function createRoundWithDelegates(): void
@@ -41,13 +40,6 @@ function createRoundWithDelegates(): void
         ]);
     });
 }
-
-beforeEach(function () {
-    Artisan::call('migrate:fresh', [
-        '--database' => 'explorer',
-        '--path'     => 'tests/migrations',
-    ]);
-});
 
 // @TODO: make assertions about data visibility
 it('should render without errors', function () {

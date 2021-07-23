@@ -9,7 +9,6 @@ use App\Models\Round;
 use App\Models\Wallet;
 use App\Services\Cache\WalletCache;
 use App\ViewModels\WalletViewModel;
-use Illuminate\Support\Facades\Artisan;
 use Livewire\Livewire;
 
 function createRoundWithDelegatesAndPerformances(array $performances = null, bool $addBlockForNextRound = true): void
@@ -51,13 +50,6 @@ function createRoundWithDelegatesAndPerformances(array $performances = null, boo
         ]);
     });
 }
-
-beforeEach(function () {
-    Artisan::call('migrate:fresh', [
-        '--database' => 'explorer',
-        '--path'     => 'tests/migrations',
-    ]);
-});
 
 it('should render without errors', function () {
     createRoundWithDelegatesAndPerformances();
