@@ -14,11 +14,6 @@ use Livewire\Livewire;
 
 function createRoundWithDelegatesAndPerformances(array $performances = null, bool $addBlockForNextRound = true): void
 {
-    Artisan::call('migrate:fresh', [
-        '--database' => 'explorer',
-        '--path'     => 'tests/migrations',
-    ]);
-
     Wallet::factory(51)->create()->each(function ($wallet) use ($performances, $addBlockForNextRound) {
         $block = Block::factory()->create([
             'height'               => 5720529,
@@ -56,6 +51,13 @@ function createRoundWithDelegatesAndPerformances(array $performances = null, boo
         ]);
     });
 }
+
+beforeEach(function () {
+    Artisan::call('migrate:fresh', [
+        '--database' => 'explorer',
+        '--path'     => 'tests/migrations',
+    ]);
+});
 
 
 it('should render without errors', function () {
