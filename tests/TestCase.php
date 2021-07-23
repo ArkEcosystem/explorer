@@ -13,6 +13,16 @@ abstract class TestCase extends BaseTestCase
     use RefreshDatabase;
 
     /**
+     * Begin a database transaction on the testing database.
+     *
+     * @return void
+     */
+    public function beginDatabaseTransaction()
+    {
+        // Not neccesary
+    }
+
+    /**
      * The parameters that should be used when running "migrate:fresh".
      *
      * @return array
