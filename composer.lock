@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a84116ab62fbf8f6f332a118d0b2f542",
+    "content-hash": "8cb54b0d3461b91e2685ebb8cfd35f4c",
     "packages": [
         {
             "name": "arkecosystem/crypto",
@@ -8958,16 +8958,16 @@
     "packages-dev": [
         {
             "name": "arkecosystem/stan",
-            "version": "dev-chore/ugprade-deps",
+            "version": "3.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ArkEcosystem/laravel-stan.git",
-                "reference": "b780668649b15f27ad9f7ab7f470bc74d83e8f48"
+                "reference": "6d8e008c27c89fbd472bf1be40154b79c2ded3d8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ArkEcosystem/laravel-stan/zipball/b780668649b15f27ad9f7ab7f470bc74d83e8f48",
-                "reference": "b780668649b15f27ad9f7ab7f470bc74d83e8f48",
+                "url": "https://api.github.com/repos/ArkEcosystem/laravel-stan/zipball/6d8e008c27c89fbd472bf1be40154b79c2ded3d8",
+                "reference": "6d8e008c27c89fbd472bf1be40154b79c2ded3d8",
                 "shasum": ""
             },
             "require": {
@@ -9019,9 +9019,9 @@
             "description": "Static Analysis & Testing for Laravel. Powered by PHPStan and Pest.",
             "support": {
                 "issues": "https://github.com/ArkEcosystem/laravel-stan/issues",
-                "source": "https://github.com/ArkEcosystem/laravel-stan/tree/chore/ugprade-deps"
+                "source": "https://github.com/ArkEcosystem/laravel-stan/tree/3.3.0"
             },
-            "time": "2021-07-22T17:45:29+00:00"
+            "time": "2021-07-23T12:56:57+00:00"
         },
         {
             "name": "barryvdh/laravel-debugbar",
@@ -15353,18 +15353,9 @@
             "time": "2021-07-08T19:01:59+00:00"
         }
     ],
-    "aliases": [
-        {
-            "package": "arkecosystem/stan",
-            "version": "dev-chore/ugprade-deps",
-            "alias": "3.99.9",
-            "alias_normalized": "3.99.9.0"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "arkecosystem/stan": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
