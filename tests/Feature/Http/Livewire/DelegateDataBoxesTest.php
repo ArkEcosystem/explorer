@@ -57,7 +57,6 @@ function createRoundWithDelegatesAndPerformances(array $performances = null, boo
     });
 }
 
-
 it('should render without errors', function () {
     createRoundWithDelegatesAndPerformances();
 
