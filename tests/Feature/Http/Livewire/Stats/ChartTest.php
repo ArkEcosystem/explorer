@@ -8,12 +8,9 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Config;
 use Livewire\Livewire;
-use function Tests\configureExplorerDatabase;
 use function Tests\fakeCryptoCompare;
 
 beforeEach(function (): void {
-    configureExplorerDatabase();
-
     Carbon::setTestNow('2020-01-01 00:00:00');
 });
 
