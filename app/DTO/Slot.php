@@ -127,7 +127,15 @@ final class Slot
 
     private function isWaiting(): bool
     {
-        return $this->isNext() || $this->isPending();
+        if ($this->isNext()) {
+            return true;
+        }
+
+        if ($this->isPending()) {
+            return true;
+        }
+
+        return false;
     }
 
     private function getLastHeight(): int
