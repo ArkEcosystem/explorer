@@ -17,7 +17,6 @@ final class DelegateTracker
         // Arrange Block
         $lastBlock = Block::withScope(OrderByHeightScope::class)->firstOrFail();
         $height    = $lastBlock->height->toNumber();
-        $timestamp = $lastBlock->timestamp;
 
         // Arrange Delegates
         $activeDelegates = $delegates->toBase()->map(fn ($delegate) => $delegate->public_key);
@@ -26,7 +25,7 @@ final class DelegateTracker
         $activeDelegates = ShuffleDelegates::execute($activeDelegates->toArray(), $startHeight);
 
         // Act
-        $forgingInfo = ForgingInfoCalculator::calculate($timestamp, $height);
+        $forgingInfo = ForgingInfoCalculator::calculate(null, $height);
 
         // // Determine Next Forgers...
         // $nextForgers = [];
