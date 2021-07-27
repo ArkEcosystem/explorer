@@ -21,7 +21,7 @@ final class Slots
 
         $start = Network::epoch()->unix();
 
-        return (int) floor(($timestamp - $start) / 1000);
+        return $timestamp - $start;
     }
 
     public function getTimeInMsUntilNextSlot(): int
