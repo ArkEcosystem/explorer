@@ -15,8 +15,6 @@ use Carbon\Carbon;
 use Livewire\Livewire;
 
 beforeEach(function () {
-    configureExplorerDatabase();
-
     $this->activeDelegates = require dirname(dirname(dirname(__DIR__))).'/fixtures/forgers.php';
 });
 
