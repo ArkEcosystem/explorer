@@ -19,10 +19,10 @@ final class DelegateTracker
         $height    = $lastBlock->height->toNumber();
 
         // Arrange Delegates
-        $activeDelegates = $delegates->toBase()->map(fn ($delegate) => $delegate->public_key);
+        $activeDelegates = self::getActiveDelegates($delegates);
 
         // TODO: calculate this once for a given round, then cache it as it won't change until next round
-        $activeDelegates = ShuffleDelegates::execute($activeDelegates->toArray(), $startHeight);
+        $activeDelegates = self::shuffleDelegates($activeDelegates, $startHeight);
 
         // Act
         $forgingInfo = ForgingInfoCalculator::calculate(null, $height);
@@ -41,21 +41,25 @@ final class DelegateTracker
         $forgingIndex = 2; // We start at 2 to skip 0 which results in 0 as time and 1 which would be the next forger.
 
         // Get the original forging info to determine the actual first
-        $originalOrder = ForgingInfoCalculator::calculate(Block::where('height', $startHeight)->firstOrFail()->timestamp, $startHeight);
+        $originalOrder = ForgingInfoCalculator::calculate(
+            Block::where('height', $startHeight)->firstOrFail()->timestamp,
+            $startHeight
+        );
 
         // Note: static order will be found by shifting the index based on the forging data from above
-        $delCount         = Network::delegateCount();
-        $delegatesOrdered = [];
-        for ($i = $originalOrder['currentForger']; $i < $delCount + $originalOrder['currentForger']; $i++) {
-            $delegatesOrdered[] = $activeDelegates[$i % $delCount];
-        }
+        $delegateCount    = Network::delegateCount();
+        $delegatesOrdered = self::orderDelegates(
+            $activeDelegates,
+            $originalOrder['currentForger'],
+            $delegateCount
+        );
 
         return collect($delegatesOrdered)
-            ->map(function ($publicKey, $index) use (&$forgingIndex, $forgingInfo, $originalOrder, $delCount) {
+            ->map(function ($publicKey, $index) use (&$forgingIndex, $forgingInfo, $originalOrder, $delegateCount) {
 
                 // Determine forging order based on the original offset
                 $difference = $forgingInfo['currentForger'] - $originalOrder['currentForger'];
-                $normalizedOrder = $difference >= 0 ? $difference : $delCount + $difference;
+                $normalizedOrder = $difference >= 0 ? $difference : $delegateCount + $difference;
 
                 if ($index === $normalizedOrder) {
                     return [
