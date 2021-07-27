@@ -89,4 +89,30 @@ final class DelegateTracker
             })
             ->toArray();
     }
+
+    private static function getActiveDelegates(Collection $delegates): array
+    {
+        return $delegates->toBase()
+            ->map(fn ($delegate) => $delegate->public_key)
+            ->toArray();
+    }
+
+    private static function shuffleDelegates(array $delegates, int $height): array
+    {
+        return ShuffleDelegates::execute($delegates, $height);
+    }
+
+    private static function orderDelegates(
+        array $activeDelegates,
+        int $currentForger,
+        int $delegateCount,
+    ): array
+    {
+        $delegatesOrdered = [];
+        for ($i = $currentForger; $i < $delegateCount + $currentForger; $i++) {
+            $delegatesOrdered[] = $activeDelegates[$i % $delegateCount];
+        }
+
+        return $delegatesOrdered;
+    }
 }
