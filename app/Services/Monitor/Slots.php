@@ -72,8 +72,6 @@ final class Slots
             $timestamp = $this->getTime();
         }
 
-        $height = $this->getLatestHeight($height);
-
         $blockTime               = Network::blockTime();
         $totalSlotsFromLastSpan  = 0;
         $lastSpanEndTime         = 0;
