@@ -13,7 +13,6 @@ use App\Services\Monitor\ForgingInfoCalculator;
 use App\Services\Monitor\Slots;
 use Carbon\Carbon;
 use Livewire\Livewire;
-use function Tests\configureExplorerDatabase;
 
 beforeEach(function() {
     configureExplorerDatabase();

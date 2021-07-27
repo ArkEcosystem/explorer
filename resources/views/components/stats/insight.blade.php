@@ -14,22 +14,24 @@
     'selected',
 ])
 
-<x-general.card with-border class="flex flex-col gap-6">
+<x-general.card with-border class="flex flex-col gap-6 w-full">
     <div class="xl:w-full">
         <h2 class="mb-0 text-sm font-semibold leading-none text-theme-secondary-900 dark:text-theme-secondary-200">{{ $mainTitle }}</h2>
         <p class="mt-3 text-lg font-bold sm:text-2xl text-theme-secondary-900 dark:text-theme-secondary-200">{{ $mainValue }}</p>
     </div>
 
     <div class="pt-6 w-full border-t border-theme-secondary-300 dark:border-theme-secondary-800">
-        <x-ark-rich-select
-            wire:model="{{ $model }}"
-            wrapper-class="relative left-0 xl:inline-block"
-            dropdown-class="left-0 mt-1 origin-top-left"
-            button-class="block text-sm font-semibold text-left bg-transparent text-theme-secondary-700 dark:text-theme-secondary-200"
-            :initial-value="$selected"
-            :placeholder="$selected"
-            :options="$options"
-        />
+        <div wire:ignore>
+            <x-ark-rich-select
+                wire:model="{{ $model }}"
+                wrapper-class="relative left-0 xl:inline-block"
+                dropdown-class="left-0 mt-1 origin-top-left"
+                button-class="block text-sm font-semibold text-left bg-transparent text-theme-secondary-700 dark:text-theme-secondary-200"
+                :initial-value="$selected"
+                :placeholder="$selected"
+                :options="$options"
+            />
+        </div>
 
         <div class="flex flex-col gap-5 sm:flex-row sm:items-end xl:w-full @if($chart) sm:justify-between @endif">
             <div class="">
