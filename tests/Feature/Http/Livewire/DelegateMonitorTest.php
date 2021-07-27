@@ -14,7 +14,7 @@ use App\Services\Monitor\Slots;
 use Carbon\Carbon;
 use Livewire\Livewire;
 
-beforeEach(function() {
+beforeEach(function () {
     configureExplorerDatabase();
 
     $this->activeDelegates = require dirname(dirname(dirname(__DIR__))).'/fixtures/forgers.php';
@@ -107,7 +107,7 @@ it('should correctly show the block is missed', function () {
     $this->travelTo(new Carbon('2021-01-01 00:04:00'));
 
     // Create wallets for each delegate
-    $this->activeDelegates->each(function($delegate) use (&$wallets) {
+    $this->activeDelegates->each(function ($delegate) use (&$wallets) {
         $wallet = Wallet::factory()->create(['public_key' => $delegate->public_key]);
 
         Round::factory()->create([
@@ -137,7 +137,7 @@ it('should correctly show the block is missed', function () {
     $delegatesInOrder  = collect($orderDelegatesMethod->invokeArgs(null, [
         $shuffledDelegates,
         $originalOrder['currentForger'],
-        51
+        51,
     ]));
 
     // Forge blocks for first 5 delegates

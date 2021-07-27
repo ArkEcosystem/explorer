@@ -110,8 +110,7 @@ final class DelegateTracker
         array $activeDelegates,
         int $currentForger,
         int $delegateCount,
-    ): array
-    {
+    ): array {
         $delegatesOrdered = [];
         for ($i = $currentForger; $i < $delegateCount + $currentForger; $i++) {
             $delegatesOrdered[] = $activeDelegates[$i % $delegateCount];

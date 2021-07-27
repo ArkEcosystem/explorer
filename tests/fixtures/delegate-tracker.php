@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 return [
     'input' => [
         '033a5474f68f92f254691e93c06a2f22efaf7d66b543a53efcece021819653a200',

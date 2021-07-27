@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Cache;
 
 use function Spatie\Snapshots\assertMatchesSnapshot;
 
-beforeEach(function() {
+beforeEach(function () {
     $this->activeDelegates = require dirname(dirname(dirname(__DIR__))).'/fixtures/forgers.php';
     $this->expected        = require dirname(dirname(dirname(__DIR__))).'/fixtures/delegate-tracker.php';
 });

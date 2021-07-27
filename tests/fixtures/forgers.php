@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 return collect([
     (object) ['public_key' => '033a5474f68f92f254691e93c06a2f22efaf7d66b543a53efcece021819653a200'],
     (object) ['public_key' => '0215789ac26155b7a338708f595b97c453e08918d0630c896cbd31d83fe2ad1c33'],
