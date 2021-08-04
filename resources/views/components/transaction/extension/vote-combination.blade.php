@@ -23,7 +23,7 @@
                                     <a href="{{ route('wallet', $transaction->voted()->address()) }}" class="font-semibold link">
                                         {{ $transaction->voted()->username() }}
                                     </a>
-                                    <span class="min-w-0 text-theme-secondary-400">
+                                    <span class="min-w-0 text-theme-secondary-500 font-semibold dark:text-theme-secondary-700">
                                         <x-truncate-dynamic>{{ $transaction->voted()->address() }}</x-truncate-dynamic>
                                     </span>
                                 </div>
@@ -58,7 +58,7 @@
                                     <a href="{{ route('wallet', $transaction->unvoted()->address()) }}" class="font-semibold link">
                                         {{ $transaction->unvoted()->username() }}
                                     </a>
-                                    <span class="min-w-0 text-theme-secondary-400">
+                                    <span class="min-w-0 text-theme-secondary-500 font-semibold dark:text-theme-secondary-700">
                                         <x-truncate-dynamic>{{ $transaction->unvoted()->address() }}</x-truncate-dynamic>
                                     </span>
                                 </div>
