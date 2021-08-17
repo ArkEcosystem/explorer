@@ -21,7 +21,7 @@ final class DelegateTable extends Component
     ];
 
     /**
-     * @var array $listeners
+     * @var array
      */
     protected $listeners = ['filterByDelegateStatus'];
 
@@ -29,7 +29,7 @@ final class DelegateTable extends Component
     {
         $tab = request()->get('tab', 'active');
 
-        if (in_array($tab, ['standby', 'resigned'])) {
+        if (in_array($tab, ['standby', 'resigned'], true)) {
             $this->state['status'] = $tab;
         }
     }
