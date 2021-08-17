@@ -20,8 +20,19 @@ final class DelegateTable extends Component
         'status' => 'active',
     ];
 
-    /** @phpstan-ignore-next-line */
+    /**
+     * @var array $listeners
+     */
     protected $listeners = ['filterByDelegateStatus'];
+
+    public function mount(): void
+    {
+        $tab = request()->get('tab', 'active');
+
+        if (in_array($tab, ['standby', 'resigned'])) {
+            $this->state['status'] = $tab;
+        }
+    }
 
     public function render(): View
     {
@@ -40,6 +51,8 @@ final class DelegateTable extends Component
 
     public function filterByDelegateStatus(string $value): void
     {
+        $this->tab = $value;
+
         $this->state['status'] = $value;
 
         $this->gotoPage(1);
