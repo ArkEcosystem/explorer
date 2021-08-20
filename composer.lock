@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f45a780924d7bac912da603978fc118f",
+    "content-hash": "d07ec0be0a46f53c85e1a15fc5d116e3",
     "packages": [
         {
             "name": "arkecosystem/crypto",
