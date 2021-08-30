@@ -73,7 +73,7 @@ it('should aggregate the total rewards forged', function () {
     expect($result->toArray()[0]['reward'])->toBe((string) 10e8);
 });
 
-it('should aggregate the total everything together', function () {
+it('should aggregate all the forged data', function () {
     Block::factory(10)->create([
         'generator_public_key' => 'generator',
         'total_fee'            => '100000000',
