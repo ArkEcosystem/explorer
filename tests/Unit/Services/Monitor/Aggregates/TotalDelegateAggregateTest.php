@@ -13,8 +13,8 @@ beforeEach(function () {
         'attributes' => [
             'delegate' => [
                 'username' => 'generator',
-            ]
-        ]
+            ],
+        ],
     ]);
 });
 
@@ -35,7 +35,7 @@ it('should aggregate the total amount forged', function () {
 it('should aggregate the total fee forged', function () {
     Block::factory(10)->create([
         'generator_public_key' => 'generator',
-        'total_fee'         => '100000000',
+        'total_fee'            => '100000000',
     ])->pluck('generator_public_key')->toArray();
 
     $result = (new TotalDelegateAggregate())->aggregate();
@@ -72,7 +72,6 @@ it('should aggregate the total rewards forged', function () {
     expect($result->toArray()[0]['generator_public_key'])->toBe('generator');
     expect($result->toArray()[0]['reward'])->toBe((string) 10e8);
 });
-
 
 it('should aggregate the total everything together', function () {
     Block::factory(10)->create([

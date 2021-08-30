@@ -4,11 +4,9 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
-use App\Models\Block;
-use App\Facades\Wallets;
-use Illuminate\Console\Command;
 use App\Services\Cache\DelegateCache;
 use App\Services\Monitor\Aggregates\TotalDelegateAggregate;
+use Illuminate\Console\Command;
 
 final class CacheDelegateAggregates extends Command
 {
@@ -33,7 +31,7 @@ final class CacheDelegateAggregates extends Command
      */
     public function handle(DelegateCache $cache)
     {
-        $aggregate = (new TotalDelegateAggregate)->aggregate();
+        $aggregate = (new TotalDelegateAggregate())->aggregate();
 
         dd($aggregate->pluck('total_amount', 'generator_public_key'));
 
@@ -44,6 +42,5 @@ final class CacheDelegateAggregates extends Command
         $cache->setTotalRewards($aggregate->pluck('reward', 'generator_public_key'));
 
         $cache->setTotalBlocks($aggregate->pluck('count', 'generator_public_key'));
-
     }
 }
