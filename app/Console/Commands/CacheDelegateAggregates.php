@@ -35,8 +35,6 @@ final class CacheDelegateAggregates extends Command
     {
         $aggregate = (new TotalDelegateAggregate)->aggregate();
 
-        dd($aggregate->pluck('total_amount', 'generator_public_key'));
-
         $cache->setTotalAmounts($aggregate->pluck('total_amount', 'generator_public_key'));
 
         $cache->setTotalFees($aggregate->pluck('total_fee', 'generator_public_key'));
