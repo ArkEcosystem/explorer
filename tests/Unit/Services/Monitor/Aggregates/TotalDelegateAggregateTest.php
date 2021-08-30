@@ -12,14 +12,9 @@ beforeEach(function () {
         'public_key' => 'generator',
         'attributes' => [
             'delegate' => [
-                'username' => 'delegate',
-            ]
-        ]
-    ]);
-
-    Wallet::factory()->create([
-        'public_key' => 'not_delegate_key',
-        'attributes' => []
+                'username' => 'generator',
+            ],
+        ],
     ]);
 });
 
@@ -27,7 +22,7 @@ it('should aggregate the total amount forged', function () {
     Block::factory(10)->create([
         'generator_public_key' => 'generator',
         'total_amount'         => '100000000',
-    ]);
+    ])->pluck('generator_public_key')->toArray();
 
     $result = (new TotalDelegateAggregate())->aggregate();
 
@@ -40,8 +35,8 @@ it('should aggregate the total amount forged', function () {
 it('should aggregate the total fee forged', function () {
     Block::factory(10)->create([
         'generator_public_key' => 'generator',
-        'total_fee'         => '100000000',
-    ]);
+        'total_fee'            => '100000000',
+    ])->pluck('generator_public_key')->toArray();
 
     $result = (new TotalDelegateAggregate())->aggregate();
 
@@ -54,7 +49,7 @@ it('should aggregate the total fee forged', function () {
 it('should aggregate the total count forged', function () {
     Block::factory(10)->create([
         'generator_public_key' => 'generator',
-    ]);
+    ])->pluck('generator_public_key')->toArray();
 
     $result = (new TotalDelegateAggregate())->aggregate();
 
@@ -68,7 +63,7 @@ it('should aggregate the total rewards forged', function () {
     Block::factory(10)->create([
         'generator_public_key' => 'generator',
         'reward'               => '100000000',
-    ]);
+    ])->pluck('generator_public_key')->toArray();
 
     $result = (new TotalDelegateAggregate())->aggregate();
 
@@ -78,21 +73,13 @@ it('should aggregate the total rewards forged', function () {
     expect($result->toArray()[0]['reward'])->toBe((string) 10e8);
 });
 
-
 it('should aggregate the total everything together', function () {
     Block::factory(10)->create([
         'generator_public_key' => 'generator',
         'total_fee'            => '100000000',
         'total_amount'         => '200000000',
         'reward'               => '300000000',
-    ]);
-
-    Block::factory()->create([
-        'generator_public_key' => 'not_delegate_key',
-        'total_fee'            => '400000000',
-        'total_amount'         => '500000000',
-        'reward'               => '600000000',
-    ]);
+    ])->pluck('generator_public_key')->toArray();
 
     $result = (new TotalDelegateAggregate())->aggregate();
 
