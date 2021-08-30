@@ -7,7 +7,7 @@ namespace App\Services\Monitor\Aggregates;
 use App\Facades\Wallets;
 use Illuminate\Database\Eloquent\Collection;
 
-final class TotalDelegateAggregate
+final class DelegateTotalAggregates
 {
     public function aggregate(): Collection
     {

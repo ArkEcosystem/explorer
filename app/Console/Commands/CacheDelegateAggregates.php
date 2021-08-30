@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Console\Commands;
 
 use App\Services\Cache\DelegateCache;
-use App\Services\Monitor\Aggregates\TotalDelegateAggregate;
+use App\Services\Monitor\Aggregates\DelegateTotalAggregates;
 use Illuminate\Console\Command;
 
 final class CacheDelegateAggregates extends Command
@@ -31,14 +31,14 @@ final class CacheDelegateAggregates extends Command
      */
     public function handle(DelegateCache $cache)
     {
-        $aggregate = (new TotalDelegateAggregate())->aggregate();
+        $aggregate = (new DelegateTotalAggregates())->aggregate();
 
-        $cache->setTotalAmounts(fn() => $aggregate->pluck('total_amount', 'generator_public_key'));
+        $cache->setTotalAmounts(fn() => $aggregate->pluck('total_amount', 'generator_public_key')->toArray());
 
-        $cache->setTotalFees(fn() => $aggregate->pluck('total_fee', 'generator_public_key'));
+        $cache->setTotalFees(fn() => $aggregate->pluck('total_fee', 'generator_public_key')->toArray());
 
-        $cache->setTotalRewards(fn() => $aggregate->pluck('reward', 'generator_public_key'));
+        $cache->setTotalRewards(fn() => $aggregate->pluck('reward', 'generator_public_key')->toArray());
 
-        $cache->setTotalBlocks(fn() => $aggregate->pluck('count', 'generator_public_key'));
+        $cache->setTotalBlocks(fn() => $aggregate->pluck('count', 'generator_public_key')->toArray());
     }
 }
