@@ -21,8 +21,6 @@ final class DelegateTotalAggregates
                 blocks.generator_public_key
             ')
             ->groupBy('blocks.generator_public_key')
-            // Needed because the wallets are sorted by balance.
-            ->groupBy('wallets.balance')
             ->get();
     }
 }
