@@ -1,4 +1,4 @@
-<div class="flex flex-col rounded-xl overflow-hidden border-2 border-theme-secondary-300 dark:border-theme-secondary-800">
+<div class="flex overflow-hidden flex-col rounded-xl border-2 border-theme-secondary-300 dark:border-theme-secondary-800">
     <div class="{{ $padding ?? 'px-8 py-6' }} bg-theme-secondary-900 lg:relative">
         <div class="flex overflow-auto flex-col justify-between space-y-8 lg:flex-row lg:space-y-0">
             <div class="flex overflow-auto md:space-x-4">
