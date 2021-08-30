@@ -33,12 +33,12 @@ final class CacheDelegateAggregates extends Command
     {
         $aggregate = (new DelegateTotalAggregates())->aggregate();
 
-        $cache->setTotalAmounts(fn() => $aggregate->pluck('total_amount', 'generator_public_key')->toArray());
+        $cache->setTotalAmounts(fn () => $aggregate->pluck('total_amount', 'generator_public_key')->toArray());
 
-        $cache->setTotalFees(fn() => $aggregate->pluck('total_fee', 'generator_public_key')->toArray());
+        $cache->setTotalFees(fn () => $aggregate->pluck('total_fee', 'generator_public_key')->toArray());
 
-        $cache->setTotalRewards(fn() => $aggregate->pluck('reward', 'generator_public_key')->toArray());
+        $cache->setTotalRewards(fn () => $aggregate->pluck('reward', 'generator_public_key')->toArray());
 
-        $cache->setTotalBlocks(fn() => $aggregate->pluck('count', 'generator_public_key')->toArray());
+        $cache->setTotalBlocks(fn () => $aggregate->pluck('count', 'generator_public_key')->toArray());
     }
 }
