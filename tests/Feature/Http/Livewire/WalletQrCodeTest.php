@@ -34,7 +34,7 @@ it('defaults the wallet uri prefix to payvo', function () {
 });
 
 it('accepts a different wallet uri prefix', function () {
-    Config::set('explorer.wallet_prefix', 'ark:');
+    Config::set('explorer.wallet_prefix', 'ark');
 
     $wallet = Wallet::factory()->create(['address' => 'DRgF3PvzeGWndQjET7dZsSmnrc6uAy23ES']);
 
