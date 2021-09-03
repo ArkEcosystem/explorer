@@ -5,7 +5,7 @@ declare(strict_types=1);
 return [
     'network' => env('EXPLORER_NETWORK', 'development'),
 
-    'wallet_prefix' => env('WALLET_PREFIX', 'payvo'),
+    'uri_prefix' => env('EXPLORER_URI_PREFIX', 'payvo'),
 
     'networks' => [
         'production' => [
