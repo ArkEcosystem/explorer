@@ -24,7 +24,6 @@ final class CoinGecko implements CryptoDataFetcher
 
             $params = [
                 'vs_currency' => Str::lower($target),
-                'days' => 'max',
                 'days' => Network::epoch()->diffInDays(),
                 'interval' => 'daily',
             ];
@@ -39,33 +38,49 @@ final class CoinGecko implements CryptoDataFetcher
     public function historicalHourly(string $source, string $target, int $limit = 23, string $format = 'Y-m-d H:i:s'): Collection
     {
         return (new CryptoDataCache())->setHistoricalHourly($source, $target, $format, $limit, function () use ($source, $target, $format, $limit): Collection {
-            $result = Http::get('https://min-api.cryptocompare.com/data/histohour', [
-                'fsym'  => $source,
-                'tsym'  => $target,
-                'toTs'  => Carbon::now()->unix(),
-                'limit' => $limit,
-            ])->json()['Data'];
+            $client = new CoinGeckoClient();
 
-            return collect($result)
-                ->groupBy(fn ($day) => Carbon::createFromTimestamp($day['time'])->format($format))
-                ->mapWithKeys(fn ($transactions, $day) => [
-                    $day => ResolveScientificNotation::execute($transactions->sum('close')),
-                ]);
+            $data = $client->coins()->getMarketChart(
+                Str::lower($source),
+                Str::lower($target),
+                strval(ceil($limit / 24))
+            );
+
+            return collect($data['prices'])
+                ->groupBy(fn ($item) => Carbon::createFromTimestampMsUTC($item[0])->format('Y-m-d H:') . '00:00')
+                ->mapWithKeys(fn ($items, $day) => [
+                    Carbon::createFromFormat('Y-m-d H:i:s', $day)->format($format) => collect($items)->average(fn ($item) => $item[1])
+                ])
+                // Take the last $limit items (since the API returns a whole days and the limit is per hour)
+                ->reverse()->take($limit + 1)->reverse();
         });
     }
 
+    // @TODO
     public function getCurrenciesData(string $source, Collection $targets): Collection
     {
-        $result = Http::get('https://min-api.cryptocompare.com/data/pricemultifull', [
-            'fsyms'  => $source,
-            'tsyms'  => $targets->join(','),
-        ])->json();
+        return collect();
+        // $client = new CoinGeckoClient();
 
-        return $targets->mapWithKeys(fn ($currency) => [
-            strtoupper($currency) => [
-                    'priceChange' => Arr::get($result, 'RAW.'.$source.'.'.strtoupper($currency).'.CHANGEPCT24HOUR', 0) / 100,
-                    'price'       => Arr::get($result, 'RAW.'.$source.'.'.strtoupper($currency).'.PRICE', 0),
-                ],
-            ]);
+        // $data = $client->coins()->getMarkets(
+        //     'Str::lower($source)',
+        //     [
+        //         'ids' => $targets->map(fn ($target) => Str::lower($target))->join(','),
+        //     ]
+        // );
+
+        // dd
+
+        // $result = Http::get('https://min-api.cryptocompare.com/data/pricemultifull', [
+        //     'fsyms'  => $source,
+        //     'tsyms'  => $targets->join(','),
+        // ])->json();
+
+        // return $targets->mapWithKeys(fn ($currency) => [
+        //     strtoupper($currency) => [
+        //             'priceChange' => Arr::get($result, 'RAW.'.$source.'.'.strtoupper($currency).'.CHANGEPCT24HOUR', 0) / 100,
+        //             'price'       => Arr::get($result, 'RAW.'.$source.'.'.strtoupper($currency).'.PRICE', 0),
+        //         ],
+        //     ]);
     }
 }

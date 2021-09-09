@@ -40,15 +40,17 @@ final class CacheCurrenciesData extends Command
 
     public function handle(NetworkStatusBlockCache $cache): void
     {
-        if (! Network::canBeExchanged()) {
-            return;
-        }
+        // if (! Network::canBeExchanged()) {
+        //     return;
+        // }
 
         $source     = Network::currency();
         $currencies = collect(config('currencies'))->pluck('currency');
 
         try {
             $currenciesData = $this->cryptoDataFetcher->getCurrenciesData($source, $currencies);
+
+            dd($currencies->map(fn($currency) => \Illuminate\Support\Str::lower($currency))->join(','));
 
             $currenciesData->each(function ($data, $currency) use ($source, $cache) : void {
                 ['price' => $price, 'priceChange' => $priceChange] = $data;
