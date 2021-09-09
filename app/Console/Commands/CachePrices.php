@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
+use App\Contracts\CryptoDataFetcher;
 use App\Enums\StatsPeriods;
 use App\Facades\Network;
 use App\Services\Cache\CryptoDataCache;
 use App\Services\Cache\PriceChartCache;
-use Illuminate\Console\Command;
-use Illuminate\Support\Str;
-use App\Contracts\CryptoDataFetcher;
 use Carbon\Carbon;
+use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 
 final class CachePrices extends Command
 {

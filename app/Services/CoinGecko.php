@@ -48,7 +48,7 @@ final class CoinGecko implements CryptoDataFetcher
             return collect($data['prices'])
                 ->groupBy(fn ($item) => Carbon::createFromTimestampMsUTC($item[0])->format('Y-m-d H:').'00:00')
                 ->mapWithKeys(fn ($items, $day) => [
-                    /** @phpstan-ignore-next-line */
+                    /* @phpstan-ignore-next-line */
                     Carbon::createFromFormat('Y-m-d H:i:s', $day)->format($format) => collect($items)->average(fn ($item) => $item[1]),
                 ])
                 // Take the last $limit items (since the API returns a whole days and the limit is per hour)
