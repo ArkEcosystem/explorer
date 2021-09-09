@@ -11,6 +11,8 @@ use App\Services\Cache\PriceChartCache;
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
 use App\Contracts\CryptoDataFetcher;
+use Carbon\Carbon;
+use Illuminate\Support\Collection;
 
 final class CachePrices extends Command
 {
@@ -69,5 +71,42 @@ final class CachePrices extends Command
                 $cache->setHistorical($currency, $period, $this->{$method}($prices));
             });
         });
+    }
+
+    private function getDay(Collection $datasets): Collection
+    {
+        return $this->groupByDate($datasets->take(-24), 'H:s');
+    }
+
+    private function getWeek(Collection $datasets): Collection
+    {
+        return $this->groupByDate($datasets->take(-7), 'd.m');
+    }
+
+    private function getMonth(Collection $datasets): Collection
+    {
+        return $this->groupByDate($datasets->take(-30), 'd.m');
+    }
+
+    private function getQuarter(Collection $datasets): Collection
+    {
+        return $this->groupByDate($datasets->take(-120), 'd.m');
+    }
+
+    private function getYear(Collection $datasets): Collection
+    {
+        return $this->groupByDate($datasets->take(-365), 'd.m');
+    }
+
+    private function getAll(Collection $datasets): Collection
+    {
+        return $this->groupByDate($datasets, 'm.Y');
+    }
+
+    private function groupByDate(Collection $datasets, string $format): Collection
+    {
+        return $datasets
+            ->groupBy(fn ($_, $key) => Carbon::parse($key)->format($format))
+            ->mapWithKeys(fn ($values, $key) => [$key => (float) $values->first()]);
     }
 }
