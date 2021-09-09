@@ -5,7 +5,7 @@ declare(strict_types=1);
 use App\Console\Commands\CachePrices;
 use App\Contracts\Network;
 use App\Services\Blockchain\Network as Blockchain;
-use App\Services\Cache\CryptoCompareCache;
+use App\Services\Cache\CryptoDataCache;
 use App\Services\Cache\PriceChartCache;
 use Illuminate\Support\Collection;
 use function Tests\fakeCryptoCompare;
@@ -15,7 +15,7 @@ it('should execute the command', function (string $network) {
 
     $this->app->singleton(Network::class, fn () => new Blockchain(config($network)));
 
-    $crypto = new CryptoCompareCache();
+    $crypto = new CryptoDataCache();
     $prices = new PriceChartCache();
 
     (new CachePrices())->handle($crypto, $prices);

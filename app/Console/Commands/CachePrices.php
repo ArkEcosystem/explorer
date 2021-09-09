@@ -6,13 +6,11 @@ namespace App\Console\Commands;
 
 use App\Enums\StatsPeriods;
 use App\Facades\Network;
-use App\Services\Cache\CryptoCompareCache;
+use App\Services\Cache\CryptoDataCache;
 use App\Services\Cache\PriceChartCache;
-use App\Services\CryptoCompare;
-use Carbon\Carbon;
 use Illuminate\Console\Command;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
+use App\Contracts\CryptoDataFetcher;
 
 final class CachePrices extends Command
 {
@@ -30,7 +28,19 @@ final class CachePrices extends Command
      */
     protected $description = 'Cache prices and exchange rates.';
 
-    public function handle(CryptoCompareCache $crypto, PriceChartCache $cache): void
+    /**
+     * @var CryptoDataFetcher
+     */
+    protected $cryptoDataFetcher = 'Cache currencies data';
+
+    public function __construct(CryptoDataFetcher $cryptoDataFetcher)
+    {
+        parent::__construct();
+
+        $this->cryptoDataFetcher = $cryptoDataFetcher;
+    }
+
+    public function handle(CryptoDataCache $crypto, PriceChartCache $cache): void
     {
         if (! Network::canBeExchanged()) {
             return;
@@ -38,8 +48,8 @@ final class CachePrices extends Command
 
         collect(config('currencies'))->values()->each(function ($currency) use ($crypto, $cache): void {
             $currency = $currency['currency'];
-            $prices   = CryptoCompare::historical(Network::currency(), $currency);
-            $hourlyPrices   = CryptoCompare::historicalHourly(Network::currency(), $currency);
+            $prices = $this->cryptoDataFetcher->historical(Network::currency(), $currency);
+            $hourlyPrices = $this->cryptoDataFetcher->historicalHourly(Network::currency(), $currency);
 
             collect([
                 StatsPeriods::DAY,
@@ -59,42 +69,5 @@ final class CachePrices extends Command
                 $cache->setHistorical($currency, $period, $this->{$method}($prices));
             });
         });
-    }
-
-    private function getDay(Collection $datasets): Collection
-    {
-        return $this->groupByDate($datasets->take(-24), 'H:s');
-    }
-
-    private function getWeek(Collection $datasets): Collection
-    {
-        return $this->groupByDate($datasets->take(-7), 'd.m');
-    }
-
-    private function getMonth(Collection $datasets): Collection
-    {
-        return $this->groupByDate($datasets->take(-30), 'd.m');
-    }
-
-    private function getQuarter(Collection $datasets): Collection
-    {
-        return $this->groupByDate($datasets->take(-120), 'd.m');
-    }
-
-    private function getYear(Collection $datasets): Collection
-    {
-        return $this->groupByDate($datasets->take(-365), 'd.m');
-    }
-
-    private function getAll(Collection $datasets): Collection
-    {
-        return $this->groupByDate($datasets, 'm.Y');
-    }
-
-    private function groupByDate(Collection $datasets, string $format): Collection
-    {
-        return $datasets
-            ->groupBy(fn ($_, $key) => Carbon::parse($key)->format($format))
-            ->mapWithKeys(fn ($values, $key) => [$key => (float) $values->first()]);
     }
 }

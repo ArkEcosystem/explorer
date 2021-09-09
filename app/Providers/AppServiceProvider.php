@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\Contracts\CryptoDataFetcher;
 use App\Services\BigNumber;
+use App\Services\CryptoCompare;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Illuminate\Support\ServiceProvider;
@@ -20,6 +22,8 @@ final class AppServiceProvider extends ServiceProvider
     public function register()
     {
         Model::unguard();
+
+        $this->app->singleton(CryptoDataFetcher::class, fn () => new CryptoCompare());
     }
 
     /**

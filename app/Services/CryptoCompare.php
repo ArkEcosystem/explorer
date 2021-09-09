@@ -5,18 +5,19 @@ declare(strict_types=1);
 namespace App\Services;
 
 use App\Facades\Network;
-use App\Services\Cache\CryptoCompareCache;
+use App\Services\Cache\CryptoDataCache;
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
 use Konceiver\BetterNumberFormatter\ResolveScientificNotation;
+use App\Contracts\CryptoDataFetcher;
 
-final class CryptoCompare
+final class CryptoCompare implements CryptoDataFetcher
 {
-    public static function historical(string $source, string $target, string $format = 'Y-m-d'): Collection
+    public function historical(string $source, string $target, string $format = 'Y-m-d'): Collection
     {
-        return (new CryptoCompareCache())->setHistorical($source, $target, $format, function () use ($source, $target, $format): Collection {
+        return (new CryptoDataCache())->setHistorical($source, $target, $format, function () use ($source, $target, $format): Collection {
             $result = Http::get('https://min-api.cryptocompare.com/data/histoday', [
                 'fsym'  => $source,
                 'tsym'  => $target,
@@ -30,9 +31,9 @@ final class CryptoCompare
         });
     }
 
-    public static function historicalHourly(string $source, string $target, int $limit = 23, string $format = 'Y-m-d H:i:s'): Collection
+    public function historicalHourly(string $source, string $target, int $limit = 23, string $format = 'Y-m-d H:i:s'): Collection
     {
-        return (new CryptoCompareCache())->setHistoricalHourly($source, $target, $format, $limit, function () use ($source, $target, $format, $limit): Collection {
+        return (new CryptoDataCache())->setHistoricalHourly($source, $target, $format, $limit, function () use ($source, $target, $format, $limit): Collection {
             $result = Http::get('https://min-api.cryptocompare.com/data/histohour', [
                 'fsym'  => $source,
                 'tsym'  => $target,
@@ -48,7 +49,7 @@ final class CryptoCompare
         });
     }
 
-    public static function getCurrenciesData(string $source, Collection $targets): Collection
+    public function getCurrenciesData(string $source, Collection $targets): Collection
     {
         $result = Http::get('https://min-api.cryptocompare.com/data/pricemultifull', [
             'fsyms'  => $source,

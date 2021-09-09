@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
+use App\Contracts\CryptoDataFetcher;
 use App\Facades\Network;
 use App\Services\Cache\NetworkStatusBlockCache;
-use App\Services\CryptoCompare;
 use Illuminate\Console\Command;
 use Illuminate\Http\Client\ConnectionException;
 
@@ -26,6 +26,18 @@ final class CacheCurrenciesData extends Command
      */
     protected $description = 'Cache currencies data';
 
+    /**
+     * @var CryptoDataFetcher
+     */
+    protected $cryptoDataFetcher = 'Cache currencies data';
+
+    public function __construct(CryptoDataFetcher $cryptoDataFetcher)
+    {
+        parent::__construct();
+
+        $this->cryptoDataFetcher = $cryptoDataFetcher;
+    }
+
     public function handle(NetworkStatusBlockCache $cache): void
     {
         if (! Network::canBeExchanged()) {
@@ -36,7 +48,7 @@ final class CacheCurrenciesData extends Command
         $currencies = collect(config('currencies'))->pluck('currency');
 
         try {
-            $currenciesData = CryptoCompare::getCurrenciesData($source, $currencies);
+            $currenciesData = $this->cryptoDataFetcher->getCurrenciesData($source, $currencies);
 
             $currenciesData->each(function ($data, $currency) use ($source, $cache) : void {
                 ['price' => $price, 'priceChange' => $priceChange] = $data;
