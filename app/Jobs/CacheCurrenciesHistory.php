@@ -28,10 +28,9 @@ final class CacheCurrenciesHistory implements ShouldQueue
     {
     }
 
-
     public function handle(): void
     {
-        $cache = app(NetworkStatusBlockCache::class);
+        $cache             = app(NetworkStatusBlockCache::class);
         $cryptoDataFetcher = app(CryptoDataFetcher::class);
 
         try {
