@@ -50,7 +50,7 @@ final class CacheCurrenciesData extends Command
         try {
             $currenciesData = $this->cryptoDataFetcher->getCurrenciesData($source, $currencies);
 
-            dd($currencies->map(fn($currency) => \Illuminate\Support\Str::lower($currency))->join(','));
+            dd($currencies->map(fn ($currency) => \Illuminate\Support\Str::lower($currency))->join(','));
 
             $currenciesData->each(function ($data, $currency) use ($source, $cache) : void {
                 ['price' => $price, 'priceChange' => $priceChange] = $data;

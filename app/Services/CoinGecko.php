@@ -4,16 +4,15 @@ declare(strict_types=1);
 
 namespace App\Services;
 
-use Carbon\Carbon;
-use App\Facades\Network;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
-use Illuminate\Support\Collection;
 use App\Contracts\CryptoDataFetcher;
-use Illuminate\Support\Facades\Http;
+use App\Facades\Network;
 use App\Services\Cache\CryptoDataCache;
+use Carbon\Carbon;
 use Codenixsv\CoinGeckoApi\CoinGeckoClient;
-use Konceiver\BetterNumberFormatter\ResolveScientificNotation;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Str;
 
 final class CoinGecko implements CryptoDataFetcher
 {
@@ -24,11 +23,11 @@ final class CoinGecko implements CryptoDataFetcher
 
             $params = [
                 'vs_currency' => Str::lower($target),
-                'days' => Network::epoch()->diffInDays(),
-                'interval' => 'daily',
+                'days'        => Network::epoch()->diffInDays(),
+                'interval'    => 'daily',
             ];
 
-            $data = $client->coins()->get('/coins/' . Str::lower($source) . '/market_chart', $params);
+            $data = $client->coins()->get('/coins/'.Str::lower($source).'/market_chart', $params);
 
             return collect($data['prices'])
                 ->mapWithKeys(fn ($item) => [Carbon::createFromTimestampMs($item[0])->format($format) => $item[1]]);
@@ -47,9 +46,9 @@ final class CoinGecko implements CryptoDataFetcher
             );
 
             return collect($data['prices'])
-                ->groupBy(fn ($item) => Carbon::createFromTimestampMsUTC($item[0])->format('Y-m-d H:') . '00:00')
+                ->groupBy(fn ($item) => Carbon::createFromTimestampMsUTC($item[0])->format('Y-m-d H:').'00:00')
                 ->mapWithKeys(fn ($items, $day) => [
-                    Carbon::createFromFormat('Y-m-d H:i:s', $day)->format($format) => collect($items)->average(fn ($item) => $item[1])
+                    Carbon::createFromFormat('Y-m-d H:i:s', $day)->format($format) => collect($items)->average(fn ($item) => $item[1]),
                 ])
                 // Take the last $limit items (since the API returns a whole days and the limit is per hour)
                 ->reverse()->take($limit + 1)->reverse();
