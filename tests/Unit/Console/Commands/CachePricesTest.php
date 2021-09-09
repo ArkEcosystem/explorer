@@ -18,7 +18,7 @@ it('should execute the command', function (string $network) {
     $crypto = new CryptoDataCache();
     $prices = new PriceChartCache();
 
-    (new CachePrices())->handle($crypto, $prices);
+    app(CachePrices::class)->handle($crypto, $prices);
 
     expect($crypto->getPrices('USD'))->toBeInstanceOf(Collection::class);
     expect($prices->getHistorical('USD', 'day'))->toBeArray();

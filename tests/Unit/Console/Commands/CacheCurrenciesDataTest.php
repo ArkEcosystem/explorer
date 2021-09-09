@@ -30,7 +30,7 @@ it('should execute the command', function () {
     expect($cache->getPrice(Network::currency(), 'USD'))->toBeNull();
     expect($cache->getPriceChange(Network::currency(), 'USD'))->toBeNull();
 
-    (new CacheCurrenciesData())->handle($cache);
+    app(CacheCurrenciesData::class)->handle($cache);
 
     expect($cache->getPrice(Network::currency(), 'USD'))->toBe(1.2219981765);
     expect($cache->getPriceChange(Network::currency(), 'USD'))->toBe(0.14989143413680925);
@@ -57,7 +57,7 @@ it('set values to null when cryptocompare is down', function () {
         },
     ]);
 
-    (new CacheCurrenciesData())->handle($cache);
+    app(CacheCurrenciesData::class)->handle($cache);
 
     expect($cache->getPrice(Network::currency(), 'USD'))->toBeNull();
     expect($cache->getPriceChange(Network::currency(), 'USD'))->toBeNull();
@@ -80,7 +80,7 @@ it('should ignore the cache for development network', function () {
     expect($cache->getPrice(Network::currency(), 'USD'))->toBeNull();
     expect($cache->getPriceChange(Network::currency(), 'USD'))->toBeNull();
 
-    (new CacheCurrenciesData())->handle($cache);
+    app(CacheCurrenciesData::class)->handle($cache);
 
     expect($cache->getPrice(Network::currency(), 'USD'))->toBeNull();
     expect($cache->getPriceChange(Network::currency(), 'USD'))->toBeNull();
