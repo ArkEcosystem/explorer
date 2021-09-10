@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use App\Services\CryptoCompare;
+use App\Services\MarketDataServices\CryptoCompare;
 use Illuminate\Support\Facades\Http;
 
 use function Spatie\Snapshots\assertMatchesSnapshot;

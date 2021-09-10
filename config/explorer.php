@@ -2,10 +2,14 @@
 
 declare(strict_types=1);
 
+use App\Services\MarketDataServices\CoinGecko;
+
 return [
     'network' => env('EXPLORER_NETWORK', 'development'),
 
     'uri_prefix' => env('EXPLORER_URI_PREFIX', 'payvo'),
+
+    'crypto_market_api_service' => env('EXPLORER_CRYPTO_MARKET_API_SERVICE', CoinGecko::class),
 
     'networks' => [
         'production' => [

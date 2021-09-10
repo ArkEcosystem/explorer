@@ -6,9 +6,9 @@ namespace App\Providers;
 
 use App\Contracts\MarketDataService;
 use App\Services\BigNumber;
-use App\Services\CryptoCompare;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 use Konceiver\DataBags\DataBag;
 
@@ -23,7 +23,10 @@ final class AppServiceProvider extends ServiceProvider
     {
         Model::unguard();
 
-        $this->app->singleton(MarketDataService::class, fn () => new CryptoCompare());
+        $this->app->singleton(
+            MarketDataService::class,
+            fn () => new (Config::get('explorer.crypto_market_api_service'))
+        );
     }
 
     /**
