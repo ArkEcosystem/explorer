@@ -9,6 +9,7 @@ use App\Facades\Network;
 use App\Services\Cache\CryptoDataCache;
 use Carbon\Carbon;
 use Codenixsv\CoinGeckoApi\CoinGeckoClient;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
@@ -54,31 +55,15 @@ final class CoinGecko implements MarketDataService
         });
     }
 
-    // @TODO
     public function getCurrenciesData(string $source, Collection $targets): Collection
     {
-        return collect();
-        // $client = new CoinGeckoClient();
+        $client = new CoinGeckoClient();
 
-        // $data = $client->coins()->getMarkets(
-        //     'Str::lower($source)',
-        //     [
-        //         'ids' => $targets->map(fn ($target) => Str::lower($target))->join(','),
-        //     ]
-        // );
+        $data = $client->coins()->getCoin(Str::lower($source));
 
-        // dd
-
-        // $result = Http::get('https://min-api.cryptocompare.com/data/pricemultifull', [
-        //     'fsyms'  => $source,
-        //     'tsyms'  => $targets->join(','),
-        // ])->json();
-
-        // return $targets->mapWithKeys(fn ($currency) => [
-        //     strtoupper($currency) => [
-        //             'priceChange' => Arr::get($result, 'RAW.'.$source.'.'.strtoupper($currency).'.CHANGEPCT24HOUR', 0) / 100,
-        //             'price'       => Arr::get($result, 'RAW.'.$source.'.'.strtoupper($currency).'.PRICE', 0),
-        //         ],
-        //     ]);
+        return $targets->mapWithKeys(fn (string $currency) => [strtoupper($currency) => [
+            'price' => Arr::get($data, 'market_data.current_price.' . Str::lower($currency)),
+            'priceChange' => Arr::get($data, 'market_data.price_change_24h_in_currency.' . Str::lower($currency)),
+        ]]);
     }
 }
