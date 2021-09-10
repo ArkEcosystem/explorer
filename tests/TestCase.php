@@ -6,10 +6,11 @@ namespace Tests;
 
 use App\Contracts\MarketDataService;
 use App\Services\MarketDataServices\CryptoCompare;
+use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Illuminate\Support\Facades\Artisan;
-use Illuminate\Contracts\Console\Kernel;
+
 abstract class TestCase extends BaseTestCase
 {
     use RefreshDatabase;
