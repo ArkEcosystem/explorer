@@ -4,17 +4,15 @@ declare(strict_types=1);
 
 namespace App\Services;
 
-use App\Contracts\CryptoDataFetcher;
+use App\Contracts\MarketDataService;
 use App\Facades\Network;
 use App\Services\Cache\CryptoDataCache;
 use Carbon\Carbon;
 use Codenixsv\CoinGeckoApi\CoinGeckoClient;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 
-final class CoinGecko implements CryptoDataFetcher
+final class CoinGecko implements MarketDataService
 {
     public function historical(string $source, string $target, string $format = 'Y-m-d'): Collection
     {

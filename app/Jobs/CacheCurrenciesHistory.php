@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Jobs;
 
-use App\Contracts\CryptoDataFetcher;
+use App\Contracts\MarketDataService;
 use App\Services\Cache\NetworkStatusBlockCache;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -31,13 +31,13 @@ final class CacheCurrenciesHistory implements ShouldQueue
     public function handle(): void
     {
         $cache             = app(NetworkStatusBlockCache::class);
-        $cryptoDataFetcher = app(CryptoDataFetcher::class);
+        $cryptoDataService = app(MarketDataService::class);
 
         try {
             $cache->setHistoricalHourly(
                 $this->source,
                 $this->currency,
-                $cryptoDataFetcher->historicalHourly($this->source, $this->currency)
+                $cryptoDataService->historicalHourly($this->source, $this->currency)
             );
         } catch (ConnectionException $e) {
             $cache->setHistoricalHourly($this->source, $this->currency, null);

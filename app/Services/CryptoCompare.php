@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services;
 
-use App\Contracts\CryptoDataFetcher;
+use App\Contracts\MarketDataService;
 use App\Facades\Network;
 use App\Services\Cache\CryptoDataCache;
 use Carbon\Carbon;
@@ -13,7 +13,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
 use Konceiver\BetterNumberFormatter\ResolveScientificNotation;
 
-final class CryptoCompare implements CryptoDataFetcher
+final class CryptoCompare implements MarketDataService
 {
     public function historical(string $source, string $target, string $format = 'Y-m-d'): Collection
     {

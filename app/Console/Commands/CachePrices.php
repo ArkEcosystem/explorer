@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
-use App\Contracts\CryptoDataFetcher;
+use App\Contracts\MarketDataService;
 use App\Enums\StatsPeriods;
 use App\Facades\Network;
 use App\Services\Cache\CryptoDataCache;
@@ -31,15 +31,15 @@ final class CachePrices extends Command
     protected $description = 'Cache prices and exchange rates.';
 
     /**
-     * @var CryptoDataFetcher
+     * @var MarketDataService
      */
-    protected $cryptoDataFetcher;
+    protected $marketDataService;
 
-    public function __construct(CryptoDataFetcher $cryptoDataFetcher)
+    public function __construct(MarketDataService $marketDataService)
     {
         parent::__construct();
 
-        $this->cryptoDataFetcher = $cryptoDataFetcher;
+        $this->marketDataService = $marketDataService;
     }
 
     public function handle(CryptoDataCache $crypto, PriceChartCache $cache): void
@@ -50,8 +50,8 @@ final class CachePrices extends Command
 
         collect(config('currencies'))->values()->each(function ($currency) use ($crypto, $cache): void {
             $currency = $currency['currency'];
-            $prices = $this->cryptoDataFetcher->historical(Network::currency(), $currency);
-            $hourlyPrices = $this->cryptoDataFetcher->historicalHourly(Network::currency(), $currency);
+            $prices = $this->marketDataService->historical(Network::currency(), $currency);
+            $hourlyPrices = $this->marketDataService->historicalHourly(Network::currency(), $currency);
 
             collect([
                 StatsPeriods::DAY,

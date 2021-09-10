@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
-use App\Contracts\CryptoDataFetcher;
+use App\Contracts\MarketDataService;
 use App\Services\BigNumber;
 use App\Services\CryptoCompare;
 use Illuminate\Database\Eloquent\Model;
@@ -23,7 +23,7 @@ final class AppServiceProvider extends ServiceProvider
     {
         Model::unguard();
 
-        $this->app->singleton(CryptoDataFetcher::class, fn () => new CryptoCompare());
+        $this->app->singleton(MarketDataService::class, fn () => new CryptoCompare());
     }
 
     /**
