@@ -62,8 +62,8 @@ final class CoinGecko implements MarketDataService
         $data = $client->coins()->getCoin(Str::lower($source));
 
         return $targets->mapWithKeys(fn (string $currency) => [strtoupper($currency) => [
-            'price' => Arr::get($data, 'market_data.current_price.' . Str::lower($currency)),
-            'priceChange' => Arr::get($data, 'market_data.price_change_24h_in_currency.' . Str::lower($currency)),
+            'price'       => Arr::get($data, 'market_data.current_price.'.Str::lower($currency)),
+            'priceChange' => Arr::get($data, 'market_data.price_change_24h_in_currency.'.Str::lower($currency)),
         ]]);
     }
 }
