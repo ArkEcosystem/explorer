@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services\MarketDataProviders;
 
 use App\Contracts\MarketDataProvider;
+use App\DTO\MarketData;
 use App\Facades\Network;
 use App\Services\Cache\CryptoDataCache;
 use Carbon\Carbon;
@@ -51,16 +52,13 @@ final class CryptoCompare implements MarketDataProvider
 
     public function priceAndPriceChange(string $baseCurrency, Collection $targetCurrencies): Collection
     {
-        $result = Http::get('https://min-api.cryptocompare.com/data/pricemultifull', [
+        $data = Http::get('https://min-api.cryptocompare.com/data/pricemultifull', [
             'fsyms'  => $baseCurrency,
             'tsyms'  => $targetCurrencies->join(','),
         ])->json();
 
-        return $targetCurrencies->mapWithKeys(fn ($currency) => [
-            strtoupper($currency) => [
-                    'priceChange' => Arr::get($result, 'RAW.'.$baseCurrency.'.'.strtoupper($currency).'.CHANGEPCT24HOUR', 0) / 100,
-                    'price'       => Arr::get($result, 'RAW.'.$baseCurrency.'.'.strtoupper($currency).'.PRICE', 0),
-                ],
-            ]);
+        return $targetCurrencies->mapWithKeys(fn ($targetCurrency) => [
+            strtoupper($targetCurrency) => MarketData::fromCryptoCompareApiResponse($baseCurrency, $targetCurrency, $data)
+        ]);
     }
 }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services\MarketDataProviders;
 
 use App\Contracts\MarketDataProvider;
+use App\DTO\MarketData;
 use App\Facades\Network;
 use App\Services\Cache\CryptoDataCache;
 use Carbon\Carbon;
@@ -62,9 +63,7 @@ final class CoinGecko implements MarketDataProvider
     {
         $data = Http::get('https://api.coingecko.com/api/v3/coins/'.Str::lower($baseCurrency))->json();
 
-        return $targetCurrencies->mapWithKeys(fn (string $currency) => [strtoupper($currency) => [
-            'priceChange' => Arr::get($data, 'market_data.price_change_24h_in_currency.'.Str::lower($currency)),
-            'price'       => Arr::get($data, 'market_data.current_price.'.Str::lower($currency)),
-        ]]);
+        return $targetCurrencies
+            ->mapWithKeys(fn (string $currency) => [strtoupper($currency) => MarketData::fromCoinGeckoApiResponse($currency, $data)]);
     }
 }

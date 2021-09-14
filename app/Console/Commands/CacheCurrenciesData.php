@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Console\Commands;
 
 use App\Contracts\MarketDataProvider;
+use App\DTO\MarketData;
 use App\Facades\Network;
 use App\Services\Cache\NetworkStatusBlockCache;
 use Illuminate\Console\Command;
@@ -38,10 +39,9 @@ final class CacheCurrenciesData extends Command
         try {
             $priceAndPriceChange = $marketDataProvider->priceAndPriceChange($baseCurrency, $targetCurrencies);
 
-            $priceAndPriceChange->each(function ($data, $currency) use ($baseCurrency, $cache) : void {
-                ['price' => $price, 'priceChange' => $priceChange] = $data;
-                $cache->setPrice($baseCurrency, $currency, $price);
-                $cache->setPriceChange($baseCurrency, $currency, $priceChange);
+            $priceAndPriceChange->each(function (MarketData $dto, string $currency) use ($baseCurrency, $cache) : void {
+                $cache->setPrice($baseCurrency, $currency, $dto->price());
+                $cache->setPriceChange($baseCurrency, $currency, $dto->priceChange());
             });
         } catch (ConnectionException $e) {
             $targetCurrencies->each(function ($currency) use ($baseCurrency, $cache) : void {
