@@ -9,7 +9,6 @@ use App\DTO\MarketData;
 use App\Facades\Network;
 use App\Services\Cache\CryptoDataCache;
 use Carbon\Carbon;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
 use Konceiver\BetterNumberFormatter\ResolveScientificNotation;
@@ -58,7 +57,7 @@ final class CryptoCompare implements MarketDataProvider
         ])->json();
 
         return $targetCurrencies->mapWithKeys(fn ($targetCurrency) => [
-            strtoupper($targetCurrency) => MarketData::fromCryptoCompareApiResponse($baseCurrency, $targetCurrency, $data)
+            strtoupper($targetCurrency) => MarketData::fromCryptoCompareApiResponse($baseCurrency, $targetCurrency, $data),
         ]);
     }
 }

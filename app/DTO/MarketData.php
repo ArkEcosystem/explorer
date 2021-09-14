@@ -20,6 +20,7 @@ final class MarketData
             priceChange: Arr::get($data, 'market_data.price_change_24h_in_currency.'.Str::lower($baseCurrency)),
         );
     }
+
     public static function fromCryptoCompareApiResponse(string $baseCurrency, string $targetCurrency, array $data): self
     {
         return new static(
