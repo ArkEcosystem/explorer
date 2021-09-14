@@ -30,28 +30,16 @@ final class CachePrices extends Command
      */
     protected $description = 'Cache prices and exchange rates.';
 
-    /**
-     * @var MarketDataService
-     */
-    protected $marketDataService;
-
-    public function __construct(MarketDataService $marketDataService)
-    {
-        parent::__construct();
-
-        $this->marketDataService = $marketDataService;
-    }
-
-    public function handle(CryptoDataCache $crypto, PriceChartCache $cache): void
+    public function handle(CryptoDataCache $crypto, PriceChartCache $cache, MarketDataService $marketDataService): void
     {
         if (! Network::canBeExchanged()) {
             return;
         }
 
-        collect(config('currencies'))->values()->each(function ($currency) use ($crypto, $cache): void {
+        collect(config('currencies'))->values()->each(function ($currency) use ($crypto, $cache, $marketDataService): void {
             $currency = $currency['currency'];
-            $prices = $this->marketDataService->historical(Network::currency(), $currency);
-            $hourlyPrices = $this->marketDataService->historicalHourly(Network::currency(), $currency);
+            $prices = $marketDataService->historical(Network::currency(), $currency);
+            $hourlyPrices = $marketDataService->historicalHourly(Network::currency(), $currency);
 
             collect([
                 StatsPeriods::DAY,

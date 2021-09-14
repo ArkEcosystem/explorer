@@ -26,19 +26,7 @@ final class CacheCurrenciesData extends Command
      */
     protected $description = 'Cache currencies data';
 
-    /**
-     * @var MarketDataService
-     */
-    protected $marketDataService;
-
-    public function __construct(MarketDataService $marketDataService)
-    {
-        parent::__construct();
-
-        $this->marketDataService = $marketDataService;
-    }
-
-    public function handle(NetworkStatusBlockCache $cache): void
+    public function handle(NetworkStatusBlockCache $cache, MarketDataService $marketDataService): void
     {
         if (! Network::canBeExchanged()) {
             return;
@@ -48,7 +36,7 @@ final class CacheCurrenciesData extends Command
         $currencies = collect(config('currencies'))->pluck('currency');
 
         try {
-            $currenciesData = $this->marketDataService->getCurrenciesData($source, $currencies);
+            $currenciesData = $marketDataService->getCurrenciesData($source, $currencies);
 
             $currenciesData->each(function ($data, $currency) use ($source, $cache) : void {
                 ['price' => $price, 'priceChange' => $priceChange] = $data;
