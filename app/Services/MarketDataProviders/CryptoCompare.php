@@ -49,17 +49,17 @@ final class CryptoCompare implements MarketDataProvider
         });
     }
 
-    public function getCurrenciesData(string $source, Collection $targets): Collection
+    public function priceAndPriceChange(string $baseCurrency, Collection $targetCurrencies): Collection
     {
         $result = Http::get('https://min-api.cryptocompare.com/data/pricemultifull', [
-            'fsyms'  => $source,
-            'tsyms'  => $targets->join(','),
+            'fsyms'  => $baseCurrency,
+            'tsyms'  => $targetCurrencies->join(','),
         ])->json();
 
-        return $targets->mapWithKeys(fn ($currency) => [
+        return $targetCurrencies->mapWithKeys(fn ($currency) => [
             strtoupper($currency) => [
-                    'priceChange' => Arr::get($result, 'RAW.'.$source.'.'.strtoupper($currency).'.CHANGEPCT24HOUR', 0) / 100,
-                    'price'       => Arr::get($result, 'RAW.'.$source.'.'.strtoupper($currency).'.PRICE', 0),
+                    'priceChange' => Arr::get($result, 'RAW.'.$baseCurrency.'.'.strtoupper($currency).'.CHANGEPCT24HOUR', 0) / 100,
+                    'price'       => Arr::get($result, 'RAW.'.$baseCurrency.'.'.strtoupper($currency).'.PRICE', 0),
                 ],
             ]);
     }

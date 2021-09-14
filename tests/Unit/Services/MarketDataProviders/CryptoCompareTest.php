@@ -11,7 +11,7 @@ use function Tests\fakeCryptoCompare;
 it('should fetch the price data for the given collection', function () {
     fakeCryptoCompare();
 
-    expect((new CryptoCompare())->getCurrenciesData('ARK', collect(['USD'])))->toEqual(collect([
+    expect((new CryptoCompare())->priceAndPriceChange('ARK', collect(['USD'])))->toEqual(collect([
         'USD' => [
             'priceChange' => 0.14989143413680925,
             'price'       => 1.2219981765,

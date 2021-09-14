@@ -10,7 +10,7 @@ use App\Services\Cache\NetworkStatusBlockCache;
 use Illuminate\Console\Command;
 use Illuminate\Http\Client\ConnectionException;
 
-final class CacheCurrenciesData extends Command
+final class CachepriceAndPriceChange extends Command
 {
     /**
      * The name and signature of the console command.
@@ -32,21 +32,21 @@ final class CacheCurrenciesData extends Command
             return;
         }
 
-        $source     = Network::currency();
-        $currencies = collect(config('currencies'))->pluck('currency');
+        $baseCurrency     = Network::currency();
+        $targetCurrencies = collect(config('currencies'))->pluck('currency');
 
         try {
-            $currenciesData = $marketDataProvider->getCurrenciesData($source, $currencies);
+            $priceAndPriceChange = $marketDataProvider->priceAndPriceChange($baseCurrency, $targetCurrencies);
 
-            $currenciesData->each(function ($data, $currency) use ($source, $cache) : void {
+            $priceAndPriceChange->each(function ($data, $currency) use ($baseCurrency, $cache) : void {
                 ['price' => $price, 'priceChange' => $priceChange] = $data;
-                $cache->setPrice($source, $currency, $price);
-                $cache->setPriceChange($source, $currency, $priceChange);
+                $cache->setPrice($baseCurrency, $currency, $price);
+                $cache->setPriceChange($baseCurrency, $currency, $priceChange);
             });
         } catch (ConnectionException $e) {
-            $currencies->each(function ($currency) use ($source, $cache) : void {
-                $cache->setPrice($source, $currency, null);
-                $cache->setPriceChange($source, $currency, null);
+            $targetCurrencies->each(function ($currency) use ($baseCurrency, $cache) : void {
+                $cache->setPrice($baseCurrency, $currency, null);
+                $cache->setPriceChange($baseCurrency, $currency, null);
             });
         }
     }

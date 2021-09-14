@@ -11,7 +11,7 @@ it('should fetch the price data for the given collection', function () {
         'api.coingecko.com/*'     => Http::response(json_decode(file_get_contents(base_path('tests/fixtures/coingecko/coin.json')), true), 200),
     ]);
 
-    expect((new CoinGecko())->getCurrenciesData('ARK', collect(['USD'])))->toEqual(collect([
+    expect((new CoinGecko())->priceAndPriceChange('ARK', collect(['USD'])))->toEqual(collect([
         'USD' => [
             'priceChange' => -0.079771867564,
             'price'       => 1.63,

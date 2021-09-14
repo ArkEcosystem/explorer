@@ -58,11 +58,11 @@ final class CoinGecko implements MarketDataProvider
         });
     }
 
-    public function getCurrenciesData(string $source, Collection $targets): Collection
+    public function priceAndPriceChange(string $baseCurrency, Collection $targetCurrencies): Collection
     {
-        $data = Http::get('https://api.coingecko.com/api/v3/coins/'.Str::lower($source))->json();
+        $data = Http::get('https://api.coingecko.com/api/v3/coins/'.Str::lower($baseCurrency))->json();
 
-        return $targets->mapWithKeys(fn (string $currency) => [strtoupper($currency) => [
+        return $targetCurrencies->mapWithKeys(fn (string $currency) => [strtoupper($currency) => [
             'priceChange' => Arr::get($data, 'market_data.price_change_24h_in_currency.'.Str::lower($currency)),
             'price'       => Arr::get($data, 'market_data.current_price.'.Str::lower($currency)),
         ]]);
