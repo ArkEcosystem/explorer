@@ -24,23 +24,20 @@ final class CacheCurrenciesHistory implements ShouldQueue
      */
     public int $tries = 5;
 
-    public function __construct(public string $source, public string $currency)
+    public function __construct(public string $source, public string $currency, public NetworkStatusBlockCache $cache, public MarketDataService $marketDataService)
     {
     }
 
     public function handle(): void
     {
-        $cache             = app(NetworkStatusBlockCache::class);
-        $cryptoDataService = app(MarketDataService::class);
-
         try {
-            $cache->setHistoricalHourly(
+            $this->cache->setHistoricalHourly(
                 $this->source,
                 $this->currency,
-                $cryptoDataService->historicalHourly($this->source, $this->currency)
+                $this->marketDataService->historicalHourly($this->source, $this->currency)
             );
         } catch (ConnectionException $e) {
-            $cache->setHistoricalHourly($this->source, $this->currency, null);
+            $this->cache->setHistoricalHourly($this->source, $this->currency, null);
 
             throw $e;
         }
