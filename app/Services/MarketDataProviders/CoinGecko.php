@@ -9,7 +9,6 @@ use App\DTO\MarketData;
 use App\Facades\Network;
 use App\Services\Cache\CryptoDataCache;
 use Carbon\Carbon;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
