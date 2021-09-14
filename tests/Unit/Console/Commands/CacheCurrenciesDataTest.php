@@ -3,8 +3,8 @@
 declare(strict_types=1);
 
 use App\Console\Commands\CacheCurrenciesData;
-use App\Contracts\Network as NetworkContract;
 use App\Contracts\MarketDataProvider;
+use App\Contracts\Network as NetworkContract;
 use App\Facades\Network;
 use App\Services\Blockchain\Network as Blockchain;
 use App\Services\Cache\NetworkStatusBlockCache;
