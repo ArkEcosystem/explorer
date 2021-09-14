@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
-use App\Contracts\MarketDataService;
+use App\Contracts\MarketDataProvider;
 use App\Services\BigNumber;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
@@ -24,8 +24,8 @@ final class AppServiceProvider extends ServiceProvider
         Model::unguard();
 
         $this->app->singleton(
-            MarketDataService::class,
-            fn () => new (Config::get('explorer.crypto_market_api_service'))
+            MarketDataProvider::class,
+            fn () => new (Config::get('explorer.market_data_provider_service'))
         );
     }
 

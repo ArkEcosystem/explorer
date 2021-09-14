@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Services\MarketDataServices;
+namespace App\Services\MarketDataProviders;
 
-use App\Contracts\MarketDataService;
+use App\Contracts\MarketDataProvider;
 use App\Facades\Network;
 use App\Services\Cache\CryptoDataCache;
 use Carbon\Carbon;
@@ -13,7 +13,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 
-final class CoinGecko implements MarketDataService
+final class CoinGecko implements MarketDataProvider
 {
     public function historical(string $source, string $target, string $format = 'Y-m-d'): Collection
     {

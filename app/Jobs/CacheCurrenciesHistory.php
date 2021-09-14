@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Jobs;
 
-use App\Contracts\MarketDataService;
+use App\Contracts\MarketDataProvider;
 use App\Services\Cache\NetworkStatusBlockCache;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -24,20 +24,20 @@ final class CacheCurrenciesHistory implements ShouldQueue
      */
     public int $tries = 5;
 
-    public function __construct(public string $source, public string $currency, public NetworkStatusBlockCache $cache, public MarketDataService $marketDataService)
+    public function __construct(public string $source, public string $currency)
     {
     }
 
-    public function handle(): void
+    public function handle(NetworkStatusBlockCache $cache, MarketDataProvider $marketDataProvider): void
     {
         try {
-            $this->cache->setHistoricalHourly(
+            $cache->setHistoricalHourly(
                 $this->source,
                 $this->currency,
-                $this->marketDataService->historicalHourly($this->source, $this->currency)
+                $marketDataProvider->historicalHourly($this->source, $this->currency)
             );
         } catch (ConnectionException $e) {
-            $this->cache->setHistoricalHourly($this->source, $this->currency, null);
+            $cache->setHistoricalHourly($this->source, $this->currency, null);
 
             throw $e;
         }

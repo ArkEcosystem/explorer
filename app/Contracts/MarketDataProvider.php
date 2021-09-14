@@ -6,7 +6,7 @@ namespace App\Contracts;
 
 use Illuminate\Support\Collection;
 
-interface MarketDataService
+interface MarketDataProvider
 {
     public function historical(string $source, string $target, string $format = 'Y-m-d'): Collection;
 

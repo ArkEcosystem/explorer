@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tests;
 
-use App\Contracts\MarketDataService;
-use App\Services\MarketDataServices\CryptoCompare;
+use App\Contracts\MarketDataProvider;
+use App\Services\MarketDataProviders\CryptoCompare;
 use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
@@ -27,7 +27,7 @@ abstract class TestCase extends BaseTestCase
         $app->make(Kernel::class)->bootstrap();
 
         $app->singleton(
-            MarketDataService::class,
+            MarketDataProvider::class,
             fn () => new CryptoCompare()
         );
 

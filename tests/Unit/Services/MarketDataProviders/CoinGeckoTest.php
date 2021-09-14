@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use App\Services\MarketDataServices\CoinGecko;
+use App\Services\MarketDataProviders\CoinGecko;
 use Illuminate\Support\Facades\Http;
 use function Spatie\Snapshots\assertMatchesSnapshot;
 

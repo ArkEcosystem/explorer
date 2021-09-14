@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
-use App\Contracts\MarketDataService;
+use App\Contracts\MarketDataProvider;
 use App\Facades\Network;
 use App\Services\Cache\NetworkStatusBlockCache;
 use Illuminate\Console\Command;
@@ -26,7 +26,7 @@ final class CacheCurrenciesData extends Command
      */
     protected $description = 'Cache currencies data';
 
-    public function handle(NetworkStatusBlockCache $cache, MarketDataService $marketDataService): void
+    public function handle(NetworkStatusBlockCache $cache, MarketDataProvider $marketDataProvider): void
     {
         if (! Network::canBeExchanged()) {
             return;
@@ -36,7 +36,7 @@ final class CacheCurrenciesData extends Command
         $currencies = collect(config('currencies'))->pluck('currency');
 
         try {
-            $currenciesData = $marketDataService->getCurrenciesData($source, $currencies);
+            $currenciesData = $marketDataProvider->getCurrenciesData($source, $currencies);
 
             $currenciesData->each(function ($data, $currency) use ($source, $cache) : void {
                 ['price' => $price, 'priceChange' => $priceChange] = $data;
