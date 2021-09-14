@@ -10,7 +10,7 @@ use App\Services\Cache\NetworkStatusBlockCache;
 use Illuminate\Console\Command;
 use Illuminate\Http\Client\ConnectionException;
 
-final class CachepriceAndPriceChange extends Command
+final class CacheCurrenciesData extends Command
 {
     /**
      * The name and signature of the console command.
