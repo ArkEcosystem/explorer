@@ -54,7 +54,7 @@ final class CoinGecko implements MarketDataProvider
                     Carbon::createFromFormat('Y-m-d H:i:s', $day)->format($format) => collect($items)->average(fn ($item) => $item[1]),
                 ])
                 // Take the last $limit items (since the API returns a whole days and the limit is per hour)
-                ->reverse()->take($limit + 1)->reverse();
+                ->splice(-$limit - 1);
         });
     }
 
