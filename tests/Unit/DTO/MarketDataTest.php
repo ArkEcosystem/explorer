@@ -19,12 +19,12 @@ it('should make an instance from the coingecko response', function () {
     $response = [];
 
     Arr::set($response, 'market_data.current_price.usd', 11.21);
-    Arr::set($response, 'market_data.price_change_percentage_24h_in_currency.usd', -4.66);
+    Arr::set($response, 'market_data.price_change_percentage_24h_in_currency.usd', 1.62);
 
     $subject = MarketData::fromCoinGeckoApiResponse('USD', $response);
 
     expect($subject->price())->toBe(11.21);
-    expect($subject->priceChange())->toBe(-4.66);
+    expect($subject->priceChange())->toBe(1.62);
 });
 
 it('should make an instance from the cryptocompare response', function () {
