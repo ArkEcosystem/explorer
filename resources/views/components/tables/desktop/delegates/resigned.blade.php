@@ -10,7 +10,9 @@
         @foreach($delegates as $delegate)
             <x-ark-tables.row wire:key="{{ Helpers::generateId($delegate->username(), $delegate->resignationId()) }}">
                 <x-ark-tables.cell>
-                    <x-tables.rows.desktop.resignation-id :model="$delegate" />
+                    <div class="text-left">
+                        <x-tables.rows.desktop.resignation-id :model="$delegate" />
+                    </div>
                 </x-ark-tables.cell>
                 <x-ark-tables.cell>
                     <span class="hidden md:inline">
