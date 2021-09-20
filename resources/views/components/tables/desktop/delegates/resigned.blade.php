@@ -1,7 +1,7 @@
 <x-ark-tables.table sticky class="w-full">
     <thead>
         <tr>
-            <x-tables.headers.desktop.id name="general.delegates.id" />
+            <x-tables.headers.desktop.id name="general.delegates.id" width="70" />
             <x-tables.headers.desktop.address name="general.delegates.name"/>
             <x-tables.headers.desktop.number name="general.delegates.votes"/>
         </tr>
