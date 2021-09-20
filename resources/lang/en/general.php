@@ -25,6 +25,7 @@ return [
     'more_details'            => 'For more :transactionType details',
     'learn_more'              => 'Learn more',
     'confirmations'           => ':count confirmation|:count confirmations',
+    'market_data_by'          => 'Market Data by',
 
     'block' => [
         'id'            => 'ID',

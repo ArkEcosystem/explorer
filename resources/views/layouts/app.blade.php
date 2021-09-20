@@ -63,7 +63,15 @@
             </main>
         </div>
 
-        <x-footer />
+        <x-ark-footer icon-size="sm">
+            <x-slot name="extra">
+                <div class="flex space-x-2">
+                    <span>@lang('general.market_data_by')</span>
+
+                    <x-ark-icon name="brands.coingecko" />
+                </div>
+            </x-slot>
+        </x-ark-footer>
 
         <livewire:search-module is-modal />
 
