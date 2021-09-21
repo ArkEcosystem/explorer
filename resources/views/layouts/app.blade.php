@@ -67,7 +67,7 @@
             <x-slot name="copyrightSlot">
                 <div class="flex">
                     <span class="mx-1 sm:inline"> | </span>
-                    <span class="whitespace-nowrap flex items-center space-x-2">
+                    <span class="flex items-center space-x-2 whitespace-nowrap">
                         <span>@lang('general.market_data_by')</span>
 
                         <x-ark-icon
