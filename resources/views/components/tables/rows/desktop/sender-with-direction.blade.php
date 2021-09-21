@@ -2,11 +2,11 @@
     <div class="flex justify-center items-center sender-direction-wrapper">
         <div class="flex">
             @if($model->isSent($wallet->address()))
-                <div class="arrow-direction text-theme-danger-400 border-theme-danger-100 dark:text-theme-secondary-600 dark:border-theme-secondary-600">
+                <div class="arrow-direction text-theme-danger-400 border-theme-danger-100 dark:border-theme-danger-400">
                     <x-ark-icon name="sent" />
                 </div>
             @else
-                <div class="arrow-direction text-theme-success-600 border-theme-success-200 dark:text-theme-secondary-600 dark:border-theme-secondary-600">
+                <div class="arrow-direction text-theme-success-600 border-theme-success-200 dark:border-theme-success-600">
                     <x-ark-icon name="received" />
                 </div>
             @endif
