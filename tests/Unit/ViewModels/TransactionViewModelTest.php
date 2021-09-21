@@ -69,7 +69,7 @@ it('should determine if multipayment transaction is sent to self', function () {
         ->multiPayment()
         ->create([
             'sender_public_key' => $this->sender->public_key,
-            'asset' => [
+            'asset'             => [
                 'payments' => [
                     ['recipientId' => $this->sender->address],
                     ['recipientId' => 'recipient'],
@@ -86,7 +86,7 @@ it('should determine if multipayment transaction is not sent to self', function 
         ->multiPayment()
         ->create([
             'sender_public_key' => $this->sender->public_key,
-            'asset' => [
+            'asset'             => [
                 'payments' => [
                     ['recipientId' => 'recipient'],
                     ['recipientId' => 'recipient-2'],
