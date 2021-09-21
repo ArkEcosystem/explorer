@@ -97,6 +97,14 @@ it('should determine if multipayment transaction is not sent to self', function 
     expect($transaction->isSentToSelf())->toBeFalse();
 });
 
+it('should not be sent to self if not multipayment or transfer', function () {
+    $transaction = new TransactionViewModel(Transaction::factory()
+        ->vote()
+        ->create());
+
+    expect($transaction->isSentToSelf())->toBeFalse();
+});
+
 it('should get the timestamp', function () {
     expect($this->subject->timestamp())->toBeString();
     expect($this->subject->timestamp())->toBe('19 Oct 2020 04:54:16');
