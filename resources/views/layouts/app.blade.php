@@ -63,12 +63,15 @@
             </main>
         </div>
 
-        <x-ark-footer icon-size="sm">
+        <x-ark-footer>
             <x-slot name="extra">
-                <div class="flex space-x-2">
+                <div class="flex items-center space-x-2">
                     <span>@lang('general.market_data_by')</span>
 
-                    <x-ark-icon name="brands.coingecko" />
+                    <x-ark-icon
+                        name="brands.coingecko"
+                        class="inline-block -mt-1"
+                    />
                 </div>
             </x-slot>
         </x-ark-footer>
