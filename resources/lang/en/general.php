@@ -121,4 +121,8 @@ return [
         'commission'   => 'Commission',
         'productivity' => 'Productivity',
     ],
+
+    'urls' => [
+        'coingecko' => 'https://www.coingecko.com/',
+    ],
 ];

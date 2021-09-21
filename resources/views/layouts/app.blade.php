@@ -70,10 +70,15 @@
                     <span class="flex items-center space-x-2 whitespace-nowrap">
                         <span>@lang('general.market_data_by')</span>
 
-                        <x-ark-icon
-                            name="brands.coingecko"
-                            class="inline-block -mt-1"
-                        />
+                        <a
+                            href="@lang('general.urls.coingecko')"
+                            target="_blank"
+                        >
+                            <x-ark-icon
+                                name="brands.coingecko"
+                                class="inline-block -mt-1"
+                            />
+                        </a>
                     </span>
                 </div>
             </x-slot>
