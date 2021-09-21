@@ -55,7 +55,7 @@ it('should determine if transfer transaction is sent to self', function () {
         ->transfer()
         ->create([
             'sender_public_key' => $this->sender->public_key,
-            'recipient_id' => $this->sender->address,
+            'recipient_id'      => $this->sender->address,
         ]));
 
     expect($transaction->isSentToSelf())->toBeTrue();
