@@ -25,7 +25,7 @@ beforeEach(function () {
     (new NetworkCache())->setHeight(fn () => 5000000);
 
     $this->sender = Wallet::factory()->create();
-    $this->subject = new TransactionViewModel(Transaction::factory()->create([
+    $this->subject = new TransactionViewModel(Transaction::factory()->transfer()->create([
         'block_id'          => $this->block->id,
         'block_height'      => 1,
         'fee'               => '100000000',
@@ -48,6 +48,53 @@ it('should determine if the transaction is incoming', function () {
 it('should determine if the transaction is outgoing', function () {
     expect($this->subject->isSent($this->sender->address))->toBeTrue();
     expect($this->subject->isSent('recipient'))->toBeFalse();
+});
+
+it('should determine if transfer transaction is sent to self', function () {
+    $transaction = new TransactionViewModel(Transaction::factory()
+        ->transfer()
+        ->create([
+            'recipient_id' => $this->sender->address,
+        ]));
+
+    expect($transaction->isSentToSelf())->toBeFalse();
+});
+
+it('should determine if transfer transaction is not sent to self', function () {
+    expect($this->subject->isSentToSelf())->toBeFalse();
+});
+
+it('should determine if multipayment transaction is sent to self', function () {
+    $transaction = new TransactionViewModel(Transaction::factory()
+        ->multiPayment()
+        ->create([
+            'sender_public_key' => $this->sender->public_key,
+            'asset' => [
+                'payments' => [
+                    ['recipientId' => $this->sender->address],
+                    ['recipientId' => 'recipient'],
+                    ['recipientId' => 'recipient-2'],
+                ],
+            ],
+        ]));
+
+    expect($transaction->isSentToSelf())->toBeTrue();
+});
+
+it('should determine if multipayment transaction is not sent to self', function () {
+    $transaction = new TransactionViewModel(Transaction::factory()
+        ->multiPayment()
+        ->create([
+            'sender_public_key' => $this->sender->public_key,
+            'asset' => [
+                'payments' => [
+                    ['recipientId' => 'recipient'],
+                    ['recipientId' => 'recipient-2'],
+                ],
+            ],
+        ]));
+
+    expect($transaction->isSentToSelf())->toBeFalse();
 });
 
 it('should get the timestamp', function () {
