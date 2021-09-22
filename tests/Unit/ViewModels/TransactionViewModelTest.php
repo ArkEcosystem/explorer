@@ -58,11 +58,8 @@ it('should determine if transfer transaction is sent to self', function () {
             'recipient_id'      => $this->sender->address,
         ]));
 
-    expect($transaction->isSentToSelf())->toBeTrue();
-});
-
-it('should determine if transfer transaction is not sent to self', function () {
-    expect($this->subject->isSentToSelf())->toBeFalse();
+    expect($transaction->isSentToSelf($this->sender->address))->toBeTrue();
+    expect($transaction->isSentToSelf('recipient'))->toBeFalse();
 });
 
 it('should determine if multipayment transaction is sent to self', function () {
@@ -79,23 +76,8 @@ it('should determine if multipayment transaction is sent to self', function () {
             ],
         ]));
 
-    expect($transaction->isSentToSelf())->toBeTrue();
-});
-
-it('should determine if multipayment transaction is not sent to self', function () {
-    $transaction = new TransactionViewModel(Transaction::factory()
-        ->multiPayment()
-        ->create([
-            'sender_public_key' => $this->sender->public_key,
-            'asset'             => [
-                'payments' => [
-                    ['recipientId' => 'recipient'],
-                    ['recipientId' => 'recipient-2'],
-                ],
-            ],
-        ]));
-
-    expect($transaction->isSentToSelf())->toBeFalse();
+    expect($transaction->isSentToSelf($this->sender->address))->toBeTrue();
+    expect($transaction->isSentToSelf('recipient-3'))->toBeFalse();
 });
 
 it('should not be sent to self if not multipayment or transfer', function () {
@@ -103,7 +85,7 @@ it('should not be sent to self if not multipayment or transfer', function () {
         ->vote()
         ->create());
 
-    expect($transaction->isSentToSelf())->toBeFalse();
+    expect($transaction->isSentToSelf($this->sender->address))->toBeFalse();
 });
 
 it('should get the timestamp', function () {
