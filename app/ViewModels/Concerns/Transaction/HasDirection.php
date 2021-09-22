@@ -13,22 +13,22 @@ trait HasDirection
         return $this->direction->isSent($address);
     }
 
-    public function isSentToSelf(): bool
+    public function isSentToSelf(string $address): bool
     {
         if (! $this->isTransfer() && ! $this->isMultiPayment()) {
             return false;
         }
 
-        if ($this->sender() !== null && $this->recipient() !== null && $this->sender()->address === $this->recipient()->address) {
+        if ($this->sender() !== null && $address !== $this->sender()->address) {
+            return false;
+        }
+
+        if ($this->recipient() !== null && $address === $this->recipient()->address) {
             return true;
         }
 
         return collect(Arr::get($this->transaction->asset ?? [], 'payments', []))
-            ->some(function ($payment): bool {
-                $sender = $this->sender();
-
-                return $sender !== null && $sender->address === $payment['recipientId'];
-            });
+            ->some(fn ($payment) => $address === $payment['recipientId']);
     }
 
     public function isReceived(string $address): bool
