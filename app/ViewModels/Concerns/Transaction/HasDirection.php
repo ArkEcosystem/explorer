@@ -27,7 +27,7 @@ trait HasDirection
             return true;
         }
 
-        return collect(Arr::get($this->transaction->asset ?? [], 'payments', []))
+        return collect(Arr::get($this->transaction, 'asset.payments', []))
             ->some(fn ($payment) => $address === $payment['recipientId']);
     }
 
