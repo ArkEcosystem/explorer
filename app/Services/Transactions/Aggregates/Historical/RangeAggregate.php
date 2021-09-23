@@ -19,14 +19,14 @@ final class RangeAggregate
         $select = [
             'MAX(timestamp) as timestamp',
             'COUNT(*) as total',
-            sprintf("to_char(to_timestamp(%d+timestamp) AT TIME ZONE 'UTC', '%s') as formated_date", Network::epoch()->timestamp, $format),
+            sprintf("to_char(to_timestamp(%d+timestamp) AT TIME ZONE 'UTC', '%s') as formatted_date", Network::epoch()->timestamp, $format),
         ];
 
         return $this
             ->dateRangeQuery($start, $end)
             ->select(DB::raw(implode(', ', $select)))
-            ->orderBy('formated_date')
-            ->groupBy('formated_date')
-            ->pluck('total', 'formated_date');
+            ->orderBy('formatted_date')
+            ->groupBy('formatted_date')
+            ->pluck('total', 'formatted_date');
     }
 }
