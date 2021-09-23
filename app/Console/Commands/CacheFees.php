@@ -7,12 +7,8 @@ namespace App\Console\Commands;
 use App\Enums\StatsPeriods;
 use App\Services\Cache\FeeCache;
 use App\Services\Forms;
-use App\Services\Transactions\Aggregates\Fees\Average\LastAggregate;
-use App\Services\Transactions\Aggregates\Fees\AverageAggregateFactory;
 use App\Services\Transactions\Aggregates\Fees\HistoricalAggregateFactory;
 use App\Services\Transactions\Aggregates\Fees\LastFeeAggregate;
-use App\Services\Transactions\Aggregates\Fees\MaximumAggregateFactory;
-use App\Services\Transactions\Aggregates\Fees\MinimumAggregateFactory;
 use Illuminate\Console\Command;
 
 final class CacheFees extends Command
