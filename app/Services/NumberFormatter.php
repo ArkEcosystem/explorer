@@ -84,6 +84,8 @@ final class NumberFormatter
      */
     public static function currencyShortNotation($value): string
     {
+        $value = is_string($value) ? (float) $value : $value;
+
         if ($value < 1000) {
             return sprintf('%d', $value);
         }
