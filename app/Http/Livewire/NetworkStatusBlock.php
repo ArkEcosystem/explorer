@@ -20,7 +20,7 @@ final class NetworkStatusBlock extends Component
     /** @phpstan-ignore-next-line */
     protected $listeners = [
         'currencyChanged' => '$refresh',
-        'updatePrice' => '$refresh',
+        'updatePrice'     => '$refresh',
     ];
 
     public function render(): View
