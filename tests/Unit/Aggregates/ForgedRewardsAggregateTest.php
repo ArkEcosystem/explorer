@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 use App\Aggregates\ForgedRewardsAggregate;
 use App\Models\Block;
-
 use function Spatie\Snapshots\assertMatchesSnapshot;
 
 beforeEach(function () {

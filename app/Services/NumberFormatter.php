@@ -11,9 +11,9 @@ use ReflectionClass;
 
 final class NumberFormatter
 {
-    const CRYPTO_DECIMALS = 8;
+    public const CRYPTO_DECIMALS = 8;
 
-    const FIAT_DECIMALS = 2;
+    public const FIAT_DECIMALS = 2;
 
     /**
      * @param string|int|float $value

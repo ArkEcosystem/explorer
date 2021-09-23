@@ -3,7 +3,6 @@
 declare(strict_types=1);
 
 use App\Models\Transaction;
-
 use App\Services\Timestamp;
 use App\Services\Transactions\Aggregates\Fees\Average\DayAggregate;
 use Carbon\Carbon;
