@@ -1,5 +1,4 @@
 <div
-    wire:poll.60s
     class="uppercase"
     :class="{ 'opacity-50': busy }"
     x-data="{ to: '{{ $to }}', busy: false }"

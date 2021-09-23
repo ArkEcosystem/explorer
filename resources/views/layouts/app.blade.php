@@ -91,6 +91,13 @@
         @stack('scripts')
 
         <!-- Scripts -->
+        <script type="text/javascript">
+            (function() {
+                setInterval(() => {
+                    Livewire.emit('updatePrice');
+                }, {{ Network::blockTime() * 1000 }})
+            })();
+        </script>
         <script src="{{ mix('js/manifest.js') }}" defer></script>
         <script src="{{ mix('js/vendor.js') }}" defer></script>
         <script src="{{ mix('js/app.js') }}" defer></script>

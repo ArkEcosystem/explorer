@@ -18,7 +18,10 @@ use Livewire\Component;
 final class NetworkStatusBlock extends Component
 {
     /** @phpstan-ignore-next-line */
-    protected $listeners = ['refreshNetworkStatusBlock' => '$refresh'];
+    protected $listeners = [
+        'currencyChanged' => '$refresh',
+        'updatePrice' => '$refresh',
+    ];
 
     public function render(): View
     {
