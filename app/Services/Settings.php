@@ -31,27 +31,27 @@ final class Settings
 
     public static function currency(): string
     {
-        return Str::upper(Arr::get(static::all(), 'currency', 'USD'));
+        return Str::upper(Arr::get(static::all(), 'currency'));
     }
 
     public static function locale(): string
     {
-        return Arr::get(config('currencies'), strtolower(static::currency()).'.locale', 'en_US');
+        return Arr::get(config('currencies'), strtolower(static::currency()).'.locale', 'en_US') ?? 'en_US';
     }
 
     public static function priceChart(): bool
     {
-        return Arr::get(static::all(), 'priceChart', true);
+        return (bool) Arr::get(static::all(), 'priceChart', true);
     }
 
     public static function feeChart(): bool
     {
-        return Arr::get(static::all(), 'feeChart', true);
+        return (bool) Arr::get(static::all(), 'feeChart', true);
     }
 
     public static function darkTheme(): bool
     {
-        return Arr::get(static::all(), 'darkTheme', true);
+        return (bool) Arr::get(static::all(), 'darkTheme', true);
     }
 
     public static function theme(): string
@@ -65,7 +65,7 @@ final class Settings
 
     public static function compactTables(): bool
     {
-        return Arr::get(static::all(), 'compactTables', true);
+        return (bool) Arr::get(static::all(), 'compactTables', true);
     }
 
     public static function usesCharts(): bool
