@@ -16,7 +16,7 @@ final class PriceTicker extends Component
     /** @phpstan-ignore-next-line */
     protected $listeners = [
         'currencyChanged' => 'setValues',
-        'updatePrice' => 'setValues',
+        'updatePrice'     => 'setValues',
     ];
 
     public string $price;
