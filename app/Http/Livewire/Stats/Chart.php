@@ -72,7 +72,7 @@ final class Chart extends Component
     private function mainValueFiat(): string
     {
         $currency = Settings::currency();
-        $price = $this->getPrice($currency);
+        $price    = $this->getPrice($currency);
 
         if (ServiceNumberFormatter::isFiat($currency)) {
             return BetterNumberFormatter::new()
