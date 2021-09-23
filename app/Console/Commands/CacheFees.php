@@ -38,7 +38,7 @@ final class CacheFees extends Command
      */
     public function handle(FeeCache $cache)
     {
-        $cache->setHistorical(StatsPeriods::ALL, HistoricalAggregateFactory::make(StatsPeriods::ALL)->aggregate());
+        //$cache->setHistorical(StatsPeriods::ALL, HistoricalAggregateFactory::make(StatsPeriods::ALL)->aggregate());
 
         collect([
             StatsPeriods::DAY,
@@ -53,10 +53,10 @@ final class CacheFees extends Command
             $cache->setHistorical($period, HistoricalAggregateFactory::make($period)->aggregate());
         });
 
-        collect(Forms::getTransactionOptions())->except('all')->keys()->each(function ($type) use ($cache): void {
-            $cache->setMinimum($type, MinimumAggregateFactory::make(self::LAST_20, $type)->aggregate());
-            $cache->setAverage($type, AverageAggregateFactory::make(self::LAST_20, $type)->aggregate());
-            $cache->setMaximum($type, MaximumAggregateFactory::make(self::LAST_20, $type)->aggregate());
-        });
+        // collect(Forms::getTransactionOptions())->except('all')->keys()->each(function ($type) use ($cache): void {
+        //     $cache->setMinimum($type, MinimumAggregateFactory::make(self::LAST_20, $type)->aggregate());
+        //     $cache->setAverage($type, AverageAggregateFactory::make(self::LAST_20, $type)->aggregate());
+        //     $cache->setMaximum($type, MaximumAggregateFactory::make(self::LAST_20, $type)->aggregate());
+        // });
     }
 }
