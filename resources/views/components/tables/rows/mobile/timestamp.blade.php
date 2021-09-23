@@ -1,5 +1,10 @@
 <div>
     @lang('labels.timestamp')
 
-    <div>{{ $model->timestamp() }}</div>
+    <div>
+        <x-time
+            :datetime="$model->datetime()"
+            :format="DateFormat::TIME_JS"
+        />
+    </div>
 </div>

@@ -1,5 +1,11 @@
 @if($shortened ?? false)
-    <span data-tippy-content="{{ $model->timestamp() }}">{{ $model->timestamp(true) }}</span>
+    <x-time
+        :datetime="$model->datetime()"
+        :format="DateFormat::TIME_SHORT_JS"
+    />
 @else
-    {{ $model->timestamp() }}
+    <x-time
+        :datetime="$model->datetime()"
+        :format="DateFormat::TIME_JS"
+    />
 @endif
