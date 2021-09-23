@@ -38,7 +38,7 @@ final class CacheFees extends Command
      */
     public function handle(FeeCache $cache)
     {
-        //$cache->setHistorical(StatsPeriods::ALL, HistoricalAggregateFactory::make(StatsPeriods::ALL)->aggregate());
+        $cache->setHistorical(StatsPeriods::ALL, HistoricalAggregateFactory::make(StatsPeriods::ALL)->aggregate());
 
         collect([
             StatsPeriods::DAY,
@@ -47,9 +47,6 @@ final class CacheFees extends Command
             StatsPeriods::QUARTER,
             StatsPeriods::YEAR,
         ])->each(function ($period) use ($cache): void {
-            $cache->setMinimum($period, MinimumAggregateFactory::make($period)->aggregate());
-            $cache->setAverage($period, AverageAggregateFactory::make($period)->aggregate());
-            $cache->setMaximum($period, MaximumAggregateFactory::make($period)->aggregate());
             $cache->setHistorical($period, HistoricalAggregateFactory::make($period)->aggregate());
         });
 
