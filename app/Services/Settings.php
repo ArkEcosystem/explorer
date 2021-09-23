@@ -36,6 +36,8 @@ final class Settings
 
     public static function locale(): string
     {
+        // Since sometimes the key exists (crypto values) but returns `null`, we need another default value
+        // in the end to handle that case
         return Arr::get(config('currencies'), strtolower(static::currency()).'.locale', 'en_US') ?? 'en_US';
     }
 
