@@ -1,11 +1,14 @@
 @if($shortened ?? false)
-    <x-time
+    <x-ark-local-time
         :datetime="$model->datetime()"
         :format="DateFormat::TIME_SHORT_JS"
+        :placeholder="$model->timestamp(true)"
+        :tooltip-format="DateFormat::TIME_JS"
     />
 @else
-    <x-time
+    <x-ark-local-time
         :datetime="$model->datetime()"
         :format="DateFormat::TIME_JS"
+        :placeholder="$model->timestamp()"
     />
 @endif
