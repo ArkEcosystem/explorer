@@ -14,7 +14,6 @@ use Illuminate\Support\Facades\DB;
 final class AllAggregate
 {
     use HasPlaceholders;
-
     use HasQueries;
 
     public function aggregate(): Collection

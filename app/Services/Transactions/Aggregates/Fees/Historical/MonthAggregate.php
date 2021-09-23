@@ -12,7 +12,6 @@ use Illuminate\Support\Collection;
 final class MonthAggregate
 {
     use HasPlaceholders;
-
     use HasQueries;
 
     public function aggregate(): Collection

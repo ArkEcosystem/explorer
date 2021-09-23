@@ -14,7 +14,6 @@ use Livewire\Component;
 final class LatestRecords extends Component
 {
     use ManagesLatestBlocks;
-
     use ManagesLatestTransactions;
 
     /** @phpstan-ignore-next-line */

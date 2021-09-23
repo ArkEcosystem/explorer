@@ -15,9 +15,7 @@ use Livewire\Component;
 final class InsightAllTimeTransactions extends Component
 {
     use AvailablePeriods;
-
     use ChartNumberFormatters;
-
     use StatisticsChart;
 
     public string $period = '';

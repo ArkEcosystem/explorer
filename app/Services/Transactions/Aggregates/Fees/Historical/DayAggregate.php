@@ -12,7 +12,6 @@ use Illuminate\Support\Collection;
 final class DayAggregate
 {
     use HasPlaceholders;
-
     use HasQueries;
 
     public function aggregate(): Collection

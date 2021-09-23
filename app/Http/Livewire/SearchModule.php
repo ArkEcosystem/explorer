@@ -19,7 +19,6 @@ use Livewire\Component;
 final class SearchModule extends Component
 {
     use ManagesSearch;
-
     use HasModal;
 
     public bool $isModal = false;

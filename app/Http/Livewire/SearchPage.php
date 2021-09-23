@@ -17,7 +17,6 @@ use Livewire\WithPagination;
 final class SearchPage extends Component
 {
     use ManagesSearch;
-
     use WithPagination;
 
     /** @phpstan-ignore-next-line */

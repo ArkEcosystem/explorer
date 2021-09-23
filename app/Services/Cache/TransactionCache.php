@@ -14,7 +14,6 @@ use Illuminate\Support\Facades\Cache;
 final class TransactionCache implements Contract
 {
     use ManagesCache;
-
     use ManagesChart;
 
     public function getHistorical(string $period): array

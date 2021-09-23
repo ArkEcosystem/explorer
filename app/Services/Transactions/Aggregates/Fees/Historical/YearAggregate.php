@@ -12,7 +12,6 @@ use Illuminate\Support\Collection;
 final class YearAggregate
 {
     use HasPlaceholders;
-
     use HasQueries;
 
     public function aggregate(): Collection

@@ -30,27 +30,16 @@ use Illuminate\Support\Arr;
 final class TransactionViewModel implements ViewModel
 {
     use HasDirection;
-
     use HasIcons;
-
     use HasState;
-
     use HasType;
-
     use InteractsWithDelegateRegistration;
-
     use InteractsWithEntities;
-
     use InteractsWithMultiPayment;
-
     use InteractsWithMultiSignature;
-
     use InteractsWithTypeData;
-
     use InteractsWithVendorField;
-
     use InteractsWithVotes;
-
     use InteractsWithWallets;
 
     private TransactionType $type;

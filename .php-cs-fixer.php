@@ -74,6 +74,7 @@ $rules = [
             'extra',
             'throw',
             'use',
+            'use_trait',
         ],
     ],
     'no_leading_import_slash' => true,
