@@ -12,6 +12,7 @@ use Illuminate\Support\Collection;
 final class WeekAggregate
 {
     use HasPlaceholders;
+
     use HasQueries;
 
     public function aggregate(): Collection

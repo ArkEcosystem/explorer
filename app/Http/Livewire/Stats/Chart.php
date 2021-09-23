@@ -20,6 +20,7 @@ use Livewire\Component;
 final class Chart extends Component
 {
     use AvailablePeriods;
+
     use StatisticsChart;
 
     public bool $show = true;

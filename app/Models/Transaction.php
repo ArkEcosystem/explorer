@@ -42,7 +42,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 final class Transaction extends Model
 {
     use HasFactory;
+
     use SearchesCaseInsensitive;
+
     use HasEmptyScope;
 
     /**
