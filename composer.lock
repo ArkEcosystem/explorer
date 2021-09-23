@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d07ec0be0a46f53c85e1a15fc5d116e3",
+    "content-hash": "411746871bb53db15bc2d7462b947db7",
     "packages": [
         {
             "name": "arkecosystem/crypto",
@@ -6316,16 +6316,16 @@
         },
         {
             "name": "spatie/laravel-responsecache",
-            "version": "6.6.9",
+            "version": "7.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-responsecache.git",
-                "reference": "cab93fa63fd60e03dc5bb33aef7b45cc014ed6a3"
+                "reference": "3bf314f2e6ed7644b9dc182817b48754c928008c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-responsecache/zipball/cab93fa63fd60e03dc5bb33aef7b45cc014ed6a3",
-                "reference": "cab93fa63fd60e03dc5bb33aef7b45cc014ed6a3",
+                "url": "https://api.github.com/repos/spatie/laravel-responsecache/zipball/3bf314f2e6ed7644b9dc182817b48754c928008c",
+                "reference": "3bf314f2e6ed7644b9dc182817b48754c928008c",
                 "shasum": ""
             },
             "require": {
@@ -6335,14 +6335,15 @@
                 "illuminate/http": "^7.13|^8.0",
                 "illuminate/support": "^7.13|^8.0",
                 "nesbot/carbon": "^2.35",
-                "php": "^7.4|^8.0",
+                "php": "^8.0",
                 "spatie/laravel-package-tools": "^1.1"
             },
             "require-dev": {
                 "laravel/framework": "^7.13|^8.0",
                 "mockery/mockery": "^1.4",
                 "orchestra/testbench": "^5.2|^6.0",
-                "phpunit/phpunit": "^9.1.5"
+                "phpunit/phpunit": "^9.3",
+                "vimeo/psalm": "^4.4"
             },
             "type": "library",
             "extra": {
@@ -6384,15 +6385,19 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-responsecache/issues",
-                "source": "https://github.com/spatie/laravel-responsecache/tree/6.6.9"
+                "source": "https://github.com/spatie/laravel-responsecache/tree/7.1.0"
             },
             "funding": [
                 {
                     "url": "https://spatie.be/open-source/support-us",
                     "type": "custom"
+                },
+                {
+                    "url": "https://github.com/spatie",
+                    "type": "github"
                 }
             ],
-            "time": "2021-03-30T20:11:33+00:00"
+            "time": "2021-04-27T07:23:06+00:00"
         },
         {
             "name": "spatie/laravel-schemaless-attributes",
