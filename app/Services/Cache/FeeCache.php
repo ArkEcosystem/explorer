@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Cache;
 final class FeeCache implements Contract
 {
     use ManagesCache;
+
     use ManagesChart;
 
     public function all(string $period): array

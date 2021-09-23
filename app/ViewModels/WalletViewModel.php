@@ -20,10 +20,15 @@ use Mattiasgeniar\Percentage\Percentage;
 final class WalletViewModel implements ViewModel
 {
     use CanBeCold;
+
     use CanBeDelegate;
+
     use CanForge;
+
     use CanVote;
+
     use HasType;
+
     use HasVoters;
 
     public function __construct(private Wallet $wallet)

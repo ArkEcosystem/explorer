@@ -16,7 +16,9 @@ use App\ViewModels\Concerns\Block\InteractsWithNeighbours;
 final class BlockViewModel implements ViewModel
 {
     use HasDelegate;
+
     use HasTransactions;
+
     use InteractsWithNeighbours;
 
     public function __construct(private Block $block)

@@ -22,7 +22,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 final class Wallet extends Model
 {
     use HasFactory;
+
     use SearchesCaseInsensitive;
+
     use HasEmptyScope;
 
     /**

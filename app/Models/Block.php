@@ -27,7 +27,9 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 final class Block extends Model
 {
     use HasFactory;
+
     use SearchesCaseInsensitive;
+
     use HasEmptyScope;
 
     /**
