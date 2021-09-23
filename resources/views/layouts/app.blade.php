@@ -93,9 +93,9 @@
         <!-- Scripts -->
         <script type="text/javascript">
             (function() {
-                setInterval(() => {
+                setInterval(function() {
                     Livewire.emit('updatePrice');
-                }, {{ Network::blockTime() * 1000 }})
+                }, {{ Network::blockTime() * 1000 }});
             })();
         </script>
         <script src="{{ mix('js/manifest.js') }}" defer></script>
