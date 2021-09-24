@@ -6,7 +6,6 @@ use App\Models\Transaction;
 use App\Services\Timestamp;
 use App\Services\Transactions\Aggregates\Historical\MonthAggregate;
 
-
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use function Spatie\Snapshots\assertMatchesSnapshot;
