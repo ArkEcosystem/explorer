@@ -7,7 +7,7 @@ namespace App\Console\Commands;
 use App\Enums\StatsPeriods;
 use App\Services\Cache\FeeCache;
 use App\Services\Forms;
-use App\Services\Transactions\Aggregates\Fees\HistoricalAggregateFactory;
+use App\Services\Transactions\Aggregates\HistoricalAggregateFactory;
 use App\Services\Transactions\Aggregates\Fees\LastFeeAggregate;
 use Illuminate\Console\Command;
 

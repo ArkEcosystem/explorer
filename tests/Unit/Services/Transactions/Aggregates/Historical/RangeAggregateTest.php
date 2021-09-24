@@ -5,7 +5,7 @@ declare(strict_types=1);
 use App\Models\Transaction;
 
 use App\Services\Timestamp;
-use App\Services\Transactions\Aggregates\Fees\Historical\RangeAggregate;
+use App\Services\Transactions\Aggregates\Historical\RangeAggregate;
 use Illuminate\Support\Collection;
 use function Spatie\Snapshots\assertMatchesSnapshot;
 
