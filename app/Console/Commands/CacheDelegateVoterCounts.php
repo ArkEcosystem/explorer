@@ -48,8 +48,6 @@ final class CacheDelegateVoterCounts extends Command
                 /* @phpstan-ignore-next-line */
                 DB::raw('("voters"."attributes"->>\'vote\')::text')
             )->groupByRaw('"wallets"."public_key"')
-            ->orderByRaw('"total" DESC')
-            ->limit(10)
             ->pluck('total', 'public_key');
 
         $results->each(fn ($total, $publicKey) => $walletCache->setVoterCount($publicKey, $total));
