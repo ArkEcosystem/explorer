@@ -7,7 +7,7 @@
 
     <div wire:poll.60s class="flex space-x-3">
         <span class="font-semibold leading-none whitespace-nowrap dark:text-white text-theme-secondary-900">
-            {{ $price }}  {{ time() }}
+            {{ $price }}
         </span>
 
         @if ($priceChange < 0)

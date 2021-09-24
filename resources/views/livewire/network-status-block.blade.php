@@ -14,7 +14,7 @@
                 </x-stats.stat>
 
                 <x-stats.stat :label="trans('general.market_cap')" icon="app-monitor" :disabled="! Network::canBeExchanged() || $marketCap === null">
-                    {{ $marketCap }} {{ time() }}
+                    {{ $marketCap }}
                 </x-stats.stat>
 
                 <livewire:network-status-block-price />
