@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace App\Console\Commands;
 
 use App\Facades\Wallets;
-use App\Jobs\CacheVoterCountByPublicKey;
+use App\Services\Cache\WalletCache;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
 
 final class CacheDelegateVoterCounts extends Command
 {
@@ -31,8 +32,24 @@ final class CacheDelegateVoterCounts extends Command
      */
     public function handle(): void
     {
-        Wallets::allWithUsername()
-            ->orderBy('balance')
-            ->each(fn ($wallet) => CacheVoterCountByPublicKey::dispatch($wallet->public_key)->onQueue('voters'));
+        $walletCache = new WalletCache;
+
+        $select = [
+            '"wallets"."public_key"',
+            'COUNT("voters"."public_key") total'
+        ];
+
+        $results = Wallets::allWithUsername()
+            ->selectRaw(implode(', ', $select))
+            ->join(
+                'wallets as voters',
+                DB::raw('"wallets"."public_key"'),
+                DB::raw('("voters"."attributes"->>\'vote\')::text')
+            )->groupByRaw('"wallets"."public_key"')
+            ->orderByRaw('"total" DESC')
+            ->limit(10)
+            ->pluck('total', 'public_key');
+
+        $results->each(fn ($total, $publicKey) => $walletCache->setVoterCount($publicKey, $total));
     }
 }
