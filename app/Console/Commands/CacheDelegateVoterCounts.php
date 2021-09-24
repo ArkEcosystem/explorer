@@ -32,11 +32,11 @@ final class CacheDelegateVoterCounts extends Command
      */
     public function handle(): void
     {
-        $walletCache = new WalletCache;
+        $walletCache = new WalletCache();
 
         $select = [
             '"wallets"."public_key"',
-            'COUNT("voters"."public_key") total'
+            'COUNT("voters"."public_key") total',
         ];
 
         $results = Wallets::allWithUsername()

@@ -21,4 +21,3 @@ it('should cache the voter count for the public key', function () {
 
     expect(Cache::tags('wallet')->has(md5("voter_count/$vote")))->toBeTrue();
 });
-
