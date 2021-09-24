@@ -17,7 +17,8 @@
     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
         <x-general.search.advanced-option class="md:border-b" option-class="md:border-r" :title="trans('forms.search.type')">
             <x-ark-rich-select
-                button-class="block w-full font-medium text-left bg-transparent text-theme-secondary-900 dark:text-theme-secondary-200"
+                button-class="mr-10 block w-full font-medium text-left bg-transparent text-theme-secondary-900 dark:text-theme-secondary-200"
+                icon-class="absolute inset-y-0 right-0 flex items-center justify-center"
                 initial-value="{{ $type }}"
                 dispatch-event="search-type-changed"
                 wire:model.defer="state.type"
