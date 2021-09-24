@@ -43,7 +43,9 @@ final class CacheDelegateVoterCounts extends Command
             ->selectRaw(implode(', ', $select))
             ->join(
                 'wallets as voters',
+                /* @phpstan-ignore-next-line */
                 DB::raw('"wallets"."public_key"'),
+                /* @phpstan-ignore-next-line */
                 DB::raw('("voters"."attributes"->>\'vote\')::text')
             )->groupByRaw('"wallets"."public_key"')
             ->orderByRaw('"total" DESC')
