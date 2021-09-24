@@ -1,6 +1,6 @@
 <div>
     <div class="dark:bg-black bg-theme-secondary-100">
-        <div class="w-full p-8 content-container-full-width">
+        <div class="p-8 w-full content-container-full-width">
             <livewire:search-module :type="$state['type']" />
         </div>
     </div>
