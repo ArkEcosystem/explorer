@@ -1,11 +1,11 @@
 <div>
     <div class="dark:bg-black bg-theme-secondary-100">
-        <div class="p-8 w-full content-container-full-width">
+        <div class="w-full p-8 content-container-full-width">
             <livewire:search-module :type="$state['type']" />
         </div>
     </div>
 
-    <x-ark-container>
+    <x-ark-container id="results-list">
         <h1 class="header-2">@lang('pages.search_results.title')</h1>
 
         @if($results && $results->count())
