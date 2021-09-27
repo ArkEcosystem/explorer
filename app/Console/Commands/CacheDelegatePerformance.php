@@ -41,7 +41,7 @@ final class CacheDelegatePerformance extends Command
             ->limit(Network::delegateCount())
             ->select([
                 'rounds.public_key',
-                DB::raw('MAX(balance) as balance')
+                DB::raw('MAX(rounds.balance) as balance')
             ])
             ->join('blocks', 'blocks.generator_public_key', '=', 'rounds.public_key');
 
@@ -53,7 +53,7 @@ final class CacheDelegatePerformance extends Command
                 'max' => $roundStart + Network::delegateCount(),
             ];
         })->each(function (array $range, int $index) use ($query) {
-            $query->addSelect(DB::raw(sprintf('SUM(CASE WHEN blocks.height BETWEEN %s AND  %s THEN 1 else 0 end) > 0 round_%s', $range['min'], $range['max'], $index)));
+            $query->addSelect(DB::raw(sprintf('bool_or(blocks.height BETWEEN %s AND %s) round_%s', $range['min'], $range['max'], $index)));
         });
 
         $query
