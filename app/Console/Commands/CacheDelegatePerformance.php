@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
-use App\Services\Monitor\Monitor;
 use App\Facades\Network;
 use App\Models\Round;
 use App\Services\Cache\WalletCache;
+use App\Services\Monitor\Monitor;
+use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 
 final class CacheDelegatePerformance extends Command
@@ -41,7 +41,7 @@ final class CacheDelegatePerformance extends Command
             ->limit(Network::delegateCount())
             ->select([
                 'rounds.public_key',
-                DB::raw('MAX(rounds.balance) as balance')
+                DB::raw('MAX(rounds.balance) as balance'),
             ])
             ->join('blocks', 'blocks.generator_public_key', '=', 'rounds.public_key');
 
@@ -62,7 +62,7 @@ final class CacheDelegatePerformance extends Command
             ->groupBy('rounds.public_key');
 
         $query->get()->each(function (object $item) : void {
-            /** @var object $item */
+            /* @var object $item */
             (new WalletCache())->setPerformance($item->public_key, [
                 $item->round_0,
                 $item->round_1,
