@@ -52,7 +52,7 @@ final class CacheDelegatePerformance extends Command
                 'min' => $roundStart,
                 'max' => $roundStart + Network::delegateCount(),
             ];
-        })->each(function (array $range, int $index) use ($query) {
+        })->each(function (array $range, int $index) use ($query) : void {
             $query->addSelect(DB::raw(sprintf('bool_or(blocks.height BETWEEN %s AND %s) round_%s', $range['min'], $range['max'], $index)));
         });
 
@@ -61,7 +61,8 @@ final class CacheDelegatePerformance extends Command
             ->orderBy('public_key', 'asc')
             ->groupBy('rounds.public_key');
 
-        $query->get()->each(function ($item) {
+        $query->get()->each(function (object $item) : void {
+            /** @var object $item */
             (new WalletCache())->setPerformance($item->public_key, [
                 $item->round_0,
                 $item->round_1,
