@@ -76,7 +76,7 @@ final class TransactionViewModel implements ViewModel
         return Timestamp::fromGenesisHuman($this->transaction->timestamp, $short);
     }
 
-    public function datetime(): Carbon
+    public function dateTime(): Carbon
     {
         return Timestamp::fromGenesis($this->transaction->timestamp);
     }
