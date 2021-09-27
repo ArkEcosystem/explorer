@@ -75,4 +75,10 @@ return [
         'description' => 'View search results for :searchTerm on :name Blockchain.',
         'image'       => asset('images/metadata/explorer-preview.png'),
     ],
+
+    '404' => [
+        'title'       => '404 - Error | :name Blockchain Explorer',
+        'description' => '',
+        'image'       => asset('images/metadata/explorer-preview.png'),
+    ],
 ];
