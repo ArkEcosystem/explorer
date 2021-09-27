@@ -3,9 +3,9 @@
 declare(strict_types=1);
 
 use App\Console\Commands\CacheDelegatePerformance;
-use App\Models\Round;
 use App\Facades\Network;
 use App\Models\Block;
+use App\Models\Round;
 use App\Services\Cache\WalletCache;
 use Illuminate\Support\Facades\Cache;
 
@@ -13,7 +13,7 @@ it('should cache the past performance for a public key', function () {
     $publicKey = 'generator';
 
     Round::factory()->create([
-        'round' => '16',
+        'round'      => '16',
         'public_key' => $publicKey,
     ]);
 
@@ -43,7 +43,7 @@ it('should cache end of a round missed blocks for a public key ', function () {
     $publicKey = 'generator';
 
     Round::factory()->create([
-        'round' => '16',
+        'round'      => '16',
         'public_key' => $publicKey,
     ]);
 
