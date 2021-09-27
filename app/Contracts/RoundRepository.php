@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Contracts;
 
-use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Collection;
 
 interface RoundRepository
 {
-    public function allByRound(int $round): Builder;
+    public function allByRound(int $round): Collection;
 
     public function current(): int;
 }
