@@ -3,7 +3,7 @@
         <script src="{{ mix('js/clipboard.js')}}"></script>
     @endpush
 
-    <x-ark-metadata page="transactions" />
+    <x-metadata page="transaction" :detail="['txid' => $transaction->id()]" />
 
     @section('content')
         <x-page-headers.transaction :transaction="$transaction" />

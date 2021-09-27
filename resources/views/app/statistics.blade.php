@@ -1,5 +1,5 @@
 @component('layouts.app', ['isLanding' => true, 'fullWidth' => true])
-    <x-ark-metadata page="statistics"/>
+    <x-metadata page="statistics" />
 
     @section('content')
         <livewire:stats-highlights/>

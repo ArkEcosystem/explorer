@@ -1,5 +1,5 @@
 @component('layouts.app', ['isLanding' => true, 'fullWidth' => true])
-    <x-ark-metadata page="delegates" />
+    <x-metadata page="delegates" />
 
     @section('content')
         <x-general.header class="overflow-auto">

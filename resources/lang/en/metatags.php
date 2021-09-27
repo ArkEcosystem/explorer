@@ -5,8 +5,8 @@ declare(strict_types=1);
 return [
 
     'home' => [
-        'title'       => ':detail Blockchain Explorer',
-        'description' => 'View transactions, blocks, nodes, and other network activity on the :detail Blockchain.',
+        'title'       => ':name Blockchain Explorer',
+        'description' => 'View transactions, blocks, nodes, and other network activity on the :name Blockchain.',
         'image'       => asset('images/metadata/explorer-preview.png'),
     ],
 

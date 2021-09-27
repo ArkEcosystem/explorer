@@ -3,7 +3,7 @@
         <script src="{{ mix('js/clipboard.js')}}"></script>
     @endpush
 
-    <x-ark-metadata page="wallet-blocks" />
+    <x-metadata page="wallet-blocks" :detail="['address' => $wallet->address()]" />
 
     @section('content')
         <x-page-headers.wallet.blocks :wallet="$wallet" />

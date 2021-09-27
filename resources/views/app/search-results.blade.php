@@ -1,5 +1,5 @@
 @component('layouts.app', ['isLanding' => true, 'fullWidth' => true])
-    <x-ark-metadata page="search" />
+    <x-metadata page="search" :detail="['searchTerm' => request()->get('term')]" />
 
     @section('content')
         <livewire:search-page />
