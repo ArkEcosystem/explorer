@@ -33,8 +33,7 @@
         "tailwind": "^4.0.0",
         "tailwindcss": "^2.2.16",
         "tippy.js": "^6.3.1",
-        "ts-loader": "^8.0.6",
-        "typescript": "^4.0.3"
+        "vue-template-compiler": "^2.6.14"
     },
     "dependencies": {
         "body-scroll-lock": "^3.1.5",
