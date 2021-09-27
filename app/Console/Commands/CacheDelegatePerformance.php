@@ -53,6 +53,8 @@ final class CacheDelegatePerformance extends Command
                 'max' => $roundStart + Network::delegateCount(),
             ];
         })->each(function (array $range, int $index) use ($query) : void {
+            // `bool_or` is equivalent to `some` in PGSQL and is used here to
+            // check if there is at least one block on the range.
             $query->addSelect(DB::raw(sprintf('bool_or(blocks.height BETWEEN %s AND %s) round_%s', $range['min'], $range['max'], $index)));
         });
 
@@ -62,15 +64,19 @@ final class CacheDelegatePerformance extends Command
             ->groupBy('rounds.public_key');
 
         $query->get()->each(function ($item) : void {
-            // @phpstan-ignore-start
+            /* @phpstan-ignore-next-line */
             (new WalletCache())->setPerformance($item->public_key, [
+                /* @phpstan-ignore-next-line */
                 $item->round_0,
+                /* @phpstan-ignore-next-line */
                 $item->round_1,
+                /* @phpstan-ignore-next-line */
                 $item->round_2,
+                /* @phpstan-ignore-next-line */
                 $item->round_3,
+                /* @phpstan-ignore-next-line */
                 $item->round_4,
             ]);
-            // @phpstan-ignore-end
         });
     }
 }
