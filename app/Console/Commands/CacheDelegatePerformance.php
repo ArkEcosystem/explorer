@@ -4,19 +4,12 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
-<<<<<<< HEAD
 use Illuminate\Console\Command;
 use App\Services\Monitor\Monitor;
 use App\Facades\Network;
 use App\Models\Round;
 use App\Services\Cache\WalletCache;
 use Illuminate\Support\Facades\DB;
-=======
-use App\Facades\Rounds;
-use App\Jobs\CachePastRoundPerformanceByPublicKey;
-use App\Services\Monitor\Monitor;
-use Illuminate\Console\Command;
->>>>>>> parent of faca34b9 (allbyround should return a query builder)
 
 final class CacheDelegatePerformance extends Command
 {
@@ -41,7 +34,6 @@ final class CacheDelegatePerformance extends Command
      */
     public function handle()
     {
-<<<<<<< HEAD
         $round = Monitor::roundNumber();
 
         $query = Round::query()
@@ -78,9 +70,5 @@ final class CacheDelegatePerformance extends Command
                 $item->round_4,
             ]);
         });
-=======
-        Rounds::allByRound(Monitor::roundNumber())
-            ->each(fn ($round) => CachePastRoundPerformanceByPublicKey::dispatch($round->round, $round->public_key)->onQueue('performance'));
->>>>>>> parent of faca34b9 (allbyround should return a query builder)
     }
 }
