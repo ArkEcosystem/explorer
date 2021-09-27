@@ -35,19 +35,19 @@ final class CacheDelegateVoterCounts extends Command
         $walletCache = new WalletCache();
 
         $select = [
-            '"wallets"."public_key"',
-            'COUNT("voters"."public_key") total',
+            'wallets.public_key',
+            'COUNT(voters.public_key) total',
         ];
 
         $results = Wallets::allWithUsername()
             ->selectRaw(implode(', ', $select))
             ->join(
                 'wallets as voters',
+                'wallets.public_key',
                 /* @phpstan-ignore-next-line */
-                DB::raw('"wallets"."public_key"'),
-                /* @phpstan-ignore-next-line */
-                DB::raw('("voters"."attributes"->>\'vote\')::text')
-            )->groupByRaw('"wallets"."public_key"')
+                DB::raw('(voters.attributes->>\'vote\')::text')
+            )
+            ->groupBy('wallets.public_key')
             ->pluck('total', 'public_key');
 
         $results->each(fn ($total, $publicKey) => $walletCache->setVoterCount($publicKey, $total));
