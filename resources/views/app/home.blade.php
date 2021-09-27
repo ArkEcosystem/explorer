@@ -1,4 +1,7 @@
 @component('layouts.app', ['isLanding' => true, 'fullWidth' => true])
+
+    <x-metadata page="home" :detail="Network::explorerTitle()" />
+
     @section('content')
         <livewire:network-status-block />
 

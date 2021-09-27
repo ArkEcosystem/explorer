@@ -1,8 +1,9 @@
 @component('layouts.app', ['isLanding' => true, 'fullWidth' => true])
-
     @push('scripts')
         <script src="{{ mix('js/clipboard.js')}}"></script>
     @endpush
+
+    <x-ark-metadata page="blocks" />
 
     @section('content')
         <x-page-headers.block :block="$block" />
@@ -31,5 +32,4 @@
             </div>
         @endif
     @endsection
-
 @endcomponent

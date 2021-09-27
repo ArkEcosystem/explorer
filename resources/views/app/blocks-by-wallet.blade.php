@@ -1,8 +1,9 @@
 @component('layouts.app', ['isLanding' => true, 'fullWidth' => true])
-
     @push('scripts')
         <script src="{{ mix('js/clipboard.js')}}"></script>
     @endpush
+
+    <x-ark-metadata page="wallet-blocks" />
 
     @section('content')
         <x-page-headers.wallet.blocks :wallet="$wallet" />
@@ -15,5 +16,4 @@
             </x-ark-container>
         </div>
     @endsection
-
 @endcomponent
