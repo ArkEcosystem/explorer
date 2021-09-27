@@ -21,7 +21,7 @@ beforeEach(function () {
 });
 
 it('should get all delegates for the given round', function () {
-    expect($this->subject->allByRound(112168))->toHaveCount(51);
+    expect($this->subject->allByRound(112168)->get())->toHaveCount(51);
 });
 
 it('should get the current round', function () {

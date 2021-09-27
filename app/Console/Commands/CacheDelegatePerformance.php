@@ -5,9 +5,10 @@ declare(strict_types=1);
 namespace App\Console\Commands;
 
 use App\Facades\Rounds;
-use App\Jobs\CachePastRoundPerformanceByPublicKey;
-use App\Services\Monitor\Monitor;
+use Performance\Performance;
 use Illuminate\Console\Command;
+use App\Services\Monitor\Monitor;
+use App\Jobs\CachePastRoundPerformanceByPublicKey;
 
 final class CacheDelegatePerformance extends Command
 {
@@ -32,7 +33,13 @@ final class CacheDelegatePerformance extends Command
      */
     public function handle()
     {
+        Performance::point();
+
+        dd(Rounds::allByRound(Monitor::roundNumber()));
+
         Rounds::allByRound(Monitor::roundNumber())
             ->each(fn ($round) => CachePastRoundPerformanceByPublicKey::dispatch($round->round, $round->public_key)->onQueue('performance'));
+
+        return Performance::results()->toJson();
     }
 }

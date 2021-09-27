@@ -118,7 +118,7 @@ it('should correctly show the block is missed', function () {
     });
 
     // Store delegate record for each Round object
-    $wallets = Rounds::allByRound(1)->map(fn ($round) => $round->delegate);
+    $wallets = Rounds::allByRound(1)->get()->map(fn ($round) => $round->delegate);
 
     // Make methods public for fetching forging order
     $activeDelegatesMethod  = new ReflectionMethod(DelegateTracker::class, 'getActiveDelegates');

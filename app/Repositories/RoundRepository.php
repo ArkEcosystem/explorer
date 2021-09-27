@@ -7,18 +7,17 @@ namespace App\Repositories;
 use App\Contracts\RoundRepository as Contract;
 use App\Facades\Network;
 use App\Models\Round;
-use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\Builder;
 
 final class RoundRepository implements Contract
 {
-    public function allByRound(int $round): Collection
+    public function allByRound(int $round): Builder
     {
         return Round::query()
             ->where('round', $round)
             ->orderBy('balance', 'desc')
             ->orderBy('public_key', 'asc')
-            ->limit(Network::delegateCount())
-            ->get();
+            ->limit(Network::delegateCount());
     }
 
     public function current(): int

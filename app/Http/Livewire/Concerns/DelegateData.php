@@ -69,7 +69,7 @@ trait DelegateData
     {
         $roundNumber = Rounds::current();
         $heightRange = Monitor::heightRangeByRound($roundNumber);
-        $delegates   = Rounds::allByRound($roundNumber);
+        $delegates   = Rounds::allByRound($roundNumber)->get();
 
         $this->cacheLastBlocks($delegates->pluck('public_key')->toArray());
 
