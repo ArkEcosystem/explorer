@@ -61,8 +61,8 @@ final class CacheDelegatePerformance extends Command
             ->orderBy('public_key', 'asc')
             ->groupBy('rounds.public_key');
 
-        $query->get()->each(function (object $item) : void {
-            /* @var object $item */
+        $query->get()->each(function ($item) : void {
+            // @phpstan-ignore-start
             (new WalletCache())->setPerformance($item->public_key, [
                 $item->round_0,
                 $item->round_1,
@@ -70,6 +70,7 @@ final class CacheDelegatePerformance extends Command
                 $item->round_3,
                 $item->round_4,
             ]);
+            // @phpstan-ignore-end
         });
     }
 }
