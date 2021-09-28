@@ -1,9 +1,10 @@
 {
-    "/js/app.js": "/js/app.js?id=302f70e0579ed528ddb5",
+    "/js/app.js": "/js/app.js?id=8cce3d8a15dba62d1642",
     "/js/manifest.js": "/js/manifest.js?id=5a1327d1f045d45c23ab",
     "/css/app.css": "/css/app.css?id=e511db1d90f55cfb8b66",
     "/js/vendor.js": "/js/vendor.js?id=6f0ead49b5ff5f0ee410",
     "/js/clipboard.js": "/js/clipboard.js?id=99d052d4c54fa6c91edc",
+    "/images/.DS_Store": "/images/.DS_Store?id=c1af3f834cda2cc7bd46",
     "/images/.gitkeep": "/images/.gitkeep?id=d41d8cd98f00b204e980",
     "/images/logo.svg": "/images/logo.svg?id=924491aaff66bdf12f68"
 }
