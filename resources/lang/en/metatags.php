@@ -59,14 +59,14 @@ return [
     ],
 
     'wallet-voters' => [
-        'title'       => 'Voters of :address Wallet - :name Blockchain Explorer',
-        'description' => 'View all voters of :address wallet on the :name Blockchain.',
+        'title'       => 'Voters of :delegate - :name Blockchain Explorer',
+        'description' => 'View all voters of :delegate on the :name Blockchain.',
         'image'       => asset('images/metadata/explorer-preview.png'),
     ],
 
     'wallet-blocks' => [
-        'title'       => 'Blocks Validated by :address Wallet - :name Blockchain Explorer',
-        'description' => 'View blocks validated by :address wallet on the :name Blockchain.',
+        'title'       => 'Blocks Validated by :delegate - :name Blockchain Explorer',
+        'description' => 'View blocks validated by :delegate on the :name Blockchain.',
         'image'       => asset('images/metadata/explorer-preview.png'),
     ],
 

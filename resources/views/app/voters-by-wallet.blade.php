@@ -4,7 +4,7 @@
         <script src="{{ mix('js/clipboard.js')}}"></script>
     @endpush
 
-    <x-metadata page="wallet-voters" :detail="['address' => $wallet->address()]" />
+    <x-metadata page="wallet-voters" :detail="['delegate' => $wallet->username()]" />
 
     @section('content')
         <x-page-headers.wallet.voters :wallet="$wallet" />
