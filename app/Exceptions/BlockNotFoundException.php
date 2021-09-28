@@ -7,7 +7,7 @@ namespace App\Exceptions;
 use App\Exceptions\Contracts\EntityNotFoundInterface;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\HtmlString;
-use Konceiver\BladeComponents\View\Components\TruncateMiddle;
+use ARKEcosystem\UserInterface\Components\TruncateMiddle;
 
 final class BlockNotFoundException extends ModelNotFoundException implements EntityNotFoundInterface
 {
