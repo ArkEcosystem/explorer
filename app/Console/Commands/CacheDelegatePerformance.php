@@ -44,7 +44,9 @@ final class CacheDelegatePerformance extends Command
             $roundStart = (int) $round * Network::delegateCount();
 
             return [
+                // 1st block on range
                 'min' => $roundStart,
+                // 51st block on range
                 'max' => $roundStart + Network::delegateCount() - 1,
             ];
         })->each(function (array $range, int $index) use ($query) : void {

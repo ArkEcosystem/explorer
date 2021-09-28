@@ -98,7 +98,7 @@ it('uses the 1st block to set the performance on the first range', function () {
     ]);
 });
 
-it('uses the 51th block to set the performance on the first range', function () {
+it('uses the 51st block to set the performance on the first range', function () {
     $publicKey = 'generator';
 
     Round::factory()->create([
@@ -127,7 +127,7 @@ it('uses the 51th block to set the performance on the first range', function () 
     ]);
 });
 
-it('uses the 52th block to set the performance on the second range', function () {
+it('uses the 52st block to set the performance on the second range', function () {
     $publicKey = 'generator';
 
     Round::factory()->create([
