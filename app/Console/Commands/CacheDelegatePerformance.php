@@ -45,7 +45,7 @@ final class CacheDelegatePerformance extends Command
 
             return [
                 'min' => $roundStart,
-                'max' => $roundStart + Network::delegateCount(),
+                'max' => $roundStart + Network::delegateCount() - 1,
             ];
         })->each(function (array $range, int $index) use ($query) : void {
             // `bool_or` is equivalent to `some` in PGSQL and is used here to
