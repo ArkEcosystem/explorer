@@ -2,13 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Services\Transactions\Aggregates\Fees\Minimum;
+namespace App\Services\Transactions\Aggregates\Fees;
 
 use App\Models\Transaction;
-use App\Services\BigNumber;
 use App\Services\Transactions\Aggregates\Concerns\HasQueries;
 
-final class LastAggregate
+final class LastFeeAggregate
 {
     use HasQueries;
 
@@ -30,16 +29,22 @@ final class LastAggregate
         return $this;
     }
 
-    public function aggregate(): float
+    public function aggregate(): array
     {
         $scope = $this->getScopeByType($this->type);
 
-        $sub = Transaction::select(['id', 'fee'])
+        $fees = Transaction::query()
+            ->select('fee')
             ->withScope($scope)
             ->orderByDesc('timestamp')
-            ->limit($this->limit);
+            ->limit($this->limit)
+            ->pluck('fee')
+            ->map(fn ($fee) => $fee->toFloat());
 
-        return BigNumber::new(Transaction::fromSub($sub, 'fees')->min('fee') ?? 0)
-            ->toFloat();
+        return [
+            'minimum' => $fees->min() ?? 0,
+            'average' => $fees->avg() ?? 0,
+            'maximum' => $fees->max() ?? 0,
+        ];
     }
 }
