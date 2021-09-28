@@ -59,7 +59,4 @@
         <server name="EXPLORER_DB_PASSWORD" value="password"/>
         <server name="PDO_ATTR_PERSISTENT" value="false"/>
     </php>
-    <listeners>
-        <listener class="Konceiver\SpeedTrap\SpeedTrapListener" />
-    </listeners>
 </phpunit>
