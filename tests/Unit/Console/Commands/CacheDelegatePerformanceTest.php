@@ -138,7 +138,7 @@ it('uses the 52th block to set the performance on the second range', function ()
     // First blocks in range 2
     Block::factory()->create([
         'generator_public_key' => $publicKey,
-        'height'               => (11 * Network::delegateCount()) , // 561
+        'height'               => (11 * Network::delegateCount()), // 561
     ]);
 
     expect(Block::whereGeneratorPublicKey($publicKey)->count())->toBe(1);
