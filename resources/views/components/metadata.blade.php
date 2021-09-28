@@ -4,7 +4,7 @@
 ])
 
 @php
-    $detail = array_merge(['name' => Network::explorerTitle()], $detail);
+    $detail = array_merge(['name' => Network::currency()], $detail);
 @endphp
 
 @section('title')
