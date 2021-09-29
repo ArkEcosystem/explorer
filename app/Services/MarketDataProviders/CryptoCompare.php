@@ -11,7 +11,7 @@ use App\Services\Cache\CryptoDataCache;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
-use Konceiver\BetterNumberFormatter\ResolveScientificNotation;
+use ARKEcosystem\UserInterface\NumberFormatter\ResolveScientificNotation;
 
 final class CryptoCompare implements MarketDataProvider
 {

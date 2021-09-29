@@ -14,7 +14,7 @@ use App\Services\NumberFormatter as ServiceNumberFormatter;
 use App\Services\Settings;
 use Illuminate\Support\Collection;
 use Illuminate\View\View;
-use Konceiver\BetterNumberFormatter\BetterNumberFormatter;
+use ARKEcosystem\UserInterface\NumberFormatter\NumberFormatter as BetterNumberFormatter;
 use Livewire\Component;
 
 final class Chart extends Component

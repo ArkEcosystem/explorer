@@ -9,7 +9,7 @@ use App\Services\Cache\NetworkStatusBlockCache;
 use App\Services\NumberFormatter;
 use App\Services\Settings;
 use Illuminate\View\View;
-use Konceiver\BetterNumberFormatter\BetterNumberFormatter;
+use ARKEcosystem\UserInterface\NumberFormatter\NumberFormatter as BetterNumberFormatter;
 use Livewire\Component;
 
 final class NetworkStatusBlockPrice extends Component
