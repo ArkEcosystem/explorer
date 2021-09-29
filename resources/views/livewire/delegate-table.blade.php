@@ -17,22 +17,20 @@
 
     @if($this->state['status'] === 'active')
         <div wire:poll.{{ Network::blockTime() }}s wire:key="poll_active_delegates_skeleton">
-            <x-loading.hidden>
-                @if (count($delegates) && $state['status'] === 'active')
-                    <span x-show="selected === 'active'">
-                        <x-tables.desktop.delegates.active :delegates="$delegates" />
-                    </span>
-                @else
+            @if (count($delegates) && $state['status'] === 'active')
+                <span x-show="selected === 'active'">
                     <x-tables.desktop.delegates.active :delegates="$delegates" />
-                @endif
-            </x-loading.hidden>
+                </span>
+            @else
+                <x-loading.hidden>
+                    <x-tables.desktop.delegates.active :delegates="$delegates" />
+                </x-loading.hidden>
+            @endif
         </div>
     @elseif (! count($delegates) || $state['status'] !== 'active')
-        <x-loading.visible>
-            <span x-show="selected === 'active'">
-                <x-tables.desktop.skeleton.delegates.active />
-            </span>
-        </x-loading.visible>
+        <span x-show="selected === 'active'">
+            <x-tables.desktop.skeleton.delegates.active />
+        </span>
     @endif
 
     @if($this->state['status'] === 'standby')
