@@ -557,6 +557,7 @@ it('can determine the colors for icons based on the status of a delegate', funct
         'attributes'   => [
             'delegate' => [
                 'username' => 'John',
+                'rank'     => 1,
             ],
         ],
     ]));
