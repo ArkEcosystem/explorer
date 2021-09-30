@@ -6,7 +6,6 @@ namespace App\ViewModels;
 
 use App\Actions\CacheNetworkHeight;
 use App\Contracts\ViewModel;
-use App\Facades\Wallets;
 use App\Models\Transaction;
 use App\Services\ExchangeRate;
 use App\Services\Timestamp;
@@ -83,6 +82,7 @@ final class TransactionViewModel implements ViewModel
 
     public function nonce(): int
     {
+        /* @phpstan-ignore-next-line */
         return $this->transaction->nonce;
     }
 
