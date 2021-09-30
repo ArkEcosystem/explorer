@@ -83,9 +83,7 @@ final class TransactionViewModel implements ViewModel
 
     public function nonce(): int
     {
-        $wallet = Wallets::findByPublicKey($this->transaction->sender_public_key);
-
-        return $wallet->nonce->toNumber();
+        return $this->transaction->nonce;
     }
 
     public function fee(): float
