@@ -82,7 +82,6 @@ final class TransactionViewModel implements ViewModel
 
     public function nonce(): int
     {
-        /* @phpstan-ignore-next-line */
         return $this->transaction->nonce;
     }
 
