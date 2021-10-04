@@ -2,7 +2,7 @@
     <x-metadata page="404" />
 
     @section('content')
-        <div class="flex flex-col items-center justify-center space-y-8">
+        <div class="flex flex-col justify-center items-center space-y-8">
             <div class="flex justify-center w-full">
                 <img src="/images/errors/404.svg" class="block max-w-4xl dark:hidden"/>
                 <img src="/images/errors/404_dark.svg" class="hidden max-w-4xl dark:block"/>
