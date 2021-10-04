@@ -56,7 +56,7 @@ final class CacheDelegatePerformance extends Command
             ->get();
 
         $results->each(function ($row) : void {
-            /** @var object $row */
+            /* @var object $row */
             (new WalletCache())->setPerformance($row->public_key, [
                 $row->round_0,
                 $row->round_1,
