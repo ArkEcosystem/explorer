@@ -83,7 +83,7 @@
             "yarn prod"
         ],
         "format": [
-            "vendor/bin/php-cs-fixer fix"
+            "vendor/bin/php-cs-fixer fix --config=vendor/arkecosystem/foundation/.php-cs-fixer.php"
         ],
         "fresh": [
             "php artisan migrate:fresh --seed"

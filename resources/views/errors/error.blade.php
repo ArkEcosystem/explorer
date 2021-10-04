@@ -35,16 +35,16 @@
         :class="{ 'dark bg-theme-secondary-900': theme === 'dark', 'bg-white': theme !== 'dark' }"
     >
         <div id="app" class="flex flex-col h-full antialiased">
-            <main class="container flex flex-1 items-center px-4 mx-auto w-full sm:px-8 sm:max-w-full lg:max-w-7xl">
+            <main class="container flex items-center flex-1 w-full px-4 mx-auto sm:px-8 sm:max-w-full lg:max-w-7xl">
                 <div class="w-full rounded-lg">
-                    <div class="flex flex-col justify-center items-center space-y-8">
+                    <div class="flex flex-col items-center justify-center space-y-8">
                         <div class="flex justify-center w-full">
                             <img src="/images/errors/{{ $errorType }}.svg" class="inline w-full max-w-4xl dark:hidden"/>
                             <img src="/images/errors/{{ $errorType }}_dark.svg" class="hidden w-full max-w-4xl dark:inline"/>
                         </div>
 
                         <div class="text-lg font-semibold text-center text-theme-secondary-900 dark:text-theme-secondary-600">
-                            {{ ARKEcosystem\UserInterface\UI::getErrorMessage($errorType) }}
+                            {{ \ARKEcosystem\Foundation\UserInterface\UI::getErrorMessage($errorType) }}
                         </div>
                         <div class="space-x-3">
                             <a href="/" class="button-primary">@lang('menus.home')</a>
