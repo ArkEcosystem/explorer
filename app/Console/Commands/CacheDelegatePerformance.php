@@ -9,8 +9,8 @@ use App\Models\Round;
 use App\Services\Cache\WalletCache;
 use App\Services\Monitor\Monitor;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\DB;
 
 final class CacheDelegatePerformance extends Command
 {
