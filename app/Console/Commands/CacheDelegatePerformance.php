@@ -10,6 +10,7 @@ use App\Services\Cache\WalletCache;
 use App\Services\Monitor\Monitor;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Collection;
 
 final class CacheDelegatePerformance extends Command
 {
@@ -49,6 +50,9 @@ final class CacheDelegatePerformance extends Command
                 $query->addSelect(DB::raw(sprintf('bool_or(blocks.height BETWEEN %s AND %s) round_%s', $start, $end, $index)));
             });
 
+        /**
+         * @var Collection $results
+         */
         $results = $query
             ->orderBy('balance', 'desc')
             ->orderBy('public_key', 'asc')
@@ -56,7 +60,6 @@ final class CacheDelegatePerformance extends Command
             ->get();
 
         $results->each(function ($row) : void {
-            /** @var object $row */
             (new WalletCache())->setPerformance($row->public_key, [
                 $row->round_0,
                 $row->round_1,
