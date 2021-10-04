@@ -49,24 +49,20 @@ final class CacheDelegatePerformance extends Command
                 $query->addSelect(DB::raw(sprintf('bool_or(blocks.height BETWEEN %s AND %s) round_%s', $start, $end, $index)));
             });
 
-        $query
+        $results = $query
             ->orderBy('balance', 'desc')
             ->orderBy('public_key', 'asc')
-            ->groupBy('rounds.public_key');
+            ->groupBy('rounds.public_key')
+            ->get();
 
-        $query->get()->each(function ($item) : void {
-            /* @phpstan-ignore-next-line */
-            (new WalletCache())->setPerformance($item->public_key, [
-                /* @phpstan-ignore-next-line */
-                $item->round_0,
-                /* @phpstan-ignore-next-line */
-                $item->round_1,
-                /* @phpstan-ignore-next-line */
-                $item->round_2,
-                /* @phpstan-ignore-next-line */
-                $item->round_3,
-                /* @phpstan-ignore-next-line */
-                $item->round_4,
+        $results->each(function ($row) : void {
+            /** @var object $row */
+            (new WalletCache())->setPerformance($row->public_key, [
+                $row->round_0,
+                $row->round_1,
+                $row->round_2,
+                $row->round_3,
+                $row->round_4,
             ]);
         });
     }
