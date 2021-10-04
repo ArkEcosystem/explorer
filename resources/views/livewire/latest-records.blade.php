@@ -22,7 +22,7 @@
                     <x-tables.mobile.blocks :blocks="$blocks" />
 
                     @if(count($blocks) === 15)
-                        <a href="{{ route('blocks', ['page' => 2]) }}" class="mt-4 w-full button-secondary">@lang('actions.view_all')</a>
+                        <a href="{{ route('blocks', ['page' => 2]) }}" class="w-full mt-4 button-secondary">@lang('actions.view_all')</a>
                     @endif
                 </div>
             @endif
@@ -35,7 +35,7 @@
                         <x-general.no-results :text="trans('pages.home.no_transaction_results', [trans('forms.search.transaction_types.'.$state['type'])])" />
                     </div>
                 @else
-                    <div wire:poll="pollTransactions" wire:key="poll_transactions_skeleton">
+                    <div wire:init="pollTransactions" wire:key="poll_transactions_skeleton">
                         <x-tables.desktop.skeleton.transactions />
 
                         <x-tables.mobile.skeleton.transactions />
@@ -48,7 +48,7 @@
                     <x-tables.mobile.transactions :transactions="$transactions" />
 
                     @if(count($transactions) === 15)
-                        <a href="{{ route('transactions', ['page' => 2, 'state[type]' => $state['type']]) }}" class="mt-4 w-full button-secondary">@lang('actions.view_all')</a>
+                        <a href="{{ route('transactions', ['page' => 2, 'state[type]' => $state['type']]) }}" class="w-full mt-4 button-secondary">@lang('actions.view_all')</a>
                     @endif
                 </div>
             @endif
