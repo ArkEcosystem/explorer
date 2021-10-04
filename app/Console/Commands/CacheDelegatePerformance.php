@@ -40,20 +40,14 @@ final class CacheDelegatePerformance extends Command
             ])
             ->join('blocks', 'blocks.generator_public_key', '=', 'rounds.public_key');
 
-        collect(range($round - 6, $round - 2))->map(function ($round): array {
-            $roundStart = (int) $round * Network::delegateCount();
+        collect(range($round - 5, $round - 1))
+            ->each(function ($round, int $index) use ($query) : void {
+                [$start, $end] = Monitor::heightRangeByRound($round);
 
-            return [
-                // 1st block on range
-                'min' => $roundStart,
-                // 51st block on range
-                'max' => $roundStart + Network::delegateCount() - 1,
-            ];
-        })->each(function (array $range, int $index) use ($query) : void {
-            // `bool_or` is equivalent to `some` in PGSQL and is used here to
-            // check if there is at least one block on the range.
-            $query->addSelect(DB::raw(sprintf('bool_or(blocks.height BETWEEN %s AND %s) round_%s', $range['min'], $range['max'], $index)));
-        });
+                // `bool_or` is equivalent to `some` in PGSQL and is used here to
+                // check if there is at least one block on the range.
+                $query->addSelect(DB::raw(sprintf('bool_or(blocks.height BETWEEN %s AND %s) round_%s', $start, $end, $index)));
+            });
 
         $query
             ->orderBy('balance', 'desc')

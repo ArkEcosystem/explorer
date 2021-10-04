@@ -10,14 +10,16 @@ use App\Services\Cache\WalletCache;
 use Illuminate\Support\Facades\Cache;
 
 it('should cache the past performance for a public key', function () {
+    $round = 16;
+
     $publicKey = 'generator';
 
     Round::factory()->create([
-        'round'      => '16',
+        'round'      => $round,
         'public_key' => $publicKey,
     ]);
 
-    foreach (range(10, 14) as $round) {
+    foreach (range($round - 5, $round - 1) as $round) {
         Block::factory()->create([
             'generator_public_key' => $publicKey,
             'height'               => $round * Network::delegateCount(),
@@ -40,14 +42,16 @@ it('should cache the past performance for a public key', function () {
 });
 
 it('should cache end of a round missed blocks for a public key ', function () {
+    $round = 16;
+
     $publicKey = 'generator';
 
     Round::factory()->create([
-        'round'      => '16',
+        'round'      => $round,
         'public_key' => $publicKey,
     ]);
 
-    foreach (range(10, 13) as $round) {
+    foreach (range($round - 5, $round - 2) as $round) {
         Block::factory()->create([
             'generator_public_key' => $publicKey,
             'height'               => $round * Network::delegateCount(),
@@ -70,17 +74,18 @@ it('should cache end of a round missed blocks for a public key ', function () {
 });
 
 it('uses the 1st block to set the performance on the first range', function () {
+    $round = 16;
     $publicKey = 'generator';
 
     Round::factory()->create([
-        'round'      => '16',
+        'round'      => $round,
         'public_key' => $publicKey,
     ]);
 
     // First block in range 1
     Block::factory()->create([
         'generator_public_key' => $publicKey,
-        'height'               => 10 * Network::delegateCount(), // 510
+        'height'               => (($round - 6) * Network::delegateCount()) + 1, // 511
     ]);
 
     expect(Block::whereGeneratorPublicKey($publicKey)->count())->toBe(1);
@@ -99,17 +104,18 @@ it('uses the 1st block to set the performance on the first range', function () {
 });
 
 it('uses the 51st block to set the performance on the first range', function () {
+    $round = 16;
     $publicKey = 'generator';
 
     Round::factory()->create([
-        'round'      => '16',
+        'round'      => $round,
         'public_key' => $publicKey,
     ]);
 
     // Last blocks in range 1
     Block::factory()->create([
         'generator_public_key' => $publicKey,
-        'height'               => (11 * Network::delegateCount()) - 1, // 560
+        'height'               => ($round - 5) * Network::delegateCount(), // 561
     ]);
 
     expect(Block::whereGeneratorPublicKey($publicKey)->count())->toBe(1);
@@ -128,17 +134,18 @@ it('uses the 51st block to set the performance on the first range', function () 
 });
 
 it('uses the 52st block to set the performance on the second range', function () {
+    $round = 16;
     $publicKey = 'generator';
 
     Round::factory()->create([
-        'round'      => '16',
+        'round'      => $round,
         'public_key' => $publicKey,
     ]);
 
     // First blocks in range 2
     Block::factory()->create([
         'generator_public_key' => $publicKey,
-        'height'               => (11 * Network::delegateCount()), // 561
+        'height'               => ($round - 5) * Network::delegateCount() + 1, // 562
     ]);
 
     expect(Block::whereGeneratorPublicKey($publicKey)->count())->toBe(1);
