@@ -1,19 +1,32 @@
 <div id="delegate-list" class="w-full">
-    <span x-show="selected !== 'active'" x-cloak>
-        <x-loading.visible>
-            <span x-show="selected === 'active'" x-cloak>
-                <x-tables.desktop.skeleton.delegates.active />
-            </span>
+    <x-loading.visible>
 
-            <span x-show="selected === 'standby'" x-cloak>
-                <x-tables.desktop.skeleton.delegates.standby />
-            </span>
+        {{--Alpine loading state--}}
+        <span x-show="selected === 'active'" x-cloak>
+            <x-tables.desktop.skeleton.delegates.active />
+        </span>
 
-            <span x-show="selected === 'resigned'" x-cloak>
-                <x-tables.desktop.skeleton.delegates.resigned />
-            </span>
-        </x-loading.visible>
-    </span>
+        <span x-show="selected === 'standby'" x-cloak>
+            <x-tables.desktop.skeleton.delegates.standby />
+        </span>
+
+        <span x-show="selected === 'resigned'" x-cloak>
+            <x-tables.desktop.skeleton.delegates.resigned />
+        </span>
+
+        {{--Livewire loading state--}}
+        @if($this->state['status'] === 'active')
+            <x-tables.desktop.skeleton.delegates.active />
+        @endif
+
+        @if($this->state['status'] === 'standby')
+            <x-tables.desktop.skeleton.delegates.standby />
+        @endif
+
+        @if($this->state['status'] === 'resigned')
+            <x-tables.desktop.skeleton.delegates.resigned />
+        @endif
+    </x-loading.visible>
 
     @if($this->state['status'] === 'active')
         <div wire:poll.{{ Network::blockTime() }}s wire:key="poll_active_delegates_skeleton">
