@@ -446,6 +446,28 @@ it('should handle vote weight percentage with 0 vote balance', function () {
     expect($this->subject->votePercentage())->toBeNull();
 });
 
+it('should handle vote weight percentage with 1 arktoshi vote balance', function () {
+    expect($this->subject->votePercentage())->toBeNull();
+
+    $vote = Wallet::factory()->create([
+        'attributes' => [
+            'delegate' => ['voteBalance' => 1e8],
+        ],
+    ]);
+
+    $this->subject = new WalletViewModel(Wallet::factory()->create([
+        'balance'    => 1e8,
+        'attributes' => ['vote' => $vote->public_key],
+    ]));
+
+    expect($this->subject->votePercentage())->toBeNull();
+
+    (new WalletCache())->setVote($vote->public_key, $vote);
+
+    expect($this->subject->votePercentage())->toBeFloat();
+    expect($this->subject->votePercentage())->toBe(100.0);
+});
+
 it('should fail to get the vote weight as percentage if the wallet has no public key', function () {
     $this->subject = new WalletViewModel(Wallet::factory()->create([
         'public_key' => null,
