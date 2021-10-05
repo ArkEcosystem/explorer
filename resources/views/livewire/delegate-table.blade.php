@@ -1,36 +1,36 @@
 <div id="delegate-list" class="w-full">
-    <x-loading.visible>
 
-        {{--Alpine loading state--}}
-        <span x-show="selected === 'active'" x-cloak>
+    <code><pre>
+    Alpine: <span x-text="selected"></span><span x-show="!Boolean(selected)">null</span>
+    Livewire: <span>{{ $this->state['status'] }}</span>
+    Delegates: <span>{{ count($delegates) }}</span>
+    Loading: <span wire:loading>Yes</span><span wire:loading.remove>NO</span>
+    </pre></code>
+
+    @if ($this->state['status'] !== 'active' || ! count($delegates))
+        <div x-show="selected === 'active'" x-cloak>
+            1
             <x-tables.desktop.skeleton.delegates.active />
-        </span>
+        </div>
+    @endif
 
-        <span x-show="selected === 'standby'" x-cloak>
+    @if ($this->state['status'] !== 'standby')
+        <div x-show="selected === 'standby'" x-cloak>
+            2
             <x-tables.desktop.skeleton.delegates.standby />
-        </span>
+        </div>
+    @endif
 
+    @if ($this->state['status'] !== 'resigned')
         <span x-show="selected === 'resigned'" x-cloak>
+            3
             <x-tables.desktop.skeleton.delegates.resigned />
         </span>
-
-        {{--Livewire loading state--}}
-        @if($this->state['status'] === 'active')
-            <x-tables.desktop.skeleton.delegates.active />
-        @endif
-
-        @if($this->state['status'] === 'standby')
-            <x-tables.desktop.skeleton.delegates.standby />
-        @endif
-
-        @if($this->state['status'] === 'resigned')
-            <x-tables.desktop.skeleton.delegates.resigned />
-        @endif
-    </x-loading.visible>
+    @endif
 
     @if($this->state['status'] === 'active')
         <div wire:poll.{{ Network::blockTime() }}s wire:key="poll_active_delegates_skeleton">
-            @if (count($delegates) && $state['status'] === 'active')
+            @if ($this->state['status'] === 'active' && count($delegates))
                 <span x-show="selected === 'active'">
                     <x-tables.desktop.delegates.active :delegates="$delegates" />
                 </span>
@@ -40,26 +40,48 @@
                 </x-loading.hidden>
             @endif
         </div>
-    @elseif (! count($delegates) || $state['status'] !== 'active')
-        <span x-show="selected === 'active'" x-cloak>
-            <x-tables.desktop.skeleton.delegates.active />
-        </span>
     @endif
 
     @if($this->state['status'] === 'standby')
         <x-loading.hidden>
             <x-tables.desktop.delegates.standby :delegates="$delegates" />
-
             <x-general.pagination :results="$delegates" class="mt-8" />
         </x-loading.hidden>
+
+        <div x-show="selected === 'standby'" x-cloak>
+            <x-loading.visible>
+            4
+                <x-tables.desktop.skeleton.delegates.standby />
+            </x-loading.visible>
+        </div>
+
+        <div x-show="!Boolean(selected)">
+            <x-loading.visible>
+            5
+                <x-tables.desktop.skeleton.delegates.standby />
+            </x-loading.visible>
+        </div>
     @endif
 
     @if($this->state['status'] === 'resigned')
         <x-loading.hidden>
             <x-tables.desktop.delegates.resigned :delegates="$delegates" />
-
             <x-general.pagination :results="$delegates" class="mt-8" />
         </x-loading.hidden>
+
+        <div x-show="selected === 'resigned'" x-cloak>
+            <x-loading.visible>
+            6
+                <x-tables.desktop.skeleton.delegates.resigned />
+            </x-loading.visible>
+        </div>
+
+        <div x-show="!Boolean(selected)">
+            <x-loading.visible>
+            7
+                <x-tables.desktop.skeleton.delegates.resigned />
+            </x-loading.visible>
+        </div>
     @endif
 
     <script>
