@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a22c724c7c0d2464b486ae2f375a5063",
+    "content-hash": "791ff95b7376aac526e3772830b47d74",
     "packages": [
         {
             "name": "arkecosystem/crypto",
@@ -2621,139 +2621,6 @@
                 }
             ],
             "time": "2020-06-13T08:05:20+00:00"
-        },
-        {
-            "name": "konceiver/better-number-formatter",
-            "version": "2.2.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/konceiver/better-number-formatter.git",
-                "reference": "016b2dc9e8e8fc754efe2e4ebf00689bdfb84efb"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/konceiver/better-number-formatter/zipball/016b2dc9e8e8fc754efe2e4ebf00689bdfb84efb",
-                "reference": "016b2dc9e8e8fc754efe2e4ebf00689bdfb84efb",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": "^8.0",
-                "php": "^8.0"
-            },
-            "require-dev": {
-                "konceiver/stan": "^1.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Konceiver\\BetterNumberFormatter\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Brian Faust",
-                    "email": "brian@konceiver.dev",
-                    "homepage": "https://konceiver.dev",
-                    "role": "Developer"
-                }
-            ],
-            "description": ":package_description",
-            "homepage": "https://github.com/konceiver/better-number-formatter",
-            "keywords": [
-                "better-number-formatter",
-                "konceiver"
-            ],
-            "support": {
-                "issues": "https://github.com/konceiver/better-number-formatter/issues",
-                "source": "https://github.com/konceiver/better-number-formatter/tree/2.2.1"
-            },
-            "funding": [
-                {
-                    "url": "https://konceiver.dev/open-source/support-us",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/faustbrian",
-                    "type": "github"
-                }
-            ],
-            "time": "2021-06-18T12:09:38+00:00"
-        },
-        {
-            "name": "konceiver/laravel-blade-components",
-            "version": "2.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/konceiver/laravel-blade-components.git",
-                "reference": "942df203b59786a6ff31c02172bf6b719b5830ea"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/konceiver/laravel-blade-components/zipball/942df203b59786a6ff31c02172bf6b719b5830ea",
-                "reference": "942df203b59786a6ff31c02172bf6b719b5830ea",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/contracts": "^8.0",
-                "illuminate/support": "^8.0",
-                "konceiver/better-number-formatter": "^2.0",
-                "php": "^8.0",
-                "spatie/laravel-package-tools": "^1.9"
-            },
-            "require-dev": {
-                "konceiver/laravel-stan": "^1.1",
-                "nunomaduro/laravel-mojito": "^0.2.6"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Konceiver\\BladeComponents\\Providers\\BladeComponentServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Konceiver\\BladeComponents\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Brian Faust",
-                    "email": "brian@konceiver.dev",
-                    "homepage": "https://konceiver.dev",
-                    "role": "Developer"
-                }
-            ],
-            "description": ":package_description",
-            "homepage": "https://github.com/konceiver/laravel-blade-components",
-            "keywords": [
-                "konceiver",
-                "laravel-blade-components"
-            ],
-            "support": {
-                "issues": "https://github.com/konceiver/laravel-blade-components/issues",
-                "source": "https://github.com/konceiver/laravel-blade-components/tree/2.1.0"
-            },
-            "funding": [
-                {
-                    "url": "https://konceiver.dev/open-source/support-us",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/faustbrian",
-                    "type": "github"
-                }
-            ],
-            "time": "2021-08-19T00:43:52+00:00"
         },
         {
             "name": "laravel/fortify",
