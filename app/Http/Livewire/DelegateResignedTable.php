@@ -16,19 +16,23 @@ final class DelegateResignedTable extends Component
 {
     use WithPagination;
 
+    public bool $load = false;
+
     /** @phpstan-ignore-next-line */
     protected $listeners = ['tabFiltered'];
 
     public function render(): View
     {
         return view('livewire.delegate-resigned-table', [
-            'delegates' => $this->delegates(),
+            'delegates' => $this->load ? $this->delegates() : [],
         ]);
     }
 
-    public function tabFiltered(): void
+    public function tabFiltered(string $tab): void
     {
         $this->gotoPage(1);
+
+        $this->load = $tab === 'resigned';
     }
 
     private function delegates(): LengthAwarePaginator

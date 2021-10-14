@@ -36,6 +36,7 @@
                             onSelected
                         );
                     }()"
+                    x-init="Livewire.emit('tabFiltered', 'active');"
                     x-cloak
                     class="w-full"
                 >

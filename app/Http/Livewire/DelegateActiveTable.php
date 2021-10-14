@@ -13,11 +13,21 @@ use Livewire\Component;
 
 final class DelegateActiveTable extends Component
 {
+    public bool $load = false;
+
+    /** @phpstan-ignore-next-line */
+    protected $listeners = ['tabFiltered'];
+
     public function render(): View
     {
         return view('livewire.delegate-active-table', [
-            'delegates' => $this->delegates(),
+            'delegates' => $this->load ? $this->delegates() : [],
         ]);
+    }
+
+    public function tabFiltered(string $tab): void
+    {
+        $this->load = $tab === 'active';
     }
 
     private function delegates(): Collection
