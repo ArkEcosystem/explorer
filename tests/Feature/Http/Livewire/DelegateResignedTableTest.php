@@ -3,7 +3,6 @@
 declare(strict_types=1);
 
 use App\Http\Livewire\DelegateResignedTable;
-use App\Models\Wallet;
 use Livewire\Livewire;
 
 it('should render the component without data', function (): void {
