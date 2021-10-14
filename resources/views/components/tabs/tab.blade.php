@@ -16,7 +16,6 @@
     @keydown.arrow-right="selectNextTab"
     :tabindex="selected === '{{ $name }}' ? 0 : -1"
     :aria-selected="selected === '{{ $name }}'"
-    wire:loading.attr="disabled"
     {{ $attributes }}
 >
     <span
