@@ -1,8 +1,4 @@
 <div class="w-full">
-    <x-loading.visible>
-        <x-tables.desktop.skeleton.delegates.active />
-    </x-loading.visible>
-
     <x-loading.hidden>
         @if (! count($delegates))
             <x-tables.desktop.skeleton.delegates.active />
