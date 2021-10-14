@@ -15,7 +15,9 @@ final class DelegateActiveTable extends Component
 {
     public bool $load = false;
 
-    /** @phpstan-ignore-next-line */
+    /**
+     * @var array
+     */
     protected $listeners = ['tabFiltered'];
 
     public function render(): View
