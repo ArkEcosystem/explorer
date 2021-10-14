@@ -1,16 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Livewire;
 
 use App\Facades\Network;
 use App\Models\Wallet;
 use App\ViewModels\ViewModelFactory;
 use Illuminate\Support\Collection;
+use Illuminate\View\View;
 use Livewire\Component;
 
-class DelegateActiveTable extends Component
+final class DelegateActiveTable extends Component
 {
-    public function render()
+    public function render(): View
     {
         return view('livewire.delegate-active-table', [
             'delegates' => $this->delegates(),
