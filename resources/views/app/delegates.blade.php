@@ -18,8 +18,13 @@
                         const extraData = {
                             dropdownOpen: false,
                             component: initialComponent,
+                            filter(selected) {
+                                Livewire.emit('tabFiltered', selected);
+                            },
                             init() {
-                                Livewire.emit('tabFiltered', initialSelected);
+                                if (initialComponent === 'table') {
+                                    this.filter(initialSelected);
+                                }
                             }
                         };
 
@@ -30,7 +35,10 @@
                             window.history.pushState({ path: newUrl },'',newUrl);
 
                             this.component = selected === 'monitor' ? 'monitor' : 'table';
-                            Livewire.emit('tabFiltered', selected);
+
+                            if (this.component === 'table') {
+                                this.filter(selected);
+                            }
                         }
 
                         return Tabs(
