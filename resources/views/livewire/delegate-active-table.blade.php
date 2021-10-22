@@ -1,5 +1,5 @@
 <div class="w-full">
-    @if (! count($delegates))
+    @if (! $load)
         <x-tables.desktop.skeleton.delegates.active />
     @else
         <div wire:poll.{{ Network::blockTime() }}s wire:key="poll_active_delegates">

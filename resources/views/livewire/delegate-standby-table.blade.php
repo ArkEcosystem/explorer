@@ -4,7 +4,7 @@
     </x-loading.visible>
 
     <x-loading.hidden>
-        @if (! count($delegates))
+        @if (! $load)
             <x-tables.desktop.skeleton.delegates.standby />
         @else
             <x-tables.desktop.delegates.standby :delegates="$delegates" />
