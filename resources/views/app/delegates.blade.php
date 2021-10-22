@@ -18,6 +18,9 @@
                         const extraData = {
                             dropdownOpen: false,
                             component: initialComponent,
+                            init() {
+                                Livewire.emit('tabFiltered', initialSelected);
+                            }
                         };
 
                         function onSelected (selected) {
@@ -36,7 +39,7 @@
                             onSelected
                         );
                     }()"
-                    x-init="Livewire.emit('tabFiltered', 'active');"
+                    x-init="init"
                     x-cloak
                     class="w-full"
                 >
