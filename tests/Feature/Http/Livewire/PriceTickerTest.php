@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-use Livewire\Livewire;
-use App\Facades\Network;
-use App\Services\Settings;
 use App\Contracts\SettingsStorage;
+use App\Facades\Network;
 use App\Http\Livewire\PriceTicker;
 use App\Services\Cache\NetworkStatusBlockCache;
+use App\Services\Settings;
+use Livewire\Livewire;
 
 it('should render with the source currency, target currency and exchange rate', function () {
     (new NetworkStatusBlockCache())->setPrice('DARK', 'USD', 0.2907);

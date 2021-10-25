@@ -9,7 +9,6 @@ use App\Services\Cache\CryptoDataCache;
 use App\Services\NumberFormatter;
 use App\Services\Settings;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Session;
 use Livewire\Livewire;
 
 it('should show the balance of the wallet', function () {

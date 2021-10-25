@@ -9,7 +9,6 @@ use App\Services\Settings;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Session;
 use Livewire\Livewire;
 use function Tests\fakeCryptoCompare;
 
