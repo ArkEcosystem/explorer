@@ -3,19 +3,20 @@
 declare(strict_types=1);
 
 use App\Services\Settings;
-use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Route;
 
 // Since the settings rely on the cookies I need to create a fake route that will
 // contain the cookie passed as a param and will respond with the data that the
 // Settings service returns for the given method. The response will be a json
 // that we can use for testing the values.
-function getSettingsFromCookies($ctx, $method = 'all', array $settings = []) {
+function getSettingsFromCookies($ctx, $method = 'all', array $settings = [])
+{
     Route::get('get-settings', ['middleware' => 'web', fn () => Arr::wrap(Settings::$method())]);
 
     $response = $ctx->withCookies([
-        'settings' => json_encode($settings)
+        'settings' => json_encode($settings),
     ])->get('get-settings');
 
     return is_string($response) ? $response : $response->json();
@@ -91,7 +92,6 @@ it('should determine if visitor uses any chart', function () {
         'priceChart' => true,
         'feeChart'   => true,
     ]))->toBe([true]);
-
 });
 
 it('should determine if visitor uses price chart', function () {
