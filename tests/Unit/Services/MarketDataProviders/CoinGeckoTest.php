@@ -25,7 +25,6 @@ it('should fetch the historical prices for the given pair', function () {
     assertMatchesSnapshot((new CoinGecko())->historical('ARK', 'USD'));
 });
 
-
 it('should return an empty value if empty response for historical', function () {
     Http::fake([
         'api.coingecko.com/*' => Http::response(null, 200),
