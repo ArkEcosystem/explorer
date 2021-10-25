@@ -21,7 +21,7 @@ final class Settings
         ];
 
         if (Cookie::has('settings')) {
-            $sessionSettings = json_decode(Cookie::get('settings'), true);
+            $sessionSettings = json_decode(strval(Cookie::get('settings')), true);
 
             return $sessionSettings + $defaultSettings;
         }

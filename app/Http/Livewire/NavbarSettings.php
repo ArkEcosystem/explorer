@@ -26,7 +26,7 @@ final class NavbarSettings extends Component
         $originalTheme = Arr::get(Settings::all(), 'darkTheme');
         $newTheme      = Arr::get($this->state, 'darkTheme');
 
-        Cookie::queue('settings', json_encode($this->state));
+        Cookie::queue('settings', json_encode($this->state), 60 * 24 * 365 * 5);
 
         if ($originalCurrency !== $newCurrency) {
             $this->emit('currencyChanged', $newCurrency);
