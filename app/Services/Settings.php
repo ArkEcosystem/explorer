@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Services;
 
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Str;
 
 final class Settings
@@ -20,8 +20,8 @@ final class Settings
             'compactTables' => true,
         ];
 
-        if (Session::has('settings')) {
-            $sessionSettings = json_decode(Session::get('settings'), true);
+        if (Cookie::has('settings')) {
+            $sessionSettings = json_decode(Cookie::get('settings'), true);
 
             return $sessionSettings + $defaultSettings;
         }
