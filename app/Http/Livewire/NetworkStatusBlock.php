@@ -8,9 +8,9 @@ use App\Actions\CacheNetworkHeight;
 use App\Actions\CacheNetworkSupply;
 use App\Facades\Network;
 use App\Services\MarketCap;
-use App\Services\Settings;
 use Illuminate\View\View;
 use Livewire\Component;
+use App\Contracts\SettingsStorage;
 
 final class NetworkStatusBlock extends Component
 {
@@ -25,7 +25,7 @@ final class NetworkStatusBlock extends Component
             'height'      => CacheNetworkHeight::execute(),
             'network'     => Network::name(),
             'supply'      => CacheNetworkSupply::execute() / 1e8,
-            'marketCap'   => MarketCap::getFormatted(Network::currency(), Settings::currency()),
+            'marketCap'   => MarketCap::getFormatted(Network::currency(), app(SettingsStorage::class)->currency()),
         ]);
     }
 }

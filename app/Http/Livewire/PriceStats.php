@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire;
 
+use App\Contracts\SettingsStorage;
 use App\Facades\Network;
 use App\Services\Cache\NetworkStatusBlockCache;
-use App\Services\Settings;
 use Illuminate\Support\Collection;
 use Illuminate\View\View;
 use Livewire\Component;
@@ -20,7 +20,7 @@ final class PriceStats extends Component
     {
         return view('livewire.price-stats', [
             'from'           => Network::currency(),
-            'to'             => Settings::currency(),
+            'to'             => app(SettingsStorage::class)->currency(),
             'historical'     => $this->getHistorical(),
             'isPositive'     => $this->getPriceChange() >= 0,
             'usePlaceholder' => $this->shouldUsePlaceholder(),
@@ -30,12 +30,12 @@ final class PriceStats extends Component
     private function isAvailable(): bool
     {
         return Network::canBeExchanged()
-            && (new NetworkStatusBlockCache())->getIsAvailable(Network::currency(), Settings::currency());
+            && (new NetworkStatusBlockCache())->getIsAvailable(Network::currency(), app(SettingsStorage::class)->currency());
     }
 
     private function getPriceChange(): ?float
     {
-        return (new NetworkStatusBlockCache())->getPriceChange(Network::currency(), Settings::currency());
+        return (new NetworkStatusBlockCache())->getPriceChange(Network::currency(), app(SettingsStorage::class)->currency());
     }
 
     private function getHistorical(): Collection
@@ -51,7 +51,7 @@ final class PriceStats extends Component
 
     private function getHistoricalData(): ? Collection
     {
-        return (new NetworkStatusBlockCache())->getHistoricalHourly(Network::currency(), Settings::currency());
+        return (new NetworkStatusBlockCache())->getHistoricalHourly(Network::currency(), app(SettingsStorage::class)->currency());
     }
 
     private function shouldUsePlaceholder(): bool

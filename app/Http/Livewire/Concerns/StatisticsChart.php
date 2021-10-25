@@ -5,19 +5,19 @@ declare(strict_types=1);
 namespace App\Http\Livewire\Concerns;
 
 use App\Services\Cache\PriceChartCache;
-use App\Services\Settings;
 use Illuminate\Support\Collection;
+use App\Contracts\SettingsStorage;
 
 trait StatisticsChart
 {
     private function chartTheme(string $color): Collection
     {
-        return collect(['name' => $color, 'mode' => Settings::theme()]);
+        return collect(['name' => $color, 'mode' => app(SettingsStorage::class)->theme()]);
     }
 
     private function chartHistoricalPrice(string $period): Collection
     {
-        return collect((new PriceChartCache())->getHistorical(Settings::currency(), $period));
+        return collect((new PriceChartCache())->getHistorical(app(SettingsStorage::class)->currency(), $period));
     }
 
     private function chartTotalTransactionsPerPeriod(string $cache, string $period): Collection

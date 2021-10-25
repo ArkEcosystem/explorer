@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Contracts\SettingsStorage;
 use App\Facades\Network;
 use App\Http\Livewire\TransactionTable;
 use App\Models\Block;
@@ -133,9 +134,14 @@ it('should update the records fiat tooltip when currency changed', function () {
     $component->assertSeeHtml('data-tippy-content="'.$expectedValue.'"');
     $component->assertDontSeeHtml('data-tippy-content="61.6048933 BTC"');
 
-    $settings = Settings::all();
+    $settings = app(SettingsStorage::class)->all();
     $settings['currency'] = 'BTC';
-    Session::put('settings', json_encode($settings));
+
+    $this->partialMock(SettingsStorage::class)
+        ->shouldReceive('all')
+        ->andReturn($settings)
+        ->shouldReceive('currency')
+        ->andReturn('BTC');
 
     $component->emit('currencyChanged', 'BTC');
 

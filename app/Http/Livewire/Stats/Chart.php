@@ -11,11 +11,11 @@ use App\Http\Livewire\Concerns\StatisticsChart;
 use App\Services\Cache\NetworkStatusBlockCache;
 use App\Services\MarketCap;
 use App\Services\NumberFormatter as ServiceNumberFormatter;
-use App\Services\Settings;
 use ARKEcosystem\Foundation\NumberFormatter\NumberFormatter as BetterNumberFormatter;
 use Illuminate\Support\Collection;
 use Illuminate\View\View;
 use Livewire\Component;
+use App\Contracts\SettingsStorage;
 
 final class Chart extends Component
 {
@@ -71,12 +71,12 @@ final class Chart extends Component
 
     private function mainValueFiat(): string
     {
-        $currency = Settings::currency();
+        $currency = app(SettingsStorage::class)->currency();
         $price    = $this->getPrice($currency);
 
         if (ServiceNumberFormatter::isFiat($currency)) {
             return BetterNumberFormatter::new()
-                ->withLocale(Settings::locale())
+                ->withLocale(app(SettingsStorage::class)->locale())
                 ->withFractionDigits(2)
                 ->formatWithCurrencyAccounting($price);
         }
@@ -101,12 +101,12 @@ final class Chart extends Component
 
     private function marketCap(): string
     {
-        return MarketCap::getFormatted(Network::currency(), Settings::currency()) ?? '0';
+        return MarketCap::getFormatted(Network::currency(), app(SettingsStorage::class)->currency()) ?? '0';
     }
 
     private function getPriceChange(): ?float
     {
-        return (new NetworkStatusBlockCache())->getPriceChange(Network::currency(), Settings::currency());
+        return (new NetworkStatusBlockCache())->getPriceChange(Network::currency(), app(SettingsStorage::class)->currency());
     }
 
     private function getPrice(string $currency): float

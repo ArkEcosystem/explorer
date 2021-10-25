@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace App\Services;
 
+use App\Contracts\SettingsStorage;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Str;
 
-final class Settings
+final class Settings implements SettingsStorage
 {
     public static function all(): array
     {

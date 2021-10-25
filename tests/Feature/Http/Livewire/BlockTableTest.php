@@ -11,8 +11,10 @@ use App\Services\NumberFormatter;
 use App\Services\Settings;
 use App\ViewModels\ViewModelFactory;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Session;
 use Livewire\Livewire;
+use App\Contracts\SettingsStorage;
 
 it('should list the first page of records', function () {
     Block::factory(30)->create();
@@ -52,9 +54,14 @@ it('should update the records fiat tooltip when currency changed', function () {
     $component->assertSeeHtml('data-tippy-content="'.$expectedValue.'"');
     $component->assertDontSeeHtml('data-tippy-content="61.6048933 BTC"');
 
-    $settings = Settings::all();
+    $settings = app(SettingsStorage::class)->all();
     $settings['currency'] = 'BTC';
-    Session::put('settings', json_encode($settings));
+
+    $this->partialMock(SettingsStorage::class)
+        ->shouldReceive('all')
+        ->andReturn($settings)
+        ->shouldReceive('currency')
+        ->andReturn('BTC');
 
     $component->emit('currencyChanged', 'BTC');
 

@@ -7,10 +7,10 @@ namespace App\Http\Livewire;
 use App\Facades\Network;
 use App\Services\Cache\NetworkStatusBlockCache;
 use App\Services\NumberFormatter;
-use App\Services\Settings;
 use ARKEcosystem\Foundation\NumberFormatter\NumberFormatter as BetterNumberFormatter;
 use Illuminate\View\View;
 use Livewire\Component;
+use App\Contracts\SettingsStorage;
 
 final class NetworkStatusBlockPrice extends Component
 {
@@ -29,12 +29,13 @@ final class NetworkStatusBlockPrice extends Component
 
     private function getPriceChange(): ?float
     {
-        return (new NetworkStatusBlockCache())->getPriceChange(Network::currency(), Settings::currency());
+        return (new NetworkStatusBlockCache())->getPriceChange(Network::currency(), app(SettingsStorage::class)->currency());
     }
 
     private function getPriceFormatted(): ? string
     {
-        $currency = Settings::currency();
+        $settings = app(SettingsStorage::class);
+        $currency = $settings->currency();
         $price    = (new NetworkStatusBlockCache())->getPrice(Network::currency(), $currency);
 
         if ($price === null) {
@@ -43,7 +44,7 @@ final class NetworkStatusBlockPrice extends Component
 
         if (NumberFormatter::isFiat($currency)) {
             return BetterNumberFormatter::new()
-                ->withLocale(Settings::locale())
+                ->withLocale($settings->locale())
                 ->formatWithCurrencyAccounting($price);
         }
 
