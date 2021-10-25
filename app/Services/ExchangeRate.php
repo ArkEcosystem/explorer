@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Services;
 
-use Carbon\Carbon;
-use Illuminate\Support\Arr;
 use App\Contracts\SettingsStorage;
 use App\Services\Cache\CryptoDataCache;
+use Carbon\Carbon;
+use Illuminate\Support\Arr;
 
 final class ExchangeRate
 {

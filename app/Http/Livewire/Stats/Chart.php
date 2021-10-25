@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire\Stats;
 
+use App\Contracts\SettingsStorage;
 use App\Enums\CryptoCurrencies;
 use App\Facades\Network;
 use App\Http\Livewire\Concerns\AvailablePeriods;
@@ -15,7 +16,6 @@ use ARKEcosystem\Foundation\NumberFormatter\NumberFormatter as BetterNumberForma
 use Illuminate\Support\Collection;
 use Illuminate\View\View;
 use Livewire\Component;
-use App\Contracts\SettingsStorage;
 
 final class Chart extends Component
 {

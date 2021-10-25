@@ -9,10 +9,8 @@ use App\Models\Block;
 use App\Models\Transaction;
 use App\Services\Cache\CryptoDataCache;
 use App\Services\NumberFormatter;
-use App\Services\Settings;
 use App\ViewModels\ViewModelFactory;
 use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Session;
 use Livewire\Livewire;
 
 it('should list the first transactions for the giving block id', function () {

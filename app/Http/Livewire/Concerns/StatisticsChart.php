@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire\Concerns;
 
+use App\Contracts\SettingsStorage;
 use App\Services\Cache\PriceChartCache;
 use Illuminate\Support\Collection;
-use App\Contracts\SettingsStorage;
 
 trait StatisticsChart
 {
