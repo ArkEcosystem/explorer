@@ -8,7 +8,6 @@ use App\Contracts\MarketDataProvider;
 use App\DTO\MarketData;
 use App\Facades\Network;
 use App\Services\Cache\CryptoDataCache;
-use App\Services\Cache\PriceChartCache;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
