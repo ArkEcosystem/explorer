@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Contracts\SettingsStorage;
 use App\Http\Livewire\NetworkStatusBlock;
 use App\Models\Block;
 use App\Models\Wallet;
@@ -50,10 +51,14 @@ it('should render with a height, supply and market cap', function () {
 it('should render with a height, supply and market cap for BTC', function () {
     Config::set('explorer.network', 'production');
 
-    $settings = Settings::all();
+    $settings = app(SettingsStorage::class)->all();
     $settings['currency'] = 'BTC';
 
-    Session::put('settings', json_encode($settings));
+    $this->partialMock(SettingsStorage::class)
+        ->shouldReceive('all')
+        ->andReturn($settings)
+        ->shouldReceive('currency')
+        ->andReturn('BTC');
 
     Block::factory()->create([
         'height'               => 5651290,
