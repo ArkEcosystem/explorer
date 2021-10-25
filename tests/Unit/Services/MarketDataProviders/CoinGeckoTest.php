@@ -3,7 +3,6 @@
 declare(strict_types=1);
 
 use App\Services\MarketDataProviders\CoinGecko;
-use Illuminate\Cache\TaggedCache;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use function Spatie\Snapshots\assertMatchesSnapshot;
@@ -27,16 +26,12 @@ it('should fetch the historical prices for the given pair', function () {
 });
 
 
-it('should return the previous value if empty response for historical', function () {
+it('should return an empty value if empty response for historical', function () {
     Http::fake([
-        'api.coingecko.com/*' => Http::sequence()
-            ->push(json_decode(file_get_contents(base_path('tests/fixtures/coingecko/market_data.json')), true), 200)
-            ->push([], 200),
+        'api.coingecko.com/*' => Http::response([], 200),
     ]);
 
-    (new CoinGecko())->historical('ARK', 'USD');
-
-    assertMatchesSnapshot((new CoinGecko())->historical('ARK', 'USD'));
+    expect((new CoinGecko())->historical('ARK', 'USD'))->toEqual(collect());
 });
 
 it('should fetch the historical prices per hour for the given pair', function () {
@@ -47,16 +42,12 @@ it('should fetch the historical prices per hour for the given pair', function ()
     assertMatchesSnapshot((new CoinGecko())->historicalHourly('ARK', 'USD'));
 });
 
-it('should return the previous value if empty response for historical hourly', function () {
+it('should return an empty value if empty response for historical hourly', function () {
     Http::fake([
-        'api.coingecko.com/*' => Http::sequence()
-            ->push(json_decode(file_get_contents(base_path('tests/fixtures/coingecko/market_data_1_day.json')), true), 200)
-            ->push([], 200),
+        'api.coingecko.com/*' => Http::response([], 200),
     ]);
 
-    (new CoinGecko())->historicalHourly('ARK', 'USD');
-
-    assertMatchesSnapshot((new CoinGecko())->historicalHourly('ARK', 'USD'));
+    expect((new CoinGecko())->historicalHourly('ARK', 'USD'))->toEqual(collect());
 });
 
 it('should throw an exception after 30 empty responses', function () {

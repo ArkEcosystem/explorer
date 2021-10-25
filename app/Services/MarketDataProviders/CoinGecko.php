@@ -32,7 +32,7 @@ final class CoinGecko implements MarketDataProvider
             )->json();
 
             if (! $this->checkResponse($data)) {
-                return collect((new PriceChartCache)->getHistorical($source, $target));
+                return collect();
             }
 
             return collect($data['prices'])
@@ -54,7 +54,7 @@ final class CoinGecko implements MarketDataProvider
             )->json();
 
             if (! $this->checkResponse($data)) {
-                return collect((new PriceChartCache)->getHistorical($source, $target));
+                return collect();
             }
 
             return collect($data['prices'])
