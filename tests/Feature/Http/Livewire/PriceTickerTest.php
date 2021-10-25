@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
+use Livewire\Livewire;
 use App\Facades\Network;
+use App\Services\Settings;
+use App\Contracts\SettingsStorage;
 use App\Http\Livewire\PriceTicker;
 use App\Services\Cache\NetworkStatusBlockCache;
-use App\Services\Settings;
-use Illuminate\Support\Facades\Session;
-use Livewire\Livewire;
 
 it('should render with the source currency, target currency and exchange rate', function () {
     (new NetworkStatusBlockCache())->setPrice('DARK', 'USD', 0.2907);
@@ -31,10 +31,14 @@ it('should update the price if the currency changes', function () {
 
     $component = Livewire::test(PriceTicker::class);
 
-    $settings = Settings::all();
+    $settings = app(SettingsStorage::class)->all();
     $settings['currency'] = 'MXN';
 
-    Session::put('settings', json_encode($settings));
+    $this->partialMock(SettingsStorage::class)
+        ->shouldReceive('all')
+        ->andReturn($settings)
+        ->shouldReceive('currency')
+        ->andReturn('MXN');
 
     $component
         ->assertSee('DARK')

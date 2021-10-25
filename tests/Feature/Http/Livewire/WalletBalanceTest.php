@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Contracts\SettingsStorage;
 use App\Http\Livewire\WalletBalance;
 use App\Models\Wallet;
 use App\Services\Cache\CryptoDataCache;
@@ -38,7 +39,12 @@ it('updates the balance when currency changes', function () {
 
     $settings = Settings::all();
     $settings['currency'] = 'BTC';
-    Session::put('settings', json_encode($settings));
+
+    $this->partialMock(SettingsStorage::class)
+        ->shouldReceive('all')
+        ->andReturn($settings)
+        ->shouldReceive('currency')
+        ->andReturn('BTC');
 
     $component->emit('currencyChanged', 'BTC')->assertSee('0.00015488 BTC');
 });
