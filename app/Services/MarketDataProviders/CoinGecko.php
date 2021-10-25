@@ -8,8 +8,10 @@ use App\Contracts\MarketDataProvider;
 use App\DTO\MarketData;
 use App\Facades\Network;
 use App\Services\Cache\CryptoDataCache;
+use App\Services\Cache\PriceChartCache;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 
@@ -29,6 +31,10 @@ final class CoinGecko implements MarketDataProvider
                 $params
             )->json();
 
+            if (! $this->checkResponse($data)) {
+                return collect((new PriceChartCache)->getHistorical($source, $target));
+            }
+
             return collect($data['prices'])
                 ->mapWithKeys(fn ($item) => [Carbon::createFromTimestampMs($item[0])->format($format) => $item[1]]);
         });
@@ -47,6 +53,10 @@ final class CoinGecko implements MarketDataProvider
                 $params
             )->json();
 
+            if (! $this->checkResponse($data)) {
+                return collect((new PriceChartCache)->getHistorical($source, $target));
+            }
+
             return collect($data['prices'])
                 ->groupBy(fn ($item) => Carbon::createFromTimestampMsUTC($item[0])->format('Y-m-d H:').'00:00')
                 ->mapWithKeys(fn ($items, $day) => [
@@ -64,5 +74,22 @@ final class CoinGecko implements MarketDataProvider
 
         return $targetCurrencies
             ->mapWithKeys(fn (string $currency) => [strtoupper($currency) => MarketData::fromCoinGeckoApiResponse($currency, $data)]);
+    }
+
+    private function checkResponse(?array $data): bool
+    {
+        if (empty($data['prices'])) {
+            $times = Cache::increment('coin_gecko_response_error');
+
+            if ($times > 30) {
+                throw new \Exception('Too many empty coinGecko responses');
+            }
+
+            return false;
+        }
+
+        Cache::delete('coin_gecko_response_error');
+
+        return true;
     }
 }

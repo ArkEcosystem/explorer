@@ -3,6 +3,8 @@
 declare(strict_types=1);
 
 use App\Services\MarketDataProviders\CoinGecko;
+use Illuminate\Cache\TaggedCache;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use function Spatie\Snapshots\assertMatchesSnapshot;
 
@@ -24,10 +26,47 @@ it('should fetch the historical prices for the given pair', function () {
     assertMatchesSnapshot((new CoinGecko())->historical('ARK', 'USD'));
 });
 
+
+it('should return the previous value if empty response for historical', function () {
+    Http::fake([
+        'api.coingecko.com/*' => Http::sequence()
+            ->push(json_decode(file_get_contents(base_path('tests/fixtures/coingecko/market_data.json')), true), 200)
+            ->push([], 200),
+    ]);
+
+    (new CoinGecko())->historical('ARK', 'USD');
+
+    assertMatchesSnapshot((new CoinGecko())->historical('ARK', 'USD'));
+});
+
 it('should fetch the historical prices per hour for the given pair', function () {
     Http::fake([
         'api.coingecko.com/*' => Http::response(json_decode(file_get_contents(base_path('tests/fixtures/coingecko/market_data_1_day.json')), true), 200),
     ]);
 
     assertMatchesSnapshot((new CoinGecko())->historicalHourly('ARK', 'USD'));
+});
+
+it('should return the previous value if empty response for historical hourly', function () {
+    Http::fake([
+        'api.coingecko.com/*' => Http::sequence()
+            ->push(json_decode(file_get_contents(base_path('tests/fixtures/coingecko/market_data_1_day.json')), true), 200)
+            ->push([], 200),
+    ]);
+
+    (new CoinGecko())->historicalHourly('ARK', 'USD');
+
+    assertMatchesSnapshot((new CoinGecko())->historicalHourly('ARK', 'USD'));
+});
+
+it('should throw an exception after 30 empty responses', function () {
+    Http::fake([
+        'api.coingecko.com/*' => Http::response([], 200),
+    ]);
+
+    Cache::set('coin_gecko_response_error', 30);
+
+    $this->expectException(\Exception::class);
+
+    (new CoinGecko())->historicalHourly('ARK', 'USD');
 });
