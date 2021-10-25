@@ -2,19 +2,16 @@
 
 declare(strict_types=1);
 
+use App\Contracts\SettingsStorage;
 use App\Facades\Network;
 use App\Http\Livewire\BlockTable;
 use App\Models\Block;
 use App\Models\Scopes\OrderByHeightScope;
 use App\Services\Cache\CryptoDataCache;
 use App\Services\NumberFormatter;
-use App\Services\Settings;
 use App\ViewModels\ViewModelFactory;
 use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Cookie;
-use Illuminate\Support\Facades\Session;
 use Livewire\Livewire;
-use App\Contracts\SettingsStorage;
 
 it('should list the first page of records', function () {
     Block::factory(30)->create();

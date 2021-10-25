@@ -6,11 +6,11 @@ namespace App\Http\Livewire;
 
 use App\Actions\CacheNetworkHeight;
 use App\Actions\CacheNetworkSupply;
+use App\Contracts\SettingsStorage;
 use App\Facades\Network;
 use App\Services\MarketCap;
 use Illuminate\View\View;
 use Livewire\Component;
-use App\Contracts\SettingsStorage;
 
 final class NetworkStatusBlock extends Component
 {

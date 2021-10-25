@@ -11,10 +11,8 @@ use App\Models\Transaction;
 use App\Models\Wallet;
 use App\Services\Cache\CryptoDataCache;
 use App\Services\NumberFormatter;
-use App\Services\Settings;
 use App\ViewModels\ViewModelFactory;
 use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Session;
 use Livewire\Livewire;
 use Ramsey\Uuid\Uuid;
 

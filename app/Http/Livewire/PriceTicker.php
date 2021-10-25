@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire;
 
+use App\Contracts\SettingsStorage;
 use App\Facades\Network;
 use App\Services\Cache\NetworkStatusBlockCache;
 use App\Services\NumberFormatter;
 use Illuminate\View\View;
 use Livewire\Component;
-use App\Contracts\SettingsStorage;
 
 final class PriceTicker extends Component
 {

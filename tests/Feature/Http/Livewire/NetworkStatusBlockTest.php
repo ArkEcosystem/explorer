@@ -7,9 +7,7 @@ use App\Http\Livewire\NetworkStatusBlock;
 use App\Models\Block;
 use App\Models\Wallet;
 use App\Services\Cache\NetworkStatusBlockCache;
-use App\Services\Settings;
 use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Session;
 use Livewire\Livewire;
 
 it('should render with a height, supply and not available market cap', function () {
