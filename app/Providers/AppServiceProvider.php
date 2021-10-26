@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace App\Providers;
 
 use App\Contracts\MarketDataProvider;
-use App\Contracts\SettingsStorage;
 use App\Services\BigNumber;
-use App\Services\Settings;
 use ARKEcosystem\Foundation\DataBags\DataBag;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
@@ -29,8 +27,6 @@ final class AppServiceProvider extends ServiceProvider
             MarketDataProvider::class,
             fn () => new (Config::get('explorer.market_data_provider_service'))
         );
-
-        $this->app->singleton(SettingsStorage::class, fn () => new Settings());
     }
 
     /**

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use App\Services\Settings;
+use App\Facades\Settings;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Route;

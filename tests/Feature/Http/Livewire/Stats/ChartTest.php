@@ -2,10 +2,9 @@
 
 declare(strict_types=1);
 
-use App\Contracts\SettingsStorage;
+use App\Facades\Settings;
 use App\Http\Livewire\Stats\Chart;
 use App\Services\Cache\NetworkCache;
-use App\Services\Settings;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Config;
@@ -44,13 +43,9 @@ it('should render the component with fiat value', function () {
 });
 
 it('should render the component with non fiat value', function () {
-    $this->partialMock(SettingsStorage::class)
-        ->shouldReceive('all')
-        ->andReturn(Settings::all())
-        ->shouldReceive('theme')
-        ->andReturn(Settings::theme())
-        ->shouldReceive('currency')
-        ->andReturn('BTC');
+    Settings::shouldReceive('all')->andReturn(Settings::all());
+    Settings::shouldReceive('theme')->andReturn(Settings::all());
+    Settings::shouldReceive('currency')->andReturn('BTC');
 
     fakeCryptoCompare(false, 'BTC');
 

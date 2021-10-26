@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire\Stats;
 
-use App\Contracts\SettingsStorage;
 use App\Enums\CryptoCurrencies;
 use App\Facades\Network;
+use App\Facades\Settings;
 use App\Http\Livewire\Concerns\AvailablePeriods;
 use App\Http\Livewire\Concerns\StatisticsChart;
 use App\Services\Cache\NetworkStatusBlockCache;
@@ -71,12 +71,12 @@ final class Chart extends Component
 
     private function mainValueFiat(): string
     {
-        $currency = app(SettingsStorage::class)->currency();
+        $currency = Settings::currency();
         $price    = $this->getPrice($currency);
 
         if (ServiceNumberFormatter::isFiat($currency)) {
             return BetterNumberFormatter::new()
-                ->withLocale(app(SettingsStorage::class)->locale())
+                ->withLocale(Settings::locale())
                 ->withFractionDigits(2)
                 ->formatWithCurrencyAccounting($price);
         }
@@ -101,12 +101,12 @@ final class Chart extends Component
 
     private function marketCap(): string
     {
-        return MarketCap::getFormatted(Network::currency(), app(SettingsStorage::class)->currency()) ?? '0';
+        return MarketCap::getFormatted(Network::currency(), Settings::currency()) ?? '0';
     }
 
     private function getPriceChange(): ?float
     {
-        return (new NetworkStatusBlockCache())->getPriceChange(Network::currency(), app(SettingsStorage::class)->currency());
+        return (new NetworkStatusBlockCache())->getPriceChange(Network::currency(), Settings::currency());
     }
 
     private function getPrice(string $currency): float

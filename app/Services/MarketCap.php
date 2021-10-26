@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Services;
 
 use App\Actions\CacheNetworkSupply;
-use App\Contracts\SettingsStorage;
+use App\Facades\Settings;
 use App\Services\Cache\NetworkStatusBlockCache;
 use ARKEcosystem\Foundation\NumberFormatter\NumberFormatter as BetterNumberFormatter;
 
@@ -32,7 +32,7 @@ final class MarketCap
 
         if (NumberFormatter::isFiat($target)) {
             return BetterNumberFormatter::new()
-                ->withLocale(app(SettingsStorage::class)->locale())
+                ->withLocale(Settings::locale())
                 ->withFractionDigits(0)
                 ->formatWithCurrencyAccounting($marketcap);
         }

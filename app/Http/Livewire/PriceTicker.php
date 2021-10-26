@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire;
 
-use App\Contracts\SettingsStorage;
 use App\Facades\Network;
+use App\Facades\Settings;
 use App\Services\Cache\NetworkStatusBlockCache;
 use App\Services\NumberFormatter;
 use Illuminate\View\View;
@@ -33,21 +33,21 @@ final class PriceTicker extends Component
 
     public function setValues(): void
     {
-        $this->isAvailable = (new NetworkStatusBlockCache())->getIsAvailable(Network::currency(), app(SettingsStorage::class)->currency());
+        $this->isAvailable = (new NetworkStatusBlockCache())->getIsAvailable(Network::currency(), Settings::currency());
         $this->price       = $this->getPriceFormatted();
         $this->from        = Network::currency();
-        $this->to          = app(SettingsStorage::class)->currency();
+        $this->to          = Settings::currency();
     }
 
     private function getPriceFormatted(): string
     {
-        $price = (new NetworkStatusBlockCache())->getPrice(Network::currency(), app(SettingsStorage::class)->currency());
+        $price = (new NetworkStatusBlockCache())->getPrice(Network::currency(), Settings::currency());
 
         if ($price === null) {
             return '';
         }
 
-        return NumberFormatter::currencyWithDecimalsWithoutSuffix($price, app(SettingsStorage::class)->currency());
+        return NumberFormatter::currencyWithDecimalsWithoutSuffix($price, Settings::currency());
     }
 
     public function render(): View
