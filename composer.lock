@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0a8fff97d176b7f31dc1eb8f9d041f79",
+    "content-hash": "c64b8daacbc3574d0feb4bd2cf33ed4b",
     "packages": [
         {
             "name": "arkecosystem/crypto",
@@ -74,16 +74,16 @@
         },
         {
             "name": "arkecosystem/foundation",
-            "version": "dev-chore/chart-js-deps-update",
+            "version": "0.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ArkEcosystem/laravel-foundation.git",
-                "reference": "79cb9e453f751ba3c7b35ffbf32a6ede4c948fa1"
+                "reference": "85aac7da691dd914fa5b762cd88b326b721b7455"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ArkEcosystem/laravel-foundation/zipball/79cb9e453f751ba3c7b35ffbf32a6ede4c948fa1",
-                "reference": "79cb9e453f751ba3c7b35ffbf32a6ede4c948fa1",
+                "url": "https://api.github.com/repos/ArkEcosystem/laravel-foundation/zipball/85aac7da691dd914fa5b762cd88b326b721b7455",
+                "reference": "85aac7da691dd914fa5b762cd88b326b721b7455",
                 "shasum": ""
             },
             "require": {
@@ -168,9 +168,9 @@
             "description": "User-Interface Scaffolding for Laravel. Powered by TailwindCSS.",
             "support": {
                 "issues": "https://github.com/ArkEcosystem/laravel-foundation/issues",
-                "source": "https://github.com/ArkEcosystem/laravel-foundation/tree/chore/chart-js-deps-update"
+                "source": "https://github.com/ArkEcosystem/laravel-foundation/tree/0.4.0"
             },
-            "time": "2021-10-19T08:11:50+00:00"
+            "time": "2021-10-19T12:43:46+00:00"
         },
         {
             "name": "asm89/stack-cors",
@@ -9664,16 +9664,16 @@
         },
         {
             "name": "rector/rector",
-            "version": "0.11.58",
+            "version": "0.11.59",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rectorphp/rector.git",
-                "reference": "15a8647cf05641db35f091edf0a558ffa9619fee"
+                "reference": "5ae5c75ec54697ff19de987f249e68513e899b8a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/rector/zipball/15a8647cf05641db35f091edf0a558ffa9619fee",
-                "reference": "15a8647cf05641db35f091edf0a558ffa9619fee",
+                "url": "https://api.github.com/repos/rectorphp/rector/zipball/5ae5c75ec54697ff19de987f249e68513e899b8a",
+                "reference": "5ae5c75ec54697ff19de987f249e68513e899b8a",
                 "shasum": ""
             },
             "require": {
@@ -9713,7 +9713,7 @@
             "description": "Prefixed and PHP 7.1 downgraded version of rector/rector",
             "support": {
                 "issues": "https://github.com/rectorphp/rector/issues",
-                "source": "https://github.com/rectorphp/rector/tree/0.11.58"
+                "source": "https://github.com/rectorphp/rector/tree/0.11.59"
             },
             "funding": [
                 {
@@ -9721,7 +9721,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-10-12T20:26:47+00:00"
+            "time": "2021-10-19T10:08:27+00:00"
         },
         {
             "name": "ruafozy/mersenne-twister",
