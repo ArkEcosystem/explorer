@@ -87,7 +87,7 @@ final class CoinGecko implements MarketDataProvider
             return false;
         }
 
-        Cache::delete('coin_gecko_response_error');
+        Cache::forget('coin_gecko_response_error');
 
         return true;
     }
