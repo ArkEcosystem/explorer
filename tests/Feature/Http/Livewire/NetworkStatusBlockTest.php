@@ -54,6 +54,7 @@ it('should render with a height, supply and market cap for BTC', function () {
 
     Settings::shouldReceive('all')->andReturn($settings);
     Settings::shouldReceive('currency')->andReturn('BTC');
+    Settings::shouldReceive('usesDarkTheme')->andReturn(false);
 
     Block::factory()->create([
         'height'               => 5651290,

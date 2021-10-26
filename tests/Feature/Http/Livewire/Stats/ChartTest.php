@@ -44,7 +44,7 @@ it('should render the component with fiat value', function () {
 
 it('should render the component with non fiat value', function () {
     Settings::shouldReceive('all')->andReturn(Settings::all());
-    Settings::shouldReceive('theme')->andReturn(Settings::all());
+    Settings::shouldReceive('theme')->andReturn('light');
     Settings::shouldReceive('currency')->andReturn('BTC');
 
     fakeCryptoCompare(false, 'BTC');
