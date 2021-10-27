@@ -40,7 +40,8 @@ final class CacheDelegateUsernames extends Command
                 'public_key',
             ])
             ->get()
-            ->each(function (Model $wallet) use ($cache, $knownWallets) {
+            ->each(function (Model $wallet) use ($cache, $knownWallets) : void {
+                /** @var \stdClass $wallet */
                 $knownWallet = $knownWallets->firstWhere('address', $wallet->address);
 
                 if (! is_null($knownWallet)) {
