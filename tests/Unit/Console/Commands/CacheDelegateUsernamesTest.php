@@ -30,9 +30,9 @@ it('should cache the known wallet name if defined', function () {
 
     Http::fake(Http::response([
         [
-            "type" => "team",
-            "name" => "Hot Wallet",
-            "address" => "AagJoLEnpXYkxYdYkmdDSNMLjjBkLJ6T67"
+            'type'    => 'team',
+            'name'    => 'Hot Wallet',
+            'address' => 'AagJoLEnpXYkxYdYkmdDSNMLjjBkLJ6T67',
         ],
     ], 200));
 
@@ -57,14 +57,14 @@ it('should cache the known wallet name if doesnt have delegate name', function (
 
     Http::fake(Http::response([
         [
-            "type" => "team",
-            "name" => "Hot Wallet",
-            "address" => "AagJoLEnpXYkxYdYkmdDSNMLjjBkLJ6T67"
+            'type'    => 'team',
+            'name'    => 'Hot Wallet',
+            'address' => 'AagJoLEnpXYkxYdYkmdDSNMLjjBkLJ6T67',
         ],
     ], 200));
 
     $wallet = Wallet::factory()->create([
-        'address' => 'AagJoLEnpXYkxYdYkmdDSNMLjjBkLJ6T67',
+        'address'                        => 'AagJoLEnpXYkxYdYkmdDSNMLjjBkLJ6T67',
         'attributes->delegate->username' => null,
     ]);
 
