@@ -84,11 +84,11 @@ final class CoinGecko implements MarketDataProvider
                 throw new \Exception('Too many empty coinGecko responses');
             }
 
-            return false;
+            return true;
         }
 
         Cache::forget('coin_gecko_response_error');
 
-        return true;
+        return false;
     }
 }
