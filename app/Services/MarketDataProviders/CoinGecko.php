@@ -30,7 +30,7 @@ final class CoinGecko implements MarketDataProvider
                 $params
             )->json();
 
-            if (! $this->checkResponse($data)) {
+            if ($this->isEmptyResponse($data)) {
                 return collect();
             }
 
@@ -52,7 +52,7 @@ final class CoinGecko implements MarketDataProvider
                 $params
             )->json();
 
-            if (! $this->checkResponse($data)) {
+            if ($this->isEmptyResponse($data)) {
                 return collect();
             }
 
@@ -75,7 +75,7 @@ final class CoinGecko implements MarketDataProvider
             ->mapWithKeys(fn (string $currency) => [strtoupper($currency) => MarketData::fromCoinGeckoApiResponse($currency, $data)]);
     }
 
-    private function checkResponse(?array $data): bool
+    private function isEmptyResponse(?array $data): bool
     {
         if ($data === null) {
             $times = Cache::increment('coin_gecko_response_error');
