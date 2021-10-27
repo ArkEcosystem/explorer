@@ -32,24 +32,28 @@ final class CacheDelegateUsernames extends Command
 
         $knownWallets = collect(Network::knownWallets());
 
-        Wallets::allWithUsername()->select([
-            'attributes->delegate->username as username',
-            'address',
-            'public_key',
-        ])->get()->each(function (Model $wallet) use ($cache, $knownWallets) {
-            $knownWallet = $knownWallets->firstWhere('address', $wallet->address);
+        Wallets::allWithUsername()
+            ->orWhereIn('address', $knownWallets->pluck('address'))
+            ->select([
+                'attributes->delegate->username as username',
+                'address',
+                'public_key',
+            ])
+            ->get()
+            ->each(function (Model $wallet) use ($cache, $knownWallets) {
+                $knownWallet = $knownWallets->firstWhere('address', $wallet->address);
 
-            if (! is_null($knownWallet)) {
-                $username = $knownWallet['name'];
-            } else {
-                $username = $wallet->username;
-            }
+                if (! is_null($knownWallet)) {
+                    $username = $knownWallet['name'];
+                } else {
+                    $username = $wallet->username;
+                }
 
-            $cache->setUsernameByAddress($wallet->address, $username);
+                $cache->setUsernameByAddress($wallet->address, $username);
 
-            if (! is_null($wallet->public_key)) {
-                $cache->setUsernameByPublicKey($wallet->public_key, $username);
-            }
-        });
+                if (! is_null($wallet->public_key)) {
+                    $cache->setUsernameByPublicKey($wallet->public_key, $username);
+                }
+            });
     }
 }
