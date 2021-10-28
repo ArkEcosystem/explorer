@@ -36,7 +36,7 @@ it('should cache the known wallet name if defined', function () {
         ],
     ], 200));
 
-    $knowWallet = Wallet::factory()->create([
+    $knownWallet = Wallet::factory()->create([
         'address' => 'AagJoLEnpXYkxYdYkmdDSNMLjjBkLJ6T67',
     ]);
 
@@ -46,7 +46,7 @@ it('should cache the known wallet name if defined', function () {
 
     (new CacheDelegateUsernames())->handle();
 
-    expect(Cache::tags('wallet')->get(md5("username_by_address/$knowWallet->address")))->toBe('Hot Wallet');
+    expect(Cache::tags('wallet')->get(md5("username_by_address/$knownWallet->address")))->toBe('Hot Wallet');
     expect(Cache::tags('wallet')->get(md5("username_by_address/$regularWallet->address")))->toBe('regular');
 });
 
