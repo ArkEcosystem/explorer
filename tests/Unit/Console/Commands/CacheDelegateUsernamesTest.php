@@ -24,7 +24,7 @@ it('should cache the username for the public key', function () {
 });
 
 it('should cache the known wallet name if defined', function () {
-    $knownWalletsUrl = 'https://knonwallet.com/known-wallets.json';
+    $knownWalletsUrl = 'https://knownwallets.com/known-wallets.json';
 
     Config::set('explorer.networks.development.knownWallets', $knownWalletsUrl);
 
