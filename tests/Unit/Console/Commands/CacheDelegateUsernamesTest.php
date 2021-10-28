@@ -51,7 +51,7 @@ it('should cache the known wallet name if defined', function () {
 });
 
 it('should cache the known wallet name if doesnt have delegate name', function () {
-    $knownWalletsUrl = 'https://knonwallet.com/known-wallets.json';
+    $knownWalletsUrl = 'https://knownwallets.com/known-wallets.json';
 
     Config::set('explorer.networks.development.knownWallets', $knownWalletsUrl);
 
