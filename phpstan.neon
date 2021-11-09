@@ -17,7 +17,6 @@ parameters:
         - '#Variable method call#'
         - '#Dynamic call to static method#'
         - '#InvalidArgumentException constructor expects string#'
-        - '#withScope#'
         # FIXME
         - '#AbstractNetwork#'
         - '#PendingDispatch given#'
