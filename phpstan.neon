@@ -20,6 +20,5 @@ parameters:
         - '#withScope#'
         # FIXME
         - '#AbstractNetwork#'
-        - '#PendingDispatch given#'
         - '#with a nullable type declaration#'
     checkMissingIterableValueType: false
