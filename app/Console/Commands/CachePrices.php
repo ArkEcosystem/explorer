@@ -12,7 +12,6 @@ use App\Services\Cache\PriceChartCache;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Str;
 
 final class CachePrices extends Command
 {
