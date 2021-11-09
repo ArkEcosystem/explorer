@@ -19,7 +19,6 @@ parameters:
         - '#InvalidArgumentException constructor expects string#'
         - '#withScope#'
         # FIXME
-        - '#AbstractNetwork#'
         - '#PendingDispatch given#'
         - '#with a nullable type declaration#'
     checkMissingIterableValueType: false
