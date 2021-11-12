@@ -35,7 +35,7 @@ trait StatisticsChart
 
     private function transactionsPerPeriod(string $cache, string $period): Collection
     {
-        /** @var TransactionCache $cache */
+        /* @var TransactionCache $cache */
         return collect((new $cache())->getHistorical($period));
     }
 }
