@@ -37,7 +37,7 @@ trait StatisticsChart
     private function transactionsPerPeriod(string $cache, string $period): Collection
     {
         // prettier-ignore
-        /** @var FeeCache|TransactionCache $cache */
+        /* @var FeeCache|TransactionCache $cache */
         return collect((new $cache())->getHistorical($period));
     }
 }
