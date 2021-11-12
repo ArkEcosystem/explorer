@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Livewire\Concerns;
 
 use App\Facades\Settings;
+use App\Services\Cache\FeeCache;
 use App\Services\Cache\PriceChartCache;
 use App\Services\Cache\TransactionCache;
 use Illuminate\Support\Collection;
@@ -35,7 +36,7 @@ trait StatisticsChart
 
     private function transactionsPerPeriod(string $cache, string $period): Collection
     {
-        /** @var TransactionCache $cache */
+        /** @var FeeCache|TransactionCache $cache */
         return collect((new $cache())->getHistorical($period));
     }
 }
