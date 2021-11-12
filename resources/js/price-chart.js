@@ -1,4 +1,6 @@
 import { Chart, registerables } from "chart.js";
+import "chartjs-adapter-date-fns";
+import { en } from "date-fns/locale";
 
 Chart.register(...registerables);
 
@@ -121,6 +123,11 @@ const PriceChart = (
                 scales: {
                     x: {
                         type: "time",
+                        adapters: {
+                            date: {
+                                locale: en,
+                            },
+                        },
                         ticks: {
                             display: false,
                         },
