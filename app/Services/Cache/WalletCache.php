@@ -55,7 +55,7 @@ final class WalletCache implements Contract
         $this->put(sprintf('productivity/%s', $publicKey), $value);
     }
 
-    public function getResignationId(string $publicKey): ?string
+    public function getResignationId(string $publicKey): string|null
     {
         return $this->get(sprintf('resignation_id/%s', $publicKey));
     }
@@ -65,7 +65,7 @@ final class WalletCache implements Contract
         $this->put(sprintf('resignation_id/%s', $publicKey), $id);
     }
 
-    public function getVote(string $publicKey): ?Wallet
+    public function getVote(string $publicKey): Wallet|null
     {
         return $this->get(sprintf('vote/%s', $publicKey));
     }
@@ -75,7 +75,7 @@ final class WalletCache implements Contract
         $this->put(sprintf('vote/%s', $publicKey), $value);
     }
 
-    public function getMultiSignatureAddress(int $min, array $publicKeys): ?string
+    public function getMultiSignatureAddress(int $min, array $publicKeys): string|null
     {
         return $this->get(sprintf('multi_signature/%s/%s', $min, serialize($publicKeys)));
     }
@@ -85,7 +85,7 @@ final class WalletCache implements Contract
         $this->remember(sprintf('multi_signature/%s/%s', $min, serialize($publicKeys)), now()->addHour(), $callback);
     }
 
-    public function getUsernameByAddress(string $address): ?string
+    public function getUsernameByAddress(string $address): string|null
     {
         return $this->get(sprintf('username_by_address/%s', $address));
     }
@@ -95,7 +95,7 @@ final class WalletCache implements Contract
         $this->put(sprintf('username_by_address/%s', $address), $username);
     }
 
-    public function getUsernameByPublicKey(string $publicKey): ?string
+    public function getUsernameByPublicKey(string $publicKey): string|null
     {
         return $this->get(sprintf('username_by_public_key/%s', $publicKey));
     }
