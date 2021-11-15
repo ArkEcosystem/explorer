@@ -28,12 +28,12 @@ final class MemoryWallet
         return $this->address;
     }
 
-    public function publicKey(): ?string
+    public function publicKey(): string|null
     {
         return $this->publicKey;
     }
 
-    public function username(): ?string
+    public function username(): string|null
     {
         return (new WalletCache())->getUsernameByAddress($this->address);
     }
