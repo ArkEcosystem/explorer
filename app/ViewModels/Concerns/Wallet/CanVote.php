@@ -15,7 +15,7 @@ trait CanVote
         return ! is_null(Arr::get($this->wallet, 'attributes.vote'));
     }
 
-    public function vote(): ?self
+    public function vote(): self|null
     {
         if (is_null($this->wallet->public_key)) {
             return null;
@@ -36,7 +36,7 @@ trait CanVote
         return new static($delegate);
     }
 
-    public function votePercentage(): ?float
+    public function votePercentage(): float|null
     {
         if (is_null($this->wallet->public_key)) {
             return null;
