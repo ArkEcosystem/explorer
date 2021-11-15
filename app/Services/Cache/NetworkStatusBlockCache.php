@@ -19,7 +19,7 @@ final class NetworkStatusBlockCache implements Contract
         return $this->get(sprintf('historical-hourly/%s/%s', $source, $target));
     }
 
-    public function setHistoricalHourly(string $source, string $target, ?Collection $historical): ?Collection
+    public function setHistoricalHourly(string $source, string $target, Collection|null $historical): Collection|null
     {
         $this->put(sprintf('historical-hourly/%s/%s', $source, $target), $historical);
 
@@ -33,7 +33,7 @@ final class NetworkStatusBlockCache implements Contract
         return $price === null ? null : (float) $price;
     }
 
-    public function setPrice(string $source, string $target, ?float $price): ?float
+    public function setPrice(string $source, string $target, float|null $price): float|null
     {
         $this->put(sprintf('price/%s/%s', $source, $target), $price);
 
@@ -47,7 +47,7 @@ final class NetworkStatusBlockCache implements Contract
         return $priceChange === null ? null : (float) $priceChange;
     }
 
-    public function setPriceChange(string $source, string $target, ?float $priceChange): ?float
+    public function setPriceChange(string $source, string $target, float|null $priceChange): float|null
     {
         $this->put(sprintf('pricechange/%s/%s', $source, $target), $priceChange);
 
