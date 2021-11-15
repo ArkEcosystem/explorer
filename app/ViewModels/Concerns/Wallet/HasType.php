@@ -59,7 +59,7 @@ trait HasType
         return $this->isOwnedByExchange();
     }
 
-    private function findWalletByKnown(): ?array
+    private function findWalletByKnown(): array|null
     {
         return collect(Network::knownWallets())->firstWhere('address', $this->wallet->address);
     }
