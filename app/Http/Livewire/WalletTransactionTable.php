@@ -31,7 +31,7 @@ final class WalletTransactionTable extends Component
         'currencyChanged' => '$refresh',
     ];
 
-    public function mount(string $address, bool $isCold, ?string $publicKey): void
+    public function mount(string $address, bool $isCold, string|null $publicKey): void
     {
         $this->state['address']   = $address;
         $this->state['publicKey'] = $publicKey;
