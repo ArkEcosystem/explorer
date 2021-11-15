@@ -45,7 +45,7 @@ final class WalletViewModel implements ViewModel
         return $this->wallet->address;
     }
 
-    public function publicKey(): ?string
+    public function publicKey(): string|null
     {
         return $this->wallet->public_key;
     }
