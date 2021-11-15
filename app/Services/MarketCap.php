@@ -11,7 +11,7 @@ use ARKEcosystem\Foundation\NumberFormatter\NumberFormatter as BetterNumberForma
 
 final class MarketCap
 {
-    public static function get(string $source, string $target): ? float
+    public static function get(string $source, string $target): float|null
     {
         $price = static::getPrice($source, $target);
 
@@ -22,7 +22,7 @@ final class MarketCap
         return $price * static::getSupply();
     }
 
-    public static function getFormatted(string $source, string $target): ? string
+    public static function getFormatted(string $source, string $target): string|null
     {
         $marketcap = static::get($source, $target);
 
@@ -50,7 +50,7 @@ final class MarketCap
         return CacheNetworkSupply::execute() / 1e8;
     }
 
-    private static function getPrice(string $source, string $target): ? float
+    private static function getPrice(string $source, string $target): float|null
     {
         return (new NetworkStatusBlockCache())->getPrice($source, $target);
     }
