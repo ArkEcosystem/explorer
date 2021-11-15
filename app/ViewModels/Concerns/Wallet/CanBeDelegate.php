@@ -20,7 +20,7 @@ trait CanBeDelegate
         return Arr::has($this->wallet, 'attributes.delegate.resigned');
     }
 
-    public function resignationId(): ?string
+    public function resignationId(): string|null
     {
         if (is_null($this->wallet->public_key)) {
             return null;
@@ -33,7 +33,7 @@ trait CanBeDelegate
         return (new WalletCache())->getResignationId($this->wallet->public_key);
     }
 
-    public function username(): ?string
+    public function username(): string|null
     {
         $knownWallet = $this->findWalletByKnown();
 
@@ -47,7 +47,7 @@ trait CanBeDelegate
     /**
      * @codeCoverageIgnore
      */
-    public function rank(): ?int
+    public function rank(): int|null
     {
         return Arr::get($this->wallet, 'attributes.delegate.rank', 0);
     }
