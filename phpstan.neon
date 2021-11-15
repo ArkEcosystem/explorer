@@ -15,6 +15,4 @@ parameters:
         - '#with null as default value#'
         # Laravel
         - '#Dynamic call to static method#'
-        # FIXME
-        - '#with a nullable type declaration#'
     checkMissingIterableValueType: false
