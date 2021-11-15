@@ -9,7 +9,7 @@ use App\Services\Identity;
 
 final class MemoryWallet
 {
-    private function __construct(public string $address, public ?string $publicKey)
+    private function __construct(public string $address, public string|null $publicKey)
     {
     }
 
