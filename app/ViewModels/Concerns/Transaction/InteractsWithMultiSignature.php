@@ -12,7 +12,7 @@ use Illuminate\Support\Arr;
 
 trait InteractsWithMultiSignature
 {
-    public function multiSignatureWallet(): ?WalletViewModel
+    public function multiSignatureWallet(): WalletViewModel|null
     {
         $address = $this->multiSignatureAddress();
 
@@ -23,7 +23,7 @@ trait InteractsWithMultiSignature
         return new WalletViewModel(Wallets::findByAddress($address));
     }
 
-    public function multiSignatureAddress(): ?string
+    public function multiSignatureAddress(): string|null
     {
         if (! $this->isMultiSignature()) {
             return null;
@@ -55,7 +55,7 @@ trait InteractsWithMultiSignature
             ->toArray();
     }
 
-    public function multiSignatureMinimum(): ?int
+    public function multiSignatureMinimum(): int|null
     {
         if (! $this->isMultiSignature()) {
             return null;
@@ -68,7 +68,7 @@ trait InteractsWithMultiSignature
         return Arr::get($this->transaction->asset, 'multiSignature.min', 0);
     }
 
-    public function multiSignatureParticipantCount(): ?int
+    public function multiSignatureParticipantCount(): int|null
     {
         if (! $this->isMultiSignature()) {
             return null;
