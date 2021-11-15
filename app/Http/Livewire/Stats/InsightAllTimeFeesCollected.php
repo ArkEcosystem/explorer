@@ -47,7 +47,7 @@ final class InsightAllTimeFeesCollected extends Component
         ]);
     }
 
-    private function tooltip(): ?string
+    private function tooltip(): string|null
     {
         $number =$this->totalTransactionsPerPeriod(FeeCache::class, $this->period);
 
