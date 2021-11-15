@@ -19,7 +19,7 @@ trait HasQueries
         ]);
     }
 
-    private function getScopeByType(string $type): ?string
+    private function getScopeByType(string $type): string|null
     {
         return data_get(Transaction::TYPE_SCOPES, $type);
     }
