@@ -8,7 +8,7 @@ use Illuminate\Support\Arr;
 
 trait InteractsWithDelegateRegistration
 {
-    public function delegateUsername(): ?string
+    public function delegateUsername(): string|null
     {
         if (! $this->isDelegateRegistration()) {
             return null;
