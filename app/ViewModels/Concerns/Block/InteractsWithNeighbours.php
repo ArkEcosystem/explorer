@@ -9,17 +9,17 @@ use Throwable;
 
 trait InteractsWithNeighbours
 {
-    public function previousBlockUrl(): ?string
+    public function previousBlockUrl(): string|null
     {
         return $this->findBlockWithHeight($this->block->height->toNumber() - 1);
     }
 
-    public function nextBlockUrl(): ?string
+    public function nextBlockUrl(): string|null
     {
         return $this->findBlockWithHeight($this->block->height->toNumber() + 1);
     }
 
-    private function findBlockWithHeight(int $height): ?string
+    private function findBlockWithHeight(int $height): string|null
     {
         try {
             return route('block', Blocks::findByHeight($height));
