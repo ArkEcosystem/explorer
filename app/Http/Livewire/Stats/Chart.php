@@ -104,7 +104,7 @@ final class Chart extends Component
         return MarketCap::getFormatted(Network::currency(), Settings::currency()) ?? '0';
     }
 
-    private function getPriceChange(): ?float
+    private function getPriceChange(): float|null
     {
         return (new NetworkStatusBlockCache())->getPriceChange(Network::currency(), Settings::currency());
     }
