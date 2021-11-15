@@ -38,7 +38,7 @@ final class Payment
         return $this->address;
     }
 
-    public function username(): ?string
+    public function username(): string|null
     {
         return $this->username;
     }
