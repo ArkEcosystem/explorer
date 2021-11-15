@@ -14,7 +14,7 @@ use Livewire\Component;
 
 final class NetworkStatusBlockPrice extends Component
 {
-    /** @phpstan-ignore-next-line */
+    /** @var mixed */
     protected $listeners = [
         'currencyChanged' => '$refresh',
     ];
@@ -27,12 +27,12 @@ final class NetworkStatusBlockPrice extends Component
         ]);
     }
 
-    private function getPriceChange(): ?float
+    private function getPriceChange(): float|null
     {
         return (new NetworkStatusBlockCache())->getPriceChange(Network::currency(), Settings::currency());
     }
 
-    private function getPriceFormatted(): ? string
+    private function getPriceFormatted(): string|null
     {
         $currency = Settings::currency();
         $price    = (new NetworkStatusBlockCache())->getPrice(Network::currency(), $currency);
