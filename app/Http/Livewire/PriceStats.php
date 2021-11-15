@@ -33,7 +33,7 @@ final class PriceStats extends Component
             && (new NetworkStatusBlockCache())->getIsAvailable(Network::currency(), Settings::currency());
     }
 
-    private function getPriceChange(): ?float
+    private function getPriceChange(): float|null
     {
         return (new NetworkStatusBlockCache())->getPriceChange(Network::currency(), Settings::currency());
     }
@@ -49,7 +49,7 @@ final class PriceStats extends Component
         return $historicalData;
     }
 
-    private function getHistoricalData(): ? Collection
+    private function getHistoricalData(): Collection|null
     {
         return (new NetworkStatusBlockCache())->getHistoricalHourly(Network::currency(), Settings::currency());
     }
