@@ -9,7 +9,7 @@ trait InteractsWithVendorField
     /**
      * @codeCoverageIgnore
      */
-    public function vendorField(): ?string
+    public function vendorField(): string|null
     {
         $vendorField = $this->transaction->vendor_field;
 
