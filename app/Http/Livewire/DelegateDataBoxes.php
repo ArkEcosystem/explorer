@@ -85,16 +85,16 @@ final class DelegateDataBoxes extends Component
         });
     }
 
-    public function getNextDelegate(): ? WalletViewModel
+    public function getNextDelegate(): WalletViewModel|null
     {
         $this->delegates = $this->fetchDelegates();
 
-        return (new MonitorCache())->setNextDelegate(function (): ? WalletViewModel {
+        return (new MonitorCache())->setNextDelegate(function (): WalletViewModel|null {
             return optional($this->getSlotsByStatus($this->delegates, 'pending'))->wallet();
         });
     }
 
-    private function getSlotsByStatus(array $slots, string $status): ?Slot
+    private function getSlotsByStatus(array $slots, string $status): Slot|null
     {
         return collect($slots)
             ->filter(fn ($slot) => $slot->status() === $status)
