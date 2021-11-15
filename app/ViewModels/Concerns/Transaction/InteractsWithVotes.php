@@ -11,7 +11,7 @@ use Illuminate\Support\Str;
 
 trait InteractsWithVotes
 {
-    public function voted(): ?WalletViewModel
+    public function voted(): WalletViewModel|null
     {
         if (! $this->isVote()) {
             return null;
@@ -24,7 +24,7 @@ trait InteractsWithVotes
         return new WalletViewModel(Wallets::findByPublicKey(substr($publicKey, 1)));
     }
 
-    public function unvoted(): ?WalletViewModel
+    public function unvoted(): WalletViewModel|null
     {
         if (! $this->isUnvote()) {
             return null;
