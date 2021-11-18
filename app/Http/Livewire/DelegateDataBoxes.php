@@ -89,8 +89,7 @@ final class DelegateDataBoxes extends Component
     {
         $this->delegates = $this->fetchDelegates();
 
-        return (new MonitorCache())->setNextDelegate(fn () =>
-            optional($this->getSlotsByStatus($this->delegates, 'pending'))->wallet());
+        return (new MonitorCache())->setNextDelegate(fn () => optional($this->getSlotsByStatus($this->delegates, 'pending'))->wallet());
     }
 
     private function getSlotsByStatus(array $slots, string $status): ?Slot
