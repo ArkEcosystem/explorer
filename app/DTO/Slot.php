@@ -14,57 +14,46 @@ use Illuminate\Support\Str;
 
 final class Slot
 {
-    private string $publicKey;
-
-    private int $order;
-
-    private WalletViewModel $wallet;
-
-    private Carbon $forgingAt;
-
-    private array $lastBlock;
-
-    private string $status;
-
-    private int $currentRoundBlocks;
+    private array $collection;
 
     public function __construct(array $data, Collection $roundBlocks, private int $roundNumber)
     {
         foreach ($data as $key => $value) {
             $key = Str::camel($key);
 
-            /* @phpstan-ignore-next-line */
-            $this->$key = $value;
+            $this->collection[$key] = $value;
         }
 
-        $this->currentRoundBlocks = $roundBlocks
+        $this->collection['roundNumber'] = $this->roundNumber;
+
+        $this->collection['currentRoundBlocks'] = $roundBlocks
             ->where('generator_public_key', $data['publicKey'])
             ->count();
     }
 
     public function publicKey(): string
     {
-        return $this->publicKey;
+        return $this->collection['publicKey'];
     }
 
     public function order(): int
     {
-        return $this->order;
+        return $this->collection['order'];
     }
 
     public function wallet(): WalletViewModel
     {
-        return $this->wallet;
+        return $this->collection['wallet'];
     }
 
     public function forgingAt(): Carbon
     {
-        return $this->forgingAt;
+        return $this->collection['forgingAt'];
     }
 
     public function lastBlock(): array
     {
-        return $this->lastBlock;
+        return $this->collection['lastBlock'];
     }
 
     public function hasForged(): bool
@@ -73,7 +62,7 @@ final class Slot
             return false;
         }
 
-        return $this->currentRoundBlocks >= 1;
+        return $this->collection['currentRoundBlocks'] >= 1;
     }
 
     public function justMissed(): bool
@@ -82,7 +71,7 @@ final class Slot
             return false;
         }
 
-        return $this->currentRoundBlocks < 1;
+        return $this->collection['currentRoundBlocks'] < 1;
     }
 
     public function keepsMissing(): bool
@@ -96,32 +85,32 @@ final class Slot
         }
 
         // Since we're not waiting in current round, more than 1 round between current and last forged block means we're missing 2+ consecutive rounds
-        return ($this->roundNumber - Monitor::roundNumberFromHeight($this->getLastHeight())) > 1;
+        return ($this->collection['roundNumber'] - Monitor::roundNumberFromHeight($this->getLastHeight())) > 1;
     }
 
     public function missedCount(): int
     {
-        return (new WalletCache())->getMissedBlocks($this->publicKey);
+        return (new WalletCache())->getMissedBlocks($this->collection['publicKey']);
     }
 
     public function isDone(): bool
     {
-        return $this->status === 'done';
+        return $this->collection['status'] === 'done';
     }
 
     public function isNext(): bool
     {
-        return $this->status === 'next';
+        return $this->collection['status'] === 'next';
     }
 
     public function isPending(): bool
     {
-        return $this->status === 'pending';
+        return $this->collection['status'] === 'pending';
     }
 
     public function status(): string
     {
-        return $this->status;
+        return $this->collection['status'];
     }
 
     public function isWaiting(): bool
@@ -139,6 +128,6 @@ final class Slot
 
     private function getLastHeight(): int
     {
-        return Arr::get($this->lastBlock, 'height', 0);
+        return Arr::get($this->collection['lastBlock'], 'height', 0);
     }
 }
