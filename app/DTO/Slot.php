@@ -24,8 +24,7 @@ final class Slot
         private string $status,
         private Collection $roundBlocks,
         private int $roundNumber
-    )
-    {
+    ) {
         $this->currentRoundBlocks = $this->roundBlocks
             ->where('generator_public_key', $this->publicKey)
             ->count();
