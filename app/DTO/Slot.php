@@ -15,16 +15,6 @@ final class Slot
 {
     private int $currentRoundBlocks;
 
-    /**
-     * @param string $publicKey
-     * @param int $order
-     * @param WalletViewModel $wallet
-     * @param Carbon $forgingAt
-     * @param array $lastBlock
-     * @param string $status
-     * @param Collection $roundBlocks
-     * @param int $roundNumber
-     */
     public function __construct(
         private string $publicKey,
         private int $order,
