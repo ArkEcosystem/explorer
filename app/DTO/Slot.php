@@ -10,35 +10,34 @@ use App\ViewModels\WalletViewModel;
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Str;
 
 final class Slot
 {
-    private string $publicKey;
-
-    private int $order;
-
-    private WalletViewModel $wallet;
-
-    private Carbon $forgingAt;
-
-    private array $lastBlock;
-
-    private string $status;
-
     private int $currentRoundBlocks;
 
-    public function __construct(array $data, Collection $roundBlocks, private int $roundNumber)
+    /**
+     * @param string $publicKey
+     * @param int $order
+     * @param WalletViewModel $wallet
+     * @param Carbon $forgingAt
+     * @param array $lastBlock
+     * @param string $status
+     * @param Collection $roundBlocks
+     * @param int $roundNumber
+     */
+    public function __construct(
+        private string $publicKey,
+        private int $order,
+        private WalletViewModel $wallet,
+        private Carbon $forgingAt,
+        private array $lastBlock,
+        private string $status,
+        private Collection $roundBlocks,
+        private int $roundNumber
+    )
     {
-        foreach ($data as $key => $value) {
-            $key = Str::camel($key);
-
-            /* @phpstan-ignore-next-line */
-            $this->$key = $value;
-        }
-
-        $this->currentRoundBlocks = $roundBlocks
-            ->where('generator_public_key', $data['publicKey'])
+        $this->currentRoundBlocks = $this->roundBlocks
+            ->where('generator_public_key', $this->publicKey)
             ->count();
     }
 
