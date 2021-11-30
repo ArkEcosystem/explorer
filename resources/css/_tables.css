@@ -34,26 +34,68 @@ tr:hover td.hoverable-cell .table-avatar {
 }
 
 /** Compact Table Styling **/
-.table-compact:not(.table-compact-until-md) .table-container table > tbody .transaction-icon,
-.table-compact:not(.table-compact-until-md) .table-container table > tbody .vote-circle,
-.table-compact:not(.table-compact-until-md) .table-container table > tbody .unvote-circle {
+.table-compact:not(.table-compact-until-md)
+    .table-container
+    table
+    > tbody
+    .transaction-icon,
+.table-compact:not(.table-compact-until-md)
+    .table-container
+    table
+    > tbody
+    .vote-circle,
+.table-compact:not(.table-compact-until-md)
+    .table-container
+    table
+    > tbody
+    .unvote-circle {
     @apply w-5 h-5 border-0;
 }
 
-.table-compact:not(.table-compact-until-md) .table-container table > tbody .avatar-wrapper,
-.table-compact:not(.table-compact-until-md) .table-container table > tbody .status-circle,
-.table-compact:not(.table-compact-until-md) .table-container table > tbody .arrow-direction svg,
-.table-compact:not(.table-compact-until-md) .table-container table > tbody .round-status svg {
+.table-compact:not(.table-compact-until-md)
+    .table-container
+    table
+    > tbody
+    .avatar-wrapper,
+.table-compact:not(.table-compact-until-md)
+    .table-container
+    table
+    > tbody
+    .status-circle,
+.table-compact:not(.table-compact-until-md)
+    .table-container
+    table
+    > tbody
+    .arrow-direction
+    svg,
+.table-compact:not(.table-compact-until-md)
+    .table-container
+    table
+    > tbody
+    .round-status
+    svg {
     @apply w-5 h-5;
 }
 
 @screen md {
-    .table-compact:not(.table-compact-until-md) .table-container table > tbody .transaction-icon {
+    .table-compact:not(.table-compact-until-md)
+        .table-container
+        table
+        > tbody
+        .transaction-icon {
         @apply w-5 h-5 border-0;
     }
 
-    .table-compact:not(.table-compact-until-md) .table-container table > tbody .avatar-wrapper,
-    .table-compact:not(.table-compact-until-md) .table-container table > tbody .status-circle {
+    .table-compact:not(.table-compact-until-md)
+        .table-container
+        table
+        > tbody
+        .avatar-wrapper,
+    .table-compact:not(.table-compact-until-md)
+        .table-container
+        table
+        > tbody
+        .status-circle {
         @apply w-5 h-5 !important;
     }
 }
