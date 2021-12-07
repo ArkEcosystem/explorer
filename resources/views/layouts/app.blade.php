@@ -71,7 +71,7 @@
                             target="_blank"
                         >
                             <x-ark-icon
-                                name="app-coin-gecko"
+                                name="app-coingecko"
                                 class="inline-block -mt-1"
                             />
                         </a>
