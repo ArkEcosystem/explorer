@@ -12,8 +12,9 @@
     </x-navbar.button>
 
     <div
-        x-show.transition.origin.top="showSettings"
+        x-show="showSettings"
         class="fixed top-0 right-0 left-0 z-30 px-4 pt-3 mt-20 w-full md:absolute md:left-auto md:p-0 md:mt-24 md:w-120"
+        x-transition.origin.top
         x-cloak
         @click.outside="showSettings = false"
     >
