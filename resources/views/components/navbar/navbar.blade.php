@@ -120,7 +120,10 @@
             </div>
 
             <template x-if="open">
-                <div class="border-t-2 shadow-xl lg:hidden border-theme-secondary-200 dark:border-theme-secondary-800" @click.away="open = false">
+                <div
+                    class="border-t-2 shadow-xl lg:hidden border-theme-secondary-200 dark:border-theme-secondary-800"
+                    @click.outside="open = false"
+                >
                     <div class="pt-2 pb-4 rounded-b-lg">
                         @foreach ($navigation as $navItem)
                             <x-ark-navbar-link-mobile :route="$navItem['route']" :name="$navItem['label']" :params="$navItem['params'] ?? []" />
