@@ -1,5 +1,5 @@
 // @see https://laravel-mix.com/docs/6.0/upgrade#unused-library-extraction
-import "alpinejs";
+import Alpine from "alpinejs";
 import "chart.js";
 import "focus-visible";
 import "@ui/js/tippy.js";
@@ -16,6 +16,7 @@ import Tabs from "./tabs";
 import Navbar from "@ui/js/navbar";
 import CustomChart from "@ui/js/chart.js";
 
+window.Alpine = Alpine;
 window.dayjs = dayjs;
 window.Tabs = Tabs;
 window.Pikaday = Pikaday;
@@ -26,6 +27,8 @@ window.RichSelect = RichSelect;
 window.PriceChart = PriceChart;
 window.Navbar = Navbar;
 window.CustomChart = CustomChart;
+
+Alpine.start();
 
 /**
  * If browser back button was used, flush cache
