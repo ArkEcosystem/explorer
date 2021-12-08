@@ -2,14 +2,14 @@
     x-data="{
         value: '{{ $slot }}',
         init() {
-            new ResizeObserver(() => this.truncate()).observe(this.$el);
+            new ResizeObserver(() => this.truncate()).observe(this.$root);
 
             document.addEventListener('resize', () => this.truncate());
 
             this.truncate();
         },
         truncate() {
-            const el = this.$el;
+            const el = this.$root;
 
             el.innerHTML = ''
             el.appendChild(document.createTextNode(this.value));
