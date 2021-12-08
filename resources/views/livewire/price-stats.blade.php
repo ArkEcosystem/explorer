@@ -13,7 +13,6 @@
             '{{ time() }}',
             {{ $isPositive ? 'true' : 'false' }}
         )"
-        x-init="init"
         @toggle-dark-mode.window="toggleDarkMode"
     >
         <div class="block" wire:ignore>

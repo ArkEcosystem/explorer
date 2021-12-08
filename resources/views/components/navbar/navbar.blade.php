@@ -8,7 +8,6 @@
             open: false,
             showSettings: false
         })"
-        x-init="init"
         @toggle-dark-mode.window="dark = !dark"
     >
         <nav x-ref="nav" class="relative z-30 bg-white border-b border-theme-secondary-300 dark:bg-theme-secondary-900 dark:border-theme-secondary-800">

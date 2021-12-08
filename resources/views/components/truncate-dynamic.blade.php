@@ -34,6 +34,5 @@
             return el.offsetWidth < el.scrollWidth;
         },
     }"
-    x-init="init"
     class="inline-flex overflow-hidden w-full max-w-full whitespace-nowrap"
 >{{ $slot }}</span>
