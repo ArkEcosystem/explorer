@@ -49,6 +49,6 @@
         @click="searching = true"
     >
         <span x-show="searching"><x-ark-spinner-icon /></span>
-        <span x-show="!searching"><x-ark-icon name="search" /></span>
+        <span x-show="!searching"><x-ark-icon name="magnifying-glass" /></span>
     </button>
 </div>
