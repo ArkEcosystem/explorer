@@ -30,7 +30,7 @@
         />
 
         <div
-            class="flex justify-center items-center space-x-2 py-3 font-semibold text-center rounded-b-xl md:hidden bg-theme-secondary-200 text-theme-primary-600 dark:bg-theme-secondary-800 dark:text-theme-secondary-200"
+            class="flex justify-center items-center py-3 space-x-2 font-semibold text-center rounded-b-xl md:hidden bg-theme-secondary-200 text-theme-primary-600 dark:bg-theme-secondary-800 dark:text-theme-secondary-200"
             @click="showAdvancedMobile = !showAdvancedMobile"
             x-cloak
         >
