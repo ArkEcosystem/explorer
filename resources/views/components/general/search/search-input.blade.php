@@ -1,5 +1,5 @@
 <div class="flex items-center py-4 px-6 md:py-5">
-    <div class="leading-none flex-1 mr-8">
+    <div class="flex-1 mr-8 leading-none">
         <input
             x-ref="input"
             type="text"
