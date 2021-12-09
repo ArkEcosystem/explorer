@@ -1,5 +1,5 @@
 <div class="flex items-center py-6 px-8">
-    <div class="flex-1 mr-8">
+    <div class="leading-none flex-1 mr-8">
         <input
             x-ref="input"
             type="text"
@@ -44,11 +44,16 @@
 
     <button
         type="button"
-        class="cursor-pointer md:hidden text-theme-secondary-700 dark:text-theme-secondary-500 dark:hover:text-theme-secondary-400 hover:text-theme-primary-600"
+        class="md:hidden button-primary"
         wire:click="performSearch"
         @click="searching = true"
     >
-        <span x-show="searching"><x-ark-spinner-icon /></span>
-        <span x-show="!searching"><x-ark-icon name="search" /></span>
+        <span x-show="searching">
+            <x-ark-spinner-icon />
+        </span>
+
+        <span x-show="!searching">
+            <x-ark-icon name="search" size="sm" />
+        </span>
     </button>
 </div>
