@@ -1,4 +1,4 @@
-<div class="flex items-center py-6 px-8">
+<div class="flex items-center py-4 px-6 md:py-5">
     <div class="leading-none flex-1 mr-8">
         <input
             x-ref="input"
