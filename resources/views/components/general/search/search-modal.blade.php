@@ -63,7 +63,7 @@
                             <span x-show="showAdvanced">@lang('actions.hide_advanced')</span>
                         </div>
 
-                        <x-ark-chevron-open-close is-open="showAdvanced === true" />
+                        <x-ark-chevron-toggle is-open="showAdvanced === true" />
                     </div>
                 </div>
             </div>

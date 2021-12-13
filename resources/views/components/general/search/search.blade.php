@@ -39,7 +39,7 @@
                 <span x-show="showAdvancedMobile">@lang('actions.hide_advanced')</span>
             </div>
 
-            <x-ark-chevron-open-close is-open="showAdvancedMobile === true" />
+            <x-ark-chevron-toggle is-open="showAdvancedMobile === true" />
         </div>
     </div>
 </div>
