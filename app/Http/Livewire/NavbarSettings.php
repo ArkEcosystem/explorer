@@ -34,7 +34,7 @@ final class NavbarSettings extends Component
 
         if ($originalTheme !== $newTheme) {
             $this->dispatchBrowserEvent('setThemeMode', [
-                'theme' => $newTheme ? 'dark' : 'light',
+                'theme' => $newTheme === true ? 'dark' : 'light',
             ]);
         }
     }
