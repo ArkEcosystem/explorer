@@ -124,11 +124,11 @@ it('should determine if visitor uses fee chart', function () {
 
 it('should determine if visitor uses dark theme', function () {
     expect(getSettingsFromCookies($this, 'theme', [
-        'darkTheme' => true
+        'darkTheme' => true,
     ]))->toBe(['dark']);
 
     expect(getSettingsFromCookies($this, 'theme', [
-        'darkTheme' => false
+        'darkTheme' => false,
     ]))->toBe(['light']);
 });
 
