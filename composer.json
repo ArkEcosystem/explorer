@@ -8,7 +8,7 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^8.0",
+        "php": "^8.1",
         "ext-gmp": "*",
         "arkecosystem/crypto": "^1.8",
         "arkecosystem/foundation": "^0.15.3",
@@ -88,13 +88,13 @@
             "@php artisan playbook:run DevelopmentPlaybook"
         ],
         "analyse": [
-            "vendor/bin/phpstan analyse --configuration=vendor/arkecosystem/foundation/phpstan.neon --memory-limit=2G"
+            "./vendor/bin/phpstan analyse --configuration=vendor/arkecosystem/foundation/phpstan.neon --memory-limit=2G --ansi"
         ],
         "format": [
-            "vendor/bin/php-cs-fixer fix --config=vendor/arkecosystem/foundation/.php-cs-fixer.php"
+            "./vendor/bin/php-cs-fixer fix --config=vendor/arkecosystem/foundation/.php-cs-fixer.php --ansi"
         ],
         "refactor": [
-            "./vendor/bin/rector process --config=vendor/arkecosystem/foundation/rector.php"
+            "./vendor/bin/rector process --config=vendor/arkecosystem/foundation/rector.php --ansi"
         ],
         "test": [
             "./vendor/bin/pest"
