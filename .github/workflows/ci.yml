@@ -21,7 +21,50 @@ jobs:
             - name: Merge Conflict finder
               uses: olivernybroe/action-conflict-finder@v1.1
 
+    rector:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v2
+              with:
+                  ref: ${{ github.head_ref }}
+                  token: ${{ secrets.GH_TOKEN }}
+
+            - name: Setup PHP
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: "8.1"
+                  extensions: mbstring, dom, fileinfo, intl, gd, imagick, bcmath, soap, zip, sqlite
+
+            - name: Cache dependencies
+              uses: actions/cache@v1
+              with:
+                  path: ~/.composer/cache/files
+                  key: dependencies-composer-${{ hashFiles('composer.json') }}
+
+            - name: Install Composer dependencies
+              run: composer install --no-ansi --no-interaction --no-suggest --no-progress --prefer-dist --optimize-autoloader --ignore-platform-reqs
+
+            - name: Prepare Database
+              run: touch database/database.sqlite
+
+            - name: Prepare Application
+              run: cp .env.example .env && php artisan key:generate
+
+            - name: Run Rector
+              run: composer refactor
+
+            - name: Run php-cs-fixer
+              run: composer format
+
+            - uses: stefanzweifel/git-auto-commit-action@v4
+              with:
+                  commit_message: "refactor: code quality assurance"
+                  branch: ${{ github.head_ref }}
+
     analyse:
+        needs: [rector]
         runs-on: ubuntu-latest
 
         steps:
@@ -53,35 +96,8 @@ jobs:
             - name: Run PHPStan
               run: composer analyse
 
-    format:
-        runs-on: ubuntu-latest
-
-        steps:
-            - uses: actions/checkout@v2
-              with:
-                  ref: ${{ github.head_ref }}
-                  token: ${{ secrets.GH_TOKEN }}
-
-            - name: Setup PHP
-              uses: shivammathur/setup-php@v2
-              with:
-                  php-version: "8.0"
-                  extensions: mbstring, dom, fileinfo, intl, gd, imagick, bcmath, soap, zip, sqlite, pcov
-                  coverage: pcov
-
-            - name: Install
-              run: composer install --no-ansi --no-interaction --no-suggest --no-progress --prefer-dist --optimize-autoloader --ignore-platform-reqs
-
-            - name: Run php-cs-fixer
-              run: composer format
-
-            - uses: stefanzweifel/git-auto-commit-action@v4
-              with:
-                  commit_message: "style: resolve style guide violations"
-                  branch: ${{ github.head_ref }}
-
     unit:
-        needs: [conflicts, analyse, format]
+        needs: [conflicts, rector, analyse]
 
         runs-on: ubuntu-latest
 
@@ -105,7 +121,7 @@ jobs:
             - name: Setup PHP
               uses: shivammathur/setup-php@v2
               with:
-                  php-version: "8.0"
+                  php-version: "8.1"
                   extensions: mbstring, dom, fileinfo, intl, gd, imagick, bcmath, soap, zip, sqlite, pcov
                   coverage: pcov
 
@@ -121,10 +137,10 @@ jobs:
             - name: Install Yarn dependencies
               run: yarn --frozen-lockfile
 
-            - name: Prepare the database
+            - name: Prepare Database
               run: touch database/database.sqlite
 
-            - name: Prepare the application
+            - name: Prepare Application
               run: cp .env.example .env && php artisan key:generate
 
             - name: Clear Config
