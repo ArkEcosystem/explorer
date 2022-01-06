@@ -18,7 +18,7 @@ final class InsightAllTimeTransactions extends Component
     use ChartNumberFormatters;
     use StatisticsChart;
 
-    public string $period = '';
+    public string $period;
 
     public string $refreshInterval = '';
 
@@ -31,14 +31,14 @@ final class InsightAllTimeTransactions extends Component
     {
         $this->refreshInterval = (string) config('explorer.statistics.refreshInterval', '60');
         $this->period          = $this->defaultPeriod();
-        $this->cache           = StatsCache::TRANSACTIONS;
+        $this->cache           = StatsCache::TRANSACTIONS->key();
     }
 
     public function render(): View
     {
         return view('livewire.stats.insight-all-time-transactions', [
             'allTimeTransactionsTitle' => trans('pages.statistics.insights.all-time-transactions'),
-            'allTimeTransactionsValue' => $this->asNumber($this->totalTransactionsPerPeriod($this->cache, StatsPeriods::ALL)),
+            'allTimeTransactionsValue' => $this->asNumber($this->totalTransactionsPerPeriod($this->cache, StatsPeriods::ALL->value)),
             'transactionsTitle'        => trans('pages.statistics.insights.transactions'),
             'transactionsValue'        => $this->asNumber($this->totalTransactionsPerPeriod($this->cache, $this->period)),
             'chartValues'              => $this->chartTotalTransactionsPerPeriod($this->cache, $this->period),
