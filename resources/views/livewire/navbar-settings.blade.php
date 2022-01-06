@@ -62,7 +62,7 @@
                         name="state.compactTables"
                         hide-label
                         :default="$this->state['compactTables'] ? 'false' : 'true'"
-                        alpine-click="$dispatch('toggle-compact-table')"
+                        alpine-click="$dispatch('toggle-compact-table', { expand: value })"
                     />
                 </x-navbar.setting-option>
             </div>
