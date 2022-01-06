@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace App\Enums;
 
-final class StatsPeriods
+enum StatsPeriods: string
 {
-    public const DAY = 'day';
+    case DAY = 'day';
 
-    public const WEEK = 'week';
+    case WEEK = 'week';
 
-    public const MONTH = 'month';
+    case MONTH = 'month';
 
-    public const QUARTER = 'quarter';
+    case QUARTER = 'quarter';
 
-    public const YEAR = 'year';
+    case YEAR = 'year';
 
-    public const ALL = 'all';
+    case ALL = 'all';
 }
