@@ -18,7 +18,7 @@ final class NavbarSettings extends Component
         $this->state = Settings::all();
     }
 
-    public function updatedState(): void
+    public function updatedState(mixed $value, string $key): void
     {
         $originalCurrency = Arr::get(Settings::all(), 'currency');
         $newCurrency      = Arr::get($this->state, 'currency');
@@ -29,8 +29,10 @@ final class NavbarSettings extends Component
             $this->emit('currencyChanged', $newCurrency);
         }
 
-        $this->dispatchBrowserEvent('setThemeMode', [
-            'theme' => $this->state['darkTheme'] === true ? 'dark' : 'light',
-        ]);
+        if ($key === 'darkTheme') {
+            $this->dispatchBrowserEvent('setThemeMode', [
+                'theme' => $this->state['darkTheme'] === true ? 'dark' : 'light',
+            ]);
+        }
     }
 }
