@@ -395,23 +395,23 @@ final class TransactionType
         return true;
     }
 
-    private function isCoreType(int $type): bool
+    private function isCoreType(CoreTransactionTypeEnum $type): bool
     {
-        $matchesType      = $this->transaction->type === $type;
-        $matchesTypeGroup = $this->transaction->type_group === TransactionTypeGroupEnum::CORE;
+        $matchesType      = $this->transaction->type === $type->value;
+        $matchesTypeGroup = $this->transaction->type_group === TransactionTypeGroupEnum::CORE->value;
 
         return $matchesType && $matchesTypeGroup;
     }
 
-    private function isMagistrateType(int $type): bool
+    private function isMagistrateType(MagistrateTransactionTypeEnum $type): bool
     {
-        $matchesType      = $this->transaction->type === $type;
-        $matchesTypeGroup = $this->transaction->type_group === TransactionTypeGroupEnum::MAGISTRATE;
+        $matchesType      = $this->transaction->type === $type->value;
+        $matchesTypeGroup = $this->transaction->type_group === TransactionTypeGroupEnum::MAGISTRATE->value;
 
         return $matchesType && $matchesTypeGroup;
     }
 
-    private function isEntityWithRegistration(int $type): bool
+    private function isEntityWithRegistration(MagistrateTransactionEntityTypeEnum $type): bool
     {
         if (! $this->isEntityRegistration()) {
             return false;
@@ -420,7 +420,7 @@ final class TransactionType
         return $this->isEntityType($type);
     }
 
-    private function isEntityWithResignation(int $type): bool
+    private function isEntityWithResignation(MagistrateTransactionEntityTypeEnum $type): bool
     {
         if (! $this->isEntityResignation()) {
             return false;
@@ -429,7 +429,7 @@ final class TransactionType
         return $this->isEntityType($type);
     }
 
-    private function isEntityWithUpdate(int $type): bool
+    private function isEntityWithUpdate(MagistrateTransactionEntityTypeEnum $type): bool
     {
         if (! $this->isEntityUpdate()) {
             return false;
@@ -438,26 +438,26 @@ final class TransactionType
         return $this->isEntityType($type);
     }
 
-    private function isEntityType(int $type): bool
+    private function isEntityType(MagistrateTransactionEntityTypeEnum $type): bool
     {
-        return Arr::get($this->transaction->asset ?? [], 'type') === $type;
+        return Arr::get($this->transaction->asset ?? [], 'type') === $type->value;
     }
 
-    private function isEntityAction(int $action): bool
+    private function isEntityAction(MagistrateTransactionEntityActionEnum $action): bool
     {
         if (! $this->isMagistrateTypeGroup()) {
             return false;
         }
 
-        $matchesType   = $this->transaction->type === MagistrateTransactionTypeEnum::ENTITY;
-        $matchesAction = Arr::get($this->transaction->asset ?? [], 'action') === $action;
+        $matchesType   = $this->transaction->type === MagistrateTransactionTypeEnum::ENTITY->value;
+        $matchesAction = Arr::get($this->transaction->asset ?? [], 'action') === $action->value;
 
         return $matchesType && $matchesAction;
     }
 
     private function isMagistrateTypeGroup(): bool
     {
-        return $this->transaction->type_group === TransactionTypeGroupEnum::MAGISTRATE;
+        return $this->transaction->type_group === TransactionTypeGroupEnum::MAGISTRATE->value;
     }
 
     private function determineVoteTypes(): array
