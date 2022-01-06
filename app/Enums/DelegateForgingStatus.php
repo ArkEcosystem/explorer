@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Enums;
 
-final class DelegateForgingStatus
+enum DelegateForgingStatus
 {
-    public const forging = 'forging';
+    case forging;
 
-    public const missed = 'missed';
+    case missed;
 
-    public const missing = 'missing';
+    case missing;
 }
