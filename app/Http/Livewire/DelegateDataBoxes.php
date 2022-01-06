@@ -55,9 +55,9 @@ final class DelegateDataBoxes extends Component
         $parsedPerformances = array_count_values($performances);
 
         return [
-            'forging' => $parsedPerformances[DelegateForgingStatus::forging] ?? 0,
-            'missed'  => $parsedPerformances[DelegateForgingStatus::missed] ?? 0,
-            'missing' => $parsedPerformances[DelegateForgingStatus::missing] ?? 0,
+            'forging' => $parsedPerformances[DelegateForgingStatus::forging->name] ?? 0,
+            'missed'  => $parsedPerformances[DelegateForgingStatus::missed->name] ?? 0,
+            'missing' => $parsedPerformances[DelegateForgingStatus::missing->name] ?? 0,
         ];
     }
 
@@ -67,12 +67,12 @@ final class DelegateDataBoxes extends Component
         $delegate = ViewModelFactory::make((new WalletCache())->getDelegate($publicKey));
 
         if ($delegate->hasForged()) {
-            return DelegateForgingStatus::forging;
+            return DelegateForgingStatus::forging->name;
         } elseif ($delegate->keepsMissing()) {
-            return DelegateForgingStatus::missing;
+            return DelegateForgingStatus::missing->name;
         }
 
-        return DelegateForgingStatus::missed;
+        return DelegateForgingStatus::missed->name;
     }
 
     public function getBlockCount(): string
