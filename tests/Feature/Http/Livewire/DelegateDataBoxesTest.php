@@ -96,7 +96,7 @@ it('should determine if delegates are forging based on their round history', fun
     $delegate = new WalletViewModel($delegateWallet);
 
     expect($component->instance()->getDelegatePerformance($delegate->publicKey()))->toBeString();
-    expect($component->instance()->getDelegatePerformance($delegate->publicKey()))->toBe(DelegateForgingStatus::forging);
+    expect($component->instance()->getDelegatePerformance($delegate->publicKey()))->toBe(DelegateForgingStatus::forging->name);
 });
 
 it('should determine if delegates are not forging based on their round history', function () {
@@ -110,7 +110,7 @@ it('should determine if delegates are not forging based on their round history',
     $delegate = new WalletViewModel($delegateWallet);
 
     expect($component->instance()->getDelegatePerformance($delegate->publicKey()))->toBeString();
-    expect($component->instance()->getDelegatePerformance($delegate->publicKey()))->toBe(DelegateForgingStatus::missing);
+    expect($component->instance()->getDelegatePerformance($delegate->publicKey()))->toBe(DelegateForgingStatus::missing->name);
 });
 
 it('should determine if delegates just missed based on their round history', function () {
@@ -124,7 +124,7 @@ it('should determine if delegates just missed based on their round history', fun
     $delegate = new WalletViewModel($delegateWallet);
 
     expect($component->instance()->getDelegatePerformance($delegate->publicKey()))->toBeString();
-    expect($component->instance()->getDelegatePerformance($delegate->publicKey()))->toBe(DelegateForgingStatus::missed);
+    expect($component->instance()->getDelegatePerformance($delegate->publicKey()))->toBe(DelegateForgingStatus::missed->name);
 });
 
 it('should determine if delegates are forging after missing 4 slots based on their round history', function () {
@@ -138,7 +138,7 @@ it('should determine if delegates are forging after missing 4 slots based on the
     $delegate = new WalletViewModel($delegateWallet);
 
     expect($component->instance()->getDelegatePerformance($delegate->publicKey()))->toBeString();
-    expect($component->instance()->getDelegatePerformance($delegate->publicKey()))->toBe(DelegateForgingStatus::forging);
+    expect($component->instance()->getDelegatePerformance($delegate->publicKey()))->toBe(DelegateForgingStatus::forging->name);
 });
 
 it('should return the block count', function () {
