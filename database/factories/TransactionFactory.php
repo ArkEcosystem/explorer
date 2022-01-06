@@ -44,8 +44,8 @@ final class TransactionFactory extends Factory
     public function transfer(): Factory
     {
         return $this->state(fn () => [
-            'type'       => CoreTransactionTypeEnum::TRANSFER,
-            'type_group' => TransactionTypeGroupEnum::CORE,
+            'type'       => CoreTransactionTypeEnum::TRANSFER->value,
+            'type_group' => TransactionTypeGroupEnum::CORE->value,
             'asset'      => [],
         ]);
     }
@@ -53,8 +53,8 @@ final class TransactionFactory extends Factory
     public function secondSignature(): Factory
     {
         return $this->state(fn () => [
-            'type'       => CoreTransactionTypeEnum::SECOND_SIGNATURE,
-            'type_group' => TransactionTypeGroupEnum::CORE,
+            'type'       => CoreTransactionTypeEnum::SECOND_SIGNATURE->value,
+            'type_group' => TransactionTypeGroupEnum::CORE->value,
             'asset'      => [],
         ]);
     }
@@ -62,8 +62,8 @@ final class TransactionFactory extends Factory
     public function delegateRegistration(): Factory
     {
         return $this->state(fn () => [
-            'type'       => CoreTransactionTypeEnum::DELEGATE_REGISTRATION,
-            'type_group' => TransactionTypeGroupEnum::CORE,
+            'type'       => CoreTransactionTypeEnum::DELEGATE_REGISTRATION->value,
+            'type_group' => TransactionTypeGroupEnum::CORE->value,
             'asset'      => [],
         ]);
     }
@@ -71,8 +71,8 @@ final class TransactionFactory extends Factory
     public function vote(): Factory
     {
         return $this->state(fn () => [
-            'type'       => CoreTransactionTypeEnum::VOTE,
-            'type_group' => TransactionTypeGroupEnum::CORE,
+            'type'       => CoreTransactionTypeEnum::VOTE->value,
+            'type_group' => TransactionTypeGroupEnum::CORE->value,
             'asset'      => [
                 'votes' => ['+publicKey'],
             ],
@@ -82,8 +82,8 @@ final class TransactionFactory extends Factory
     public function unvote(): Factory
     {
         return $this->state(fn () => [
-            'type'       => CoreTransactionTypeEnum::VOTE,
-            'type_group' => TransactionTypeGroupEnum::CORE,
+            'type'       => CoreTransactionTypeEnum::VOTE->value,
+            'type_group' => TransactionTypeGroupEnum::CORE->value,
             'asset'      => [
                 'votes' => ['-publicKey'],
             ],
@@ -93,8 +93,8 @@ final class TransactionFactory extends Factory
     public function voteCombination(): Factory
     {
         return $this->state(fn () => [
-            'type'       => CoreTransactionTypeEnum::VOTE,
-            'type_group' => TransactionTypeGroupEnum::CORE,
+            'type'       => CoreTransactionTypeEnum::VOTE->value,
+            'type_group' => TransactionTypeGroupEnum::CORE->value,
             'asset'      => [
                 'votes' => ['+publicKey', '-publicKey'],
             ],
@@ -104,8 +104,8 @@ final class TransactionFactory extends Factory
     public function multiSignature(): Factory
     {
         return $this->state(fn () => [
-            'type'       => CoreTransactionTypeEnum::MULTI_SIGNATURE,
-            'type_group' => TransactionTypeGroupEnum::CORE,
+            'type'       => CoreTransactionTypeEnum::MULTI_SIGNATURE->value,
+            'type_group' => TransactionTypeGroupEnum::CORE->value,
             'asset'      => [],
         ]);
     }
@@ -113,8 +113,8 @@ final class TransactionFactory extends Factory
     public function ipfs(): Factory
     {
         return $this->state(fn () => [
-            'type'       => CoreTransactionTypeEnum::IPFS,
-            'type_group' => TransactionTypeGroupEnum::CORE,
+            'type'       => CoreTransactionTypeEnum::IPFS->value,
+            'type_group' => TransactionTypeGroupEnum::CORE->value,
             'asset'      => [
                 'ipfs' => 'QmXrvSZaDr8vjLUB9b7xz26S3kpk3S3bSc8SUyZmNPvmVo',
             ],
@@ -124,8 +124,8 @@ final class TransactionFactory extends Factory
     public function delegateResignation(): Factory
     {
         return $this->state(fn () => [
-            'type'       => CoreTransactionTypeEnum::DELEGATE_RESIGNATION,
-            'type_group' => TransactionTypeGroupEnum::CORE,
+            'type'       => CoreTransactionTypeEnum::DELEGATE_RESIGNATION->value,
+            'type_group' => TransactionTypeGroupEnum::CORE->value,
             'asset'      => [],
         ]);
     }
@@ -133,8 +133,8 @@ final class TransactionFactory extends Factory
     public function multiPayment(): Factory
     {
         return $this->state(fn () => [
-            'type'       => CoreTransactionTypeEnum::MULTI_PAYMENT,
-            'type_group' => TransactionTypeGroupEnum::CORE,
+            'type'       => CoreTransactionTypeEnum::MULTI_PAYMENT->value,
+            'type_group' => TransactionTypeGroupEnum::CORE->value,
             'asset'      => [],
         ]);
     }
@@ -142,8 +142,8 @@ final class TransactionFactory extends Factory
     public function timelock(): Factory
     {
         return $this->state(fn () => [
-            'type'       => CoreTransactionTypeEnum::TIMELOCK,
-            'type_group' => TransactionTypeGroupEnum::CORE,
+            'type'       => CoreTransactionTypeEnum::TIMELOCK->value,
+            'type_group' => TransactionTypeGroupEnum::CORE->value,
             'asset'      => [],
         ]);
     }
@@ -151,8 +151,8 @@ final class TransactionFactory extends Factory
     public function timelockClaim(): Factory
     {
         return $this->state(fn () => [
-            'type'       => CoreTransactionTypeEnum::TIMELOCK_CLAIM,
-            'type_group' => TransactionTypeGroupEnum::CORE,
+            'type'       => CoreTransactionTypeEnum::TIMELOCK_CLAIM->value,
+            'type_group' => TransactionTypeGroupEnum::CORE->value,
             'asset'      => [],
         ]);
     }
@@ -160,8 +160,8 @@ final class TransactionFactory extends Factory
     public function timelockRefund(): Factory
     {
         return $this->state(fn () => [
-            'type'       => CoreTransactionTypeEnum::TIMELOCK_REFUND,
-            'type_group' => TransactionTypeGroupEnum::CORE,
+            'type'       => CoreTransactionTypeEnum::TIMELOCK_REFUND->value,
+            'type_group' => TransactionTypeGroupEnum::CORE->value,
             'asset'      => [],
         ]);
     }
@@ -169,10 +169,10 @@ final class TransactionFactory extends Factory
     public function entityRegistration(): Factory
     {
         return $this->state(fn () => [
-            'type'       => MagistrateTransactionTypeEnum::ENTITY,
-            'type_group' => TransactionTypeGroupEnum::MAGISTRATE,
+            'type'       => MagistrateTransactionTypeEnum::ENTITY->value,
+            'type_group' => TransactionTypeGroupEnum::MAGISTRATE->value,
             'asset'      => [
-                'action'  => MagistrateTransactionEntityActionEnum::REGISTER,
+                'action'  => MagistrateTransactionEntityActionEnum::REGISTER->value,
             ],
         ]);
     }
@@ -180,10 +180,10 @@ final class TransactionFactory extends Factory
     public function entityResignation(): Factory
     {
         return $this->state(fn () => [
-            'type'       => MagistrateTransactionTypeEnum::ENTITY,
-            'type_group' => TransactionTypeGroupEnum::MAGISTRATE,
+            'type'       => MagistrateTransactionTypeEnum::ENTITY->value,
+            'type_group' => TransactionTypeGroupEnum::MAGISTRATE->value,
             'asset'      => [
-                'action'  => MagistrateTransactionEntityActionEnum::RESIGN,
+                'action'  => MagistrateTransactionEntityActionEnum::RESIGN->value,
             ],
         ]);
     }
@@ -191,10 +191,10 @@ final class TransactionFactory extends Factory
     public function entityUpdate(): Factory
     {
         return $this->state(fn () => [
-            'type'       => MagistrateTransactionTypeEnum::ENTITY,
-            'type_group' => TransactionTypeGroupEnum::MAGISTRATE,
+            'type'       => MagistrateTransactionTypeEnum::ENTITY->value,
+            'type_group' => TransactionTypeGroupEnum::MAGISTRATE->value,
             'asset'      => [
-                'action'  => MagistrateTransactionEntityActionEnum::UPDATE,
+                'action'  => MagistrateTransactionEntityActionEnum::UPDATE->value,
             ],
         ]);
     }
@@ -202,12 +202,12 @@ final class TransactionFactory extends Factory
     public function businessEntityRegistration(): Factory
     {
         return $this->state(fn () => [
-            'type'       => MagistrateTransactionTypeEnum::ENTITY,
-            'type_group' => TransactionTypeGroupEnum::MAGISTRATE,
+            'type'       => MagistrateTransactionTypeEnum::ENTITY->value,
+            'type_group' => TransactionTypeGroupEnum::MAGISTRATE->value,
             'asset'      => [
-                'type'    => MagistrateTransactionEntityTypeEnum::BUSINESS,
-                'subtype' => MagistrateTransactionEntitySubTypeEnum::NONE,
-                'action'  => MagistrateTransactionEntityActionEnum::REGISTER,
+                'type'    => MagistrateTransactionEntityTypeEnum::BUSINESS->value,
+                'subtype' => MagistrateTransactionEntitySubTypeEnum::NONE->value,
+                'action'  => MagistrateTransactionEntityActionEnum::REGISTER->value,
             ],
         ]);
     }
@@ -215,12 +215,12 @@ final class TransactionFactory extends Factory
     public function businessEntityResignation(): Factory
     {
         return $this->state(fn () => [
-            'type'       => MagistrateTransactionTypeEnum::ENTITY,
-            'type_group' => TransactionTypeGroupEnum::MAGISTRATE,
+            'type'       => MagistrateTransactionTypeEnum::ENTITY->value,
+            'type_group' => TransactionTypeGroupEnum::MAGISTRATE->value,
             'asset'      => [
-                'type'    => MagistrateTransactionEntityTypeEnum::BUSINESS,
-                'subtype' => MagistrateTransactionEntitySubTypeEnum::NONE,
-                'action'  => MagistrateTransactionEntityActionEnum::RESIGN,
+                'type'    => MagistrateTransactionEntityTypeEnum::BUSINESS->value,
+                'subtype' => MagistrateTransactionEntitySubTypeEnum::NONE->value,
+                'action'  => MagistrateTransactionEntityActionEnum::RESIGN->value,
             ],
         ]);
     }
@@ -228,12 +228,12 @@ final class TransactionFactory extends Factory
     public function businessEntityUpdate(): Factory
     {
         return $this->state(fn () => [
-            'type'       => MagistrateTransactionTypeEnum::ENTITY,
-            'type_group' => TransactionTypeGroupEnum::MAGISTRATE,
+            'type'       => MagistrateTransactionTypeEnum::ENTITY->value,
+            'type_group' => TransactionTypeGroupEnum::MAGISTRATE->value,
             'asset'      => [
-                'type'    => MagistrateTransactionEntityTypeEnum::BUSINESS,
-                'subtype' => MagistrateTransactionEntitySubTypeEnum::NONE,
-                'action'  => MagistrateTransactionEntityActionEnum::UPDATE,
+                'type'    => MagistrateTransactionEntityTypeEnum::BUSINESS->value,
+                'subtype' => MagistrateTransactionEntitySubTypeEnum::NONE->value,
+                'action'  => MagistrateTransactionEntityActionEnum::UPDATE->value,
             ],
         ]);
     }
@@ -241,12 +241,12 @@ final class TransactionFactory extends Factory
     public function productEntityRegistration(array $data = []): Factory
     {
         return $this->state(fn () => [
-            'type'       => MagistrateTransactionTypeEnum::ENTITY,
-            'type_group' => TransactionTypeGroupEnum::MAGISTRATE,
+            'type'       => MagistrateTransactionTypeEnum::ENTITY->value,
+            'type_group' => TransactionTypeGroupEnum::MAGISTRATE->value,
             'asset'      => [
-                'type'    => MagistrateTransactionEntityTypeEnum::PRODUCT,
-                'subtype' => MagistrateTransactionEntitySubTypeEnum::NONE,
-                'action'  => MagistrateTransactionEntityActionEnum::REGISTER,
+                'type'    => MagistrateTransactionEntityTypeEnum::PRODUCT->value,
+                'subtype' => MagistrateTransactionEntitySubTypeEnum::NONE->value,
+                'action'  => MagistrateTransactionEntityActionEnum::REGISTER->value,
                 'data'    => $data,
             ],
         ]);
@@ -255,12 +255,12 @@ final class TransactionFactory extends Factory
     public function productEntityResignation(): Factory
     {
         return $this->state(fn () => [
-            'type'       => MagistrateTransactionTypeEnum::ENTITY,
-            'type_group' => TransactionTypeGroupEnum::MAGISTRATE,
+            'type'       => MagistrateTransactionTypeEnum::ENTITY->value,
+            'type_group' => TransactionTypeGroupEnum::MAGISTRATE->value,
             'asset'      => [
-                'type'    => MagistrateTransactionEntityTypeEnum::PRODUCT,
-                'subtype' => MagistrateTransactionEntitySubTypeEnum::NONE,
-                'action'  => MagistrateTransactionEntityActionEnum::RESIGN,
+                'type'    => MagistrateTransactionEntityTypeEnum::PRODUCT->value,
+                'subtype' => MagistrateTransactionEntitySubTypeEnum::NONE->value,
+                'action'  => MagistrateTransactionEntityActionEnum::RESIGN->value,
             ],
         ]);
     }
@@ -268,12 +268,12 @@ final class TransactionFactory extends Factory
     public function productEntityUpdate(?string $registrationId = null): Factory
     {
         return $this->state(fn () => [
-            'type'       => MagistrateTransactionTypeEnum::ENTITY,
-            'type_group' => TransactionTypeGroupEnum::MAGISTRATE,
+            'type'       => MagistrateTransactionTypeEnum::ENTITY->value,
+            'type_group' => TransactionTypeGroupEnum::MAGISTRATE->value,
             'asset'      => [
-                'type'           => MagistrateTransactionEntityTypeEnum::PRODUCT,
-                'subtype'        => MagistrateTransactionEntitySubTypeEnum::NONE,
-                'action'         => MagistrateTransactionEntityActionEnum::UPDATE,
+                'type'           => MagistrateTransactionEntityTypeEnum::PRODUCT->value,
+                'subtype'        => MagistrateTransactionEntitySubTypeEnum::NONE->value,
+                'action'         => MagistrateTransactionEntityActionEnum::UPDATE->value,
                 'registrationId' => $registrationId,
             ],
         ]);
@@ -282,12 +282,12 @@ final class TransactionFactory extends Factory
     public function pluginEntityRegistration(): Factory
     {
         return $this->state(fn () => [
-            'type'       => MagistrateTransactionTypeEnum::ENTITY,
-            'type_group' => TransactionTypeGroupEnum::MAGISTRATE,
+            'type'       => MagistrateTransactionTypeEnum::ENTITY->value,
+            'type_group' => TransactionTypeGroupEnum::MAGISTRATE->value,
             'asset'      => [
-                'type'    => MagistrateTransactionEntityTypeEnum::PLUGIN,
-                'subtype' => MagistrateTransactionEntitySubTypeEnum::NONE,
-                'action'  => MagistrateTransactionEntityActionEnum::REGISTER,
+                'type'    => MagistrateTransactionEntityTypeEnum::PLUGIN->value,
+                'subtype' => MagistrateTransactionEntitySubTypeEnum::NONE->value,
+                'action'  => MagistrateTransactionEntityActionEnum::REGISTER->value,
             ],
         ]);
     }
@@ -295,12 +295,12 @@ final class TransactionFactory extends Factory
     public function pluginEntityResignation(): Factory
     {
         return $this->state(fn () => [
-            'type'       => MagistrateTransactionTypeEnum::ENTITY,
-            'type_group' => TransactionTypeGroupEnum::MAGISTRATE,
+            'type'       => MagistrateTransactionTypeEnum::ENTITY->value,
+            'type_group' => TransactionTypeGroupEnum::MAGISTRATE->value,
             'asset'      => [
-                'type'    => MagistrateTransactionEntityTypeEnum::PLUGIN,
-                'subtype' => MagistrateTransactionEntitySubTypeEnum::NONE,
-                'action'  => MagistrateTransactionEntityActionEnum::RESIGN,
+                'type'    => MagistrateTransactionEntityTypeEnum::PLUGIN->value,
+                'subtype' => MagistrateTransactionEntitySubTypeEnum::NONE->value,
+                'action'  => MagistrateTransactionEntityActionEnum::RESIGN->value,
             ],
         ]);
     }
@@ -308,12 +308,12 @@ final class TransactionFactory extends Factory
     public function pluginEntityUpdate(): Factory
     {
         return $this->state(fn () => [
-            'type'       => MagistrateTransactionTypeEnum::ENTITY,
-            'type_group' => TransactionTypeGroupEnum::MAGISTRATE,
+            'type'       => MagistrateTransactionTypeEnum::ENTITY->value,
+            'type_group' => TransactionTypeGroupEnum::MAGISTRATE->value,
             'asset'      => [
-                'type'    => MagistrateTransactionEntityTypeEnum::PLUGIN,
-                'subtype' => MagistrateTransactionEntitySubTypeEnum::NONE,
-                'action'  => MagistrateTransactionEntityActionEnum::UPDATE,
+                'type'    => MagistrateTransactionEntityTypeEnum::PLUGIN->value,
+                'subtype' => MagistrateTransactionEntitySubTypeEnum::NONE->value,
+                'action'  => MagistrateTransactionEntityActionEnum::UPDATE->value,
             ],
         ]);
     }
@@ -321,12 +321,12 @@ final class TransactionFactory extends Factory
     public function moduleEntityRegistration(): Factory
     {
         return $this->state(fn () => [
-            'type'       => MagistrateTransactionTypeEnum::ENTITY,
-            'type_group' => TransactionTypeGroupEnum::MAGISTRATE,
+            'type'       => MagistrateTransactionTypeEnum::ENTITY->value,
+            'type_group' => TransactionTypeGroupEnum::MAGISTRATE->value,
             'asset'      => [
-                'type'    => MagistrateTransactionEntityTypeEnum::MODULE,
-                'subtype' => MagistrateTransactionEntitySubTypeEnum::NONE,
-                'action'  => MagistrateTransactionEntityActionEnum::REGISTER,
+                'type'    => MagistrateTransactionEntityTypeEnum::MODULE->value,
+                'subtype' => MagistrateTransactionEntitySubTypeEnum::NONE->value,
+                'action'  => MagistrateTransactionEntityActionEnum::REGISTER->value,
             ],
         ]);
     }
@@ -334,12 +334,12 @@ final class TransactionFactory extends Factory
     public function moduleEntityResignation(): Factory
     {
         return $this->state(fn () => [
-            'type'       => MagistrateTransactionTypeEnum::ENTITY,
-            'type_group' => TransactionTypeGroupEnum::MAGISTRATE,
+            'type'       => MagistrateTransactionTypeEnum::ENTITY->value,
+            'type_group' => TransactionTypeGroupEnum::MAGISTRATE->value,
             'asset'      => [
-                'type'    => MagistrateTransactionEntityTypeEnum::MODULE,
-                'subtype' => MagistrateTransactionEntitySubTypeEnum::NONE,
-                'action'  => MagistrateTransactionEntityActionEnum::RESIGN,
+                'type'    => MagistrateTransactionEntityTypeEnum::MODULE->value,
+                'subtype' => MagistrateTransactionEntitySubTypeEnum::NONE->value,
+                'action'  => MagistrateTransactionEntityActionEnum::RESIGN->value,
             ],
         ]);
     }
@@ -347,12 +347,12 @@ final class TransactionFactory extends Factory
     public function moduleEntityUpdate(): Factory
     {
         return $this->state(fn () => [
-            'type'       => MagistrateTransactionTypeEnum::ENTITY,
-            'type_group' => TransactionTypeGroupEnum::MAGISTRATE,
+            'type'       => MagistrateTransactionTypeEnum::ENTITY->value,
+            'type_group' => TransactionTypeGroupEnum::MAGISTRATE->value,
             'asset'      => [
-                'type'    => MagistrateTransactionEntityTypeEnum::MODULE,
-                'subtype' => MagistrateTransactionEntitySubTypeEnum::NONE,
-                'action'  => MagistrateTransactionEntityActionEnum::UPDATE,
+                'type'    => MagistrateTransactionEntityTypeEnum::MODULE->value,
+                'subtype' => MagistrateTransactionEntitySubTypeEnum::NONE->value,
+                'action'  => MagistrateTransactionEntityActionEnum::UPDATE->value,
             ],
         ]);
     }
@@ -360,12 +360,12 @@ final class TransactionFactory extends Factory
     public function delegateEntityRegistration(): Factory
     {
         return $this->state(fn () => [
-            'type'       => MagistrateTransactionTypeEnum::ENTITY,
-            'type_group' => TransactionTypeGroupEnum::MAGISTRATE,
+            'type'       => MagistrateTransactionTypeEnum::ENTITY->value,
+            'type_group' => TransactionTypeGroupEnum::MAGISTRATE->value,
             'asset'      => [
-                'type'    => MagistrateTransactionEntityTypeEnum::DELEGATE,
-                'subtype' => MagistrateTransactionEntitySubTypeEnum::NONE,
-                'action'  => MagistrateTransactionEntityActionEnum::REGISTER,
+                'type'    => MagistrateTransactionEntityTypeEnum::DELEGATE->value,
+                'subtype' => MagistrateTransactionEntitySubTypeEnum::NONE->value,
+                'action'  => MagistrateTransactionEntityActionEnum::REGISTER->value,
             ],
         ]);
     }
@@ -373,12 +373,12 @@ final class TransactionFactory extends Factory
     public function delegateEntityResignation(): Factory
     {
         return $this->state(fn () => [
-            'type'       => MagistrateTransactionTypeEnum::ENTITY,
-            'type_group' => TransactionTypeGroupEnum::MAGISTRATE,
+            'type'       => MagistrateTransactionTypeEnum::ENTITY->value,
+            'type_group' => TransactionTypeGroupEnum::MAGISTRATE->value,
             'asset'      => [
-                'type'    => MagistrateTransactionEntityTypeEnum::DELEGATE,
-                'subtype' => MagistrateTransactionEntitySubTypeEnum::NONE,
-                'action'  => MagistrateTransactionEntityActionEnum::RESIGN,
+                'type'    => MagistrateTransactionEntityTypeEnum::DELEGATE->value,
+                'subtype' => MagistrateTransactionEntitySubTypeEnum::NONE->value,
+                'action'  => MagistrateTransactionEntityActionEnum::RESIGN->value,
             ],
         ]);
     }
@@ -386,12 +386,12 @@ final class TransactionFactory extends Factory
     public function delegateEntityUpdate(): Factory
     {
         return $this->state(fn () => [
-            'type'       => MagistrateTransactionTypeEnum::ENTITY,
-            'type_group' => TransactionTypeGroupEnum::MAGISTRATE,
+            'type'       => MagistrateTransactionTypeEnum::ENTITY->value,
+            'type_group' => TransactionTypeGroupEnum::MAGISTRATE->value,
             'asset'      => [
-                'type'    => MagistrateTransactionEntityTypeEnum::DELEGATE,
-                'subtype' => MagistrateTransactionEntitySubTypeEnum::NONE,
-                'action'  => MagistrateTransactionEntityActionEnum::UPDATE,
+                'type'    => MagistrateTransactionEntityTypeEnum::DELEGATE->value,
+                'subtype' => MagistrateTransactionEntitySubTypeEnum::NONE->value,
+                'action'  => MagistrateTransactionEntityActionEnum::UPDATE->value,
             ],
         ]);
     }
@@ -399,8 +399,8 @@ final class TransactionFactory extends Factory
     public function legacyBusinessRegistration(): Factory
     {
         return $this->state(fn () => [
-            'type'       => MagistrateTransactionTypeEnum::BUSINESS_REGISTRATION,
-            'type_group' => TransactionTypeGroupEnum::MAGISTRATE,
+            'type'       => MagistrateTransactionTypeEnum::BUSINESS_REGISTRATION->value,
+            'type_group' => TransactionTypeGroupEnum::MAGISTRATE->value,
             'asset'      => [],
         ]);
     }
@@ -408,8 +408,8 @@ final class TransactionFactory extends Factory
     public function legacyBusinessResignation(): Factory
     {
         return $this->state(fn () => [
-            'type'       => MagistrateTransactionTypeEnum::BUSINESS_RESIGNATION,
-            'type_group' => TransactionTypeGroupEnum::MAGISTRATE,
+            'type'       => MagistrateTransactionTypeEnum::BUSINESS_RESIGNATION->value,
+            'type_group' => TransactionTypeGroupEnum::MAGISTRATE->value,
             'asset'      => [],
         ]);
     }
@@ -417,8 +417,8 @@ final class TransactionFactory extends Factory
     public function legacyBusinessUpdate(): Factory
     {
         return $this->state(fn () => [
-            'type'       => MagistrateTransactionTypeEnum::BUSINESS_UPDATE,
-            'type_group' => TransactionTypeGroupEnum::MAGISTRATE,
+            'type'       => MagistrateTransactionTypeEnum::BUSINESS_UPDATE->value,
+            'type_group' => TransactionTypeGroupEnum::MAGISTRATE->value,
             'asset'      => [],
         ]);
     }
@@ -426,8 +426,8 @@ final class TransactionFactory extends Factory
     public function legacyBridgechainRegistration(): Factory
     {
         return $this->state(fn () => [
-            'type'       => MagistrateTransactionTypeEnum::BRIDGECHAIN_REGISTRATION,
-            'type_group' => TransactionTypeGroupEnum::MAGISTRATE,
+            'type'       => MagistrateTransactionTypeEnum::BRIDGECHAIN_REGISTRATION->value,
+            'type_group' => TransactionTypeGroupEnum::MAGISTRATE->value,
             'asset'      => [],
         ]);
     }
@@ -435,8 +435,8 @@ final class TransactionFactory extends Factory
     public function legacyBridgechainResignation(): Factory
     {
         return $this->state(fn () => [
-            'type'       => MagistrateTransactionTypeEnum::BRIDGECHAIN_RESIGNATION,
-            'type_group' => TransactionTypeGroupEnum::MAGISTRATE,
+            'type'       => MagistrateTransactionTypeEnum::BRIDGECHAIN_RESIGNATION->value,
+            'type_group' => TransactionTypeGroupEnum::MAGISTRATE->value,
             'asset'      => [],
         ]);
     }
@@ -444,8 +444,8 @@ final class TransactionFactory extends Factory
     public function legacyBridgechainUpdate(): Factory
     {
         return $this->state(fn () => [
-            'type'       => MagistrateTransactionTypeEnum::BRIDGECHAIN_UPDATE,
-            'type_group' => TransactionTypeGroupEnum::MAGISTRATE,
+            'type'       => MagistrateTransactionTypeEnum::BRIDGECHAIN_UPDATE->value,
+            'type_group' => TransactionTypeGroupEnum::MAGISTRATE->value,
             'asset'      => [],
         ]);
     }
