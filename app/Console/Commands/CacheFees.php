@@ -31,24 +31,24 @@ final class CacheFees extends Command
 
     public function handle(FeeCache $cache): void
     {
-        $cache->setHistorical(StatsPeriods::ALL, HistoricalAggregateFactory::make(StatsPeriods::ALL)->aggregate());
+        $cache->setHistorical(StatsPeriods::ALL->value, HistoricalAggregateFactory::make(StatsPeriods::ALL->value)->aggregate());
 
         collect([
-            StatsPeriods::DAY,
-            StatsPeriods::WEEK,
-            StatsPeriods::MONTH,
-            StatsPeriods::QUARTER,
-            StatsPeriods::YEAR,
-        ])->each(function ($period) use ($cache): void {
+            StatsPeriods::DAY->value,
+            StatsPeriods::WEEK->value,
+            StatsPeriods::MONTH->value,
+            StatsPeriods::QUARTER->value,
+            StatsPeriods::YEAR->value,
+        ])->each(function (string $period) use ($cache): void {
             $cache->setHistorical($period, HistoricalAggregateFactory::make($period)->aggregate());
         });
 
-        collect(Forms::getTransactionOptions())->except('all')->keys()->each(function ($type) use ($cache): void {
+        collect(Forms::getTransactionOptions())->except(StatsPeriods::ALL->value)->keys()->each(function (string $type) use ($cache): void {
             preg_match('/^[a-z]+(\d+)$/', self::LAST_20, $match);
 
             $result = (new LastFeeAggregate())
                 ->setLimit((int) $match[1])
-                ->setType($type ?? '')
+                ->setType($type)
                 ->aggregate();
 
             $cache->setMinimum($type, $result['minimum']);
