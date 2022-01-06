@@ -99,7 +99,10 @@ final class NumberFormatter
 
     public static function isFiat(string $currency): bool
     {
-        $cryptoCurrencies = (new ReflectionClass(CryptoCurrencies::class))->getConstants();
+        $cryptoCurrencies = array_map(
+            fn(CryptoCurrencies $currency) => $currency->name,
+            CryptoCurrencies::cases()
+        );
 
         return ! in_array($currency, $cryptoCurrencies, true);
     }
