@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Enums;
 
-final class SQLEnum
+enum SQLEnum: int
 {
-    public const INT4_MAXVALUE = 2147483647;
+    case INT4_MAXVALUE = 2147483647;
 }
