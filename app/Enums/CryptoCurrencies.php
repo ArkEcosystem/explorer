@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace App\Enums;
 
-final class CryptoCurrencies
+enum CryptoCurrencies
 {
-    public const BTC = 'BTC';
+    case BTC;
 
-    public const ETH = 'ETH';
+    case ETH;
 
-    public const LTC = 'LTC';
+    case LTC;
 
-    public const ARK = 'ARK';
+    case ARK;
 
-    public const DARK = 'DARK';
+    case DARK;
 }
