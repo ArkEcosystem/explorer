@@ -41,14 +41,14 @@ final class CachePrices extends Command
             $hourlyPrices = $marketDataProvider->historicalHourly(Network::currency(), $currency);
 
             collect([
-                StatsPeriods::DAY,
-                StatsPeriods::WEEK,
-                StatsPeriods::MONTH,
-                StatsPeriods::QUARTER,
-                StatsPeriods::YEAR,
-                StatsPeriods::ALL,
-            ])->each(function ($period) use ($currency, $crypto, $cache, $prices, $hourlyPrices): void {
-                if ($period === StatsPeriods::DAY) {
+                StatsPeriods::DAY->value,
+                StatsPeriods::WEEK->value,
+                StatsPeriods::MONTH->value,
+                StatsPeriods::QUARTER->value,
+                StatsPeriods::YEAR->value,
+                StatsPeriods::ALL->value,
+            ])->each(function (string $period) use ($currency, $crypto, $cache, $prices, $hourlyPrices): void {
+                if ($period === StatsPeriods::DAY->value) {
                     $prices = $hourlyPrices;
                 }
 
@@ -61,11 +61,11 @@ final class CachePrices extends Command
     private function statsByPeriod(string $period, Collection $datasets): Collection
     {
         return match ($period) {
-            'day'     => $this->groupByDate($datasets->take(-24), 'H:s'),
-            'week'    => $this->groupByDate($datasets->take(-7), 'd.m'),
-            'month'   => $this->groupByDate($datasets->take(-30), 'd.m'),
-            'quarter' => $this->groupByDate($datasets->take(-120), 'd.m'),
-            'year'    => $this->groupByDate($datasets->take(-365), 'd.m'),
+            StatsPeriods::DAY->value     => $this->groupByDate($datasets->take(-24), 'H:s'),
+            StatsPeriods::WEEK->value    => $this->groupByDate($datasets->take(-7), 'd.m'),
+            StatsPeriods::MONTH->value   => $this->groupByDate($datasets->take(-30), 'd.m'),
+            StatsPeriods::QUARTER->value => $this->groupByDate($datasets->take(-120), 'd.m'),
+            StatsPeriods::YEAR->value    => $this->groupByDate($datasets->take(-365), 'd.m'),
             default   => $this->groupByDate($datasets, 'm.Y'),
         };
     }
