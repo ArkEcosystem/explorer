@@ -32,14 +32,14 @@ final class InsightAllTimeFeesCollected extends Component
     {
         $this->refreshInterval = (string) config('explorer.statistics.refreshInterval', '60');
         $this->period          = $this->defaultPeriod();
-        $this->cache           = StatsCache::FEES;
+        $this->cache           = StatsCache::FEES->key();
     }
 
     public function render(): View
     {
         return view('livewire.stats.insight-all-time-fees-collected', [
             'allTimeFeesCollectedTitle' => trans('pages.statistics.insights.all-time-fees-collected'),
-            'allTimeFeesCollectedValue' => $this->asMoney($this->totalTransactionsPerPeriod($this->cache, StatsPeriods::ALL)),
+            'allTimeFeesCollectedValue' => $this->asMoney($this->totalTransactionsPerPeriod($this->cache, StatsPeriods::ALL->value)),
             'feesTitle'                 => trans('pages.statistics.insights.fees'),
             'feesValue'                 => $this->truncate(),
             'feesTooltip'               => $this->tooltip(),
