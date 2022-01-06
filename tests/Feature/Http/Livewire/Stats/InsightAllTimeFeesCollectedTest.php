@@ -26,7 +26,7 @@ it('should render the component', function () {
     Artisan::call('explorer:cache-fees');
 
     Livewire::test(InsightAllTimeFeesCollected::class)
-        ->set('period', StatsPeriods::DAY)
+        ->set('period', StatsPeriods::DAY->value)
         ->assertSee(trans('pages.statistics.insights.all-time-fees-collected'))
         ->assertSee('16,666.6665285 DARK')
         ->assertSee(trans('pages.statistics.insights.fees'))
@@ -45,7 +45,7 @@ it('should filter by year', function () {
     Artisan::call('explorer:cache-fees');
 
     Livewire::test(InsightAllTimeFeesCollected::class)
-        ->set('period', StatsPeriods::YEAR)
+        ->set('period', StatsPeriods::YEAR->value)
         ->assertSee(trans('pages.statistics.insights.all-time-fees-collected'))
         ->assertSee('16,666.6665285 DARK')
         ->assertSee(trans('pages.statistics.insights.fees'))
