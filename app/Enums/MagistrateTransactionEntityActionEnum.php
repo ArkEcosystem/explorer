@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Enums;
 
-final class MagistrateTransactionEntityActionEnum
+enum MagistrateTransactionEntityActionEnum: int
 {
-    public const REGISTER = 0;
+    case REGISTER = 0;
 
-    public const UPDATE = 1;
+    case UPDATE = 1;
 
-    public const RESIGN = 2;
+    case RESIGN = 2;
 }
