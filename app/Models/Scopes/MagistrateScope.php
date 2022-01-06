@@ -13,6 +13,6 @@ final class MagistrateScope implements Scope
 {
     public function apply(Builder $builder, Model $model)
     {
-        $builder->where('type_group', TransactionTypeGroupEnum::MAGISTRATE);
+        $builder->where('type_group', TransactionTypeGroupEnum::MAGISTRATE->value);
     }
 }
