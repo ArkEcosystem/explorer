@@ -15,8 +15,8 @@ final class EntityRegistrationScope implements Scope
 {
     public function apply(Builder $builder, Model $model)
     {
-        $builder->where('type_group', TransactionTypeGroupEnum::MAGISTRATE);
-        $builder->where('type', MagistrateTransactionTypeEnum::ENTITY);
-        $builder->where('asset->action', MagistrateTransactionEntityActionEnum::REGISTER);
+        $builder->where('type_group', TransactionTypeGroupEnum::MAGISTRATE->value);
+        $builder->where('type', MagistrateTransactionTypeEnum::ENTITY->value);
+        $builder->where('asset->action', MagistrateTransactionEntityActionEnum::REGISTER->value);
     }
 }
