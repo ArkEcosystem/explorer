@@ -4,19 +4,19 @@ declare(strict_types=1);
 
 namespace App\Enums;
 
-final class MagistrateTransactionTypeEnum
+enum MagistrateTransactionTypeEnum: int
 {
-    public const BUSINESS_REGISTRATION = 0;
+    case BUSINESS_REGISTRATION = 0;
 
-    public const BUSINESS_RESIGNATION = 1;
+    case BUSINESS_RESIGNATION = 1;
 
-    public const BUSINESS_UPDATE = 2;
+    case BUSINESS_UPDATE = 2;
 
-    public const BRIDGECHAIN_REGISTRATION = 3;
+    case BRIDGECHAIN_REGISTRATION = 3;
 
-    public const BRIDGECHAIN_RESIGNATION = 4;
+    case BRIDGECHAIN_RESIGNATION = 4;
 
-    public const BRIDGECHAIN_UPDATE = 5;
+    case BRIDGECHAIN_UPDATE = 5;
 
-    public const ENTITY = 6;
+    case ENTITY = 6;
 }
