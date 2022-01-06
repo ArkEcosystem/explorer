@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace App\Enums;
 
-final class MagistrateTransactionEntityTypeEnum
+enum MagistrateTransactionEntityTypeEnum: int
 {
-    public const BUSINESS = 0;
+    case BUSINESS = 0;
 
-    public const PRODUCT = 1;
+    case PRODUCT = 1;
 
-    public const PLUGIN = 2;
+    case PLUGIN = 2;
 
-    public const MODULE = 3;
+    case MODULE = 3;
 
-    public const DELEGATE = 4;
+    case DELEGATE = 4;
 }
