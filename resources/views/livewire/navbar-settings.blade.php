@@ -49,7 +49,7 @@
                     <x-ark-toggle
                         name="state.darkTheme"
                         hide-label
-                        default="window.getThemeMode() === 'dark' ? true : false"
+                        default="window.getThemeMode() === 'dark'"
                     />
                 </x-navbar.setting-option>
 
