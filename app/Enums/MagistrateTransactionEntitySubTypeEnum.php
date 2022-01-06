@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Enums;
 
-final class MagistrateTransactionEntitySubTypeEnum
+enum MagistrateTransactionEntitySubTypeEnum: int
 {
-    public const NONE = 0;
+    case NONE = 0;
 }
