@@ -14,7 +14,7 @@ final class TimelockClaimScope implements Scope
 {
     public function apply(Builder $builder, Model $model)
     {
-        $builder->where('type_group', TransactionTypeGroupEnum::CORE);
-        $builder->where('type', CoreTransactionTypeEnum::TIMELOCK_CLAIM);
+        $builder->where('type_group', TransactionTypeGroupEnum::CORE->value);
+        $builder->where('type', CoreTransactionTypeEnum::TIMELOCK_CLAIM->value);
     }
 }
