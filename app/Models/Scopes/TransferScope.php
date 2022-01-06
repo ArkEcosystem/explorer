@@ -14,7 +14,7 @@ final class TransferScope implements Scope
 {
     public function apply(Builder $builder, Model $model)
     {
-        $builder->where('type_group', TransactionTypeGroupEnum::CORE);
-        $builder->where('type', CoreTransactionTypeEnum::TRANSFER);
+        $builder->where('type_group', TransactionTypeGroupEnum::CORE->value);
+        $builder->where('type', CoreTransactionTypeEnum::TRANSFER->value);
     }
 }
