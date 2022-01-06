@@ -31,8 +31,6 @@ trait ValidatesTerm
     /**
      * Check if the query can be a username
      * Regex source: https://github.com/ArkEcosystem/core/blob/4e149f039b59da97d224db1c593059dbc8e0f385/packages/core-api/src/handlers/shared/schemas/username.ts.
-     *
-     * @return bool
      */
     private function couldBeUsername(string $term): bool
     {
@@ -69,11 +67,9 @@ trait ValidatesTerm
     /**
      * Validates that the numnber is smaller that the max size for a type integer
      * on pgsql. Searching for a bigger number will result in an SQL exception.
-     *
-     * @return bool
      */
     private function numericTermIsInRange(string $term): bool
     {
-        return floatval($term) <= SQLEnum::INT4_MAXVALUE;
+        return floatval($term) <= SQLEnum::INT4_MAXVALUE->value;
     }
 }
