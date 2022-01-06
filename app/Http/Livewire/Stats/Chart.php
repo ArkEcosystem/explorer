@@ -66,7 +66,7 @@ final class Chart extends Component
 
     private function mainValueBTC(): string
     {
-        return ServiceNumberFormatter::currency($this->getPrice(CryptoCurrencies::BTC), CryptoCurrencies::BTC);
+        return ServiceNumberFormatter::currency($this->getPrice(CryptoCurrencies::BTC->name), CryptoCurrencies::BTC->name);
     }
 
     private function mainValueFiat(): string
@@ -116,21 +116,21 @@ final class Chart extends Component
 
     private function getPriceRange(): Collection
     {
-        return $this->getHistoricalHourly(CryptoCurrencies::BTC);
+        return $this->getHistoricalHourly(CryptoCurrencies::BTC->name);
     }
 
     private function minPrice(): string
     {
         $range = $this->getPriceRange();
 
-        return ServiceNumberFormatter::currency((float) $range->min(), CryptoCurrencies::BTC);
+        return ServiceNumberFormatter::currency((float) $range->min(), CryptoCurrencies::BTC->name);
     }
 
     private function maxPrice(): string
     {
         $range = $this->getPriceRange();
 
-        return ServiceNumberFormatter::currency((float) $range->max(), CryptoCurrencies::BTC);
+        return ServiceNumberFormatter::currency((float) $range->max(), CryptoCurrencies::BTC->name);
     }
 
     private function getHistoricalHourly(string $target): Collection
