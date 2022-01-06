@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Enums;
 
-final class TransactionTypeGroupEnum
+enum TransactionTypeGroupEnum: int
 {
-    public const CORE = 1;
+    case CORE = 1;
 
-    public const MAGISTRATE = 2;
+    case MAGISTRATE = 2;
 }
