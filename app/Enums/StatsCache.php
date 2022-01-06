@@ -7,9 +7,17 @@ namespace App\Enums;
 use App\Services\Cache\FeeCache;
 use App\Services\Cache\TransactionCache;
 
-final class StatsCache
+enum StatsCache
 {
-    public const FEES = FeeCache::class;
+    case FEES;
 
-    public const TRANSACTIONS = TransactionCache::class;
+    case TRANSACTIONS;
+
+    public function key(): string
+    {
+        return match ($this) {
+            StatsCache::FEES => FeeCache::class,
+            StatsCache::TRANSACTIONS => TransactionCache::class,
+        };
+    }
 }
