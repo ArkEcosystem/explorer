@@ -15,7 +15,7 @@ final class Blocks extends Component
 {
     use HasPagination;
 
-    protected LengthAwarePaginator $blocks;
+    private LengthAwarePaginator $blocks;
 
     public function mount(Builder $blocks): void
     {

@@ -17,7 +17,7 @@ final class Wallets extends Component
 
     public bool $viewMore = false;
 
-    protected LengthAwarePaginator $wallets;
+    private LengthAwarePaginator $wallets;
 
     public function mount(Builder $wallets): void
     {

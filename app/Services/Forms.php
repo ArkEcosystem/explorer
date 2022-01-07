@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 
 final class Forms
 {
-    protected static array $transactionOptionsValues = [
+    private static array $transactionOptionsValues = [
         'all',
         'transfer',
         'secondSignature',

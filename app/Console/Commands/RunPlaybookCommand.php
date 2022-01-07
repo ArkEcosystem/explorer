@@ -16,7 +16,7 @@ final class RunPlaybookCommand extends Command
 
     protected $description = 'Setup the database against a predefined playbook';
 
-    protected array $ranDefinitions = [];
+    private array $ranDefinitions = [];
 
     public function handle(): void
     {
