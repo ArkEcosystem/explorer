@@ -16,7 +16,7 @@ final class WalletRepositoryWithCache implements WalletRepository
 {
     use ManagesCache;
 
-    public function __construct(private WalletRepository $wallets)
+    public function __construct(private readonly WalletRepository $wallets)
     {
     }
 
