@@ -8,7 +8,7 @@ use App\Models\Transaction;
 
 final class TransactionDirectionIcon
 {
-    private TransactionDirection $state;
+    private readonly TransactionDirection $state;
 
     public function __construct(Transaction $transaction)
     {
