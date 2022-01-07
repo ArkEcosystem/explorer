@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Http;
 
 final class Network implements Contract
 {
-    public function __construct(private array $config)
+    public function __construct(private readonly array $config)
     {
     }
 
