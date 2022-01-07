@@ -10,13 +10,13 @@ use Illuminate\Support\Arr;
 
 final class Payment
 {
-    private float $amount;
+    private readonly float $amount;
 
-    private string $address;
+    private readonly string $address;
 
     private ?string $username = null;
 
-    public function __construct(private int $timestamp, array $payment)
+    public function __construct(private readonly int $timestamp, array $payment)
     {
         $this->amount      = $payment['amount'] / 1e8;
         $this->address     = $payment['recipientId'];
