@@ -20,7 +20,7 @@ final class BlockViewModel implements ViewModel
     use HasTransactions;
     use InteractsWithNeighbours;
 
-    public function __construct(private Block $block)
+    public function __construct(private readonly Block $block)
     {
     }
 
