@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 
 final class MarketData
 {
-    public function __construct(private float $price, private float $priceChange)
+    public function __construct(private readonly float $price, private readonly float $priceChange)
     {
     }
 
