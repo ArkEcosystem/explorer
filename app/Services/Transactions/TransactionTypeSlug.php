@@ -11,7 +11,7 @@ final class TransactionTypeSlug
 {
     use ManagesTransactionTypes;
 
-    private TransactionType $type;
+    private readonly TransactionType $type;
 
     public function __construct(Transaction $transaction)
     {
