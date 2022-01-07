@@ -99,12 +99,9 @@ final class NumberFormatter
 
     public static function isFiat(string $currency): bool
     {
-        $cryptoCurrencies = array_map(
-            fn(CryptoCurrencies $currency) => $currency->name,
-            CryptoCurrencies::cases()
-        );
-
-        return ! in_array($currency, $cryptoCurrencies, true);
+        return ! collect(CryptoCurrencies::cases())
+            ->map(fn(CryptoCurrencies $currency) => $currency->name)
+            ->containsStrict($currency);
     }
 
     public static function decimalsFor(string $currency): int
