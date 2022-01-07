@@ -14,7 +14,7 @@ final class RoundRepositoryWithCache implements RoundRepository
 {
     use ManagesCache;
 
-    public function __construct(private RoundRepository $rounds)
+    public function __construct(private readonly RoundRepository $rounds)
     {
     }
 
