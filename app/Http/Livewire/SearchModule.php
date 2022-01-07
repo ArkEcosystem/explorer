@@ -95,9 +95,11 @@ final class SearchModule extends Component
     private function searchWithService(Search $service, array $data, Closure $callback): bool
     {
         $term = Arr::get($data, 'term');
-
         // Skip and search for everything if the term is empty
-        if (is_null($term) || $term === '') {
+        if (is_null($term)) {
+            return false;
+        }
+        if ($term === '') {
             return false;
         }
 
