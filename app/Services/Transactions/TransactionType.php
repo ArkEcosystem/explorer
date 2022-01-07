@@ -52,7 +52,7 @@ final class TransactionType
         'isLegacyBridgechainUpdate'       => 'bridgechain-entity-update',
     ];
 
-    public function __construct(private Transaction $transaction)
+    public function __construct(private readonly Transaction $transaction)
     {
     }
 
