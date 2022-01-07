@@ -26,7 +26,7 @@ final class WalletViewModel implements ViewModel
     use HasType;
     use HasVoters;
 
-    public function __construct(private Wallet $wallet)
+    public function __construct(private readonly Wallet $wallet)
     {
     }
 
