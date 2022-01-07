@@ -13,17 +13,17 @@ use Illuminate\Support\Collection;
 
 final class Slot
 {
-    private int $currentRoundBlocks;
+    private readonly int $currentRoundBlocks;
 
     public function __construct(
-        private string $publicKey,
-        private int $order,
-        private WalletViewModel $wallet,
-        private Carbon $forgingAt,
-        private array $lastBlock,
-        private string $status,
-        private Collection $roundBlocks,
-        private int $roundNumber
+        private readonly string $publicKey,
+        private readonly int $order,
+        private readonly WalletViewModel $wallet,
+        private readonly Carbon $forgingAt,
+        private readonly array $lastBlock,
+        private readonly string $status,
+        private readonly Collection $roundBlocks,
+        private readonly int $roundNumber
     ) {
         $this->currentRoundBlocks = $this->roundBlocks
             ->where('generator_public_key', $this->publicKey)
