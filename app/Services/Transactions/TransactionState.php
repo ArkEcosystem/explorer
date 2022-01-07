@@ -10,7 +10,7 @@ use App\Models\Transaction;
 
 final class TransactionState
 {
-    public function __construct(private Transaction $transaction)
+    public function __construct(private readonly Transaction $transaction)
     {
     }
 
