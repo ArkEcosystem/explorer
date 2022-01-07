@@ -27,13 +27,8 @@ final class CacheTransactions extends Command
 
     public function handle(TransactionCache $cache): void
     {
-        collect([
-            StatsPeriods::DAY->value,
-            StatsPeriods::WEEK->value,
-            StatsPeriods::MONTH->value,
-            StatsPeriods::QUARTER->value,
-            StatsPeriods::YEAR->value,
-            StatsPeriods::ALL->value,
-        ])->each(fn (string $period) => $cache->setHistorical($period, HistoricalAggregateFactory::make($period)->aggregate()));
+        collect(StatsPeriods::cases())
+            ->each(fn (StatsPeriods $period) =>
+                $cache->setHistorical($period->value, HistoricalAggregateFactory::make($period->value)->aggregate()));
     }
 }
