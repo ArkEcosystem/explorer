@@ -23,7 +23,7 @@ final class TableCache implements Contract
 
     public function setLatestTransactions(string $type, Closure $callback): Collection
     {
-        return $this->remember("latest_transactions/$type", Network::blockTime(), $callback);
+        return $this->remember("latest_transactions/{$type}", Network::blockTime(), $callback);
     }
 
     public function getCache(): TaggedCache

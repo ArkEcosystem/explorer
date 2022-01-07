@@ -70,9 +70,11 @@ trait CanBeDelegate
         if ($this->rank() === 0) {
             return 'text-theme-secondary-500 border-theme-secondary-500 dark:text-theme-secondary-800 dark:border-theme-secondary-800';
         }
+
         if ($this->isResigned()) {
             return 'text-theme-secondary-500 border-theme-secondary-500 dark:text-theme-secondary-800 dark:border-theme-secondary-800';
         }
+
         if ($this->rank() > Network::delegateCount()) {
             return 'text-theme-secondary-500 border-theme-secondary-500 dark:text-theme-secondary-800 dark:border-theme-secondary-800';
         }

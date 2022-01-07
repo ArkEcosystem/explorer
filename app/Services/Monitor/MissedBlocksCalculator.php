@@ -71,6 +71,7 @@ final class MissedBlocksCalculator
     ): array {
         $tempDelegateOrderForTheRound        = Round::where('round', $round)->orderByRaw('balance DESC, public_key ASC')->pluck('public_key')->toArray();
         $tempDelegateOrderForTheRound        = ShuffleDelegates::execute($tempDelegateOrderForTheRound, $height);
+
         $finalDelegateOrderForRound          = array_merge(
             array_slice($tempDelegateOrderForTheRound, $slotNumberForFirstTheoreticalBlock % $activeDelegates),
             array_slice($tempDelegateOrderForTheRound, 0, $slotNumberForFirstTheoreticalBlock % $activeDelegates)

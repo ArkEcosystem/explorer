@@ -30,7 +30,7 @@ abstract class Playbook
 
     final public function hasRun(): void
     {
-        static::$timesRun += 1;
+        static::$timesRun++;
     }
 
     final public function timesRun(): int

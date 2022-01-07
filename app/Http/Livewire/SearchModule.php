@@ -59,7 +59,7 @@ final class SearchModule extends Component
         $data = $this->validateSearchQuery();
 
         if (array_key_exists('term', $data) && ! is_null($data['term'])) {
-            $data['term'] = preg_replace('/(0x[0-9A-Z]+)/', '', $data['term']);
+            $data['term'] = preg_replace('#(0x[0-9A-Z]+)#', '', $data['term']);
         }
 
         if ($this->searchWallet($data)) {
@@ -99,6 +99,7 @@ final class SearchModule extends Component
         if (is_null($term)) {
             return false;
         }
+
         if ($term === '') {
             return false;
         }

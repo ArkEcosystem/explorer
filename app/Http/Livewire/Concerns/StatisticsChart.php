@@ -45,6 +45,6 @@ trait StatisticsChart
             return collect((new TransactionCache())->getHistorical($period));
         }
 
-        throw new InvalidArgumentException("Given cache [$cache] is invalid. Use FeeCache or TransactionCache.");
+        throw new InvalidArgumentException("Given cache [{$cache}] is invalid. Use FeeCache or TransactionCache.");
     }
 }

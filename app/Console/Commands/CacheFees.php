@@ -38,7 +38,7 @@ final class CacheFees extends Command
             ->except(StatsPeriods::ALL->value)
             ->keys()
             ->each(function (string $type) use ($cache): void {
-                preg_match('/^[a-z]+(\d+)$/', self::LAST_20, $match);
+                preg_match('#^[a-z]+(\d+)$#', self::LAST_20, $match);
 
                 $result = (new LastFeeAggregate())
                     ->setLimit((int) $match[1])

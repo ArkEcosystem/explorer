@@ -58,9 +58,11 @@ final class Handler extends ExceptionHandler
             if (! $this->shouldReport($e)) {
                 return;
             }
+
             if (! app()->bound('sentry')) {
                 return;
             }
+
             app('sentry')->captureException($e);
         });
     }
@@ -119,6 +121,7 @@ final class Handler extends ExceptionHandler
         if (! $this->isARegularGetRequest($request)) {
             return false;
         }
+
         if ($mainNotFoundException === null) {
             return false;
         }

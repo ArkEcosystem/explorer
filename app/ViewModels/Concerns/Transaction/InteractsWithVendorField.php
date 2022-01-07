@@ -21,6 +21,7 @@ trait InteractsWithVendorField
         if ($vendorField === '') {
             return null;
         }
+
         if ($vendorField === false) {
             return null;
         }

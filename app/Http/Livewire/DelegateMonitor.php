@@ -35,6 +35,7 @@ final class DelegateMonitor extends Component
             // @README: If any errors occur we want to keep polling until we have a list of delegates
             $this->pollDelegates();
         }
+
         // @codeCoverageIgnoreEnd
     }
 }

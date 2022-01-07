@@ -43,7 +43,7 @@ final class CacheCurrenciesData extends Command
                 $cache->setPrice($baseCurrency, $currency, $dto->price());
                 $cache->setPriceChange($baseCurrency, $currency, $dto->priceChange());
             });
-        } catch (ConnectionException $e) {
+        } catch (ConnectionException $connectionException) {
             $targetCurrencies->each(function ($currency) use ($baseCurrency, $cache) : void {
                 $cache->setPrice($baseCurrency, $currency, null);
                 $cache->setPriceChange($baseCurrency, $currency, null);

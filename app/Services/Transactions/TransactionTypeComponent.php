@@ -34,16 +34,16 @@ final class TransactionTypeComponent
     private function getView(string $group, string $type): string
     {
         $views = [
-            sprintf("$group.$type.".$this->slug->exact()),
-            sprintf("$group.$type.".$this->slug->generic()),
+            sprintf("{$group}.{$type}.".$this->slug->exact()),
+            sprintf("{$group}.{$type}.".$this->slug->generic()),
         ];
 
         foreach ($views as $view) {
-            if (View::exists("components.$view")) {
+            if (View::exists("components.{$view}")) {
                 return $view;
             }
         }
 
-        return "$group.$type.fallback";
+        return "{$group}.{$type}.fallback";
     }
 }
