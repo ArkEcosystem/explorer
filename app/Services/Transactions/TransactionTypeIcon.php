@@ -8,7 +8,7 @@ use App\Models\Transaction;
 
 final class TransactionTypeIcon
 {
-    private TransactionType $type;
+    private readonly TransactionType $type;
 
     private array $types = [
         'isTransfer'                      => 'transfer',
