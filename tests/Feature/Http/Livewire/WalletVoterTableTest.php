@@ -32,6 +32,6 @@ it('should list all blocks for the given public key', function () {
         $component->assertSee($voter->address());
         $component->assertSee($voter->balance());
         $component->assertSee(NumberFormatter::currency($voter->balance(), Network::currency()));
-        $component->assertSee(NumberFormatter::percentage($voter->votePercentage()));
+        $component->assertSee(NumberFormatter::percentage($voter->votePercentage() ?? 0));
     }
 });
