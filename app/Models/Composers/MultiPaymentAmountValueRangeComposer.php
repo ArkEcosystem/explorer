@@ -29,10 +29,13 @@ final class MultiPaymentAmountValueRangeComposer
             if (! is_null($from) && $from > 0) {
                 $query->havingRaw('sum(am) >= ?', [$from * 1e8]);
             }
-
-            if (! is_null($to) && $to > 0) {
-                $query->havingRaw('sum(am) <= ?', [$to * 1e8]);
+            if (is_null($to)) {
+                return;
             }
+            if ($to <= 0) {
+                return;
+            }
+            $query->havingRaw('sum(am) <= ?', [$to * 1e8]);
         });
 
         return $query;
