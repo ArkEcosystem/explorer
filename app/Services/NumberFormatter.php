@@ -7,13 +7,12 @@ namespace App\Services;
 use App\Enums\CryptoCurrencies;
 use ARKEcosystem\Foundation\NumberFormatter\NumberFormatter as BetterNumberFormatter;
 use ARKEcosystem\Foundation\NumberFormatter\ResolveScientificNotation;
-use ReflectionClass;
 
 final class NumberFormatter
 {
-    public final const CRYPTO_DECIMALS = 8;
+    final public const CRYPTO_DECIMALS = 8;
 
-    public final const FIAT_DECIMALS = 2;
+    final public const FIAT_DECIMALS = 2;
 
     /**
      * @param string|int|float $value
@@ -100,7 +99,7 @@ final class NumberFormatter
     public static function isFiat(string $currency): bool
     {
         return ! collect(CryptoCurrencies::cases())
-            ->map(fn(CryptoCurrencies $currency) => $currency->name)
+            ->map(fn (CryptoCurrencies $currency) => $currency->name)
             ->containsStrict($currency);
     }
 

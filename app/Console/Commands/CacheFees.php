@@ -32,8 +32,7 @@ final class CacheFees extends Command
     public function handle(FeeCache $cache): void
     {
         collect(StatsPeriods::cases())
-            ->each(fn (StatsPeriods $period) =>
-                $cache->setHistorical($period->value, HistoricalAggregateFactory::make($period->value)->aggregate()));
+            ->each(fn (StatsPeriods $period) => $cache->setHistorical($period->value, HistoricalAggregateFactory::make($period->value)->aggregate()));
 
         collect(Forms::getTransactionOptions())
             ->except(StatsPeriods::ALL->value)

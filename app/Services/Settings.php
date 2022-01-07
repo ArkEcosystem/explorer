@@ -71,6 +71,7 @@ class Settings
         if ($this->usesPriceChart()) {
             return true;
         }
+
         return $this->usesFeeChart();
     }
 

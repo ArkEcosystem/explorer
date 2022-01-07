@@ -44,10 +44,11 @@ trait ValidatesTerm
     private function couldBeHeightValue(string $term): bool
     {
         $numericTerm = strval(filter_var($term, FILTER_VALIDATE_FLOAT, FILTER_FLAG_ALLOW_THOUSAND));
-        if (!$this->isOnlyNumbers($numericTerm)) {
+        if (! $this->isOnlyNumbers($numericTerm)) {
             return false;
         }
-        return (bool) $this->numericTermIsInRange($numericTerm);
+
+        return $this->numericTermIsInRange($numericTerm);
     }
 
     private function is64CharsHexadecimalString(string $term): bool
@@ -55,6 +56,7 @@ trait ValidatesTerm
         if ($this->isOnlyNumbers($term)) {
             return true;
         }
+
         return strlen($term) === 64 && $this->isHexadecimalString($term);
     }
 

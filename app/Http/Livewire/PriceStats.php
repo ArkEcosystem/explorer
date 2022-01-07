@@ -29,9 +29,10 @@ final class PriceStats extends Component
 
     private function isAvailable(): bool
     {
-        if (!Network::canBeExchanged()) {
+        if (! Network::canBeExchanged()) {
             return false;
         }
+
         return (new NetworkStatusBlockCache())->getIsAvailable(Network::currency(), Settings::currency());
     }
 

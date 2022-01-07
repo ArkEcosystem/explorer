@@ -16,7 +16,7 @@ enum StatsCache
     public function key(): string
     {
         return match ($this) {
-            StatsCache::FEES => FeeCache::class,
+            StatsCache::FEES         => FeeCache::class,
             StatsCache::TRANSACTIONS => TransactionCache::class,
         };
     }

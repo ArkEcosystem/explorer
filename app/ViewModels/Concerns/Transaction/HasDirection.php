@@ -22,7 +22,7 @@ trait HasDirection
         if ($this->sender() !== null && $address !== $this->sender()->address) {
             return false;
         }
-        if (!$this->isTransfer()) {
+        if (! $this->isTransfer()) {
             return collect(Arr::get($this->transaction, 'asset.payments', []))
                 ->some(fn ($payment) => $address === $payment['recipientId']);
         }
@@ -34,6 +34,7 @@ trait HasDirection
             return collect(Arr::get($this->transaction, 'asset.payments', []))
                 ->some(fn ($payment) => $address === $payment['recipientId']);
         }
+
         return true;
     }
 

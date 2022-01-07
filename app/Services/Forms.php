@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Services;
 
-use Illuminate\Support\Str;
 use App\Facades\Network;
+use Illuminate\Support\Str;
 
 final class Forms
 {
