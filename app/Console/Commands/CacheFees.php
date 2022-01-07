@@ -31,29 +31,24 @@ final class CacheFees extends Command
 
     public function handle(FeeCache $cache): void
     {
-        $cache->setHistorical(StatsPeriods::ALL->value, HistoricalAggregateFactory::make(StatsPeriods::ALL->value)->aggregate());
+        collect(StatsPeriods::cases())
+            ->each(fn (StatsPeriods $period) =>
+                $cache->setHistorical($period->value, HistoricalAggregateFactory::make($period->value)->aggregate()));
 
-        collect([
-            StatsPeriods::DAY->value,
-            StatsPeriods::WEEK->value,
-            StatsPeriods::MONTH->value,
-            StatsPeriods::QUARTER->value,
-            StatsPeriods::YEAR->value,
-        ])->each(function (string $period) use ($cache): void {
-            $cache->setHistorical($period, HistoricalAggregateFactory::make($period)->aggregate());
-        });
+        collect(Forms::getTransactionOptions())
+            ->except(StatsPeriods::ALL->value)
+            ->keys()
+            ->each(function (string $type) use ($cache): void {
+                preg_match('/^[a-z]+(\d+)$/', self::LAST_20, $match);
 
-        collect(Forms::getTransactionOptions())->except(StatsPeriods::ALL->value)->keys()->each(function (string $type) use ($cache): void {
-            preg_match('/^[a-z]+(\d+)$/', self::LAST_20, $match);
+                $result = (new LastFeeAggregate())
+                    ->setLimit((int) $match[1])
+                    ->setType($type)
+                    ->aggregate();
 
-            $result = (new LastFeeAggregate())
-                ->setLimit((int) $match[1])
-                ->setType($type)
-                ->aggregate();
-
-            $cache->setMinimum($type, $result['minimum']);
-            $cache->setAverage($type, $result['average']);
-            $cache->setMaximum($type, $result['maximum']);
-        });
+                $cache->setMinimum($type, $result['minimum']);
+                $cache->setAverage($type, $result['average']);
+                $cache->setMaximum($type, $result['maximum']);
+            });
     }
 }
