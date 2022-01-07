@@ -15,7 +15,7 @@ final class TransactionRepositoryWithCache implements TransactionRepository
 {
     use ManagesCache;
 
-    public function __construct(private TransactionRepository $transactions)
+    public function __construct(private readonly TransactionRepository $transactions)
     {
     }
 
