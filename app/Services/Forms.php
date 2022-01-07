@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services;
 
+use Illuminate\Support\Str;
 use App\Facades\Network;
 
 final class Forms
@@ -36,7 +37,7 @@ final class Forms
             ->mapWithKeys(fn ($option) => [$option =>__('forms.search.transaction_types.'.$option)]);
 
         if (! Network::hasTimelock()) {
-            $options = $options->filter(fn ($value, $key) => str_contains($key, 'timelock') === false);
+            $options = $options->filter(fn ($value, $key) => Str::contains($key, 'timelock') === false);
         }
 
         return $options->toArray();
