@@ -65,10 +65,11 @@ final class DelegateDataBoxes extends Component
     {
         /** @var WalletViewModel $delegate */
         $delegate = ViewModelFactory::make((new WalletCache())->getDelegate($publicKey));
-
         if ($delegate->hasForged()) {
             return DelegateForgingStatus::forging->name;
-        } elseif ($delegate->keepsMissing()) {
+        }
+
+        if ($delegate->keepsMissing()) {
             return DelegateForgingStatus::missing->name;
         }
 
