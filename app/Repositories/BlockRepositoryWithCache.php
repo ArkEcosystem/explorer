@@ -14,7 +14,7 @@ final class BlockRepositoryWithCache implements BlockRepository
 {
     use ManagesCache;
 
-    public function __construct(private BlockRepository $blocks)
+    public function __construct(private readonly BlockRepository $blocks)
     {
     }
 
