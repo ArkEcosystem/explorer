@@ -9,7 +9,7 @@ use App\Models\Round;
 
 final class RoundViewModel implements ViewModel
 {
-    public function __construct(private Round $round)
+    public function __construct(private readonly Round $round)
     {
     }
 
