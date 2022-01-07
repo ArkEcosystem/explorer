@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\View;
 
 final class TransactionTypeComponent
 {
-    private TransactionTypeSlug $slug;
+    private readonly TransactionTypeSlug $slug;
 
     public function __construct(Transaction $transaction)
     {
