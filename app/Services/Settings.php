@@ -68,7 +68,10 @@ class Settings
 
     public function usesCharts(): bool
     {
-        return $this->usesPriceChart() || $this->usesFeeChart();
+        if ($this->usesPriceChart()) {
+            return true;
+        }
+        return $this->usesFeeChart();
     }
 
     public function usesPriceChart(): bool
