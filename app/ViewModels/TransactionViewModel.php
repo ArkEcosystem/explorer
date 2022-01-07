@@ -42,13 +42,13 @@ final class TransactionViewModel implements ViewModel
     use InteractsWithVotes;
     use InteractsWithWallets;
 
-    private TransactionType $type;
+    private readonly TransactionType $type;
 
-    private TransactionState $state;
+    private readonly TransactionState $state;
 
-    private TransactionDirection $direction;
+    private readonly TransactionDirection $direction;
 
-    public function __construct(private Transaction $transaction)
+    public function __construct(private readonly Transaction $transaction)
     {
         $this->type        = new TransactionType($transaction);
         $this->state       = new TransactionState($transaction);
