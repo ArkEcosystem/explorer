@@ -8,7 +8,7 @@ use mersenne_twister\twister;
 
 final class Mersenne
 {
-    private twister $twister;
+    private readonly twister $twister;
 
     public function __construct(int $seed)
     {
