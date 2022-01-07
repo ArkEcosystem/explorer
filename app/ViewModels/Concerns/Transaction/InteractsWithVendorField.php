@@ -18,8 +18,10 @@ trait InteractsWithVendorField
         }
 
         $vendorField = stream_get_contents($vendorField);
-
-        if ($vendorField === '' || $vendorField === false) {
+        if ($vendorField === '') {
+            return null;
+        }
+        if ($vendorField === false) {
             return null;
         }
 
