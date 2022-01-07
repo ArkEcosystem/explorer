@@ -55,9 +55,13 @@ final class Handler extends ExceptionHandler
     public function register()
     {
         $this->reportable(function (Throwable $e) : void {
-            if ($this->shouldReport($e) && app()->bound('sentry')) {
-                app('sentry')->captureException($e);
+            if (!$this->shouldReport($e)) {
+                return;
             }
+            if (!app()->bound('sentry')) {
+                return;
+            }
+            app('sentry')->captureException($e);
         });
     }
 
@@ -112,10 +116,13 @@ final class Handler extends ExceptionHandler
     {
         $expectedException     = $this->prepareException($this->mapException($exception));
         $mainNotFoundException = $expectedException->getPrevious();
-
-        return $this->isARegularGetRequest($request)
-            && $mainNotFoundException !== null
-            && is_a($mainNotFoundException, EntityNotFoundInterface::class);
+        if (!$this->isARegularGetRequest($request)) {
+            return false;
+        }
+        if ($mainNotFoundException === null) {
+            return false;
+        }
+        return is_a($mainNotFoundException, EntityNotFoundInterface::class);
     }
 
     private function getNotFoundEntityResponse(Throwable $exception): HttpResponse
@@ -129,7 +136,10 @@ final class Handler extends ExceptionHandler
 
     private function isARegularGetRequest(Request $request): bool
     {
-        return $request->method() === 'GET' && ! $request->expectsJson();
+        if ($request->method() !== 'GET') {
+            return false;
+        }
+        return ! $request->expectsJson();
     }
 
     private function sessionAlreadyStarted(): bool
