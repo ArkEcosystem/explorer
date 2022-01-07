@@ -29,8 +29,10 @@ final class PriceStats extends Component
 
     private function isAvailable(): bool
     {
-        return Network::canBeExchanged()
-            && (new NetworkStatusBlockCache())->getIsAvailable(Network::currency(), Settings::currency());
+        if (!Network::canBeExchanged()) {
+            return false;
+        }
+        return (new NetworkStatusBlockCache())->getIsAvailable(Network::currency(), Settings::currency());
     }
 
     private function getPriceChange(): ?float
@@ -41,8 +43,10 @@ final class PriceStats extends Component
     private function getHistorical(): Collection
     {
         $historicalData = $this->getHistoricalData();
-
-        if (! $this->isAvailable() || $historicalData === null) {
+        if (! $this->isAvailable()) {
+            return collect([4, 5, 2, 2, 2, 3, 5, 1, 4, 5, 6, 5, 3, 3, 4, 5, 6, 4, 4, 4, 5, 8, 8, 10]);
+        }
+        if ($historicalData === null) {
             return collect([4, 5, 2, 2, 2, 3, 5, 1, 4, 5, 6, 5, 3, 3, 4, 5, 6, 4, 4, 4, 5, 8, 8, 10]);
         }
 
