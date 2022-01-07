@@ -14,34 +14,22 @@ final class NumberFormatter
 
     final public const FIAT_DECIMALS = 2;
 
-    /**
-     * @param string|int|float $value
-     */
-    public static function number($value): string
+    public static function number(float|int|string $value): string
     {
         return BetterNumberFormatter::new()->formatWithDecimal((float) $value);
     }
 
-    /**
-     * @param string|int|float $value
-     */
-    public static function percentage($value): string
+    public static function percentage(float|int|string $value): string
     {
         return BetterNumberFormatter::new()->formatWithPercent((float) $value, 2);
     }
 
-    /**
-     * @param string|int|float $value
-     */
-    public static function satoshi($value): string
+    public static function satoshi(float|int|string $value): string
     {
         return BetterNumberFormatter::new()->formatWithDecimal(BigNumber::new($value)->toFloat());
     }
 
-    /**
-     * @param string|int|float $value
-     */
-    public static function currency($value, string $currency): string
+    public static function currency(float|int|string $value, string $currency): string
     {
         if (! static::isFiat($currency)) {
             return BetterNumberFormatter::new()
@@ -54,34 +42,22 @@ final class NumberFormatter
             ->formatCurrency((float) $value, $currency);
     }
 
-    /**
-     * @param string|int|float $value
-     */
-    public static function currencyWithoutSuffix($value, string $currency): string
+    public static function currencyWithoutSuffix(float|int|string $value, string $currency): string
     {
         return trim(BetterNumberFormatter::new()->formatWithCurrencyCustom($value, '', static::decimalsFor($currency)));
     }
 
-    /**
-     * @param string|int|float $value
-     */
-    public static function currencyWithDecimalsWithoutSuffix($value, string $currency): string
+    public static function currencyWithDecimalsWithoutSuffix(float|int|string $value, string $currency): string
     {
         return number_format((float) ResolveScientificNotation::execute((float) $value), static::decimalsFor($currency));
     }
 
-    /**
-     * @param string|int|float $value
-     */
-    public static function currencyShort($value, string $currency): string
+    public static function currencyShort(float|int|string $value, string $currency): string
     {
         return BetterNumberFormatter::new()->formatWithCurrencyShort($value, $currency);
     }
 
-    /**
-     * @param string|int|float $value
-     */
-    public static function currencyShortNotation($value): string
+    public static function currencyShortNotation(float|int|string $value): string
     {
         $value = is_string($value) ? (float) $value : $value;
 

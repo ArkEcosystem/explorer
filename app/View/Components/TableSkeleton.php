@@ -12,14 +12,11 @@ use Illuminate\View\Component;
 
 final class TableSkeleton extends Component
 {
-    public string $class;
-
     private readonly Collection $items;
 
-    public function __construct(private readonly string $device, array $items, string $class = 'hidden md:block')
+    public function __construct(private readonly string $device, array $items, public string $class = 'hidden md:block')
     {
         $this->items = collect($items);
-        $this->class = $class;
     }
 
     public function render(): View

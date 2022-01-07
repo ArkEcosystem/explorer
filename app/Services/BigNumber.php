@@ -29,18 +29,12 @@ final class BigNumber implements Stringable
         return (string) $this->value;
     }
 
-    /**
-     * @param int|float|string $value
-     */
-    public static function new($value): self
+    public static function new(float|int|string $value): self
     {
         return new static($value);
     }
 
-    /**
-     * @param BigDecimal|int|string $value
-     */
-    public function plus($value): self
+    public function plus(BigDecimal|int|string $value): self
     {
         $this->value = $this->value->plus($value);
 

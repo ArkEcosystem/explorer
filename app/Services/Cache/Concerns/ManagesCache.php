@@ -20,11 +20,9 @@ trait ManagesCache
     }
 
     /**
-     * @param Carbon|int $ttl
-     *
      * @return mixed
      */
-    private function remember(string $key, $ttl, Closure $callback)
+    private function remember(string $key, Carbon|int $ttl, Closure $callback)
     {
         return $this->getCache()->remember(md5($key), $ttl, $callback);
     }
