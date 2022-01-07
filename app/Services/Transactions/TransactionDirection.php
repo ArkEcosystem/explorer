@@ -9,7 +9,7 @@ use App\Services\Identity;
 
 final class TransactionDirection
 {
-    public function __construct(private Transaction $transaction)
+    public function __construct(private readonly Transaction $transaction)
     {
     }
 
