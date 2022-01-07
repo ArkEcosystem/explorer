@@ -29,7 +29,7 @@ final class CustomNetwork extends AbstractNetwork
         self::BIP32_PREFIX_XPRV => '46089520',
     ];
 
-    private string $epoch;
+    private readonly string $epoch;
 
     public function __construct(array $config)
     {
