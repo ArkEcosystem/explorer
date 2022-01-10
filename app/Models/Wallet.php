@@ -46,8 +46,6 @@ final class Wallet extends Model
 
     /**
      * A wallet has many sent transactions.
-     *
-     * @return HasMany
      */
     public function sentTransactions(): HasMany
     {
@@ -56,8 +54,6 @@ final class Wallet extends Model
 
     /**
      * A wallet has many received transactions.
-     *
-     * @return HasMany
      */
     public function receivedTransactions(): HasMany
     {
@@ -66,8 +62,6 @@ final class Wallet extends Model
 
     /**
      * A wallet has many blocks if it is a delegate.
-     *
-     * @return HasMany
      */
     public function blocks(): HasMany
     {

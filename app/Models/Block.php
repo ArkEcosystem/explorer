@@ -61,8 +61,6 @@ final class Block extends Model
 
     /**
      * A block has many transactions.
-     *
-     * @return HasMany
      */
     public function transactions(): HasMany
     {
@@ -71,8 +69,6 @@ final class Block extends Model
 
     /**
      * A block belongs to a delegate.
-     *
-     * @return BelongsTo
      */
     public function delegate(): BelongsTo
     {
@@ -81,8 +77,6 @@ final class Block extends Model
 
     /**
      * A block has one previous block.
-     *
-     * @return HasOne
      */
     public function previous(): HasOne
     {

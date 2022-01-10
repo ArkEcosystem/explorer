@@ -18,17 +18,17 @@ final class BlockRepositoryWithCache implements BlockRepository
     {
     }
 
-    public function findById($id): Block
+    public function findById(int|string $id): Block
     {
         return $this->remember(fn () => $this->blocks->findById($id));
     }
 
-    public function findByHeight($height): Block
+    public function findByHeight(int|string $height): Block
     {
         return $this->remember(fn () => $this->blocks->findByHeight($height));
     }
 
-    public function findByIdentifier($identifier): Block
+    public function findByIdentifier(int|string $identifier): Block
     {
         return $this->remember(fn () => $this->blocks->findByIdentifier($identifier));
     }

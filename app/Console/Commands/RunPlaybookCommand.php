@@ -118,7 +118,7 @@ final class RunPlaybookCommand extends Command
         }
 
         if ($class instanceof Playbook) {
-            return new PlaybookDefinition(get_class($class));
+            return new PlaybookDefinition($class::class);
         }
 
         $className = $class;
@@ -132,7 +132,7 @@ final class RunPlaybookCommand extends Command
 
     private function infoRunning(Playbook $playbook, int $i): void
     {
-        $playbookName = get_class($playbook);
+        $playbookName = $playbook::class;
 
         $this->info("Running playbook `{$playbookName}` (#{$i})");
     }

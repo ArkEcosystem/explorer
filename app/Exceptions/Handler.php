@@ -41,10 +41,8 @@ final class Handler extends ExceptionHandler
     /**
      * Report or log an exception.
      *
-     * @param Throwable $exception
      *
      * @throws Exception
-     *
      * @return void
      */
     public function report(Throwable $exception)
@@ -71,10 +69,8 @@ final class Handler extends ExceptionHandler
      * Render an exception into an HTTP response.
      *
      * @param Request   $request
-     * @param Throwable $exception
      *
      * @throws Throwable
-     *
      * @return Response
      */
     public function render($request, Throwable $exception)

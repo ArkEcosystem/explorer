@@ -9,17 +9,17 @@ use App\Models\Block;
 
 final class BlockRepository implements Contract
 {
-    public function findById($id): Block
+    public function findById(int|string $id): Block
     {
         return Block::findOrFail($id);
     }
 
-    public function findByHeight($height): Block
+    public function findByHeight(int|string $height): Block
     {
         return Block::where('height', $height)->firstOrFail();
     }
 
-    public function findByIdentifier($identifier): Block
+    public function findByIdentifier(int|string $identifier): Block
     {
         return Block::query()
             ->where('id', $identifier)

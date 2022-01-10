@@ -100,8 +100,6 @@ final class Transaction extends Model
 
     /**
      * A transaction belongs to a block.
-     *
-     * @return BelongsTo
      */
     public function block(): BelongsTo
     {
@@ -110,8 +108,6 @@ final class Transaction extends Model
 
     /**
      * A transaction belongs to a sender.
-     *
-     * @return BelongsTo
      */
     public function sender(): BelongsTo
     {
@@ -120,8 +116,6 @@ final class Transaction extends Model
 
     /**
      * A transaction belongs to a recipient.
-     *
-     * @return BelongsTo
      */
     public function recipient(): BelongsTo
     {

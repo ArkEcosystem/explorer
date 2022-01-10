@@ -39,8 +39,6 @@ final class Round extends Model
 
     /**
      * A round slot belongs to a delegate.
-     *
-     * @return BelongsTo
      */
     public function delegate(): BelongsTo
     {
