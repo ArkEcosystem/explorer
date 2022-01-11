@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b88444cd7d0223d446517ae236e39df6",
+    "content-hash": "aff7aaaf0be3e43530f0d6746657b60e",
     "packages": [
         {
             "name": "arkecosystem/crypto",
@@ -74,16 +74,16 @@
         },
         {
             "name": "arkecosystem/foundation",
-            "version": "0.29.0",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ArkEcosystem/laravel-foundation.git",
-                "reference": "f13746d177fb31ad821ae5fa026703d2faeacd38"
+                "reference": "74be48657974d35c32269a32463f62b0529d2364"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ArkEcosystem/laravel-foundation/zipball/f13746d177fb31ad821ae5fa026703d2faeacd38",
-                "reference": "f13746d177fb31ad821ae5fa026703d2faeacd38",
+                "url": "https://api.github.com/repos/ArkEcosystem/laravel-foundation/zipball/74be48657974d35c32269a32463f62b0529d2364",
+                "reference": "74be48657974d35c32269a32463f62b0529d2364",
                 "shasum": ""
             },
             "require": {
@@ -179,9 +179,9 @@
             "description": "User-Interface Scaffolding for Laravel. Powered by TailwindCSS.",
             "support": {
                 "issues": "https://github.com/ArkEcosystem/laravel-foundation/issues",
-                "source": "https://github.com/ArkEcosystem/laravel-foundation/tree/0.29.0"
+                "source": "https://github.com/ArkEcosystem/laravel-foundation/tree/1.0.0"
             },
-            "time": "2022-01-03T07:16:01+00:00"
+            "time": "2022-01-10T15:32:42+00:00"
         },
         {
             "name": "asm89/stack-cors",
