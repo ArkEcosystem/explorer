@@ -49,7 +49,7 @@
         wire:click="performSearch"
         @click="searching = true"
     >
-        <span x-show="searching">
+        <span x-show="searching" x-cloak>
             <x-ark-spinner-icon size="w-4 h-4" />
         </span>
 
