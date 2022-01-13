@@ -60,19 +60,8 @@
             </main>
         </div>
 
-        <x-ark-footer :is-ark-product="false">
+        <x-ark-footer>
             <x-slot name="copyrightSlot">
-                <div>
-                    <span class="hidden mr-1 sm:inline"> | </span>
-                    <span class="whitespace-nowrap">
-                        <x-ark-icon
-                            name="networks.ark-square"
-                            class="inline-block mr-1 -mt-1 ark-logo-red"
-                        />
-
-                        An <a href="https://ark.io/" class="underline hover:no-underline focus-visible:rounded">ARK.io</a> @lang('ui::generic.product')
-                    </span>
-                </div>
                 <div class="flex">
                     <span class="mx-1 sm:inline"> | </span>
                     <span class="flex items-center space-x-2 whitespace-nowrap">
