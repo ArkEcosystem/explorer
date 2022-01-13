@@ -36,9 +36,10 @@
         wire:click="performSearch"
         @click="searching = true"
     >
-        <span x-show="searching" class="flex absolute right-0 left-0 justify-center items-center" x-cloak>
+        <span x-show="searching" class="flex absolute inset-0 justify-center items-center" x-cloak>
             <x-ark-spinner-icon />
         </span>
+
         <span :class="{ 'invisible': searching }">@lang('actions.find_it')</span>
     </button>
 
@@ -49,7 +50,7 @@
         @click="searching = true"
     >
         <span x-show="searching">
-            <x-ark-spinner-icon />
+            <x-ark-spinner-icon size="w-4 h-4" />
         </span>
 
         <span x-show="!searching">
