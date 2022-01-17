@@ -32,16 +32,16 @@ final class ClearExpiredViews extends Command
      *
      * @return void
      */
-    public function handle()
+    public function handle(Filesystem $files)
     {
         $path = Config::get('view.compiled');
 
         $expiresMinutes = self::EXPIRES_MINUTES;
 
-        $files = app(Filesystem::class);
-
         collect($files->glob("{$path}/*"))
             ->filter(fn (string $view) => $files->lastModified($view) < Carbon::now()->subMinutes($expiresMinutes)->getTimestamp())
             ->each(fn (string $view)   => $files->delete($view));
+
+        $this->info(sprintf('Compiled views that are older than %s minute(s) cleared!', $expiresMinutes));
     }
 }
