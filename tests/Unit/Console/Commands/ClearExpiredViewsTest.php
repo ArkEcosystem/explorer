@@ -27,7 +27,7 @@ afterEach(function () {
     });
 });
 
-it('clears only the views that are older the default expiration time', function () {
+it('clears only the views that are older than the expiration time', function () {
     $expiresMinutes = ClearExpiredViews::EXPIRES_MINUTES;
 
     // Updated the expiration time ago + 1 minute
