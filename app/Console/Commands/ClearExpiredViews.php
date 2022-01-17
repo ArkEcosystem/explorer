@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Console\Commands;
 
 use Carbon\Carbon;
@@ -9,7 +11,7 @@ use Illuminate\Support\Facades\Config;
 
 class ClearExpiredViews extends Command
 {
-    const EXPIRES_MINUTES = 60;
+    public const EXPIRES_MINUTES = 60;
 
     /**
      * The name and signature of the console command.
@@ -51,7 +53,7 @@ class ClearExpiredViews extends Command
 
         collect($this->files->glob("{$path}/*"))
             ->filter(fn (string $view) => $this->files->lastModified($view) < Carbon::now()->subMinutes($expiresMinutes)->getTimestamp())
-            ->each(fn (string $view) => $this->files->delete($view));
+            ->each(fn (string $view)   => $this->files->delete($view));
 
         $this->info(sprintf('Compiled views that are older than %s minute(s) cleared!', $expiresMinutes));
     }

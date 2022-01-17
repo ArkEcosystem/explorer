@@ -11,16 +11,16 @@ beforeEach(function () {
     $viewPath = Config::get('view.compiled');
 
     $this->files = collect([
-        $viewPath . '/view1.blade.php',
-        $viewPath . '/view2.blade.php',
-        $viewPath . '/view3.blade.php',
+        $viewPath.'/view1.blade.php',
+        $viewPath.'/view2.blade.php',
+        $viewPath.'/view3.blade.php',
     ]);
 
     $this->files->each(fn (string $path) => file_put_contents($path, 'Contents'));
 });
 
 afterEach(function () {
-    $this->files->each(function(string $path) {
+    $this->files->each(function (string $path) {
         if (file_exists($path)) {
             unlink($path);
         }
