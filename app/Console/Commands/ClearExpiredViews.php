@@ -6,7 +6,6 @@ use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Config;
-use RuntimeException;
 
 class ClearExpiredViews extends Command
 {
@@ -47,10 +46,6 @@ class ClearExpiredViews extends Command
     public function handle()
     {
         $path = Config::get('view.compiled');
-
-        if (! $path) {
-            throw new RuntimeException('View path not found.');
-        }
 
         $expiresMinutes = (int) $this->argument('time') ?: self::EXPIRES_MINUTES;
 
