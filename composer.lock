@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2cd4cba14b6cda36730fb590e4a7163c",
+    "content-hash": "2270eee534e6c6f977b48abbf02e54a8",
     "packages": [
         {
             "name": "arkecosystem/crypto",
@@ -74,16 +74,16 @@
         },
         {
             "name": "arkecosystem/foundation",
-            "version": "1.0.9",
+            "version": "1.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ArkEcosystem/laravel-foundation.git",
-                "reference": "477b27f08e1096017133ae6ff088eceb65dd4883"
+                "reference": "723a9a1df4295260e2963e7fdd6292c9caa39085"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ArkEcosystem/laravel-foundation/zipball/477b27f08e1096017133ae6ff088eceb65dd4883",
-                "reference": "477b27f08e1096017133ae6ff088eceb65dd4883",
+                "url": "https://api.github.com/repos/ArkEcosystem/laravel-foundation/zipball/723a9a1df4295260e2963e7fdd6292c9caa39085",
+                "reference": "723a9a1df4295260e2963e7fdd6292c9caa39085",
                 "shasum": ""
             },
             "require": {
@@ -179,9 +179,9 @@
             "description": "User-Interface Scaffolding for Laravel. Powered by TailwindCSS.",
             "support": {
                 "issues": "https://github.com/ArkEcosystem/laravel-foundation/issues",
-                "source": "https://github.com/ArkEcosystem/laravel-foundation/tree/1.0.9"
+                "source": "https://github.com/ArkEcosystem/laravel-foundation/tree/1.1.5"
             },
-            "time": "2022-01-14T13:43:57+00:00"
+            "time": "2022-01-18T10:16:46+00:00"
         },
         {
             "name": "asm89/stack-cors",
@@ -17279,9 +17279,9 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^8.0",
+        "php": "^8.1",
         "ext-gmp": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "2.1.0"
 }
