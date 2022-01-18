@@ -40,7 +40,7 @@
                 el.appendChild(document.createTextNode(truncated));
 
                 length--;
-            } while(this.hasOverflow(el))
+            } while(this.hasOverflow(el) && length >= 0)
         },
         hasOverflow(el) {
             return el.offsetWidth < el.scrollWidth;
