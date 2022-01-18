@@ -98,22 +98,14 @@ final class TransactionViewModel implements ViewModel
     public function amountForItself(): float
     {
         return collect(Arr::get($this->transaction, 'asset.payments', []))
-            ->filter(function ($payment): bool {
-                $sender = $this->sender();
-
-                return $sender !== null && $sender->address === $payment['recipientId'];
-            })
+            ->filter(fn ($payment): bool => $this->sender()->address === $payment['recipientId'])
             ->sum('amount') / 1e8;
     }
 
     public function amountExcludingItself(): float
     {
         return collect(Arr::get($this->transaction, 'asset.payments', []))
-            ->filter(function ($payment): bool {
-                $sender = $this->sender();
-
-                return $sender === null || $sender->address !== $payment['recipientId'];
-            })
+            ->filter(fn ($payment): bool => $this->sender()->address !== $payment['recipientId'])
             ->sum('amount') / 1e8;
     }
 

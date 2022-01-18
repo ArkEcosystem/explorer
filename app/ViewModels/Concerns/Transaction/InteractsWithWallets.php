@@ -8,12 +8,12 @@ use App\DTO\MemoryWallet;
 
 trait InteractsWithWallets
 {
-    public function sender(): ?MemoryWallet
+    public function sender(): MemoryWallet
     {
         return MemoryWallet::fromPublicKey($this->transaction->sender_public_key);
     }
 
-    public function recipient(): ?MemoryWallet
+    public function recipient(): MemoryWallet
     {
         if (is_null($this->transaction->recipient_id)) {
             return $this->sender();

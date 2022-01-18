@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Config;
 
 final class ClearExpiredViews extends Command
 {
-    public const EXPIRES_MINUTES = 60;
+    final public const EXPIRES_MINUTES = 60;
 
     /**
      * The name and signature of the console command.
