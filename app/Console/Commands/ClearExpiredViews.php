@@ -13,25 +13,10 @@ final class ClearExpiredViews extends Command
 {
     public const EXPIRES_MINUTES = 60;
 
-    /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
     protected $signature = 'view:clear-expired';
 
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
     protected $description = 'Removes old compiled views files';
 
-    /**
-     * Execute the console command.
-     *
-     * @return void
-     */
     public function handle(Filesystem $files)
     {
         $path = Config::get('view.compiled');
