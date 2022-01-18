@@ -23,22 +23,12 @@ trait HasDirection
             return false;
         }
 
-        if (! $this->isTransfer()) {
-            return collect(Arr::get($this->transaction, 'asset.payments', []))
-                ->some(fn ($payment) => $address === $payment['recipientId']);
+        if ($this->isTransfer() && $address === $this->recipient()->address) {
+            return true;
         }
 
-        if ($this->recipient() === null) {
-            return collect(Arr::get($this->transaction, 'asset.payments', []))
-                ->some(fn ($payment) => $address === $payment['recipientId']);
-        }
-
-        if ($address !== $this->recipient()->address) {
-            return collect(Arr::get($this->transaction, 'asset.payments', []))
-                ->some(fn ($payment) => $address === $payment['recipientId']);
-        }
-
-        return true;
+        return collect(Arr::get($this->transaction, 'asset.payments', []))
+            ->some(fn ($payment) => $address === $payment['recipientId']);
     }
 
     public function isReceived(string $address): bool
