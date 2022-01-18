@@ -99,8 +99,12 @@ it('should search for transactions by amount maximum', function () {
     $result = (new TransactionSearch())->search([
         'amountTo' => 1000,
     ]);
-
     expect($result->get())->toHaveCount(10);
+
+    $result = (new TransactionSearch())->search([
+        'amountTo' => 0,
+    ]);
+    expect($result->get())->toHaveCount(0);
 });
 
 it('should search for transactions by amount range', function () {

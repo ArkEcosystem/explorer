@@ -94,6 +94,18 @@ it('should determine if visitor uses any chart', function () {
     ]))->toBe([true]);
 });
 
+it('should determine if visitor uses charts', function () {
+    expect(getSettingsFromCookies($this, 'usesFeeChart', [
+        'feeChart' => false,
+    ]))->toBe([false]);
+
+    Config::set('explorer.network', 'development');
+    expect(Settings::usesCharts())->toBeFalse();
+
+    Config::set('explorer.network', 'production');
+    expect(Settings::usesCharts())->toBeTrue();
+});
+
 it('should determine if visitor uses price chart', function () {
     Config::set('explorer.network', 'development');
 

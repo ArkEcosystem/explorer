@@ -573,6 +573,7 @@ it('can determine the colors for icons based on the status of a delegate', funct
         'nonce'        => 1000,
         'attributes'   => [
             'delegate' => [
+                'rank'     => 1,
                 'resigned' => true,
             ],
         ],
