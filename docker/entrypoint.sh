@@ -3,8 +3,6 @@
 sudo chown -R explorer:www-data /var/www/explorer
 touch database/database.sqlite
 #--- run installs
-composer config allow-plugins.pestphp/pest-plugin true
-composer config allow-plugins.phpstan/extension-installer true
 composer install --ignore-platform-reqs
 yarn install
 #--- fire up services
