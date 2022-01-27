@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <x-ark-pages-includes-layout-head
-        default-name="Explorer"
+        :default-name="trans('metatags.home.title')"
         mask-icon-color="#c9292c"
         microsoft-tile-color="#da532c"
         theme-color="#ffffff"
