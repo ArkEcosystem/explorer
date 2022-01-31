@@ -4,11 +4,11 @@
         id="navbar"
         class="fixed z-20 w-full"
         x-data="Navbar.dropdown({
-            dark: {{ Settings::usesDarkTheme() ? 'true' :  'false' }},
+            dark: window.getThemeMode() === 'dark',
             open: false,
             showSettings: false
         })"
-        @toggle-dark-mode.window="dark = !dark"
+        @theme-changed.window="dark = $event.detail.theme === 'dark'"
     >
         <nav
             x-ref="nav"
@@ -24,7 +24,7 @@
                             @if($logo ?? false)
                                 {{ $logo }}
                             @else
-                                <x-ark-icon name="ark-logo-red-square" size="xxl" />
+                                <x-ark-icon name="networks.ark-square" size="xxl" />
 
                                 <div class="hidden ml-6 text-lg lg:block"><span class="font-black text-theme-secondary-900">ARK</span> {{ $title }}</div>
                             @endif
@@ -40,7 +40,7 @@
                             @click="Livewire.emit('openSearchModal')"
                             dusk="navigation-search-modal-trigger"
                         >
-                            <x-ark-icon name="search" />
+                            <x-ark-icon name="magnifying-glass" />
 
                             <span class="sr-only">
                                 @lang('actions.search')
@@ -109,7 +109,7 @@
                                 @click="Livewire.emit('openSearchModal')"
                                 dusk="navigation-search-modal-trigger"
                             >
-                                <x-ark-icon name="search" />
+                                <x-ark-icon name="magnifying-glass" />
 
                                 <span class="sr-only">
                                     @lang('actions.search')

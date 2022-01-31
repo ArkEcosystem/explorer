@@ -7,7 +7,7 @@
         dusk="navigation-search-modal-trigger"
     >
         <span class="inline-flex">
-            <x-ark-icon name="filter"/>
+            <x-ark-icon name="sliders-vertical"/>
         </span>
     </x-navbar.button>
 
@@ -50,8 +50,7 @@
                     <x-ark-toggle
                         name="state.darkTheme"
                         hide-label
-                        :default="$this->state['darkTheme'] ? 'true' : 'false'"
-                        alpine-click="$dispatch('toggle-dark-mode')"
+                        default="window.getThemeMode() === 'dark'"
                     />
                 </x-navbar.setting-option>
 
@@ -64,7 +63,7 @@
                         name="state.compactTables"
                         hide-label
                         :default="$this->state['compactTables'] ? 'false' : 'true'"
-                        alpine-click="$dispatch('toggle-compact-table')"
+                        alpine-click="$dispatch('toggle-compact-table', { expand: value })"
                     />
                 </x-navbar.setting-option>
             </div>
