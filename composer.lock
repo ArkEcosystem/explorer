@@ -74,16 +74,16 @@
         },
         {
             "name": "arkecosystem/foundation",
-            "version": "2.0.1",
+            "version": "2.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ArkEcosystem/laravel-foundation.git",
-                "reference": "66bf94ab49d883885ebf94ec7548f66de98c7d67"
+                "reference": "ebe2063989bc7c0d82387a97663da38677a3424b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ArkEcosystem/laravel-foundation/zipball/66bf94ab49d883885ebf94ec7548f66de98c7d67",
-                "reference": "66bf94ab49d883885ebf94ec7548f66de98c7d67",
+                "url": "https://api.github.com/repos/ArkEcosystem/laravel-foundation/zipball/ebe2063989bc7c0d82387a97663da38677a3424b",
+                "reference": "ebe2063989bc7c0d82387a97663da38677a3424b",
                 "shasum": ""
             },
             "require": {
@@ -159,12 +159,12 @@
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "ARKEcosystem\\Foundation\\": "src/"
-                },
                 "files": [
                     "src/UserInterface/helpers.php"
-                ]
+                ],
+                "psr-4": {
+                    "ARKEcosystem\\Foundation\\": "src/"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -179,9 +179,9 @@
             "description": "User-Interface Scaffolding for Laravel. Powered by TailwindCSS.",
             "support": {
                 "issues": "https://github.com/ArkEcosystem/laravel-foundation/issues",
-                "source": "https://github.com/ArkEcosystem/laravel-foundation/tree/2.0.1"
+                "source": "https://github.com/ArkEcosystem/laravel-foundation/tree/2.2.1"
             },
-            "time": "2022-01-31T16:05:02+00:00"
+            "time": "2022-02-07T07:58:26+00:00"
         },
         {
             "name": "asm89/stack-cors",
