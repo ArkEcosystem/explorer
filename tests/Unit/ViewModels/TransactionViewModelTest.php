@@ -1119,7 +1119,7 @@ it('should determine that the transaction is not any kind of registration', func
 it('should get the address of legacy multi signature transactions', function () {
     $this->subject = new TransactionViewModel(Transaction::factory()->multiSignature()->create([
         'sender_public_key' => $this->sender->public_key,
-        'asset' => [
+        'asset'             => [
             'multiSignatureLegacy' => [
                 'min'       => 3,
                 'lifetime'  => 24,
