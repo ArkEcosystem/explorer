@@ -40,7 +40,7 @@ trait InteractsWithMultiSignature
             );
         }
 
-        return $this->transaction->recipient_id;
+        return $this->transaction->sender->address;
     }
 
     public function participants(): array
