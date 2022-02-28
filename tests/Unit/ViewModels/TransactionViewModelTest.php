@@ -1118,8 +1118,8 @@ it('should determine that the transaction is not any kind of registration', func
 
 it('should get the address of legacy multi signature transactions', function () {
     $this->subject = new TransactionViewModel(Transaction::factory()->multiSignature()->create([
-        'recipient_id' => 'D6Z26L69gdk9qYmTv5uzk3uGepigtHY4ax',
-        'asset'        => [
+        'sender_public_key' => $this->sender->public_key,
+        'asset' => [
             'multiSignatureLegacy' => [
                 'min'       => 3,
                 'lifetime'  => 24,
@@ -1134,7 +1134,7 @@ it('should get the address of legacy multi signature transactions', function () 
         ],
     ]));
 
-    expect($this->subject->multiSignatureAddress())->toBe('D6Z26L69gdk9qYmTv5uzk3uGepigtHY4ax');
+    expect($this->subject->multiSignatureAddress())->toBe($this->sender->address);
 });
 
 it('should get the participant count for legacy multi signature transactions', function () {
