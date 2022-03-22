@@ -39,7 +39,7 @@ trait ValidatesTerm
         $regex = '/^[a-zA-Z0-9!@$&_. ]+$/';
 
         return strlen($term) >= 1
-            && strlen($term) <= 20
+            && strlen($term) <= 30
             && preg_match($regex, $term, $matches) > 0;
     }
 
