@@ -52,7 +52,7 @@ it('can search for a wallet by term matching the username containing a whitespac
     ]);
 
     expect($result->get())->toHaveCount(1);
-})->with([null, 'strtolower', 'strtoupper'])->only();
+})->with([null, 'strtolower', 'strtoupper']);
 
 it('should search for a wallet by username', function (?string $modifier) {
     $wallet = Wallet::factory(10)->create()[0];
