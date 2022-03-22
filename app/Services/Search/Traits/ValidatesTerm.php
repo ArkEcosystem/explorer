@@ -36,7 +36,7 @@ trait ValidatesTerm
      */
     private function couldBeUsername(string $term): bool
     {
-        $regex = '/^[a-zA-Z0-9!@$&_.]+$/';
+        $regex = '/^[a-zA-Z0-9!@$&_. ]+$/';
 
         return strlen($term) >= 1
             && strlen($term) <= 20
