@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 use App\Models\Wallet;
 use App\Services\Search\WalletSearch;
-use Illuminate\Support\Arr;
 
 it('should search for a wallet by address', function (?string $modifier) {
     $wallet = Wallet::factory(10)->create()[0];
@@ -39,8 +38,8 @@ it('should search for a wallet by delegate username in terms', function (?string
 })->with([null, 'strtolower', 'strtoupper']);
 
 it('can search for a wallet by term matching the username containing a whitespace', function (?string $modifier) {
-    $wallet = Wallet::factory(10)->create()[0];
-    $delegate = $wallet->attributes['delegate'];
+    $wallet               = Wallet::factory(10)->create()[0];
+    $delegate             = $wallet->attributes['delegate'];
     $delegate['username'] = 'something with a whitespace';
 
     $wallet->update([
@@ -66,8 +65,8 @@ it('should search for a wallet by username', function (?string $modifier) {
 })->with([null, 'strtolower', 'strtoupper']);
 
 it('can search for a wallet by username containing a whitespace', function (?string $modifier) {
-    $wallet = Wallet::factory(10)->create()[0];
-    $delegate = $wallet->attributes['delegate'];
+    $wallet               = Wallet::factory(10)->create()[0];
+    $delegate             = $wallet->attributes['delegate'];
     $delegate['username'] = 'something with a whitespace';
 
     $wallet->update([

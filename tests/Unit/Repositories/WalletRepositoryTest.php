@@ -50,8 +50,8 @@ it('should find a wallet by username', function () {
 });
 
 it('should find a wallet by username containing a whitespace', function () {
-    $wallet = Wallet::factory()->create();
-    $delegate = $wallet->attributes['delegate'];
+    $wallet               = Wallet::factory()->create();
+    $delegate             = $wallet->attributes['delegate'];
     $delegate['username'] = 'something with a whitespace';
 
     $wallet->update([
