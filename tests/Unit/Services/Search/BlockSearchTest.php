@@ -270,14 +270,14 @@ it('should search for blocks by generator with a username', function (?string $m
     expect($result->get())->toHaveCount(1);
 })->with([null, 'strtolower', 'strtoupper']);
 
-it('should search for blocks by generator with a username containing a whitespace', function (?string $modifier) {
+it('should search for blocks by generator with a username containing special characters', function (?string $modifier) {
     Block::factory(10)->create();
 
     $block = Block::factory()->create([
         'generator_public_key' => Wallet::factory()->create([
             'attributes' => [
                 'delegate' => [
-                    'username' => 'something longer than 20 char',
+                    'username' => 'john.doe (old) [new] 2',
                 ],
             ],
         ])->public_key,

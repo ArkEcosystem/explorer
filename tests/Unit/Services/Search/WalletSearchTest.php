@@ -37,17 +37,17 @@ it('should search for a wallet by delegate username in terms', function (?string
     expect($result->get())->toHaveCount(1);
 })->with([null, 'strtolower', 'strtoupper']);
 
-it('can search for a wallet by term matching the username containing a whitespace', function (?string $modifier) {
+it('can search for a wallet by term matching the username containing special characters', function (?string $modifier) {
     $wallet               = Wallet::factory(10)->create()[0];
     $delegate             = $wallet->attributes['delegate'];
-    $delegate['username'] = 'something with a whitespace';
+    $delegate['username'] = 'john.doe (old) [new] 2';
 
     $wallet->update([
         'attributes' => array_merge($wallet->attributes, ['delegate' => $delegate]),
     ]);
 
     $result = (new WalletSearch())->search([
-        'term' => $modifier ? $modifier('something with a whitespace') : 'something with a whitespace',
+        'term' => $modifier ? $modifier('john.doe (old) [new] 2') : 'john.doe (old) [new] 2',
     ]);
 
     expect($result->get())->toHaveCount(1);
@@ -64,10 +64,10 @@ it('should search for a wallet by username', function (?string $modifier) {
     expect($result->get())->toHaveCount(1);
 })->with([null, 'strtolower', 'strtoupper']);
 
-it('can search for a wallet by username containing a whitespace', function (?string $modifier) {
+it('can search for a wallet by username containing special characters', function (?string $modifier) {
     $wallet               = Wallet::factory(10)->create()[0];
     $delegate             = $wallet->attributes['delegate'];
-    $delegate['username'] = 'something with a whitespace';
+    $delegate['username'] = 'john.doe (old) [new] 2';
 
     $wallet->update([
         'attributes' => array_merge($wallet->attributes, ['delegate' => $delegate]),
@@ -75,7 +75,7 @@ it('can search for a wallet by username containing a whitespace', function (?str
 
     $result = (new WalletSearch())->search([
         'term'     => '',
-        'username' => $modifier ? $modifier('something with a whitespace') : 'something with a whitespace',
+        'username' => $modifier ? $modifier('john.doe (old) [new] 2') : 'john.doe (old) [new] 2',
     ]);
 
     expect($result->get())->toHaveCount(1);

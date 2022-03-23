@@ -284,9 +284,9 @@ it('should search for transactions by wallet with a username', function (?string
     expect($result->get())->toHaveCount(3);
 })->with([null, 'strtolower', 'strtoupper']);
 
-it('should search for transactions by wallet with a username containing a whitespace', function (?string $modifier) {
+it('should search for transactions by wallet with a username containing special characters', function (?string $modifier) {
     Transaction::factory(10)->create();
-    $username = 'something longer than 20 char';
+    $username = 'john.doe (old) [new] 2';
 
     $wallet = Wallet::factory()->create([
         'attributes' => [
