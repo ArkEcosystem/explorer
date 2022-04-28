@@ -12,12 +12,13 @@ use Livewire\Livewire;
 
 final class DropInvalidLivewireRequests
 {
-    public function handle(Request $request, Closure $next)
+    public function handle(Request $request, Closure $next): mixed
     {
         if (! $request->routeIs('livewire.*')) {
             return $next($request);
         }
 
+        // @phpstan-ignore-line
         if ($this->hasValidSignature($request)) {
             return $next($request);
         }
