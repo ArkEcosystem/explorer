@@ -18,7 +18,6 @@ final class DropInvalidLivewireRequests
             return $next($request);
         }
 
-        // @phpstan-ignore-line
         if ($this->hasValidSignature($request)) {
             return $next($request);
         }
@@ -54,6 +53,7 @@ final class DropInvalidLivewireRequests
     private function hasValidSignature(Request $request) : bool
     {
         if ($request->filled('signature')) {
+            // @phpstan-ignore-next-line
             return $request->hasValidSignature();
         }
 
