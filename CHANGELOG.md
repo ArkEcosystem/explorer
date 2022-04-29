@@ -6,6 +6,15 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased Devnet](https://github.com/ArkEcosystem/explorer/compare/staging...develop)
 
+## 2022-05-02 (Explorer + Dexplorer)
+
+### Fixed
+
+- use livewire middleware directly in project ([#1057]) (b7cbeec1, @ItsANameToo)
+- mobile voter weight ([#1056]) (a06d486a, @alexbarnsley)
+
+---
+
 ## 2022-03-29 (Explorer + Dexplorer)
 
 ### Changed
@@ -409,3 +418,5 @@ All notable changes to this project will be documented in this file.
 [#1049]: https://github.com/Arkecosystem/explorer/pull/1049
 [#1048]: https://github.com/Arkecosystem/explorer/pull/1048
 [#1052]: https://github.com/Arkecosystem/explorer/pull/1052
+[#1057]: https://github.com/Arkecosystem/explorer/pull/1057
+[#1056]: https://github.com/Arkecosystem/explorer/pull/1056
